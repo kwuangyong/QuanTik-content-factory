@@ -19,6 +19,7 @@ knowledge/CATALOG.md     bảng tra id → tên, nhóm, engine, mô hình demo
 knowledge/episodes.csv   tập đã dựng/đăng → tránh trùng, nối mạch, ghi view
 knowledge/hooks.md       kho hook (đã kiểm chứng bằng view thật / ứng viên)
 knowledge/stories/       chuyện lịch sử có nguồn (LTCM, Medallion)
+tutorial/                video HƯỚNG DẪN SẢN PHẨM (quay giao diện web thật): README.md · run.sh · beats.py · render.py
 styles/<style>/          spec.md (cấu trúc cảnh) + template.py (dựng cảnh) + mẫu
 pipeline/                models.py (code mô hình) · batch.py (lệnh chính) · render/voiceover/assemble
 qa/                      check_numbers · check_banned · check_format · qa_report.md (mẫu phiếu)
@@ -26,6 +27,10 @@ episodes/                episode JSON đã viết (ghi đè mặc định của 
 ```
 
 ## Quy trình
+
+> **Video hướng dẫn dùng sản phẩm** ("hướng dẫn sử dụng QuanTik", "workflow từ tạo tài khoản đến phân tích",
+> "demo tính năng quét sàn") không đi qua `batch.py`. Đọc `tutorial/README.md` và làm theo đó: quay giao diện
+> production thật bằng Playwright, dữ liệu minh hoạ với mã bịa, rồi lồng tiếng và ghép bằng `tutorial/run.sh`.
 
 ### 1. Chốt yêu cầu
 
