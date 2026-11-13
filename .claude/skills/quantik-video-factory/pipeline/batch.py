@@ -183,7 +183,9 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
     used = "silent"; errors = []
     if kind == "video" and getattr(mod, "VOICE", True):
         used, errors = V.probe_engine(engine, voice)
-        print(f"  voice engine: {used}" + (f"  (fallback; {errors[0]})" if errors and used != engine else ""))
+        print(f"  voice engine: {used}")
+        for err in errors:  # every engine skipped before `used`, with its reason
+            print(f"    skipped {err}")
     for i, s in enumerate(scenes):
         sec = V.estimate_seconds(s.say) if s.say else 0
         if used != "silent" and s.say:

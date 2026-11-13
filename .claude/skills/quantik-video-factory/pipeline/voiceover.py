@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -52,8 +53,50 @@ def _to_wav(src, dst):
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(src), "-ac", "1", "-ar", "44100", str(dst)], check=True)
 
 
+def extra_ca_files() -> list[str]:
+    """CA bundles named by SSL_CERT_FILE / REQUESTS_CA_BUNDLE that exist (e.g. an HTTPS-inspecting proxy's CA)."""
+    out = []
+    for var in ("SSL_CERT_FILE", "REQUESTS_CA_BUNDLE"):
+        p = os.environ.get(var)
+        if p and os.path.isfile(p) and p not in out:
+            out.append(p)
+    return out
+
+
+_EDGE_CA_DONE = False
+
+
+def _trust_env_ca_for_edge():
+    """edge-tts pins its own ssl context to certifi (edge_tts.communicate/voices._SSL_CTX) and ignores
+    SSL_CERT_FILE / REQUESTS_CA_BUNDLE, so behind a TLS-inspecting proxy it fails certificate verification.
+    Load those CA files into its contexts as well. Guarded: newer edge-tts versions may drop _SSL_CTX."""
+    global _EDGE_CA_DONE
+    if _EDGE_CA_DONE:
+        return
+    _EDGE_CA_DONE = True
+    cas = extra_ca_files()
+    if not cas:
+        return
+    import importlib
+
+    for modname in ("edge_tts.communicate", "edge_tts.voices"):
+        try:
+            ctx = getattr(importlib.import_module(modname), "_SSL_CTX", None)
+        except Exception:
+            continue
+        if ctx is None or not hasattr(ctx, "load_verify_locations"):
+            continue
+        for ca in cas:
+            try:
+                ctx.load_verify_locations(cafile=ca)
+            except Exception as ex:
+                print(f"  ! edge-tts: could not load CA {ca}: {ex}", file=sys.stderr)
+
+
 def _edge(text, dst, voice, rate):
     import edge_tts
+
+    _trust_env_ca_for_edge()
 
     tmp = Path(dst).with_suffix(".mp3")
 
@@ -79,6 +122,29 @@ def _espeak(text, dst, *_):
     subprocess.run([exe, "-v", "vi", "-s", "150", "-w", str(dst), text], check=True, capture_output=True)
 
 
+def explain(engine, ex) -> str:
+    """One readable line on why an engine was skipped (root cause + hint), instead of a truncated repr."""
+    if isinstance(ex, ImportError):
+        return f"package not installed ({ex.name or ex}); pip install -r requirements.txt edge-tts"
+    root = ex
+    while (root.__cause__ or root.__context__) is not None and root is not (root.__cause__ or root.__context__):
+        root = root.__cause__ or root.__context__
+    msg = f"{type(ex).__name__}: {str(ex)[:160]}"
+    if root is not ex:
+        msg += f" <- {type(root).__name__}: {str(root)[:200]}"
+    low = (str(ex) + " " + str(root)).lower()
+    if "certificate_verify_failed" in low or "certificate verify failed" in low:
+        hint = ("TLS cert not trusted; set SSL_CERT_FILE to the proxy CA bundle" if not extra_ca_files()
+                else f"TLS cert not trusted even with {', '.join(extra_ca_files())}")
+        msg += f" [hint: {hint}]"
+    elif "403" in low or "tunnel connection failed" in low or "proxyerror" in low:
+        host = {"edge": "speech.platform.bing.com", "gtts": "translate.google.com"}.get(engine, "the TTS host")
+        msg += f" [hint: proxy/network policy blocks {host}; allow it in the environment]"
+    elif isinstance(ex, (asyncio.TimeoutError, TimeoutError)):
+        msg += " [hint: timed out; host unreachable or very slow]"
+    return msg
+
+
 def synth(text, dst, engine="auto", voice="female", rate="+0%"):
     """Write dst (wav). Returns (engine_used, seconds). engine_used == 'silent' means no file was written."""
     order = ENGINES if engine == "auto" else [engine]
@@ -91,7 +157,7 @@ def synth(text, dst, engine="auto", voice="female", rate="+0%"):
             {"edge": _edge, "gtts": _gtts, "espeak": _espeak}[e](say, dst, VOICES.get(voice, voice), rate)
             return e, duration_of(dst), errors
         except Exception as ex:  # network blocked, package missing...
-            errors.append(f"{e}: {type(ex).__name__}: {str(ex)[:120]}")
+            errors.append(f"{e}: {explain(e, ex)}")
     return "silent", estimate_seconds(text), errors
 
 
