@@ -118,6 +118,20 @@ Không dùng mã thật; minh hoạ bằng dữ liệu mô phỏng.
     "2 chiến lược"
   ],
   "hook_kicker": "Sortino là gì?",
-  "myth_say": "Sharpe phạt mọi biến động, kể cả phiên tăng vọt có lợi cho bạn. Nên nhiều người nghĩ: cùng Sharpe {sharpe_a} là rủi ro như nhau."
+  "myth_say": "Sharpe phạt mọi biến động, kể cả phiên tăng vọt có lợi cho bạn. Nên nhiều người nghĩ: cùng Sharpe {sharpe_a} là rủi ro như nhau.",
+  "thumb": {
+    "title": "Sortino",
+    "question": "Cùng Sharpe {sharpe_a}, vì sao một cái làm bạn mất ngủ?",
+    "cards": [
+      {
+        "label": "Sortino A",
+        "value": "{sortino_a}"
+      },
+      {
+        "label": "Sortino B",
+        "value": "{sortino_b}"
+      }
+    ]
+  }
 }
 ```
