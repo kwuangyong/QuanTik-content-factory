@@ -10,6 +10,7 @@ Usage: python voiceover.py "Xin chào" out.wav [--engine edge]
 from __future__ import annotations
 
 import asyncio
+import os
 import json
 import re
 import shutil
@@ -58,7 +59,7 @@ def _edge(text, dst, voice, rate):
     tmp = Path(dst).with_suffix(".mp3")
 
     async def go():
-        await edge_tts.Communicate(text, voice, rate=rate).save(str(tmp))
+        await edge_tts.Communicate(text, voice, rate=os.environ.get("QT_RATE", rate), pitch=os.environ.get("QT_PITCH", "+0Hz")).save(str(tmp))
 
     asyncio.run(asyncio.wait_for(go(), timeout=40))
     _to_wav(tmp, dst); tmp.unlink(missing_ok=True)
