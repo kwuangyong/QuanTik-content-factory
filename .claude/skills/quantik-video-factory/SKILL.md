@@ -99,7 +99,7 @@ Tuỳ chọn: `--scale 0.5` (bản xem nhanh 540×960, dựng lại `--scale 1` 
 
 Mỗi video ra `social-output/<id>/` (thư mục gốc repo): `final.mp4`, `thumbnail.jpg`, `captions.md`, `subtitles.srt`, `qa_report.md`, `values.json` (số + code đã chạy), `layout.json`. Carousel ra `slides/1080x1920/` và `slides/1080x1350/`. Talking-head ra `teleprompter.mp4`, `script.md`, `broll/`. Một video mất khoảng 1–2 phút dựng.
 
-**Thumbnail có số tập (series "Học Quant cùng QuanTik #N"):** `python thumbnail.py --topic <topic> --no <N> --out <thư mục output>` → `thumbnail-NN.jpg`. Nội dung lấy từ khối `thumb` trong `video_defaults` (`title`, `question`, `cards` với placeholder số). Hỏi người dùng số tập nếu chưa rõ.
+**Thumbnail** (series "Học Quant cùng QuanTik #N", nền sáng): đọc `brand/thumbnail.md` rồi chạy `python thumbnail.py --topic <topic> --no <N> --out <thư mục output>` → `thumbnail-NN.jpg`. Nội dung lấy từ khối `thumb` trong `video_defaults`. Hỏi người dùng số tập nếu chưa rõ.
 
 **Dữ liệu thật:** `--prices` nhận CSV có cột `close`. Chỉ dùng để minh hoạ cách tính, nhãn nguồn hiện trên màn hình; vẫn không nói gì về hướng giá của mã đó. Không có `--prices` thì luôn là dữ liệu mô phỏng có seed cố định, và màn hình ghi "Dữ liệu mô phỏng".
 

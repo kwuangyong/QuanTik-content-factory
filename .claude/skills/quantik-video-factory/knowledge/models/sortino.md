@@ -120,18 +120,35 @@ Không dùng mã thật; minh hoạ bằng dữ liệu mô phỏng.
   "hook_kicker": "Sortino là gì?",
   "myth_say": "Sharpe phạt mọi biến động, kể cả phiên tăng vọt có lợi cho bạn. Nên nhiều người nghĩ: cùng Sharpe {sharpe_a} là rủi ro như nhau.",
   "thumb": {
-    "title": "Sortino",
-    "question": "Cùng Sharpe {sharpe_a}, vì sao một cái làm bạn mất ngủ?",
-    "cards": [
+    "tag": "Sortino ratio",
+    "headline": [
       {
-        "label": "Sortino A",
-        "value": "{sortino_a}"
+        "t": "CÙNG SHARPE [o]{sharpe_a}[/o]",
+        "size": 110
       },
       {
-        "label": "Sortino B",
-        "value": "{sortino_b}"
+        "t": "MỘT CÁI",
+        "size": 190
+      },
+      {
+        "t": "LÀM BẠN [o]MẤT NGỦ[/o]",
+        "size": 120
       }
-    ]
+    ],
+    "pill": "Sortino chỉ đếm ngày lỗ · code Python",
+    "labels": [
+      {
+        "label": "A · Sortino",
+        "value": "{sortino_a}",
+        "color": "green"
+      },
+      {
+        "label": "B · Sortino",
+        "value": "{sortino_b}",
+        "color": "orange"
+      }
+    ],
+    "footer": "Dữ liệu mô phỏng • Không phải khuyến nghị"
   }
 }
 ```
