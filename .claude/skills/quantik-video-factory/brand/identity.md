@@ -53,4 +53,4 @@ Theo `README.md` và `docs/` của repo này, cập nhật đến 11/2026:
 - **Gói**: Free 30 ngày cho tài khoản mới (5 yêu cầu/ngày); QuanTik Pro 149.000đ/30 ngày (giá niêm yết 229.000đ), 20 yêu cầu/ngày — theo `docs/LAUNCH-OFFER-PRODUCTION.md` (ưu đãi từ 19/10/2026, chưa có ngày kết thúc). **Đối chiếu https://quantik.io.vn/plans trước khi nhắc giá.**
 - Website: quantik.io.vn
 
-CTA mặc định: “Xem mô hình này chạy trên dữ liệu thật tại quantik.io.vn”. CTA quảng bá không nói “screening chọn cổ phiếu tốt cho bạn”; nói “screening xếp hạng theo bộ chỉ tiêu công bố”.
+CTA thẻ cuối mặc định cho MỌI video (chủ sản phẩm yêu cầu): “Thả tim và theo dõi QuanTik để học một kiến thức quant mỗi ngày” (`FOLLOW_CTA` trong `pipeline/batch.py`, tự áp dụng). Câu dẫn link tính năng (“Xem … tại quantik.io.vn”) chuyển xuống caption. Chỉ video quảng bá mới ghi `cta` riêng trong episode JSON. CTA quảng bá không nói “screening chọn cổ phiếu tốt cho bạn”; nói “screening xếp hạng theo bộ chỉ tiêu công bố”.

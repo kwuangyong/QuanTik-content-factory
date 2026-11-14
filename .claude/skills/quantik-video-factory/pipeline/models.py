@@ -300,6 +300,56 @@ def surface_sharpe(s, v):
     return {"X": M * 100, "Y": Sg * 100, "Z": M / Sg, "xl": "lợi nhuận năm %", "yl": "biến động năm %", "zl": "Sharpe"}
 
 
+# =============================================================== Sortino ratio
+def sortino_demo(seed=3, n=750):
+    rng = np.random.default_rng(seed)
+    base = rng.normal(-0.0008, 0.008, n)
+    jump = rng.random(n) < 0.03
+    a = base + jump * 0.045       # A: thỉnh thoảng bật vọt
+    b = 2 * a.mean() - a          # B: soi gương A
+    def sharpe(r):
+        return r.mean() / r.std() * np.sqrt(252)
+    def sortino(r, mar=0.0):
+        dd = np.sqrt(np.mean(np.minimum(r - mar, 0)**2))
+        return (r.mean() - mar) / dd * np.sqrt(252)
+    return (sharpe(a), sharpe(b),
+            sortino(a), sortino(b), a, b)
+
+
+def compute_sortino(seed=3, returns=None):
+    sa, sb, ta, tb, a, b = sortino_demo(seed)
+    dn = lambda r: float(np.sqrt(np.mean(np.minimum(r, 0) ** 2)))
+    values = {"sharpe_a": sa, "sharpe_b": sb, "sortino_a": ta, "sortino_b": tb, "n_days": len(a),
+              "worst_a": float(a.min()), "worst_b": float(b.min()), "best_a": float(a.max()), "best_b": float(b.max()),
+              "down_a": dn(a), "down_b": dn(b), "ratio": ta / tb, "n_jumps": int((a > 0.03).sum())}
+    formats = {"sharpe_a": "num2", "sharpe_b": "num2", "sortino_a": "num2", "sortino_b": "num2", "n_days": "int",
+               "worst_a": "pct1", "worst_b": "pct1", "best_a": "pct1", "best_b": "pct1", "down_a": "pct2", "down_b": "pct2",
+               "ratio": "x1", "n_jumps": "int"}
+    return values, formats, {"a": a, "b": b}
+
+
+def plot2d_sortino(ax, s, upto=1.0):
+    n = len(s["a"]); k = max(2, int(n * upto)); x = np.arange(k)
+    off = 0.11
+    for r, y0, name in ((s["a"], off, "A"), (s["b"], -off, "B")):
+        rr = r[:k]
+        ax.vlines(x[rr >= 0], y0, y0 + rr[rr >= 0], color=MUT, lw=1.2, alpha=0.55)
+        ax.vlines(x[rr < 0], y0, y0 + rr[rr < 0], color=NEG, lw=1.6)
+        ax.axhline(y0, color=hex_(THEME["border"]), lw=1)
+        ax.text(n * 0.01, y0 + 0.062, f"Chiến lược {name}", color=TXT, fontsize=20, fontweight="bold")
+    ax.set_ylim(-off - 0.075, off + 0.075); ax.set_xlim(0, n)
+    ax.set_yticks([]); ax.set_xlabel("phiên  ·  đỏ = ngày lỗ (Sortino phạt)  ·  xám = ngày lãi (bỏ qua)")
+
+
+def surface_sortino(s, v):
+    lines = []
+    for i, (r, c) in enumerate(((s["a"], POS), (s["b"], NEG))):
+        t = np.arange(30, len(r))
+        z = [r[:j].mean() / np.sqrt(np.mean(np.minimum(r[:j], 0) ** 2)) * np.sqrt(252) for j in t]
+        lines.append((t, np.full(len(t), i), np.array(z), c))
+    return {"lines": lines, "xl": "phiên", "yl": "", "zl": "Sortino lũy kế", "yticks": ["A", "B"]}
+
+
 # =============================================================== VaR / CVaR
 def var_cvar_demo(seed=13, n=2500, df=3):
     rng = np.random.default_rng(seed)
@@ -390,7 +440,7 @@ def surface_kelly(s, v):
 
 
 # =============================================================== registry
-TOPICS = ["garch", "hurst", "ou", "hmm", "monte_carlo", "sharpe", "var_cvar", "kelly"]
+TOPICS = ["garch", "hurst", "ou", "hmm", "monte_carlo", "sharpe", "sortino", "var_cvar", "kelly"]
 
 
 def _style(ax):

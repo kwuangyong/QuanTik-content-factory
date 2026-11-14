@@ -90,7 +90,7 @@ def captions(ep, disc):
 
 {cap}
 
-👉 {ep.get('cta', '')}
+👉 {ep.get('cta_link', '')}\n\n{ep.get('cta', '')}
 
 {tags}
 
@@ -102,7 +102,7 @@ def captions(ep, disc):
 **Mô tả:**
 {cap}
 
-{ep.get('cta', '')}
+{ep.get('cta_link', '')}\n{ep.get('cta', '')}
 
 {disc}
 
@@ -122,7 +122,24 @@ def log_episode(ep, out_dir, status, duration):
                     f"{duration:.0f}", status, str(out_dir), "", "", "", ""])
 
 
+# Thẻ cuối mọi video: kêu gọi theo dõi kênh (yêu cầu của chủ sản phẩm, áp dụng cho mọi video).
+# Episode muốn CTA khác (video quảng bá) thì ghi "cta" trong episode JSON. CTA tính năng cũ chuyển xuống caption.
+FOLLOW_CTA = "Thả tim và theo dõi QuanTik để học một kiến thức quant mỗi ngày"
+
+
+def _follow_cta(ep, override):
+    ep["cta_link"] = ep.get("cta_link") or ep.get("cta", "")
+    if not (override or {}).get("cta"):
+        ep["cta"] = FOLLOW_CTA
+    return ep
+
+
 def prepare(topic, style, override=None, returns=None):
+    ep, mod, model = _prepare(topic, style, override, returns)
+    return _follow_cta(ep, override), mod, model
+
+
+def _prepare(topic, style, override=None, returns=None):
     """(episode, style module, model) for a hand-written topic or any catalog topic."""
     if topic in TOPICS:
         ep, mod = build_episode(topic, style, override)
