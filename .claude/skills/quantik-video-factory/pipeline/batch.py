@@ -94,7 +94,7 @@ def captions(ep, disc):
 
 {cap}
 
-👉 {ep.get('cta_link', '')}\n\n{ep.get('cta', '')}
+{('👉 ' + ep['cta_link'] + chr(10) + chr(10)) if ep.get('cta_link') else ''}{ep.get('cta', '')}
 
 {tags}
 

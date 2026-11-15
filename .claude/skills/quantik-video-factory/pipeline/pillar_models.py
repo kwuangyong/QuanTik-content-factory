@@ -127,21 +127,28 @@ def surface_ev_variance(s, v):
 
 # =============================================================== Kuhn poker (Nash via CFR)
 def kuhn_poker_demo(seed=0, iters=3000):
-    R, S = {}, {}                        # regret, tổng chiến lược
-    def cfr(c, h, p0, p1):
+    R, S = {}, {}          # hối tiếc, tổng chiến lược
+    def cfr(c, h, p):      # p: xác suất tới đây, 2 bên
         pl = len(h) % 2; me, op = c[pl], c[1 - pl]
-        if h in ("bp", "pbp"): return 1
-        if h in ("pp", "bb", "pbb"):
-            return (1 if h == "pp" else 2) * (1 if me > op else -1)
-        k = str(me) + h; r = R.setdefault(k, np.zeros(2))
-        s = np.maximum(r, 0); s = s / s.sum() if s.sum() else np.full(2, .5)
-        S[k] = S.get(k, 0) + (p0 if pl == 0 else p1) * s
-        u = np.array([-cfr(c, h + a, p0 * (s[i] if pl == 0 else 1), p1 * (s[i] if pl else 1))
-                      for i, a in enumerate("pb")])
-        R[k] += (p1 if pl == 0 else p0) * (u - s @ u)
+        if h in ("bp", "pbp"): return 1   # đối thủ bỏ
+        if h in ("pp", "bb", "pbb"):           # lật bài
+            w = 1 if me > op else -1
+            return (1 if h == "pp" else 2) * w
+        k = str(me) + h
+        r = R.setdefault(k, np.zeros(2))
+        s = np.maximum(r, 0)
+        s = s / s.sum() if s.sum() else np.full(2, .5)
+        S[k] = S.get(k, 0) + p[pl] * s
+        u = np.zeros(2)
+        for i, a in enumerate("pb"):      # xem / tố
+            q = list(p); q[pl] *= s[i]
+            u[i] = -cfr(c, h + a, q)
+        R[k] += p[1 - pl] * (u - s @ u)
         return s @ u
-    deals = [(a, b) for a in range(3) for b in range(3) if a != b]
-    v = sum(cfr(d, "", 1, 1) for _ in range(iters) for d in deals) / (6 * iters)
+    deals = [(a, b) for a in range(3)
+             for b in range(3) if a != b]  # 6 cách
+    v = np.mean([cfr(d, "", [1, 1])
+                 for _ in range(iters) for d in deals])
     return v, {k: S[k] / S[k].sum() for k in S}
 
 
@@ -157,23 +164,21 @@ def compute_kuhn_poker(seed=0, returns=None):
 
 def plot2d_kuhn_poker(ax, s, upto=1.0):
     st = s["strat"]
-    keys = [("0", "J đi trước: tố"), ("1", "Q đi trước: tố"), ("2", "K đi trước: tố"),
-            ("0b", "J bị tố: theo"), ("1b", "Q bị tố: theo"), ("2b", "K bị tố: theo")]
+    keys = [("0", "J, đi trước: tố"), ("1", "Q, đi trước: tố"), ("2", "K, đi trước: tố"),
+            ("0b", "J, bị tố: theo"), ("1b", "Q, bị tố: theo"), ("2b", "K, bị tố: theo")]
     k = max(1, int(round(len(keys) * upto)))
     ys = np.arange(len(keys))[::-1]
     for (key, lab), y in list(zip(keys, ys))[:k]:
         p = float(st[key][1]) * 100
         ax.barh(y, p, color=ACC if "bị" not in lab else POS, height=0.6)
-        ax.text(p + 2, y, f"{p:.0f}%", va="center", fontsize=18, color=TXT)
-    ax.set_yticks(ys); ax.set_yticklabels([l for _, l in keys], fontsize=16, color=TXT)
-    ax.set_xlim(0, 115); ax.set_xlabel("tần suất (%) ở cân bằng")
+        ax.text(-3, y, lab, va="center", ha="right", fontsize=17, color=TXT)   # label inside the axes: never clipped
+        ax.text(p + 2, y, f"{p:.0f}%", va="center", fontsize=17, color=TXT)
+    ax.set_yticks([]); ax.set_xlim(-68, 118); ax.set_xticks([0, 50, 100]); ax.axvline(0, color=MUT, lw=1)
+    ax.set_xlabel("tần suất (%) ở cân bằng")
 
 
 def surface_kuhn_poker(s, v):
-    a = np.linspace(0, 1 / 3, 30); q = np.linspace(0, 1, 40)
-    A, Q = np.meshgrid(a, q)
-    Z = -1 / 18 + 0.1 * (Q - 1 / 3) * (A - 1 / 6)   # minh hoạ bề mặt yên ngựa quanh cân bằng
-    return {"X": A * 100, "Y": Q * 100, "Z": Z, "xl": "J tố %", "yl": "Q theo %", "zl": "EV người đi trước"}
+    return None   # no computed 3D view for Kuhn poker: scenes fall back to text rather than show an illustrative surface
 
 
 TOPICS = ["prospect_theory", "ev_variance", "kuhn_poker"]
@@ -196,6 +201,7 @@ class Model(BaseModel):
         self._plot2d = g[f"plot2d_{topic}"]
         self._surface = g[f"surface_{topic}"]
         self.real_data = False
+        self.has_surface = self._surface(self.series, self.values) is not None
 
 
 # =============================================================== market snapshot (from a report, never simulated)

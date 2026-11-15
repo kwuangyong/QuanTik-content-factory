@@ -33,8 +33,8 @@
       "name": "Cân bằng Nash trong Kuhn poker",
       "group": "Lý thuyết trò chơi",
       "model": "kuhn_poker",
-      "status": "backlog",
-      "example_episode": null,
+      "status": "ready",
+      "example_episode": "episodes/ds-kuhn-nash-decision-lab.json",
       "angle": "Bluff tối ưu = 1/3"
     },
     {
