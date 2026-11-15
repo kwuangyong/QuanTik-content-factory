@@ -1,5 +1,8 @@
 # Ảnh nhân vật, hãng, sự kiện
 
+Quy trình đầy đủ (tự động dò tên → ảnh thật hoặc minh hoạ → đặt vào cảnh): skill **`.claude/skills/quantik-visual-assets/SKILL.md`**,
+lệnh `python pipeline/visuals.py auto <episode> --write`.
+
 `ledger.json` (schemas/image_ledger.schema.json) là sổ ảnh: mọi ảnh dùng trong video phải có ở đây. `files/` chứa file.
 
 | Loại | Lấy từ đâu | Điều kiện | Dòng ghi công trên màn hình |
@@ -31,6 +34,7 @@ cùng `--id` là xong, episode không phải sửa.
 
 - Wikimedia chỉ phục vụ ảnh thu nhỏ ở kích thước chuẩn (https://w.wiki/GHai); `images.py` dùng 1280 px. Kích thước lạ
   bị trả HTTP 429.
+- Commons đôi khi trả URL `thumb.wikimedia.org`; `images.py` tự đổi sang `upload.wikimedia.org` (cùng đường dẫn).
 - Gặp 429, `images.py` tự chờ (`Retry-After`) rồi thử lại. IP dùng chung của môi trường cloud hay bị giới hạn lâu
   hơn; chạy trên máy cá nhân thì ổn định.
 
@@ -41,6 +45,8 @@ cùng `--id` là xong, episode không phải sửa.
 | Edward O. Thorp | không có ảnh giấy phép tự do (kết quả "Ed Thorp" là cúp NFL, người khác) | ảnh minh hoạ `thorp` |
 | John L. Kelly Jr. | không có ảnh giấy phép tự do | ảnh minh hoạ `kelly` |
 | Harold W. Kuhn | không có ảnh giấy phép tự do, không có danh mục riêng | ảnh minh hoạ `kuhn` |
+| Jim Simons | **có**: `File:Jim Simons at MSRI.jpg`, CC BY-SA 3.0 (Gleuschk) | ảnh thật `jim-simons` |
+| Claude Shannon | **có**: `File:ClaudeShannon MFO3807.jpg`, CC BY-SA 2.0 de (Konrad Jacobs) | ảnh thật `claude-shannon` |
 | Bell Labs, Murray Hill (nơi Kelly làm việc) | có: bộ ảnh Gottscho-Schleisner 1942, **public domain** (Library of Congress), ví dụ `File:Bell Telephone Laboratories, Murray Hill, New Jersey. LOC gsc.5a08392.jpg` | chưa tải được (Wikimedia giới hạn IP cloud) — lệnh bên dưới |
 
 ```bash

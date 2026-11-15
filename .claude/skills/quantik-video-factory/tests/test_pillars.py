@@ -441,6 +441,57 @@ class Figures(unittest.TestCase):
         self.assertTrue(any("Tôi bỏ" in t for s in scenes for t in s.texts))
 
 
+class VisualsAuto(unittest.TestCase):
+    """visuals.py auto: every name in the script gets an image (offline → illustration) placed where it is named."""
+
+    def setUp(self):
+        import images
+        d = Path(tempfile.mkdtemp())
+        shutil.copytree(images.IMG_DIR, d / "images")
+        old = images.IMG_DIR, images.FILES, images.LEDGER
+        images.IMG_DIR, images.FILES, images.LEDGER = d / "images", d / "images/files", d / "images/ledger.json"
+        images.LEDGER.write_text(json.dumps({"version": 1, "images": []}))
+        self.addCleanup(lambda: [setattr(images, k, v) for k, v in zip(("IMG_DIR", "FILES", "LEDGER"), old)])
+        self.d = d
+
+    def _bare(self, name):
+        e = ep(name)
+        e.pop("entities", None)
+        for t in e.get("timeline", []):
+            t.pop("image", None); t.pop("images", None)
+        for s in e["segments"]:
+            if (s.get("visual") or {}).get("kind") == "image":
+                s.pop("visual")
+            elif (s.get("visual") or {}).get("image"):
+                s["visual"].pop("image")
+        p = self.d / f"{name}.json"
+        p.write_text(json.dumps(e, ensure_ascii=False), encoding="utf-8")
+        return p
+
+    def test_history_episode_rebuilt_from_nothing(self):
+        import visuals
+        r = visuals.auto(self._bare("qh-thorp-history-story"), write=True, offline=True, log=lambda *_: None)
+        names = {ent["name"] for ent, in [(x[1],) for x in r["plan"]]}
+        self.assertTrue({"Edward Thorp", "Jay Regan", "Myron Scholes", "Fischer Black"} <= names)
+        issues = r["check"]["issues"]
+        self.assertTrue(all("Bell Labs" in i for i in issues), issues)   # only the place with no slot is left
+
+    def test_citation_author_gets_picture(self):
+        import visuals
+        p = self._bare("bf-disposition-bias-lab")
+        r = visuals.auto(p, write=True, offline=True, log=lambda *_: None)
+        self.assertFalse(r["check"]["fail"], r["check"])
+        e = json.loads(p.read_text(encoding="utf-8"))
+        ev = next(s for s in e["segments"] if s["role"] == "evidence")
+        self.assertEqual(ev["visual"]["kind"], "citation")
+        self.assertTrue(ev["visual"]["image"])
+
+    def test_portrait_filter(self):
+        import visuals
+        self.assertTrue(visuals.NOT_PORTRAIT.search("File:Claude Shannon Centenary Logo.jpg"))
+        self.assertFalse(visuals.NOT_PORTRAIT.search("File:ClaudeShannon MFO3807.jpg"))
+
+
 class VoiceRetry(unittest.TestCase):
     """edge-tts fails intermittently (NoAudioReceived); one failed call must not leave a scene voiceless."""
 

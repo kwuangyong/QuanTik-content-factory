@@ -363,12 +363,12 @@ def _timeline(ep, seg, model, role_label, status, cites):
             d.ellipse([x - 16, y - 16, x + 16, y + 16], fill=col if hot else T["raised"], outline=col, width=4)
             F.text_box(img, ev["year"], (x + 40, y - 30, x + 230, y + 30), "mono-bold", 44 if hot else 34,
                        T["accent"] if hot else T["muted"], label=f"tl-year{i}", alpha=a)
-            has = bool(ev.get("image") and image_entry(ev["image"]))
-            F.text_box(img, ev["label"], (x + 240, y - 34, X1 - (120 if has else 0), y + 60), "sans-bold",
+            pics = [q for q in ([ev.get("image")] + ev.get("images", [])) if q and image_entry(q)][:2]
+            sz = 96 if hot else 80
+            F.text_box(img, ev["label"], (x + 240, y - 34, X1 - (sz + 24) * len(pics), y + 60), "sans-bold",
                        36 if hot else 30, T["text"] if hot else T["muted"], label=f"tl-label{i}", alpha=a, min_size=22)
-            if has:
-                F.paste(img, _thumb_cached(ev["image"], 96 if hot else 80), (X1 - (96 if hot else 80), y - 40),
-                        alpha=a if hot else 0.75)
+            for j, q in enumerate(pics):
+                F.paste(img, _thumb_cached(q, sz), (X1 - sz - j * (sz + 12), y - 40), alpha=a if hot else 0.75)
         note = seg.get("screen")
         if note:
             F.text_box(img, note, (X0, 1080, X1, 1200), "sans-bold", 40, T["neutral"], label=f"{seg['role']}-note",
@@ -376,7 +376,7 @@ def _timeline(ep, seg, model, role_label, status, cites):
         credit_line(img, imgs)
         footer(img, cites)
 
-    imgs = [e["image"] for e in events[:upto + 1] if e.get("image")]
+    imgs = [i for e in events[:upto + 1] for i in ([e["image"]] if e.get("image") else []) + e.get("images", [])]
     return draw, _texts(role_label, status, cites, seg.get("screen"), credit_text(imgs),
                         *[e["year"] + " " + e["label"] for e in events[:upto + 1]])
 
@@ -504,7 +504,7 @@ def segment_images(ep, seg, kind):
         return [seg["visual"]["image"]]
     if kind == "timeline":
         upto = seg.get("visual", {}).get("upto", len(ep.get("timeline", [])) - 1)
-        return [e["image"] for e in ep.get("timeline", [])[:upto + 1] if e.get("image")]
+        return [i for e in ep.get("timeline", [])[:upto + 1] for i in ([e["image"]] if e.get("image") else []) + e.get("images", [])]
     return []
 
 

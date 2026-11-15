@@ -20,6 +20,7 @@ Chọn nhánh theo yêu cầu:
 | Nhịp thị trường, độ rộng, dòng tiền, kịch bản | `pillars/market-intelligence/PILLAR.md` | `cd pipeline && python pillar.py market produce` |
 | Lịch sử quant, nhân vật, quỹ | `pillars/quant-history/PILLAR.md` | như dòng tâm lý, trụ cột `quant-history` |
 | Lý thuyết trò chơi, poker, EV, Kelly, rủi ro phá sản | `pillars/decision-science/PILLAR.md` | như dòng tâm lý, trụ cột `decision-science` |
+| Ảnh thật / minh hoạ cho người, hãng, sự kiện; nhân vật, hiện vật, biểu tượng | `../quantik-visual-assets/SKILL.md` | `cd pipeline && python visuals.py auto <episode> --write` |
 
 Kiến trúc năm trụ cột: `pillars/README.md`. Vai nghiên cứu/kiểm chứng/sản xuất và hợp đồng bàn giao: `workers/README.md`,
 `schemas/`. Chuyển đổi và lệnh mẫu: `MIGRATION.md`. Kiểm thử: `python -m unittest discover -s tests -v` (từ thư mục skill).
@@ -52,7 +53,8 @@ Kiến trúc năm trụ cột: `pillars/README.md`. Vai nghiên cứu/kiểm ch�
 - Python 3.10+, `pip install -r .claude/skills/quantik-video-factory/requirements.txt edge-tts`, ffmpeg.
 - Video hướng dẫn cần thêm Node 20.9+ và Chromium cho Playwright.
 - Mạng: `speech.platform.bing.com` (giọng đọc edge-tts), `quantik.io.vn`, `github.com` (clone `QuanTik---Design`),
-  `trading.agr.vn` (dữ liệu thị trường cho trụ cột 3), `commons.wikimedia.org` + `upload.wikimedia.org` (ảnh có giấy phép mở).
+  `trading.agr.vn` (dữ liệu thị trường cho trụ cột 3), `commons.wikimedia.org` + `upload.wikimedia.org` (ảnh có giấy phép mở;
+  `thumb.wikimedia.org` nếu muốn tải trực tiếp, không bắt buộc).
   Không có mạng tới TTS thì pipeline lùi về gTTS → espeak → không giọng; phải báo người dùng.
 - Repo nguồn liên quan (chỉ đọc): `kwuangyong/QuanTik---Design` (web production, Next.js),
   `kwuangyong/QuanTik-website` (engine quant `backend/quant_engine/quant.py`; frontend React cũ, không dùng để quay).

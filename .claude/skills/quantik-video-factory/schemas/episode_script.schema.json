@@ -283,6 +283,14 @@
           },
           "image": {
             "type": "string"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 1,
+            "description": "ảnh thứ hai cho mốc có hai nhân vật"
           }
         }
       }

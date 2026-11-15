@@ -14,6 +14,9 @@ Mọi con số trong lời thoại đều do code tính ra. QA chặn số gõ t
 | 4a | Lịch sử quant & nhân vật | `history-story` | hook → bối cảnh → xung đột → đột phá → hệ quả → bài học; tách tư liệu / lời tự kể / giai thoại / tranh cãi |
 | 4b | Lý thuyết trò chơi, poker & ra quyết định | `decision-lab` | EV, phương sai, Nash, Kelly, rủi ro phá sản; poker giống và khác thị trường ở đâu |
 
+Hình ảnh: skill `quantik-visual-assets` — ảnh thật giấy phép tự do (Wikimedia Commons) hoặc ảnh minh hoạ cho người/hãng/sự
+kiện được nhắc, nhân vật hình người, hiện vật, biểu tượng (`python pipeline/visuals.py auto <episode> --write`).
+
 Trụ cột 2–4 dùng worker nghiên cứu, fact-checker, sổ nguồn chung (`knowledge/sources/ledger.json`) và gate QA riêng: không
 nguồn thì không render, giai thoại không được kể như sự kiện, không có dữ liệu thị trường thì không có video.
 Kiến trúc: `.claude/skills/quantik-video-factory/pillars/README.md` · worker: `workers/README.md` ·

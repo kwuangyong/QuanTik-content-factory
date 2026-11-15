@@ -43,7 +43,7 @@ def used_images(ep):
            for s in ep.get("segments", []) if (s.get("visual") or {}).get("kind") == "timeline"
            or (s["role"] in ("context", "consequences") and ep.get("style") == "history-story" and not s.get("visual"))]
     shown = max(ups) if ups else -1
-    ids += [e["image"] for e in ep.get("timeline", [])[:shown + 1] if e.get("image")]
+    ids += [i for e in ep.get("timeline", [])[:shown + 1] for i in ([e["image"]] if e.get("image") else []) + e.get("images", [])]
     return ids
 
 

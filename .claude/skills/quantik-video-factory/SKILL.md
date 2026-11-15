@@ -49,7 +49,9 @@ JSON theo `schemas/`. Mọi claim trỏ về `knowledge/sources/ledger.json`; `q
 nguồn, thiếu fact-check, hoặc lời kể một giai thoại/lời tự kể như sự kiện. Trụ cột 3 không bao giờ bịa số thị trường:
 không có dữ liệu thì không có video, dữ liệu cũ phải khai báo (`qa/check_market.py`).
 
-**Ảnh:** nhắc tới người, hãng, sự kiện thì phải có ảnh — ảnh Wikimedia Commons giấy phép tự do (ghi tác giả + giấy
+**Hình ảnh:** dùng skill **`quantik-visual-assets`** (`.claude/skills/quantik-visual-assets/SKILL.md`) cho ảnh thật,
+ảnh minh hoạ, nhân vật, hiện vật, biểu tượng; lệnh nhanh `python pipeline/visuals.py auto <episode> --write`.
+Nhắc tới người, hãng, sự kiện thì phải có ảnh — ảnh Wikimedia Commons giấy phép tự do (ghi tác giả + giấy
 phép trên màn hình) hoặc ảnh minh hoạ vẽ bằng code (ghi "minh hoạ"). Khai báo trong `entities` của episode;
 `qa/check_images.py` chặn nếu thiếu. Hướng dẫn: `knowledge/images/README.md`, lệnh `python pipeline/images.py`.
 

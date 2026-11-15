@@ -16,6 +16,32 @@
       "retrieved": "2026-11-15"
     },
     {
+      "id": "claude-shannon",
+      "kind": "photo",
+      "subject": "Claude Shannon",
+      "depicts": "Claude Shannon",
+      "file": "files/claude-shannon.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:ClaudeShannon_MFO3807.jpg",
+      "author": "Jacobs, Konrad",
+      "license": "CC BY-SA 2.0 de",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0/de/deed.en",
+      "credit": "Ảnh: Jacobs, Konrad · CC BY-SA 2.0 de · Wikimedia Commons",
+      "retrieved": "2026-11-15"
+    },
+    {
+      "id": "jim-simons",
+      "kind": "photo",
+      "subject": "Jim Simons",
+      "depicts": "Jim Simons tại MSRI",
+      "file": "files/jim-simons.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Jim_Simons_at_MSRI.jpg",
+      "author": "Gleuschk",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+      "credit": "Ảnh: Gleuschk · CC BY-SA 3.0 · Wikimedia Commons",
+      "retrieved": "2026-11-15"
+    },
+    {
       "id": "kassouf",
       "kind": "illustration",
       "subject": "Sheen T. Kassouf",

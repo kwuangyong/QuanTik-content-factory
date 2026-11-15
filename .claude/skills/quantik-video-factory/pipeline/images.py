@@ -164,7 +164,15 @@ def fetch(title, img_id, subject, depicts=None, opener=None):
         raise SystemExit(f"từ chối {title}: giấy phép '{info['license'] or 'không rõ'}' không cho phép dùng lại")
     if not info["author"]:
         raise SystemExit(f"từ chối {title}: không có tác giả để ghi công")
-    raw = _download(info["thumb_url"], opener)
+    url = info["thumb_url"]
+    try:
+        raw = _download(url, opener)
+    except Exception:
+        # Commons now hands out thumb.wikimedia.org URLs; the same path is served by upload.wikimedia.org
+        alt = re.sub(r"^https://thumb\.wikimedia\.org/", "https://upload.wikimedia.org/", url.split("?")[0])
+        if alt == url:
+            raise
+        raw = _download(alt, opener)
     FILES.mkdir(parents=True, exist_ok=True)
     ext = Path(urllib.parse.urlparse(info["thumb_url"]).path).suffix.lower() or ".jpg"
     f = FILES / f"{img_id}{ext}"
@@ -263,6 +271,22 @@ def event(img_id, title, when="", where=""):
                               f"images.py event --title {title!r} --when {when!r} --where {where!r}")
 
 
+def org(img_id, name, role=""):
+    """Firm / institution card: building pictogram + name. Not a photo of the real building."""
+    import pictos
+
+    img, d = _canvas()
+    ic = pictos.icon("building", 300, T["accent"])
+    img.paste(ic, (90, 170), ic)
+    y = 200
+    for ln in _wrap(d, name, font("sans-black", 72), 560)[:3]:
+        d.text((440, y), ln, font=font("sans-black", 72), fill=T["text"]); y += 86
+    for ln in _wrap(d, role, font("sans-bold", 40), 560)[:2]:
+        d.text((440, y + 10), ln, font=font("sans-bold", 40), fill=T["neutral"]); y += 52
+    _label(d)
+    return _save_illustration(img, img_id, name, f"thẻ tổ chức — {name}", f"images.py org --name {name!r} --role {role!r}")
+
+
 def cards(img_id, ranks=("J", "Q", "K")):
     img, d = _canvas()
     n = len(ranks)
@@ -304,6 +328,8 @@ def main():
     s.add_argument("--role", default=""); s.add_argument("--note", default="")
     s = sub.add_parser("event"); s.add_argument("--id", required=True); s.add_argument("--title", required=True)
     s.add_argument("--when", default=""); s.add_argument("--where", default="")
+    s = sub.add_parser("org"); s.add_argument("--id", required=True); s.add_argument("--name", required=True)
+    s.add_argument("--role", default="")
     s = sub.add_parser("cards"); s.add_argument("--id", required=True); s.add_argument("--cards", default="J,Q,K")
     sub.add_parser("list")
     a = ap.parse_args()
@@ -323,6 +349,8 @@ def main():
         print(person(a.id, a.name, a.role, a.note)["file"])
     elif a.cmd == "event":
         print(event(a.id, a.title, a.when, a.where)["file"])
+    elif a.cmd == "org":
+        print(org(a.id, a.name, a.role)["file"])
     elif a.cmd == "cards":
         print(cards(a.id, tuple(a.cards.split(",")))["file"])
     else:
