@@ -111,11 +111,33 @@ def footer(img, cites):
                    label="source-footer", max_lines=2)
 
 
-def badges(img, role_label, status, y=330):
+CHAPTER = {"i": 0, "n": 0}   # set per scene by pillar_build: where we are in the story
+
+
+def chapter_dots(img, i, n, y=346):
+    """Small progress dots on the badge row: done / current / to come — viewers see the structure of the story."""
+    if n < 2:
+        return
+    d = F.ImageDraw.Draw(img)
+    gap, r = 30, 8
+    x = X1 - (n - 1) * gap - r
+    for k in range(n):
+        cx = x + k * gap
+        if k < i:
+            d.ellipse([cx - r, y - r, cx + r, y + r], fill=T["muted"])
+        elif k == i:
+            d.ellipse([cx - r - 3, y - r - 3, cx + r + 3, y + r + 3], fill=T["accent"])
+        else:
+            d.ellipse([cx - r, y - r, cx + r, y + r], outline=T["border"], width=3)
+
+
+def badges(img, role_label, status, y=330, chapter=None):
     x = F.chip(img, (X0, y), role_label, T["raised"], 26) + 14
     if status:
         text, col = STATUS_LABEL[status]
         F.chip(img, (x, y), text, col, 26)
+    if chapter:
+        chapter_dots(img, *chapter)
 
 
 def _texts(role_label, status, cites, *more):
@@ -126,26 +148,51 @@ def _texts(role_label, status, cites, *more):
 
 
 # ---------------------------------------------------------------- visuals
+def ease_back(x):
+    """Overshoot then settle — the 'pop' of an icon landing."""
+    x = F.clamp(x)
+    c = 1.70158
+    return 1 + (c + 1) * (x - 1) ** 3 + c * (x - 1) ** 2
+
+
 def _statement(ep, seg, model, role_label, status, cites, accent=None):
+    """Big text revealed word by word; with an icon the text sits on top and the pictogram pops in below and floats."""
+    import math
+
     text = seg.get("screen") or seg["say"]
+    icon = (seg.get("visual") or {}).get("icon") or seg.get("_icon")
+    words = text.split()
+    box = (X0, 430, X1, 820) if icon else (X0, 430, X1, 1230)
+    size = F.fit_size(text, box, "sans-black", 72 if icon else 68, 38)
+    chapter = (CHAPTER["i"], CHAPTER["n"])
 
     def draw(img, t, p):
-        a = F.ease_out(F.seg(p, 0, 0.2))
-        badges(img, role_label, status)
-        F.text_box(img, text, (X0, 430 + 30 * (1 - a), X1, 1230), "sans-black", 68, accent or T["text"], "left", "middle",
-                   min_size=38, label=f"{seg['role']}-text", hl_numbers=True, alpha=a)
+        badges(img, role_label, status, chapter=chapter)
+        k = max(1, int(len(words) * F.ease_out(F.seg(p, 0.0, 0.35)) + 0.999))
+        F.text_box(img, " ".join(words[:k]), box, "sans-black", size, accent or T["text"], "left",
+                   "top" if icon else "middle", min_size=size, label=f"{seg['role']}-text", hl_numbers=True)
+        if icon:
+            import pictos
+
+            sc = ease_back(F.seg(p, 0.12, 0.38))
+            if sc > 0.02:
+                bob = 10 * math.sin(2 * math.pi * t / 2.4)
+                side = int(380 * max(0.05, sc))
+                ic = pictos.icon(icon, 380).resize((side, side), F.Image.LANCZOS)
+                F.paste(img, ic, ((X0 + X1) // 2, 1040 + bob), anchor="center")
         footer(img, cites)
 
     return draw, _texts(role_label, status, cites, text)
 
 
 def _chart(ep, seg, model, role_label, status, cites):
+    chapter = (CHAPTER["i"], CHAPTER["n"])
     note = seg.get("screen") or ""
     box = (X0, 420, X1, 1060 if note else 1240)
     S._MODELS[id(model)] = model
 
     def draw(img, t, p):
-        badges(img, role_label, status)
+        badges(img, role_label, status, chapter=chapter)
         step = max(1, int(24 * F.ease_in_out(F.seg(p, 0, 0.7)) + 0.5))
         F.paste(img, S._chart_cached(id(model), step, 24, box[2] - box[0], box[3] - box[1],
                                      seg.get("visual", {}).get("title")), (box[0], box[1]))
@@ -158,13 +205,14 @@ def _chart(ep, seg, model, role_label, status, cites):
 
 
 def _surface(ep, seg, model, role_label, status, cites):
+    chapter = (CHAPTER["i"], CHAPTER["n"])
     note = seg.get("screen") or ""
     S._MODELS[id(model)] = model
 
     def draw(img, t, p):
         e = F.ease_in_out(p)
         F.paste(img, S._surface_cached(id(model), int(-70 + 80 * e), int(30 - 8 * e), S.CW, 760), (X0, 410))
-        badges(img, role_label, status)
+        badges(img, role_label, status, chapter=chapter)
         if note:
             F.text_box(img, note, (X0, 1170, X1, 1245), "sans-bold", 34, T["muted"], "left", "top", min_size=24,
                        label=f"{seg['role']}-note", hl_numbers=True)
@@ -174,11 +222,12 @@ def _surface(ep, seg, model, role_label, status, cites):
 
 
 def _code(ep, seg, model, role_label, status, cites):
+    chapter = (CHAPTER["i"], CHAPTER["n"])
     code, total = model.code, len(model.code)
     rows = _rows(seg, model)
 
     def draw(img, t, p):
-        badges(img, role_label, status)
+        badges(img, role_label, status, chapter=chapter)
         n = int(total * F.ease_in_out(F.seg(p, 0, 0.6)))
         im = F.fit_width(F.code_panel(code, S.CW, chars=n if n < total else None,
                                       title=getattr(model, "code_title", "") or f"{model.topic}.py"), S.CW, 600)
@@ -198,11 +247,12 @@ def _rows(seg, model):
 
 
 def _terminal(ep, seg, model, role_label, status, cites):
+    chapter = (CHAPTER["i"], CHAPTER["n"])
     rows = _rows(seg, model)
     note = seg.get("screen") or ""
 
     def draw(img, t, p):
-        badges(img, role_label, status)
+        badges(img, role_label, status, chapter=chapter)
         k = min(len(rows), int(len(rows) * F.seg(p, 0.05, 0.6)) + 1)
         im = F.terminal_panel(rows[:k], S.CW, title=seg.get("visual", {}).get("title") or getattr(model, "run_title", "kết quả"))
         F.paste(img, im, (X0, 420))
@@ -216,6 +266,7 @@ def _terminal(ep, seg, model, role_label, status, cites):
 
 
 def _citation(ep, seg, model, role_label, status, cites):
+    chapter = (CHAPTER["i"], CHAPTER["n"])
     """Study card: who, where, what was found (the finding is `screen`, numbers only via facts/placeholders)."""
     led = ledger()
     cl = claim_index(ep)
@@ -227,7 +278,7 @@ def _citation(ep, seg, model, role_label, status, cites):
 
     def draw(img, t, p):
         a = F.ease_out(F.seg(p, 0, 0.2))
-        badges(img, role_label, status)
+        badges(img, role_label, status, chapter=chapter)
         F.panel(img, (X0, 420, X1, 1240), fill=T["surface"], outline=T["positive"])
         rx = X1 - (210 if pic else 36)
         F.text_box(img, who, (X0 + 36, 450, rx, 520), "mono-bold", 36, T["positive"], label="cite-who", alpha=a)
@@ -245,13 +296,14 @@ def _citation(ep, seg, model, role_label, status, cites):
 
 
 def _timeline(ep, seg, model, role_label, status, cites):
+    chapter = (CHAPTER["i"], CHAPTER["n"])
     """Vertical timeline of ep['timeline'] events up to and including this segment's `upto` index."""
     events = ep.get("timeline", [])
     upto = seg.get("visual", {}).get("upto", len(events) - 1)
     cl = claim_index(ep)
 
     def draw(img, t, p):
-        badges(img, role_label, status)
+        badges(img, role_label, status, chapter=chapter)
         d = F.ImageDraw.Draw(img)
         shown = events[:upto + 1]
         n = max(1, len(shown))
@@ -286,6 +338,7 @@ def _timeline(ep, seg, model, role_label, status, cites):
 
 
 def _split(ep, seg, model, role_label, status, cites):
+    chapter = (CHAPTER["i"], CHAPTER["n"])
     an = ep.get("analogy", {})
     sim, brk = an.get("similar", [])[:3], an.get("breaks", [])[:3]
 
@@ -301,7 +354,7 @@ def _split(ep, seg, model, role_label, status, cites):
             y += h
 
     def draw(img, t, p):
-        badges(img, role_label, status)
+        badges(img, role_label, status, chapter=chapter)
         col(img, (X0, 420, X0 + S.CW // 2 - 12, 1240), "GIỐNG", sim, T["positive"], F.ease_out(F.seg(p, 0, 0.2)), "sim")
         col(img, (X0 + S.CW // 2 + 12, 420, X1, 1240), "KHÁC", brk, T["negative"], F.ease_out(F.seg(p, 0.3, 0.5)), "brk")
         footer(img, cites)
@@ -310,12 +363,13 @@ def _split(ep, seg, model, role_label, status, cites):
 
 
 def _scenarios(ep, seg, model, role_label, status, cites):
+    chapter = (CHAPTER["i"], CHAPTER["n"])
     """Three scenario cards: name, what confirms it, what invalidates it. No probabilities unless sourced."""
     scs = ep.get("scenarios", [])
     names = {"bull": ("TÍCH CỰC", T["positive"]), "base": ("CƠ SỞ", T["neutral"]), "bear": ("TIÊU CỰC", T["negative"])}
 
     def draw(img, t, p):
-        badges(img, role_label, status)
+        badges(img, role_label, status, chapter=chapter)
         y = 420
         h = (1240 - 420 - 2 * 18) // 3
         for i, sc in enumerate(scs[:3]):
@@ -337,6 +391,7 @@ def _scenarios(ep, seg, model, role_label, status, cites):
 
 
 def _gauge(ep, seg, model, role_label, status, cites):
+    chapter = (CHAPTER["i"], CHAPTER["n"])
     """Breadth bar: advancers / decliners / unchanged as one stacked bar, with the counts."""
     v = model.values
     parts = [("tăng", v.get("adv", 0), T["positive"]), ("giảm", v.get("dec", 0), T["negative"]),
@@ -345,7 +400,7 @@ def _gauge(ep, seg, model, role_label, status, cites):
     note = seg.get("screen") or ""
 
     def draw(img, t, p):
-        badges(img, role_label, status)
+        badges(img, role_label, status, chapter=chapter)
         k = F.ease_in_out(F.seg(p, 0, 0.5))
         x = X0
         d = F.ImageDraw.Draw(img)
@@ -368,13 +423,14 @@ def _gauge(ep, seg, model, role_label, status, cites):
 
 
 def _image(ep, seg, model, role_label, status, cites):
+    chapter = (CHAPTER["i"], CHAPTER["n"])
     """A person / event / object image (licensed photo or labelled illustration) with caption and credit."""
     iid = seg["visual"]["image"]
     note = seg.get("screen") or ""
     box = (X0, 420, X1, 1000)
 
     def draw(img, t, p):
-        badges(img, role_label, status)
+        badges(img, role_label, status, chapter=chapter)
         im = _img_cached(iid, box[2] - box[0], box[3] - box[1])
         z = 1.0 + 0.04 * F.ease_in_out(p)            # slow push-in
         if z > 1.001:
@@ -429,13 +485,21 @@ def segment_scene(ep, seg, model, role_label, default_visual="statement", min_du
     return sc
 
 
-def pillar_build(ep, model, ctx, role_labels, visuals, takeaway_chip="Mang về", hook_kicker=None):
-    """Hook → segments (in order) → takeaway → end card. Used by every pillar style."""
+def pillar_build(ep, model, ctx, role_labels, visuals, takeaway_chip="Mang về", hook_kicker=None, icons=None):
+    """Hook → segments (in order) → takeaway → end card. Used by every pillar style.
+    icons: role → pictogram for text-only scenes (an episode can override with visual.icon)."""
     out = [S.hook(ep["hook"], kicker=ep.get("kicker") or hook_kicker)]
-    for seg in ep["segments"]:
+    segs = ep["segments"]
+    for i, seg in enumerate(segs):
+        CHAPTER.update(i=i, n=len(segs))
+        if (icons or {}).get(seg["role"]) and not seg.get("_icon"):
+            seg = dict(seg, _icon=icons[seg["role"]])
         out.append(segment_scene(ep, seg, model, role_labels.get(seg["role"], seg["role"].upper()),
                                  visuals.get(seg["role"], "statement")))
+    CHAPTER.update(i=0, n=0)
     if ep.get("takeaway"):
-        out.append(S.statement(ep["takeaway"], name="takeaway", size=64, label_chip=takeaway_chip))
+        tk = {"role": "takeaway", "say": ep["takeaway"], "claims": [], "visual": {"kind": "statement", "icon": "check"}}
+        draw, texts = _statement(ep, tk, model, takeaway_chip.upper(), None, [])
+        out.append(Scene("takeaway", ep["takeaway"], draw, 2.5, texts=texts))
     out.append(S.end(ep["cta"], ctx["disclaimer"], ctx["tag"]))
     return out

@@ -11,6 +11,8 @@ ROLES = {"setup": "TRÒ CHƠI", "intuition": "TRỰC GIÁC", "math": "TOÁN", "s
 VISUALS = {"setup": "statement", "intuition": "statement", "math": "code", "simulation": "chart",
            "analogy": "split", "lesson": "surface"}
 
+ICONS = {"setup": "cards", "intuition": "bulb", "math": "gear", "simulation": "dice", "analogy": "scale", "lesson": "target"}   # pictograms for text-only scenes (pipeline/pictos.py)
+
 
 def build(ep, model, ctx):
-    return P.pillar_build(ep, model, ctx, ROLES, VISUALS, takeaway_chip="Mang về")
+    return P.pillar_build(ep, model, ctx, ROLES, VISUALS, icons=ICONS, takeaway_chip="Mang về")

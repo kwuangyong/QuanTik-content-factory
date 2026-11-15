@@ -27,6 +27,16 @@ mốc), `"visual": {"kind": "citation", "image": "<id>"}` (ảnh tác giả trê
 `python pipeline/images.py search "<tên>"` trên Wikimedia Commons; chỉ giấy phép tự do; không có thì
 `images.py person/event/cards` (ảnh minh hoạ). Chi tiết: `knowledge/images/README.md`.
 
+## Cho dễ xem
+
+- Cảnh chỉ có chữ tự có **biểu tượng** theo vai (bảng `ICONS` trong `template.py` của từng style); đổi cho một đoạn bằng
+  `"visual": {"kind": "statement", "icon": "<tên>"}`. Danh sách: `python pipeline/pictos.py <file.png>` (18 biểu tượng:
+  book, building, bulb, cards, chart_up, chart_down, check, coins, dice, eye, gear, hourglass, magnifier, people, scale,
+  shield, target, warning).
+- Chữ lớn hiện từng từ; biểu tượng bật lên rồi trôi nhẹ; phụ đề sáng từng từ theo giọng (karaoke); chuyển cảnh mờ dần
+  0,25 giây; chấm tiến trình chương ở góc phải cho biết đang ở đoạn nào. Tất cả tự động, không cần khai báo.
+- Mỗi đoạn nên có `screen` ngắn (≤ 10 từ) khác với lời đọc: màn hình nói ý chính, giọng giải thích.
+
 ## Ràng buộc nhận diện
 
 - Màu, font, vùng an toàn: `brand/identity.md`. Mỗi đoạn trụ cột mới luôn có nhãn vai + nhãn trạng thái

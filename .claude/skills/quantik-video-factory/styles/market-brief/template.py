@@ -11,6 +11,8 @@ ROLES = {"asof": "DỮ LIỆU", "breadth": "ĐỘ RỘNG", "liquidity": "THANH K
 VISUALS = {"asof": "terminal", "breadth": "gauge", "liquidity": "terminal", "sectors": "sectors", "regime": "terminal",
            "interpretation": "statement", "scenarios": "scenarios", "risk": "statement"}
 
+ICONS = {"asof": "hourglass", "breadth": "people", "liquidity": "coins", "sectors": "building", "regime": "magnifier", "interpretation": "eye", "scenarios": "scale", "risk": "shield"}   # pictograms for text-only scenes (pipeline/pictos.py)
+
 
 def build(ep, model, ctx):
-    return P.pillar_build(ep, model, ctx, ROLES, VISUALS, takeaway_chip="Ghi nhớ")
+    return P.pillar_build(ep, model, ctx, ROLES, VISUALS, icons=ICONS, takeaway_chip="Ghi nhớ")

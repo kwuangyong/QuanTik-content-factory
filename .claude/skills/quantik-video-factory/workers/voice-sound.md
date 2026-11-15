@@ -2,7 +2,7 @@
 
 | File | Việc |
 | --- | --- |
-| `pipeline/voiceover.py` | TTS: edge-tts (vi-VN-HoaiMyNeural / NamMinhNeural) → gTTS → espeak-ng → không giọng; `brand/pronunciation.json` |
+| `pipeline/voiceover.py` | Giọng mặc định `male-deep` (NamMinh, −12Hz, −5%). TTS: edge-tts (vi-VN-HoaiMyNeural / NamMinhNeural) → gTTS → espeak-ng → không giọng; `brand/pronunciation.json` |
 | `pipeline/assemble.py` | ghép giọng từng cảnh + nhạc nền (pad tự tạo hoặc file có giấy phép) → `final.mp4` |
 
 Engine thực tế ghi trong `qa_report.md` — báo người dùng nếu không có giọng. Sau proxy kiểm tra TLS, `voiceover.py`

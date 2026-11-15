@@ -126,7 +126,7 @@ python batch.py --episode ../episodes/kelly-meme-tap03.json            # episode
 python batch.py --topics var_cvar --styles code-reel --prices FPT.csv --data-source "FPT, HOSE, 2023–2025"
 ```
 
-Tuỳ chọn: `--scale 0.5` (bản xem nhanh 540×960, dựng lại `--scale 1` trước khi đăng) · `--voice male` (giọng nam trầm: đặt biến môi trường `QT_PITCH=-12Hz QT_RATE=-5%` trước lệnh, chỉ engine edge) · `--voice-engine edge|gtts|espeak|silent` · `--music <file có giấy phép>|none` · `--no-log` (không ghi episodes.csv, dùng khi thử) · `--force` (dựng dù QA trước render thất bại — chỉ để xem, không đăng).
+Tuỳ chọn: `--scale 0.5` (bản xem nhanh 540×960, dựng lại `--scale 1` trước khi đăng) · giọng **mặc định là nam trầm** (`male-deep`: NamMinh, −12Hz, −5%); `--voice female` cho giọng nữ, `--voice male` cho giọng nam thường (biến môi trường `QT_PITCH`/`QT_RATE` vẫn ghi đè) · `--voice-engine edge|gtts|espeak|silent` · `--music <file có giấy phép>|none` · `--no-log` (không ghi episodes.csv, dùng khi thử) · `--force` (dựng dù QA trước render thất bại — chỉ để xem, không đăng).
 
 Mỗi video ra `social-output/<id>/` (thư mục gốc repo): `final.mp4`, `thumbnail.jpg`, `captions.md`, `subtitles.srt`, `qa_report.md`, `values.json` (số + code đã chạy), `layout.json`. Carousel ra `slides/1080x1920/` và `slides/1080x1350/`. Talking-head ra `teleprompter.mp4`, `script.md`, `broll/`. Một video mất khoảng 1–2 phút dựng.
 

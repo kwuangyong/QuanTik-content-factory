@@ -100,6 +100,13 @@ python images.py person --id <id> --name "<Họ tên>" --role "<vai trò>"     #
 python images.py search "<tên>"; python images.py fetch "File:…" --id <id> --subject "<tên>"   # ảnh thật (cần mạng)
 ```
 
+## Giọng và hình (bổ sung)
+
+- Giọng mặc định đổi từ nữ (HoaiMy) sang **nam trầm** (`male-deep`) cho mọi lệnh. Giữ giọng nữ: `--voice female`.
+  Giọng trầm đọc chậm hơn 5% → video dài thêm vài giây; kiểm `max_seconds`.
+- Mọi video (cả style cũ): phụ đề karaoke, chuyển cảnh mờ dần. Style trụ cột mới: biểu tượng cho cảnh chữ, chữ hiện từng
+  từ, chấm tiến trình chương (`pipeline/pictos.py`, `pillar_scenes.py`).
+
 ## Việc còn để ngỏ (chưa làm, không giả vờ là đã có)
 
 - Chưa có API lịch sử giá tự động → regime/biến động/thanh khoản 20 phiên cần CSV người dùng hoặc tích luỹ snapshot.

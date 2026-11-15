@@ -187,7 +187,7 @@ def main():
 
     def render_opts(s):
         s.add_argument("--out", default=str(DEFAULT_OUT)); s.add_argument("--scale", type=float, default=1.0)
-        s.add_argument("--voice-engine", default="auto"); s.add_argument("--voice", default="female")
+        s.add_argument("--voice-engine", default="auto"); s.add_argument("--voice", default="male-deep")
         s.add_argument("--music", default=None); s.add_argument("--no-log", action="store_true")
 
     s = sub.add_parser("check"); s.add_argument("episode"); render_opts(s); s.set_defaults(fn=cmd_check)

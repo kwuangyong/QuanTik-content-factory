@@ -418,7 +418,7 @@ class VoiceRetry(unittest.TestCase):
 
         calls = {"n": 0}
 
-        def flaky(text, dst, voice, rate):
+        def flaky(text, dst, voice, rate, pitch="+0Hz"):
             calls["n"] += 1
             if calls["n"] < 3:
                 raise RuntimeError("NoAudioReceived")

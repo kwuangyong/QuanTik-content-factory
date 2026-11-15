@@ -13,6 +13,8 @@ ROLES = {"context": "BỐI CẢNH", "conflict": "BÀI TOÁN", "breakthrough": "�
 VISUALS = {"context": "timeline", "conflict": "statement", "breakthrough": "chart", "consequences": "timeline",
            "lesson": "terminal"}
 
+ICONS = {"context": "book", "conflict": "target", "breakthrough": "bulb", "consequences": "hourglass", "lesson": "check"}   # pictograms for text-only scenes (pipeline/pictos.py)
+
 
 def build(ep, model, ctx):
-    return P.pillar_build(ep, model, ctx, ROLES, VISUALS, takeaway_chip="Điều còn đúng hôm nay")
+    return P.pillar_build(ep, model, ctx, ROLES, VISUALS, icons=ICONS, takeaway_chip="Điều còn đúng hôm nay")

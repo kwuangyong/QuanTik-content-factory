@@ -21,7 +21,16 @@ from pathlib import Path
 
 from core import BRAND
 
-VOICES = {"female": "vi-VN-HoaiMyNeural", "male": "vi-VN-NamMinhNeural"}
+VOICES = {"female": "vi-VN-HoaiMyNeural", "male": "vi-VN-NamMinhNeural", "male-deep": "vi-VN-NamMinhNeural"}
+# voice profile → (edge voice, rate, pitch). Default for every video: deep male narrator (owner's choice, 11/2026).
+# QT_RATE / QT_PITCH env vars still override.
+PROFILES = {"male-deep": ("vi-VN-NamMinhNeural", "-5%", "-12Hz"), "male": ("vi-VN-NamMinhNeural", "+0%", "+0Hz"),
+            "female": ("vi-VN-HoaiMyNeural", "+0%", "+0Hz")}
+DEFAULT_VOICE = "male-deep"
+
+
+def profile(voice):
+    return PROFILES.get(voice, (VOICES.get(voice, voice), "+0%", "+0Hz"))
 ENGINES = ["edge", "gtts", "espeak", "silent"]
 RETRIES = int(os.environ.get("QT_TTS_RETRIES", "5"))
 
@@ -72,7 +81,7 @@ def _trust_env_ca(edge_tts):
             m._SSL_CTX = ctx
 
 
-def _edge(text, dst, voice, rate):
+def _edge(text, dst, voice, rate, pitch="+0Hz"):
     import edge_tts
 
     tmp = Path(dst).with_suffix(".mp3")
@@ -81,7 +90,7 @@ def _edge(text, dst, voice, rate):
     proxy = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
 
     async def go():
-        await edge_tts.Communicate(text, voice, rate=os.environ.get("QT_RATE", rate), pitch=os.environ.get("QT_PITCH", "+0Hz"),
+        await edge_tts.Communicate(text, voice, rate=os.environ.get("QT_RATE", rate), pitch=os.environ.get("QT_PITCH", pitch),
                                    proxy=proxy).save(str(tmp))
 
     asyncio.run(asyncio.wait_for(go(), timeout=40))
@@ -103,7 +112,7 @@ def _espeak(text, dst, *_):
     subprocess.run([exe, "-v", "vi", "-s", "150", "-w", str(dst), text], check=True, capture_output=True)
 
 
-def _split_synth(say, dst, voice, rate):
+def _split_synth(say, dst, voice, rate, pitch="+0Hz"):
     parts = [p for p in re.split(r"(?<=[.!?…])\s+", say) if p.strip()]
     if len(parts) < 2:
         raise RuntimeError("không tách được câu")
@@ -112,7 +121,7 @@ def _split_synth(say, dst, voice, rate):
         out = Path(dst).with_name(Path(dst).stem + f"-s{i}.wav")
         for k in range(RETRIES):
             try:
-                _edge(p, out, voice, rate)
+                _edge(p, out, voice, rate, pitch)
                 break
             except Exception:
                 if k + 1 == RETRIES:
@@ -127,11 +136,13 @@ def _split_synth(say, dst, voice, rate):
         t.unlink(missing_ok=True)
 
 
-def synth(text, dst, engine="auto", voice="female", rate="+0%"):
+def synth(text, dst, engine="auto", voice=DEFAULT_VOICE, rate=None):
     """Write dst (wav). Returns (engine_used, seconds). engine_used == 'silent' means no file was written."""
     order = ENGINES if engine == "auto" else [engine]
     errors = []
     say = speakable(text)
+    vid, prate, pitch = profile(voice)
+    rate = rate or prate
     for e in order:
         if e == "silent":
             return "silent", estimate_seconds(text), errors
@@ -139,7 +150,7 @@ def synth(text, dst, engine="auto", voice="female", rate="+0%"):
         attempts = RETRIES if e in ("edge", "gtts") else 1
         for k in range(attempts):
             try:
-                {"edge": _edge, "gtts": _gtts, "espeak": _espeak}[e](say, dst, VOICES.get(voice, voice), rate)
+                {"edge": lambda *a: _edge(*a, pitch), "gtts": _gtts, "espeak": _espeak}[e](say, dst, vid, rate)
                 return e, duration_of(dst), errors
             except Exception as ex:  # network blocked, package missing, transient service error...
                 errors.append(f"{e}: {type(ex).__name__}: {str(ex)[:120]}")
@@ -149,14 +160,14 @@ def synth(text, dst, engine="auto", voice="female", rate="+0%"):
                     break
         if e == "edge" and errors and "Certificate" not in errors[-1]:
             try:  # one awkward sentence (often an English term) can sink a whole scene: retry sentence by sentence
-                _split_synth(say, dst, VOICES.get(voice, voice), rate)
+                _split_synth(say, dst, vid, rate, pitch)
                 return e, duration_of(dst), errors
             except Exception as ex:
                 errors.append(f"{e} (từng câu): {type(ex).__name__}: {str(ex)[:120]}")
     return "silent", estimate_seconds(text), errors
 
 
-def probe_engine(engine="auto", voice="female"):
+def probe_engine(engine="auto", voice=DEFAULT_VOICE):
     """Pick the first engine that works once, so a whole video uses one consistent voice."""
     import tempfile
 
@@ -171,7 +182,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("text"); ap.add_argument("out")
     ap.add_argument("--engine", default="auto", choices=["auto"] + ENGINES)
-    ap.add_argument("--voice", default="female")
+    ap.add_argument("--voice", default=DEFAULT_VOICE, help="male-deep (mặc định) | male | female | edge voice id")
     a = ap.parse_args()
     used, sec, errs = synth(a.text, a.out, a.engine, a.voice)
     print(json.dumps({"engine": used, "seconds": round(sec, 2), "errors": errs}, ensure_ascii=False))

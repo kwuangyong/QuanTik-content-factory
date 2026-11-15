@@ -275,7 +275,7 @@ def _write_provenance(out, filled, scenes, model, kind, pillar):
             + img_block)
 
 
-def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice="female", music=None,
+def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice="male-deep", music=None,
          scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True, check_only=False):
     t_start = time.time()
     ep, mod, model = prepare(topic, style, override, returns)
@@ -388,7 +388,7 @@ def main():
     ap.add_argument("--episode", action="append", default=[], help="episode JSON (needs topic + style)")
     ap.add_argument("--out", default=str(DEFAULT_OUT))
     ap.add_argument("--voice-engine", default="auto", choices=["auto"] + V.ENGINES)
-    ap.add_argument("--voice", default="female", help="female | male | any edge-tts voice id")
+    ap.add_argument("--voice", default="male-deep", help="male-deep (mặc định, nam trầm) | male | female | edge voice id")
     ap.add_argument("--music", default=None, help="path to a licensed track, or 'none'")
     ap.add_argument("--scale", type=float, default=1.0, help="0.5 = fast 540x960 preview")
     ap.add_argument("--fps", type=int, default=30)
