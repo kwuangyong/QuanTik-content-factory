@@ -43,8 +43,39 @@
         "c_exploit"
       ],
       "visual": {
-        "kind": "image",
-        "image": "kuhn-cards"
+        "kind": "statement",
+        "scene": {
+          "cast": [
+            {
+              "who": "investor",
+              "pose": "point",
+              "face": "smile",
+              "x": 0.24
+            },
+            {
+              "who": "rival",
+              "pose": "shrug",
+              "face": "neutral",
+              "x": 0.76,
+              "flip": true
+            }
+          ],
+          "props": [
+            {
+              "what": "poker_table"
+            },
+            {
+              "what": "chips",
+              "x": 0.5,
+              "y": 0.84,
+              "s": 0.6
+            }
+          ],
+          "bubble": {
+            "text": "Lại có K à? Tôi bỏ.",
+            "who": 1
+          }
+        }
       }
     },
     {

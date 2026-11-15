@@ -160,9 +160,10 @@ def _statement(ep, seg, model, role_label, status, cites, accent=None):
     import math
 
     text = seg.get("screen") or seg["say"]
-    icon = (seg.get("visual") or {}).get("icon") or seg.get("_icon")
+    stg = (seg.get("visual") or {}).get("scene") or seg.get("_scene")
+    icon = None if stg else ((seg.get("visual") or {}).get("icon") or seg.get("_icon"))
     words = text.split()
-    box = (X0, 430, X1, 820) if icon else (X0, 430, X1, 1230)
+    box = (X0, 430, X1, 760) if stg else (X0, 430, X1, 820) if icon else (X0, 430, X1, 1230)
     size = F.fit_size(text, box, "sans-black", 72 if icon else 68, 38)
     chapter = (CHAPTER["i"], CHAPTER["n"])
 
@@ -170,7 +171,9 @@ def _statement(ep, seg, model, role_label, status, cites, accent=None):
         badges(img, role_label, status, chapter=chapter)
         k = max(1, int(len(words) * F.ease_out(F.seg(p, 0.0, 0.35)) + 0.999))
         F.text_box(img, " ".join(words[:k]), box, "sans-black", size, accent or T["text"], "left",
-                   "top" if icon else "middle", min_size=size, label=f"{seg['role']}-text", hl_numbers=True)
+                   "top" if (icon or stg) else "middle", min_size=size, label=f"{seg['role']}-text", hl_numbers=True)
+        if stg:
+            draw_stage(img, stg, t, p, seg["role"])
         if icon:
             import pictos
 
@@ -182,7 +185,48 @@ def _statement(ep, seg, model, role_label, status, cites, accent=None):
                 F.paste(img, ic, ((X0 + X1) // 2, 1040 + bob), anchor="center")
         footer(img, cites)
 
-    return draw, _texts(role_label, status, cites, text)
+    return draw, _texts(role_label, status, cites, text, ((stg or {}).get("bubble") or {}).get("text"))
+
+
+STAGE_BOX = (X0, 780, X1, 1236)
+
+
+def draw_stage(img, spec, t, p, name="stage", box=STAGE_BOX):
+    """Characters + props (pipeline/figures.py) in the lower part of the frame, optional speech bubble on top."""
+    import figures as G
+
+    w, h = box[2] - box[0], box[3] - box[1]
+    F.paste(img, G.stage(spec, w, h, t, p), (box[0], box[1]))
+    bub = spec.get("bubble")
+    if bub and p > 0.3:
+        who = spec.get("cast", [{}])[min(bub.get("who", 0), len(spec.get("cast", [{}])) - 1)]
+        cx = box[0] + int(w * who.get("x", 0.5))
+        bw, bh = 400, 120
+        x0 = max(box[0], min(box[2] - bw, cx - bw // 2))
+        y0 = box[1] - 40
+        a = F.ease_out(F.seg(p, 0.3, 0.42))
+        d = F.ImageDraw.Draw(img)
+        d.rounded_rectangle([x0, y0, x0 + bw, y0 + bh], radius=30, fill=(245, 242, 235), outline=T["accent"], width=4)
+        d.polygon([(cx - 18, y0 + bh - 2), (cx + 18, y0 + bh - 2), (cx, y0 + bh + 34)], fill=(245, 242, 235))
+        F.text_box(img, bub["text"], (x0 + 22, y0 + 14, x0 + bw - 22, y0 + bh - 14), "sans-black", 44, T["bg"],
+                   "center", "middle", min_size=24, label=f"{name}-bubble", alpha=a)
+
+
+def hook_scene(text, spec, kicker=None, min_dur=2.6):
+    """Hook with a stage: words pop in on top, characters land below — a face in the first second."""
+    words = text.split()
+    box = (X0, 420, X1, 800)
+    size = F.fit_size(text, box, "sans-black", 84, 46)
+
+    def draw(img, t, p):
+        k = max(1, int(len(words) * F.ease_out(F.seg(p, 0, 0.45)) + 0.999))
+        if kicker:
+            F.chip(img, (X0, 330), kicker, T["accent"], 28)
+        F.text_box(img, " ".join(words[:k]), box, "sans-black", size, T["text"], "left", "top", min_size=size,
+                   label="hook", hl_numbers=True)
+        draw_stage(img, spec, t, min(1.0, p * 1.6), "hook")
+
+    return Scene("hook", text, draw, min_dur, texts=[text, kicker or "", (spec.get("bubble") or {}).get("text", "")])
 
 
 def _chart(ep, seg, model, role_label, status, cites):
@@ -485,15 +529,22 @@ def segment_scene(ep, seg, model, role_label, default_visual="statement", min_du
     return sc
 
 
-def pillar_build(ep, model, ctx, role_labels, visuals, takeaway_chip="Mang về", hook_kicker=None, icons=None):
+def pillar_build(ep, model, ctx, role_labels, visuals, takeaway_chip="Mang về", hook_kicker=None, icons=None,
+                 scenes=None):
     """Hook → segments (in order) → takeaway → end card. Used by every pillar style.
-    icons: role → pictogram for text-only scenes (an episode can override with visual.icon)."""
-    out = [S.hook(ep["hook"], kicker=ep.get("kicker") or hook_kicker)]
+    icons: role → pictogram for text-only scenes; scenes: role → stage (characters + props, pipeline/figures.py),
+    which wins over the icon. An episode overrides with visual.icon / visual.scene, and ep["hook_scene"] (or the
+    style's scenes["hook"]) puts characters under the hook; "hook_scene": null turns it off."""
+    hs = ep.get("hook_scene", (scenes or {}).get("hook"))
+    out = [hook_scene(ep["hook"], hs, ep.get("kicker") or hook_kicker) if hs
+           else S.hook(ep["hook"], kicker=ep.get("kicker") or hook_kicker)]
     segs = ep["segments"]
     for i, seg in enumerate(segs):
         CHAPTER.update(i=i, n=len(segs))
         if (icons or {}).get(seg["role"]) and not seg.get("_icon"):
             seg = dict(seg, _icon=icons[seg["role"]])
+        if (scenes or {}).get(seg["role"]) and not seg.get("_scene"):
+            seg = dict(seg, _scene=scenes[seg["role"]])
         out.append(segment_scene(ep, seg, model, role_labels.get(seg["role"], seg["role"].upper()),
                                  visuals.get(seg["role"], "statement")))
     CHAPTER.update(i=0, n=0)

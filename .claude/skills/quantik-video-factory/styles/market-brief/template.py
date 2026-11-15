@@ -12,7 +12,8 @@ VISUALS = {"asof": "terminal", "breadth": "gauge", "liquidity": "terminal", "sec
            "interpretation": "statement", "scenarios": "scenarios", "risk": "statement"}
 
 ICONS = {"asof": "hourglass", "breadth": "people", "liquidity": "coins", "sectors": "building", "regime": "magnifier", "interpretation": "eye", "scenarios": "scale", "risk": "shield"}   # pictograms for text-only scenes (pipeline/pictos.py)
+SCENES = {"hook": {"cast": [{"who": "analyst", "pose": "present", "face": "surprised", "x": 0.3, "flip": False}], "props": [{"what": "laptop_down", "x": 0.72, "y": 0.62, "s": 0.9}]}, "interpretation": {"cast": [{"who": "analyst", "pose": "think", "face": "focus", "x": 0.3, "flip": False}], "props": [{"what": "laptop_up", "x": 0.72, "y": 0.62, "s": 0.9}]}, "risk": {"cast": [{"who": "investor", "pose": "shrug", "face": "neutral", "x": 0.3, "flip": False}], "props": [{"what": "newspaper", "x": 0.72, "y": 0.6, "s": 0.9}]}}   # characters + props (pipeline/figures.py)
 
 
 def build(ep, model, ctx):
-    return P.pillar_build(ep, model, ctx, ROLES, VISUALS, icons=ICONS, takeaway_chip="Ghi nhớ")
+    return P.pillar_build(ep, model, ctx, ROLES, VISUALS, icons=ICONS, scenes=SCENES, takeaway_chip="Ghi nhớ")

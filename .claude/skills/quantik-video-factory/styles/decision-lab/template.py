@@ -12,7 +12,8 @@ VISUALS = {"setup": "statement", "intuition": "statement", "math": "code", "simu
            "analogy": "split", "lesson": "surface"}
 
 ICONS = {"setup": "cards", "intuition": "bulb", "math": "gear", "simulation": "dice", "analogy": "scale", "lesson": "target"}   # pictograms for text-only scenes (pipeline/pictos.py)
+SCENES = {"hook": {"cast": [{"who": "rival", "pose": "hold", "face": "focus", "x": 0.24, "flip": False}, {"who": "investor", "pose": "think", "face": "surprised", "x": 0.76, "flip": True}], "props": [{"what": "poker_table"}, {"what": "cards", "x": 0.5, "y": 0.86, "s": 0.5}]}, "setup": {"cast": [{"who": "rival", "pose": "hold", "face": "neutral", "x": 0.24, "flip": False}, {"who": "investor", "pose": "hold", "face": "neutral", "x": 0.76, "flip": True}], "props": [{"what": "poker_table"}, {"what": "cards", "x": 0.5, "y": 0.86, "s": 0.5}]}, "intuition": {"cast": [{"who": "investor", "pose": "think", "face": "focus", "x": 0.3, "flip": False}], "props": [{"what": "cards", "x": 0.72, "y": 0.55}]}, "lesson": {"cast": [{"who": "quant", "pose": "point", "face": "smile", "x": 0.26, "flip": False}], "props": [{"what": "chalkboard", "x": 0.72, "y": 0.45, "s": 0.95}]}}   # characters + props (pipeline/figures.py)
 
 
 def build(ep, model, ctx):
-    return P.pillar_build(ep, model, ctx, ROLES, VISUALS, icons=ICONS, takeaway_chip="Mang về")
+    return P.pillar_build(ep, model, ctx, ROLES, VISUALS, icons=ICONS, scenes=SCENES, takeaway_chip="Mang về")

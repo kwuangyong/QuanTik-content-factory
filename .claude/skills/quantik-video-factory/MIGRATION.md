@@ -107,6 +107,12 @@ python images.py search "<tên>"; python images.py fetch "File:…" --id <id> --
 - Mọi video (cả style cũ): phụ đề karaoke, chuyển cảnh mờ dần. Style trụ cột mới: biểu tượng cho cảnh chữ, chữ hiện từng
   từ, chấm tiến trình chương (`pipeline/pictos.py`, `pillar_scenes.py`).
 
+## Nhân vật và hiện vật (bổ sung)
+
+`pipeline/figures.py`: 5 nhân vật, 8 tư thế, 5 nét mặt, 10 hiện vật, ghép thành "sân khấu" có chuyển động (rơi vào,
+thở, chớp mắt, bong bóng thoại). Bốn style trụ cột mới tự đặt sân khấu cho hook và các cảnh chữ (bảng `SCENES`); tắt
+hook có nhân vật bằng `"hook_scene": null` trong episode.
+
 ## Việc còn để ngỏ (chưa làm, không giả vờ là đã có)
 
 - Chưa có API lịch sử giá tự động → regime/biến động/thanh khoản 20 phiên cần CSV người dùng hoặc tích luỹ snapshot.

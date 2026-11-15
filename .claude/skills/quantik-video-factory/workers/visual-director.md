@@ -35,6 +35,15 @@ mốc), `"visual": {"kind": "citation", "image": "<id>"}` (ảnh tác giả trê
   shield, target, warning).
 - Chữ lớn hiện từng từ; biểu tượng bật lên rồi trôi nhẹ; phụ đề sáng từng từ theo giọng (karaoke); chuyển cảnh mờ dần
   0,25 giây; chấm tiến trình chương ở góc phải cho biết đang ở đoạn nào. Tất cả tự động, không cần khai báo.
+- **Nhân vật và hiện vật** (`pipeline/figures.py`): nhân vật hình người phẳng — `investor`, `quant`, `rival`,
+  `professor`, `analyst`; tư thế `stand, point, think, worried, cheer, shrug, present, hold`; nét mặt `neutral, smile,
+  worried, surprised, focus`; hiện vật `poker_table, cards, chips, phone_up, phone_down, laptop_up, laptop_down,
+  chalkboard, book, newspaper`. Mỗi style có cảnh mặc định (`SCENES` trong `template.py`, kể cả `hook`); đổi cho một đoạn:
+  `"visual": {"kind": "statement", "scene": {"cast": [{"who": "investor", "pose": "worried", "face": "worried", "x": 0.3}],
+  "props": [{"what": "phone_down", "x": 0.7}], "bubble": {"text": "…", "who": 0}}}`. Xem tất cả:
+  `python pipeline/figures.py sheet.png`.
+- Nhân vật là **vai trò chung**, không phải chân dung người thật; người thật vẫn dùng thẻ tên/ảnh có giấy phép. Hiện vật
+  không có chữ số; chữ trong bong bóng đi qua QA như mọi chữ trên màn hình.
 - Mỗi đoạn nên có `screen` ngắn (≤ 10 từ) khác với lời đọc: màn hình nói ý chính, giọng giải thích.
 
 ## Ràng buộc nhận diện

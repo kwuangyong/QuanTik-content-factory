@@ -410,6 +410,37 @@ class Images(unittest.TestCase):
             self.assertFalse(images.is_free(bad), bad)
 
 
+class Figures(unittest.TestCase):
+    """Characters / props used by style defaults and episodes exist and render."""
+
+    def _specs(self):
+        out = []
+        for st in ("bias-lab", "history-story", "decision-lab", "market-brief"):
+            out += list(batch.load_style(st).SCENES.values())
+        for name in list(EPISODES.values()) + ["ds-kuhn-nash-decision-lab"]:
+            out += [s["visual"]["scene"] for s in ep(name)["segments"] if (s.get("visual") or {}).get("scene")]
+        return out
+
+    def test_every_scene_spec_is_valid_and_renders(self):
+        import figures as G
+        for spec in self._specs():
+            for c in spec.get("cast", []):
+                self.assertIn(c["who"], G.CHARACTERS); self.assertIn(c.get("pose", "stand"), G.POSES)
+                self.assertIn(c.get("face", "neutral"), G.FACES)
+            for pr in spec.get("props", []):
+                self.assertIn(pr["what"], G.PROPS)
+            im = G.stage(spec, 880, 456, 1.0, 1.0)
+            self.assertEqual(im.size, (880, 456))
+            self.assertGreater(im.getbbox()[3] - im.getbbox()[1], 100)   # something visible was drawn
+
+    def test_bubble_text_reaches_qa(self):
+        e = ep("ds-kuhn-nash-decision-lab")
+        filled, mod, model = batch.prepare(e["topic"], e["style"], e)
+        from pathlib import Path as _P
+        scenes = mod.build(filled, model, {"tag": "T", "note": "", "disclaimer": "d", "out": _P(tempfile.mkdtemp())})
+        self.assertTrue(any("Tôi bỏ" in t for s in scenes for t in s.texts))
+
+
 class VoiceRetry(unittest.TestCase):
     """edge-tts fails intermittently (NoAudioReceived); one failed call must not leave a scene voiceless."""
 
