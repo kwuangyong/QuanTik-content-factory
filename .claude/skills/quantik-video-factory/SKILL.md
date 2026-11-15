@@ -52,8 +52,10 @@ Xác định từ lời người dùng (hỏi lại chỉ khi thật sự mơ h�
 | `talking-head-script` | bạn tự quay: kịch bản + teleprompter + B-roll | 45–90s |
 | `carousel` | feed Facebook/TikTok photo, đọc chậm, 7 slide | — |
 | `meme-quant` | giải trí, kéo người mới, 12–20s | 12–20s |
+| `story-mix` | **loạt bài nhiều tập cùng mô hình**: episode tự xếp cảnh (lịch sử, cách dùng, đố vui, so sánh, code trích dòng, 2D/3D tuỳ chọn) | 45–75s |
 
-- **Số lượng.** "Làm loạt", "cả tuần" → nhiều cặp topic × style, chạy một lệnh batch.
+- **Số lượng.** "Làm loạt", "cả tuần" → mỗi video một episode JSON riêng (thường là `story-mix`), không chạy topic × style hàng loạt.
+- **Chống lặp (bắt buộc với loạt bài).** Các style cũ dùng chung lời, seed, chart, 3D và caption theo chủ đề, nên cùng chủ đề khác style vẫn ra nội dung gần như y hệt. Mỗi video trong loạt phải khác ở: góc kể (thứ tự cảnh), `seed` + `params`, hình (2D/3D, góc quay `view`, đoạn code trích), và `title`/`caption`/`thumb`. Xem `styles/story-mix/spec.md`. Trình bày kế hoạch nội dung cho người dùng duyệt trước khi dựng cả lô.
 
 Đọc `knowledge/episodes.csv` trước: tránh trùng cặp topic × style đã đăng; nếu là loạt bài, tham chiếu tập trước trong hook hoặc CTA ("Tập trước mình nói về GARCH…").
 
@@ -95,15 +97,15 @@ python batch.py --episode ../episodes/kelly-meme-tap03.json            # episode
 python batch.py --topics var_cvar --styles code-reel --prices FPT.csv --data-source "FPT, HOSE, 2023–2025"
 ```
 
-Tuỳ chọn: `--scale 0.5` (bản xem nhanh 540×960, dựng lại `--scale 1` trước khi đăng) · `--voice male` (giọng nam trầm: đặt biến môi trường `QT_PITCH=-12Hz QT_RATE=-5%` trước lệnh, chỉ engine edge) · `--voice-engine edge|gtts|espeak|silent` · `--music <file có giấy phép>|none` · `--no-log` (không ghi episodes.csv, dùng khi thử) · `--force` (dựng dù QA trước render thất bại — chỉ để xem, không đăng).
+Tuỳ chọn: `--scale 0.5` (bản xem nhanh 540×960, dựng lại `--scale 1` trước khi đăng) · `--voice` (mặc định `male`: giọng thương hiệu nam trầm `vi-VN-NamMinhNeural`, pitch −12Hz, tempo +12%; `female` = HoaiMy +8%; ghi đè bằng `QT_PITCH`/`QT_RATE`, chỉ engine edge) · `--voice-engine edge|gtts|espeak|silent` · `--music <file có giấy phép>|none` · `--no-log` (không ghi episodes.csv, dùng khi thử) · `--force` (dựng dù QA trước render thất bại — chỉ để xem, không đăng).
 
 Mỗi video ra `social-output/<id>/` (thư mục gốc repo): `final.mp4`, `thumbnail.jpg`, `captions.md`, `subtitles.srt`, `qa_report.md`, `values.json` (số + code đã chạy), `layout.json`. Carousel ra `slides/1080x1920/` và `slides/1080x1350/`. Talking-head ra `teleprompter.mp4`, `script.md`, `broll/`. Một video mất khoảng 1–2 phút dựng.
 
-**Thumbnail** (series "Học Quant cùng QuanTik #N", nền sáng): đọc `brand/thumbnail.md` rồi chạy `python thumbnail.py --topic <topic> --no <N> --out <thư mục output>` → `thumbnail-NN.jpg`. Nội dung lấy từ khối `thumb` trong `video_defaults`. Hỏi người dùng số tập nếu chưa rõ.
+**Thumbnail** (series "Học Quant cùng QuanTik #N", nền sáng): đọc `brand/thumbnail.md` rồi chạy `python thumbnail.py --episode <episode.json> --no <N> --out <thư mục output>` (hoặc `--topic <topic> [--style <style>]`) → `thumbnail-NN.jpg`. Nội dung: khối `thumb` của mô hình ← `thumb_variants[style]` ← khối `thumb` trong episode (ưu tiên cao nhất); seed/params lấy theo episode nên số trên ảnh khớp video. Hỏi người dùng số tập nếu chưa rõ.
 
 **Dữ liệu thật:** `--prices` nhận CSV có cột `close`. Chỉ dùng để minh hoạ cách tính, nhãn nguồn hiện trên màn hình; vẫn không nói gì về hướng giá của mã đó. Không có `--prices` thì luôn là dữ liệu mô phỏng có seed cố định, và màn hình ghi "Dữ liệu mô phỏng".
 
-**Giọng đọc:** edge-tts (vi-VN-HoaiMyNeural / NamMinhNeural) cần Internet tới `speech.platform.bing.com`. Không vào được thì pipeline lùi về gTTS → espeak-ng → không giọng (phụ đề vẫn đầy đủ, thời lượng ước theo số chữ). Engine thực tế ghi trong `qa_report.md` — phải báo người dùng nếu video không có giọng, kèm cách khắc phục: chạy lệnh trên máy có Internet, hoặc thêm host đó vào allowlist mạng của môi trường.
+**Giọng đọc:** edge-tts (mặc định NamMinhNeural nam trầm, tempo +12%) cần Internet tới `speech.platform.bing.com`. Sau proxy TLS (môi trường cloud) pipeline tự dùng CA trong `SSL_CERT_FILE`. Không vào được thì pipeline lùi về gTTS → espeak-ng → không giọng (phụ đề vẫn đầy đủ, thời lượng ước theo số chữ). Engine thực tế ghi trong `qa_report.md` — phải báo người dùng nếu video không có giọng, kèm cách khắc phục: chạy lệnh trên máy có Internet, hoặc thêm host đó vào allowlist mạng của môi trường.
 
 ### 5. Kiểm tra
 

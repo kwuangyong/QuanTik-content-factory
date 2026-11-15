@@ -1,0 +1,47 @@
+{
+  "id": "garch-lich-su",
+  "topic": "garch",
+  "style": "story-mix",
+  "seed": 23,
+  "params": {"a": 0.12, "b": 0.85},
+  "tag": "GARCH",
+  "title": "Giải Nobel cho một quan sát ai cũng thấy: biến động đi thành cụm",
+  "caption": "Năm 1982 Robert Engle viết ra mô hình cho một điều trader nào cũng biết: hôm qua dữ dội thì hôm nay thường cũng dữ dội. Tim Bollerslev mở rộng thành GARCH năm 1986, và Engle nhận Nobel kinh tế 2003. Video chạy lại GARCH bằng code thật để xem một cú sốc vang bao lâu.",
+  "hashtags": ["quant", "GARCH", "lichsutaichinh", "chungkhoan", "phantichdinhluong", "QuanTik"],
+  "facts": {
+    "engle_year": {"value": "1982", "source": "Engle, R. (1982), Econometrica 50(4): ARCH"},
+    "boll_year": {"value": "1986", "source": "Bollerslev, T. (1986), Journal of Econometrics 31: GARCH"},
+    "nobel_year": {"value": "2003", "source": "NobelPrize.org: Sveriges Riksbank Prize 2003, Robert F. Engle III"}
+  },
+  "allowed_literals": ["GARCH(1,1)"],
+  "scenes": [
+    {"type": "hook", "kicker": "Lịch sử quant", "text": "Một giải Nobel cho điều mà trader nào cũng thấy mỗi ngày",
+     "say": "Có một giải Nobel được trao cho điều mà trader nào cũng thấy mỗi ngày."},
+    {"type": "story", "chip": "Năm 1982", "era": "1982", "title": "Robert Engle và lạm phát nước Anh",
+     "text": "Engle nhận ra: tháng nào biến động lớn thì tháng sau thường cũng lớn. Ông gọi đó là ARCH: rủi ro hôm nay phụ thuộc cú sốc hôm qua.",
+     "source": "Engle (1982), Econometrica",
+     "say": "Năm 1982, Robert Engle nghiên cứu lạm phát nước Anh và thấy biến động không rải đều. Tháng nào dữ dội thì tháng sau thường cũng dữ dội."},
+    {"type": "story", "chip": "Năm 1986 · 2003", "era": "1986 → 2003", "title": "Bollerslev thêm trí nhớ, Engle nhận Nobel",
+     "text": "Học trò Tim Bollerslev thêm một số hạng nhớ phương sai cũ: GARCH ra đời. Năm 2003 Engle nhận Nobel kinh tế.",
+     "source": "Bollerslev (1986); NobelPrize.org",
+     "say": "Năm 1986, học trò của ông là Tim Bollerslev thêm cho mô hình một trí nhớ dài hơn, gọi là GARCH. Năm 2003, Engle nhận giải Nobel kinh tế."},
+    {"type": "code", "lines": [4, 8], "hl": 7, "note": "Dòng sáng: phương sai hôm nay = ω + α·cú sốc hôm qua + β·phương sai hôm qua",
+     "say": "Toàn bộ ý tưởng nằm trong một dòng. Phương sai hôm nay bằng một phần cú sốc hôm qua, cộng một phần phương sai hôm qua."},
+    {"type": "run", "outputs": [{"label": "α (phản ứng cú sốc)", "key": "alpha"}, {"label": "β (trí nhớ)", "key": "beta"},
+      {"label": "α + β", "key": "persistence"}, {"label": "nửa đời cú sốc (phiên)", "key": "half_life", "highlight": true}],
+     "say": "Chạy với alpha {alpha} và beta {beta}. Tổng {persistence} nghĩa là một cú sốc mất khoảng {half_life} phiên mới nguội đi một nửa."},
+    {"type": "chart", "title": "{n_days} phiên mô phỏng",
+     "notes": [[0.0, "Cột: lợi suất ngày · Đường cam: biến động năm hoá"], [0.6, "Đỉnh {vol_peak}, đáy {vol_min}"]],
+     "say": "Nhìn đường cam. Biến động vọt lên {vol_peak} sau một chuỗi cú sốc, rồi lặng dần về {vol_min}. Cụm dữ dội, cụm yên ắng."},
+    {"type": "surface", "view": "dive", "caption": "Đồi càng thấp và rộng: phân phối lợi suất càng loãng, rủi ro càng cao",
+     "say": "Ở góc nhìn 3D, mỗi lát cắt là phân phối lợi suất của một ngày. Ngày bão tố thì đồi sụp xuống và bè rộng ra."},
+    {"type": "statement", "chip": "Mang về", "text": "Đừng hỏi biến động trung bình là bao nhiêu. Hãy hỏi: hôm nay mình đang ở cụm nào?",
+     "say": "Mang về một câu: đừng hỏi biến động trung bình là bao nhiêu. Hãy hỏi hôm nay mình đang ở cụm nào."}
+  ],
+  "thumb": {
+    "tag": "GARCH · Lịch sử",
+    "headline": [{"t": "MỘT GIẢI NOBEL", "size": 130}, {"t": "CHO ĐIỀU", "size": 150}, {"t": "[o]AI CŨNG THẤY[/o]", "size": 150}],
+    "pill": "Engle 1982 → Nobel 2003 · code Python",
+    "labels": [{"label": "Đỉnh vol", "value": "{vol_peak}", "color": "orange"}, {"label": "Nửa đời", "value": "{half_life}", "color": "green"}]
+  }
+}

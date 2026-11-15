@@ -135,11 +135,13 @@ def chart_generic(m, w, h):
 CHARTS = {"sortino": chart_sortino}  # thêm chart riêng cho topic khác ở đây
 
 
-def build(topic, no, out, style=None):
-    m = Model(topic)
+def build(topic, no, out, style=None, episode=None):
+    ep = episode or {}
+    m = Model(topic, ep.get("seed"), None, ep.get("params"))
     vd = load_model_kb(topic)
     th = dict(vd.get("thumb", {}))
     th.update(vd.get("thumb_variants", {}).get(style or "", {}))  # tiêu đề riêng theo style, tránh ảnh trùng
+    th.update(ep.get("thumb", {}))  # episode JSON có khối "thumb" riêng → ảnh riêng cho đúng video đó
     f = lambda s: fill(s, m.values, m.formats)
     img = background(); d = ImageDraw.Draw(img)
 
@@ -189,9 +191,14 @@ def build(topic, no, out, style=None):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--topic", required=True)
+    ap.add_argument("--topic")
+    ap.add_argument("--episode", help="episode JSON: lấy topic, seed, params và khối thumb riêng")
     ap.add_argument("--no", type=int, required=True, help="số tập trong series Học Quant cùng QuanTik")
     ap.add_argument("--out", required=True)
     ap.add_argument("--style", help="lấy biến thể thumb_variants[<style>] nếu có")
     a = ap.parse_args()
-    print(build(a.topic, a.no, a.out, a.style))
+    ep = None
+    if a.episode:
+        import json
+        ep = json.loads(Path(a.episode).read_text(encoding="utf-8"))
+    print(build(a.topic or ep["topic"], a.no, a.out, a.style or (ep or {}).get("style"), ep))

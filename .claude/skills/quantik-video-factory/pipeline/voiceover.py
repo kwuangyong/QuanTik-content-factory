@@ -21,6 +21,8 @@ from pathlib import Path
 from core import BRAND
 
 VOICES = {"female": "vi-VN-HoaiMyNeural", "male": "vi-VN-NamMinhNeural"}
+# Giọng thương hiệu (chủ sản phẩm chốt): nam trầm, tempo nhanh hơn một chút. Ghi đè bằng QT_PITCH / QT_RATE.
+PROSODY = {"vi-VN-NamMinhNeural": ("-12Hz", "+12%"), "vi-VN-HoaiMyNeural": ("+0Hz", "+8%")}
 ENGINES = ["edge", "gtts", "espeak", "silent"]
 
 
@@ -45,8 +47,8 @@ def duration_of(path) -> float:
 
 
 def estimate_seconds(text: str) -> float:
-    # Vietnamese narration ≈ 3,6 syllables/second at a calm explainer pace.
-    return 0.6 + len(text.split()) / 3.6
+    # Vietnamese narration ≈ 4 syllables/second at the brand pace (+12%).
+    return 0.6 + len(text.split()) / 4.0
 
 
 def _to_wav(src, dst):
@@ -55,11 +57,18 @@ def _to_wav(src, dst):
 
 def _edge(text, dst, voice, rate):
     import edge_tts
+    import edge_tts.communicate as _ec
+
+    ca = os.environ.get("SSL_CERT_FILE")
+    if ca and Path(ca).exists() and not getattr(_ec, "_qt_ca", False):
+        import ssl  # edge-tts chỉ tin certifi; sau proxy TLS (môi trường cloud) phải dùng CA của hệ thống
+        _ec._SSL_CTX = ssl.create_default_context(cafile=ca); _ec._qt_ca = True
 
     tmp = Path(dst).with_suffix(".mp3")
 
     async def go():
-        await edge_tts.Communicate(text, voice, rate=os.environ.get("QT_RATE", rate), pitch=os.environ.get("QT_PITCH", "+0Hz")).save(str(tmp))
+        pitch, rate0 = PROSODY.get(voice, ("+0Hz", rate))
+        await edge_tts.Communicate(text, voice, rate=os.environ.get("QT_RATE", rate0), pitch=os.environ.get("QT_PITCH", pitch)).save(str(tmp))
 
     asyncio.run(asyncio.wait_for(go(), timeout=40))
     _to_wav(tmp, dst); tmp.unlink(missing_ok=True)
@@ -80,7 +89,7 @@ def _espeak(text, dst, *_):
     subprocess.run([exe, "-v", "vi", "-s", "150", "-w", str(dst), text], check=True, capture_output=True)
 
 
-def synth(text, dst, engine="auto", voice="female", rate="+0%"):
+def synth(text, dst, engine="auto", voice="male", rate="+0%"):
     """Write dst (wav). Returns (engine_used, seconds). engine_used == 'silent' means no file was written."""
     order = ENGINES if engine == "auto" else [engine]
     errors = []
@@ -96,7 +105,7 @@ def synth(text, dst, engine="auto", voice="female", rate="+0%"):
     return "silent", estimate_seconds(text), errors
 
 
-def probe_engine(engine="auto", voice="female"):
+def probe_engine(engine="auto", voice="male"):
     """Pick the first engine that works once, so a whole video uses one consistent voice."""
     import tempfile
 
@@ -111,7 +120,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("text"); ap.add_argument("out")
     ap.add_argument("--engine", default="auto", choices=["auto"] + ENGINES)
-    ap.add_argument("--voice", default="female")
+    ap.add_argument("--voice", default="male")
     a = ap.parse_args()
     used, sec, errs = synth(a.text, a.out, a.engine, a.voice)
     print(json.dumps({"engine": used, "seconds": round(sec, 2), "errors": errs}, ensure_ascii=False))

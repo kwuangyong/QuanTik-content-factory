@@ -114,8 +114,15 @@ def _fallback(model, say, name, caption, min_dur):
     return Scene(name, say, draw, min_dur, texts=[title, sub])
 
 
-def surface(model, say, caption=None, name="surface3d", min_dur=4.0, sweep=(-75, 15), elev=(32, 22)):
+# Góc quay 3D: (azim đầu, azim cuối), (elev đầu, elev cuối). Mỗi video chọn một góc để 3D không lặp lại.
+VIEWS = {"orbit": ((-75, 15), (32, 22)), "top": ((-60, -20), (72, 50)), "low": ((-130, -50), (8, 20)),
+         "spin": ((-180, 120), (26, 26)), "dive": ((20, -40), (60, 12)), "side": ((-95, -80), (14, 30))}
+
+
+def surface(model, say, caption=None, name="surface3d", min_dur=4.0, sweep=(-75, 15), elev=(32, 22), view=None):
     """Rotating 3D view of the model (density surface / regime trajectory); formula card if the topic has none."""
+    if view:
+        sweep, elev = VIEWS[view]
     if not getattr(model, "has_surface", True):
         return _fallback(model, say, name, caption, min_dur)
     _MODELS[id(model)] = model

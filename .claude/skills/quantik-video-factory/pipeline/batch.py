@@ -143,7 +143,7 @@ def _prepare(topic, style, override=None, returns=None):
     """(episode, style module, model) for a hand-written topic or any catalog topic."""
     if topic in TOPICS:
         ep, mod = build_episode(topic, style, override)
-        return ep, mod, Model(topic, ep.get("seed"), returns)
+        return ep, mod, Model(topic, ep.get("seed"), returns, ep.get("params"))
     entry = C.get(topic)
     if entry is None:
         raise SystemExit(f"unknown topic {topic!r}. Hand-written: {TOPICS}. Catalog: python catalog.py --list")
@@ -158,7 +158,7 @@ def _prepare(topic, style, override=None, returns=None):
     return ep, mod, model
 
 
-def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice="female", music=None,
+def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice="male", music=None,
          scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True):
     t_start = time.time()
     ep, mod, model = prepare(topic, style, override, returns)
@@ -167,7 +167,7 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
     work.mkdir(parents=True, exist_ok=True)
     print(f"\n=== {ep['id']}  ({topic} × {style}) → {out}")
 
-    save_json(out / "values.json", {"topic": topic, "seed": model.seed, "real_data": model.real_data,
+    save_json(out / "values.json", {"topic": topic, "seed": model.seed, "params": getattr(model, "params", {}), "real_data": model.real_data,
                                     "values": model.values, "formats": model.formats, "code": model.code})
     rendered = set()
     filled = fill_tree(ep, model.values, model.formats, rendered)
@@ -246,7 +246,7 @@ def main():
     ap.add_argument("--episode", action="append", default=[], help="episode JSON (needs topic + style)")
     ap.add_argument("--out", default=str(DEFAULT_OUT))
     ap.add_argument("--voice-engine", default="auto", choices=["auto"] + V.ENGINES)
-    ap.add_argument("--voice", default="female", help="female | male | any edge-tts voice id")
+    ap.add_argument("--voice", default="male", help="male (mặc định: nam trầm, nhanh) | female | any edge-tts voice id")
     ap.add_argument("--music", default=None, help="path to a licensed track, or 'none'")
     ap.add_argument("--scale", type=float, default=1.0, help="0.5 = fast 540x960 preview")
     ap.add_argument("--fps", type=int, default=30)
