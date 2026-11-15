@@ -157,6 +157,54 @@ Ba chuỗi cùng một nguồn nhiễu (seed 1, 3.000 bước, độ trễ 2–4
         "color": "orange"
       }
     ]
+  },
+  "thumb_variants": {
+    "chart-story": {
+      "headline": [
+        {
+          "t": "H = [g]{h_trend}[/g]",
+          "size": 170
+        },
+        {
+          "t": "HAY H = [o]{h_meanrev}[/o]",
+          "size": 140
+        },
+        {
+          "t": "CHUỖI GIÁ CỦA BẠN LÀ LOẠI NÀO?",
+          "size": 80
+        }
+      ],
+      "pill": "Ba chuỗi, ba tính cách · code Python"
+    },
+    "myth-buster": {
+      "headline": [
+        {
+          "t": "ĐỒ THỊ ĐẸP",
+          "size": 150
+        },
+        {
+          "t": "CHƯA CHẮC",
+          "size": 190
+        },
+        {
+          "t": "LÀ [o]XU HƯỚNG[/o]",
+          "size": 130
+        }
+      ],
+      "pill": "Ngẫu nhiên thuần cũng ra H = {h_walk} · code Python",
+      "labels": [
+        {
+          "label": "Ngẫu nhiên",
+          "value": "{h_walk}",
+          "color": "green"
+        },
+        {
+          "label": "Hồi quy",
+          "value": "{h_meanrev}",
+          "color": "orange"
+        }
+      ]
+    }
   }
 }
 ```

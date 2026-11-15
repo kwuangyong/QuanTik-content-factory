@@ -166,6 +166,82 @@ $$\sigma_t^2=\omega+\alpha\,\epsilon_{t-1}^2+\beta\,\sigma_{t-1}^2$$
         "color": "green"
       }
     ]
+  },
+  "thumb_variants": {
+    "myth-buster": {
+      "headline": [
+        {
+          "t": "TƯỞNG RỦI RO",
+          "size": 130
+        },
+        {
+          "t": "ĐỨNG YÊN?",
+          "size": 190
+        },
+        {
+          "t": "NỬA ĐỜI [o]{half_life}[/o] NGÀY",
+          "size": 120
+        }
+      ],
+      "pill": "Cú sốc hôm nay còn vang rất lâu · code Python",
+      "labels": [
+        {
+          "label": "Persistence",
+          "value": "{persistence}",
+          "color": "orange"
+        },
+        {
+          "label": "Vol dài hạn",
+          "value": "{long_run_vol}",
+          "color": "green"
+        }
+      ]
+    },
+    "chart-story": {
+      "headline": [
+        {
+          "t": "[o]{big_moves}[/o] CÚ SỐC",
+          "size": 150
+        },
+        {
+          "t": "KÉO DÀI",
+          "size": 190
+        },
+        {
+          "t": "BAO LÂU?",
+          "size": 150
+        }
+      ],
+      "pill": "Kể lại {n_days} phiên bằng GARCH · code Python",
+      "labels": [
+        {
+          "label": "Vol cuối",
+          "value": "{vol_last}",
+          "color": "orange"
+        },
+        {
+          "label": "Vol dài hạn",
+          "value": "{long_run_vol}",
+          "color": "green"
+        }
+      ]
+    },
+    "kinetic-text": {
+      "headline": [
+        {
+          "t": "BÌNH YÊN [g]{vol_min}[/g]",
+          "size": 140
+        },
+        {
+          "t": "BÃO TỐ [o]{vol_peak}[/o]",
+          "size": 140
+        },
+        {
+          "t": "CÙNG MỘT CHUỖI GIÁ",
+          "size": 100
+        }
+      ]
+    }
   }
 }
 ```

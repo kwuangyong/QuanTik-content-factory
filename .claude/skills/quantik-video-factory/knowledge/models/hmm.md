@@ -152,6 +152,65 @@ $$P(z_t=k\mid x_{1:t})\propto p(x_t\mid z_t=k)\sum_j P_{jk}\,P(z_{t-1}=j\mid x_{
         "color": "green"
       }
     ]
+  },
+  "thumb_variants": {
+    "code-reel": {
+      "headline": [
+        {
+          "t": "PHA TĂNG KÉO DÀI",
+          "size": 120
+        },
+        {
+          "t": "[g]{bull_len}[/g] NGÀY",
+          "size": 190
+        },
+        {
+          "t": "PHA GIẢM [o]{bear_len}[/o] NGÀY",
+          "size": 110
+        }
+      ],
+      "pill": "Ma trận chuyển trạng thái · code Python",
+      "labels": [
+        {
+          "label": "Ở lại tăng",
+          "value": "{stay_bull}",
+          "color": "green"
+        },
+        {
+          "label": "Ở lại giảm",
+          "value": "{stay_bear}",
+          "color": "orange"
+        }
+      ]
+    },
+    "myth-buster": {
+      "headline": [
+        {
+          "t": "ĐỒ THỊ KHÔNG",
+          "size": 140
+        },
+        {
+          "t": "NÓI RA",
+          "size": 190
+        },
+        {
+          "t": "NÓ ĐANG [o]Ở PHA NÀO[/o]",
+          "size": 110
+        }
+      ],
+      "labels": [
+        {
+          "label": "Pha trội",
+          "value": "{p_dom_last}",
+          "color": "green"
+        },
+        {
+          "label": "Pha giảm",
+          "value": "{p_bear_last}",
+          "color": "orange"
+        }
+      ]
+    }
   }
 }
 ```

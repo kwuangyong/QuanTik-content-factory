@@ -163,6 +163,64 @@ W = 55%, R = 1 → f* = 10%. 2.000 người × 500 lần đặt, seed 4. Trung v
         "color": "orange"
       }
     ]
+  },
+  "thumb_variants": {
+    "meme-quant": {
+      "headline": [
+        {
+          "t": "CƯỢC [o]{quad_kelly}[/o] VỐN",
+          "size": 130
+        },
+        {
+          "t": "TÀI SẢN CÒN",
+          "size": 150
+        },
+        {
+          "t": "[o]{med_quad}[/o]",
+          "size": 190
+        }
+      ],
+      "labels": [
+        {
+          "label": "Kelly",
+          "value": "{f_star}",
+          "color": "green"
+        },
+        {
+          "label": "Quá tay",
+          "value": "{quad_kelly}",
+          "color": "orange"
+        }
+      ]
+    },
+    "myth-buster": {
+      "headline": [
+        {
+          "t": "CÀNG CƯỢC NHIỀU",
+          "size": 120
+        },
+        {
+          "t": "CÀNG GIÀU?",
+          "size": 180
+        },
+        {
+          "t": "KELLY NÓI [g]{f_star}[/g]",
+          "size": 130
+        }
+      ],
+      "labels": [
+        {
+          "label": "Kelly đủ",
+          "value": "{med_full}",
+          "color": "green"
+        },
+        {
+          "label": "Gấp bốn",
+          "value": "{med_quad}",
+          "color": "orange"
+        }
+      ]
+    }
   }
 }
 ```

@@ -135,10 +135,11 @@ def chart_generic(m, w, h):
 CHARTS = {"sortino": chart_sortino}  # thêm chart riêng cho topic khác ở đây
 
 
-def build(topic, no, out):
+def build(topic, no, out, style=None):
     m = Model(topic)
     vd = load_model_kb(topic)
-    th = vd.get("thumb", {})
+    th = dict(vd.get("thumb", {}))
+    th.update(vd.get("thumb_variants", {}).get(style or "", {}))  # tiêu đề riêng theo style, tránh ảnh trùng
     f = lambda s: fill(s, m.values, m.formats)
     img = background(); d = ImageDraw.Draw(img)
 
@@ -191,5 +192,6 @@ if __name__ == "__main__":
     ap.add_argument("--topic", required=True)
     ap.add_argument("--no", type=int, required=True, help="số tập trong series Học Quant cùng QuanTik")
     ap.add_argument("--out", required=True)
+    ap.add_argument("--style", help="lấy biến thể thumb_variants[<style>] nếu có")
     a = ap.parse_args()
-    print(build(a.topic, a.no, a.out))
+    print(build(a.topic, a.no, a.out, a.style))

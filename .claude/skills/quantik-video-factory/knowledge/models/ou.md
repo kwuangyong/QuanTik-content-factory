@@ -154,6 +154,37 @@ $$dX_t=\theta(\mu-X_t)\,dt+\sigma\,dW_t$$
         "color": "orange"
       }
     ]
+  },
+  "thumb_variants": {
+    "whiteboard-math": {
+      "headline": [
+        {
+          "t": "BA KÝ HIỆU",
+          "size": 150
+        },
+        {
+          "t": "θ · μ · σ",
+          "size": 190
+        },
+        {
+          "t": "HIỂU [o]TỪNG CÁI[/o]",
+          "size": 120
+        }
+      ],
+      "pill": "Đọc công thức Ornstein–Uhlenbeck · code Python",
+      "labels": [
+        {
+          "label": "θ ước lượng",
+          "value": "{theta_hat}",
+          "color": "green"
+        },
+        {
+          "label": "Nửa đời (ngày)",
+          "value": "{half_life}",
+          "color": "orange"
+        }
+      ]
+    }
   }
 }
 ```

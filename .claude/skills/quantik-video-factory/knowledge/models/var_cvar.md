@@ -159,6 +159,65 @@ Lịch sử: VaR = phân vị α của chuỗi lỗ; CVaR = trung bình các m�
         "color": "orange"
       }
     ]
+  },
+  "thumb_variants": {
+    "myth-buster": {
+      "headline": [
+        {
+          "t": "TÍNH THEO",
+          "size": 120
+        },
+        {
+          "t": "PHÂN PHỐI CHUẨN",
+          "size": 140
+        },
+        {
+          "t": "THIẾU [o]{underestimate}[/o] RỦI RO",
+          "size": 120
+        }
+      ],
+      "pill": "Đuôi dày làm VaR chuẩn hụt · code Python",
+      "labels": [
+        {
+          "label": "VaR 99 thực",
+          "value": "{var99}",
+          "color": "orange"
+        },
+        {
+          "label": "VaR 99 chuẩn",
+          "value": "{var99_normal}",
+          "color": "green"
+        }
+      ]
+    },
+    "kinetic-text": {
+      "headline": [
+        {
+          "t": "NGÀY TỆ NHẤT",
+          "size": 140
+        },
+        {
+          "t": "MẤT [o]{worst}[/o]",
+          "size": 190
+        },
+        {
+          "t": "VaR CÓ THẤY KHÔNG?",
+          "size": 110
+        }
+      ],
+      "labels": [
+        {
+          "label": "VaR 99",
+          "value": "{var99}",
+          "color": "green"
+        },
+        {
+          "label": "CVaR 99",
+          "value": "{cvar99}",
+          "color": "orange"
+        }
+      ]
+    }
   }
 }
 ```
