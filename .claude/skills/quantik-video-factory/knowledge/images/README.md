@@ -7,7 +7,7 @@ lệnh `python pipeline/visuals.py auto <episode> --write`.
 
 | Loại | Lấy từ đâu | Điều kiện | Dòng ghi công trên màn hình |
 | --- | --- | --- | --- |
-| `photo` | Wikimedia Commons (`python pipeline/images.py fetch "File:…"`) | giấy phép public domain, CC0, CC BY, CC BY-SA (từ chối NC, ND, fair use); có tác giả và URL | `Ảnh: <tác giả> · <giấy phép> · Wikimedia Commons` |
+| `photo` | Wikimedia Commons (`images.py fetch "File:…"`) hoặc Openverse — Flickr, bảo tàng, thư viện (`images.py ov-fetch <id>`) | giấy phép public domain, CC0, CC BY, CC BY-SA (từ chối NC, ND, fair use); có tác giả và URL | `Ảnh: <tác giả> · <giấy phép> · Wikimedia Commons` |
 | `illustration` | vẽ bằng code (`images.py person / event / cards`) | phong cách đồ hoạ thương hiệu, chữ cái đầu tên — **không bao giờ giả ảnh chụp người thật** | `Ảnh minh hoạ tạo bằng code, không phải ảnh thật` |
 
 Không dùng ảnh tìm trên Google, báo chí, Facebook… khi chưa có giấy phép (`brand/compliance.md`). Không dùng AI tạo
@@ -42,6 +42,7 @@ cùng `--id` là xong, episode không phải sửa.
 
 | Đối tượng | Kết quả trên Wikimedia Commons | Đang dùng |
 | --- | --- | --- |
+| Khung cảnh, hiện vật (Openverse) | `trading-floor-chicago` (tziralis), `poker-table-photo` (slgckgc), `blackjack-hand` (Images_of_Money) — CC BY 2.0, Flickr | dùng làm cảnh `image` |
 | Edward O. Thorp | không có ảnh giấy phép tự do (kết quả "Ed Thorp" là cúp NFL, người khác) | ảnh minh hoạ `thorp` |
 | John L. Kelly Jr. | không có ảnh giấy phép tự do | ảnh minh hoạ `kelly` |
 | Harold W. Kuhn | không có ảnh giấy phép tự do, không có danh mục riêng | ảnh minh hoạ `kuhn` |

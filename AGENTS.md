@@ -53,7 +53,7 @@ Kiến trúc năm trụ cột: `pillars/README.md`. Vai nghiên cứu/kiểm ch�
 - Python 3.10+, `pip install -r .claude/skills/quantik-video-factory/requirements.txt edge-tts`, ffmpeg.
 - Video hướng dẫn cần thêm Node 20.9+ và Chromium cho Playwright.
 - Mạng: `speech.platform.bing.com` (giọng đọc edge-tts), `quantik.io.vn`, `github.com` (clone `QuanTik---Design`),
-  `trading.agr.vn` (dữ liệu thị trường cho trụ cột 3), `commons.wikimedia.org` + `upload.wikimedia.org` (ảnh có giấy phép mở;
+  `trading.agr.vn` (dữ liệu thị trường cho trụ cột 3), `commons.wikimedia.org` + `upload.wikimedia.org` + `api.openverse.org` (ảnh có giấy phép mở;
   `thumb.wikimedia.org` nếu muốn tải trực tiếp, không bắt buộc).
   Không có mạng tới TTS thì pipeline lùi về gTTS → espeak → không giọng; phải báo người dùng.
 - Repo nguồn liên quan (chỉ đọc): `kwuangyong/QuanTik---Design` (web production, Next.js),

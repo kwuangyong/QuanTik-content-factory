@@ -74,8 +74,21 @@ def find_real(name, opener=None):
         if NOT_PORTRAIT.search(c["title"]) or not re.search(r"\.(jpe?g|png|tiff?)$", c["title"], re.I):
             continue
         if c.get("free") and all(t in blob for t in tokens) and c.get("author"):
-            return c
+            return dict(c, origin="commons")
+    try:   # second source: Openverse (Flickr, museums, libraries) — title must name the subject too
+        for c in IMG.openverse_search(name, 20, opener):
+            if c["free"] and c["author"] and all(t in c["title"].lower() for t in tokens) \
+                    and not NOT_PORTRAIT.search(c["title"]) and (c.get("width") or 0) >= 400:
+                return c
+    except Exception:
+        pass
     return None
+
+
+def fetch_found(c, img_id, name, opener=None):
+    if c.get("origin") == "openverse":
+        return IMG.openverse_fetch(c["ov_id"], img_id, name, opener=opener)
+    return IMG.fetch(c["title"], img_id, name, opener=opener)
 
 
 def make_illustration(img_id, name, kind, role=""):
@@ -143,8 +156,8 @@ def auto(ep_path, write=False, offline=False, opener=None, log=print):
             try:
                 c = find_real(name, opener)
                 if c:
-                    IMG.fetch(c["title"], img_id, name, opener=opener)
-                    src = f"ảnh thật: {c['title']} ({c['license']})"
+                    fetch_found(c, img_id, name, opener)
+                    src = f"ảnh thật ({c.get('origin')}): {c['title'][:50]} ({c['license']})"
             except Exception as ex:
                 log(f"  ⚠ Commons không truy cập được ({type(ex).__name__}: {str(ex)[:60]}) → dùng ảnh minh hoạ")
                 online = False
@@ -190,7 +203,9 @@ def main():
         r = auto(a.episode, a.write, a.offline)
         sys.exit(1 if r["check"] and r["check"]["fail"] else 0)
     c = find_real(a.name)
-    print(f"✅ {c['title']}\n   {c['license']} · {c['author']}" if c else "không có ảnh giấy phép tự do nào ghi đúng tên này")
+    print(f"✅ [{c.get('origin')}] {c['title']}\n   {c['license']} · {c['author']}"
+          + (f"\n   openverse id: {c['ov_id']}" if c.get("ov_id") else "") if c
+          else "không có ảnh giấy phép tự do nào ghi đúng tên này (Commons + Openverse)")
 
 
 if __name__ == "__main__":

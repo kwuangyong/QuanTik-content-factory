@@ -402,9 +402,57 @@ class Images(unittest.TestCase):
             with self.assertRaises(SystemExit):
                 images.fetch("File:X.jpg", "x", "Someone", opener=self._fake_commons(lic))
 
+    def _fake_openverse(self, license_code, version="2.0", creator="Jane Doe"):
+        import io
+
+        rec = {"id": "abc", "title": "Poker table", "creator": creator, "license": license_code,
+               "license_version": version, "license_url": "https://creativecommons.org/licenses/by/2.0/",
+               "foreign_landing_url": "https://www.flickr.com/photos/x/1", "source": "flickr", "width": 1024, "height": 679}
+
+        class R(io.BytesIO):
+            def __enter__(self): return self
+            def __exit__(self, *a): pass
+
+        def opener(req, timeout=0):
+            u = req.full_url
+            if "/thumb/" in u:
+                return R(b"\xff\xd8fakejpeg")
+            return R(json.dumps({"results": [rec]} if "?q=" in u else rec).encode())
+        return opener
+
+    def test_openverse_free_licence_fetched_with_full_credit(self):
+        images = self._sandbox()
+        e = images.openverse_fetch("abc", "poker", "Bàn poker", opener=self._fake_openverse("by"))
+        self.assertEqual(e["license"], "CC BY 2.0")
+        self.assertEqual(e["credit"], "Ảnh: Jane Doe · CC BY 2.0 · Flickr qua Openverse")
+        self.assertEqual(e["source_url"], "https://www.flickr.com/photos/x/1")
+        self.assertTrue((images.IMG_DIR / e["file"]).exists())
+        self.assertEqual(check_script.validate(json.loads(images.LEDGER.read_text()), "image_ledger"), [])
+
+    def test_openverse_non_free_or_anonymous_refused(self):
+        images = self._sandbox()
+        for code in ("by-nc", "by-nd", "by-nc-sa"):
+            with self.assertRaises(SystemExit):
+                images.openverse_fetch("abc", "x", "X", opener=self._fake_openverse(code))
+        with self.assertRaises(SystemExit):
+            images.openverse_fetch("abc", "x", "X", opener=self._fake_openverse("by", creator=""))
+
+    def test_openverse_search_only_requests_free_licences(self):
+        import images
+        seen = []
+        fake = self._fake_openverse("cc0")
+
+        def spy(req, timeout=0):
+            seen.append(req.full_url); return fake(req, timeout)
+        res = images.openverse_search("poker", 5, opener=spy)
+        self.assertIn("license=cc0%2Cpdm%2Cby%2Cby-sa", seen[0])
+        self.assertEqual(res[0]["license"], "CC0 1.0")
+        self.assertTrue(res[0]["free"])
+
     def test_licence_classifier(self):
         import images
-        for ok in ("Public domain", "PD-US", "CC0", "CC BY 2.0", "CC BY-SA 3.0", "CC BY-SA 4.0"):
+        for ok in ("Public domain", "PD-US", "CC0", "CC BY 2.0", "CC BY-SA 3.0", "CC BY-SA 4.0", "CC0 1.0",
+                   "Public domain (PDM)"):
             self.assertTrue(images.is_free(ok), ok)
         for bad in ("CC BY-NC 2.0", "CC BY-NC-ND 4.0", "Fair use", "All rights reserved"):
             self.assertFalse(images.is_free(bad), bad)

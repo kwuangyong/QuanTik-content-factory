@@ -8,6 +8,8 @@ Two kinds only (brand/compliance.md: no copyrighted images without a licence):
                 Always labelled "Ảnh minh hoạ"; never a fake photo of a real person.
 
   python images.py search "Claude Shannon"                    # Commons candidates with their licences
+  python images.py ov-search "poker table"                     # Openverse (Flickr, museums…), free licences only
+  python images.py ov-fetch <openverse id> --id poker-table --subject "Bàn poker"
   python images.py fetch "File:ClaudeShannon MFO3807.jpg" --id shannon --subject "Claude Shannon"
   python images.py person --id thorp --name "Edward O. Thorp" --role "nhà toán học, nhà đầu tư"
   python images.py event  --id ltcm-1998 --title "LTCM được giải cứu" --when "9/1998" --where "New York"
@@ -185,6 +187,56 @@ def fetch(title, img_id, subject, depicts=None, opener=None):
         "retrieved": dt.date.today().isoformat()})
 
 
+# ---------------------------------------------------------------- Openverse (CC-licensed images from Flickr, museums…)
+OV_API = "https://api.openverse.org/v1/images/"
+OV_LICENSES = "cc0,pdm,by,by-sa"      # only licences that allow commercial reuse and modification
+
+
+def _ov_json(url, opener=None):
+    return json.loads(_download(url, opener))
+
+
+def _ov_license(r):
+    lic, ver = (r.get("license") or "").lower(), r.get("license_version") or ""
+    if lic == "cc0":
+        return "CC0 1.0"
+    if lic == "pdm":
+        return "Public domain (PDM)"
+    return f"CC {lic.upper()} {ver}".strip()
+
+
+def _ov_info(r):
+    lic = _ov_license(r)
+    return {"title": r.get("title") or "", "ov_id": r["id"], "license": lic, "license_url": r.get("license_url", ""),
+            "author": (r.get("creator") or "").strip(), "page_url": r.get("foreign_landing_url", ""),
+            "provider": (r.get("source") or r.get("provider") or "").capitalize(), "width": r.get("width"),
+            "height": r.get("height"), "description": r.get("title") or "", "free": is_free(lic), "origin": "openverse"}
+
+
+def openverse_search(query, limit=10, opener=None):
+    q = urllib.parse.urlencode({"q": query, "license": OV_LICENSES, "page_size": limit, "mature": "false"})
+    return [_ov_info(r) for r in _ov_json(f"{OV_API}?{q}", opener).get("results", [])]
+
+
+def openverse_fetch(ov_id, img_id, subject, depicts=None, opener=None):
+    info = _ov_info(_ov_json(f"{OV_API}{ov_id}/", opener))
+    if not info["free"]:
+        raise SystemExit(f"từ chối Openverse {ov_id}: giấy phép '{info['license']}' không cho phép dùng lại")
+    if not info["author"]:
+        raise SystemExit(f"từ chối Openverse {ov_id}: không có tác giả để ghi công")
+    raw = _download(f"{OV_API}{ov_id}/thumb/?full_size=true", opener)   # served by Openverse itself: one host
+    FILES.mkdir(parents=True, exist_ok=True)
+    f = FILES / f"{img_id}.jpg"
+    f.write_bytes(raw)
+    author = info["author"][:60]
+    return _save_entry({
+        "id": img_id, "kind": "photo", "subject": subject, "depicts": depicts or info["title"] or subject,
+        "title": info["title"], "file": f"files/{f.name}", "source_url": info["page_url"], "author": author,
+        "license": info["license"], "license_url": info["license_url"], "provider": info["provider"],
+        "credit": f"Ảnh: {author} · {info['license']} · {info['provider']} qua Openverse",
+        "retrieved": dt.date.today().isoformat()})
+
+
 # ---------------------------------------------------------------- illustrations (never photo-like)
 def _canvas():
     img = Image.new("RGB", (W, H), T["surface"])
@@ -324,6 +376,9 @@ def main():
     s = sub.add_parser("categories"); s.add_argument("query")
     s = sub.add_parser("fetch"); s.add_argument("title"); s.add_argument("--id", required=True)
     s.add_argument("--subject", required=True); s.add_argument("--depicts")
+    s = sub.add_parser("ov-search"); s.add_argument("query"); s.add_argument("--limit", type=int, default=10)
+    s = sub.add_parser("ov-fetch"); s.add_argument("ov_id"); s.add_argument("--id", required=True)
+    s.add_argument("--subject", required=True); s.add_argument("--depicts")
     s = sub.add_parser("person"); s.add_argument("--id", required=True); s.add_argument("--name", required=True)
     s.add_argument("--role", default=""); s.add_argument("--note", default="")
     s = sub.add_parser("event"); s.add_argument("--id", required=True); s.add_argument("--title", required=True)
@@ -343,6 +398,12 @@ def main():
                   f"\n    {r.get('description', '')[:110]}")
     elif a.cmd == "categories":
         print("\n".join(categories_like(a.query)))
+    elif a.cmd == "ov-search":
+        for r in openverse_search(a.query, a.limit):
+            print(f"{'✅' if r['free'] else '⛔'} {r['ov_id']}  {r['title'][:70]}\n    {r['license']} · {r['author'][:40]} · "
+                  f"{r['provider']} · {r['width']}×{r['height']}\n    {r['page_url']}")
+    elif a.cmd == "ov-fetch":
+        print(json.dumps(openverse_fetch(a.ov_id, a.id, a.subject, a.depicts), ensure_ascii=False, indent=2))
     elif a.cmd == "fetch":
         print(json.dumps(fetch(a.title, a.id, a.subject, a.depicts), ensure_ascii=False, indent=2))
     elif a.cmd == "person":

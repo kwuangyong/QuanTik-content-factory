@@ -16,6 +16,21 @@
       "retrieved": "2026-11-15"
     },
     {
+      "id": "blackjack-hand",
+      "kind": "photo",
+      "subject": "Ván blackjack",
+      "depicts": "Một ván blackjack thắng",
+      "title": "Winning Blackjack hand",
+      "file": "files/blackjack-hand.jpg",
+      "source_url": "https://www.flickr.com/photos/59937401@N07/5857826966",
+      "author": "Images_of_Money",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "provider": "Flickr",
+      "credit": "Ảnh: Images_of_Money · CC BY 2.0 · Flickr qua Openverse",
+      "retrieved": "2026-11-15"
+    },
+    {
       "id": "claude-shannon",
       "kind": "photo",
       "subject": "Claude Shannon",
@@ -112,6 +127,21 @@
       "retrieved": "2026-11-15"
     },
     {
+      "id": "poker-table-photo",
+      "kind": "photo",
+      "subject": "Bàn poker",
+      "depicts": "Poker Table",
+      "title": "Poker Table",
+      "file": "files/poker-table-photo.jpg",
+      "source_url": "https://www.flickr.com/photos/14771153@N04/6391466331",
+      "author": "slgckgc",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "provider": "Flickr",
+      "credit": "Ảnh: slgckgc · CC BY 2.0 · Flickr qua Openverse",
+      "retrieved": "2026-11-15"
+    },
+    {
       "id": "regan",
       "kind": "illustration",
       "subject": "Jay Regan",
@@ -137,6 +167,21 @@
       "license_url": "",
       "credit": "Ảnh minh hoạ tạo bằng code, không phải ảnh thật",
       "generator": "images.py person --name 'Edward O. Thorp' --role 'nhà toán học, tác giả Beat the Dealer'",
+      "retrieved": "2026-11-15"
+    },
+    {
+      "id": "trading-floor-chicago",
+      "kind": "photo",
+      "subject": "Sàn giao dịch Chicago Stock Exchange",
+      "depicts": "Trading floor at Chicago Stock Exchange",
+      "title": "Trading floor at Chicago Stock Exchange",
+      "file": "files/trading-floor-chicago.jpg",
+      "source_url": "https://www.flickr.com/photos/10113114@N00/2664857467",
+      "author": "tziralis",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "provider": "Flickr",
+      "credit": "Ảnh: tziralis · CC BY 2.0 · Flickr qua Openverse",
       "retrieved": "2026-11-15"
     }
   ]

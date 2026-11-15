@@ -12,7 +12,7 @@ Bộ công cụ hình ảnh dùng chung cho mọi video của `quantik-video-fac
 
 | Cần hình cho | Dùng | Công cụ | Ghi trên màn hình |
 | --- | --- | --- | --- |
-| **Người / hãng / nơi chốn / sự kiện có thật** được nhắc tên | 1) ảnh thật giấy phép tự do · 2) không có thì ảnh minh hoạ | `visuals.py`, `images.py` | `Ảnh: <tác giả> · <giấy phép> · Wikimedia Commons` hoặc `Ảnh minh hoạ tạo bằng code` |
+| **Người / hãng / nơi chốn / sự kiện có thật** được nhắc tên | 1) ảnh thật giấy phép tự do (Commons, Openverse) · 2) không có thì ảnh minh hoạ | `visuals.py`, `images.py` | `Ảnh: <tác giả> · <giấy phép> · Wikimedia Commons` hoặc `Ảnh minh hoạ tạo bằng code` |
 | **Vai trò chung** để kể chuyện (một nhà đầu tư, hai người chơi poker, một giáo sư) | nhân vật hình người + hiện vật | `figures.py` | không cần (không phải ai cụ thể) |
 | **Ý niệm** (cảnh báo, ý tưởng, rủi ro, thời gian) | biểu tượng | `pictos.py` | không cần |
 
@@ -45,10 +45,18 @@ python images.py categories "Bell Labs"              # tìm danh mục Commons
 python images.py category "Bell Labs Murray Hill"    # file trong danh mục, kèm giấy phép
 python images.py search "Edward Thorp"               # tìm chữ (nhiễu hơn; kiểm kỹ đúng người)
 python images.py fetch "File:<tên>" --id <id> --subject "<tên>" --depicts "<mô tả>"
+python images.py ov-search "stock exchange"          # Openverse: Flickr, bảo tàng, thư viện… chỉ giấy phép tự do
+python images.py ov-fetch <openverse id> --id <id> --subject "<mô tả>"
 python images.py list
 ```
 
-Đã có trong sổ ảnh (`knowledge/images/ledger.json`): ảnh thật `jim-simons`, `claude-shannon`; ảnh minh hoạ `thorp`,
+`visuals.py find/auto` tìm Commons trước, không có thì Openverse (tên ảnh phải ghi đúng tên người/vật). Openverse rất hợp
+cho **ảnh khung cảnh và hiện vật thật** — sàn giao dịch, bàn poker, ván blackjack, toà nhà — đặt vào cảnh bằng
+`"visual": {"kind": "image", "image": "<id>"}` (không cần khai báo entity vì không phải người cụ thể). Ghi công tự hiện
+dưới cảnh: `Ảnh: <tác giả> · <giấy phép> · <nguồn> qua Openverse`.
+
+Đã có trong sổ ảnh (`knowledge/images/ledger.json`): ảnh thật `jim-simons`, `claude-shannon` (Commons),
+`trading-floor-chicago`, `poker-table-photo`, `blackjack-hand` (Openverse/Flickr, CC BY 2.0); ảnh minh hoạ `thorp`,
 `kelly`, `kassouf`, `regan`, `black-scholes`, `kuhn`, `odean`, `kuhn-cards`. Kết quả tìm từng người:
 `quantik-video-factory/knowledge/images/README.md`.
 
