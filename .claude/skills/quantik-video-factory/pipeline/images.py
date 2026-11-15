@@ -70,24 +70,28 @@ def is_free(license_name):
 
 
 # ---------------------------------------------------------------- Wikimedia Commons
-def _api(params, opener=None):
-    q = urllib.parse.urlencode(dict(params, format="json", formatversion="2"))
-    req = urllib.request.Request(f"{API}?{q}", headers={"User-Agent": UA})
-    with (opener or urllib.request.urlopen)(req, timeout=20) as r:
-        return json.loads(r.read())
+def _api(params, opener=None, tries=5):
+    """Commons API call; on HTTP 429 wait (Retry-After or exponential) and retry — Wikimedia rate-limits bursts."""
+    import time
+    import urllib.error
+
+    q = urllib.parse.urlencode(dict(params, format="json", formatversion="2", maxlag=5))
+    for k in range(tries):
+        req = urllib.request.Request(f"{API}?{q}", headers={"User-Agent": UA})
+        try:
+            with (opener or urllib.request.urlopen)(req, timeout=20) as r:
+                return json.loads(r.read())
+        except urllib.error.HTTPError as ex:
+            if ex.code != 429 or k + 1 == tries:
+                raise
+            time.sleep(float(ex.headers.get("Retry-After") or 0) or 2 * 2 ** k)
 
 
 def _strip(s):
-    return html.unescape(re.sub(r"<[^>]+>", "", s or "")).strip()
+    return html.unescape(re.sub(r"<[^>]+>", "", str(s) if s is not None else "")).strip()
 
 
-def commons_info(title, opener=None):
-    """imageinfo + licence metadata for one File: page."""
-    d = _api({"action": "query", "titles": title, "prop": "imageinfo", "iiprop": "url|extmetadata|size",
-              "iiurlwidth": 1080}, opener)
-    page = d["query"]["pages"][0]
-    if page.get("missing"):
-        raise SystemExit(f"không có trang {title} trên Commons")
+def _info_from_page(page):
     ii = page["imageinfo"][0]
     meta = {k: _strip(v.get("value", "")) for k, v in ii.get("extmetadata", {}).items()}
     return {"title": page["title"], "page_url": ii.get("descriptionurl"), "thumb_url": ii.get("thumburl") or ii["url"],
@@ -96,17 +100,62 @@ def commons_info(title, opener=None):
             "date": meta.get("DateTimeOriginal", "")}
 
 
+# Wikimedia only serves standard thumbnail widths (https://w.wiki/GHai): 1080 → HTTP 429, 1280 is standard.
+II = {"prop": "imageinfo", "iiprop": "url|extmetadata|size", "iiurlwidth": 1280}
+
+
+def commons_info(title, opener=None):
+    """imageinfo + licence metadata for one File: page."""
+    page = _api(dict(II, action="query", titles=title), opener)["query"]["pages"][0]
+    if page.get("missing") or not page.get("imageinfo"):
+        raise SystemExit(f"không có trang {title} trên Commons")
+    return _info_from_page(page)
+
+
 def search(query, limit=10, opener=None):
-    d = _api({"action": "query", "list": "search", "srsearch": query, "srnamespace": 6, "srlimit": limit}, opener)
+    """One API call: file search + licence metadata for every hit (no per-file requests → no rate limiting)."""
+    d = _api(dict(II, action="query", generator="search", gsrsearch=query, gsrnamespace=6, gsrlimit=limit), opener)
     out = []
-    for hit in d["query"]["search"]:
-        try:
-            info = commons_info(hit["title"], opener)
-        except Exception as ex:  # one broken page must not stop the listing
-            info = {"title": hit["title"], "license": f"? ({ex})", "author": ""}
+    for page in sorted(d.get("query", {}).get("pages", []), key=lambda p: p.get("index", 0)):
+        if not page.get("imageinfo"):
+            continue
+        info = _info_from_page(page)
         info["free"] = is_free(info.get("license", ""))
         out.append(info)
     return out
+
+
+def category(name, limit=20, opener=None):
+    """Files in a Commons category (e.g. 'Edward O. Thorp') — far more precise than full-text search for people."""
+    cat = name if name.startswith("Category:") else "Category:" + name
+    d = _api(dict(II, action="query", generator="categorymembers", gcmtitle=cat, gcmtype="file", gcmlimit=limit), opener)
+    out = []
+    for page in d.get("query", {}).get("pages", []):
+        if page.get("imageinfo"):
+            info = _info_from_page(page)
+            info["free"] = is_free(info.get("license", ""))
+            out.append(info)
+    return out
+
+
+def categories_like(query, limit=10, opener=None):
+    d = _api({"action": "query", "list": "search", "srsearch": query, "srnamespace": 14, "srlimit": limit}, opener)
+    return [h["title"] for h in d["query"]["search"]]
+
+
+def _download(url, opener=None, tries=5):
+    import time
+    import urllib.error
+
+    for k in range(tries):
+        req = urllib.request.Request(url, headers={"User-Agent": UA})
+        try:
+            with (opener or urllib.request.urlopen)(req, timeout=30) as r:
+                return r.read()
+        except urllib.error.HTTPError as ex:
+            if ex.code != 429 or k + 1 == tries:
+                raise
+            time.sleep(float(ex.headers.get("Retry-After") or 0) or 3 * 2 ** k)
 
 
 def fetch(title, img_id, subject, depicts=None, opener=None):
@@ -115,9 +164,7 @@ def fetch(title, img_id, subject, depicts=None, opener=None):
         raise SystemExit(f"từ chối {title}: giấy phép '{info['license'] or 'không rõ'}' không cho phép dùng lại")
     if not info["author"]:
         raise SystemExit(f"từ chối {title}: không có tác giả để ghi công")
-    req = urllib.request.Request(info["thumb_url"], headers={"User-Agent": UA})
-    with (opener or urllib.request.urlopen)(req, timeout=30) as r:
-        raw = r.read()
+    raw = _download(info["thumb_url"], opener)
     FILES.mkdir(parents=True, exist_ok=True)
     ext = Path(urllib.parse.urlparse(info["thumb_url"]).path).suffix.lower() or ".jpg"
     f = FILES / f"{img_id}{ext}"
@@ -249,6 +296,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("search"); s.add_argument("query"); s.add_argument("--limit", type=int, default=10)
+    s = sub.add_parser("category"); s.add_argument("name"); s.add_argument("--limit", type=int, default=20)
+    s = sub.add_parser("categories"); s.add_argument("query")
     s = sub.add_parser("fetch"); s.add_argument("title"); s.add_argument("--id", required=True)
     s.add_argument("--subject", required=True); s.add_argument("--depicts")
     s = sub.add_parser("person"); s.add_argument("--id", required=True); s.add_argument("--name", required=True)
@@ -260,7 +309,14 @@ def main():
     a = ap.parse_args()
     if a.cmd == "search":
         for r in search(a.query, a.limit):
-            print(f"{'✅' if r['free'] else '⛔'} {r['title']}\n    {r.get('license')} · {r.get('author', '')[:60]}")
+            print(f"{'✅' if r['free'] else '⛔'} {r['title']}\n    {r.get('license')} · {r.get('author', '')[:60]}"
+                  f"\n    {r.get('description', '')[:110]}")
+    elif a.cmd == "category":
+        for r in category(a.name, a.limit):
+            print(f"{'✅' if r['free'] else '⛔'} {r['title']}\n    {r.get('license')} · {r.get('author', '')[:60]}"
+                  f"\n    {r.get('description', '')[:110]}")
+    elif a.cmd == "categories":
+        print("\n".join(categories_like(a.query)))
     elif a.cmd == "fetch":
         print(json.dumps(fetch(a.title, a.id, a.subject, a.depicts), ensure_ascii=False, indent=2))
     elif a.cmd == "person":

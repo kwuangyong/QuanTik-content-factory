@@ -13,6 +13,8 @@ Không dùng ảnh tìm trên Google, báo chí, Facebook… khi chưa có giấ
 ```bash
 cd .claude/skills/quantik-video-factory/pipeline
 python images.py search "Claude Shannon"                 # ứng viên + giấy phép (✅ dùng được / ⛔ không)
+python images.py categories "Bell Labs"                  # tìm danh mục Commons (chính xác hơn tìm chữ)
+python images.py category "Bell Labs Murray Hill"         # file trong một danh mục
 python images.py fetch "File:<tên file>" --id shannon --subject "Claude Shannon"
 python images.py person --id thorp --name "Edward O. Thorp" --role "nhà toán học"
 python images.py event --id ltcm-1998 --title "LTCM được giải cứu" --when "9/1998" --where "New York"
@@ -24,3 +26,26 @@ python images.py list
 
 Ưu tiên: ảnh thật có giấy phép mở khi tìm được; không có thì ảnh minh hoạ. Một ảnh thật thay ảnh minh hoạ: fetch với
 cùng `--id` là xong, episode không phải sửa.
+
+## Ghi chú kỹ thuật
+
+- Wikimedia chỉ phục vụ ảnh thu nhỏ ở kích thước chuẩn (https://w.wiki/GHai); `images.py` dùng 1280 px. Kích thước lạ
+  bị trả HTTP 429.
+- Gặp 429, `images.py` tự chờ (`Retry-After`) rồi thử lại. IP dùng chung của môi trường cloud hay bị giới hạn lâu
+  hơn; chạy trên máy cá nhân thì ổn định.
+
+## Kết quả tìm ảnh thật (2026-11-15)
+
+| Đối tượng | Kết quả trên Wikimedia Commons | Đang dùng |
+| --- | --- | --- |
+| Edward O. Thorp | không có ảnh giấy phép tự do (kết quả "Ed Thorp" là cúp NFL, người khác) | ảnh minh hoạ `thorp` |
+| John L. Kelly Jr. | không có ảnh giấy phép tự do | ảnh minh hoạ `kelly` |
+| Harold W. Kuhn | không có ảnh giấy phép tự do, không có danh mục riêng | ảnh minh hoạ `kuhn` |
+| Bell Labs, Murray Hill (nơi Kelly làm việc) | có: bộ ảnh Gottscho-Schleisner 1942, **public domain** (Library of Congress), ví dụ `File:Bell Telephone Laboratories, Murray Hill, New Jersey. LOC gsc.5a08392.jpg` | chưa tải được (Wikimedia giới hạn IP cloud) — lệnh bên dưới |
+
+```bash
+python images.py fetch "File:Bell Telephone Laboratories, Murray Hill, New Jersey. LOC gsc.5a08392.jpg" --id bell-labs --subject "Bell Labs, Murray Hill" --depicts "Bell Telephone Laboratories, Murray Hill, New Jersey (1942)"
+```
+
+Sau khi tải: trong `episodes/qh-thorp-history-story.json`, đổi thực thể Bell Labs từ `waiver` sang `"image": "bell-labs"` và
+đặt `"visual": {"kind": "image", "image": "bell-labs"}` cho đoạn `context` (hoặc gắn vào mốc 1956).
