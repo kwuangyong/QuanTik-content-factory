@@ -8,6 +8,7 @@
 | Cụm cấm | `qa/check_banned.py` | mọi tập (+ `extra_banned` của trụ cột) | hô hào mua bán, hứa lãi; trụ cột 3: "sẽ tăng", "chắc chắn", "bắt đáy"… |
 | Khung trụ cột | `qa/check_script.py` | tập có `pillar` | sai schema, sai thứ tự vai, claim không tồn tại, decision-science thiếu GIỐNG/KHÁC |
 | Nguồn & fact-check | `qa/check_sources.py` | tập có `pillar` | nguồn không trong ledger, `documented` dưới tier, đoạn không có claim, thiếu cụm rào, fact-check thiếu/không đạt/lệch trạng thái |
+| Ảnh nhân vật & bản quyền | `qa/check_images.py` | trụ cột 2, 4a, 4b (và mọi tập có ảnh) | người/hãng/sự kiện được nhắc mà không có ảnh hay lý do; ảnh không có trong sổ ảnh; ảnh thật không có giấy phép tự do, tác giả, ghi công; ảnh minh hoạ không ghi "minh hoạ" |
 | Dữ liệu thị trường | `qa/check_market.py` | trụ cột 3 | không có dữ liệu, dữ liệu mẫu, dữ liệu cũ không khai báo, trộn quan sát/mô hình/nhận định, thiếu 3 kịch bản có điều kiện, nhắc mã cụ thể, giới hạn không lên caption |
 
 ## Gate sau render

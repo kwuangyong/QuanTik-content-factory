@@ -25,7 +25,7 @@ và Fact-checker không kiểm chính claim do mình vừa viết mà không tra
 | Game Theory Researcher | agent + code | `game-theory-researcher.md` | `research/<id>/brief.json` + mô hình trong `pipeline/pillar_models.py` | đã chạy thử 1 tập (`ds-ev-variance-decision-lab`); 3 mô hình có test |
 | Fact-checker | agent + gate | `fact-checker.md` | `research/<id>/factcheck.json` (factcheck) + gate `qa/check_sources.py` | gate có 10 test; vai agent đã kiểm 3 brief bằng web search |
 | Scriptwriter | agent | `scriptwriter.md` | `episodes/<id>.json` (episode_script) | dùng chung cho 5 trụ cột |
-| Visual Director | agent (chọn) + code (dựng) | `visual-director.md` | style + trường `visual` từng đoạn | 4 style mới + 8 style cũ |
+| Visual Director | agent (chọn) + code (dựng) | `visual-director.md` | style + trường `visual` từng đoạn + `entities` và ảnh (`pipeline/images.py`) | 4 style mới + 8 style cũ; ảnh minh hoạ chạy được, ảnh Commons cần mạng |
 | Animation | code | `animation.md` | khung hình, `storyboard.json`, `visual_assets.json` | `render.py`, `frames.py`, `scenes.py`, `pillar_scenes.py` |
 | Voice & Sound | code | `voice-sound.md` | wav từng cảnh, nhạc nền, `final.mp4` | `voiceover.py`, `assemble.py` |
 | Production QA | code + người duyệt | `production-qa.md` | `qa_report.md`, `qa_report.json` | 6 gate tự động + checklist người duyệt |

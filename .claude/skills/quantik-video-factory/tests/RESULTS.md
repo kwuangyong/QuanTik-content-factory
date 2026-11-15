@@ -72,3 +72,16 @@ Trước khi đăng: dựng lại trên máy có kết nối edge-tts ổn đị
 `python batch.py --topics garch,module_egarch_gamma --styles code-reel,carousel --scale 0.5 --no-log` → 4/4 ĐẠT
 (topic viết tay + topic catalog, video + carousel). `python batch.py --topics kelly --styles kinetic-text` ĐẠT trước
 khi sửa (mốc so sánh).
+
+## 7. Ảnh nhân vật / sự kiện (bổ sung 2026-11-15)
+
+- Test mới `Images` (9): mọi tập mẫu khai báo đủ nhân vật được nhắc; bỏ khai báo "Jay Regan" → chặn; waiver quá ngắn →
+  chặn; ảnh khai báo mà không cảnh nào hiện → chặn; id ảnh lạ → chặn; sổ ảnh đúng schema; tải Commons với giấy phép
+  CC BY-SA 4.0 → ghi đủ tác giả + giấy phép (phản hồi API giả lập); NC / ND / fair use / không rõ → từ chối.
+  Tổng bộ test: **47 test, 46 đạt, 1 bỏ qua có chủ đích**.
+- Dựng lại với ảnh (1080×1920, giọng edge):
+  - `ds-kuhn-nash-decision-lab` **ĐẠT** — 82,2 s, 2 ảnh minh hoạ (Harold W. Kuhn, lá bài J/Q/K); Nash có waiver.
+  - `qh-thorp-history-story` **ĐẠT** — 78,5 s, mọi cảnh có giọng, 5 ảnh minh hoạ (Kelly, Thorp, Kassouf, Regan,
+    Black & Scholes) trên timeline + cảnh Thorp; Bell Labs có waiver.
+- Chưa tải được ảnh thật từ Wikimedia Commons trong phiên này: host đã thêm vào môi trường, lệnh truy cập bị chặn ở bước
+  duyệt quyền. Mã tải và kiểm giấy phép đã có test với phản hồi giả lập.

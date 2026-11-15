@@ -29,7 +29,11 @@
       "screen": "J · Q · K — mỗi người một lá",
       "claims": [
         "c_rules"
-      ]
+      ],
+      "visual": {
+        "kind": "image",
+        "image": "kuhn"
+      }
     },
     {
       "role": "intuition",
@@ -37,7 +41,11 @@
       "screen": "Chỉ tố khi có K → bị đọc vị",
       "claims": [
         "c_exploit"
-      ]
+      ],
+      "visual": {
+        "kind": "image",
+        "image": "kuhn-cards"
+      }
     },
     {
       "role": "math",
@@ -184,5 +192,24 @@
   "allowed_literals": [
     "3.000"
   ],
-  "max_seconds": 90
+  "max_seconds": 90,
+  "entities": [
+    {
+      "name": "Harold W. Kuhn",
+      "aliases": [
+        "Kuhn"
+      ],
+      "kind": "person",
+      "image": "kuhn"
+    },
+    {
+      "name": "John Nash",
+      "aliases": [
+        "Nash"
+      ],
+      "kind": "person",
+      "image": null,
+      "waiver": "chỉ nhắc như tên khái niệm 'cân bằng Nash', không phải nhân vật của tập"
+    }
+  ]
 }

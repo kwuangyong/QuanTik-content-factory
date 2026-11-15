@@ -9,6 +9,8 @@ QuanTik làm nội dung **giáo dục về phương pháp định lượng**. Vi
 - Dùng dữ liệu thật của một mã **để minh hoạ cách tính** (ghi nguồn, khoảng thời gian), kèm câu “không phải khuyến nghị”.
 - So sánh khái niệm (“Sharpe cao chưa chắc lãi nhiều hơn”), kể chuyện lịch sử có nguồn (LTCM, Medallion).
 - Giới thiệu tính năng QuanTik đúng như sản phẩm đang có (xem `identity.md`).
+- Nhắc tới người, hãng, sự kiện thì kèm ảnh: ảnh có giấy phép mở (public domain, CC0, CC BY, CC BY-SA) ghi tác giả +
+  giấy phép trên màn hình, hoặc ảnh minh hoạ tạo bằng code ghi rõ "minh hoạ" (`knowledge/images/README.md`).
 
 ## Không được làm
 
@@ -18,6 +20,7 @@ QuanTik làm nội dung **giáo dục về phương pháp định lượng**. Vi
 - Dùng số không do code tính ra hoặc không có nguồn (qa/check_numbers.py chặn).
 - Nhắc giá gói/ưu đãi mà chưa đối chiếu trang `/plans` hiện tại.
 - Dùng nhạc, ảnh, meme template có bản quyền khi chưa có giấy phép.
+- Tạo ảnh trông như ảnh chụp thật của một người có thật (kể cả bằng AI). Ảnh minh hoạ phải là đồ hoạ và ghi "minh hoạ".
 
 ## Cụm cấm
 

@@ -34,6 +34,12 @@ sẵn tư liệu LTCM, Medallion — chuyển dần sang brief + ledger.
 Mọi năm/con số là `facts` có `source_id` (QA chặn năm không nguồn). Nhãn của một đoạn là trạng thái **yếu nhất**
 trong các claim của đoạn đó.
 
+## Ảnh
+
+Bắt buộc (`require_entity_images`): mỗi nhân vật/hãng/sự kiện được nhắc có ảnh — chấm timeline có ảnh nhỏ
+(`timeline[].image`), cảnh chính có thể là ảnh lớn (`visual.kind = image`). Ưu tiên ảnh Commons giấy phép tự do; không
+có thì ảnh minh hoạ. Xem `knowledge/images/README.md`.
+
 ## Tập mẫu
 
 `episodes/qh-thorp-history-story.json` — Thorp: Kelly (1956), Beat the Dealer (1962), Beat the Market (1967), quỹ 1969,

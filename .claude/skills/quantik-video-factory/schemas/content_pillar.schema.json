@@ -110,6 +110,10 @@
     },
     "max_seconds": {
       "type": "integer"
+    },
+    "require_entity_images": {
+      "type": "boolean",
+      "description": "người/sự kiện được nhắc phải có ảnh hoặc waiver (qa/check_images.py)"
     }
   }
 }

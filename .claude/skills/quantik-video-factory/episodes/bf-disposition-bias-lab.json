@@ -39,7 +39,11 @@
       "screen": "Chốt lãi: 0,148 · chốt lỗ: 0,098",
       "claims": [
         "c_odean"
-      ]
+      ],
+      "visual": {
+        "kind": "citation",
+        "image": "odean"
+      }
     },
     {
       "role": "implication",
@@ -180,5 +184,15 @@
   "allowed_literals": [
     "50/50"
   ],
-  "max_seconds": 90
+  "max_seconds": 90,
+  "entities": [
+    {
+      "name": "Terrance Odean",
+      "aliases": [
+        "Odean"
+      ],
+      "kind": "person",
+      "image": "odean"
+    }
+  ]
 }

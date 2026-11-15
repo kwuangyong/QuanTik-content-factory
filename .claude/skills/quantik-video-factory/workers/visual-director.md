@@ -15,6 +15,18 @@ Chọn style và hình cho từng đoạn sao cho hình **chứng minh** lời, 
 (`rows` cho terminal/code, `title` cho chart, `upto` cho timeline). Hình không có dữ liệu (ví dụ chart khi mô hình không
 có) tự lùi về `statement`.
 
+## Ảnh người, hãng, sự kiện
+
+Mọi người/hãng/sự kiện được nhắc trong lời hoặc chữ trên màn hình phải có trong `entities` của episode, kèm `image`
+(id trong `knowledge/images/ledger.json`) được hiện ở ít nhất một cảnh, hoặc `waiver` nêu lý do (ví dụ "chỉ nhắc như
+tên khái niệm 'cân bằng Nash'"). `qa/check_images.py` tự phát hiện họ tên tác giả trong ledger nguồn và tên riêng hai từ
+("Jay Regan") rồi chặn nếu chưa khai báo.
+
+Cách đặt ảnh: `"visual": {"kind": "image", "image": "<id>"}` (ảnh lớn + chú thích), `timeline[].image` (ảnh nhỏ cạnh
+mốc), `"visual": {"kind": "citation", "image": "<id>"}` (ảnh tác giả trên thẻ nghiên cứu). Lấy ảnh: thử
+`python pipeline/images.py search "<tên>"` trên Wikimedia Commons; chỉ giấy phép tự do; không có thì
+`images.py person/event/cards` (ảnh minh hoạ). Chi tiết: `knowledge/images/README.md`.
+
 ## Ràng buộc nhận diện
 
 - Màu, font, vùng an toàn: `brand/identity.md`. Mỗi đoạn trụ cột mới luôn có nhãn vai + nhãn trạng thái

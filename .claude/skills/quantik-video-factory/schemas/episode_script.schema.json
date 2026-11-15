@@ -83,8 +83,13 @@
                   "scenarios",
                   "formula",
                   "gauge",
-                  "sectors"
+                  "sectors",
+                  "image"
                 ]
+              },
+              "image": {
+                "type": "string",
+                "description": "id trong knowledge/images/ledger.json"
               }
             }
           },
@@ -212,6 +217,75 @@
     },
     "seed": {
       "type": "integer"
+    },
+    "entities": {
+      "type": "array",
+      "description": "người/hãng/sự kiện được nhắc: ảnh (id trong image ledger) hoặc waiver",
+      "items": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "kind": {
+            "enum": [
+              "person",
+              "firm",
+              "event",
+              "place",
+              "object"
+            ]
+          },
+          "image": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "waiver": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "entity_ignore": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "timeline": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "year",
+          "label"
+        ],
+        "properties": {
+          "year": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "claim": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          }
+        }
+      }
     }
   }
 }

@@ -14,27 +14,32 @@
     {
       "year": "1956",
       "label": "Kelly công bố công thức cược tối ưu",
-      "claim": "c_kelly"
+      "claim": "c_kelly",
+      "image": "kelly"
     },
     {
       "year": "1962",
       "label": "Thorp xuất bản Beat the Dealer",
-      "claim": "c_btd"
+      "claim": "c_btd",
+      "image": "thorp"
     },
     {
       "year": "1967",
       "label": "Beat the Market (với Kassouf)",
-      "claim": "c_btm"
+      "claim": "c_btm",
+      "image": "kassouf"
     },
     {
       "year": "1969",
       "label": "Lập quỹ cùng Jay Regan",
-      "claim": "c_pnp"
+      "claim": "c_pnp",
+      "image": "regan"
     },
     {
       "year": "1973",
       "label": "Black–Scholes công bố; Thorp kể đã có công thức tương đương",
-      "claim": "c_bs_self"
+      "claim": "c_bs_self",
+      "image": "black-scholes"
     }
   ],
   "segments": [
@@ -56,7 +61,11 @@
       "screen": "Có lợi thế nhỏ. Cược bao nhiêu?",
       "claims": [
         "c_ruin_math"
-      ]
+      ],
+      "visual": {
+        "kind": "image",
+        "image": "thorp"
+      }
     },
     {
       "role": "breakthrough",
@@ -230,5 +239,57 @@
     "QuanTik"
   ],
   "allowed_literals": [],
-  "max_seconds": 90
+  "max_seconds": 90,
+  "entities": [
+    {
+      "name": "Edward O. Thorp",
+      "aliases": [
+        "Thorp",
+        "Edward Thorp"
+      ],
+      "kind": "person",
+      "image": "thorp"
+    },
+    {
+      "name": "John L. Kelly Jr.",
+      "aliases": [
+        "Kelly",
+        "John Kelly"
+      ],
+      "kind": "person",
+      "image": "kelly"
+    },
+    {
+      "name": "Sheen T. Kassouf",
+      "aliases": [
+        "Kassouf"
+      ],
+      "kind": "person",
+      "image": "kassouf"
+    },
+    {
+      "name": "Jay Regan",
+      "aliases": [
+        "Regan"
+      ],
+      "kind": "person",
+      "image": "regan"
+    },
+    {
+      "name": "Fischer Black & Myron Scholes",
+      "aliases": [
+        "Black",
+        "Scholes",
+        "Black–Scholes"
+      ],
+      "kind": "person",
+      "image": "black-scholes"
+    },
+    {
+      "name": "Bell Labs",
+      "kind": "firm",
+      "image": null,
+      "waiver": "chỉ nhắc như nơi làm việc của Kelly; ảnh thật cần tải từ Wikimedia Commons khi có mạng"
+    }
+  ]
 }

@@ -41,7 +41,10 @@ Kiến trúc năm trụ cột: `pillars/README.md`. Vai nghiên cứu/kiểm ch�
 7. **Thị trường** (trụ cột 3): chỉ dùng dữ liệu có dấu thời gian trong bundle; tách quan sát / mô hình / nhận định; ba
    kịch bản có điều kiện xác nhận và vô hiệu; không nhắc mã cụ thể, không "sẽ tăng/giảm". Không có dữ liệu → nói rõ
    giới hạn, không dựng video.
-8. Output vào `social-output/<id>/` (đã gitignore). Trả về trong chat: đường dẫn file, thời lượng, kết luận QA,
+8. **Ảnh người/hãng/sự kiện**: nhắc ai thì có ảnh — Wikimedia Commons giấy phép tự do (ghi tác giả, giấy phép) hoặc ảnh
+   minh hoạ tạo bằng code ghi rõ "minh hoạ"; không bao giờ tạo ảnh giả như ảnh chụp người thật
+   (`knowledge/images/README.md`, QA `check_images` chặn).
+9. Output vào `social-output/<id>/` (đã gitignore). Trả về trong chat: đường dẫn file, thời lượng, kết luận QA,
    engine giọng, caption từng nền tảng trong khối copy được, và lưu ý còn lại cho người duyệt.
 
 ## Môi trường
@@ -49,7 +52,7 @@ Kiến trúc năm trụ cột: `pillars/README.md`. Vai nghiên cứu/kiểm ch�
 - Python 3.10+, `pip install -r .claude/skills/quantik-video-factory/requirements.txt edge-tts`, ffmpeg.
 - Video hướng dẫn cần thêm Node 20.9+ và Chromium cho Playwright.
 - Mạng: `speech.platform.bing.com` (giọng đọc edge-tts), `quantik.io.vn`, `github.com` (clone `QuanTik---Design`),
-  `trading.agr.vn` (dữ liệu thị trường cho trụ cột 3).
+  `trading.agr.vn` (dữ liệu thị trường cho trụ cột 3), `commons.wikimedia.org` + `upload.wikimedia.org` (ảnh có giấy phép mở).
   Không có mạng tới TTS thì pipeline lùi về gTTS → espeak → không giọng; phải báo người dùng.
 - Repo nguồn liên quan (chỉ đọc): `kwuangyong/QuanTik---Design` (web production, Next.js),
   `kwuangyong/QuanTik-website` (engine quant `backend/quant_engine/quant.py`; frontend React cũ, không dùng để quay).

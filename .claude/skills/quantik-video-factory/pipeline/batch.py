@@ -34,7 +34,7 @@ import render as R  # noqa: E402
 import voiceover as V  # noqa: E402
 from assemble import assemble  # noqa: E402
 import check_banned, check_format, check_numbers, report  # noqa: E402
-import check_market, check_script, check_sources  # noqa: E402
+import check_images, check_market, check_script, check_sources  # noqa: E402
 import pillar_models as PM  # noqa: E402
 import pillar_registry as PR  # noqa: E402
 
@@ -192,6 +192,8 @@ def _pillar_gates(filled, pillar, model, corpus):
             ("Nguồn & fact-check", check_sources.check(filled, pillar))]
     if isinstance(model, PM.MarketModel):
         more.append(("Dữ liệu thị trường", check_market.check(filled, model.report, pillar, corpus=corpus)))
+    if pillar.get("require_entity_images") or filled.get("entities") or check_images.used_images(filled):
+        more.append(("Ảnh nhân vật & bản quyền", check_images.check(filled, pillar.get("require_entity_images", False))))
     return more
 
 
@@ -217,6 +219,15 @@ def _write_provenance(out, filled, scenes, model, kind, pillar):
               [(out / "final.mp4", "video"), (out / "thumbnail.jpg", "thumbnail"), (out / "subtitles.srt", "subtitles")]
               if p.exists()]
     assets += [{"path": str(p.relative_to(out)), "kind": "slide", "provenance": prov} for p in sorted(out.glob("slides/*/*.png"))]
+    import images as IMG
+
+    imgs_used = []
+    for s in scenes:
+        imgs_used += [i for i in getattr(s, "images", []) if i not in imgs_used]
+    iidx = IMG.index()
+    assets += [{"path": f"knowledge/images/{iidx[i]['file']}", "kind": "still",
+                "provenance": iidx[i].get("source_url") or iidx[i].get("generator", ""), "license": iidx[i]["license"]}
+               for i in imgs_used if i in iidx]
     save_json(out / "visual_assets.json", {"id": filled["id"], "assets": assets})
     if not pillar:
         return ""
@@ -251,8 +262,17 @@ def _write_provenance(out, filled, scenes, model, kind, pillar):
         lines.append(f"- **{src.get('cite_short', sid)}** — {', '.join(src.get('authors', []))}. *{src.get('title', '')}*. "
                      f"{src.get('venue', '')} {ref} (cấp {src.get('tier')})")
         short.append(f"{src.get('cite_short', sid)} {ref}".strip())
+    if imgs_used:
+        lines += ["", "## Ảnh", "", "| Ảnh | Loại | Chủ thể | Tác giả · giấy phép | Nguồn |", "| --- | --- | --- | --- | --- |"]
+        for i in imgs_used:
+            e = iidx.get(i, {})
+            lines.append(f"| `{i}` | {e.get('kind')} | {e.get('subject')} | {e.get('author')} · {e.get('license')} | "
+                         f"{e.get('source_url') or e.get('generator', '')} |")
     (out / "sources.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
-    return "\n## Nguồn (dán vào mô tả YouTube / bình luận ghim)\n" + "\n".join("- " + x for x in short) + "\n"
+    credits = sorted({iidx[i]["credit"] for i in imgs_used if i in iidx})
+    img_block = ("\n## Ảnh\n" + "\n".join("- " + c for c in credits) + "\n") if credits else ""
+    return ("\n## Nguồn (dán vào mô tả YouTube / bình luận ghim)\n" + "\n".join("- " + x for x in short) + "\n"
+            + img_block)
 
 
 def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice="female", music=None,
@@ -296,6 +316,7 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
         led = PS.ledger()
         lits += [c for s in scenes for c in getattr(s, "sources", [])]
         lits += [led[x]["title"] for c in filled.get("claims", []) for x in c.get("source_ids", []) if x in led]
+        lits += [PS.credit_text(getattr(s, "images", [])) for s in scenes]   # "CC BY-SA 4.0" etc. come from the image ledger
     nums = check_numbers.check(corpus, model.values, model.formats, rendered, lits, filled.get("facts", {}))
     banned = check_banned.check(corpus, (pillar or {}).get("extra_banned", []))
     more = _pillar_gates(filled, pillar, model, corpus) if pillar else []

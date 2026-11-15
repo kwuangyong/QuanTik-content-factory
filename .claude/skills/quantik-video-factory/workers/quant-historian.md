@@ -30,6 +30,11 @@ và tách bạch từng mẩu thông tin theo mức độ tin cậy.
 - Không vẽ đường NAV bịa. Không có chuỗi dữ liệu có nguồn thì dùng mô hình liên quan (Kelly, OU…) và ghi "mô phỏng".
 - Mỗi câu chuyện phải nối về một bài học quant kiểm chứng được (quy mô vị thế, đuôi dày, tương quan…).
 
+## Nhân vật cần ảnh
+
+Liệt kê trong brief (`open_questions` hoặc ghi chú framework) mọi người/hãng/sự kiện sẽ được nhắc, kèm gợi ý file
+Wikimedia Commons có giấy phép mở nếu tìm được. Visual Director dựng ảnh và khai báo `entities` trong episode.
+
 ## Bàn giao
 
 Brief → Fact-checker → Scriptwriter. Chọn `model` trong `models.py`/`pillar_models.py` để đoạn "đột phá" có số chạy thật.

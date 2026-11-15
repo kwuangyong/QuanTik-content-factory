@@ -34,6 +34,11 @@ Biến một hành vi sai lầm quen thuộc của nhà đầu tư thành chuỗ
 - Không viết lời khuyên kiểu động lực ("kỷ luật là chìa khoá thành công"); bài học phải là hành vi đo/kiểm được.
 - Không bịa số "nghiên cứu cho thấy 90% nhà đầu tư…". Không tìm được nguồn → bỏ.
 
+## Nhân vật cần ảnh
+
+Liệt kê trong brief (`open_questions` hoặc ghi chú framework) mọi người/hãng/sự kiện sẽ được nhắc, kèm gợi ý file
+Wikimedia Commons có giấy phép mở nếu tìm được. Visual Director dựng ảnh và khai báo `entities` trong episode.
+
 ## Bàn giao
 
 Brief → **Fact-checker**. Khi fact-check đạt → **Scriptwriter**. Nếu cần một mô hình mới (ví dụ mô phỏng FOMO),

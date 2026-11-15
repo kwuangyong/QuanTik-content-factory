@@ -28,7 +28,8 @@
       "requires_factcheck": false,
       "catalog": "knowledge/catalog.json",
       "doc": "pillars/quant-education/PILLAR.md",
-      "max_seconds": 60
+      "max_seconds": 60,
+      "require_entity_images": false
     },
     {
       "id": "behavioral-finance",
@@ -91,7 +92,8 @@
       "requires_factcheck": true,
       "catalog": "pillars/behavioral-finance/catalog.json",
       "doc": "pillars/behavioral-finance/PILLAR.md",
-      "max_seconds": 90
+      "max_seconds": 90,
+      "require_entity_images": true
     },
     {
       "id": "market-intelligence",
@@ -151,7 +153,8 @@
       "max_data_sessions_behind": 0,
       "catalog": "pillars/market-intelligence/catalog.json",
       "doc": "pillars/market-intelligence/PILLAR.md",
-      "max_seconds": 90
+      "max_seconds": 90,
+      "require_entity_images": false
     },
     {
       "id": "quant-history",
@@ -220,7 +223,8 @@
       "requires_factcheck": true,
       "catalog": "pillars/quant-history/catalog.json",
       "doc": "pillars/quant-history/PILLAR.md",
-      "max_seconds": 90
+      "max_seconds": 90,
+      "require_entity_images": true
     },
     {
       "id": "decision-science",
@@ -276,7 +280,8 @@
       "requires_factcheck": true,
       "catalog": "pillars/decision-science/catalog.json",
       "doc": "pillars/decision-science/PILLAR.md",
-      "max_seconds": 90
+      "max_seconds": 90,
+      "require_entity_images": true
     }
   ]
 }

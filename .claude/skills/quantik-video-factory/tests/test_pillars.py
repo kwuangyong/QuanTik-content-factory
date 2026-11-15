@@ -327,6 +327,89 @@ class MarketPipeline(unittest.TestCase):
         return fill_tree(e, model.values, model.formats, set()), None, model
 
 
+class Images(unittest.TestCase):
+    """People/events named in an episode get a licensed photo or a labelled illustration; Commons licences are enforced."""
+
+    def setUp(self):
+        import check_images
+        self.ci = check_images
+        self.e = ep(EPISODES["quant-history"])
+
+    def test_representative_episodes_cover_every_mention(self):
+        for name in list(EPISODES.values()) + ["ds-kuhn-nash-decision-lab"]:
+            self.assertFalse(self.ci.check(ep(name))["fail"], name)
+
+    def test_undeclared_person_fails(self):
+        e = copy.deepcopy(self.e)
+        e["entities"] = [x for x in e["entities"] if x["name"] != "Jay Regan"]
+        self.assertTrue(any("Regan" in i for i in self.ci.check(e)["issues"]))
+
+    def test_short_waiver_fails(self):
+        e = copy.deepcopy(self.e)
+        e["entities"][-1]["waiver"] = "không"
+        self.assertTrue(self.ci.check(e)["fail"])
+
+    def test_declared_image_must_be_shown(self):
+        e = ep("ds-kuhn-nash-decision-lab")           # Kuhn's card is shown only in the setup scene
+        e["segments"][0].pop("visual")
+        self.assertTrue(any("không cảnh nào hiện" in i for i in self.ci.check(e)["issues"]))
+
+    def test_unknown_image_fails(self):
+        e = copy.deepcopy(self.e)
+        e["timeline"][0]["image"] = "no-such-image"
+        self.assertTrue(self.ci.check(e)["fail"])
+
+    def test_ledger_matches_schema(self):
+        self.assertEqual(check_script.validate(load(SKILL / "knowledge/images/ledger.json"), "image_ledger"), [])
+
+    def _fake_commons(self, license_name):
+        import io
+
+        meta = {"LicenseShortName": {"value": license_name}, "Artist": {"value": "<a>Jane Doe</a>"},
+                "LicenseUrl": {"value": "https://creativecommons.org/licenses/by-sa/4.0"}}
+        info = {"query": {"pages": [{"title": "File:X.jpg", "imageinfo": [{"url": "https://upload.example/X.jpg",
+                "thumburl": "https://upload.example/X.jpg", "descriptionurl": "https://commons.wikimedia.org/wiki/File:X.jpg",
+                "extmetadata": meta}]}]}}
+
+        class R(io.BytesIO):
+            def __enter__(self): return self
+            def __exit__(self, *a): pass
+
+        def opener(req, timeout=0):
+            return R(json.dumps(info).encode() if "api.php" in req.full_url else b"\xff\xd8fakejpeg")
+        return opener
+
+    def _sandbox(self):
+        import images
+        d = Path(tempfile.mkdtemp())
+        old = images.IMG_DIR, images.FILES, images.LEDGER
+        images.IMG_DIR, images.FILES, images.LEDGER = d, d / "files", d / "ledger.json"
+        self.addCleanup(lambda: setattr(images, "IMG_DIR", old[0]) or setattr(images, "FILES", old[1])
+                        or setattr(images, "LEDGER", old[2]))
+        return images
+
+    def test_commons_free_licence_is_fetched_with_credit(self):
+        images = self._sandbox()
+        e = images.fetch("File:X.jpg", "x", "Someone", opener=self._fake_commons("CC BY-SA 4.0"))
+        self.assertEqual(e["kind"], "photo")
+        self.assertIn("CC BY-SA 4.0", e["credit"])
+        self.assertIn("Jane Doe", e["credit"])
+        self.assertTrue((images.IMG_DIR / e["file"]).exists())
+
+    def test_commons_non_free_licence_refused(self):
+        images = self._sandbox()
+        for lic in ("CC BY-NC-SA 4.0", "CC BY-ND 2.0", "Fair use", ""):
+            with self.assertRaises(SystemExit):
+                images.fetch("File:X.jpg", "x", "Someone", opener=self._fake_commons(lic))
+
+    def test_licence_classifier(self):
+        import images
+        for ok in ("Public domain", "PD-US", "CC0", "CC BY 2.0", "CC BY-SA 3.0", "CC BY-SA 4.0"):
+            self.assertTrue(images.is_free(ok), ok)
+        for bad in ("CC BY-NC 2.0", "CC BY-NC-ND 4.0", "Fair use", "All rights reserved"):
+            self.assertFalse(images.is_free(bad), bad)
+
+
 class VoiceRetry(unittest.TestCase):
     """edge-tts fails intermittently (NoAudioReceived); one failed call must not leave a scene voiceless."""
 

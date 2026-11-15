@@ -63,6 +63,48 @@ def segment_sources(ep, seg):
     return out
 
 
+CREDIT = (X0, 1212, X1, 1254)
+
+
+def image_entry(iid):
+    import images
+
+    return images.index().get(iid)
+
+
+def credit_text(ids):
+    seen = []
+    for iid in ids:
+        e = image_entry(iid)
+        if e and e["credit"] not in seen:
+            seen.append(e["credit"])
+    return " · ".join(seen)
+
+
+def credit_line(img, ids):
+    txt = credit_text(ids)
+    if txt:
+        F.text_box(img, txt, CREDIT, "sans", 20, T["muted"], "left", "middle", min_size=16, label="image-credit",
+                   max_lines=2)
+
+
+@lru_cache(maxsize=64)
+def _img_cached(iid, w, h):
+    import images
+    from PIL import Image
+
+    im = Image.open(images.path_of(image_entry(iid))).convert("RGB")
+    k = min(w / im.width, h / im.height)
+    return im.resize((max(1, int(im.width * k)), max(1, int(im.height * k))), Image.LANCZOS)
+
+
+@lru_cache(maxsize=64)
+def _thumb_cached(iid, size):
+    import images
+
+    return images.avatar_thumb(image_entry(iid), size)
+
+
 def footer(img, cites):
     if cites:
         F.text_box(img, "Nguồn: " + " · ".join(cites), FOOT, "sans", 22, T["muted"], "left", "middle", min_size=18,
@@ -187,14 +229,19 @@ def _citation(ep, seg, model, role_label, status, cites):
         a = F.ease_out(F.seg(p, 0, 0.2))
         badges(img, role_label, status)
         F.panel(img, (X0, 420, X1, 1240), fill=T["surface"], outline=T["positive"])
-        F.text_box(img, who, (X0 + 36, 450, X1 - 36, 520), "mono-bold", 36, T["positive"], label="cite-who", alpha=a)
-        F.text_box(img, "“" + title + "”", (X0 + 36, 530, X1 - 36, 680), "sans", 32, T["muted"], label="cite-title",
+        rx = X1 - (210 if pic else 36)
+        F.text_box(img, who, (X0 + 36, 450, rx, 520), "mono-bold", 36, T["positive"], label="cite-who", alpha=a)
+        F.text_box(img, "“" + title + "”", (X0 + 36, 530, rx, 680), "sans", 32, T["muted"], label="cite-title",
                    alpha=a, min_size=22)
-        F.text_box(img, finding, (X0 + 36, 700, X1 - 36, 1210), "sans-black", 58, T["text"], "left", "top",
+        F.text_box(img, finding, (X0 + 36, 700, X1 - 36, 1190), "sans-black", 58, T["text"], "left", "top",
                    min_size=34, label="cite-finding", hl_numbers=True, alpha=F.ease_out(F.seg(p, 0.15, 0.35)))
+        if pic:
+            F.paste(img, _thumb_cached(pic, 150), (X1 - 186, 450), alpha=a)
+        credit_line(img, [pic] if pic else [])
         footer(img, cites)
 
-    return draw, _texts(role_label, status, cites, who, title, finding)
+    pic = (seg.get("visual") or {}).get("image") if image_entry((seg.get("visual") or {}).get("image")) else None
+    return draw, _texts(role_label, status, cites, who, title, finding, credit_text([pic] if pic else []))
 
 
 def _timeline(ep, seg, model, role_label, status, cites):
@@ -220,15 +267,22 @@ def _timeline(ep, seg, model, role_label, status, cites):
             d.ellipse([x - 16, y - 16, x + 16, y + 16], fill=col if hot else T["raised"], outline=col, width=4)
             F.text_box(img, ev["year"], (x + 40, y - 30, x + 230, y + 30), "mono-bold", 44 if hot else 34,
                        T["accent"] if hot else T["muted"], label=f"tl-year{i}", alpha=a)
-            F.text_box(img, ev["label"], (x + 240, y - 34, X1, y + 60), "sans-bold", 36 if hot else 30,
-                       T["text"] if hot else T["muted"], label=f"tl-label{i}", alpha=a, min_size=22)
+            has = bool(ev.get("image") and image_entry(ev["image"]))
+            F.text_box(img, ev["label"], (x + 240, y - 34, X1 - (120 if has else 0), y + 60), "sans-bold",
+                       36 if hot else 30, T["text"] if hot else T["muted"], label=f"tl-label{i}", alpha=a, min_size=22)
+            if has:
+                F.paste(img, _thumb_cached(ev["image"], 96 if hot else 80), (X1 - (96 if hot else 80), y - 40),
+                        alpha=a if hot else 0.75)
         note = seg.get("screen")
         if note:
-            F.text_box(img, note, (X0, 1080, X1, 1240), "sans-bold", 40, T["neutral"], label=f"{seg['role']}-note",
+            F.text_box(img, note, (X0, 1080, X1, 1200), "sans-bold", 40, T["neutral"], label=f"{seg['role']}-note",
                        hl_numbers=True, min_size=26)
+        credit_line(img, imgs)
         footer(img, cites)
 
-    return draw, _texts(role_label, status, cites, seg.get("screen"), *[e["year"] + " " + e["label"] for e in events[:upto + 1]])
+    imgs = [e["image"] for e in events[:upto + 1] if e.get("image")]
+    return draw, _texts(role_label, status, cites, seg.get("screen"), credit_text(imgs),
+                        *[e["year"] + " " + e["label"] for e in events[:upto + 1]])
 
 
 def _split(ep, seg, model, role_label, status, cites):
@@ -313,9 +367,45 @@ def _gauge(ep, seg, model, role_label, status, cites):
                         *[f"{fmt_vi(n, 'int')} mã {name}" for name, n, _ in parts])
 
 
+def _image(ep, seg, model, role_label, status, cites):
+    """A person / event / object image (licensed photo or labelled illustration) with caption and credit."""
+    iid = seg["visual"]["image"]
+    note = seg.get("screen") or ""
+    box = (X0, 420, X1, 1000)
+
+    def draw(img, t, p):
+        badges(img, role_label, status)
+        im = _img_cached(iid, box[2] - box[0], box[3] - box[1])
+        z = 1.0 + 0.04 * F.ease_in_out(p)            # slow push-in
+        if z > 1.001:
+            from PIL import Image
+
+            zw, zh = int(im.width * z), int(im.height * z)
+            im = im.resize((zw, zh), Image.LANCZOS).crop(((zw - im.width) // 2, (zh - im.height) // 2,
+                                                          (zw + im.width) // 2, (zh + im.height) // 2))
+        F.paste(img, im, ((box[0] + box[2]) // 2, box[1]), alpha=F.ease_out(F.seg(p, 0, 0.15)), anchor="n")
+        if note:
+            F.text_box(img, note, (X0, 1020, X1, 1200), "sans-bold", 44, T["text"], "left", "top", min_size=28,
+                       label=f"{seg['role']}-note", hl_numbers=True)
+        credit_line(img, [iid])
+        footer(img, cites)
+
+    return draw, _texts(role_label, status, cites, note, credit_text([iid]))
+
+
 VISUALS = {"statement": _statement, "chart": _chart, "surface": _surface, "code": _code, "terminal": _terminal,
            "citation": _citation, "timeline": _timeline, "split": _split, "scenarios": _scenarios, "gauge": _gauge,
-           "sectors": _chart}
+           "sectors": _chart, "image": _image}
+
+
+def segment_images(ep, seg, kind):
+    """Image ids actually drawn by this scene (for QA and storyboard)."""
+    if kind in ("image", "citation") and (seg.get("visual") or {}).get("image"):
+        return [seg["visual"]["image"]]
+    if kind == "timeline":
+        upto = seg.get("visual", {}).get("upto", len(ep.get("timeline", [])) - 1)
+        return [e["image"] for e in ep.get("timeline", [])[:upto + 1] if e.get("image")]
+    return []
 
 
 def segment_scene(ep, seg, model, role_label, default_visual="statement", min_dur=4.0):
@@ -328,11 +418,14 @@ def segment_scene(ep, seg, model, role_label, default_visual="statement", min_du
         kind = "statement"
     if kind == "code" and not getattr(model, "code", ""):
         kind = "statement"
+    if kind == "image" and not image_entry((seg.get("visual") or {}).get("image")):
+        kind = "statement"   # unknown image id: check_images reports it; never draw a missing picture
     status = "limitation" if seg.get("limitation") else segment_status(ep, seg)
     cites = segment_sources(ep, seg)
     draw, texts = VISUALS[kind](ep, seg, model, role_label, status, cites)
     sc = Scene(seg["role"], seg["say"], draw, seg.get("min_dur", min_dur), texts=texts)
     sc.role, sc.status, sc.claims, sc.sources, sc.visual = seg["role"], status, seg.get("claims", []), cites, kind
+    sc.images = segment_images(ep, seg, kind)
     return sc
 
 

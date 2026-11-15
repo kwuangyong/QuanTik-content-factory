@@ -49,6 +49,10 @@ JSON theo `schemas/`. Mọi claim trỏ về `knowledge/sources/ledger.json`; `q
 nguồn, thiếu fact-check, hoặc lời kể một giai thoại/lời tự kể như sự kiện. Trụ cột 3 không bao giờ bịa số thị trường:
 không có dữ liệu thì không có video, dữ liệu cũ phải khai báo (`qa/check_market.py`).
 
+**Ảnh:** nhắc tới người, hãng, sự kiện thì phải có ảnh — ảnh Wikimedia Commons giấy phép tự do (ghi tác giả + giấy
+phép trên màn hình) hoặc ảnh minh hoạ vẽ bằng code (ghi "minh hoạ"). Khai báo trong `entities` của episode;
+`qa/check_images.py` chặn nếu thiếu. Hướng dẫn: `knowledge/images/README.md`, lệnh `python pipeline/images.py`.
+
 Chạy từ `pipeline/`: `python pillar.py list` · `python pillar.py topics <pillar>` · `python pillar.py check <episode>` ·
 `python pillar.py make <episode> --scale 0.5`. Kết quả thêm `sources.md`, `storyboard.json`, `visual_assets.json`,
 `qa_report.json` cạnh các file cũ. Trả kết quả trong chat như mục 6, kèm danh sách nguồn chính và nhãn trạng thái.

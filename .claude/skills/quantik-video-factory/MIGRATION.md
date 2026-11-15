@@ -89,6 +89,17 @@ QT_RENDER_TESTS=1 python -m unittest tests.test_pillars.RenderTests -v
 tập trụ cột 4a: thêm nguồn vào ledger (đã có `ltcm-pwg-1999`, `lowenstein-2000`, `zuckerman-2019`), đổi `source` →
 `source_id`, tách từng câu thành claim có `status`, chạy fact-check.
 
+## Ảnh nhân vật (bổ sung)
+
+Episode trụ cột 2, 4a, 4b giờ cần `entities`: mỗi người/hãng/sự kiện được nhắc có `image` (hiện ở một cảnh) hoặc `waiver`.
+Episode cũ chưa có `entities` sẽ bị `check_images` chặn khi nhắc tên — thêm khai báo như các tập mẫu
+(`episodes/qh-thorp-history-story.json`). Trụ cột 1 và 3 không bắt buộc.
+
+```bash
+python images.py person --id <id> --name "<Họ tên>" --role "<vai trò>"     # ảnh minh hoạ
+python images.py search "<tên>"; python images.py fetch "File:…" --id <id> --subject "<tên>"   # ảnh thật (cần mạng)
+```
+
 ## Việc còn để ngỏ (chưa làm, không giả vờ là đã có)
 
 - Chưa có API lịch sử giá tự động → regime/biến động/thanh khoản 20 phiên cần CSV người dùng hoặc tích luỹ snapshot.
@@ -97,4 +108,6 @@ tập trụ cột 4a: thêm nguồn vào ledger (đã có `ltcm-pwg-1999`, `lowe
 - Nhận định thị trường hiện là bản nháp theo luật; chất lượng diễn giải phụ thuộc bước Analyst duyệt.
 - Trong môi trường cloud này, edge-tts không trả âm thanh cho một số câu (không rõ nguyên nhân, nghi proxy). Gate mới chặn
   cảnh câm; dựng bản đăng trên máy có kết nối edge-tts ổn định.
+- Chưa tải được ảnh thật từ Wikimedia Commons trong phiên cloud này (host đã thêm vào môi trường nhưng lệnh bị chặn
+  ở bước duyệt quyền); các tập mẫu đang dùng ảnh minh hoạ. Chạy `images.py search/fetch` trên máy có mạng.
 - Fact-check tự động chỉ kiểm truy vết; độ đúng của nội dung nguồn do người/agent ký `checker` chịu trách nhiệm.

@@ -23,6 +23,11 @@ Chọn một ý tưởng ra quyết định (EV, phương sai, Nash, Kelly, rủ
   "ván kết thúc", phần lớn lợi thế khó đo; ngược lại thị trường cổ phiếu dài hạn không phải trò chơi tổng bằng không.
 - Kiểm số mô phỏng với công thức đóng khi có; lệch nhiều là lỗi code hoặc lỗi giả định.
 
+## Nhân vật cần ảnh
+
+Liệt kê trong brief (`open_questions` hoặc ghi chú framework) mọi người/hãng/sự kiện sẽ được nhắc, kèm gợi ý file
+Wikimedia Commons có giấy phép mở nếu tìm được. Visual Director dựng ảnh và khai báo `entities` trong episode.
+
 ## Bàn giao
 
 Brief (+ mô hình + test) → Fact-checker → Scriptwriter.
