@@ -1,0 +1,348 @@
+"""Scene builders for research-based pillars: every segment carries its role, claim status badge and source footer.
+
+A pillar style (styles/bias-lab, history-story, market-brief, decision-lab) is a thin template: it names its roles,
+picks a default visual per role and calls ``segment_scene``. What makes the pillars feel different is the role
+sequence (pillars/registry.json), the visuals per role and the label vocabulary, not a different renderer.
+
+Content area: y 300..1240; source footer 1258..1308; subtitles 1326..1488 (render.py).
+"""
+from __future__ import annotations
+
+import json
+from functools import lru_cache
+
+import frames as F
+import scenes as S
+from core import KNOWLEDGE, THEME as T, fmt_vi
+from render import Scene
+
+X0, X1 = S.X0, S.X1
+FOOT = (X0, 1258, X1, 1308)
+
+STATUS_LABEL = {
+    "documented": ("TƯ LIỆU", T["positive"]),
+    "self_reported": ("LỜI TỰ KỂ", T["neutral"]),
+    "anecdote": ("GIAI THOẠI", T["neutral"]),
+    "disputed": ("CÒN TRANH CÃI", T["negative"]),
+    "speculation": ("SUY ĐOÁN", T["negative"]),
+    "observed": ("QUAN SÁT", T["positive"]),
+    "model_output": ("MÔ HÌNH", T["accent"]),
+    "interpretation": ("NHẬN ĐỊNH", T["neutral"]),
+    "limitation": ("GIỚI HẠN DỮ LIỆU", T["negative"]),
+}
+# weakest status wins the badge: a segment mixing a fact and a guess is shown as a guess
+WEAKNESS = ["speculation", "disputed", "anecdote", "self_reported", "interpretation", "model_output", "observed",
+            "documented"]
+
+
+@lru_cache(maxsize=1)
+def ledger():
+    data = json.loads((KNOWLEDGE / "sources/ledger.json").read_text(encoding="utf-8"))
+    return {s["id"]: s for s in data["sources"]}
+
+
+def claim_index(ep):
+    return {c["id"]: c for c in ep.get("claims", [])}
+
+
+def segment_status(ep, seg):
+    if seg.get("label"):
+        return seg["label"]
+    cl = claim_index(ep)
+    sts = [cl[c]["status"] for c in seg.get("claims", []) if c in cl]
+    return min(sts, key=WEAKNESS.index) if sts else None
+
+
+def segment_sources(ep, seg):
+    cl, led, out = claim_index(ep), ledger(), []
+    for c in seg.get("claims", []):
+        for sid in (cl.get(c) or {}).get("source_ids", []):
+            cite = led.get(sid, {}).get("cite_short", sid)
+            if cite not in out:
+                out.append(cite)
+    return out
+
+
+def footer(img, cites):
+    if cites:
+        F.text_box(img, "Nguồn: " + " · ".join(cites), FOOT, "sans", 22, T["muted"], "left", "middle", min_size=18,
+                   label="source-footer", max_lines=2)
+
+
+def badges(img, role_label, status, y=330):
+    x = F.chip(img, (X0, y), role_label, T["raised"], 26) + 14
+    if status:
+        text, col = STATUS_LABEL[status]
+        F.chip(img, (x, y), text, col, 26)
+
+
+def _texts(role_label, status, cites, *more):
+    out = [role_label, STATUS_LABEL[status][0] if status else ""]
+    if cites:
+        out.append("Nguồn: " + " · ".join(cites))
+    return out + [m for m in more if m]
+
+
+# ---------------------------------------------------------------- visuals
+def _statement(ep, seg, model, role_label, status, cites, accent=None):
+    text = seg.get("screen") or seg["say"]
+
+    def draw(img, t, p):
+        a = F.ease_out(F.seg(p, 0, 0.2))
+        badges(img, role_label, status)
+        F.text_box(img, text, (X0, 430 + 30 * (1 - a), X1, 1230), "sans-black", 68, accent or T["text"], "left", "middle",
+                   min_size=38, label=f"{seg['role']}-text", hl_numbers=True, alpha=a)
+        footer(img, cites)
+
+    return draw, _texts(role_label, status, cites, text)
+
+
+def _chart(ep, seg, model, role_label, status, cites):
+    note = seg.get("screen") or ""
+    box = (X0, 420, X1, 1060 if note else 1240)
+    S._MODELS[id(model)] = model
+
+    def draw(img, t, p):
+        badges(img, role_label, status)
+        step = max(1, int(24 * F.ease_in_out(F.seg(p, 0, 0.7)) + 0.5))
+        F.paste(img, S._chart_cached(id(model), step, 24, box[2] - box[0], box[3] - box[1],
+                                     seg.get("visual", {}).get("title")), (box[0], box[1]))
+        if note:
+            F.text_box(img, note, (X0, 1080, X1, 1240), "sans-bold", 40, T["neutral"], "left", "top", min_size=26,
+                       label=f"{seg['role']}-note", hl_numbers=True)
+        footer(img, cites)
+
+    return draw, _texts(role_label, status, cites, note, seg.get("visual", {}).get("title"))
+
+
+def _surface(ep, seg, model, role_label, status, cites):
+    note = seg.get("screen") or ""
+    S._MODELS[id(model)] = model
+
+    def draw(img, t, p):
+        e = F.ease_in_out(p)
+        F.paste(img, S._surface_cached(id(model), int(-70 + 80 * e), int(30 - 8 * e), S.CW, 760), (X0, 410))
+        badges(img, role_label, status)
+        if note:
+            F.text_box(img, note, (X0, 1170, X1, 1245), "sans-bold", 34, T["muted"], "left", "top", min_size=24,
+                       label=f"{seg['role']}-note", hl_numbers=True)
+        footer(img, cites)
+
+    return draw, _texts(role_label, status, cites, note)
+
+
+def _code(ep, seg, model, role_label, status, cites):
+    code, total = model.code, len(model.code)
+    rows = _rows(seg, model)
+
+    def draw(img, t, p):
+        badges(img, role_label, status)
+        n = int(total * F.ease_in_out(F.seg(p, 0, 0.6)))
+        im = F.fit_width(F.code_panel(code, S.CW, chars=n if n < total else None,
+                                      title=getattr(model, "code_title", "") or f"{model.topic}.py"), S.CW, 600)
+        F.paste(img, im, (X0, 410))
+        if rows and p > 0.6:
+            k = min(len(rows), int(len(rows) * F.seg(p, 0.6, 0.9)) + 1)
+            F.paste(img, F.fit_width(F.terminal_panel(rows[:k], S.CW, title="kết quả chạy"), S.CW, 1240 - 430 - im.height),
+                    (X0, 430 + im.height))
+        footer(img, cites)
+
+    return draw, _texts(role_label, status, cites, *[f"{a} {b}" for a, b in rows])
+
+
+def _rows(seg, model):
+    return [(r["label"], fmt_vi(model.values[r["key"]], r.get("fmt") or model.formats.get(r["key"], "num2")))
+            for r in seg.get("visual", {}).get("rows", [])]
+
+
+def _terminal(ep, seg, model, role_label, status, cites):
+    rows = _rows(seg, model)
+    note = seg.get("screen") or ""
+
+    def draw(img, t, p):
+        badges(img, role_label, status)
+        k = min(len(rows), int(len(rows) * F.seg(p, 0.05, 0.6)) + 1)
+        im = F.terminal_panel(rows[:k], S.CW, title=seg.get("visual", {}).get("title") or getattr(model, "run_title", "kết quả"))
+        F.paste(img, im, (X0, 420))
+        if note and p > 0.5:
+            y = 420 + F.terminal_panel(rows, S.CW).height + 40
+            F.text_box(img, note, (X0, y, X1, 1240), "sans-bold", 46, T["neutral"], "left", "top", min_size=28,
+                       label=f"{seg['role']}-note", hl_numbers=True, alpha=F.ease_out(F.seg(p, 0.5, 0.7)))
+        footer(img, cites)
+
+    return draw, _texts(role_label, status, cites, note, *[f"{a} {b}" for a, b in rows])
+
+
+def _citation(ep, seg, model, role_label, status, cites):
+    """Study card: who, where, what was found (the finding is `screen`, numbers only via facts/placeholders)."""
+    led = ledger()
+    cl = claim_index(ep)
+    sid = next((s for c in seg.get("claims", []) for s in cl.get(c, {}).get("source_ids", [])), None)
+    src = led.get(sid, {})
+    who = src.get("cite_short", "")
+    title = src.get("title", "")
+    finding = seg.get("screen") or seg["say"]
+
+    def draw(img, t, p):
+        a = F.ease_out(F.seg(p, 0, 0.2))
+        badges(img, role_label, status)
+        F.panel(img, (X0, 420, X1, 1240), fill=T["surface"], outline=T["positive"])
+        F.text_box(img, who, (X0 + 36, 450, X1 - 36, 520), "mono-bold", 36, T["positive"], label="cite-who", alpha=a)
+        F.text_box(img, "“" + title + "”", (X0 + 36, 530, X1 - 36, 680), "sans", 32, T["muted"], label="cite-title",
+                   alpha=a, min_size=22)
+        F.text_box(img, finding, (X0 + 36, 700, X1 - 36, 1210), "sans-black", 58, T["text"], "left", "top",
+                   min_size=34, label="cite-finding", hl_numbers=True, alpha=F.ease_out(F.seg(p, 0.15, 0.35)))
+        footer(img, cites)
+
+    return draw, _texts(role_label, status, cites, who, title, finding)
+
+
+def _timeline(ep, seg, model, role_label, status, cites):
+    """Vertical timeline of ep['timeline'] events up to and including this segment's `upto` index."""
+    events = ep.get("timeline", [])
+    upto = seg.get("visual", {}).get("upto", len(events) - 1)
+    cl = claim_index(ep)
+
+    def draw(img, t, p):
+        badges(img, role_label, status)
+        d = F.ImageDraw.Draw(img)
+        shown = events[:upto + 1]
+        n = max(1, len(shown))
+        step = min(150, int(800 / n))
+        x = X0 + 30
+        d.line([(x, 440), (x, 440 + step * (n - 1) + 10)], fill=T["border"], width=6)
+        for i, ev in enumerate(shown):
+            y = 440 + i * step
+            hot = i == upto
+            a = 1.0 if not hot else F.ease_out(F.seg(p, 0, 0.3))
+            st = cl.get(ev.get("claim"), {}).get("status")
+            col = STATUS_LABEL[st][1] if st else T["accent"]
+            d.ellipse([x - 16, y - 16, x + 16, y + 16], fill=col if hot else T["raised"], outline=col, width=4)
+            F.text_box(img, ev["year"], (x + 40, y - 30, x + 230, y + 30), "mono-bold", 44 if hot else 34,
+                       T["accent"] if hot else T["muted"], label=f"tl-year{i}", alpha=a)
+            F.text_box(img, ev["label"], (x + 240, y - 34, X1, y + 60), "sans-bold", 36 if hot else 30,
+                       T["text"] if hot else T["muted"], label=f"tl-label{i}", alpha=a, min_size=22)
+        note = seg.get("screen")
+        if note:
+            F.text_box(img, note, (X0, 1080, X1, 1240), "sans-bold", 40, T["neutral"], label=f"{seg['role']}-note",
+                       hl_numbers=True, min_size=26)
+        footer(img, cites)
+
+    return draw, _texts(role_label, status, cites, seg.get("screen"), *[e["year"] + " " + e["label"] for e in events[:upto + 1]])
+
+
+def _split(ep, seg, model, role_label, status, cites):
+    an = ep.get("analogy", {})
+    sim, brk = an.get("similar", [])[:3], an.get("breaks", [])[:3]
+
+    def col(img, box, title, items, color, a, name):
+        x0, y0, x1, y1 = box
+        F.panel(img, box, fill=T["surface"], outline=color)
+        F.text_box(img, title, (x0 + 24, y0 + 20, x1 - 24, y0 + 80), "sans-black", 36, color, label=f"{name}-title", alpha=a)
+        y = y0 + 100
+        h = (y1 - y - 20) // max(1, len(items))
+        for i, it in enumerate(items):
+            F.text_box(img, "• " + it, (x0 + 24, y, x1 - 20, y + h - 10), "sans-bold", 30, T["text"], min_size=20,
+                       label=f"{name}{i}", alpha=a)
+            y += h
+
+    def draw(img, t, p):
+        badges(img, role_label, status)
+        col(img, (X0, 420, X0 + S.CW // 2 - 12, 1240), "GIỐNG", sim, T["positive"], F.ease_out(F.seg(p, 0, 0.2)), "sim")
+        col(img, (X0 + S.CW // 2 + 12, 420, X1, 1240), "KHÁC", brk, T["negative"], F.ease_out(F.seg(p, 0.3, 0.5)), "brk")
+        footer(img, cites)
+
+    return draw, _texts(role_label, status, cites, "GIỐNG", "KHÁC", *sim, *brk)
+
+
+def _scenarios(ep, seg, model, role_label, status, cites):
+    """Three scenario cards: name, what confirms it, what invalidates it. No probabilities unless sourced."""
+    scs = ep.get("scenarios", [])
+    names = {"bull": ("TÍCH CỰC", T["positive"]), "base": ("CƠ SỞ", T["neutral"]), "bear": ("TIÊU CỰC", T["negative"])}
+
+    def draw(img, t, p):
+        badges(img, role_label, status)
+        y = 420
+        h = (1240 - 420 - 2 * 18) // 3
+        for i, sc in enumerate(scs[:3]):
+            a = F.ease_out(F.seg(p, 0.1 + 0.25 * i, 0.3 + 0.25 * i))
+            if a <= 0:
+                break
+            lab, colr = names.get(sc["name"], (sc["name"], T["accent"]))
+            F.panel(img, (X0, y, X1, y + h), fill=T["surface"], outline=colr)
+            F.chip(img, (X0 + 20, y + 16), lab, colr, 24)
+            F.text_box(img, "✓ " + sc["confirmation"][0], (X0 + 24, y + 76, X1 - 24, y + 76 + (h - 90) // 2),
+                       "sans-bold", 28, T["text"], min_size=19, label=f"sc{i}-ok", alpha=a, hl_numbers=True)
+            F.text_box(img, "✗ " + sc["invalidation"][0], (X0 + 24, y + 80 + (h - 90) // 2, X1 - 24, y + h - 10),
+                       "sans", 26, T["muted"], min_size=19, label=f"sc{i}-ko", alpha=a, hl_numbers=True)
+            y += h + 18
+        footer(img, cites)
+
+    texts = [x for sc in scs for x in ("✓ " + sc["confirmation"][0], "✗ " + sc["invalidation"][0])]
+    return draw, _texts(role_label, status, cites, "TÍCH CỰC", "CƠ SỞ", "TIÊU CỰC", *texts)
+
+
+def _gauge(ep, seg, model, role_label, status, cites):
+    """Breadth bar: advancers / decliners / unchanged as one stacked bar, with the counts."""
+    v = model.values
+    parts = [("tăng", v.get("adv", 0), T["positive"]), ("giảm", v.get("dec", 0), T["negative"]),
+             ("đứng", v.get("unch", 0), T["neutral"])]
+    total = sum(p for _, p, _ in parts) or 1
+    note = seg.get("screen") or ""
+
+    def draw(img, t, p):
+        badges(img, role_label, status)
+        k = F.ease_in_out(F.seg(p, 0, 0.5))
+        x = X0
+        d = F.ImageDraw.Draw(img)
+        for name, n, colr in parts:
+            w = int(S.CW * n / total * k)
+            d.rounded_rectangle([x, 470, x + max(w, 1), 590], radius=12, fill=colr)
+            x += w
+        y = 630
+        for i, (name, n, colr) in enumerate(parts):
+            F.text_box(img, f"{fmt_vi(n, 'int')} mã {name}", (X0, y, X1, y + 70), "mono-bold", 46, colr,
+                       label=f"gauge{i}")
+            y += 80
+        if note:
+            F.text_box(img, note, (X0, 900, X1, 1240), "sans-bold", 44, T["text"], label=f"{seg['role']}-note",
+                       hl_numbers=True, min_size=28)
+        footer(img, cites)
+
+    return draw, _texts(role_label, status, cites, note,
+                        *[f"{fmt_vi(n, 'int')} mã {name}" for name, n, _ in parts])
+
+
+VISUALS = {"statement": _statement, "chart": _chart, "surface": _surface, "code": _code, "terminal": _terminal,
+           "citation": _citation, "timeline": _timeline, "split": _split, "scenarios": _scenarios, "gauge": _gauge,
+           "sectors": _chart}
+
+
+def segment_scene(ep, seg, model, role_label, default_visual="statement", min_dur=4.0):
+    kind = (seg.get("visual") or {}).get("kind") or default_visual
+    if seg.get("limitation"):  # a declared data limitation is said plainly, never drawn as an empty panel
+        kind = "statement"
+    if kind in ("chart", "sectors") and not getattr(model, "has_chart", True):
+        kind = "statement"
+    if kind == "surface" and not getattr(model, "has_surface", True):
+        kind = "statement"
+    if kind == "code" and not getattr(model, "code", ""):
+        kind = "statement"
+    status = "limitation" if seg.get("limitation") else segment_status(ep, seg)
+    cites = segment_sources(ep, seg)
+    draw, texts = VISUALS[kind](ep, seg, model, role_label, status, cites)
+    sc = Scene(seg["role"], seg["say"], draw, seg.get("min_dur", min_dur), texts=texts)
+    sc.role, sc.status, sc.claims, sc.sources, sc.visual = seg["role"], status, seg.get("claims", []), cites, kind
+    return sc
+
+
+def pillar_build(ep, model, ctx, role_labels, visuals, takeaway_chip="Mang về", hook_kicker=None):
+    """Hook → segments (in order) → takeaway → end card. Used by every pillar style."""
+    out = [S.hook(ep["hook"], kicker=ep.get("kicker") or hook_kicker)]
+    for seg in ep["segments"]:
+        out.append(segment_scene(ep, seg, model, role_labels.get(seg["role"], seg["role"].upper()),
+                                 visuals.get(seg["role"], "statement")))
+    if ep.get("takeaway"):
+        out.append(S.statement(ep["takeaway"], name="takeaway", size=64, label_chip=takeaway_chip))
+    out.append(S.end(ep["cta"], ctx["disclaimer"], ctx["tag"]))
+    return out

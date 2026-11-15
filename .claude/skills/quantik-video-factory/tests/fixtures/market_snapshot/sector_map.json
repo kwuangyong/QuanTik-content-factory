@@ -1,0 +1,43 @@
+{
+ "source_id": "synthetic-fixture",
+ "note": "test",
+ "groups": [
+  {
+   "name": "Nhóm A",
+   "kind": "sector",
+   "symbols": [
+    "QTA0",
+    "QTA1",
+    "QTA2",
+    "QTA3",
+    "QTA4",
+    "QTA5",
+    "QTA6",
+    "QTA7"
+   ]
+  },
+  {
+   "name": "Nhóm B",
+   "kind": "sector",
+   "symbols": [
+    "QTB0",
+    "QTB1",
+    "QTB2",
+    "QTB3",
+    "QTB4",
+    "QTB5",
+    "QTB6",
+    "QTB7"
+   ]
+  },
+  {
+   "name": "Nhóm C",
+   "kind": "sector",
+   "symbols": [
+    "QTC0",
+    "QTC1",
+    "QTC2"
+   ]
+  }
+ ]
+}

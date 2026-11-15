@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "quantik/visual_assets.schema.json",
+  "title": "Visual assets",
+  "description": "Danh sách tài sản hình (social-output/<id>/visual_assets.json) kèm xuất xứ.",
+  "type": "object",
+  "required": [
+    "id",
+    "assets"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "kind",
+          "provenance"
+        ],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "video",
+              "thumbnail",
+              "slide",
+              "still",
+              "chart",
+              "subtitles",
+              "audio",
+              "music"
+            ]
+          },
+          "provenance": {
+            "type": "string",
+            "description": "model+seed / data bundle / nguồn / giấy phép"
+          },
+          "license": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "brief": "research/bf-disposition-bias-lab/brief.json",
+  "checked": "2026-11-15",
+  "checker": "fact-checker (Claude, web search)",
+  "verdicts": [
+    {
+      "claim": "c_disp_def",
+      "verdict": "verified",
+      "evidence": [
+        "doi:10.1111/j.1540-6261.1985.tb05002.x",
+        "doi:10.1111/0022-1082.00072"
+      ]
+    },
+    {
+      "claim": "c_pt",
+      "verdict": "verified",
+      "evidence": [
+        "doi:10.2307/1914185"
+      ]
+    },
+    {
+      "claim": "c_lambda",
+      "verdict": "verified",
+      "evidence": [
+        "https://econpapers.repec.org/RePEc:kap:jrisku:v:5:y:1992:i:4:p:297-323"
+      ],
+      "note": "Nhiều nguồn thứ cấp thống nhất α=β=0,88, λ=2,25; chưa đọc bản gốc."
+    },
+    {
+      "claim": "c_mech_dispute",
+      "verdict": "verified",
+      "status": "disputed",
+      "evidence": [
+        "https://www.nber.org/papers/w12397"
+      ]
+    },
+    {
+      "claim": "c_odean",
+      "verdict": "verified",
+      "evidence": [
+        "https://rpc.cfainstitute.org/-/media/documents/article/cfa-digest/1999/dig-v29-n2-469-pdf.pdf"
+      ]
+    },
+    {
+      "claim": "c_gmin",
+      "verdict": "verified",
+      "note": "Tính lại: 2,25^(1/0,88) = 2,51."
+    },
+    {
+      "claim": "c_lesson",
+      "verdict": "verified",
+      "status": "interpretation"
+    },
+    {
+      "claim": "c_quant",
+      "verdict": "verified",
+      "status": "interpretation"
+    },
+    {
+      "claim": "rejected_3_41",
+      "verdict": "rejected",
+      "note": "Con số 3,41% không xác nhận được — đã loại khỏi brief."
+    }
+  ]
+}

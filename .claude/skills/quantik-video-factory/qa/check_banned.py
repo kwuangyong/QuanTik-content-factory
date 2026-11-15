@@ -28,8 +28,9 @@ def negated(t, start, window=12):
     return any(w.strip(",“”\"'()") in ("không", "chưa", "chẳng", "đừng") for w in before)
 
 
-def check(texts):
-    banned = load_banned()
+def check(texts, extra=()):
+    """extra: pillar-specific phrases (pillars/registry.json extra_banned) on top of brand/compliance.md."""
+    banned = load_banned() + [e.lower() for e in extra]
     disc = norm(disclaimer())
     hits = []
     for text in texts:

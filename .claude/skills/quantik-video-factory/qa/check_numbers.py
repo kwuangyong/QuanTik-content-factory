@@ -27,6 +27,8 @@ def tokens(text):
 
 def check(texts, values, formats, rendered, allowed_literals=(), facts=None):
     ok_tokens = set(rendered) | FREE_INTS
+    for r in rendered:  # code-derived strings (dates "13/11/2026", times "15:05:05") split into their numbers
+        ok_tokens |= set(tokens(str(r)))
     for lit in allowed_literals:
         ok_tokens |= set(tokens(lit)) | {lit}
     for f in (facts or {}).values():

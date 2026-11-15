@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "quantik/storyboard.schema.json",
+  "title": "Storyboard",
+  "description": "Xuất tự động sau render (social-output/<id>/storyboard.json): mỗi cảnh, thời lượng, lời, chữ, claim và nguồn.",
+  "type": "object",
+  "required": [
+    "id",
+    "style",
+    "scenes"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "style": {
+      "type": "string"
+    },
+    "pillar": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "scenes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "start",
+          "duration",
+          "say"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "start": {
+            "type": "number"
+          },
+          "duration": {
+            "type": "number"
+          },
+          "say": {
+            "type": "string"
+          },
+          "texts": {
+            "type": "array"
+          },
+          "label": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "claims": {
+            "type": "array"
+          },
+          "sources": {
+            "type": "array"
+          },
+          "visual": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "audio": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
