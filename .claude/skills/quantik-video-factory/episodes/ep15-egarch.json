@@ -1,0 +1,99 @@
+{
+  "id": "ep15-egarch",
+  "topic": "egarch",
+  "seed": 4,
+  "title": "Vì sao tin xấu làm thị trường rung mạnh hơn tin tốt?",
+  "caption": "Cùng một cú sốc, tin xấu làm biến động tăng mạnh hơn tin tốt. EGARCH (Nelson, 1991) đo đúng sự bất đối xứng này bằng hệ số γ, và báo cáo Phân tích Quant của QuanTik hiển thị γ cho từng mã.",
+  "hashtags": [
+    "quant",
+    "EGARCH",
+    "biendong",
+    "chungkhoan",
+    "QuanTik"
+  ],
+  "facts": {
+    "nelson": {
+      "value": "1991",
+      "source": "Nelson, D. (1991), Econometrica 59(2)"
+    }
+  },
+  "scenes": [
+    {
+      "type": "hook",
+      "text": "Cùng một cú sốc. Tin xấu đẩy biến động lên {vol_down}. Tin tốt: {vol_up}.",
+      "kicker": "Biến động"
+    },
+    {
+      "type": "quiz",
+      "question": "Giá giảm 2σ hoặc tăng 2σ. Hôm sau biến động tăng mạnh hơn sau trường hợp nào?",
+      "options": [
+        "Sau phiên giảm",
+        "Sau phiên tăng",
+        "Như nhau"
+      ],
+      "answer": 0,
+      "say": "Đố bạn: một phiên giảm hai sigma, hoặc tăng hai sigma. Hôm sau biến động tăng mạnh hơn sau trường hợp nào? Đáp án: sau phiên giảm."
+    },
+    {
+      "type": "formula",
+      "latex": "\\ln\\sigma_t^2 = \\omega + \\beta\\ln\\sigma_{t-1}^2 + \\alpha(|z|-E|z|) + \\gamma z",
+      "caption": "γ < 0: cú sốc âm được tính nặng hơn",
+      "say": "EGARCH của Daniel Nelson năm 1991 thêm một số hạng gamma nhân cú sốc có dấu. Gamma âm thì tin xấu được tính nặng hơn."
+    },
+    {
+      "type": "run",
+      "outputs": [
+        {
+          "label": "γ",
+          "key": "gamma"
+        },
+        {
+          "label": "vol sau tin xấu",
+          "key": "vol_down",
+          "highlight": true
+        },
+        {
+          "label": "vol sau tin tốt",
+          "key": "vol_up"
+        },
+        {
+          "label": "gấp",
+          "key": "ratio"
+        }
+      ],
+      "say": "Với gamma {gamma}, sau cú giảm hai sigma biến động lên {vol_down}. Sau cú tăng cùng cỡ chỉ {vol_up}. Chênh {ratio}."
+    },
+    {
+      "type": "chart",
+      "title": "Đường tác động của tin tức",
+      "say": "Đường nét đứt là mô hình đối xứng. Đường cam là EGARCH: bên trái dựng cao hơn. Vùng đỏ là phần sợ hãi được khuếch đại."
+    },
+    {
+      "type": "surface",
+      "view": "side",
+      "caption": "γ càng âm, sườn tin xấu càng dốc",
+      "say": "3D: gamma càng âm, sườn bên tin xấu càng dốc."
+    },
+    {
+      "type": "usage",
+      "title": "γ trong báo cáo Quant QuanTik",
+      "steps": [
+        "γ âm: mã rung mạnh sau phiên giảm",
+        "γ gần 0: phản ứng gần đối xứng",
+        "γ nói về độ rung, không nói hướng giá"
+      ],
+      "say": "Trong báo cáo Quant của QuanTik: gamma âm nghĩa là mã rung mạnh sau phiên giảm. Gần không là phản ứng đối xứng. Và gamma nói về độ rung, không nói giá đi đâu."
+    },
+    {
+      "type": "statement",
+      "chip": "Mang về",
+      "text": "Thị trường sợ nhiều hơn mừng. EGARCH đo đúng sự bất đối xứng đó.",
+      "say": "Thị trường sợ nhiều hơn mừng. EGARCH đo đúng sự bất đối xứng đó."
+    }
+  ],
+  "thumb": {
+    "tag": "EGARCH γ"
+  },
+  "style": "story-mix",
+  "series_no": 15
+}

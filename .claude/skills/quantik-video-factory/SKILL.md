@@ -37,7 +37,7 @@ episodes/                episode JSON đã viết (ghi đè mặc định của 
 Xác định từ lời người dùng (hỏi lại chỉ khi thật sự mơ hồ):
 
 - **Chủ đề → topic.** Có hai tầng:
-  - **Viết tay (sâu nhất):** `garch`, `hurst`, `ou`, `hmm`, `monte_carlo`, `sharpe`, `var_cvar`, `kelly`. Code mô hình chạy thật trong video, mọi số đến từ lần chạy đó.
+  - **Viết tay (sâu nhất):** `garch`, `hurst`, `ou`, `hmm`, `monte_carlo`, `sharpe`, `sortino`, `var_cvar`, `kelly` (trong `models.py`) và `rsi`, `max_drawdown`, `beta`, `ols`, `lln_clt` (luật số lớn & CLT), `egarch`, `fat_tails` (chuẩn/log-normal/đuôi dày), `momentum`, `martingale`, `psr` (PSR/DSR), `cmf` (trong `models_extra.py`). Code mô hình chạy thật trong video, mọi số đến từ lần chạy đó.
   - **Catalog (rộng nhất):** mọi id trong `knowledge/CATALOG.md`, gồm thuật ngữ (`sortino`, `calmar`, `cmf`, `psr`…), chỉ số module (`module_egarch_gamma`, `module_adf_p`, `module_lightgbm`…), trường hành động (`action_kelly_half`…), cột sheet (`sheet-…`), mô hình trang Home (`home_…`) và engine (`engine_garch`, `engine_meta_label`, `engine_cross_sectional_light_gbm`…). Tìm: `python pipeline/catalog.py --list | grep -i <từ khoá>`; xem chi tiết: `--show <id>`.
   - Người dùng nói tên thường ("EGARCH", "meta-label", "độ phủ mô hình") thì tra catalog để ra id. Chủ đề trùng một mô hình viết tay thì ưu tiên bản viết tay.
 - **Style.** Người dùng không chọn thì gợi ý theo bảng:
@@ -55,6 +55,8 @@ Xác định từ lời người dùng (hỏi lại chỉ khi thật sự mơ h�
 | `story-mix` | **loạt bài nhiều tập cùng mô hình**: episode tự xếp cảnh (lịch sử, cách dùng, đố vui, so sánh, code trích dòng, 2D/3D tuỳ chọn) | 45–75s |
 
 - **Số lượng.** "Làm loạt", "cả tuần" → mỗi video một episode JSON riêng (thường là `story-mix`), không chạy topic × style hàng loạt.
+- **Đã đăng / đã có (đừng làm lại):** Monte Carlo, Sharpe, Sortino, Autoregressive, Hurst; loạt #6–#23 trong `episodes/ep*.json` (cột `series_no`). Đọc `episodes.csv` và thư mục `episodes/` trước khi lên kế hoạch.
+- **Mỗi chủ đề tối đa một tập trong một loạt**; không đủ chủ đề viết tay thì lấy từ catalog (gần 200 chủ đề) hoặc nâng chủ đề catalog lên viết tay (mục Mở rộng).
 - **Chống lặp (bắt buộc với loạt bài).** Các style cũ dùng chung lời, seed, chart, 3D và caption theo chủ đề, nên cùng chủ đề khác style vẫn ra nội dung gần như y hệt. Mỗi video trong loạt phải khác ở: góc kể (thứ tự cảnh), `seed` + `params`, hình (2D/3D, góc quay `view`, đoạn code trích), và `title`/`caption`/`thumb`. Xem `styles/story-mix/spec.md`. Trình bày kế hoạch nội dung cho người dùng duyệt trước khi dựng cả lô.
 
 Đọc `knowledge/episodes.csv` trước: tránh trùng cặp topic × style đã đăng; nếu là loạt bài, tham chiếu tập trước trong hook hoặc CTA ("Tập trước mình nói về GARCH…").

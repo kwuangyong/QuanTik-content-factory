@@ -1,0 +1,135 @@
+{
+  "id": "ep13-var-415",
+  "topic": "var_cvar",
+  "seed": 41,
+  "title": "Báo cáo 4 giờ 15 chiều đã sinh ra VaR như thế nào",
+  "caption": "Chủ tịch J.P. Morgan muốn mỗi chiều có một con số duy nhất: hôm nay có thể lỗ bao nhiêu. Bản báo cáo lúc 4 giờ 15 dẫn tới VaR và bộ RiskMetrics công bố năm 1994. Nhưng VaR có một điểm mù ở đuôi, và CVaR lấp đúng chỗ đó.",
+  "hashtags": [
+    "quant",
+    "VaR",
+    "quanlyruiro",
+    "lichsutaichinh",
+    "QuanTik"
+  ],
+  "facts": {
+    "rm": {
+      "value": "1994",
+      "source": "J.P. Morgan, RiskMetrics (1994); RiskMetrics—Technical Document, 4th ed. (1996)"
+    },
+    "time": {
+      "value": "4:15",
+      "source": "Jorion, Value at Risk (3rd ed., 2007); RiskMetrics history"
+    }
+  },
+  "allowed_literals": [
+    "95%",
+    "5%",
+    "95"
+  ],
+  "scenes": [
+    {
+      "type": "hook",
+      "text": "Mỗi chiều lúc 4:15, một tờ giấy trả lời câu hỏi: hôm nay có thể lỗ bao nhiêu?",
+      "kicker": "Lịch sử quant"
+    },
+    {
+      "type": "story",
+      "chip": "J.P. Morgan",
+      "era": "4:15",
+      "title": "Một con số cho cả ngân hàng",
+      "text": "Chủ tịch Dennis Weatherstone muốn mỗi chiều sau giờ đóng cửa có một trang tóm tắt rủi ro của toàn ngân hàng. Từ đó sinh ra Value at Risk.",
+      "source": "Jorion, Value at Risk; RiskMetrics Technical Document",
+      "say": "Đầu những năm chín mươi, chủ tịch J.P. Morgan muốn mỗi chiều lúc bốn giờ mười lăm có một trang giấy: toàn ngân hàng có thể lỗ bao nhiêu ngày mai."
+    },
+    {
+      "type": "story",
+      "chip": "Năm 1994",
+      "era": "1994",
+      "title": "RiskMetrics ra công chúng",
+      "text": "J.P. Morgan công bố phương pháp miễn phí với tên RiskMetrics. VaR nhanh chóng thành ngôn ngữ chung của quản trị rủi ro.",
+      "source": "J.P. Morgan RiskMetrics (1994)",
+      "say": "Năm 1994, J.P. Morgan công bố phương pháp này miễn phí với tên RiskMetrics. VaR trở thành ngôn ngữ chung của quản trị rủi ro."
+    },
+    {
+      "type": "run",
+      "outputs": [
+        {
+          "label": "số phiên",
+          "key": "n_days"
+        },
+        {
+          "label": "VaR 95%",
+          "key": "var95"
+        },
+        {
+          "label": "CVaR 95%",
+          "key": "cvar95",
+          "highlight": true
+        },
+        {
+          "label": "ngày tệ nhất",
+          "key": "worst"
+        }
+      ],
+      "say": "Code chạy {n_days} phiên lợi suất đuôi dày. VaR 95 phần trăm là {var95}: chỉ 5 phần trăm số ngày lỗ hơn mức này. Nhưng khi đã vượt, trung bình lỗ {cvar95}."
+    },
+    {
+      "type": "chart",
+      "title": "Phân phối lợi suất ngày",
+      "notes": [
+        [
+          0.0,
+          "Vạch đặc: VaR · vạch đứt: CVaR"
+        ],
+        [
+          0.6,
+          "Ngày tệ nhất: {worst}"
+        ]
+      ],
+      "say": "VaR là vạch đặc. Nó cho biết ranh giới, nhưng im lặng về những gì nằm bên kia. Ngày tệ nhất lỗ tới {worst}."
+    },
+    {
+      "type": "compare",
+      "title": "Điểm mù của VaR",
+      "left": {
+        "label": "VaR nói",
+        "value": "{var95}",
+        "note": "ranh giới của ngày xấu",
+        "color": "neutral"
+      },
+      "right": {
+        "label": "CVaR nói",
+        "value": "{cvar95}",
+        "note": "ngày xấu trung bình tệ đến đâu",
+        "color": "negative"
+      },
+      "say": "VaR trả lời ranh giới ở đâu. CVaR trả lời khi vượt ranh giới thì tệ đến đâu: gấp {cvar_over_var} lần."
+    },
+    {
+      "type": "statement",
+      "chip": "Mang về",
+      "text": "VaR cho biết ranh giới. CVaR cho biết vực sâu bao nhiêu.",
+      "say": "VaR cho biết ranh giới. CVaR cho biết vực sâu bao nhiêu."
+    }
+  ],
+  "thumb": {
+    "tag": "VaR · Lịch sử",
+    "headline": [
+      {
+        "t": "BÁO CÁO",
+        "size": 160
+      },
+      {
+        "t": "[o]4:15[/o]",
+        "size": 200
+      },
+      {
+        "t": "SINH RA VaR",
+        "size": 140
+      }
+    ],
+    "pill": "J.P. Morgan · RiskMetrics 1994 · code Python"
+  },
+  "style": "story-mix",
+  "series_no": 13
+}

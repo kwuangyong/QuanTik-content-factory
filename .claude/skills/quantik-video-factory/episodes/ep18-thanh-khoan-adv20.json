@@ -1,0 +1,109 @@
+{
+  "id": "ep18-thanh-khoan-adv20",
+  "topic": "adv20_value_vnd",
+  "title": "Vì sao bộ Quét toàn sàn loại mã ít thanh khoản trước tiên?",
+  "caption": "Một mã có điểm đẹp nhưng mỗi phiên giao dịch rất ít thì mua vào dễ, bán ra khó. QuanTik đo thanh khoản bằng ADV20 (giá trị giao dịch bình quân 20 phiên) và xếp hạng A–B–C–D ngay trong engine. Video đọc thẳng từ code.",
+  "hashtags": [
+    "QuanTik",
+    "quetoansan",
+    "thanhkhoan",
+    "chungkhoan",
+    "quant"
+  ],
+  "cta_link": "Xem cột thanh khoản trong Quét toàn sàn tại quantik.io.vn",
+  "facts": {
+    "a": {
+      "value": "50 tỷ",
+      "source": "quant.py:286 LiquidityEngine (adv20_val >= 50e9 → tier A)"
+    },
+    "b": {
+      "value": "20 tỷ",
+      "source": "quant.py:286 (adv20_val >= 20e9 → tier B)"
+    },
+    "w": {
+      "value": "20",
+      "source": "định nghĩa ADV20, glossary QuanTik"
+    },
+    "ex1": {
+      "value": "200 tỷ",
+      "source": "ví dụ trong glossary QuanTik (ADV20)"
+    },
+    "ex2": {
+      "value": "10 tỷ",
+      "source": "ví dụ trong glossary QuanTik (ADV20)"
+    }
+  },
+  "scenes": [
+    {
+      "type": "hook",
+      "text": "Điểm đẹp mà mỗi phiên chỉ khớp vài trăm triệu. Mua vào dễ, bán ra mới khó.",
+      "say": "Một mã điểm rất đẹp, nhưng mỗi phiên chỉ khớp vài trăm triệu. Mua vào thì dễ. Bán ra mới khó.",
+      "kicker": "Quét toàn sàn"
+    },
+    {
+      "type": "formula",
+      "latex": "ADV20 = \\frac{1}{20}\\sum_{t=1}^{20} GTGD_t",
+      "caption": "Ví dụ: tổng 200 tỷ trong 20 phiên → ADV20 = 10 tỷ mỗi phiên",
+      "say": "QuanTik đo thanh khoản bằng ADV20: giá trị giao dịch bình quân 20 phiên. Tổng 200 tỷ trong 20 phiên thì ADV20 là 10 tỷ mỗi phiên."
+    },
+    {
+      "type": "code",
+      "lines": [
+        1,
+        5
+      ],
+      "hl": 1,
+      "note": "Từ 50 tỷ/phiên: hạng A · từ 20 tỷ: hạng B · dưới ngưỡng tối thiểu: D",
+      "say": "Trong engine, mỗi mã được xếp hạng thanh khoản. Từ 50 tỷ mỗi phiên là hạng A, từ 20 tỷ là hạng B, dưới ngưỡng tối thiểu là D và không qua cổng."
+    },
+    {
+      "type": "quiz",
+      "question": "Vì sao không thay giá trị giao dịch thiếu bằng giá cuối nhân khối lượng?",
+      "options": [
+        "Vì chậm hơn",
+        "Vì giá khớp trong phiên khác giá cuối",
+        "Vì khối lượng không quan trọng"
+      ],
+      "answer": 1,
+      "say": "Đố bạn: vì sao engine không lấy giá cuối nhân khối lượng để bù dữ liệu thiếu? Vì mỗi lệnh khớp ở một giá khác nhau trong phiên, nhân như vậy sẽ ra số sai."
+    },
+    {
+      "type": "usage",
+      "title": "Đọc cột thanh khoản khi quét sàn",
+      "steps": [
+        "Xem hạng A–B–C–D trước khi xem điểm",
+        "Hạng D: không qua cổng, điểm đẹp cũng bỏ qua",
+        "Đối chiếu quy mô vốn của bạn với ADV20"
+      ],
+      "say": "Khi quét sàn: xem hạng thanh khoản trước khi xem điểm. Hạng D không qua cổng. Và đối chiếu quy mô vốn của bạn với ADV20 của mã."
+    },
+    {
+      "type": "statement",
+      "chip": "Mang về",
+      "text": "Thanh khoản là cánh cửa ra. Kiểm tra cửa ra trước khi bước vào.",
+      "say": "Thanh khoản là cánh cửa ra. Kiểm tra cửa ra trước khi bước vào."
+    }
+  ],
+  "thumb": {
+    "tag": "Thanh khoản",
+    "headline": [
+      {
+        "t": "MUA VÀO DỄ",
+        "size": 160
+      },
+      {
+        "t": "BÁN RA",
+        "size": 170
+      },
+      {
+        "t": "[o]MỚI KHÓ[/o]",
+        "size": 170
+      }
+    ],
+    "pill": "ADV20 · hạng A–B–C–D trong engine",
+    "labels": [],
+    "footer": "Quét toàn sàn • Không phải khuyến nghị"
+  },
+  "style": "story-mix",
+  "series_no": 18
+}

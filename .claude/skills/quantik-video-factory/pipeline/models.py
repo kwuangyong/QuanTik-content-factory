@@ -444,6 +444,9 @@ def surface_kelly(s, v):
 
 # =============================================================== registry
 TOPICS = ["garch", "hurst", "ou", "hmm", "monte_carlo", "sharpe", "sortino", "var_cvar", "kelly"]
+from models_extra import *  # noqa: E402,F401,F403  (mô hình bổ sung, cùng giao diện)
+from models_extra import EXTRA_TOPICS  # noqa: E402
+TOPICS += EXTRA_TOPICS
 
 
 def _style(ax):

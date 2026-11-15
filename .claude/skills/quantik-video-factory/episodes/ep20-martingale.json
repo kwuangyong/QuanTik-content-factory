@@ -1,0 +1,87 @@
+{
+  "id": "ep20-martingale",
+  "topic": "martingale",
+  "seed": 3,
+  "title": "Gấp thếp: đa số người lãi, vậy mà tổng vẫn lỗ",
+  "caption": "Martingale (gấp thếp): thua thì gấp đôi, thắng một lần là gỡ hết. Mô phỏng 2.000 người chơi cho thấy đa số đang lãi nhỏ, số ít mất sạch, và tổng kỳ vọng vẫn âm. Bình quân giá xuống bằng cách gấp vị thế cũng có cùng cấu trúc rủi ro này.",
+  "hashtags": [
+    "quant",
+    "martingale",
+    "quanlyvon",
+    "xacsuat",
+    "QuanTik"
+  ],
+  "scenes": [
+    {
+      "type": "hook",
+      "text": "Thua thì gấp đôi, thắng một lần là gỡ hết. Nghe như không thể thất bại?",
+      "kicker": "Quản trị vốn"
+    },
+    {
+      "type": "formula",
+      "latex": "1+2+4+\\dots+2^{k-1} = 2^k - 1",
+      "caption": "Vốn {cap} đơn vị chỉ chịu được {max_losses} lần thua liên tiếp",
+      "say": "Vấn đề nằm ở cấp số nhân. Vốn {cap} đơn vị chỉ đủ gấp đôi {max_losses} lần liền. Lần thứ mười một là hết tiền."
+    },
+    {
+      "type": "code",
+      "lines": [
+        7,
+        12
+      ],
+      "hl": 9,
+      "say": "Code cho {players} người chơi, xác suất thắng {p_win}. Thua thì gấp đôi, thắng thì về một đơn vị. Không đủ tiền gấp tiếp là cháy."
+    },
+    {
+      "type": "run",
+      "outputs": [
+        {
+          "label": "người đang lãi",
+          "key": "pct_up"
+        },
+        {
+          "label": "người cháy sạch",
+          "key": "pct_bust",
+          "highlight": true
+        },
+        {
+          "label": "lãi lỗ trung bình",
+          "key": "mean_pnl"
+        },
+        {
+          "label": "lỗ tệ nhất",
+          "key": "worst"
+        }
+      ],
+      "say": "Sau {rounds} ván, {pct_up} người đang lãi. Nhưng {pct_bust} người cháy sạch, và lãi lỗ trung bình cả nhóm là {mean_pnl}."
+    },
+    {
+      "type": "chart",
+      "title": "Mỗi đường là một người chơi",
+      "say": "Mỗi đường là một người: leo đều từng bậc nhỏ, tự tin dần. Rồi một chuỗi thua kéo thẳng xuống đáy."
+    },
+    {
+      "type": "surface",
+      "view": "low",
+      "caption": "Xác suất cháy theo số lần thua chịu được và số ván",
+      "say": "3D: dù vốn dày tới đâu, chơi đủ lâu thì xác suất cháy vẫn leo lên."
+    },
+    {
+      "type": "myth",
+      "myth": "Giá giảm thì mua gấp đôi để bình quân giá, sớm muộn cũng về.",
+      "fact": "Đó là gấp thếp trên cổ phiếu: nhiều lần gỡ được, một lần không gỡ được là đủ.",
+      "say": "Trên thị trường, bình quân giá xuống bằng cách gấp đôi vị thế có đúng cấu trúc này. Nhiều lần gỡ được. Một lần không gỡ được là đủ."
+    },
+    {
+      "type": "statement",
+      "chip": "Mang về",
+      "text": "Gấp thếp đổi nhiều lần lãi nhỏ lấy một lần mất hết.",
+      "say": "Gấp thếp đổi nhiều lần lãi nhỏ lấy một lần mất hết."
+    }
+  ],
+  "thumb": {
+    "tag": "Martingale"
+  },
+  "style": "story-mix",
+  "series_no": 20
+}

@@ -36,9 +36,9 @@ Thẻ cuối (CTA theo dõi kênh + miễn trừ) tự gắn. Mỗi cảnh có `
 - Số trong lời và chữ: placeholder `{key}` hoặc `facts`. QA chặn số gõ tay như mọi style.
 - Chuyện lịch sử: chỉ dùng sự kiện có nguồn; ghi `source` trên thẻ. Không chắc thì bỏ.
 - Mỗi video tối đa 9–10 cảnh; tối thiểu một cảnh hình (chart/surface/compare) chứng minh bằng số.
-- Ví dụ đầy đủ: `episodes/garch-lich-su.json`.
+- Ví dụ đầy đủ: `episodes/ep06-garch-nobel.json`.
 
 ```bash
-python batch.py --episode ../episodes/garch-lich-su.json
-python thumbnail.py --episode ../episodes/garch-lich-su.json --no 6 --out ../../../../social-output/garch-lich-su
+python batch.py --episode ../episodes/ep06-garch-nobel.json
+python thumbnail.py --episode ../episodes/ep06-garch-nobel.json --no 6 --out ../../../../social-output/ep06-garch-nobel
 ```

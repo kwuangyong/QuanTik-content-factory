@@ -1,0 +1,87 @@
+{
+  "id": "ep08-max-drawdown",
+  "topic": "max_drawdown",
+  "seed": 26,
+  "title": "Giảm 50% thì phải tăng bao nhiêu để về bờ?",
+  "caption": "Câu đố dễ sai nhất trong đầu tư: giảm 50% rồi tăng 50% không phải hoà vốn. Max drawdown đo cú rơi sâu nhất từ đỉnh, và toán về bờ khắc nghiệt hơn bạn nghĩ. Code tính thật.",
+  "hashtags": [
+    "quant",
+    "drawdown",
+    "quanlyruiro",
+    "chungkhoan",
+    "QuanTik"
+  ],
+  "scenes": [
+    {
+      "type": "hook",
+      "text": "Giảm {loss_50} rồi tăng lại {loss_50}. Bạn đã hoà vốn chưa?",
+      "kicker": "Đố vui"
+    },
+    {
+      "type": "quiz",
+      "question": "Vốn giảm {loss_50}. Phải tăng bao nhiêu để về lại vốn ban đầu?",
+      "options": [
+        "{loss_50}",
+        "{need_30}",
+        "{need_50}"
+      ],
+      "answer": 2,
+      "say": "Vốn giảm {loss_50}. Phải tăng bao nhiêu mới về bờ? Không phải {loss_50}. Đáp án là {need_50}."
+    },
+    {
+      "type": "formula",
+      "latex": "\\text{cần tăng} = \\frac{L}{1-L}",
+      "caption": "Mất L thì phần còn lại là 1 − L. Phải tăng L/(1 − L) mới về đỉnh.",
+      "say": "Lý do: lỗ tính trên vốn lớn, lãi tính trên vốn đã nhỏ đi. Mất L thì phải tăng L chia một trừ L."
+    },
+    {
+      "type": "compare",
+      "title": "Lỗ càng sâu, đường về càng dốc",
+      "left": {
+        "label": "Mất {loss_10}",
+        "value": "+{need_10}",
+        "note": "gần như đối xứng",
+        "color": "positive"
+      },
+      "right": {
+        "label": "Mất {loss_80}",
+        "value": "+{need_80}",
+        "note": "phải nhân năm lần vốn còn lại",
+        "color": "negative"
+      },
+      "say": "Mất {loss_10} chỉ cần tăng {need_10}. Mất {loss_80} thì phải tăng {need_80}."
+    },
+    {
+      "type": "chart",
+      "title": "{n_days} phiên mô phỏng",
+      "notes": [
+        [
+          0.0,
+          "Vùng đỏ: khoảng cách tới đỉnh cũ"
+        ],
+        [
+          0.7,
+          "Đáy sâu nhất {mdd} · {underwater_days} phiên dưới nước"
+        ]
+      ],
+      "say": "Chuỗi giá này cả giai đoạn vẫn lãi {total_return}. Nhưng giữa đường có cú rơi {mdd}, và {underwater_days} phiên liền chưa về đỉnh."
+    },
+    {
+      "type": "surface",
+      "view": "low",
+      "caption": "Chiều cao: số năm để về đỉnh",
+      "say": "3D: trục ngang là mức sụt, trục sâu là lãi mỗi năm. Sụt càng sâu, số năm về đỉnh dựng đứng lên."
+    },
+    {
+      "type": "statement",
+      "chip": "Mang về",
+      "text": "Mất ít quan trọng hơn lãi nhiều: lỗ càng sâu, đường về càng dốc.",
+      "say": "Mất ít quan trọng hơn lãi nhiều: lỗ càng sâu, đường về càng dốc."
+    }
+  ],
+  "thumb": {
+    "tag": "Max drawdown"
+  },
+  "style": "story-mix",
+  "series_no": 8
+}

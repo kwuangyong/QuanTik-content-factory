@@ -135,7 +135,8 @@ def _code(sc, model, i):
     a, b = sc.get("lines", [1, len(lines)])
     sub = "\n".join(lines[a - 1:b])
     hl = sc.get("hl")
-    title = sc.get("title") or (f"{model.topic}_demo · dòng {a}–{b}" if (a, b) != (1, len(lines)) else f"{model.topic}.py")
+    title = sc.get("title") or getattr(model, "code_title", "") or (
+        f"{model.topic}_demo · dòng {a}–{b}" if (a, b) != (1, len(lines)) else f"{model.topic}.py")
     total = len(sub)
 
     def draw(img, t, p):
