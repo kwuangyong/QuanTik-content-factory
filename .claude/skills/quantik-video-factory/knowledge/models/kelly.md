@@ -45,12 +45,31 @@ W = 55%, R = 1 → f* = 10%. 2.000 người × 500 lần đặt, seed 4. Trung v
     "Bề mặt 3D là tốc độ tăng trưởng theo mức cược và tỷ lệ thắng. Có một đỉnh. Vượt qua đỉnh, càng đặt nhiều càng nghèo."
   ],
   "outputs": [
-    {"label": "tỷ lệ thắng W", "key": "W"},
-    {"label": "Kelly f*", "key": "f_star", "highlight": true},
-    {"label": "trung vị, ½ Kelly", "key": "med_half"},
-    {"label": "trung vị, Kelly", "key": "med_full"},
-    {"label": "trung vị, 2× Kelly", "key": "med_double"},
-    {"label": "trung vị, 4× Kelly", "key": "med_quad"}
+    {
+      "label": "tỷ lệ thắng W",
+      "key": "W"
+    },
+    {
+      "label": "Kelly f*",
+      "key": "f_star",
+      "highlight": true
+    },
+    {
+      "label": "trung vị, ½ Kelly",
+      "key": "med_half"
+    },
+    {
+      "label": "trung vị, Kelly",
+      "key": "med_full"
+    },
+    {
+      "label": "trung vị, 2× Kelly",
+      "key": "med_double"
+    },
+    {
+      "label": "trung vị, 4× Kelly",
+      "key": "med_quad"
+    }
   ],
   "takeaway": "Lợi thế chưa đủ. Quy mô vị thế quyết định bạn có sống sót để lợi thế phát huy hay không. Thực tế, dân quant thường dùng nửa Kelly.",
   "cta": "Xem Kelly và các tham số quản lý vốn trong phân tích Quant tại quantik.io.vn",
@@ -63,9 +82,21 @@ W = 55%, R = 1 → f* = 10%. 2.000 người × 500 lần đặt, seed 4. Trung v
     "truth": "Đặt {quad_kelly} mỗi lần, tài sản trung vị gần như về 0 dù có lợi thế."
   },
   "story": [
-    {"at": 0.2, "label": "Xuất phát", "say": "Bốn nhóm người, cùng lợi thế, chỉ khác mức cược."},
-    {"at": 0.6, "label": "Tách đôi", "say": "Nhóm cược vừa phải tăng đều. Nhóm cược lớn rung lắc dữ dội."},
-    {"at": 1.0, "label": "Kết quả", "say": "Kelly nhân {med_full}. Gấp đôi Kelly còn {med_double}. Gấp bốn gần như về 0."}
+    {
+      "at": 0.2,
+      "label": "Xuất phát",
+      "say": "Bốn nhóm người, cùng lợi thế, chỉ khác mức cược."
+    },
+    {
+      "at": 0.6,
+      "label": "Tách đôi",
+      "say": "Nhóm cược vừa phải tăng đều. Nhóm cược lớn rung lắc dữ dội."
+    },
+    {
+      "at": 1.0,
+      "label": "Kết quả",
+      "say": "Kelly nhân {med_full}. Gấp đôi Kelly còn {med_double}. Gấp bốn gần như về 0."
+    }
   ],
   "formula": "f^*=W-\\frac{1-W}{R}",
   "formula_parts": [
@@ -75,12 +106,63 @@ W = 55%, R = 1 → f* = 10%. 2.000 người × 500 lần đặt, seed 4. Trung v
   ],
   "formula_numeric": "f^*=<<W>>-\\frac{1-<<W>>}{1}=<<f_star>>",
   "symbols": [
-    {"sym": "W", "say": "Tỷ lệ thắng mỗi lần."},
-    {"sym": "R", "say": "Lãi trung bình chia lỗ trung bình."},
-    {"sym": "f^*", "say": "Tỷ lệ vốn đặt mỗi lần để tài sản tăng nhanh nhất về dài hạn."}
+    {
+      "sym": "W",
+      "say": "Tỷ lệ thắng mỗi lần."
+    },
+    {
+      "sym": "R",
+      "say": "Lãi trung bình chia lỗ trung bình."
+    },
+    {
+      "sym": "f^*",
+      "say": "Tỷ lệ vốn đặt mỗi lần để tài sản tăng nhanh nhất về dài hạn."
+    }
   ],
   "caption": "Có lợi thế vẫn có thể mất tiền nếu đặt quá tay. Kelly tìm mức cược tối ưu, và vì sao dân quant chỉ dùng một nửa. Code chạy thật, mô phỏng seed cố định.",
-  "hashtags": ["quant", "kelly", "quanlyvon", "chungkhoan", "dautu", "QuanTik"],
-  "allowed_literals": ["2.000", "1", "0", "bốn mức"]
+  "hashtags": [
+    "quant",
+    "kelly",
+    "quanlyvon",
+    "chungkhoan",
+    "dautu",
+    "QuanTik"
+  ],
+  "allowed_literals": [
+    "2.000",
+    "1",
+    "0",
+    "bốn mức"
+  ],
+  "thumb": {
+    "tag": "Kelly criterion",
+    "headline": [
+      {
+        "t": "CÙNG MỘT LỢI THẾ",
+        "size": 110
+      },
+      {
+        "t": "CƯỢC GẤP ĐÔI",
+        "size": 160
+      },
+      {
+        "t": "CÒN LẠI [o]{med_double}[/o]",
+        "size": 140
+      }
+    ],
+    "pill": "Kelly chọn tỷ trọng vốn · code Python",
+    "labels": [
+      {
+        "label": "Nửa Kelly",
+        "value": "{med_half}",
+        "color": "green"
+      },
+      {
+        "label": "Gấp đôi",
+        "value": "{med_double}",
+        "color": "orange"
+      }
+    ]
+  }
 }
 ```

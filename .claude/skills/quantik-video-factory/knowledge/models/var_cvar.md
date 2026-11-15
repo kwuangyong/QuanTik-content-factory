@@ -44,11 +44,27 @@ Lịch sử: VaR = phân vị α của chuỗi lỗ; CVaR = trung bình các m�
     "Bề mặt 3D: VaR tăng theo độ tin cậy và theo số phiên nắm giữ. Đuôi càng xa, con số càng dốc."
   ],
   "outputs": [
-    {"label": "VaR 95% (1 phiên)", "key": "var95"},
-    {"label": "CVaR 95%", "key": "cvar95", "highlight": true},
-    {"label": "VaR 99% lịch sử", "key": "var99"},
-    {"label": "VaR 99% giả định chuẩn", "key": "var99_normal"},
-    {"label": "phiên tệ nhất", "key": "worst"}
+    {
+      "label": "VaR 95% (1 phiên)",
+      "key": "var95"
+    },
+    {
+      "label": "CVaR 95%",
+      "key": "cvar95",
+      "highlight": true
+    },
+    {
+      "label": "VaR 99% lịch sử",
+      "key": "var99"
+    },
+    {
+      "label": "VaR 99% giả định chuẩn",
+      "key": "var99_normal"
+    },
+    {
+      "label": "phiên tệ nhất",
+      "key": "worst"
+    }
   ],
   "takeaway": "VaR cho biết ranh giới. CVaR cho biết bên kia ranh giới tệ đến mức nào. Quản lý rủi ro cần cả hai.",
   "cta": "Xem VaR, CVaR của từng mã trong phân tích Quant tại quantik.io.vn",
@@ -61,9 +77,21 @@ Lịch sử: VaR = phân vị α của chuỗi lỗ; CVaR = trung bình các m�
     "truth": "VaR là ngưỡng. CVaR 95 bằng {cvar95} mới là trung bình ở đuôi."
   },
   "story": [
-    {"at": 0.45, "label": "Phiên bình thường", "say": "Phần lớn các phiên tập trung quanh 0, lãi lỗ nhỏ."},
-    {"at": 0.8, "label": "Ngưỡng VaR", "say": "Từ {var95} trở đi là đuôi: {tail_days} phiên tệ nhất."},
-    {"at": 1.0, "label": "Đuôi dày", "say": "Trung bình đuôi là {cvar95}. Ở mức 99, giả định chuẩn đánh giá thấp VaR khoảng {underestimate}."}
+    {
+      "at": 0.45,
+      "label": "Phiên bình thường",
+      "say": "Phần lớn các phiên tập trung quanh 0, lãi lỗ nhỏ."
+    },
+    {
+      "at": 0.8,
+      "label": "Ngưỡng VaR",
+      "say": "Từ {var95} trở đi là đuôi: {tail_days} phiên tệ nhất."
+    },
+    {
+      "at": 1.0,
+      "label": "Đuôi dày",
+      "say": "Trung bình đuôi là {cvar95}. Ở mức 99, giả định chuẩn đánh giá thấp VaR khoảng {underestimate}."
+    }
   ],
   "formula": "\\mathrm{ES}_\\alpha(L)=\\frac{1}{1-\\alpha}\\int_\\alpha^1 q_u(L)\\,du",
   "formula_parts": [
@@ -72,12 +100,65 @@ Lịch sử: VaR = phân vị α của chuỗi lỗ; CVaR = trung bình các m�
   ],
   "formula_numeric": "\\mathrm{VaR}_{95}=<<var95>>,\\quad \\mathrm{ES}_{95}=<<cvar95>>",
   "symbols": [
-    {"sym": "q_\\alpha(L)", "say": "Phân vị α của mức lỗ: ngưỡng mà chỉ một phần nhỏ số phiên vượt qua."},
-    {"sym": "\\int_\\alpha^1 q_u(L)\\,du", "say": "Cộng dồn tất cả mức lỗ phía sau ngưỡng."},
-    {"sym": "\\frac{1}{1-\\alpha}", "say": "Chia cho phần đuôi để ra trung bình."}
+    {
+      "sym": "q_\\alpha(L)",
+      "say": "Phân vị α của mức lỗ: ngưỡng mà chỉ một phần nhỏ số phiên vượt qua."
+    },
+    {
+      "sym": "\\int_\\alpha^1 q_u(L)\\,du",
+      "say": "Cộng dồn tất cả mức lỗ phía sau ngưỡng."
+    },
+    {
+      "sym": "\\frac{1}{1-\\alpha}",
+      "say": "Chia cho phần đuôi để ra trung bình."
+    }
   ],
   "caption": "VaR là ngưỡng, không phải mức lỗ tối đa. CVaR là trung bình các phiên vượt ngưỡng. Code chạy thật trên 2.500 phiên mô phỏng đuôi dày.",
-  "hashtags": ["quant", "VaR", "quanlyruiro", "chungkhoan", "dautu", "QuanTik"],
-  "allowed_literals": ["95", "99", "95%", "99%", "5 phần trăm", "1 phiên"]
+  "hashtags": [
+    "quant",
+    "VaR",
+    "quanlyruiro",
+    "chungkhoan",
+    "dautu",
+    "QuanTik"
+  ],
+  "allowed_literals": [
+    "95",
+    "99",
+    "95%",
+    "99%",
+    "5 phần trăm",
+    "1 phiên"
+  ],
+  "thumb": {
+    "tag": "VaR · CVaR",
+    "headline": [
+      {
+        "t": "VaR NÓI [g]{var95}[/g]",
+        "size": 120
+      },
+      {
+        "t": "NGÀY XẤU",
+        "size": 190
+      },
+      {
+        "t": "MẤT TỚI [o]{cvar95}[/o]",
+        "size": 140
+      }
+    ],
+    "pill": "CVaR đo phần đuôi VaR bỏ qua · code Python",
+    "labels": [
+      {
+        "label": "VaR 95",
+        "value": "{var95}",
+        "color": "green"
+      },
+      {
+        "label": "CVaR 95",
+        "value": "{cvar95}",
+        "color": "orange"
+      }
+    ]
+  }
 }
 ```

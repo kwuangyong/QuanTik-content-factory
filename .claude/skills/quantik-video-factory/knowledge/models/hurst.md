@@ -48,10 +48,23 @@ Ba chuỗi cùng một nguồn nhiễu (seed 1, 3.000 bước, độ trễ 2–4
     "Trên bề mặt 3D: H càng cao, độ lệch càng tăng nhanh theo độ trễ. Đó là trí nhớ của chuỗi."
   ],
   "outputs": [
-    {"label": "H bước ngẫu nhiên", "key": "h_walk"},
-    {"label": "H chuỗi hồi quy", "key": "h_meanrev"},
-    {"label": "H chuỗi quán tính", "key": "h_trend", "highlight": true},
-    {"label": "số độ trễ dùng", "key": "n_lags"}
+    {
+      "label": "H bước ngẫu nhiên",
+      "key": "h_walk"
+    },
+    {
+      "label": "H chuỗi hồi quy",
+      "key": "h_meanrev"
+    },
+    {
+      "label": "H chuỗi quán tính",
+      "key": "h_trend",
+      "highlight": true
+    },
+    {
+      "label": "số độ trễ dùng",
+      "key": "n_lags"
+    }
   ],
   "takeaway": "H cho biết cấu trúc của chuỗi, không cho biết giá sẽ đi đâu. Luôn hỏi: đo trên cửa sổ nào, bằng phương pháp nào?",
   "cta": "Xem các chỉ số định lượng của từng mã tại quantik.io.vn",
@@ -64,9 +77,21 @@ Ba chuỗi cùng một nguồn nhiễu (seed 1, 3.000 bước, độ trễ 2–4
     "truth": "Nhưng đúng toán: H trên 0,5 nghĩa là có quán tính, không phải tín hiệu mua."
   },
   "story": [
-    {"at": 0.3, "label": "Cùng xuất phát", "say": "Ba chuỗi dùng cùng một nguồn nhiễu, cùng điểm xuất phát."},
-    {"at": 0.65, "label": "Tách nhau", "say": "Chuỗi hồi quy cứ bị kéo về giữa. Chuỗi quán tính đi xa dần."},
-    {"at": 1.0, "label": "Đo bằng H", "say": "Hệ số Hurst lần lượt là {h_meanrev}, {h_walk} và {h_trend}."}
+    {
+      "at": 0.3,
+      "label": "Cùng xuất phát",
+      "say": "Ba chuỗi dùng cùng một nguồn nhiễu, cùng điểm xuất phát."
+    },
+    {
+      "at": 0.65,
+      "label": "Tách nhau",
+      "say": "Chuỗi hồi quy cứ bị kéo về giữa. Chuỗi quán tính đi xa dần."
+    },
+    {
+      "at": 1.0,
+      "label": "Đo bằng H",
+      "say": "Hệ số Hurst lần lượt là {h_meanrev}, {h_walk} và {h_trend}."
+    }
   ],
   "formula": "E\\left[(X_{t+\\tau}-X_t)^2\\right]\\propto\\tau^{2H}",
   "formula_parts": [
@@ -76,12 +101,62 @@ Ba chuỗi cùng một nguồn nhiễu (seed 1, 3.000 bước, độ trễ 2–4
   ],
   "formula_numeric": "H_{ngẫu\\ nhiên}=<<h_walk>>,\\quad H_{hồi\\ quy}=<<h_meanrev>>,\\quad H_{quán\\ tính}=<<h_trend>>",
   "symbols": [
-    {"sym": "X_{t+\\tau}-X_t", "say": "Chênh lệch giá sau τ phiên."},
-    {"sym": "\\tau^{2H}", "say": "Chênh lệch tăng theo τ mũ 2H. H lớn thì càng để lâu càng đi xa."},
-    {"sym": "H=0{,}5", "say": "Mốc không trí nhớ. Dưới mốc là hồi quy, trên mốc là quán tính."}
+    {
+      "sym": "X_{t+\\tau}-X_t",
+      "say": "Chênh lệch giá sau τ phiên."
+    },
+    {
+      "sym": "\\tau^{2H}",
+      "say": "Chênh lệch tăng theo τ mũ 2H. H lớn thì càng để lâu càng đi xa."
+    },
+    {
+      "sym": "H=0{,}5",
+      "say": "Mốc không trí nhớ. Dưới mốc là hồi quy, trên mốc là quán tính."
+    }
   ],
   "caption": "Hệ số Hurst đo trí nhớ của chuỗi giá: dưới 0,5 là hồi quy, trên 0,5 là quán tính. Code chạy thật trên 3 chuỗi mô phỏng.",
-  "hashtags": ["quant", "Hurst", "chungkhoan", "dautu", "thongke", "QuanTik"],
-  "allowed_literals": ["0,5", "2H", "3 chuỗi"]
+  "hashtags": [
+    "quant",
+    "Hurst",
+    "chungkhoan",
+    "dautu",
+    "thongke",
+    "QuanTik"
+  ],
+  "allowed_literals": [
+    "0,5",
+    "2H",
+    "3 chuỗi"
+  ],
+  "thumb": {
+    "tag": "Hurst exponent",
+    "headline": [
+      {
+        "t": "MỘT CON SỐ",
+        "size": 130
+      },
+      {
+        "t": "PHÂN BIỆT",
+        "size": 180
+      },
+      {
+        "t": "XU HƯỚNG VÀ [o]NHIỄU[/o]",
+        "size": 110
+      }
+    ],
+    "pill": "Hurst đo trí nhớ của chuỗi giá · code Python",
+    "labels": [
+      {
+        "label": "Xu hướng",
+        "value": "{h_trend}",
+        "color": "green"
+      },
+      {
+        "label": "Hồi quy",
+        "value": "{h_meanrev}",
+        "color": "orange"
+      }
+    ]
+  }
 }
 ```

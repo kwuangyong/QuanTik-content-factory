@@ -40,11 +40,27 @@ Hai chiến lược, 750 phiên, seed 12: A có trung bình 0,06%/phiên, σ 1,0
     "Bề mặt 3D: Sharpe tăng khi lợi nhuận tăng, nhưng giảm nhanh khi biến động phình ra."
   ],
   "outputs": [
-    {"label": "lợi nhuận năm A", "key": "cagr_a"},
-    {"label": "lợi nhuận năm B", "key": "cagr_b"},
-    {"label": "Sharpe A", "key": "sharpe_a", "highlight": true},
-    {"label": "Sharpe B", "key": "sharpe_b"},
-    {"label": "sụt giảm lớn nhất B", "key": "dd_b"}
+    {
+      "label": "lợi nhuận năm A",
+      "key": "cagr_a"
+    },
+    {
+      "label": "lợi nhuận năm B",
+      "key": "cagr_b"
+    },
+    {
+      "label": "Sharpe A",
+      "key": "sharpe_a",
+      "highlight": true
+    },
+    {
+      "label": "Sharpe B",
+      "key": "sharpe_b"
+    },
+    {
+      "label": "sụt giảm lớn nhất B",
+      "key": "dd_b"
+    }
   ],
   "takeaway": "Sharpe hỏi: mỗi đơn vị rủi ro mang lại bao nhiêu lợi nhuận. Lãi nhiều mà sụt sâu thì khó cầm đến cuối.",
   "cta": "Xem Sharpe, Sortino, Calmar của từng mã tại quantik.io.vn",
@@ -57,9 +73,21 @@ Hai chiến lược, 750 phiên, seed 12: A có trung bình 0,06%/phiên, σ 1,0
     "truth": "Sharpe {sharpe_b}, từng sụt {dd_b}. Lợi nhuận chỉ là một nửa câu chuyện."
   },
   "story": [
-    {"at": 0.3, "label": "Ngang nhau", "say": "Ban đầu hai chiến lược khó phân biệt."},
-    {"at": 0.65, "label": "B rung lắc", "say": "B tăng nhanh hơn nhưng rung lắc mạnh, có lúc sụt {dd_b}."},
-    {"at": 1.0, "label": "Về đích", "say": "Cuối kỳ B lãi {cagr_b} một năm, A lãi {cagr_a}. Nhưng Sharpe của A là {sharpe_a}, gần gấp rưỡi B."}
+    {
+      "at": 0.3,
+      "label": "Ngang nhau",
+      "say": "Ban đầu hai chiến lược khó phân biệt."
+    },
+    {
+      "at": 0.65,
+      "label": "B rung lắc",
+      "say": "B tăng nhanh hơn nhưng rung lắc mạnh, có lúc sụt {dd_b}."
+    },
+    {
+      "at": 1.0,
+      "label": "Về đích",
+      "say": "Cuối kỳ B lãi {cagr_b} một năm, A lãi {cagr_a}. Nhưng Sharpe của A là {sharpe_a}, gần gấp rưỡi B."
+    }
   ],
   "formula": "\\mathrm{Sharpe}=\\frac{\\overline{r-r_f}}{s(r-r_f)}\\sqrt{252}",
   "formula_parts": [
@@ -69,12 +97,61 @@ Hai chiến lược, 750 phiên, seed 12: A có trung bình 0,06%/phiên, σ 1,0
   ],
   "formula_numeric": "\\mathrm{Sharpe}_A=<<sharpe_a>>,\\quad \\mathrm{Sharpe}_B=<<sharpe_b>>",
   "symbols": [
-    {"sym": "\\overline{r-r_f}", "say": "Lợi suất vượt lãi suất phi rủi ro, lấy trung bình."},
-    {"sym": "s(r-r_f)", "say": "Độ lệch chuẩn: thước đo rủi ro tổng thể."},
-    {"sym": "\\sqrt{252}", "say": "Quy từ ngày ra năm, giả định 252 phiên."}
+    {
+      "sym": "\\overline{r-r_f}",
+      "say": "Lợi suất vượt lãi suất phi rủi ro, lấy trung bình."
+    },
+    {
+      "sym": "s(r-r_f)",
+      "say": "Độ lệch chuẩn: thước đo rủi ro tổng thể."
+    },
+    {
+      "sym": "\\sqrt{252}",
+      "say": "Quy từ ngày ra năm, giả định 252 phiên."
+    }
   ],
   "caption": "Lãi nhiều hơn chưa chắc tốt hơn. Sharpe đo lợi nhuận trên mỗi đơn vị rủi ro. Code chạy thật trên 2 chiến lược mô phỏng.",
-  "hashtags": ["quant", "sharpe", "chungkhoan", "dautu", "quanlyruiro", "QuanTik"],
-  "allowed_literals": ["252", "2 chiến lược"]
+  "hashtags": [
+    "quant",
+    "sharpe",
+    "chungkhoan",
+    "dautu",
+    "quanlyruiro",
+    "QuanTik"
+  ],
+  "allowed_literals": [
+    "252",
+    "2 chiến lược"
+  ],
+  "thumb": {
+    "tag": "Sharpe ratio",
+    "headline": [
+      {
+        "t": "LÃI [o]{cagr_b}[/o] MỖI NĂM",
+        "size": 110
+      },
+      {
+        "t": "VẪN THUA",
+        "size": 190
+      },
+      {
+        "t": "CHIẾN LƯỢC LÃI [g]{cagr_a}[/g]",
+        "size": 100
+      }
+    ],
+    "pill": "Sharpe chia lãi cho rủi ro · code Python",
+    "labels": [
+      {
+        "label": "A · Sharpe",
+        "value": "{sharpe_a}",
+        "color": "green"
+      },
+      {
+        "label": "B · Sharpe",
+        "value": "{sharpe_b}",
+        "color": "orange"
+      }
+    ]
+  }
 }
 ```

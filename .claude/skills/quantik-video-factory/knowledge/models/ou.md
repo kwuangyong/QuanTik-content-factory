@@ -46,11 +46,27 @@ $$dX_t=\theta(\mu-X_t)\,dt+\sigma\,dW_t$$
     "Bề mặt 3D là phân phối của spread theo thời gian: đỉnh trượt dần về 0 rồi đứng yên. Đó là trạng thái dừng."
   ],
   "outputs": [
-    {"label": "θ thật", "key": "theta_true"},
-    {"label": "θ ước lượng", "key": "theta_hat"},
-    {"label": "nửa đời (phiên)", "key": "half_life", "highlight": true},
-    {"label": "nửa đời thật", "key": "half_life_true"},
-    {"label": "μ ước lượng", "key": "mu_hat"}
+    {
+      "label": "θ thật",
+      "key": "theta_true"
+    },
+    {
+      "label": "θ ước lượng",
+      "key": "theta_hat"
+    },
+    {
+      "label": "nửa đời (phiên)",
+      "key": "half_life",
+      "highlight": true
+    },
+    {
+      "label": "nửa đời thật",
+      "key": "half_life_true"
+    },
+    {
+      "label": "μ ước lượng",
+      "key": "mu_hat"
+    }
   ],
   "takeaway": "Nửa đời biến cảm giác “sắp quay về” thành một con số kiểm tra được. Nhưng trung bình có thể dịch chuyển; hãy kiểm định lại thường xuyên.",
   "cta": "Tìm hiểu các mô hình định lượng QuanTik dùng tại quantik.io.vn",
@@ -63,9 +79,21 @@ $$dX_t=\theta(\mu-X_t)\,dt+\sigma\,dW_t$$
     "truth": "Với θ bằng {theta_hat}, nửa đời khoảng {half_life} phiên."
   },
   "story": [
-    {"at": 0.08, "label": "Lệch xa", "say": "Spread xuất phát ở {start}, rất xa mức trung bình."},
-    {"at": 0.3, "label": "Kéo về", "say": "Mỗi phiên, θ kéo nó về gần 0 hơn một chút. Sau khoảng {half_life} phiên, độ lệch còn một nửa."},
-    {"at": 1.0, "label": "Dao động quanh 0", "say": "Sau đó spread chỉ dao động quanh 0, phần lớn trong khoảng cộng trừ {band}."}
+    {
+      "at": 0.08,
+      "label": "Lệch xa",
+      "say": "Spread xuất phát ở {start}, rất xa mức trung bình."
+    },
+    {
+      "at": 0.3,
+      "label": "Kéo về",
+      "say": "Mỗi phiên, θ kéo nó về gần 0 hơn một chút. Sau khoảng {half_life} phiên, độ lệch còn một nửa."
+    },
+    {
+      "at": 1.0,
+      "label": "Dao động quanh 0",
+      "say": "Sau đó spread chỉ dao động quanh 0, phần lớn trong khoảng cộng trừ {band}."
+    }
   ],
   "formula": "dX_t=\\theta(\\mu-X_t)\\,dt+\\sigma\\,dW_t",
   "formula_parts": [
@@ -76,12 +104,56 @@ $$dX_t=\theta(\mu-X_t)\,dt+\sigma\,dW_t$$
   ],
   "formula_numeric": "t_{1/2}=\\frac{\\ln 2}{<<theta_hat>>}\\approx <<half_life>>\\ phiên",
   "symbols": [
-    {"sym": "\\theta(\\mu-X_t)", "say": "Lực kéo: càng xa trung bình μ, lực kéo về càng mạnh."},
-    {"sym": "\\sigma\\,dW_t", "say": "Nhiễu ngẫu nhiên đẩy spread lệch đi mỗi phiên."},
-    {"sym": "\\frac{\\ln 2}{\\theta}", "say": "Nửa đời: số phiên để độ lệch giảm còn một nửa."}
+    {
+      "sym": "\\theta(\\mu-X_t)",
+      "say": "Lực kéo: càng xa trung bình μ, lực kéo về càng mạnh."
+    },
+    {
+      "sym": "\\sigma\\,dW_t",
+      "say": "Nhiễu ngẫu nhiên đẩy spread lệch đi mỗi phiên."
+    },
+    {
+      "sym": "\\frac{\\ln 2}{\\theta}",
+      "say": "Nửa đời: số phiên để độ lệch giảm còn một nửa."
+    }
   ],
   "caption": "Ornstein–Uhlenbeck: mô hình hồi quy về trung bình. Từ θ ra nửa đời, tức bao lâu để độ lệch giảm một nửa. Code chạy thật, dữ liệu mô phỏng.",
-  "hashtags": ["quant", "meanreversion", "pairstrading", "chungkhoan", "QuanTik"],
-  "allowed_literals": ["ln 2", "AR(1)", "0"]
+  "hashtags": [
+    "quant",
+    "meanreversion",
+    "pairstrading",
+    "chungkhoan",
+    "QuanTik"
+  ],
+  "allowed_literals": [
+    "ln 2",
+    "AR(1)",
+    "0"
+  ],
+  "thumb": {
+    "tag": "Ornstein–Uhlenbeck",
+    "headline": [
+      {
+        "t": "LỆCH XA RỒI",
+        "size": 130
+      },
+      {
+        "t": "BAO LÂU",
+        "size": 190
+      },
+      {
+        "t": "THÌ [o]QUAY VỀ[/o]?",
+        "size": 140
+      }
+    ],
+    "pill": "Mô hình hồi quy về trung bình · code Python",
+    "labels": [
+      {
+        "label": "Nửa đời (ngày)",
+        "value": "{half_life}",
+        "color": "orange"
+      }
+    ]
+  }
 }
 ```

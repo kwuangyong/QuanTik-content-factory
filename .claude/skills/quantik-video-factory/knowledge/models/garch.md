@@ -47,12 +47,31 @@ $$\sigma_t^2=\omega+\alpha\,\epsilon_{t-1}^2+\beta\,\sigma_{t-1}^2$$
     "Nhìn 3D: mỗi lát cắt là phân phối lợi suất của một phiên. Khi biến động cao, phân phối bè ra. Đuôi rủi ro dày lên đúng lúc thị trường căng."
   ],
   "outputs": [
-    {"label": "α (phản ứng cú sốc)", "key": "alpha"},
-    {"label": "β (trí nhớ)", "key": "beta"},
-    {"label": "α + β", "key": "persistence", "highlight": true},
-    {"label": "nửa đời cú sốc (phiên)", "key": "half_life"},
-    {"label": "σ dài hạn / năm", "key": "long_run_vol"},
-    {"label": "σ cao nhất / năm", "key": "vol_peak"}
+    {
+      "label": "α (phản ứng cú sốc)",
+      "key": "alpha"
+    },
+    {
+      "label": "β (trí nhớ)",
+      "key": "beta"
+    },
+    {
+      "label": "α + β",
+      "key": "persistence",
+      "highlight": true
+    },
+    {
+      "label": "nửa đời cú sốc (phiên)",
+      "key": "half_life"
+    },
+    {
+      "label": "σ dài hạn / năm",
+      "key": "long_run_vol"
+    },
+    {
+      "label": "σ cao nhất / năm",
+      "key": "vol_peak"
+    }
   ],
   "takeaway": "GARCH không đoán giá lên hay xuống. Nó cho biết lúc nào rủi ro đang phình to, để bạn chỉnh khối lượng cho phù hợp.",
   "cta": "Xem GARCH chạy trên dữ liệu thật tại quantik.io.vn",
@@ -65,9 +84,21 @@ $$\sigma_t^2=\omega+\alpha\,\epsilon_{t-1}^2+\beta\,\sigma_{t-1}^2$$
     "truth": "GARCH gọi đó là volatility clustering. Ở đây α + β = {persistence}."
   },
   "story": [
-    {"at": 0.25, "label": "Yên ắng", "say": "Những phiên đầu, biến động quanh {vol_min}. Mọi thứ có vẻ bình thường."},
-    {"at": 0.6, "label": "Cú sốc", "say": "Rồi vài phiên lớn xuất hiện. GARCH đẩy biến động lên ngay, vì α nhân với cú sốc hôm qua."},
-    {"at": 1.0, "label": "Tắt dần", "say": "Biến động đạt đỉnh {vol_peak} rồi giảm chậm. β = {beta} giữ trí nhớ rất lâu."}
+    {
+      "at": 0.25,
+      "label": "Yên ắng",
+      "say": "Những phiên đầu, biến động quanh {vol_min}. Mọi thứ có vẻ bình thường."
+    },
+    {
+      "at": 0.6,
+      "label": "Cú sốc",
+      "say": "Rồi vài phiên lớn xuất hiện. GARCH đẩy biến động lên ngay, vì α nhân với cú sốc hôm qua."
+    },
+    {
+      "at": 1.0,
+      "label": "Tắt dần",
+      "say": "Biến động đạt đỉnh {vol_peak} rồi giảm chậm. β = {beta} giữ trí nhớ rất lâu."
+    }
   ],
   "formula": "\\sigma_t^2=\\omega+\\alpha\\,\\epsilon_{t-1}^2+\\beta\\,\\sigma_{t-1}^2",
   "formula_parts": [
@@ -78,12 +109,63 @@ $$\sigma_t^2=\omega+\alpha\,\epsilon_{t-1}^2+\beta\,\sigma_{t-1}^2$$
   ],
   "formula_numeric": "\\sigma_t^2=\\omega+<<alpha>>\\,\\epsilon_{t-1}^2+<<beta>>\\,\\sigma_{t-1}^2",
   "symbols": [
-    {"sym": "\\sigma_t^2", "say": "Phương sai hôm nay, tức bình phương độ biến động."},
-    {"sym": "\\alpha\\,\\epsilon_{t-1}^2", "say": "Phản ứng với cú sốc hôm qua. α lớn thì thị trường giật theo tin nhanh."},
-    {"sym": "\\beta\\,\\sigma_{t-1}^2", "say": "Trí nhớ. β lớn thì biến động cao kéo dài nhiều phiên."}
+    {
+      "sym": "\\sigma_t^2",
+      "say": "Phương sai hôm nay, tức bình phương độ biến động."
+    },
+    {
+      "sym": "\\alpha\\,\\epsilon_{t-1}^2",
+      "say": "Phản ứng với cú sốc hôm qua. α lớn thì thị trường giật theo tin nhanh."
+    },
+    {
+      "sym": "\\beta\\,\\sigma_{t-1}^2",
+      "say": "Trí nhớ. β lớn thì biến động cao kéo dài nhiều phiên."
+    }
   ],
   "caption": "Biến động không rải đều mà đi thành cụm. GARCH(1,1) mô tả điều đó bằng 3 tham số. Code chạy thật, dữ liệu mô phỏng có seed cố định.",
-  "hashtags": ["quant", "GARCH", "chungkhoan", "dautu", "phantichdinhluong", "QuanTik"],
-  "allowed_literals": ["GARCH(1,1)", "252", "3 tuần", "5 phiên"]
+  "hashtags": [
+    "quant",
+    "GARCH",
+    "chungkhoan",
+    "dautu",
+    "phantichdinhluong",
+    "QuanTik"
+  ],
+  "allowed_literals": [
+    "GARCH(1,1)",
+    "252",
+    "3 tuần",
+    "5 phiên"
+  ],
+  "thumb": {
+    "tag": "GARCH(1,1)",
+    "headline": [
+      {
+        "t": "BIẾN ĐỘNG KHÔNG",
+        "size": 120
+      },
+      {
+        "t": "[o]NGẪU NHIÊN[/o]",
+        "size": 190
+      },
+      {
+        "t": "NÓ ĐI THEO [o]CỤM[/o]",
+        "size": 130
+      }
+    ],
+    "pill": "GARCH đo trí nhớ của rủi ro · code Python",
+    "labels": [
+      {
+        "label": "Đỉnh vol",
+        "value": "{vol_peak}",
+        "color": "orange"
+      },
+      {
+        "label": "Đáy vol",
+        "value": "{vol_min}",
+        "color": "green"
+      }
+    ]
+  }
 }
 ```
