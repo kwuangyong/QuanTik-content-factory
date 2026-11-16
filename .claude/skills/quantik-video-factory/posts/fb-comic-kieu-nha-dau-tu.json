@@ -1,0 +1,21 @@
+{
+  "id": "fb-comic-kieu-nha-dau-tu",
+  "type": "comic",
+  "tag": "CHUYỆN NGHỀ",
+  "title": "Bạn là kiểu nhà đầu tư nào khi VN-Index giảm mạnh?",
+  "panels": [
+    {"caption": "A", "stage": {"cast": [{"who": "investor", "pose": "worried", "face": "worried", "x": 0.5}]},
+     "bubbles": [{"who": 0, "text": "Chưa bán thì chưa lỗ."}]},
+    {"caption": "B", "stage": {"cast": [{"who": "rival", "pose": "shrug", "face": "neutral", "x": 0.5}]},
+     "bubbles": [{"who": 0, "text": "Bán hết, mai tính."}]},
+    {"caption": "C", "stage": {"cast": [{"who": "professor", "pose": "point", "face": "neutral", "x": 0.35}],
+                               "props": [{"what": "book", "x": 0.75, "y": 0.62, "s": 0.8}]},
+     "bubbles": [{"who": 0, "text": "Đọc lại luận điểm đầu tư."}]},
+    {"caption": "D", "stage": {"cast": [{"who": "quant", "pose": "point", "face": "focus", "x": 0.32}],
+                               "props": [{"what": "laptop_up", "x": 0.74, "y": 0.62, "s": 0.85}]},
+     "bubbles": [{"who": 0, "text": "Mở bảng rủi ro danh mục."}]}
+  ],
+  "punchline": "Bình luận chữ cái của bạn 👇 (thành thật nhé)",
+  "caption": "Không có đáp án đúng tuyệt đối, chỉ có đáp án bạn đã chuẩn bị trước khi thị trường giảm. Bạn là A, B, C hay D?",
+  "hashtags": ["chuyennghe", "tamlydautu", "chungkhoan", "QuanTik"]
+}

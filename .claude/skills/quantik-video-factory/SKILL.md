@@ -152,6 +152,9 @@ Mọi video xen kẽ **ảnh thật → nhân vật hoạt hoạ → ảnh thậ
 YouTube Shorts dùng branding tối giản (watermark `@quantik`, không khối logo). Output thêm
 `credits.md` và `broll.jpg`. Quy định đầy đủ: `brand/identity.md` › *Hình ảnh thật & B-roll*.
 
+**Post Facebook** (truyện tranh chuyện nghề, carousel tính năng, nhiệt kế thị trường): `python post.py …`, xem
+`platforms/facebook/README.md` › Dựng post.
+
 ### 5. Kiểm tra
 
 1. QA tự chạy: số khớp code và cụm cấm **trước** khi render (sai thì dừng), định dạng, khung chữ và **tỉ lệ cảnh có ảnh thật (≥ 60%)** **sau** render. Đọc `qa_report.md`; KHÔNG ĐẠT thì sửa episode và dựng lại, không lách bằng `--force`.

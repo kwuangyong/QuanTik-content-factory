@@ -14,7 +14,7 @@ quant finance và về cách dùng sản phẩm. Toàn bộ quy trình nằm tro
 
 | Nền tảng | Vai trò · nội dung | Đọc | Lệnh chính |
 | --- | --- | --- | --- |
-| Facebook | **post** tính năng sản phẩm + chuyện hài về nghề (chuyển đổi); **Reels** chỉ cập nhật thị trường + kịch bản có điều kiện, không gọi mua/bán | `platforms/facebook/README.md` | Reels: `cd pipeline && python pillar.py market produce` |
+| Facebook | **post** tính năng sản phẩm + chuyện hài về nghề (chuyển đổi); **Reels** chỉ cập nhật thị trường + kịch bản có điều kiện, không gọi mua/bán | `platforms/facebook/README.md` | post: `cd pipeline && python post.py comic\|carousel ../posts/<id>.json` · `python post.py market` · Reels: `python pillar.py market produce` |
 | TikTok | giáo dục: "Học quant cùng QuanTik" | `platforms/tiktok/README.md` → `SKILL.md` | `cd pipeline && python batch.py --platform tiktok --topics <id> --styles <style>` |
 | Instagram Reels | **tiếng Anh**, ≤ 2 phút: larping, motivational, vui, đáng share/save | `platforms/instagram/README.md` | `batch.py --platform instagram --episode ../episodes/en-<id>.json` |
 | YouTube Shorts | **tiếng Anh**, ≤ 2 phút, kéo view nhanh: dark truth, tâm lý nhà đầu tư, poker theory | `platforms/youtube-shorts/README.md` | `batch.py --episode ../episodes/en-<id>.json` |

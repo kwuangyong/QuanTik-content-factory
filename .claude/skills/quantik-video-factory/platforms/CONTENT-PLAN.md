@@ -23,9 +23,9 @@ Chi tiết và ranh giới "khuyến nghị": `platforms/facebook/README.md`.
 
 | Mảng | Nội dung | Tần suất | Dựng bằng |
 | --- | --- | --- | --- |
-| **Post tính năng** | album "Quét toàn sàn có gì", "gõ một mã → báo cáo Quant trong 30 giây" (mã bịa) | 2/tuần | ảnh giao diện + nhân vật *(cần style carousel sản phẩm)* |
-| **Post chuyện hài về nghề** | truyện tranh 2–4 khung: "Vợ hỏi lãi không / để anh xem Sharpe đã", "group chat lúc 14h45", "bạn là kiểu nhà đầu tư nào khi VN-Index giảm 3%?" | 2/tuần | nhân vật + bong bóng thoại *(cần xuất ảnh truyện tranh)* |
-| **Post nhiệt kế thị trường** | trạng thái tuần + ba kịch bản, cấp chỉ số, không mã | 1/tuần (thứ 2) | trụ cột thị trường *(cần xuất ảnh post)* |
+| **Post tính năng** | album "Quét toàn sàn có gì", "gõ một mã → báo cáo Quant trong 30 giây" (mã bịa) | 2/tuần | `post.py carousel` |
+| **Post chuyện hài về nghề** | truyện tranh 2–4 khung: "Vợ hỏi lãi không / để anh xem Sharpe đã", "group chat lúc 14h45", "bạn là kiểu nhà đầu tư nào khi VN-Index giảm 3%?" | 2/tuần | `post.py comic` |
+| **Post nhiệt kế thị trường** | trạng thái tuần + ba kịch bản, cấp chỉ số, không mã | 1/tuần (thứ 2) | `post.py market` |
 | **Reels cập nhật thị trường** | nhịp thị trường + ba kịch bản có điều kiện + hành động quản trị rủi ro chung; **không gọi mua/bán mã** | 2–3/tuần | `python pillar.py market produce` |
 
 ## TikTok — giáo dục "Học quant cùng QuanTik"
@@ -71,7 +71,7 @@ khung tư duy xác suất.
 
 | Nền tảng | Làm được ngay | Còn thiếu |
 | --- | --- | --- |
-| Facebook | Reels thị trường (`pillar.py market produce`), câu hỏi mở với nhân vật | xuất ảnh truyện tranh, carousel sản phẩm, ảnh nhiệt kế thị trường |
+| Facebook | Reels thị trường (`pillar.py market produce`), post truyện tranh / carousel / nhiệt kế (`post.py`) | thêm truyện tranh và carousel mới (viết JSON trong `posts/`) |
 | TikTok | series Học quant (8 mô hình + catalog), quant đọc tin với `--prices` | tutorial bản ngắn; mẫu episode "quant đọc tin" chặt compliance hơn |
 | Instagram Reels | câu kỷ luật, thử thách 100 ngày, cheat sheet | người quay skit; lịch tự động series 100 ngày |
 | YouTube Shorts | toàn bộ pipeline tiếng Anh, 3 tập mẫu | viết tiếp episode tiếng Anh 4–10 |

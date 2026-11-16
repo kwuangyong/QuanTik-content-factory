@@ -28,9 +28,9 @@ Nếu sau này QuanTik có pháp nhân/đối tác được cấp phép tư vấ
 
 | Ngày | Dạng | Ví dụ | Làm bằng |
 | --- | --- | --- | --- |
-| Thứ 2 | **Nhiệt kế thị trường tuần** (ảnh 1080×1350) | trạng thái VN-Index, độ rộng, thanh khoản tuần qua, ba kịch bản tuần này; cuối bài "từng mã xem trong Phân tích Quant" | trụ cột `market-intelligence` (dữ liệu AGR thật) → ảnh tĩnh *(cần bước xuất post, xem Còn thiếu)* |
-| Thứ 3 | **Tính năng: album 3–5 ảnh** | "Quét toàn sàn có gì": ảnh giao diện (mã bịa) + chú thích + nhân vật chỉ vào màn hình | ảnh chụp `tutorial/capture` + nhân vật `figures.py` *(cần style carousel sản phẩm)* |
-| Thứ 4 | **Chuyện hài về nghề** (truyện tranh 2–4 khung) | "Vợ hỏi: tháng này lãi không? / Tôi: để anh xem Sharpe đã" · "Sếp và tôi khi thị trường xanh" · "Group chat lúc 14h45" · "Tôi sau khi đọc 3 bài phân tích trái ngược" | nhân vật + bong bóng thoại (`figures.py`, `pillar_scenes.draw_stage`) *(cần xuất ảnh truyện tranh)* |
+| Thứ 2 | **Nhiệt kế thị trường tuần** (ảnh 1080×1350) | trạng thái VN-Index, độ rộng, thanh khoản tuần qua, ba kịch bản tuần này; cuối bài "từng mã xem trong Phân tích Quant" | `python post.py market` (sau `pillar.py market fetch/analyze/editorial`) |
+| Thứ 3 | **Tính năng: album 3–5 ảnh** | "Quét toàn sàn có gì": ảnh giao diện (mã bịa) + chú thích + nhân vật chỉ vào màn hình | `python post.py carousel ../posts/<id>.json` (ảnh giao diện ở `posts/shots/`) |
+| Thứ 4 | **Chuyện hài về nghề** (truyện tranh 2–4 khung) | "Vợ hỏi: tháng này lãi không? / Tôi: để anh xem Sharpe đã" · "Sếp và tôi khi thị trường xanh" · "Group chat lúc 14h45" · "Tôi sau khi đọc 3 bài phân tích trái ngược" | `python post.py comic ../posts/<id>.json` |
 | Thứ 5 | **Tính năng: một ảnh, một lợi ích** | "Gõ một mã → kết luận, rủi ro, vùng giá mô phỏng trong 30 giây" | ảnh chụp giao diện + caption |
 | Thứ 6 | **Chuyện hài / câu hỏi mở** | "Bạn là kiểu nhà đầu tư nào khi VN-Index giảm 3%?" (4 nhân vật, mời bình luận) | nhân vật `STAGES` |
 | Khi có | **Câu chuyện người dùng thật** (có đồng ý) | quy trình của họ, thời gian tiết kiệm; **không nói lãi** | làm tay |
@@ -68,11 +68,29 @@ Khung: `hook → asof → breadth → liquidity → sectors → regime → inter
 
 - Reels giải thích mô hình (đi TikTok), Reels demo tính năng (chuyển thành post), Reels giải trí (đi Instagram/YouTube).
 
-## Còn thiếu (việc đóng gói tiếp theo)
+## Dựng post
 
-1. **Xuất ảnh truyện tranh** 1080×1350 (2–4 khung, nhân vật + bong bóng thoại) cho chuyện hài về nghề.
-2. **Style carousel sản phẩm**: ảnh giao diện từ `tutorial/capture` + chú thích + nhân vật, cho album tính năng.
-3. **Xuất post nhiệt kế thị trường**: từ báo cáo của trụ cột thị trường ra một ảnh 1080×1350 + caption post.
+```bash
+cd pipeline
+python post.py comic    ../posts/fb-comic-vo-hoi-lai.json        # truyện tranh 2–4 khung
+python post.py carousel ../posts/fb-carousel-quet-san.json       # album tính năng
+python pillar.py market fetch && python pillar.py market analyze && python pillar.py market editorial
+python post.py market                                            # nhiệt kế thị trường (bundle mới nhất)
+python post.py all                                               # mọi post trong posts/ + post thị trường
+```
+
+Ra `social-output/<id>/post-01.png…` (1080×1350), `captions.md` (Facebook), `qa_report.md` (cụm cấm, số có nguồn,
+thiếu ảnh giao diện). Post JSON mẫu ở `posts/`:
+
+- **comic**: `title`, `panels` (2–4: `stage` = tên trong `STAGES` hoặc `{cast, props}`, `bubbles` [{who, text}],
+  `caption` tuỳ chọn), `punchline`, `caption`, `hashtags`.
+- **carousel**: `slides` [{`title`, `body`, `shot` (ảnh giao diện), `stage` hoặc `art` tuỳ chọn}], `caption`,
+  `link_line`, `hashtags`. Ảnh thiếu → QA KHÔNG ĐẠT (không đăng ảnh giả giao diện).
+- **market**: lấy hết từ `market_report.json` + `market_editorial.json` (bản nháp luật cố định; Market Intelligence
+  Analyst duyệt trước khi đăng). Số đi qua placeholder; ngưỡng kịch bản là hằng khai báo trong `market/editorial.py`.
+
+Ảnh giao diện mới: chạy phần capture của `tutorial/run.sh` (build `QuanTik---Design`, API giả, mã bịa) rồi chép ảnh
+cần dùng vào `posts/shots/`.
 
 ## Đo
 

@@ -1,0 +1,24 @@
+{
+  "id": "fb-comic-vo-hoi-lai",
+  "type": "comic",
+  "tag": "CHUYỆN NGHỀ",
+  "title": "Khi vợ hỏi: tháng này lãi không anh?",
+  "panels": [
+    {"caption": "Tối thứ Sáu",
+     "stage": {"cast": [{"who": "analyst", "pose": "point", "face": "smile", "x": 0.28},
+                        {"who": "investor", "pose": "hold", "face": "neutral", "x": 0.74, "flip": true}],
+               "props": [{"what": "phone_up", "x": 0.86, "y": 0.62, "s": 0.55}]},
+     "bubbles": [{"who": 0, "text": "Tháng này lãi không anh?"}]},
+    {"stage": {"cast": [{"who": "investor", "pose": "point", "face": "focus", "x": 0.3}],
+               "props": [{"what": "laptop_up", "x": 0.72, "y": 0.62}]},
+     "bubbles": [{"who": 0, "text": "Khoan, để anh xem Sharpe đã."}]},
+    {"stage": {"cast": [{"who": "analyst", "pose": "shrug", "face": "surprised", "x": 0.5}]},
+     "bubbles": [{"who": 0, "text": "Em hỏi lãi hay lỗ thôi mà?"}]},
+    {"stage": {"cast": [{"who": "investor", "pose": "worried", "face": "worried", "x": 0.3}],
+               "props": [{"what": "chalkboard", "x": 0.72, "y": 0.42, "s": 0.8}]},
+     "bubbles": [{"who": 0, "text": "Lãi… nhưng biến động gấp đôi tháng trước."}]}
+  ],
+  "punchline": "Dân quant không trả lời có hay không. Họ trả lời bằng phân phối.",
+  "caption": "Ai ở nhà cũng từng bị hỏi câu này 😅 Bạn trả lời vợ/chồng mình thế nào? Bình luận bên dưới nhé.",
+  "hashtags": ["chuyennghe", "chungkhoan", "quant", "QuanTik"]
+}

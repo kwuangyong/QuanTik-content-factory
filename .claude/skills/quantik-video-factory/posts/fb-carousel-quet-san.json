@@ -1,0 +1,22 @@
+{
+  "id": "fb-carousel-quet-san",
+  "type": "carousel",
+  "tag": "QUÉT TOÀN SÀN",
+  "slides": [
+    {"title": "Tối nay khỏi lọc mã bằng tay", "shot": "s01_banner.png", "stage": "laptop_check",
+     "body": "Quét toàn sàn đọc bản công bố screening mới nhất và xếp hạng theo bộ chỉ tiêu công bố."},
+    {"title": "Năm mã điểm cao nhất theo thứ hạng screening", "shot": "s02_best.png",
+     "body": "Đây là thứ hạng theo bộ chỉ tiêu, không phải lời khuyên mua. Bạn vẫn là người quyết định."},
+    {"title": "Cột nào cũng có định nghĩa", "shot": "s04_tooltip.png",
+     "body": "Chạm vào tên cột để biết chỉ tiêu đó đo gì, đọc theo ngưỡng nào."},
+    {"title": "Năm mã nên tránh nhất: biết để kiểm tra lại", "shot": "s05_worst.png",
+     "body": "Mã ở cuối bảng là lý do để đọc kỹ rủi ro trước khi quyết định."},
+    {"title": "Cần xem kỹ một mã? Chuyển sang Phân tích Quant", "shot": "a05_modules.png",
+     "body": "Một báo cáo gồm các nhóm chỉ tiêu chuyên sâu, HMM, GARCH, Monte Carlo và mô hình 3D."},
+    {"title": "Dùng thử miễn phí", "stage": "phone_happy",
+     "body": "Tạo tài khoản tại quantik.io.vn. Gói và ưu đãi hiện tại: quantik.io.vn/plans."}
+  ],
+  "caption": "Lọc mã cả buổi tối, hay mở một bảng đã xếp hạng sẵn theo bộ chỉ tiêu công bố? Lướt để xem Quét toàn sàn làm gì 👉",
+  "link_line": "Dùng thử Quét toàn sàn và Phân tích Quant: quantik.io.vn",
+  "hashtags": ["QuetToanSan", "PhanTichQuant", "chungkhoan", "QuanTik"]
+}

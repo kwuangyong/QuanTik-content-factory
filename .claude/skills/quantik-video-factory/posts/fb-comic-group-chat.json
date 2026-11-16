@@ -1,0 +1,20 @@
+{
+  "id": "fb-comic-group-chat",
+  "type": "comic",
+  "tag": "CHUYỆN NGHỀ",
+  "title": "Group chat chứng khoán phút ATC",
+  "panels": [
+    {"stage": {"cast": [{"who": "rival", "pose": "cheer", "face": "surprised", "x": 0.3}],
+               "props": [{"what": "phone_up", "x": 0.74, "y": 0.58}]},
+     "bubbles": [{"who": 0, "text": "Anh em ơi, lên tàu!!!"}]},
+    {"stage": {"cast": [{"who": "investor", "pose": "worried", "face": "worried", "x": 0.3}],
+               "props": [{"what": "phone_down", "x": 0.74, "y": 0.58}]},
+     "bubbles": [{"who": 0, "text": "Tàu nào? Tôi đang ở toa cuối từ tháng trước…"}]},
+    {"stage": {"cast": [{"who": "quant", "pose": "point", "face": "focus", "x": 0.3}],
+               "props": [{"what": "laptop_up", "x": 0.74, "y": 0.6}]},
+     "bubbles": [{"who": 0, "text": "Tôi đang xem độ rộng: chỉ vài mã kéo cả chỉ số."}]}
+  ],
+  "punchline": "Group chat bảo lên tàu. Độ rộng bảo xem lại vé.",
+  "caption": "Group nào cũng có một người hô lên tàu và một người đang kẹt ở toa cuối. Bạn là ai trong ba người này? 👇",
+  "hashtags": ["chuyennghe", "chungkhoan", "dorong", "QuanTik"]
+}
