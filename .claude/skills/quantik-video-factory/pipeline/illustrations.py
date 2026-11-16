@@ -293,3 +293,50 @@ if __name__ == "__main__":
         sheet.save(a.sheet)
     else:
         frame(a.name, a.p).save(a.out)
+
+
+# ---------------------------------------------------------------- character stages (figures.py cast + props)
+# Each stage: {"cast": [{who, pose, face, x, flip}], "props": [{what, x, y, s}]}. who: investor, quant, rival,
+# professor, analyst · pose: stand, point, think, worried, cheer, shrug, present, hold · face: neutral, smile,
+# worried, surprised, focus · props: poker_table, cards, chips, phone_up, phone_down, laptop_up, laptop_down,
+# chalkboard, book, newspaper.
+STAGES = {
+    "poker_duel": {"cast": [{"who": "rival", "pose": "hold", "face": "focus", "x": 0.27},
+                            {"who": "investor", "pose": "think", "face": "worried", "x": 0.73, "flip": True}],
+                   "props": [{"what": "poker_table"}, {"what": "cards", "x": 0.5, "y": 0.8, "s": 0.6},
+                             {"what": "chips", "x": 0.36, "y": 0.84, "s": 0.5}]},
+    "poker_allin": {"cast": [{"who": "investor", "pose": "cheer", "face": "surprised", "x": 0.3},
+                             {"who": "quant", "pose": "shrug", "face": "neutral", "x": 0.72, "flip": True}],
+                    "props": [{"what": "poker_table"}, {"what": "chips", "x": 0.5, "y": 0.82, "s": 0.8}]},
+    "phone_panic": {"cast": [{"who": "investor", "pose": "worried", "face": "worried", "x": 0.32}],
+                    "props": [{"what": "phone_down", "x": 0.72, "y": 0.55}]},
+    "phone_happy": {"cast": [{"who": "investor", "pose": "cheer", "face": "smile", "x": 0.32}],
+                    "props": [{"what": "phone_up", "x": 0.72, "y": 0.55}]},
+    "quant_lesson": {"cast": [{"who": "quant", "pose": "present", "face": "smile", "x": 0.25}],
+                     "props": [{"what": "chalkboard", "x": 0.68, "y": 0.42}]},
+    "laptop_check": {"cast": [{"who": "analyst", "pose": "point", "face": "focus", "x": 0.28}],
+                     "props": [{"what": "laptop_up", "x": 0.7, "y": 0.62}]},
+    "laptop_drop": {"cast": [{"who": "investor", "pose": "shrug", "face": "worried", "x": 0.28}],
+                    "props": [{"what": "laptop_down", "x": 0.7, "y": 0.62}]},
+    "professor_book": {"cast": [{"who": "professor", "pose": "point", "face": "neutral", "x": 0.3}],
+                       "props": [{"what": "book", "x": 0.72, "y": 0.6}]},
+    "news_debate": {"cast": [{"who": "investor", "pose": "point", "face": "surprised", "x": 0.25},
+                             {"who": "analyst", "pose": "think", "face": "neutral", "x": 0.75, "flip": True}],
+                    "props": [{"what": "newspaper", "x": 0.5, "y": 0.66, "s": 0.8}]},
+}
+TOPIC_STAGES = {
+    "kelly": ["poker_duel", "poker_allin", "quant_lesson"],
+    "monte_carlo": ["laptop_check", "phone_panic", "quant_lesson"],
+    "var_cvar": ["phone_panic", "laptop_drop", "news_debate"],
+    "garch": ["news_debate", "phone_panic"],
+    "hurst": ["laptop_check", "professor_book"],
+    "hmm": ["news_debate", "phone_happy"],
+    "sharpe": ["laptop_check", "news_debate"],
+    "ou": ["quant_lesson", "professor_book"],
+}
+GENERIC_STAGES = ["phone_panic", "laptop_check", "quant_lesson", "news_debate", "phone_happy", "professor_book"]
+
+
+def stage_spec(item):
+    """A stage name from STAGES, or an inline spec dict from an episode."""
+    return STAGES[item] if isinstance(item, str) else item

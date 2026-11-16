@@ -121,6 +121,17 @@ def set_lang(code: str):
     _LANG["code"] = code
 
 
+_BRANDING = {"mode": "full"}  # "full" (logo header every scene) | "minimal" (no logo header, small watermark)
+
+
+def set_branding(mode: str):
+    _BRANDING["mode"] = mode if mode in ("full", "minimal") else "full"
+
+
+def branding() -> str:
+    return _BRANDING["mode"]
+
+
 def lang() -> str:
     return _LANG["code"]
 

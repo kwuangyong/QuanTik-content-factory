@@ -1,5 +1,5 @@
 {
-  "_note": "Đọc bởi pipeline/batch.py --platform. Sửa ở đây thì sửa luôn README của nền tảng đó. max_seconds: nền tảng quyết định giới hạn độ dài (QA định dạng).",
+  "_note": "Đọc bởi pipeline/batch.py --platform. Sửa ở đây thì sửa luôn README của nền tảng đó. max_seconds: nền tảng quyết định giới hạn độ dài (QA định dạng). branding: full (logo header mọi cảnh) | minimal (không logo header, watermark @quantik mờ, thẻ cuối ngắn).",
   "tiktok": {
     "name": "TikTok",
     "role": "education",
@@ -18,7 +18,8 @@
       "tiktok"
     ],
     "requires_episode": false,
-    "max_seconds": 60
+    "max_seconds": 60,
+    "branding": "full"
   },
   "facebook": {
     "name": "Facebook",
@@ -32,7 +33,8 @@
     ],
     "requires_episode": true,
     "requires_episode_reason": "Facebook chỉ đăng nội dung sản phẩm; lời mặc định của chủ đề là lời giáo dục. Viết episode JSON góc sản phẩm (xem platforms/facebook/README.md) hoặc dùng tutorial/run.sh.",
-    "max_seconds": 60
+    "max_seconds": 60,
+    "branding": "full"
   },
   "instagram": {
     "name": "Instagram Reels (English)",
@@ -49,7 +51,8 @@
     ],
     "requires_episode": true,
     "max_seconds": 120,
-    "requires_episode_reason": "Instagram Reels là kênh tiếng Anh; lời mặc định của chủ đề là tiếng Việt. Viết episode JSON tiếng Anh (xem platforms/instagram/README.md và episodes/en-*.json)."
+    "requires_episode_reason": "Instagram Reels là kênh tiếng Anh; lời mặc định của chủ đề là tiếng Việt. Viết episode JSON tiếng Anh (xem platforms/instagram/README.md và episodes/en-*.json).",
+    "branding": "minimal"
   },
   "youtube-shorts": {
     "name": "YouTube Shorts (English)",
@@ -68,6 +71,7 @@
     ],
     "requires_episode": true,
     "requires_episode_reason": "YouTube Shorts là kênh tiếng Anh; lời mặc định của chủ đề là tiếng Việt. Viết episode JSON tiếng Anh (xem platforms/youtube-shorts/README.md và episodes/en-*.json).",
-    "max_seconds": 120
+    "max_seconds": 120,
+    "branding": "minimal"
   }
 }

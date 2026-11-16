@@ -49,15 +49,29 @@ chữ và chart trên nền tối.
   cụ thể và người ("poker chips", "trader at desk", "storm clouds"), không là khái niệm trừu tượng.
 - **Tránh:** người nổi tiếng, logo/thương hiệu thật, bảng giá có mã thật, cảnh tai nạn/bệnh tật, ảnh gợi ý người
   trong ảnh đang dùng hay khuyên dùng QuanTik.
-- **Hình hoạ tự vẽ (linh hoạt, nhất là video tiếng Anh):** `pipeline/illustrations.py` vẽ bằng code các hình hoạt hoạ
-  phẳng theo màu thương hiệu: `chips` (chip poker), `dice`, `cards`, `coins`, `storm`, `brain`, `person` (người ngồi
-  laptop), `paths` (nhiều ngả tương lai), `scale` (cân), `hourglass`, `target` (bia phi tiêu). Không cần giấy phép hay
-  ghi nguồn. Video tiếng Anh tự xen hình hoạ vào mỗi cảnh thứ ba (bắt đầu từ cảnh 2); episode chọn bằng
-  `"art": ["chips", "cards"]` hoặc `{tên cảnh: "brain"}`, tắt bằng `"art": false`. Video tiếng Việt chỉ có hình hoạ
-  khi episode ghi `"art"`. Xem toàn bộ: `python pipeline/illustrations.py --sheet hinh-hoa.png`.
-- **QA:** dưới 60% cảnh có hình (ảnh thật, B-roll hoặc hình hoạ), hoặc dưới 1/3 cảnh là **ảnh thật** → KHÔNG ĐẠT. Người duyệt xem `broll.jpg` (tờ ảnh đã chọn) trước khi đăng.
+- **Ba loại hình, gối đầu nhau, không lặp (MỌI nền tảng):** mỗi cảnh trừ thẻ cuối nhận một loại theo vòng
+  **ảnh thật/B-roll → nhân vật → ảnh thật → hình hoạ → …**: hai cảnh liền nhau không cùng loại, và không ảnh, dàn
+  nhân vật hay hình hoạ nào xuất hiện hai lần trong một video. Thiếu ảnh thì cảnh đó lấy một hình vẽ chưa dùng, khác
+  loại cảnh bên cạnh; không bao giờ lặp lại để lấp chỗ.
+  - **Nhân vật** (`figures.py` + `STAGES` trong `illustrations.py`): nhân vật phẳng có tư thế, nét mặt, chớp mắt, cùng
+    hiện vật: `poker_duel`, `poker_allin`, `phone_panic`, `phone_happy`, `quant_lesson`, `laptop_check`,
+    `laptop_drop`, `professor_book`, `news_debate`, hoặc tự ghép `{"cast": […], "props": […]}`.
+  - **Hình hoạ** (`illustrations.py`): `chips`, `dice`, `cards`, `coins`, `storm`, `brain`, `person`, `paths`,
+    `scale`, `hourglass`, `target`.
+  - **Vị trí:** cảnh nào còn trống ≥ 300px dưới chữ thì hình vẽ đặt sáng rõ ở đó (như cảnh hook của trụ cột); không
+    thì chìm làm nền mờ sau chữ.
+  - **Episode chọn:** `"broll"` (từ khoá ảnh), `"stage"` (tên dàn cảnh), `"art"` (hình hoạ), dạng danh sách (ưu tiên)
+    hoặc `{tên cảnh: …}` (ghim loại cho cảnh đó); `"stage": false` / `"art": false` để tắt một loại.
+- **QA:** dưới 60% cảnh có hình, dưới 1/3 cảnh là **ảnh thật**, có hình lặp, hoặc hai cảnh liền nhau cùng loại → KHÔNG ĐẠT. Người duyệt xem `broll.jpg` (tờ ảnh đã chọn) trước khi đăng.
 - **Video hướng dẫn sản phẩm** (`tutorial/`): chèn cảnh B-roll người dùng thật (người cầm điện thoại, ngồi trước
   laptop…) giữa các cảnh quay giao diện; chưa tự động, làm tay theo `tutorial/README.md`.
+
+## Branding theo nền tảng
+
+`platforms/profiles.json` › `branding`. **full** (Facebook, TikTok): khối logo + tên + tagline đầu mọi cảnh, thẻ cuối
+3,5s. **minimal** (Instagram, YouTube Shorts — khán giả nước ngoài): không khối logo, nhãn chủ đề nhỏ, watermark
+`@quantik` mờ ở góc (chống re-up), thẻ cuối 1,8s có logo + CTA follow. Câu miễn trừ và dòng "dữ liệu mô phỏng" luôn giữ.
+Episode có thể ghi `"branding"` để ghi đè.
 
 ## Giọng văn: chuyên gia, dễ hiểu
 

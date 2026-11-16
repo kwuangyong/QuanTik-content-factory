@@ -37,5 +37,9 @@
   "art": [
     "chips",
     "cards"
+  ],
+  "stage": [
+    "poker_duel",
+    "poker_allin"
   ]
 }

@@ -199,6 +199,8 @@ def terminal(model, outputs, say, name="run", min_dur=4.0):
 
 
 def end(cta, disclaimer, tag, min_dur=3.5, say=None):
+    if C.branding() == "minimal":  # short end card on foreign-audience channels
+        min_dur = min(min_dur, 1.8)
     def draw(img, t, p):
         F.end_card(img, p, cta, disclaimer, tag)
 

@@ -146,16 +146,61 @@ def _band_fade(w, h):
     return m
 
 
+BW_ART = 1000
+FREE_TOP, FREE_BOTTOM = 300, 1316  # region a scene's own content can occupy; subtitles start below
+
+
+def _drawn_layer(bg, w, h, t, p):
+    """RGBA w×h of an illustration motif or a character stage."""
+    import illustrations as ILL
+    if bg["kind"] == "stage":
+        import figures as G
+        return G.stage(ILL.stage_spec(bg["stage"]), w, h, t, min(1.0, p * 1.6))
+    im = ILL.frame(bg["motif"], p)
+    s = min(w / im.width, h / im.height)
+    im = im.resize((max(1, int(im.width * s)), max(1, int(im.height * s))), Image.LANCZOS)
+    out = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    out.alpha_composite(im, ((w - im.width) // 2, h - im.height))
+    return out
+
+
+def plan_placement(scene, min_free=300):
+    """Probe the scene's last frame; if its own content leaves ≥ min_free px above the subtitles, the drawing goes
+    there at full strength (like the pillar hook stages), otherwise it becomes a dimmed backdrop."""
+    from PIL import ImageChops
+    ref = base()
+    probe = ref.copy()
+    scene.draw(probe, scene.duration * 0.97, 0.97)
+    diff = ImageChops.difference(probe, ref).convert("L").point(lambda v: 255 if v > 40 else 0)
+    box = diff.crop((SAFE["left"], FREE_TOP, W - 40, FREE_BOTTOM)).getbbox()
+    bottom = FREE_TOP + (box[3] if box else 0)
+    free = FREE_BOTTOM - bottom - 24
+    scene.bg["place"] = ({"mode": "free", "box": (SAFE["left"], bottom + 24, W - SAFE["left"], FREE_BOTTOM)}
+                         if free >= min_free else {"mode": "dim"})
+    return scene.bg["place"]
+
+
+def imagery_overlay(img, bg, t, dur):
+    pl = bg.get("place") or {}
+    if bg.get("kind") not in ("art", "stage") or pl.get("mode") != "free":
+        return
+    x0, y0, x1, y1 = pl["box"]
+    h = min(y1 - y0, 520)
+    layer = _drawn_layer(bg, x1 - x0, h, t, max(0.0, min(1.0, t / max(dur, 1e-6))))
+    img.paste(layer, (x0, y1 - h), layer)
+
+
 def broll_base(bg, t, dur):
     """Frame background for a scene carrying real imagery: slow Ken Burns zoom, darkened so text stays readable,
     small credit line on the photo."""
     p = max(0.0, min(1.0, t / max(dur, 1e-6)))
-    if bg.get("kind") == "art":  # code-drawn animated illustration (illustrations.py), dimmed under the text
-        import illustrations as ILL
+    if bg.get("kind") in ("art", "stage"):  # code-drawn animation: bright in free space (overlay) or dimmed backdrop
         img = base()
-        band = ILL.frame(bg["motif"], p)
-        band.putalpha(band.getchannel("A").point(lambda v: int(v * bg.get("alpha", 0.55))))
-        img.paste(band, (0, BAND_TOP), band)
+        if (bg.get("place") or {}).get("mode") == "free":
+            return img  # drawn on top of the scene by imagery_overlay()
+        band = _drawn_layer(bg, BW_ART, 760, t, p)
+        band.putalpha(band.getchannel("A").point(lambda v: int(v * bg.get("alpha", 0.5))))
+        img.paste(band, ((W - band.width) // 2, BAND_TOP + 20), band)
         return img
     if bg.get("frames"):  # video B-roll, pre-decoded 1080×1920 @30 fps
         files = sorted(Path(bg["frames"]).glob("*.jpg"))
@@ -201,6 +246,19 @@ def logo(size=68):
 
 
 def header(img, tag: str, note: str):
+    if C.branding() == "minimal":  # IG / YouTube for a foreign audience: no logo block, small faded watermark
+        d = ImageDraw.Draw(img, "RGBA")
+        x, y = SAFE["left"], SAFE["top"] + 4
+        f = font("mono-bold", 20)
+        tw = d.textlength(tag, font=f)
+        d.rounded_rectangle([x, y, x + tw + 28, y + 36], radius=18, outline=T["accent"] + (200,), width=2,
+                            fill=(30, 22, 16, 170))
+        d.text((x + 14, y + 7), tag, font=f, fill=T["accent"])
+        wm = "@quantik"
+        fw = font("sans-bold", 22)
+        d.text((SAFE["right"] - d.textlength(wm, font=fw), y + 6), wm, font=fw, fill=(255, 255, 255, 105))
+        d.text((x, y + 48), note, font=font("sans", 18), fill=T["muted"])
+        return
     d = ImageDraw.Draw(img)
     x, y = SAFE["left"], SAFE["top"] + 4
     img.paste(logo(64), (x, y), logo(64))

@@ -88,6 +88,8 @@ def render(scenes, out_path, tag, note, fps=FPS, layout_path=None, srt_path=None
             if s.header:
                 F.header(img, tag, note)
             s.draw(img, t, t / s.duration)
+            if s.bg:
+                F.imagery_overlay(img, s.bg, t, s.duration)
             gt = t0 + t
             hit = next(((c0, c1, c) for c0, c1, c in chunks if c0 <= gt < c1), None)
             if s.subtitles and hit:
@@ -116,6 +118,8 @@ def still(scene, t, tag, note, path, size=None):
     if scene.header:
         F.header(img, tag, note)
     scene.draw(img, t, min(1.0, t / max(scene.duration, 1e-6)))
+    if scene.bg:
+        F.imagery_overlay(img, scene.bg, t, scene.duration)
     if size:
         img = img.resize(size, F.Image.LANCZOS)
     img.save(path)

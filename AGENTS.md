@@ -57,7 +57,9 @@ Kiến trúc năm trụ cột: `pillars/README.md`. Vai nghiên cứu/kiểm ch�
 9. **Mọi video phải có hình ảnh thật** (yêu cầu cố định của chủ sản phẩm): sự vật, nơi chốn, con người, ảnh thật
    hoặc B-roll — không làm video chỉ có chữ trên nền tối. Nguồn: **Openverse** (miễn phí, CC0/PDM/CC BY), **Pexels** (ảnh + video, cần
    `PEXELS_API_KEY`), Wikimedia Commons (luật 8) và **hoạt hoạ vẽ bằng code** (nhân vật, hiện vật, hình hoạ). Các cảnh
-   **gối đầu, không lặp**: cảnh liền nhau khác loại hình, không dùng lại cùng một ảnh/hoạt hoạ trong một video. `batch.py` tự gắn và QA chặn video có dưới 60% cảnh có ảnh thật;
+   **gối đầu, không lặp** (mọi nền tảng): ảnh thật → nhân vật → ảnh thật → hình hoạ…, cảnh liền nhau khác loại, không
+   dùng lại cùng một ảnh/hoạt hoạ trong một video. `batch.py` tự gắn; QA chặn video dưới 60% cảnh có hình, dưới 1/3 ảnh
+   thật, có lặp hoặc liền kề cùng loại; Instagram/YouTube Shorts dùng branding tối giản (`profiles.json` › `branding`);
    ảnh CC BY phải ghi nguồn (pipeline tự ghi vào `credits.md` và caption). Chi tiết: `brand/identity.md` mục
    *Hình ảnh thật & B-roll*.
 10. Output vào `social-output/<id>/` (đã gitignore). Trả về trong chat: đường dẫn file, thời lượng, kết luận QA,

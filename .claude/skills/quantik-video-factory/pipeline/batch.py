@@ -181,50 +181,100 @@ def _prepare(topic, style, override=None, returns=None):
     return ep, mod, model
 
 
+def _as_plan(spec, targets):
+    """Episode field as {scene_name: value} (dict) or an ordered list."""
+    if isinstance(spec, dict):
+        return {k: v for k, v in spec.items() if v}, []
+    return {}, [x for x in (spec or []) if x]
+
+
 def attach_broll(scenes, ep, model, topic, disabled=False):
-    """Give scenes real imagery. Episode "broll" may be a list of searches (cycled over scenes) or a dict
-    {scene_name: search}; otherwise topic defaults + generic people/places. Returns the items used."""
+    """Give every scene but the end card imagery, alternating kinds so neighbours differ and nothing repeats:
+    photo/B-roll → character stage → photo → illustration → photo → stage … (real photos ≥ half).
+
+    Episode fields (all optional): "broll" (photo searches: list or {scene: search}), "stage" (STAGES names or
+    inline specs), "art" (illustration motifs); per-scene dicts pin a kind to a scene; "art": false / "stage": false
+    turn a kind off. Returns the photo items used (for credits)."""
     targets = [s for s in scenes if s.name != "end"]
     if disabled or not targets:
         return []
-    # code-drawn illustrations (English branches by default, any video if the episode asks): every third scene,
-    # starting with the second, so real photos stay the majority
-    art = ep.get("art")
     family = getattr(model, "family", None) or topic
-    if isinstance(art, dict):
-        for s in targets:
-            if art.get(s.name):
-                s.bg = {"kind": "art", "motif": art[s.name]}
-    elif art is not False and (art or Core.lang() == "en"):
-        motifs = list(art or []) or ILL.TOPIC_ART.get(family, []) + ILL.GENERIC_ART
-        for j, s in enumerate(targets[1::3]):
-            s.bg = {"kind": "art", "motif": motifs[j % len(motifs)]}
-    photo_targets = [s for s in targets if not s.bg]
-    spec = ep.get("broll")
-    defaults = BR.TOPIC_QUERIES.get(family, []) + BR.GENERIC
-    if isinstance(spec, dict):
-        order = [spec.get(s.name) for s in photo_targets]
-        queries = [q for q in order if q] + defaults
-    else:
-        queries = list(spec or []) + defaults
-    items, _ = BR.pick(queries, len(photo_targets)) if photo_targets else ([], [])
-    if not items:
-        return []
-    for i, s in enumerate(photo_targets):
-        it = items[i % len(items)]
-        s.bg = dict(it, credit=BR.credit_line(it))
+    pin_art, art_list = _as_plan(ep.get("art"), targets)
+    pin_stage, stage_list = _as_plan(ep.get("stage"), targets)
+    pin_photo, photo_list = _as_plan(ep.get("broll"), targets)
+    arts = [] if ep.get("art") is False else list(dict.fromkeys(art_list + ILL.TOPIC_ART.get(family, []) + ILL.GENERIC_ART))
+    stages = [] if ep.get("stage") is False else list(dict.fromkeys(stage_list + ILL.TOPIC_STAGES.get(family, []) + ILL.GENERIC_STAGES))
+    used_art, used_stage = set(pin_art.values()), {str(v) for v in pin_stage.values()}
+    pattern = ["photo", "stage", "photo", "art"]
+    plan = {}
+    for i, s in enumerate(targets):  # pinned kinds first, then the rotation
+        if s.name in pin_photo:
+            plan[s.name] = "photo"
+        elif s.name in pin_stage:
+            plan[s.name] = "stage"
+        elif s.name in pin_art:
+            plan[s.name] = "art"
+        else:
+            plan[s.name] = pattern[i % len(pattern)]
+    # photos: one distinct item per photo slot
+    slots = [s for s in targets if plan[s.name] == "photo"]
+    queries = [pin_photo[s.name] for s in slots if s.name in pin_photo] + photo_list + \
+        BR.TOPIC_QUERIES.get(family, []) + BR.GENERIC
+    items, _ = BR.pick(queries, len(slots)) if slots else ([], [])
+    it_iter = iter(items)
+    prev = None
+    for s in targets:
+        kind = plan[s.name]
+        if kind == "photo":
+            it = next(it_iter, None)
+            if it is not None:
+                s.bg = dict(it, credit=BR.credit_line(it))
+            else:  # not enough distinct photos: fall back to an unused drawing of a kind the neighbour isn't
+                kind = "art" if prev == "stage" else "stage"
+        if kind == "stage" and not s.bg:
+            st = pin_stage.get(s.name) or next((x for x in stages if x not in used_stage), None)
+            if st is not None:
+                used_stage.add(str(st)); s.bg = {"kind": "stage", "stage": st}
+        if kind == "art" and not s.bg:
+            m = pin_art.get(s.name) or next((x for x in arts if x not in used_art), None)
+            if m is not None:
+                used_art.add(m); s.bg = {"kind": "art", "motif": m}
+        prev = (s.bg or {}).get("kind", "photo") if s.bg else None
+        if prev == "image" or prev == "video":
+            prev = "photo"
     return items
 
 
 def imagery_check(scenes):
-    """≥ 60% of scenes carry imagery (photo, B-roll or illustration) and ≥ 1/3 carry REAL photos/B-roll."""
+    """≥ 60% of scenes carry imagery, ≥ 1/3 are REAL photos/B-roll, neighbours differ in kind, nothing repeats."""
     targets = [s for s in scenes if s.name != "end"]
-    real = sum(1 for s in targets if s.bg and s.bg.get("kind") != "art")
-    art = sum(1 for s in targets if s.bg and s.bg.get("kind") == "art")
+    kinds = [_kind(s) for s in targets]
+    real = kinds.count("photo")
+    drawn = kinds.count("art") + kinds.count("stage")
+    keys = [_key(s) for s in targets if s.bg]
+    repeats = len(keys) - len(set(keys))
+    adjacent = sum(1 for a, b in zip(kinds, kinds[1:]) if a and a == b)
     n = len(targets) or 1
-    ok = (real + art) / n >= 0.6 and real / n >= 1 / 3
-    msg = f"{real}/{len(targets)} cảnh ảnh thật/B-roll, {art} cảnh hình hoạ"
-    return {"fail": not ok, "msg": msg + ("" if ok else " — THIẾU (cần ≥ 60% có hình, ≥ 1/3 ảnh thật; kiểm tra mạng tới Openverse/Pexels)")}
+    ok = (real + drawn) / n >= 0.6 and real / n >= 1 / 3 and repeats == 0 and adjacent == 0
+    msg = (f"{real}/{len(targets)} cảnh ảnh thật/B-roll, {kinds.count('stage')} cảnh nhân vật, {kinds.count('art')} cảnh "
+           f"hình hoạ; lặp {repeats}, liền kề cùng loại {adjacent}")
+    return {"fail": not ok, "msg": msg + ("" if ok else " — KHÔNG ĐẠT (cần ≥ 60% có hình, ≥ 1/3 ảnh thật, không lặp, "
+                                                        "cảnh liền nhau khác loại; kiểm tra mạng tới Openverse/Pexels)")}
+
+
+def _kind(s):
+    if not s.bg:
+        return None
+    return s.bg["kind"] if s.bg.get("kind") in ("art", "stage") else "photo"
+
+
+def _key(s):
+    b = s.bg
+    if b.get("motif"):
+        return "art:" + b["motif"]
+    if b.get("stage") is not None:
+        return "stage:" + str(b["stage"])
+    return b.get("url") or b.get("path")
 
 
 def contact_sheet(items, path):
@@ -357,6 +407,7 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
     t_start = time.time()
     platform = (override or {}).get("platform") or platform
     Core.set_lang((override or {}).get("lang") or (PLATFORMS[platform].get("lang", "vi") if platform in PLATFORMS else "vi"))
+    Core.set_branding((override or {}).get("branding") or (PLATFORMS[platform].get("branding", "full") if platform in PLATFORMS else "full"))
     ep, mod, model = prepare(topic, style, override, returns, platform)
     out = Path(out_root) / ep["id"]
     work = out / "_work"
@@ -438,6 +489,9 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
         s.duration = max(s.min_dur, sec + 0.45)
     if hasattr(mod, "after_timing"):
         mod.after_timing(scenes, filled, model, ctx)
+    for s in scenes:  # drawings go bright into free space under the text when there is room, else dimmed behind
+        if s.bg and s.bg.get("kind") in ("art", "stage"):
+            R.F.plan_placement(s)
 
     fmt = None
     if kind == "carousel":

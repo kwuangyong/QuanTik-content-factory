@@ -147,7 +147,9 @@ Mỗi video ra `social-output/<id>/` (thư mục gốc repo): `final.mp4`, `thum
 
 **Hình ảnh thật (bắt buộc):** mọi cảnh trừ thẻ cuối được gắn ảnh thật/B-roll từ Pexels (có `PEXELS_API_KEY`) hoặc
 Openverse. Ghi `"broll": ["poker chips", "trader at desk", …]` trong episode để chọn ảnh sát nội dung. Video tiếng
-Anh xen thêm **hình hoạ tự vẽ** có chuyển động (`"art": ["chips", "brain", …]`, `pipeline/illustrations.py`). Output thêm
+Mọi video xen kẽ **ảnh thật → nhân vật hoạt hoạ → ảnh thật → hình hoạ**, cảnh liền nhau khác loại, không lặp
+(`"stage": ["poker_duel", …]`, `"art": ["chips", …]`; `pipeline/illustrations.py`, `pipeline/figures.py`). Instagram và
+YouTube Shorts dùng branding tối giản (watermark `@quantik`, không khối logo). Output thêm
 `credits.md` và `broll.jpg`. Quy định đầy đủ: `brand/identity.md` › *Hình ảnh thật & B-roll*.
 
 ### 5. Kiểm tra

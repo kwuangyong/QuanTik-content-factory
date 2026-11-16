@@ -34,5 +34,9 @@
   "art": [
     "paths",
     "hourglass"
+  ],
+  "stage": [
+    "laptop_check",
+    "phone_panic"
   ]
 }
