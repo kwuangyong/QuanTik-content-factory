@@ -1,6 +1,7 @@
 """kinetic-text: faceless — words land one by one, the key number of each beat counts up big; chart + 3D close."""
 import re
 
+from core import L
 import frames as F
 import scenes as S
 from core import THEME as T
@@ -50,6 +51,6 @@ def build(ep, model, ctx):
         out.append(beat(b, f"beat{i + 1}"))
     out.append(S.chart(model, ep["beats"][2], title=ep.get("chart_title"), min_dur=4.5))  # beat 3 describes the chart
     out.append(S.surface(model, ep["beats"][3], min_dur=4.5))
-    out.append(S.statement(ep["takeaway"], name="takeaway", size=64, label_chip="Mang về"))
+    out.append(S.statement(ep["takeaway"], name="takeaway", size=64, label_chip=L("takeaway")))
     out.append(S.end(ep["cta"], ctx["disclaimer"], ctx["tag"]))
     return out

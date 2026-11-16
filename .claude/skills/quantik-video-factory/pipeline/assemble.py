@@ -39,9 +39,34 @@ def synth_pad(path, seconds, seed_chord=0):
     return path
 
 
+def synth_drone(path, seconds):
+    """Dark, heavy bed: low D drone + fifth, slow swell, faint heartbeat thump. Original and royalty-free."""
+    import numpy as np
+
+    t = np.arange(int(seconds * SR)) / SR
+    swell = 0.6 + 0.4 * np.sin(2 * np.pi * t / 9.0 - np.pi / 2)
+    sig = (np.sin(2 * np.pi * 73.42 * t) + 0.6 * np.sin(2 * np.pi * 110.0 * t + 0.4 * np.sin(2 * np.pi * 0.11 * t))
+           + 0.35 * np.sin(2 * np.pi * 146.83 * t) + 0.18 * np.sin(2 * np.pi * 174.61 * t)) * swell
+    beat = np.zeros_like(t)
+    for b0 in np.arange(0.8, seconds, 1.6):          # lub-dub every 1.6 s
+        for off, amp in ((0.0, 1.0), (0.22, 0.6)):
+            m = (t >= b0 + off) & (t < b0 + off + 0.18)
+            tt = t[m] - b0 - off
+            beat[m] += amp * np.sin(2 * np.pi * 52 * tt) * np.exp(-tt * 28)
+    sig = sig / 2.2 + beat * 0.9
+    fade = np.minimum(1, np.minimum(t / 2.0, (seconds - t) / 2.0))
+    pcm = (np.clip(sig * fade, -1, 1) * 11000).astype("<i2")
+    with wave.open(str(path), "wb") as w:
+        w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR)
+        w.writeframes(pcm.tobytes())
+    return path
+
+
 def pick_music(work: Path, seconds: float, music: str | None):
     if music == "none":
         return None
+    if music == "drone":
+        return synth_drone(work / "drone.wav", seconds + 1)
     if music:
         return Path(music)
     lib = sorted((BRAND / "assets/music").glob("*.*")) if (BRAND / "assets/music").exists() else []

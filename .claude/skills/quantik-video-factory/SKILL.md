@@ -52,6 +52,7 @@ Xác định từ lời người dùng (hỏi lại chỉ khi thật sự mơ h�
 | `talking-head-script` | bạn tự quay: kịch bản + teleprompter + B-roll | 45–90s |
 | `carousel` | feed Facebook/TikTok photo, đọc chậm, 7 slide | — |
 | `meme-quant` | giải trí, kéo người mới, 12–20s | 12–20s |
+| `dark-story` | "dark truth" tâm lý tiền bạc / áp lực xã hội: nhân vật hoạt hoạ, không chart, không code | 45–60s |
 
 - **Số lượng.** "Làm loạt", "cả tuần" → nhiều cặp topic × style, chạy một lệnh batch.
 
@@ -83,6 +84,11 @@ Quy tắc viết lời — mỗi quy tắc đều có lý do:
 - Thẻ cuối luôn là CTA theo dõi kênh (like, follow QuanTik để học quant mỗi ngày), pipeline tự gắn; trường `cta` trong kiến thức chỉ còn là câu dẫn link trong caption.
 - Hook phải tự hiểu được với người mới: đặt câu hỏi "X là gì? Vì sao nó quan trọng với bạn?" theo cách bất ngờ, không mở bằng số khô.
 - CTA quảng bá: chỉ nói tính năng đúng như `identity.md`. Nhắc giá gói thì đối chiếu https://quantik.io.vn/plans trước, vì ưu đãi có thể đã đổi.
+
+**Tiếng Anh** (IG / YouTube Shorts quốc tế): thêm `"lang": "en"` vào episode (hoặc `video_defaults`). Số in kiểu
+1,234.5 · $1,234 (`usd`), giọng `en-US-AriaNeural` / `en-US-ChristopherNeural` (`--voice male`), nhãn giao diện, câu
+miễn trừ và cụm cấm tiếng Anh lấy từ `brand/compliance.md` (cụm cấm tiếng Việt vẫn quét). Ví dụ đầy đủ:
+`knowledge/models/escape_velocity.md` + `episodes/escape-velocity-dark-story.json` (style `dark-story`, thumbnail tối tự sinh).
 
 ### 4. Dựng
 

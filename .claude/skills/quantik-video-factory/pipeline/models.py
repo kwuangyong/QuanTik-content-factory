@@ -439,8 +439,77 @@ def surface_kelly(s, v):
     return {"X": F * 100, "Y": Wm * 100, "Z": G * 100, "xl": "tỷ lệ cược f %", "yl": "tỷ lệ thắng W %", "zl": "tăng trưởng log %"}
 
 
+# =============================================================== Escape velocity (savings vs lifestyle creep)
+def escape_velocity_demo(seed=9, years=40, n=2000):
+    rng = np.random.default_rng(seed)
+    r = rng.normal(0.05, 0.15, (n, years))  # real
+    pay = 1.02 ** np.arange(years)   # +2%/yr raises
+    def career(save, creep):
+        spend = pay * (1 - save) if creep \
+            else np.full(years, 1 - save)
+        nest, cover = np.zeros(n), []
+        for t in range(years):
+            nest = nest*(1+r[:, t]) + pay[t] - spend[t]
+            cover.append(0.04 * nest / spend[t])
+        return np.array(cover).T     # paths x years
+    a = career(0.10, creep=True)     # spend raises
+    b = career(0.10, creep=False)    # save raises
+    return a, b, pay
+
+
+def compute_escape_velocity(seed=9, returns=None):
+    a, b, pay = escape_velocity_demo(seed)
+    n, years = a.shape
+    ma, mb = np.median(a, 0), np.median(b, 0)
+    yr_b = int(np.argmax(mb >= 1) + 1) if (mb >= 1).any() else years
+    values = {
+        "years": years, "n_paths": n, "save": 0.10, "raise": 0.02, "ret": 0.05, "vol": 0.15, "wr": 0.04,
+        "target_x": 1 / 0.04,
+        "cover_a10": ma[9], "cover_a20": ma[19], "cover_a40": ma[-1],
+        "cover_b10": mb[9], "cover_b20": mb[19], "cover_b40": mb[-1],
+        "esc_a": float((a >= 1).any(1).mean()), "esc_b": float((b >= 1).any(1).mean()),
+        "esc_a_n": int((a >= 1).any(1).sum()), "trapped_a_n": int((~(a >= 1).any(1)).sum()),
+        "yr_b": yr_b, "pay_growth": float(pay[-1] / pay[0] - 1),
+        "save_b_end": float(1 - 0.9 / pay[-1]), "gap": float(mb[-1] / ma[-1]),
+    }
+    formats = {"years": "int", "n_paths": "int", "save": "pct0", "raise": "pct0", "ret": "pct0", "vol": "pct0",
+               "wr": "pct0", "target_x": "int", "esc_a": "pct1", "esc_b": "pct0", "esc_a_n": "int",
+               "trapped_a_n": "int", "yr_b": "int", "pay_growth": "pct0", "save_b_end": "pct0", "gap": "x1"}
+    formats.update({k: "pct0" for k in values if k.startswith("cover_")})
+    return values, formats, {"a": a, "b": b}
+
+
+def plot2d_escape_velocity(ax, s, upto=1.0):
+    a, b = s["a"] * 100, s["b"] * 100
+    years = a.shape[1]; x = np.arange(1, years + 1); k = max(2, int(round(years * upto)))
+    ax.axhline(100, color=TXT, lw=2, ls="--", alpha=0.8)
+    ax.text(1.2, 106, "ESCAPE VELOCITY · investments pay all bills", color=TXT, fontsize=17, fontweight="bold")
+    for arr, c, name in ((b, POS, "save the raises"), (a, NEG, "spend the raises")):
+        lo, mid, hi = (np.percentile(arr, q, axis=0) for q in (10, 50, 90))
+        ax.fill_between(x[:k], lo[:k], np.minimum(hi[:k], 250), color=c, alpha=0.14, lw=0)
+        ax.plot(x[:k], mid[:k], color=c, lw=3.4, label=name)
+    ax.set_xlim(1, years); ax.set_ylim(0, 250)
+    ax.set_xlabel("years of 9-to-5 work"); ax.set_ylabel("% of yearly spending your money pays")
+    ax.legend(loc="upper left", bbox_to_anchor=(0, 0.93), fontsize=18, frameon=False, labelcolor=TXT)
+
+
+def surface_escape_velocity(s, v):
+    """Median-growth (deterministic) coverage after 40 years over savings rate × share of each raise spent."""
+    g = 0.05 - 0.15 ** 2 / 2
+    sr = np.linspace(0.05, 0.5, 30); cr = np.linspace(0, 1, 25)
+    S_, C_ = np.meshgrid(sr, cr)
+    pay = 1.02 ** np.arange(40)
+    nest = np.zeros_like(S_)
+    for t in range(40):
+        spend = (1 - S_) * (1 + C_ * (pay[t] - 1))
+        nest = nest * np.exp(g) + pay[t] - spend
+    Z = np.minimum(0.04 * nest / spend * 100, 300)
+    return {"X": S_ * 100, "Y": C_ * 100, "Z": Z, "xl": "savings rate %", "yl": "% of raises spent",
+            "zl": "% of bills paid"}
+
+
 # =============================================================== registry
-TOPICS = ["garch", "hurst", "ou", "hmm", "monte_carlo", "sharpe", "sortino", "var_cvar", "kelly"]
+TOPICS = ["garch", "hurst", "ou", "hmm", "monte_carlo", "sharpe", "sortino", "var_cvar", "kelly", "escape_velocity"]
 
 
 def _style(ax):

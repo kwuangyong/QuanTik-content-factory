@@ -1,4 +1,5 @@
 """whiteboard-math: the formula is written piece by piece, each symbol explained, then real numbers plugged in."""
+from core import L
 import frames as F
 import scenes as S
 from core import THEME as T
@@ -73,6 +74,6 @@ def build(ep, model, ctx):
 
     out.append(Scene("numbers", ep["beats"][1], d_numbers, 5.0, texts=[hi["label"], hi_val]))
     out.append(S.chart(model, ep["beats"][2], title=ep.get("chart_title"), min_dur=4.5))
-    out.append(S.statement(ep["takeaway"], name="takeaway", size=64, label_chip="Mang về"))
+    out.append(S.statement(ep["takeaway"], name="takeaway", size=64, label_chip=L("takeaway")))
     out.append(S.end(ep["cta"], ctx["disclaimer"], ctx["tag"]))
     return out

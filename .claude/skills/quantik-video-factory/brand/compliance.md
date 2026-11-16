@@ -72,3 +72,41 @@ Nội dung giáo dục về phương pháp định lượng, không phải khuy�
 ## Khi số liệu là sự kiện lịch sử
 
 Số không do code tính (ví dụ LTCM lỗ bao nhiêu) phải nằm trong `facts` của episode, mỗi số kèm `source`. Ưu tiên nguồn gốc: báo cáo chính thức, sách đã xuất bản, báo tài chính lớn. Nếu không chắc, bỏ số đó.
+
+## Nội dung tiếng Anh (IG / YouTube Shorts quốc tế)
+
+Episode có `"lang": "en"` dùng cùng ranh giới như trên. Cụm cấm tiếng Việt vẫn quét, cộng thêm danh sách dưới đây.
+Chủ đề tài chính cá nhân (tiết kiệm, lãi kép, độc lập tài chính) chỉ minh hoạ cơ chế bằng mô phỏng có giả định ghi rõ,
+không hứa "nghỉ hưu sớm", không chỉ sản phẩm đầu tư cụ thể.
+
+## Banned phrases
+
+```text
+buy now
+sell now
+guaranteed returns
+guaranteed return
+guaranteed profit
+guaranteed income
+risk-free returns
+can't lose
+cannot lose
+never lose
+100% win
+double your account
+double your money
+get rich quick
+to the moon
+price target
+strong buy
+must buy
+quit your job now
+retire early guaranteed
+financial advice from
+```
+
+## Disclaimer
+
+```text
+Educational content about quantitative methods, not financial advice or a recommendation to buy or sell any security. Model results depend on assumptions and data; past performance does not guarantee future results.
+```

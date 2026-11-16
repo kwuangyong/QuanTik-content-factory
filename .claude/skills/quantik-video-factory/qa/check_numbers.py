@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "pipeline"))
 from core import fmt_vi  # noqa: E402
 
 NUM = re.compile(r"(?<![\w])[−\-]?\d+(?:[.,]\d+)*%?x?")
-ALL_FORMATS = [f"{k}{d}" for k in ("pct", "num") for d in range(4)] + ["int", "vnd", "x1", "x2"]
+ALL_FORMATS = [f"{k}{d}" for k in ("pct", "num") for d in range(4)] + ["int", "vnd", "usd", "x1", "x2"]
 # Small integers used as plain words ("3 trạng thái", "1 cổ phiếu") are allowed; anything bigger needs a source.
 FREE_INTS = {str(i) for i in range(0, 11)}
 
@@ -27,6 +27,7 @@ def tokens(text):
 
 def check(texts, values, formats, rendered, allowed_literals=(), facts=None):
     ok_tokens = set(rendered) | FREE_INTS
+    ok_tokens |= {tok for r in rendered for tok in tokens(r)}  # "$1,234" is read back as the token "1,234"
     for lit in allowed_literals:
         ok_tokens |= set(tokens(lit)) | {lit}
     for f in (facts or {}).values():

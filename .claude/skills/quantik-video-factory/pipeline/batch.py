@@ -26,7 +26,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(HERE.parent / "qa"))
 
-from core import DEFAULT_OUT, KNOWLEDGE, STYLES, disclaimer, fill_tree, load_json, load_model_kb, save_json  # noqa: E402
+from core import DEFAULT_OUT, KNOWLEDGE, STYLES, L, set_lang, disclaimer, fill_tree, load_json, load_model_kb, save_json  # noqa: E402
 from models import TOPICS, Model, load_returns  # noqa: E402
 import catalog as C  # noqa: E402
 import term_topic as TT  # noqa: E402
@@ -130,7 +130,7 @@ FOLLOW_CTA = "Thả tim và theo dõi QuanTik để học một kiến thức qu
 def _follow_cta(ep, override):
     ep["cta_link"] = ep.get("cta_link") or ep.get("cta", "")
     if not (override or {}).get("cta"):
-        ep["cta"] = FOLLOW_CTA
+        ep["cta"] = L("follow_cta")
     return ep
 
 
@@ -161,6 +161,11 @@ def _prepare(topic, style, override=None, returns=None):
 def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice="female", music=None,
          scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True):
     t_start = time.time()
+    # language must be set before the model's numbers are formatted and before the voice is chosen
+    lang = (override or {}).get("lang")
+    if lang is None and topic in TOPICS:
+        lang = load_model_kb(topic).get("lang")
+    set_lang(lang)
     ep, mod, model = prepare(topic, style, override, returns)
     out = Path(out_root) / ep["id"]
     work = out / "_work"
@@ -172,8 +177,8 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
     rendered = set()
     filled = fill_tree(ep, model.values, model.formats, rendered)
     disc = disclaimer()
-    note = data_label or ("Dữ liệu thật: " + filled.get("data_source", "CSV người dùng") if model.real_data
-                          else "Dữ liệu mô phỏng · giáo dục, không phải khuyến nghị")
+    note = data_label or (L("real_note") + filled.get("data_source", "CSV") if model.real_data
+                          else L("sim_note"))
     ctx = {"tag": filled.get("tag", topic.upper()), "note": note, "disclaimer": disc, "out": out}
     save_json(out / "episode.filled.json", filled)
 
@@ -221,7 +226,12 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
         duration = R.render(scenes, silent, ctx["tag"], note, fps=fps, layout_path=out / "layout.json",
                             srt_path=out / "subtitles.srt", scale=scale)
         final = out / "final.mp4"
-        assemble(silent, scenes, final, work, music=("none" if getattr(mod, "MUSIC", True) is False else music))
+        style_music = getattr(mod, "MUSIC", True)
+        if style_music is False:
+            music = "none"
+        elif music is None and isinstance(style_music, str):
+            music = style_music  # e.g. dark-story → "drone"
+        assemble(silent, scenes, final, work, music=music)
         R.still(scenes[0], scenes[0].duration * 0.9, ctx["tag"], note, out / "thumbnail.jpg")
         fmt = check_format.check_video(final, out / "layout.json", platform_max=filled.get("max_seconds", 60),
                                        expect_audio=True)
@@ -246,8 +256,8 @@ def main():
     ap.add_argument("--episode", action="append", default=[], help="episode JSON (needs topic + style)")
     ap.add_argument("--out", default=str(DEFAULT_OUT))
     ap.add_argument("--voice-engine", default="auto", choices=["auto"] + V.ENGINES)
-    ap.add_argument("--voice", default="female", help="female | male | any edge-tts voice id")
-    ap.add_argument("--music", default=None, help="path to a licensed track, or 'none'")
+    ap.add_argument("--voice", default="female", help="female | male | any edge-tts voice id (per episode lang)")
+    ap.add_argument("--music", default=None, help="path to a licensed track, 'drone' (synth dark bed), or 'none'")
     ap.add_argument("--scale", type=float, default=1.0, help="0.5 = fast 540x960 preview")
     ap.add_argument("--fps", type=int, default=30)
     ap.add_argument("--prices", help="CSV with a close column → real data instead of simulation")

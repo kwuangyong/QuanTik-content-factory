@@ -92,10 +92,41 @@ def _group(intpart: str) -> str:
     return intpart + out
 
 
+# ---------------------------------------------------------------- language
+# Episodes default to Vietnamese. "lang": "en" in an episode switches number format, voice, UI labels,
+# disclaimer and banned-phrase list to English (for international IG / YouTube Shorts).
+LANG = {"code": "vi"}
+
+LABELS = {
+    "vi": {"tagline": "quant cho cổ phiếu Việt Nam", "chapter": "Chương", "takeaway": "Mang về",
+           "sim_note": "Dữ liệu mô phỏng · giáo dục, không phải khuyến nghị", "real_note": "Dữ liệu thật: ",
+           "follow_cta": "Thả tim và theo dõi QuanTik để học một kiến thức quant mỗi ngày",
+           "myth": "BẠN NGHĨ", "fact": "THỰC RA", "evidence": "Bằng chứng từ code chạy thật",
+           "myth_kicker": "Hiểu lầm phổ biến", "result": "kết quả",
+           "thumb_footer": "Dữ liệu mô phỏng • Không phải khuyến nghị"},
+    "en": {"tagline": "quant, explained with real code", "chapter": "Chapter", "takeaway": "Takeaway",
+           "sim_note": "Simulated data · educational, not financial advice", "real_note": "Real data: ",
+           "follow_cta": "Like and follow QuanTik for one quant lesson every day",
+           "myth": "YOU THINK", "fact": "ACTUALLY", "evidence": "Evidence from code that really ran",
+           "myth_kicker": "Common myth", "result": "output",
+           "thumb_footer": "Simulated data • Not financial advice"},
+}
+
+
+def set_lang(code: str | None):
+    LANG["code"] = code if code in LABELS else "vi"
+
+
+def L(key: str) -> str:
+    return LABELS[LANG["code"]][key]
+
+
 def fmt_vi(value, spec: str = "num2") -> str:
-    """Format like Vietnamese print: 1.234,5 ; 12,3% ; 149.000 đ."""
+    """Format like Vietnamese print: 1.234,5 ; 12,3% ; 149.000 đ. In English mode: 1,234.5 ; 12.3% ; $1,234."""
     if isinstance(value, str):
         return value
+    if LANG["code"] == "en":
+        return fmt_en(value, spec)
     m = re.fullmatch(r"(pct|num|vnd|int|x)(\d?)", spec or "num2")
     if not m:
         raise ValueError(f"unknown number format {spec!r}")
@@ -120,6 +151,21 @@ def fmt_vi(value, spec: str = "num2") -> str:
     elif kind == "x":
         out += "x"
     return out
+
+
+def fmt_en(value, spec: str = "num2") -> str:
+    m = re.fullmatch(r"(pct|num|vnd|usd|int|x)(\d?)", spec or "num2")
+    if not m:
+        raise ValueError(f"unknown number format {spec!r}")
+    kind, digits = m.group(1), int(m.group(2) or 0)
+    if kind == "pct":
+        value = value * 100
+    if kind in ("int", "vnd", "usd"):
+        digits = 0
+    out = f"{abs(value):,.{digits}f}"
+    if value < 0 and out.strip("0,.") != "":
+        out = "−" + out
+    return {"pct": out + "%", "x": out + "x", "usd": "$" + out, "vnd": out + " VND"}.get(kind, out)
 
 
 _PH = re.compile(r"\{([a-zA-Z_][\w]*)(?::([a-z]+\d?))?\}")
@@ -151,7 +197,7 @@ def fill_latex(tex: str, values: dict, formats: dict, rendered: set | None = Non
         out = fmt_vi(values[key], spec or formats.get(key, "num2"))
         if rendered is not None:
             rendered.add(out)
-        return out.replace(",", "{,}").replace(".", "{.}").replace("%", r"\%").replace("−", "-")
+        return out.replace(",", "{,}").replace(".", "{.}").replace("$", r"\$").replace("%", r"\%").replace("−", "-")
 
     return _PH_TEX.sub(rep, tex)
 
@@ -177,7 +223,7 @@ def fill_tree(obj, values, formats, rendered):
 
 # keys holding LaTeX (filled with <<key>>) or ids/code that are never filled
 TEX_KEYS = {"formula", "formula_parts", "formula_numeric", "sym"}
-RAW_KEYS = {"id", "topic", "style", "platforms", "key", "fmt", "hashtags", "format", "allowed_literals", "voice",
+RAW_KEYS = {"id", "topic", "style", "lang", "platforms", "key", "fmt", "hashtags", "format", "allowed_literals", "voice",
             "facts"}
 
 
@@ -198,14 +244,20 @@ def load_model_kb(topic: str) -> dict:
 
 
 def load_banned() -> list[str]:
+    """Vietnamese banned phrases always apply; English ones are added on top (mixed-language text is common)."""
     text = (BRAND / "compliance.md").read_text(encoding="utf-8")
-    m = re.search(r"## Cụm cấm.*?```text\s*(.*?)```", text, re.S)
-    return [ln.strip().lower() for ln in m.group(1).splitlines() if ln.strip() and not ln.startswith("#")]
+    out = []
+    for head in ("## Cụm cấm", "## Banned phrases"):
+        m = re.search(re.escape(head) + r".*?```text\s*(.*?)```", text, re.S)
+        if m:
+            out += [ln.strip().lower() for ln in m.group(1).splitlines() if ln.strip() and not ln.startswith("#")]
+    return out
 
 
-def disclaimer() -> str:
+def disclaimer(lang: str | None = None) -> str:
     text = (BRAND / "compliance.md").read_text(encoding="utf-8")
-    m = re.search(r"## Câu miễn trừ.*?```text\s*(.*?)```", text, re.S)
+    head = "## Disclaimer" if (lang or LANG["code"]) == "en" else "## Câu miễn trừ"
+    m = re.search(re.escape(head) + r".*?```text\s*(.*?)```", text, re.S)
     return " ".join(m.group(1).split())
 
 
