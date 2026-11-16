@@ -10,6 +10,8 @@ CTA, caption và cách đo riêng. Mọi yêu cầu làm nội dung bắt đầu
 | **TikTok** | giáo dục, xây độ tin cậy | series "Học quant cùng QuanTik #N" | [`tiktok/README.md`](tiktok/README.md) | `batch.py --platform tiktok --topics … --styles …` |
 | **Instagram Reels · YouTube Shorts** | thử nghiệm, lan truyền | larping, motivational, vui, đáng share/save | [`reels-shorts/README.md`](reels-shorts/README.md) | `batch.py --platform reels-shorts …` |
 
+Nghiên cứu nền tảng (người xem cần gì, dạng nào đang lên, vòng thử 4 tuần): [`RESEARCH-2026-11.md`](RESEARCH-2026-11.md).
+
 `profiles.json` là bản máy đọc của bảng trên: style được phép, CTA thẻ cuối, mục caption, độ dài tối đa.
 `batch.py --platform <tên>` dùng nó để gắn CTA, chỉ in caption của nền tảng đó, thêm hậu tố nền tảng vào id
 output, và từ chối style không thuộc nền tảng. Không có `--platform` thì chạy như cũ (CTA TikTok, caption mọi nơi).
