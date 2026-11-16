@@ -11,6 +11,8 @@ CTA, caption và cách đo riêng. Mọi yêu cầu làm nội dung bắt đầu
 | **Instagram Reels** | thử nghiệm, lan truyền | larping, motivational, vui, đáng share/save | [`instagram/README.md`](instagram/README.md) | `batch.py --platform instagram …` |
 | **YouTube Shorts (tiếng Anh)** | kéo view nhanh, "ăn xổi" | dark truth, tâm lý nhà đầu tư, poker theory | [`youtube-shorts/README.md`](youtube-shorts/README.md) | `batch.py --platform youtube-shorts --episode ../episodes/en-….json` |
 
+**Bản tổng hợp: mỗi nền tảng đăng gì → [`CONTENT-PLAN.md`](CONTENT-PLAN.md).**
+
 Nghiên cứu nền tảng (người xem cần gì, dạng nào đang lên, vòng thử 4 tuần): [`RESEARCH-2026-11.md`](RESEARCH-2026-11.md).
 
 `profiles.json` là bản máy đọc của bảng trên: style được phép, CTA thẻ cuối, mục caption, độ dài tối đa.
