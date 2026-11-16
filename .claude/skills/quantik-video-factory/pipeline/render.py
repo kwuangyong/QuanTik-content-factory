@@ -73,6 +73,8 @@ def render(scenes, out_path, tag, note, fps=FPS, layout_path=None, srt_path=None
     total = sum(s.duration for s in scenes)
     srt, t0, idx = [], 0.0, 1
     F.LAYOUT.__init__()
+    prev_last = None
+    fade = max(1, int(0.25 * fps))   # crossfade from the previous scene's last frame (no hard cuts)
     for s in scenes:
         F.LAYOUT.scene = s.name
         chunks = timed_chunks(s.say, t0, s.duration) if (s.say and s.subtitles) else []
@@ -87,11 +89,15 @@ def render(scenes, out_path, tag, note, fps=FPS, layout_path=None, srt_path=None
                 F.header(img, tag, note)
             s.draw(img, t, t / s.duration)
             gt = t0 + t
-            cur = next((c for c0, c1, c in chunks if c0 <= gt < c1), "")
-            if s.subtitles:
-                F.subtitle(img, cur)
+            hit = next(((c0, c1, c) for c0, c1, c in chunks if c0 <= gt < c1), None)
+            if s.subtitles and hit:
+                F.subtitle(img, hit[2], (gt - hit[0]) / max(1e-6, hit[1] - hit[0]))
             F.progress(img, gt / total)
+            if prev_last is not None and i < fade:
+                img = F.Image.blend(prev_last, img, (i + 1) / (fade + 1))
             proc.stdin.write(img.tobytes())
+            if i == n - 1:
+                prev_last = img
         t0 += s.duration
     proc.stdin.close()
     if proc.wait() != 0:

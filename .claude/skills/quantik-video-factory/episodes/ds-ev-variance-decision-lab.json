@@ -1,0 +1,168 @@
+{
+  "id": "ds-ev-variance-decision-lab",
+  "pillar": "decision-science",
+  "topic": "ds_ev_variance",
+  "style": "decision-lab",
+  "model": "ev_variance",
+  "brief": "research/ds-ev-variance-decision-lab/brief.json",
+  "factcheck": "research/ds-ev-variance-decision-lab/factcheck.json",
+  "tag": "EV · PHƯƠNG SAI",
+  "note": "Mô phỏng seed cố định · giáo dục, không phải khuyến nghị",
+  "title": "Chơi đúng mà vẫn thua: EV, phương sai và rủi ro phá sản",
+  "hook": "Giỏi hơn đối thủ thật sự, vậy mà sau mười nghìn ván, {behind_10k} người như vậy vẫn đang lỗ.",
+  "analogy": {
+    "similar": [
+      "Quyết định theo kỳ vọng, không theo kết quả một lần",
+      "Phương sai lớn: đúng mà vẫn lỗ thời gian dài",
+      "Quy mô cược quyết định rủi ro cháy vốn"
+    ],
+    "breaks": [
+      "Luật chơi và xác suất thị trường đổi theo thời gian",
+      "Phân phối không biết trước, đuôi dày hơn phân phối chuẩn",
+      "Không có ván kết thúc rõ ràng; lợi thế khó đo, dễ tự ảo tưởng"
+    ]
+  },
+  "segments": [
+    {
+      "role": "setup",
+      "say": "Giả sử bạn thắng trung bình {mu} big blind mỗi trăm ván, độ lệch chuẩn {sd}. Lợi thế thật, nhưng nhỏ so với dao động.",
+      "screen": "Lợi thế +{mu} bb / 100 ván · dao động {sd} bb",
+      "claims": [
+        "c_setup"
+      ]
+    },
+    {
+      "role": "intuition",
+      "say": "Trực giác: chơi đúng thì thắng. Toán: sai số chỉ giảm theo căn bậc hai số lần chơi, nên kỳ vọng lộ ra rất chậm.",
+      "screen": "Kỳ vọng dương ≠ thắng ngay",
+      "claims": [
+        "c_lln"
+      ]
+    },
+    {
+      "role": "math",
+      "say": "Mô phỏng {players} người chơi. Sau một nghìn ván, {behind_1k} vẫn lỗ. Sau mười nghìn ván, {behind_10k}, khớp công thức chuẩn {theory_10k}.",
+      "claims": [
+        "c_sim",
+        "c_normal"
+      ],
+      "visual": {
+        "kind": "code",
+        "rows": [
+          {
+            "label": "lỗ sau 1.000 ván",
+            "key": "behind_1k"
+          },
+          {
+            "label": "lỗ sau 10.000 ván",
+            "key": "behind_10k"
+          },
+          {
+            "label": "lỗ sau 100.000 ván",
+            "key": "behind_100k"
+          },
+          {
+            "label": "công thức, 10.000 ván",
+            "key": "theory_10k"
+          }
+        ]
+      }
+    },
+    {
+      "role": "simulation",
+      "say": "Mỗi đường mảnh là một người, đường cam là kỳ vọng. Vốn {bankroll} big blind: {ruined} cháy vốn trong mô phỏng, công thức cho {ror}.",
+      "screen": "Vốn {bankroll} bb: {ruined} cháy vốn (mô phỏng) · {ror} (công thức)",
+      "claims": [
+        "c_sim",
+        "c_ror"
+      ],
+      "visual": {
+        "kind": "chart",
+        "title": "60 người chơi có cùng lợi thế"
+      }
+    },
+    {
+      "role": "analogy",
+      "say": "Poker giống thị trường ở kỳ vọng, phương sai và quy mô cược. Nhưng thị trường đổi luật, xác suất không biết trước, và bạn có thể không bao giờ chắc mình có lợi thế.",
+      "claims": [
+        "c_analogy"
+      ]
+    },
+    {
+      "role": "lesson",
+      "say": "Lợi thế càng nhỏ, càng cần nhiều ván. Nếu đánh giá một quyết định, hãy nhìn kỳ vọng và cỡ mẫu, đừng nhìn kết quả tuần này.",
+      "screen": "Lợi thế nhỏ → cần cỡ mẫu rất lớn",
+      "claims": [
+        "c_lesson"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "c_setup",
+      "text": "Giả định mô phỏng: lợi thế 5 bb/100 ván, độ lệch chuẩn 100 bb/100 ván.",
+      "status": "model_output",
+      "source_ids": [],
+      "note": "Tham số minh hoạ, không phải thống kê người chơi thật"
+    },
+    {
+      "id": "c_lln",
+      "text": "Luật số lớn: trung bình mẫu hội tụ về kỳ vọng khi số lần đủ lớn; sai số giảm theo căn bậc hai số lần.",
+      "status": "documented",
+      "source_ids": [
+        "feller-1968"
+      ]
+    },
+    {
+      "id": "c_sim",
+      "text": "Mô phỏng 2.000 người chơi × 100.000 ván (pillar_models.ev_variance_demo, seed 9).",
+      "status": "model_output",
+      "source_ids": []
+    },
+    {
+      "id": "c_normal",
+      "text": "Xác suất đang lỗ sau n ván ≈ Φ(−μ√n/σ) theo xấp xỉ chuẩn.",
+      "status": "documented",
+      "source_ids": [
+        "feller-1968"
+      ]
+    },
+    {
+      "id": "c_ror",
+      "text": "Xấp xỉ rủi ro phá sản với vốn B: exp(−2μB/σ²) (khuếch tán, chân trời vô hạn).",
+      "status": "documented",
+      "source_ids": [
+        "feller-1968"
+      ]
+    },
+    {
+      "id": "c_analogy",
+      "text": "Poker giống thị trường ở EV, phương sai, quy mô vị thế; khác ở luật chơi không cố định, phân phối không biết trước, đuôi dày, lợi thế khó đo.",
+      "status": "interpretation",
+      "source_ids": []
+    },
+    {
+      "id": "c_lesson",
+      "text": "Đánh giá quyết định bằng kỳ vọng và cỡ mẫu, không bằng kết quả ngắn hạn.",
+      "status": "interpretation",
+      "source_ids": []
+    }
+  ],
+  "takeaway": "Quyết định tốt vẫn có thể thua lâu. Đo lợi thế bằng cỡ mẫu, cược đủ nhỏ để sống sót.",
+  "caption": "Chơi đúng mà vẫn thua? Mô phỏng 2.000 người chơi poker có lợi thế thật: bao nhiêu người vẫn lỗ sau 10.000 ván, rủi ro phá sản là bao nhiêu, và poker giống, khác thị trường ở đâu. Code chạy thật, seed cố định.",
+  "hashtags": [
+    "poker",
+    "xacsuat",
+    "quanlyvon",
+    "quant",
+    "QuanTik"
+  ],
+  "allowed_literals": [
+    "2.000",
+    "10.000",
+    "100.000",
+    "1.000",
+    "60 người chơi"
+  ],
+  "max_seconds": 90
+}

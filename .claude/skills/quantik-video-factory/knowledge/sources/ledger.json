@@ -1,0 +1,379 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": "kahneman-tversky-1979",
+      "type": "journal_article",
+      "title": "Prospect Theory: An Analysis of Decision under Risk",
+      "authors": [
+        "Daniel Kahneman",
+        "Amos Tversky"
+      ],
+      "year": 1979,
+      "venue": "Econometrica 47(2), 263–291",
+      "doi": "10.2307/1914185",
+      "tier": "A",
+      "cite_short": "Kahneman & Tversky (1979), Econometrica",
+      "accessed": "2026-11-15"
+    },
+    {
+      "id": "tversky-kahneman-1992",
+      "type": "journal_article",
+      "title": "Advances in Prospect Theory: Cumulative Representation of Uncertainty",
+      "authors": [
+        "Amos Tversky",
+        "Daniel Kahneman"
+      ],
+      "year": 1992,
+      "venue": "Journal of Risk and Uncertainty 5(4), 297–323",
+      "doi": "10.1007/BF00122574",
+      "tier": "A",
+      "cite_short": "Tversky & Kahneman (1992), J. Risk Uncertainty",
+      "accessed": "2026-11-15",
+      "verified_by": [
+        "https://econpapers.repec.org/RePEc:kap:jrisku:v:5:y:1992:i:4:p:297-323"
+      ],
+      "notes": "Ước lượng trung vị α = β = 0,88; λ = 2,25 (đối chiếu chéo nhiều nguồn thứ cấp; nên đọc bản gốc trước khi trích thêm tham số γ)."
+    },
+    {
+      "id": "shefrin-statman-1985",
+      "type": "journal_article",
+      "title": "The Disposition to Sell Winners Too Early and Ride Losers Too Long: Theory and Evidence",
+      "authors": [
+        "Hersh Shefrin",
+        "Meir Statman"
+      ],
+      "year": 1985,
+      "venue": "Journal of Finance 40(3), 777–790",
+      "doi": "10.1111/j.1540-6261.1985.tb05002.x",
+      "tier": "A",
+      "cite_short": "Shefrin & Statman (1985), J. Finance",
+      "accessed": "2026-11-15"
+    },
+    {
+      "id": "odean-1998",
+      "type": "journal_article",
+      "title": "Are Investors Reluctant to Realize Their Losses?",
+      "authors": [
+        "Terrance Odean"
+      ],
+      "year": 1998,
+      "venue": "Journal of Finance 53(5), 1775–1798",
+      "doi": "10.1111/0022-1082.00072",
+      "tier": "A",
+      "cite_short": "Odean (1998), J. Finance",
+      "accessed": "2026-11-15",
+      "verified_by": [
+        "https://zendy.io/title/10.1111/0022-1082.00072",
+        "https://rpc.cfainstitute.org/-/media/documents/article/cfa-digest/1999/dig-v29-n2-469-pdf.pdf"
+      ],
+      "notes": "10.000 tài khoản môi giới chiết khấu; PGR 0,148, PLR 0,098 trên toàn mẫu."
+    },
+    {
+      "id": "barberis-xiong-2009",
+      "type": "journal_article",
+      "title": "What Drives the Disposition Effect? An Analysis of a Long-Standing Preference-Based Explanation",
+      "authors": [
+        "Nicholas Barberis",
+        "Wei Xiong"
+      ],
+      "year": 2009,
+      "venue": "Journal of Finance 64(2), 751–784",
+      "doi": "10.1111/j.1540-6261.2009.01448.x",
+      "tier": "A",
+      "cite_short": "Barberis & Xiong (2009), J. Finance",
+      "accessed": "2026-11-15",
+      "verified_by": [
+        "https://econpapers.repec.org/RePEc:bla:jfinan:v:64:y:2009:i:2:p:751-784",
+        "https://www.nber.org/papers/w12397"
+      ],
+      "notes": "Prospect theory trên lãi/lỗ năm thường KHÔNG dự báo được hiệu ứng; trên lãi/lỗ đã hiện thực thì đáng tin hơn."
+    },
+    {
+      "id": "barber-odean-2000",
+      "type": "journal_article",
+      "title": "Trading Is Hazardous to Your Wealth: The Common Stock Investment Performance of Individual Investors",
+      "authors": [
+        "Brad M. Barber",
+        "Terrance Odean"
+      ],
+      "year": 2000,
+      "venue": "Journal of Finance 55(2), 773–806",
+      "doi": "10.1111/0022-1082.00226",
+      "tier": "A",
+      "cite_short": "Barber & Odean (2000), J. Finance",
+      "accessed": "2026-11-15",
+      "notes": "Chưa trích số: cần đọc bản gốc trước khi dùng con số hiệu suất."
+    },
+    {
+      "id": "kelly-1956",
+      "type": "journal_article",
+      "title": "A New Interpretation of Information Rate",
+      "authors": [
+        "John L. Kelly Jr."
+      ],
+      "year": 1956,
+      "venue": "Bell System Technical Journal 35(4), 917–926",
+      "doi": "10.1002/j.1538-7305.1956.tb03809.x",
+      "tier": "A",
+      "cite_short": "Kelly (1956), Bell System Tech. J.",
+      "accessed": "2026-11-15"
+    },
+    {
+      "id": "thorp-1962",
+      "type": "book",
+      "title": "Beat the Dealer",
+      "authors": [
+        "Edward O. Thorp"
+      ],
+      "year": 1962,
+      "venue": "Blaisdell / Random House",
+      "tier": "B",
+      "cite_short": "Thorp (1962), Beat the Dealer",
+      "accessed": "2026-11-15",
+      "notes": "Một số danh mục ghi 1964/1966 là các ấn bản sau."
+    },
+    {
+      "id": "thorp-kassouf-1967",
+      "type": "book",
+      "title": "Beat the Market: A Scientific Stock Market System",
+      "authors": [
+        "Edward O. Thorp",
+        "Sheen T. Kassouf"
+      ],
+      "year": 1967,
+      "venue": "Random House",
+      "tier": "B",
+      "cite_short": "Thorp & Kassouf (1967), Beat the Market",
+      "accessed": "2026-11-15"
+    },
+    {
+      "id": "thorp-2017",
+      "type": "memoir",
+      "title": "A Man for All Markets",
+      "authors": [
+        "Edward O. Thorp"
+      ],
+      "year": 2017,
+      "venue": "Random House",
+      "isbn": "9781400067961",
+      "tier": "C",
+      "cite_short": "Thorp (2017), hồi ký",
+      "accessed": "2026-11-15",
+      "verified_by": [
+        "https://rpc.cfainstitute.org/research/financial-analysts-journal/2017/a-man-for-all-markets"
+      ],
+      "notes": "Hồi ký: đủ cho claim self_reported, không đủ cho documented."
+    },
+    {
+      "id": "poundstone-2005",
+      "type": "book",
+      "title": "Fortune's Formula",
+      "authors": [
+        "William Poundstone"
+      ],
+      "year": 2005,
+      "venue": "Hill and Wang",
+      "isbn": "9780809045990",
+      "tier": "B",
+      "cite_short": "Poundstone (2005), Fortune's Formula",
+      "accessed": "2026-11-15",
+      "verified_by": [
+        "https://academic.macmillan.com/academictrade/9780809045990/fortunesformula"
+      ]
+    },
+    {
+      "id": "haug-taleb-2011",
+      "type": "journal_article",
+      "title": "Option traders use (very) sophisticated heuristics, never the Black–Scholes–Merton formula",
+      "authors": [
+        "Espen Gaarder Haug",
+        "Nassim Nicholas Taleb"
+      ],
+      "year": 2011,
+      "venue": "Journal of Economic Behavior & Organization 77(2), 97–106",
+      "doi": "10.1016/j.jebo.2010.09.013",
+      "tier": "A",
+      "cite_short": "Haug & Taleb (2011), JEBO",
+      "accessed": "2026-11-15",
+      "notes": "Lập luận về lịch sử định giá quyền chọn trước 1973; dùng làm nguồn cho phía tranh cãi."
+    },
+    {
+      "id": "black-scholes-1973",
+      "type": "journal_article",
+      "title": "The Pricing of Options and Corporate Liabilities",
+      "authors": [
+        "Fischer Black",
+        "Myron Scholes"
+      ],
+      "year": 1973,
+      "venue": "Journal of Political Economy 81(3), 637–654",
+      "doi": "10.1086/260062",
+      "tier": "A",
+      "cite_short": "Black & Scholes (1973), J. Political Economy",
+      "accessed": "2026-11-15"
+    },
+    {
+      "id": "markowitz-1952",
+      "type": "journal_article",
+      "title": "Portfolio Selection",
+      "authors": [
+        "Harry Markowitz"
+      ],
+      "year": 1952,
+      "venue": "Journal of Finance 7(1), 77–91",
+      "doi": "10.2307/2975974",
+      "tier": "A",
+      "cite_short": "Markowitz (1952), J. Finance",
+      "accessed": "2026-11-15"
+    },
+    {
+      "id": "nash-1950",
+      "type": "journal_article",
+      "title": "Equilibrium Points in n-Person Games",
+      "authors": [
+        "John F. Nash"
+      ],
+      "year": 1950,
+      "venue": "PNAS 36(1), 48–49",
+      "doi": "10.1073/pnas.36.1.48",
+      "tier": "A",
+      "cite_short": "Nash (1950), PNAS",
+      "accessed": "2026-11-15"
+    },
+    {
+      "id": "kuhn-1950",
+      "type": "book",
+      "title": "A Simplified Two-Person Poker",
+      "authors": [
+        "Harold W. Kuhn"
+      ],
+      "year": 1950,
+      "venue": "Contributions to the Theory of Games I, Annals of Mathematics Studies 24, Princeton",
+      "tier": "A",
+      "cite_short": "Kuhn (1950), Contributions to the Theory of Games",
+      "accessed": "2026-11-15",
+      "notes": "Giá trị trò chơi với người đi trước là −1/18."
+    },
+    {
+      "id": "feller-1968",
+      "type": "book",
+      "title": "An Introduction to Probability Theory and Its Applications, Vol. 1 (3rd ed.)",
+      "authors": [
+        "William Feller"
+      ],
+      "year": 1968,
+      "venue": "Wiley",
+      "tier": "A",
+      "cite_short": "Feller (1968), xác suất cơ bản",
+      "accessed": "2026-11-15",
+      "notes": "Bài toán phá sản của người chơi (gambler's ruin)."
+    },
+    {
+      "id": "ltcm-pwg-1999",
+      "type": "official_report",
+      "title": "Hedge Funds, Leverage, and the Lessons of Long-Term Capital Management",
+      "authors": [
+        "President's Working Group on Financial Markets"
+      ],
+      "year": 1999,
+      "tier": "A",
+      "cite_short": "President's Working Group (1999)",
+      "accessed": "2026-11-15"
+    },
+    {
+      "id": "lowenstein-2000",
+      "type": "book",
+      "title": "When Genius Failed",
+      "authors": [
+        "Roger Lowenstein"
+      ],
+      "year": 2000,
+      "venue": "Random House",
+      "tier": "B",
+      "cite_short": "Lowenstein (2000), When Genius Failed",
+      "accessed": "2026-11-15"
+    },
+    {
+      "id": "zuckerman-2019",
+      "type": "book",
+      "title": "The Man Who Solved the Market",
+      "authors": [
+        "Gregory Zuckerman"
+      ],
+      "year": 2019,
+      "venue": "Portfolio",
+      "tier": "B",
+      "cite_short": "Zuckerman (2019)",
+      "accessed": "2026-11-15"
+    },
+    {
+      "id": "agr-indexsnaps",
+      "type": "data_feed",
+      "title": "AGR datafeed — chỉ số HOSE, VN30, HNX, UPCOM (snapshot)",
+      "authors": [
+        "Agriseco (trading.agr.vn)"
+      ],
+      "year": "live",
+      "url": "https://trading.agr.vn/datafeed/indexsnaps/HOSE,30,UPCOM,HNX",
+      "tier": "A",
+      "cite_short": "AGR datafeed",
+      "accessed": "2026-11-15",
+      "notes": "Cùng feed dashboard QuanTik dùng (frontend/src/components/dashboard.tsx). Snapshot, không có lịch sử."
+    },
+    {
+      "id": "agr-instruments",
+      "type": "data_feed",
+      "title": "AGR datafeed — bảng giá toàn bộ mã (snapshot)",
+      "authors": [
+        "Agriseco (trading.agr.vn)"
+      ],
+      "year": "live",
+      "url": "https://trading.agr.vn/datafeed/instruments",
+      "tier": "A",
+      "cite_short": "AGR datafeed",
+      "accessed": "2026-11-15",
+      "notes": "Giá tham chiếu, khớp, khối lượng, giá trị, khối ngoại từng mã."
+    },
+    {
+      "id": "quantik-industry-watchlist",
+      "type": "dataset",
+      "title": "QuanTik industry-watchlist.json (nhóm ngành do chủ sản phẩm cung cấp)",
+      "authors": [
+        "QuanTik"
+      ],
+      "year": 2026,
+      "url": "https://github.com/kwuangyong/QuanTik---Design/blob/main/frontend/src/content/industry-watchlist.json",
+      "tier": "B",
+      "cite_short": "nhóm ngành QuanTik",
+      "accessed": "2026-11-15",
+      "notes": "Danh sách tham chiếu, không phải phân ngành chuẩn ICB; commit 306f46d."
+    },
+    {
+      "id": "user-history-csv",
+      "type": "dataset",
+      "title": "Chuỗi lịch sử chỉ số do người dùng cung cấp (CSV + manifest)",
+      "authors": [
+        "người dùng"
+      ],
+      "year": "varies",
+      "tier": "B",
+      "cite_short": "CSV người dùng",
+      "accessed": "2026-11-15",
+      "notes": "Nguồn và kỳ dữ liệu đọc từ manifest đi kèm."
+    },
+    {
+      "id": "synthetic-fixture",
+      "type": "dataset",
+      "title": "Dữ liệu mẫu tổng hợp cho test (không phải thị trường thật)",
+      "authors": [
+        "QuanTik content factory"
+      ],
+      "year": 2026,
+      "tier": "C",
+      "cite_short": "DỮ LIỆU MẪU",
+      "accessed": "2026-11-15",
+      "notes": "Chỉ dùng cho test; QA không cho đăng."
+    }
+  ]
+}

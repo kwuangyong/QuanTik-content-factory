@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "quantik/content_pillar.schema.json",
+  "title": "Content pillar",
+  "description": "Một trụ cột nội dung trong pillars/registry.json.",
+  "type": "object",
+  "required": [
+    "id",
+    "number",
+    "name",
+    "purpose",
+    "research_worker",
+    "segment_roles",
+    "default_style",
+    "styles",
+    "claim_statuses",
+    "hedge_markers",
+    "catalog",
+    "doc"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z\\-]+$"
+    },
+    "number": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "research_worker": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "segment_roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Thứ tự đoạn bắt buộc của kịch bản (rỗng = dùng style cũ với beats)"
+    },
+    "optional_roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "default_style": {
+      "type": "string"
+    },
+    "styles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "claim_statuses": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "documented",
+          "self_reported",
+          "anecdote",
+          "disputed",
+          "speculation",
+          "observed",
+          "model_output",
+          "interpretation"
+        ]
+      }
+    },
+    "hedge_markers": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "description": "status → cụm từ phải xuất hiện trong lời đoạn dùng claim đó"
+    },
+    "extra_banned": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "min_source_tier": {
+      "enum": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    "requires_factcheck": {
+      "type": "boolean"
+    },
+    "catalog": {
+      "type": "string"
+    },
+    "doc": {
+      "type": "string"
+    },
+    "max_seconds": {
+      "type": "integer"
+    },
+    "require_entity_images": {
+      "type": "boolean",
+      "description": "người/sự kiện được nhắc phải có ảnh hoặc waiver (qa/check_images.py)"
+    }
+  }
+}

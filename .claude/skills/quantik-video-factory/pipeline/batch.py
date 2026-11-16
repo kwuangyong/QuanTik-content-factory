@@ -38,10 +38,14 @@ import render as R  # noqa: E402
 import voiceover as V  # noqa: E402
 from assemble import assemble  # noqa: E402
 import check_banned, check_format, check_numbers, report  # noqa: E402
+import check_images, check_market, check_script, check_sources  # noqa: E402
+import pillar_models as PM  # noqa: E402
+import pillar_registry as PR  # noqa: E402
 
 VI_CHARS = re.compile(r"[ăâđêôơưàáạảãằắặẳẵầấậẩẫèéẹẻẽềếệểễìíịỉĩòóọỏõồốộổỗờớợởỡùúụủũừứựửữỳýỵỷỹ]", re.I)
 PLATFORMS = {k: v for k, v in load_json(HERE.parent / "platforms" / "profiles.json").items() if not k.startswith("_")}
 STYLE_NAMES = sorted(p.name for p in STYLES.iterdir() if (p / "template.py").exists())
+PILLAR_STYLES = {"bias-lab", "history-story", "market-brief", "decision-lab"}  # need pillar segments
 
 
 def load_style(style):
@@ -110,7 +114,8 @@ def log_episode(ep, out_dir, status, duration, platform=None):
                         "views_tiktok", "views_reels", "views_youtube", "notes"])
         w.writerow([ep["id"], dt.date.today().isoformat(), ep["topic"], ep["style"], ep.get("title", ""), ep["hook"],
                     f"{duration:.0f}", status, str(out_dir), "", "", "",
-                    f"platform={platform}" if platform else ""])
+                    "; ".join(x for x in (f"platform={platform}" if platform else "",
+                                          f"pillar={ep['pillar']}" if ep.get("pillar") else "") if x)])
 
 
 # Thẻ cuối mọi video: kêu gọi theo dõi kênh (yêu cầu của chủ sản phẩm, áp dụng cho mọi video).
@@ -152,7 +157,13 @@ def prepare(topic, style, override=None, returns=None, platform=None):
 
 
 def _prepare(topic, style, override=None, returns=None):
-    """(episode, style module, model) for a hand-written topic or any catalog topic."""
+    """(episode, style module, model) for a pillar topic, a hand-written topic or any catalog topic."""
+    pil = None if (topic in TOPICS and not (override or {}).get("pillar")) else PR.resolve(topic, override)
+    if pil:
+        return _prepare_pillar(pil, topic, style, override or {}, returns)
+    if style in PILLAR_STYLES:
+        raise SystemExit(f"{style} dựng episode của trụ cột (pillars/registry.json), cần episode JSON có 'pillar' và "
+                         f"'segments' — xem pillars/README.md")
     if topic in TOPICS:
         ep, mod = build_episode(topic, style, override)
         return ep, mod, Model(topic, ep.get("seed"), returns)
@@ -234,13 +245,118 @@ def contact_sheet(items, path):
         sheet.save(path, quality=85)
 
 
-def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice="female", music=None,
-         scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True, platform=None, no_broll=False):
+def _prepare_pillar(pil, topic, style, ov, returns):
+    pillar, entry = pil
+    if style not in pillar["styles"]:
+        raise SystemExit(f"{topic} × {style}: trụ cột {pillar['id']} dùng các style {pillar['styles']}")
+    mod = load_style(style)
+    if style in PILLAR_STYLES and not ov.get("segments"):
+        raise SystemExit(f"{topic} × {style}: cần episode JSON có 'segments' (python pillar.py scaffold …)")
+    model = PM.make_model(ov.get("model") or entry.get("model"), ov.get("seed"), returns, ov)
+    ep = merge(getattr(mod, "DEFAULTS", {}), PR.episode_defaults(pillar, entry, ov), ov)
+    ep["topic"], ep["style"], ep["pillar"] = topic, style, pillar["id"]
+    ep.setdefault("id", f"{topic}-{style}")
+    if isinstance(model, PM.MarketModel):
+        r = model.report
+        ep.setdefault("note", f"Dữ liệu: AGR datafeed · phiên {model.values['as_of']} · {r['data_status']}")
+    return ep, mod, model
+
+
+def _pillar_gates(filled, pillar, model, corpus):
+    """Pre-render gates for pillar episodes: script structure, sources & fact-check, market discipline."""
+    more = [("Kịch bản trụ cột", check_script.check(filled, pillar)),
+            ("Nguồn & fact-check", check_sources.check(filled, pillar))]
+    if isinstance(model, PM.MarketModel):
+        more.append(("Dữ liệu thị trường", check_market.check(filled, model.report, pillar, corpus=corpus)))
+    if pillar.get("require_entity_images") or filled.get("entities") or check_images.used_images(filled):
+        more.append(("Ảnh nhân vật & bản quyền", check_images.check(filled, pillar.get("require_entity_images", False))))
+    return more
+
+
+def _write_provenance(out, filled, scenes, model, kind, pillar):
+    """sources.md + storyboard.json + visual_assets.json: source references survive to the published package."""
+    import pillar_scenes as PS
+
+    led = PS.ledger()
+    claims = {c["id"]: c for c in filled.get("claims", [])}
+    t, board = 0.0, []
+    for s in scenes:
+        board.append({"name": s.name, "role": getattr(s, "role", None), "start": round(t, 2),
+                      "duration": round(s.duration, 2), "say": s.say, "texts": [x for x in s.texts if x],
+                      "label": getattr(s, "status", None), "claims": getattr(s, "claims", []),
+                      "sources": getattr(s, "sources", []), "visual": getattr(s, "visual", None),
+                      "audio": Path(s.audio).name if s.audio else None})
+        t += s.duration if kind == "video" else 0
+    save_json(out / "storyboard.json", {"id": filled["id"], "style": filled["style"], "pillar": filled.get("pillar"),
+                                        "scenes": board})
+    prov = (f"market_report {getattr(model, 'path', '')}" if isinstance(model, PM.MarketModel)
+            else f"model {model.topic} seed {model.seed}" + (" (dữ liệu thật)" if model.real_data else " (mô phỏng)"))
+    assets = [{"path": p.name, "kind": k, "provenance": prov} for p, k in
+              [(out / "final.mp4", "video"), (out / "thumbnail.jpg", "thumbnail"), (out / "subtitles.srt", "subtitles")]
+              if p.exists()]
+    assets += [{"path": str(p.relative_to(out)), "kind": "slide", "provenance": prov} for p in sorted(out.glob("slides/*/*.png"))]
+    import images as IMG
+
+    imgs_used = []
+    for s in scenes:
+        imgs_used += [i for i in getattr(s, "images", []) if i not in imgs_used]
+    iidx = IMG.index()
+    assets += [{"path": f"knowledge/images/{iidx[i]['file']}", "kind": "still",
+                "provenance": iidx[i].get("source_url") or iidx[i].get("generator", ""), "license": iidx[i]["license"]}
+               for i in imgs_used if i in iidx]
+    save_json(out / "visual_assets.json", {"id": filled["id"], "assets": assets})
+    if not pillar:
+        return ""
+    used = []
+    for s in filled.get("segments", []):
+        for c in s.get("claims", []):
+            if c not in used:
+                used.append(c)
+    lines = [f"# Nguồn — {filled['id']}", "", f"Trụ cột: {pillar['name']}", ""]
+    if filled.get("brief"):
+        lines.append(f"- Research brief: `{filled['brief']}`")
+    if filled.get("factcheck"):
+        lines.append(f"- Fact-check: `{filled['factcheck']}`")
+    if filled.get("market_report"):
+        lines.append(f"- Market report: `{filled['market_report']}`")
+        for ds in model.report["bundle"]["datasets"]:
+            lines.append(f"  - {ds['name']}: {ds['status']} · {ds.get('url', '')} · lấy lúc {ds.get('retrieved_at')} · "
+                         f"{ds.get('period') or ''} {ds.get('error', '')}")
+        for lim in model.report["limitations"]:
+            lines.append(f"  - Giới hạn: {lim}")
+    lines += ["", "| Claim | Trạng thái | Nội dung | Nguồn |", "| --- | --- | --- | --- |"]
+    sids = []
+    for cid in used:
+        c = claims.get(cid, {})
+        lines.append(f"| `{cid}` | {c.get('status')} | {c.get('text', '')} | {', '.join(c.get('source_ids', [])) or '—'} |")
+        sids += [x for x in c.get("source_ids", []) if x not in sids]
+    lines += ["", "## Tài liệu", ""]
+    short = []
+    for sid in sids:
+        src = led.get(sid, {})
+        ref = src.get("doi") and f"doi:{src['doi']}" or src.get("isbn") and f"ISBN {src['isbn']}" or src.get("url", "")
+        lines.append(f"- **{src.get('cite_short', sid)}** — {', '.join(src.get('authors', []))}. *{src.get('title', '')}*. "
+                     f"{src.get('venue', '')} {ref} (cấp {src.get('tier')})")
+        short.append(f"{src.get('cite_short', sid)} {ref}".strip())
+    if imgs_used:
+        lines += ["", "## Ảnh", "", "| Ảnh | Loại | Chủ thể | Tác giả · giấy phép | Nguồn |", "| --- | --- | --- | --- | --- |"]
+        for i in imgs_used:
+            e = iidx.get(i, {})
+            lines.append(f"| `{i}` | {e.get('kind')} | {e.get('subject')} | {e.get('author')} · {e.get('license')} | "
+                         f"{e.get('source_url') or e.get('generator', '')} |")
+    (out / "sources.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    credits = sorted({iidx[i]["credit"] for i in imgs_used if i in iidx})
+    img_block = ("\n## Ảnh\n" + "\n".join("- " + c for c in credits) + "\n") if credits else ""
+    return ("\n## Nguồn (dán vào mô tả YouTube / bình luận ghim)\n" + "\n".join("- " + x for x in short) + "\n"
+            + img_block)
+
+
+def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice="male-deep", music=None,
+         scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True, check_only=False, platform=None,
+         no_broll=False):
     t_start = time.time()
     platform = (override or {}).get("platform") or platform
     Core.set_lang((override or {}).get("lang") or (PLATFORMS[platform].get("lang", "vi") if platform in PLATFORMS else "vi"))
-    if Core.lang() == "en" and voice == "female" and platform in PLATFORMS:
-        voice = PLATFORMS[platform].get("voice", voice)
     ep, mod, model = prepare(topic, style, override, returns, platform)
     out = Path(out_root) / ep["id"]
     work = out / "_work"
@@ -250,12 +366,16 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
     save_json(out / "values.json", {"topic": topic, "seed": model.seed, "real_data": model.real_data,
                                     "values": model.values, "formats": model.formats, "code": model.code})
     rendered = set()
+    # sourced facts can be used as {placeholders} too (pillar episodes: "{pgr}" → "0,148"); model values win on clashes
+    for k, f in (ep.get("facts") or {}).items():
+        if isinstance(f, dict) and k not in model.values:
+            model.values[k] = str(f["value"])
     filled = fill_tree(ep, model.values, model.formats, rendered)
     disc = disclaimer()
     if data_label:
         data_label = data_label.replace("Dữ liệu thật: ", Core.L("real_note"))
-    note = data_label or (Core.L("real_note") + filled.get("data_source", "CSV") if model.real_data
-                          else Core.L("sim_note"))
+    note = data_label or filled.get("note") or (Core.L("real_note") + filled.get("data_source", "CSV")
+                                                if model.real_data else Core.L("sim_note"))
     ctx = {"tag": filled.get("tag", topic.upper()), "note": note, "disclaimer": disc, "out": out}
     save_json(out / "episode.filled.json", filled)
 
@@ -269,17 +389,32 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
     corpus += [filled.get("caption", ""), filled.get("title", "")]
     save_json(out / "narration.json", {"scenes": [{"name": s.name, "say": s.say, "texts": s.texts} for s in scenes],
                                        "extra": texts})
-    nums = check_numbers.check(corpus, model.values, model.formats, rendered, filled.get("allowed_literals", []),
-                               filled.get("facts", {}))
-    banned = check_banned.check(corpus)
+    pillar = PR.pillar_of(filled)
+    lits = list(filled.get("allowed_literals", []))
+    if pillar:  # citations ("Odean (1998)") and source titles on screen are sourced by the ledger itself
+        import pillar_scenes as PS
+
+        led = PS.ledger()
+        lits += [c for s in scenes for c in getattr(s, "sources", [])]
+        lits += [led[x]["title"] for c in filled.get("claims", []) for x in c.get("source_ids", []) if x in led]
+        lits += [PS.credit_text(getattr(s, "images", [])) for s in scenes]   # "CC BY-SA 4.0" etc. come from the image ledger
+    nums = check_numbers.check(corpus, model.values, model.formats, rendered, lits, filled.get("facts", {}))
+    banned = check_banned.check(corpus, (pillar or {}).get("extra_banned", []))
     if Core.lang() == "en":  # English video: any Vietnamese left over from topic defaults is a bug
         vi = [t for t in corpus if t and VI_CHARS.search(t)]
         if vi:
             banned["fail"] = True
             banned["hits"] += [{"phrase": "(chữ tiếng Việt trong video tiếng Anh)", "in": t[:100]} for t in vi[:5]]
-    if (nums["fail"] or banned["fail"]) and not force:
-        report.write(out, ep, nums, banned, None, status="CHẶN TRƯỚC KHI RENDER")
-        print(report.summary(nums, banned, None))
+    more = _pillar_gates(filled, pillar, model, corpus) if pillar else []
+    blocked = nums["fail"] or banned["fail"] or any(r["fail"] for _, r in more)
+    if (blocked and not force) or check_only:
+        ep_r = dict(ep, pillar=filled.get("pillar"))
+        report.write(out, ep_r, nums, banned, None, more=more,
+                     status="CHẶN TRƯỚC KHI RENDER" if blocked else "ĐẠT")
+        print(report.summary(nums, banned, None, more))
+        if check_only:
+            print(f"  {'✗' if blocked else '✓'} pre-render QA only (--check-only) → {out/'qa_report.md'}")
+            return {"id": ep["id"], "ok": not blocked, "out": str(out), "checked_only": True}
         print(f"  ✗ blocked — fix the episode text (see {out/'qa_report.md'}) or pass --force")
         return {"id": ep["id"], "ok": False, "out": str(out)}
 
@@ -324,18 +459,25 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
         fmt.setdefault("issues", []).append(imagery["msg"])
         if hasattr(mod, "export"):
             mod.export(scenes, filled, model, ctx)
+    src_block = _write_provenance(out, filled, scenes, model, kind, pillar)
     cap_md = captions(filled, disc, platform)
     if broll_items:  # CC BY needs credit where the video is published: one short line per caption section
         names = sorted({BR.credit_line(it) for it in broll_items})
         label = "Images" if Core.lang() == "en" else "Ảnh"
         cap_md = cap_md.replace(disc, disc + f"\n\n{label}: " + "; ".join(names))
-    (out / "captions.md").write_text(cap_md, encoding="utf-8")
-    status = "ĐẠT" if not (nums["fail"] or banned["fail"] or fmt["fail"]) else "KHÔNG ĐẠT"
-    report.write(out, ep, nums, banned, fmt, status=status, extra={"Hình ảnh thật": imagery["msg"],
-                                                                   "Giọng đọc": used + (" — " + "; ".join(errors) if errors else ""),
-                                                                   "Thời lượng": f"{duration:.1f}s",
-                                                                   "Thời gian dựng": f"{time.time() - t_start:.0f}s"})
-    print(report.summary(nums, banned, fmt))
+    (out / "captions.md").write_text(cap_md + src_block, encoding="utf-8")
+    if used != "silent":  # a scene whose TTS call failed would otherwise ship with no voice and pass QA
+        mute = [s.name for s in scenes if s.say and not s.audio]
+        if mute:
+            fmt["issues"].append(f"cảnh không có giọng đọc (TTS lỗi): {', '.join(mute)} — dựng lại")
+            fmt["fail"] = True
+    status = "ĐẠT" if not (blocked or fmt["fail"]) else "KHÔNG ĐẠT"
+    report.write(out, dict(ep, pillar=filled.get("pillar")), nums, banned, fmt, status=status, more=more,
+                 extra={"Hình ảnh thật": imagery["msg"],
+                        "Giọng đọc": used + (" — " + "; ".join(errors) if errors else ""),
+                        "Thời lượng": f"{duration:.1f}s",
+                        "Thời gian dựng": f"{time.time() - t_start:.0f}s"})
+    print(report.summary(nums, banned, fmt, more))
     if log:
         log_episode(filled, out, status, duration, platform)
     shutil.rmtree(work, ignore_errors=True)
@@ -349,7 +491,7 @@ def main():
     ap.add_argument("--episode", action="append", default=[], help="episode JSON (needs topic + style)")
     ap.add_argument("--out", default=str(DEFAULT_OUT))
     ap.add_argument("--voice-engine", default="auto", choices=["auto"] + V.ENGINES)
-    ap.add_argument("--voice", default="female", help="female | male | any edge-tts voice id")
+    ap.add_argument("--voice", default="male-deep", help="male-deep (mặc định, nam trầm) | male | female | edge voice id")
     ap.add_argument("--music", default=None, help="path to a licensed track, or 'none'")
     ap.add_argument("--scale", type=float, default=1.0, help="0.5 = fast 540x960 preview")
     ap.add_argument("--fps", type=int, default=30)
@@ -360,6 +502,7 @@ def main():
                     help="tiktok | facebook | instagram | youtube-shorts: CTA, captions, allowed styles from platforms/profiles.json")
     ap.add_argument("--no-broll", action="store_true", help="skip real imagery (preview only: QA will fail it)")
     ap.add_argument("--no-log", action="store_true", help="do not append to knowledge/episodes.csv")
+    ap.add_argument("--check-only", action="store_true", help="run every pre-render QA gate, write qa_report, do not render")
     a = ap.parse_args()
 
     returns = load_returns(a.prices) if a.prices else None
@@ -382,7 +525,7 @@ def main():
         try:
             results.append(make(topic, style, override, a.out, a.voice_engine, a.voice, a.music, a.scale, a.fps,
                                 returns, ("Dữ liệu thật: " + a.data_source) if a.data_source else None, a.force,
-                                not a.no_log, a.platform, a.no_broll))
+                                not a.no_log, check_only=a.check_only, platform=a.platform, no_broll=a.no_broll))
         except SystemExit as ex:  # unsupported topic × style: report and keep going with the batch
             print(f"  ✗ {ex}")
             results.append({"id": f"{topic}-{style}", "ok": False, "error": str(ex)})

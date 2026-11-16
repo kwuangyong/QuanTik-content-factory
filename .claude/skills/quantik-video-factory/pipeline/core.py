@@ -237,6 +237,7 @@ def fill_tree(obj, values, formats, rendered):
 # keys holding LaTeX (filled with <<key>>) or ids/code that are never filled
 TEX_KEYS = {"formula", "formula_parts", "formula_numeric", "sym"}
 RAW_KEYS = {"id", "topic", "style", "platforms", "key", "fmt", "hashtags", "format", "allowed_literals", "voice",
+            "pillar", "brief", "factcheck", "market_report", "source_ids", "model", "editorial_author", "limitations",
             "facts"}
 
 

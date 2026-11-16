@@ -1,0 +1,299 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "quantik/episode_script.schema.json",
+  "title": "Episode script",
+  "description": "Kịch bản một tập (episodes/<id>.json). Trụ cột cũ dùng beats; trụ cột mới dùng segments theo segment_roles.",
+  "type": "object",
+  "required": [
+    "id",
+    "topic",
+    "style",
+    "hook"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "pillar": {
+      "type": "string"
+    },
+    "topic": {
+      "type": "string"
+    },
+    "style": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "hook": {
+      "type": "string"
+    },
+    "kicker": {
+      "type": "string"
+    },
+    "beats": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "segments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "role",
+          "say"
+        ],
+        "properties": {
+          "role": {
+            "type": "string"
+          },
+          "say": {
+            "type": "string"
+          },
+          "screen": {
+            "type": "string",
+            "description": "chữ lớn trên màn hình (mặc định = say)"
+          },
+          "label": {
+            "type": "string",
+            "description": "nhãn trạng thái hiện trên màn hình; mặc định suy từ claims"
+          },
+          "claims": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "visual": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "enum": [
+                  "statement",
+                  "chart",
+                  "surface",
+                  "code",
+                  "terminal",
+                  "citation",
+                  "timeline",
+                  "split",
+                  "scenarios",
+                  "formula",
+                  "gauge",
+                  "sectors",
+                  "image"
+                ]
+              },
+              "image": {
+                "type": "string",
+                "description": "id trong knowledge/images/ledger.json"
+              }
+            }
+          },
+          "min_dur": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "takeaway": {
+      "type": "string"
+    },
+    "cta": {
+      "type": "string"
+    },
+    "caption": {
+      "type": "string"
+    },
+    "hashtags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "text",
+          "status",
+          "source_ids"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_\\-]+$"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 5,
+            "description": "Nhận định ở dạng có thể kiểm chứng, tiếng Việt"
+          },
+          "status": {
+            "enum": [
+              "documented",
+              "self_reported",
+              "anecdote",
+              "disputed",
+              "speculation",
+              "observed",
+              "model_output",
+              "interpretation"
+            ],
+            "description": "documented: có nguồn cấp A/B · self_reported: chỉ có lời của nhân vật · anecdote: giai thoại · disputed: nguồn mâu thuẫn · speculation: suy đoán · observed: dữ liệu thị trường quan sát · model_output: do code tính · interpretation: nhận định của biên tập"
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "locator": {
+            "type": "string",
+            "description": "trang, bảng, mục trong nguồn"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "facts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": [
+              "string",
+              "number"
+            ]
+          },
+          "source": {
+            "type": "string",
+            "description": "legacy: nguồn dạng chữ"
+          },
+          "source_id": {
+            "type": "string"
+          },
+          "claim": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "allowed_literals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "brief": {
+      "type": "string"
+    },
+    "factcheck": {
+      "type": "string"
+    },
+    "market_report": {
+      "type": "string"
+    },
+    "analogy": {
+      "type": "object"
+    },
+    "scenarios": {
+      "type": "array"
+    },
+    "max_seconds": {
+      "type": "integer"
+    },
+    "seed": {
+      "type": "integer"
+    },
+    "entities": {
+      "type": "array",
+      "description": "người/hãng/sự kiện được nhắc: ảnh (id trong image ledger) hoặc waiver",
+      "items": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "kind": {
+            "enum": [
+              "person",
+              "firm",
+              "event",
+              "place",
+              "object"
+            ]
+          },
+          "image": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "waiver": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "entity_ignore": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "timeline": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "year",
+          "label"
+        ],
+        "properties": {
+          "year": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "claim": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 1,
+            "description": "ảnh thứ hai cho mốc có hai nhân vật"
+          }
+        }
+      }
+    }
+  }
+}
