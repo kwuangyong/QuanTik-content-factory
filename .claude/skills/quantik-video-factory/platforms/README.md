@@ -6,7 +6,7 @@ CTA, caption và cách đo riêng. Mọi yêu cầu làm nội dung bắt đầu
 
 | Nền tảng | Vai trò | Nội dung | Quy trình | Lệnh |
 | --- | --- | --- | --- | --- |
-| **Facebook** | chuyển đổi (ra người trả tiền) | sản phẩm QuanTik, xem là dùng được | [`facebook/README.md`](facebook/README.md) | `tutorial/run.sh` (chính) · `batch.py --platform facebook --episode …` (talking-head) |
+| **Facebook** | chuyển đổi qua **post** (tính năng + chuyện hài về nghề); Reels chỉ cập nhật thị trường + kịch bản | [`facebook/README.md`](facebook/README.md) | post: ảnh/album/truyện tranh · Reels: `python pillar.py market produce` |
 | **TikTok** | giáo dục, xây độ tin cậy | series "Học quant cùng QuanTik #N" | [`tiktok/README.md`](tiktok/README.md) | `batch.py --platform tiktok --topics … --styles …` |
 | **Instagram Reels (tiếng Anh)** | thử nghiệm, lan truyền, ≤ 2 phút | larping, motivational, vui, đáng share/save | [`instagram/README.md`](instagram/README.md) | `batch.py --platform instagram --episode ../episodes/en-….json` |
 | **YouTube Shorts (tiếng Anh)** | kéo view nhanh, "ăn xổi", ≤ 2 phút | dark truth, tâm lý nhà đầu tư, poker theory | [`youtube-shorts/README.md`](youtube-shorts/README.md) | `batch.py --platform youtube-shorts --episode ../episodes/en-….json` |
@@ -23,7 +23,7 @@ output, và từ chối style không thuộc nền tảng. Không có `--platfor
 
 | Người dùng nói | Nền tảng |
 | --- | --- |
-| "video Facebook", "bán hàng", "quảng bá", "chuyển đổi", "demo tính năng", "hướng dẫn dùng" | Facebook |
+| "Facebook", "post", "tính năng", "bán hàng", "chuyện hài", "meme nghề", "cập nhật thị trường", "nhịp thị trường" | Facebook |
 | "TikTok", "học quant", "giải thích X", "series", "tập #N" | TikTok |
 | "Reels", "Instagram", "Gen Z", "meme", "trend" | Instagram Reels |
 | "Shorts", "YouTube", "tiếng Anh", "English", "dark truth", "poker", "tâm lý nhà đầu tư" | YouTube Shorts (tiếng Anh) |

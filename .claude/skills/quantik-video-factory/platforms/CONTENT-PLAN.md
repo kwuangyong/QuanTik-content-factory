@@ -6,31 +6,27 @@ xem `brand/identity.md`).
 
 Chi tiết quy trình từng nền tảng ở `platforms/<nền tảng>/README.md`; lý do chọn hướng ở `RESEARCH-2026-11.md`.
 
-| | **Facebook Reels** | **TikTok** | **Instagram Reels** | **YouTube Shorts** |
+| | **Facebook** | **TikTok** | **Instagram Reels** | **YouTube Shorts** |
 | --- | --- | --- | --- | --- |
 | Ngôn ngữ | Việt | Việt | **Anh** | **Anh** |
-| Vai trò | **chuyển đổi** (ra người dùng trả tiền) | **giáo dục**, xây độ tin cậy | **lan truyền**, nhớ tên QuanTik | **kéo view nhanh** ("ăn xổi") |
+| Vai trò | **chuyển đổi** qua post; Reels cập nhật thị trường | **giáo dục**, xây độ tin cậy | **lan truyền**, nhớ tên QuanTik | **kéo view nhanh** ("ăn xổi") |
 | Người xem | người muốn dùng quant làm công cụ chính | nhà đầu tư tò mò về quant | Gen Z quốc tế, không thích học | người xem quốc tế, thích sự thật khó nghe |
-| Nội dung | sản phẩm: Quét toàn sàn, Phân tích Quant | quant đọc tin · series Học quant · cầm tay chỉ việc | skit/POV · câu kỷ luật · thử thách 100 ngày | dark truth · tâm lý nhà đầu tư · poker theory |
-| Độ dài | 20–45s | 35–60s | ≤ 2 phút | ≤ 2 phút |
-| Tần suất | 3/tuần | 5/tuần | 4/tuần | 5/tuần |
+| Nội dung | post tính năng + chuyện hài về nghề; Reels nhịp thị trường + kịch bản | quant đọc tin · series Học quant · cầm tay chỉ việc | skit/POV · câu kỷ luật · thử thách 100 ngày | dark truth · tâm lý nhà đầu tư · poker theory |
+| Độ dài | post; Reels 45–75s | 35–60s | ≤ 2 phút | ≤ 2 phút |
+| Tần suất | 5 post + 2–3 Reels/tuần | 5/tuần | 4/tuần | 5/tuần |
 | CTA thẻ cuối | Dùng thử miễn phí tại quantik.io.vn | Theo dõi để học quant mỗi ngày | Save this. Send it to a friend who trades. | Follow for the math behind the market |
 | Đo | click link, đăng ký, nâng Pro | follow, tỉ lệ xem hết | share, save | xem hết, sub mới |
 
-## Facebook Reels — sản phẩm, "ăn liền"
+## Facebook — post là chính (tính năng + chuyện hài về nghề), Reels chỉ cập nhật thị trường
 
-3 giây đầu là kết quả trên màn hình. Mã cổ phiếu luôn là mã bịa (QTA, QTV…). Không đăng video giáo dục.
+Chi tiết và ranh giới "khuyến nghị": `platforms/facebook/README.md`.
 
-| # | Video | Dạng | Dựng bằng |
+| Mảng | Nội dung | Tần suất | Dựng bằng |
 | --- | --- | --- | --- |
-| 1 | Buổi sáng 1 phút với Quét toàn sàn: 5 mã điểm cao nhất, 5 mã nên tránh nhất theo thứ hạng screening | demo | `tutorial/` (bản ngắn) |
-| 2 | Lọc mã cả tối bằng tay → mở bảng đã xếp hạng theo 34 chỉ tiêu | trước / sau | `tutorial/` |
-| 3 | Gõ một mã → báo cáo Phân tích Quant đọc trong 30 giây | demo | `tutorial/` |
-| 4 | Vùng giá mô phỏng là gì, và không phải là gì | demo + giải thích | `tutorial/` |
-| 5 | Xoay mô hình 3D để thấy rủi ro của một mã | demo | `tutorial/` |
-| 6 | "Quant có quyết định thay bạn không? Không. Nó làm việc này…" | hỏi đáp, tự quay | `talking-head-script` |
-| 7 | Mỗi cột trong bảng quét đo gì (series cắt nhỏ, 1 video 3–4 cột) | series | `tutorial/` |
-| 8 | Đăng ký → quét → phân tích trong 2 phút (ghim đầu trang) | hướng dẫn đầy đủ | `tutorial/run.sh` |
+| **Post tính năng** | album "Quét toàn sàn có gì", "gõ một mã → báo cáo Quant trong 30 giây" (mã bịa) | 2/tuần | ảnh giao diện + nhân vật *(cần style carousel sản phẩm)* |
+| **Post chuyện hài về nghề** | truyện tranh 2–4 khung: "Vợ hỏi lãi không / để anh xem Sharpe đã", "group chat lúc 14h45", "bạn là kiểu nhà đầu tư nào khi VN-Index giảm 3%?" | 2/tuần | nhân vật + bong bóng thoại *(cần xuất ảnh truyện tranh)* |
+| **Post nhiệt kế thị trường** | trạng thái tuần + ba kịch bản, cấp chỉ số, không mã | 1/tuần (thứ 2) | trụ cột thị trường *(cần xuất ảnh post)* |
+| **Reels cập nhật thị trường** | nhịp thị trường + ba kịch bản có điều kiện + hành động quản trị rủi ro chung; **không gọi mua/bán mã** | 2–3/tuần | `python pillar.py market produce` |
 
 ## TikTok — giáo dục "Học quant cùng QuanTik"
 
@@ -75,7 +71,7 @@ khung tư duy xác suất.
 
 | Nền tảng | Làm được ngay | Còn thiếu |
 | --- | --- | --- |
-| Facebook Reels | hướng dẫn đầy đủ (`tutorial/run.sh`), hỏi đáp tự quay | **tutorial bản ngắn** (một luồng, 20–40s) cho các video 1–5, 7 |
+| Facebook | Reels thị trường (`pillar.py market produce`), câu hỏi mở với nhân vật | xuất ảnh truyện tranh, carousel sản phẩm, ảnh nhiệt kế thị trường |
 | TikTok | series Học quant (8 mô hình + catalog), quant đọc tin với `--prices` | tutorial bản ngắn; mẫu episode "quant đọc tin" chặt compliance hơn |
 | Instagram Reels | câu kỷ luật, thử thách 100 ngày, cheat sheet | người quay skit; lịch tự động series 100 ngày |
 | YouTube Shorts | toàn bộ pipeline tiếng Anh, 3 tập mẫu | viết tiếp episode tiếng Anh 4–10 |

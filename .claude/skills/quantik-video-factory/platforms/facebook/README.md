@@ -1,71 +1,79 @@
-# Facebook — nội dung sản phẩm, để chuyển đổi
+# Facebook — post là chính, Reels chỉ cập nhật thị trường
 
-**Vai trò:** biến người xem thành người dùng QuanTik (đăng ký Free → nâng Pro).
-**Người xem nhắm tới:** tầng SOM — nhà đầu tư muốn dùng quant làm công cụ chính, tiết kiệm thời gian lọc mã,
-ra quyết định có hệ thống. Họ không vào Facebook để học; họ cần thứ "ăn liền".
-**Trọng tâm:** **Quét toàn sàn** và **Phân tích Quant**.
+Chủ sản phẩm chốt 11/2026:
 
-Video giáo dục (giải thích mô hình) **không đăng lên Facebook**: dạng này đã thử và không hiệu quả ở đây.
-Vì vậy `batch.py --platform facebook` từ chối chạy với lời mặc định của chủ đề: phải có episode góc sản phẩm.
+- **Post (trọng tâm):** **tính năng sản phẩm** (Quét toàn sàn, Phân tích Quant) và **chuyện hài về nghề** đầu tư
+  chứng khoán. Đây là nơi chuyển đổi người đã follow thành người dùng.
+- **Reels (phụ):** chỉ **cập nhật thị trường + kịch bản hành động**. Không làm Reels demo hay giáo dục trên Facebook.
 
-## Mỗi bài trả lời một câu
+**Người xem nhắm tới:** tầng SOM — nhà đầu tư muốn dùng quant làm công cụ chính. **Branding:** đầy đủ (logo, tên).
+**Mã cổ phiếu trong mọi hình sản phẩm:** mã bịa (QTA, QTV…). **Mọi post/Reels:** câu miễn trừ, có hình ảnh thật hoặc
+nhân vật/hình hoạ (luật 9, `brand/identity.md`).
 
-> *"Mở QuanTik ra thì mình làm được gì ngay, trong bao lâu, kết quả trông ra sao?"*
+## "Khuyến nghị" trên Facebook: làm được gì, không được gì
 
-## Dạng nội dung
+Tư vấn/khuyến nghị đầu tư chứng khoán là hoạt động phải có giấy phép (Luật Chứng khoán 2019), và Facebook giảm phân
+phối/gỡ nội dung dạng "phím hàng". Vì vậy:
 
-| Dạng | Ví dụ góc | Làm bằng | Độ dài |
+| Được | Không được |
+| --- | --- |
+| Ba **kịch bản có điều kiện** cho thị trường chung, mỗi kịch bản có điều kiện xác nhận và vô hiệu đo được | Gọi mua/bán/nắm giữ một mã, "điểm mua", "giá mục tiêu", "cắt lỗ tại" |
+| **Hành động quản trị rủi ro chung** theo kịch bản: "kịch bản B thì ưu tiên giữ tỷ trọng tiền mặt, tránh dùng margin" | "Nên mua nhóm X", "cổ phiếu sẽ tăng", danh sách mã thật nên mua |
+| Trạng thái thị trường đọc bằng số: độ rộng, thanh khoản, khối ngoại, regime | Đăng top mã thật từ Quét toàn sàn lên mạng xã hội (gần như khuyến nghị) |
+
+Nếu sau này QuanTik có pháp nhân/đối tác được cấp phép tư vấn, cập nhật mục này và `brand/compliance.md` trước khi
+đổi cách làm.
+
+## Post — 4–5 bài/tuần
+
+| Ngày | Dạng | Ví dụ | Làm bằng |
 | --- | --- | --- | --- |
-| Demo một việc | "Buổi sáng mở Quét toàn sàn: 5 mã điểm cao nhất, 5 mã nên tránh nhất theo thứ hạng screening" | `tutorial/` — một luồng | 20–45s |
-| Trước / sau | "Lọc mã bằng tay cả tối" → "đọc bảng đã xếp hạng theo 34 chỉ tiêu" | `tutorial/` hoặc `talking-head-script` | 25–45s |
-| Một mã, một báo cáo | "Gõ một mã → kết luận dễ đọc, vùng giá mô phỏng, rủi ro, mô hình 3D" | `tutorial/` cảnh Phân tích Quant | 30–50s |
-| Carousel tính năng | "Bảng Quét toàn sàn có gì: mỗi cột để làm gì" | ảnh chụp từ `tutorial/capture` (chưa có style tự động, xem *Còn thiếu*) | 5–7 slide |
-| Hỏi đáp / phản biện | "Quant có quyết định thay mình không? Không. Nó làm việc này…" | `talking-head-script` | 45–60s |
-| Hướng dẫn đầy đủ | đăng ký → quét → phân tích (ghim đầu trang) | `tutorial/run.sh` nguyên bản | 2–3 phút |
+| Thứ 2 | **Nhiệt kế thị trường tuần** (ảnh 1080×1350) | trạng thái VN-Index, độ rộng, thanh khoản tuần qua, ba kịch bản tuần này; cuối bài "từng mã xem trong Phân tích Quant" | trụ cột `market-intelligence` (dữ liệu AGR thật) → ảnh tĩnh *(cần bước xuất post, xem Còn thiếu)* |
+| Thứ 3 | **Tính năng: album 3–5 ảnh** | "Quét toàn sàn có gì": ảnh giao diện (mã bịa) + chú thích + nhân vật chỉ vào màn hình | ảnh chụp `tutorial/capture` + nhân vật `figures.py` *(cần style carousel sản phẩm)* |
+| Thứ 4 | **Chuyện hài về nghề** (truyện tranh 2–4 khung) | "Vợ hỏi: tháng này lãi không? / Tôi: để anh xem Sharpe đã" · "Sếp và tôi khi thị trường xanh" · "Group chat lúc 14h45" · "Tôi sau khi đọc 3 bài phân tích trái ngược" | nhân vật + bong bóng thoại (`figures.py`, `pillar_scenes.draw_stage`) *(cần xuất ảnh truyện tranh)* |
+| Thứ 5 | **Tính năng: một ảnh, một lợi ích** | "Gõ một mã → kết luận, rủi ro, vùng giá mô phỏng trong 30 giây" | ảnh chụp giao diện + caption |
+| Thứ 6 | **Chuyện hài / câu hỏi mở** | "Bạn là kiểu nhà đầu tư nào khi VN-Index giảm 3%?" (4 nhân vật, mời bình luận) | nhân vật `STAGES` |
+| Khi có | **Câu chuyện người dùng thật** (có đồng ý) | quy trình của họ, thời gian tiết kiệm; **không nói lãi** | làm tay |
 
-## Quy trình
+### Chuyện hài về nghề — luật riêng
 
-1. **Chọn dạng và một tính năng** từ bảng trên. Một bài một tính năng.
-2. **Viết lời theo lợi ích người dùng.**
-   - 3 giây đầu là **kết quả trên màn hình** (bảng quét, báo cáo), không phải câu hỏi lý thuyết.
-   - "bạn thấy ngay…", "khỏi phải…". Thuật ngữ chỉ dùng khi nó là nhãn trên giao diện.
-   - Tính năng nói đúng như `brand/identity.md` mục Sản phẩm. Không nói "screening chọn cổ phiếu tốt cho bạn",
-     nói "screening xếp hạng theo bộ chỉ tiêu công bố".
-   - Lợi ích là thời gian, kỷ luật, đọc rủi ro trước khi quyết định. **Không** hứa kiếm tiền.
-3. **Dựng.**
-   - Video quay giao diện: làm theo `tutorial/README.md` (giao diện production local, API giả, **mã bịa** QTA, QTV…).
-     Bản ngắn: chép `tutorial/beats.py` ra file mới, giữ các beat của một luồng, chạy `BEATS_FILE=… bash tutorial/run.sh <workdir>`.
-   - Tự quay (talking-head): viết `episodes/<id>.json` có `"platform": "facebook"`, rồi
-     ```bash
-     cd pipeline && python batch.py --platform facebook --episode ../episodes/<id>.json
-     ```
-     Ví dụ episode:
-     ```json
-     {"id": "fb-quet-san-th-01", "platform": "facebook", "topic": "sharpe", "style": "talking-head-script",
-      "title": "Quét toàn sàn: mở ra là có bảng xếp hạng",
-      "hook": "Tối nay khỏi lọc mã bằng tay.",
-      "beats": ["Mình mở Quét toàn sàn. Bảng screening mới nhất đã có sẵn.",
-                "Trên cùng là năm mã điểm cao nhất, bên dưới là năm mã nên tránh nhất theo thứ hạng screening.",
-                "Mỗi cột có định nghĩa. Bấm vào là biết chỉ tiêu đó đo gì.",
-                "Thấy mã nào cần xem kỹ thì chuyển sang Phân tích Quant."],
-      "takeaway": "Máy xếp hạng, bạn vẫn là người quyết định.",
-      "caption": "Quét toàn sàn đọc bản công bố screening mới nhất và xếp hạng theo bộ chỉ tiêu công bố.",
-      "cta": "Dùng thử miễn phí Quét toàn sàn tại quantik.io.vn"}
-     ```
-     `topic` chỉ để pipeline có B-roll; khi quay, chèn ảnh giao diện từ `tutorial/` thay cho B-roll quant.
-     Style khác (`carousel`, `kinetic-text`, `code-reel`…) dựng cảnh công thức/chart nên bị `--platform facebook` từ chối.
-4. **CTA thẻ cuối là dùng thử**, mặc định trong `profiles.json`: "Dùng thử miễn phí Quét toàn sàn và Phân tích
-   Quant tại quantik.io.vn". Nhắc giá hay ưu đãi thì đối chiếu https://quantik.io.vn/plans trước.
-5. **Caption Facebook:** câu đầu nêu việc làm được → link quantik.io.vn ở dòng 2–3 → 3–5 hashtag → câu miễn trừ.
-6. **QA** như mọi video (`qa_report.md` ĐẠT), cộng kiểm tra tay: mọi mã trên màn hình là mã bịa; không cảnh nào
-   lộ thông tin tài khoản thật.
+- Đùa về **tình huống và thói quen** của người chơi chứng khoán (FOMO, xem bảng điện giờ làm, group chat, "gồng lỗ"),
+  không đùa về người thua lỗ thật, không chế giễu nhà đầu tư.
+- Không lồng lời khuyên mua/bán vào câu đùa; cụm cấm vẫn áp dụng ("tất tay", "kèo thơm"… bị chặn).
+- Kết bằng một dòng nối về sản phẩm khi hợp lý ("hoặc mở Quét toàn sàn, 1 phút là xong"), không bắt buộc mọi bài.
+- Nhân vật luôn là hoạt hoạ phẳng của QuanTik; không dùng ảnh/meme người thật, không meme có bản quyền.
+
+### Caption post
+
+Câu đầu là điểm hài hoặc lợi ích → link quantik.io.vn ở dòng 2–3 (bài tính năng) → 3–5 hashtag → câu miễn trừ →
+dòng ghi nguồn ảnh (nếu có ảnh CC BY).
+
+## Reels — cập nhật thị trường, 2–3 video/tuần
+
+Chỉ một dạng: **nhịp thị trường + ba kịch bản + hành động quản trị rủi ro chung**, dữ liệu thật có dấu thời gian.
+
+```bash
+cd pipeline && python pillar.py market produce            # fetch → analyze → editorial → script → video
+```
+
+Khung: `hook → asof → breadth → liquidity → sectors → regime → interpretation → scenarios → risk → takeaway → end`
+(`pillars/market-intelligence/PILLAR.md`). QA `check_market` chặn đoạn trộn quan sát/nhận định, chặn tên mã và
+"sẽ tăng/giảm". Không có dữ liệu mới → không dựng, nói rõ giới hạn.
+
+- Hook nói trạng thái bằng số ("Độ rộng xấu nhất 3 tuần, thanh khoản giảm…"), không giật tít.
+- Hình: chart thị trường + ảnh thật (sàn, người nhìn bảng điện) + nhân vật, theo luật gối đầu.
+- CTA: "Theo dõi để nhận nhịp thị trường mỗi tuần" + link Phân tích Quant trong caption.
+
+## Không làm trên Facebook
+
+- Reels giải thích mô hình (đi TikTok), Reels demo tính năng (chuyển thành post), Reels giải trí (đi Instagram/YouTube).
 
 ## Còn thiếu (việc đóng gói tiếp theo)
 
-- Style `product-carousel`: slide từ ảnh chụp giao diện (`tutorial/capture`) + chú thích, cho dạng *Carousel tính năng*.
-- Chế độ cắt ngắn của `tutorial/`: chọn một luồng (chỉ Quét toàn sàn hoặc chỉ Phân tích Quant) bằng một tham số.
+1. **Xuất ảnh truyện tranh** 1080×1350 (2–4 khung, nhân vật + bong bóng thoại) cho chuyện hài về nghề.
+2. **Style carousel sản phẩm**: ảnh giao diện từ `tutorial/capture` + chú thích + nhân vật, cho album tính năng.
+3. **Xuất post nhiệt kế thị trường**: từ báo cáo của trụ cột thị trường ra một ảnh 1080×1350 + caption post.
 
 ## Đo
 
-Sau 7 ngày, ghi vào `notes` của `knowledge/episodes.csv`: lượt click link, số đăng ký mới trong tuần (nếu có từ
-admin), bình luận hỏi về sản phẩm. View chỉ là phụ.
+Post: bình luận, chia sẻ, click link, đăng ký trong tuần. Reels: lượt xem hết, follow trang.

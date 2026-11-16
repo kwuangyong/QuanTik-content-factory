@@ -23,7 +23,7 @@
   },
   "facebook": {
     "name": "Facebook",
-    "role": "conversion",
+    "role": "conversion (posts) + market-update Reels",
     "styles": [
       "talking-head-script"
     ],
@@ -34,7 +34,8 @@
     "requires_episode": true,
     "requires_episode_reason": "Facebook chỉ đăng nội dung sản phẩm; lời mặc định của chủ đề là lời giáo dục. Viết episode JSON góc sản phẩm (xem platforms/facebook/README.md) hoặc dùng tutorial/run.sh.",
     "max_seconds": 60,
-    "branding": "full"
+    "branding": "full",
+    "note": "Post là chính (tính năng, chuyện hài về nghề). Reels chỉ cập nhật thị trường: python pillar.py market produce. batch.py chỉ dùng cho talking-head."
   },
   "instagram": {
     "name": "Instagram Reels (English)",
