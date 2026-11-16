@@ -30,7 +30,7 @@ LICENSE_URL = {"cc0": "https://creativecommons.org/publicdomain/zero/1.0/",
 # Openverse "photograph" still returns drawings, posters and stock-art series; drop them by title/creator/tag.
 EXCLUDE = ("patent", "drawing", "illustration", "vector", "clipart", "clip art", "poster", "wall art", "diagram",
            "infographic", "logo", "cartoon", "screenshot", "meme", "nude", "injury", "accident", "hospital",
-           "crutch", "funeral", "protest", "police")
+           "crutch", "funeral", "protest", "police", "cake", "birthday")
 
 # Default searches per topic when an episode gives no "broll": concrete objects, places and people.
 TOPIC_QUERIES = {

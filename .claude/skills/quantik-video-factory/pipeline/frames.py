@@ -150,6 +150,13 @@ def broll_base(bg, t, dur):
     """Frame background for a scene carrying real imagery: slow Ken Burns zoom, darkened so text stays readable,
     small credit line on the photo."""
     p = max(0.0, min(1.0, t / max(dur, 1e-6)))
+    if bg.get("kind") == "art":  # code-drawn animated illustration (illustrations.py), dimmed under the text
+        import illustrations as ILL
+        img = base()
+        band = ILL.frame(bg["motif"], p)
+        band.putalpha(band.getchannel("A").point(lambda v: int(v * bg.get("alpha", 0.55))))
+        img.paste(band, (0, BAND_TOP), band)
+        return img
     if bg.get("frames"):  # video B-roll, pre-decoded 1080×1920 @30 fps
         files = sorted(Path(bg["frames"]).glob("*.jpg"))
         img = ImageEnhance.Brightness(Image.open(files[min(len(files) - 1, int(t * 30)) % len(files)]).convert("RGB")).enhance(0.5)

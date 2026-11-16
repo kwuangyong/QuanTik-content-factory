@@ -27,6 +27,7 @@ Khác YouTube Shorts ở chỗ: Shorts bán *sự thật khó nghe* (dark truth,
 2. **Viết episode tiếng Anh** `episodes/en-<id>.json` với `"platform": "instagram"`: hook ngắn, câu chữ đời thường,
    một ý. Ghi đè mọi trường chữ (lời mặc định là tiếng Việt; QA chặn chữ Việt còn sót). Số vẫn qua placeholder.
    Thêm `"broll"`: từ khoá ảnh người/vật cụ thể (xem `brand/identity.md` › Hình ảnh thật).
+   Hình hoạ tự vẽ tự xen vào mỗi cảnh thứ ba; chọn bằng `"art": ["brain", "person"]` (danh sách ở `brand/identity.md`).
 3. **Dựng:**
    ```bash
    cd pipeline && python batch.py --platform instagram --episode ../episodes/<id>.json

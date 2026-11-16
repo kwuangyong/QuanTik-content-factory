@@ -31,6 +31,7 @@ import core as Core  # noqa: E402
 from core import DEFAULT_OUT, KNOWLEDGE, STYLES, disclaimer, fill_tree, load_json, load_model_kb, save_json  # noqa: E402
 from models import TOPICS, Model, load_returns  # noqa: E402
 import broll as BR  # noqa: E402
+import illustrations as ILL  # noqa: E402
 import catalog as C  # noqa: E402
 import term_topic as TT  # noqa: E402
 import render as R  # noqa: E402
@@ -175,29 +176,44 @@ def attach_broll(scenes, ep, model, topic, disabled=False):
     targets = [s for s in scenes if s.name != "end"]
     if disabled or not targets:
         return []
-    spec = ep.get("broll")
+    # code-drawn illustrations (English branches by default, any video if the episode asks): every third scene,
+    # starting with the second, so real photos stay the majority
+    art = ep.get("art")
     family = getattr(model, "family", None) or topic
+    if isinstance(art, dict):
+        for s in targets:
+            if art.get(s.name):
+                s.bg = {"kind": "art", "motif": art[s.name]}
+    elif art is not False and (art or Core.lang() == "en"):
+        motifs = list(art or []) or ILL.TOPIC_ART.get(family, []) + ILL.GENERIC_ART
+        for j, s in enumerate(targets[1::3]):
+            s.bg = {"kind": "art", "motif": motifs[j % len(motifs)]}
+    photo_targets = [s for s in targets if not s.bg]
+    spec = ep.get("broll")
     defaults = BR.TOPIC_QUERIES.get(family, []) + BR.GENERIC
     if isinstance(spec, dict):
-        order = [spec.get(s.name) for s in targets]
+        order = [spec.get(s.name) for s in photo_targets]
         queries = [q for q in order if q] + defaults
     else:
         queries = list(spec or []) + defaults
-    items, _ = BR.pick(queries, len(targets))
+    items, _ = BR.pick(queries, len(photo_targets)) if photo_targets else ([], [])
     if not items:
         return []
-    for i, s in enumerate(targets):
+    for i, s in enumerate(photo_targets):
         it = items[i % len(items)]
         s.bg = dict(it, credit=BR.credit_line(it))
     return items
 
 
 def imagery_check(scenes):
+    """≥ 60% of scenes carry imagery (photo, B-roll or illustration) and ≥ 1/3 carry REAL photos/B-roll."""
     targets = [s for s in scenes if s.name != "end"]
-    with_img = sum(1 for s in targets if s.bg)
-    ok = targets and with_img / len(targets) >= 0.6
-    msg = f"{with_img}/{len(targets)} cảnh có ảnh thật/B-roll"
-    return {"fail": not ok, "msg": msg + ("" if ok else " — THIẾU (cần ≥ 60%; kiểm tra mạng tới Openverse/Pexels)")}
+    real = sum(1 for s in targets if s.bg and s.bg.get("kind") != "art")
+    art = sum(1 for s in targets if s.bg and s.bg.get("kind") == "art")
+    n = len(targets) or 1
+    ok = (real + art) / n >= 0.6 and real / n >= 1 / 3
+    msg = f"{real}/{len(targets)} cảnh ảnh thật/B-roll, {art} cảnh hình hoạ"
+    return {"fail": not ok, "msg": msg + ("" if ok else " — THIẾU (cần ≥ 60% có hình, ≥ 1/3 ảnh thật; kiểm tra mạng tới Openverse/Pexels)")}
 
 
 def contact_sheet(items, path):

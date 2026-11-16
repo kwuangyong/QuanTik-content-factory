@@ -113,7 +113,8 @@ Mỗi video ra `social-output/<id>/` (thư mục gốc repo): `final.mp4`, `thum
 **Giọng đọc:** edge-tts (vi-VN-HoaiMyNeural / NamMinhNeural) cần Internet tới `speech.platform.bing.com`. Không vào được thì pipeline lùi về gTTS → espeak-ng → không giọng (phụ đề vẫn đầy đủ, thời lượng ước theo số chữ). Engine thực tế ghi trong `qa_report.md` — phải báo người dùng nếu video không có giọng, kèm cách khắc phục: chạy lệnh trên máy có Internet, hoặc thêm host đó vào allowlist mạng của môi trường.
 
 **Hình ảnh thật (bắt buộc):** mọi cảnh trừ thẻ cuối được gắn ảnh thật/B-roll từ Pexels (có `PEXELS_API_KEY`) hoặc
-Openverse. Ghi `"broll": ["poker chips", "trader at desk", …]` trong episode để chọn ảnh sát nội dung. Output thêm
+Openverse. Ghi `"broll": ["poker chips", "trader at desk", …]` trong episode để chọn ảnh sát nội dung. Video tiếng
+Anh xen thêm **hình hoạ tự vẽ** có chuyển động (`"art": ["chips", "brain", …]`, `pipeline/illustrations.py`). Output thêm
 `credits.md` và `broll.jpg`. Quy định đầy đủ: `brand/identity.md` › *Hình ảnh thật & B-roll*.
 
 ### 5. Kiểm tra

@@ -20,7 +20,9 @@ Mẫu đã viết sẵn: `episodes/en-poker-kelly-myth.json`, `episodes/en-dark-
 
 ## Quy trình
 
-0. **Hình ảnh thật bắt buộc:** thêm `"broll"` (từ khoá người/vật cụ thể, tiếng Anh) vào episode; xem `brand/identity.md`.
+0. **Hình ảnh:** ảnh thật bắt buộc + hình hoạ tự vẽ xen kẽ (tự động mỗi cảnh thứ ba). Chọn bằng `"broll"` (từ khoá ảnh)
+   và `"art"` (`chips`, `dice`, `cards`, `coins`, `storm`, `brain`, `person`, `paths`, `scale`, `hourglass`, `target`).
+   Ghi chú cũ — thêm `"broll"` (từ khoá người/vật cụ thể, tiếng Anh) vào episode; xem `brand/identity.md`.
 1. **Chọn trụ và một sự thật** có thể chứng minh bằng một trong 8 mô hình viết tay (danh sách số: `python pipeline/models.py <topic>`).
 2. **Viết episode tiếng Anh** `episodes/en-<id>.json`, có `"platform": "youtube-shorts"`. Phải ghi đè **mọi** trường
    chữ mà style dùng (`hook`, `beats`, `myth`/`fact` hoặc `meme`, `takeaway`, `title`, `caption`, `hashtags`, `tag`),
