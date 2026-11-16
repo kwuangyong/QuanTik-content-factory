@@ -18,9 +18,16 @@ import subprocess
 import sys
 from pathlib import Path
 
-from core import BRAND
+from core import BRAND, lang
 
 VOICES = {"female": "vi-VN-HoaiMyNeural", "male": "vi-VN-NamMinhNeural"}
+# English series: Andrew = warm, low male narrator; Ava = clear female narrator.
+VOICES_EN = {"female": "en-US-AvaNeural", "male": "en-US-AndrewNeural"}
+
+
+def voice_id(voice):
+    table = VOICES_EN if lang() == "en" else VOICES
+    return table.get(voice, voice)
 ENGINES = ["edge", "gtts", "espeak", "silent"]
 
 
@@ -31,6 +38,10 @@ def lexicon():
 
 def speakable(text: str) -> str:
     """Rewrite symbols/acronyms so Vietnamese TTS reads them naturally (brand/pronunciation.json)."""
+    if lang() == "en":
+        out = re.sub(r"(\d)x\b", r"\1 times", text)
+        out = out.replace("−", "minus ").replace(" = ", " equals ").replace("≈", "about ")
+        return out
     out = text
     for k, v in sorted(lexicon().items(), key=lambda kv: -len(kv[0])):
         out = re.sub(r"(?<!\w)" + re.escape(k) + r"(?!\w)", v, out)
@@ -45,8 +56,8 @@ def duration_of(path) -> float:
 
 
 def estimate_seconds(text: str) -> float:
-    # Vietnamese narration ≈ 3,6 syllables/second at a calm explainer pace.
-    return 0.6 + len(text.split()) / 3.6
+    # Vietnamese narration ≈ 3,6 syllables/second; English ≈ 2,7 words/second at a calm explainer pace.
+    return 0.6 + len(text.split()) / (2.7 if lang() == "en" else 3.6)
 
 
 def _to_wav(src, dst):
@@ -55,6 +66,13 @@ def _to_wav(src, dst):
 
 def _edge(text, dst, voice, rate):
     import edge_tts
+    import edge_tts.communicate as _ec
+
+    # edge-tts pins certifi's CA list; behind a TLS-inspecting proxy also trust the CA named by SSL_CERT_FILE /
+    # REQUESTS_CA_BUNDLE (verification stays on).
+    ca = os.environ.get("SSL_CERT_FILE") or os.environ.get("REQUESTS_CA_BUNDLE")
+    if ca and Path(ca).exists() and not getattr(_ec, "_qt_ca", None):
+        _ec._SSL_CTX.load_verify_locations(ca); _ec._qt_ca = ca
 
     tmp = Path(dst).with_suffix(".mp3")
 
@@ -69,7 +87,7 @@ def _gtts(text, dst, *_):
     from gtts import gTTS
 
     tmp = Path(dst).with_suffix(".mp3")
-    gTTS(text, lang="vi", timeout=20).save(str(tmp))
+    gTTS(text, lang=lang(), timeout=20).save(str(tmp))
     _to_wav(tmp, dst); tmp.unlink(missing_ok=True)
 
 
@@ -77,7 +95,7 @@ def _espeak(text, dst, *_):
     exe = shutil.which("espeak-ng") or shutil.which("espeak")
     if not exe:
         raise RuntimeError("espeak-ng not installed")
-    subprocess.run([exe, "-v", "vi", "-s", "150", "-w", str(dst), text], check=True, capture_output=True)
+    subprocess.run([exe, "-v", lang(), "-s", "150", "-w", str(dst), text], check=True, capture_output=True)
 
 
 def synth(text, dst, engine="auto", voice="female", rate="+0%"):
@@ -89,7 +107,7 @@ def synth(text, dst, engine="auto", voice="female", rate="+0%"):
         if e == "silent":
             return "silent", estimate_seconds(text), errors
         try:
-            {"edge": _edge, "gtts": _gtts, "espeak": _espeak}[e](say, dst, VOICES.get(voice, voice), rate)
+            {"edge": _edge, "gtts": _gtts, "espeak": _espeak}[e](say, dst, voice_id(voice), rate)
             return e, duration_of(dst), errors
         except Exception as ex:  # network blocked, package missing...
             errors.append(f"{e}: {type(ex).__name__}: {str(ex)[:120]}")
@@ -101,7 +119,7 @@ def probe_engine(engine="auto", voice="female"):
     import tempfile
 
     with tempfile.TemporaryDirectory() as d:
-        used, _, errors = synth("Xin chào.", Path(d) / "probe.wav", engine, voice)
+        used, _, errors = synth("Hello." if lang() == "en" else "Xin chào.", Path(d) / "probe.wav", engine, voice)
     return used, errors
 
 

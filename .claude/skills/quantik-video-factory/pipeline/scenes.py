@@ -8,7 +8,7 @@ import re
 from functools import lru_cache
 
 import frames as F
-from core import SAFE, THEME as T
+from core import SAFE, THEME as T, lang
 from render import Scene
 
 X0, X1 = SAFE["left"], SAFE["right"]
@@ -170,14 +170,14 @@ def code_typing(model, say, name="code", min_dur=5.0, title=None, latex=None):
 
 def terminal(model, outputs, say, name="run", min_dur=4.0):
     """outputs: [{"label": "α + β", "key": "persistence", "fmt": optional}] — values from the model run."""
-    from core import fmt_vi
+    from core import fmt_num as fmt_vi
 
     rows = [(o["label"], fmt_vi(model.values[o["key"]], o.get("fmt") or model.formats.get(o["key"], "num2")))
             for o in outputs]
 
     hi = next((r for o, r in zip(outputs, rows) if o.get("highlight")), rows[min(2, len(rows) - 1)])
     if not hi[1]:  # label-only rows (engine methods): show the label itself as the big value
-        hi = ("hàm chính", hi[0])
+        hi = ("hàm chính" if lang() != "en" else "main function", hi[0])
 
     def draw(img, t, p):
         k = min(len(rows), int(len(rows) * F.seg(p, 0.05, 0.7)) + 1)

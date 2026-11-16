@@ -26,7 +26,8 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(HERE.parent / "qa"))
 
-from core import DEFAULT_OUT, KNOWLEDGE, STYLES, disclaimer, fill_tree, load_json, load_model_kb, save_json  # noqa: E402
+from core import (DEFAULT_OUT, KNOWLEDGE, STYLES, disclaimer, disclaimer_extra, fill_tree, load_json,  # noqa: E402
+                  load_model_kb, save_json, set_lang, tr)
 from models import TOPICS, Model, load_returns  # noqa: E402
 import catalog as C  # noqa: E402
 import term_topic as TT  # noqa: E402
@@ -72,6 +73,11 @@ def build_episode(topic, style, override=None):
 
 
 def captions(ep, disc):
+    extra = disclaimer_extra(ep.get("sensitive", ""))
+    if extra:
+        disc = extra + "\n\n" + disc
+    if ep.get("credits"):
+        disc += "\n\n" + tr("Nguồn hình ảnh:", "Footage & images:") + "\n" + "\n".join("· " + c for c in ep["credits"])
     tags = " ".join("#" + h.lstrip("#") for h in ep.get("hashtags", []))
     title = ep.get("title", ep["hook"])
     cap = ep.get("caption", ep["hook"])
@@ -90,16 +96,16 @@ def captions(ep, disc):
 
 {cap}
 
-👉 {ep.get('cta_link', '')}\n\n{ep.get('cta', '')}
+{('👉 ' + ep['cta_link'] + chr(10) + chr(10)) if ep.get('cta_link') else ''}{ep.get('cta', '')}
 
 {tags}
 
 {disc}
 
 ## YouTube Shorts
-**Tiêu đề:** {yt_title}
+**{tr("Tiêu đề", "Title")}:** {yt_title}
 
-**Mô tả:**
+**{tr("Mô tả", "Description")}:**
 {cap}
 
 {ep.get('cta_link', '')}\n{ep.get('cta', '')}
@@ -125,12 +131,13 @@ def log_episode(ep, out_dir, status, duration):
 # Thẻ cuối mọi video: kêu gọi theo dõi kênh (yêu cầu của chủ sản phẩm, áp dụng cho mọi video).
 # Episode muốn CTA khác (video quảng bá) thì ghi "cta" trong episode JSON. CTA tính năng cũ chuyển xuống caption.
 FOLLOW_CTA = "Thả tim và theo dõi QuanTik để học một kiến thức quant mỗi ngày"
+FOLLOW_CTA_EN = "Like and follow QuanTik for one quant idea every day"
 
 
 def _follow_cta(ep, override):
     ep["cta_link"] = ep.get("cta_link") or ep.get("cta", "")
     if not (override or {}).get("cta"):
-        ep["cta"] = FOLLOW_CTA
+        ep["cta"] = FOLLOW_CTA_EN if ep.get("lang") == "en" else FOLLOW_CTA
     return ep
 
 
@@ -162,6 +169,16 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
          scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True):
     t_start = time.time()
     ep, mod, model = prepare(topic, style, override, returns)
+    set_lang(ep.get("lang", "vi"))
+    try:
+        return _make(ep, mod, model, topic, style, override, out_root, engine, voice, music, scale, fps,
+                     data_label, force, log, t_start)
+    finally:
+        set_lang("vi")
+
+
+def _make(ep, mod, model, topic, style, override, out_root, engine, voice, music, scale, fps, data_label, force,
+          log, t_start):
     out = Path(out_root) / ep["id"]
     work = out / "_work"
     work.mkdir(parents=True, exist_ok=True)
@@ -172,9 +189,15 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
     rendered = set()
     filled = fill_tree(ep, model.values, model.formats, rendered)
     disc = disclaimer()
+    sim_note = tr("Dữ liệu mô phỏng · giáo dục, không phải khuyến nghị",
+                  "Simulated data · education only, not investment advice")
+    if filled.get("sensitive") == "gambling":
+        sim_note = tr("Mô phỏng · giáo dục, không khuyến khích cờ bạc hay đầu tư theo",
+                      "Simulation · education only · no gambling or investment advice")
     note = data_label or ("Dữ liệu thật: " + filled.get("data_source", "CSV người dùng") if model.real_data
-                          else "Dữ liệu mô phỏng · giáo dục, không phải khuyến nghị")
-    ctx = {"tag": filled.get("tag", topic.upper()), "note": note, "disclaimer": disc, "out": out}
+                          else sim_note)
+    ctx = {"tag": filled.get("tag", topic.upper()), "note": note, "disclaimer": disc, "out": out,
+           "disclaimer_extra": disclaimer_extra(filled.get("sensitive", ""))}
     save_json(out / "episode.filled.json", filled)
 
     result = mod.build(filled, model, ctx)
@@ -184,7 +207,7 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
     texts = result.get("texts", []) if isinstance(result, dict) else []
     scenes = result["scenes"] if isinstance(result, dict) else result
     corpus = [s.say for s in scenes] + [x for s in scenes for x in s.texts] + texts
-    corpus += [filled.get("caption", ""), filled.get("title", "")]
+    corpus += [filled.get("caption", ""), filled.get("title", "")]  # credits hold URLs/ids: not number-checked
     save_json(out / "narration.json", {"scenes": [{"name": s.name, "say": s.say, "texts": s.texts} for s in scenes],
                                        "extra": texts})
     nums = check_numbers.check(corpus, model.values, model.formats, rendered, filled.get("allowed_literals", []),

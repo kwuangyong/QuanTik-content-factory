@@ -1,3 +1,8 @@
 /social-output/
 __pycache__/
 *.pyc
+
+# stock B-roll is downloaded on demand (pipeline/broll.py), not committed
+.claude/skills/quantik-video-factory/brand/assets/broll/*.mp4
+.claude/skills/quantik-video-factory/brand/assets/images/*.jpg
+.claude/skills/quantik-video-factory/brand/assets/images/*.gif

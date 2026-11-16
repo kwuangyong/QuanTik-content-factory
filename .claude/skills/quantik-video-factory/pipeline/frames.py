@@ -14,7 +14,7 @@ import matplotlib.ticker  # noqa: E402,F401
 from matplotlib import font_manager  # noqa: E402
 from PIL import Image, ImageDraw, ImageFilter  # noqa: E402
 
-from core import BRAND, H, SAFE, THEME, W, font, font_path, hex_  # noqa: E402
+from core import BRAND, H, SAFE, THEME, W, font, font_path, hex_, tr  # noqa: E402
 
 for _k in ("sans", "sans-bold"):
     try:
@@ -123,7 +123,8 @@ def header(img, tag: str, note: str):
     x, y = SAFE["left"], SAFE["top"] + 4
     img.paste(logo(64), (x, y), logo(64))
     d.text((x + 80, y + 8), "QuanTik", font=font("sans-bold", 34), fill=T["text"])
-    d.text((x + 80, y + 46), "quant cho cổ phiếu Việt Nam", font=font("sans", 17), fill=T["muted"])
+    d.text((x + 80, y + 46), tr("quant cho cổ phiếu Việt Nam", "quant, explained with code"), font=font("sans", 17),
+           fill=T["muted"])
     f = font("mono-bold", 24)
     tw = d.textlength(tag, font=f)
     bx1 = SAFE["right"]; bx0 = bx1 - tw - 36
@@ -385,7 +386,8 @@ def code_panel(code, width=880, chars=None, hl_line=None, title="model.py"):
     return im
 
 
-def terminal_panel(lines_shown, width=880, title="kết quả"):
+def terminal_panel(lines_shown, width=880, title=None):
+    title = title or tr("kết quả", "result")
     size = 30
     while size > 20 and any(font("mono", size).getlength(a) + font("mono-bold", size).getlength(b) > width - 70
                             for a, b in lines_shown):

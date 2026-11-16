@@ -52,6 +52,7 @@ Xác định từ lời người dùng (hỏi lại chỉ khi thật sự mơ h�
 | `talking-head-script` | bạn tự quay: kịch bản + teleprompter + B-roll | 45–90s |
 | `carousel` | feed Facebook/TikTok photo, đọc chậm, 7 slide | — |
 | `meme-quant` | giải trí, kéo người mới, 12–20s | 12–20s |
+| `broll-story` | b-roll thật + hoạt họa + chart/code, chuyển cảnh gối đầu; loạt tiếng Anh | 50–60s |
 
 - **Số lượng.** "Làm loạt", "cả tuần" → nhiều cặp topic × style, chạy một lệnh batch.
 
@@ -119,6 +120,26 @@ Người dùng muốn **văn bản trong chat để copy đăng ngay**. Với m�
 - Lưu ý còn lại cho người duyệt (giọng thiếu, giá gói cần đối chiếu, nhạc chưa có giấy phép…).
 
 Sau khi đăng, nhắc người dùng ghi view vào `knowledge/episodes.csv` sau 7 ngày (hoặc lấy qua công cụ vidIQ nếu có kết nối) để `hooks.md` dần có hook đã kiểm chứng.
+
+## Loạt tiếng Anh: game theory, poker, "cold truths" về tiền
+
+10 chủ đề viết tay trong `pipeline/models_games.py` (`ergodicity`, `yard_sale`, `survivorship`, `pot_odds`,
+`poker_variance`, `bluff_gto`, `prisoners_dilemma`, `dollar_auction`, `lottery`, `gamblers_ruin`), kiến thức +
+kịch bản tiếng Anh trong `knowledge/models/<topic>.md`, dựng bằng style `broll-story`:
+
+```bash
+python broll.py                                   # tải b-roll Pexels + ảnh Wikimedia theo manifest (lần đầu)
+SSL_CERT_FILE=<CA proxy nếu có> QT_RATE=+8% python batch.py --topics pot_odds --styles broll-story --voice male
+```
+
+- `"lang": "en"` trong episode → số kiểu 1,234.5, giọng en-US (Andrew nam / Ava nữ), câu miễn trừ tiếng Anh, CTA
+  "Like and follow QuanTik…". Video tiếng Việt cũ không đổi.
+- `"sensitive": "gambling"` → thêm lưu ý "không khuyến khích cờ bạc" vào caption, thẻ cuối và dòng ghi chú trên màn
+  hình (xem `brand/compliance.md`, mục cờ bạc). Poker/xổ số/roulette chỉ là ví dụ xác suất.
+- B-roll/ảnh: `brand/assets/broll/manifest.json`, `brand/assets/images/manifest.json` (file media không commit).
+  Mọi clip/ảnh dùng trong video tự được ghi nguồn trong `captions.md`. Tìm clip mới bằng vidIQ `find_broll`.
+- Edge-tts sau proxy TLS: đặt `SSL_CERT_FILE` trỏ tới CA của proxy (voiceover.py tự nạp, vẫn xác minh TLS).
+- Giữ dưới 60s: số lớn đọc lâu; QA định dạng chặn > 60s.
 
 ## Chủ đề catalog
 

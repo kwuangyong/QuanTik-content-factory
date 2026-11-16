@@ -11,7 +11,7 @@ import unicodedata
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "pipeline"))
-from core import disclaimer, load_banned  # noqa: E402
+from core import disclaimer, disclaimer_extra, load_banned  # noqa: E402
 
 
 def norm(s):
@@ -25,16 +25,22 @@ def negated(t, start, window=12):
     """True if one of the few words before the hit negates it ("không phải điểm mua", "không có nghĩa cổ phiếu sẽ tăng").
     Definitions explain what a number is NOT; those sentences are the opposite of a call to action."""
     before = re.split(r"[.!?;:,\n]|\bnhưng\b", t[:start])[-1].split()[-window:]
-    return any(w.strip(",“”\"'()") in ("không", "chưa", "chẳng", "đừng") for w in before)
+    return any(w.strip(",“”\"'()") in NEG_WORDS for w in before)
+
+
+NEG_WORDS = ("không", "chưa", "chẳng", "đừng", "not", "no", "never", "don't", "doesn't", "isn't", "won't", "nobody")
 
 
 def check(texts):
     banned = load_banned()
-    disc = norm(disclaimer())
+    discs = [norm(x) for x in (disclaimer("vi"), disclaimer("en"), disclaimer_extra("gambling", "vi"),
+                                disclaimer_extra("gambling", "en"))]
     hits = []
     for text in texts:
-        # the mandatory disclaimer itself says "không phải khuyến nghị mua bán" — do not flag it
-        t = " ".join(norm(text).split()).replace(disc, " ")
+        # the mandatory disclaimers say "không phải khuyến nghị mua bán" / "not investment advice" — do not flag them
+        t = " ".join(norm(text).split())
+        for disc in discs:
+            t = t.replace(disc, " ")
         for phrase in banned:
             for m in re.finditer(r"(?<!\w)" + re.escape(phrase) + r"(?!\w)", t):
                 if phrase.startswith("không") or not negated(t, m.start()):

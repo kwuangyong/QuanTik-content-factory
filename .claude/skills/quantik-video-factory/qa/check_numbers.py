@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "pipeline"))
-from core import fmt_vi  # noqa: E402
+from core import fmt_num as fmt_vi  # noqa: E402
 
 NUM = re.compile(r"(?<![\w])[−\-]?\d+(?:[.,]\d+)*%?x?")
 ALL_FORMATS = [f"{k}{d}" for k in ("pct", "num") for d in range(4)] + ["int", "vnd", "x1", "x2"]

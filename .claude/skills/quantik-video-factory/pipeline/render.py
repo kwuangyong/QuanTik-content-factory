@@ -24,6 +24,8 @@ class Scene:
     subtitles: bool = True
     duration: float = 0.0
     audio: str | None = None
+    transition: str | None = None      # "fade" | "slide" | "zoom": overlap the start with the previous scene
+    trans_dur: float = 0.45
 
 
 def chunk_text(text, max_chars=66):
@@ -72,6 +74,7 @@ def render(scenes, out_path, tag, note, fps=FPS, layout_path=None, srt_path=None
     total = sum(s.duration for s in scenes)
     srt, t0, idx = [], 0.0, 1
     F.LAYOUT.__init__()
+    prev = None  # last content frame (no subtitle/progress) of the previous scene, for overlapping transitions
     for s in scenes:
         F.LAYOUT.scene = s.name
         chunks = timed_chunks(s.say, t0, s.duration) if (s.say and s.subtitles) else []
@@ -85,6 +88,10 @@ def render(scenes, out_path, tag, note, fps=FPS, layout_path=None, srt_path=None
             if s.header:
                 F.header(img, tag, note)
             s.draw(img, t, t / s.duration)
+            if s.transition and prev is not None and t < s.trans_dur:
+                img = _transition(prev, img, F.ease_in_out(t / s.trans_dur), s.transition)
+            if i == n - 1:
+                prev = img.copy()
             gt = t0 + t
             cur = next((c for c0, c1, c in chunks if c0 <= gt < c1), "")
             if s.subtitles:
@@ -100,6 +107,23 @@ def render(scenes, out_path, tag, note, fps=FPS, layout_path=None, srt_path=None
     if srt_path:
         open(srt_path, "w", encoding="utf-8").write("\n".join(srt))
     return total
+
+
+def _transition(a, b, k, kind):
+    """Blend the outgoing frame a into the incoming frame b (k: 0 → 1)."""
+    from PIL import Image
+
+    if kind == "slide":
+        out = a.copy()
+        off = int(W * (1 - k))
+        out.paste(b.crop((0, 0, W - off, H)), (off, 0)) if off < W else None
+        return Image.blend(out, b, k * 0.35)
+    if kind == "zoom":
+        s = 1 + 0.12 * k
+        z = a.resize((int(W * s), int(H * s)), Image.BILINEAR)
+        z = z.crop(((z.width - W) // 2, (z.height - H) // 2, (z.width - W) // 2 + W, (z.height - H) // 2 + H))
+        return Image.blend(z, b, k)
+    return Image.blend(a, b, k)
 
 
 def still(scene, t, tag, note, path, size=None):

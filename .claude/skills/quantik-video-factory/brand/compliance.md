@@ -69,6 +69,74 @@ Luôn có trong caption và thẻ cuối video (pipeline tự chèn).
 Nội dung giáo dục về phương pháp định lượng, không phải khuyến nghị mua bán chứng khoán. Kết quả mô hình phụ thuộc giả định và dữ liệu; hiệu suất quá khứ không đảm bảo tương lai.
 ```
 
+## Disclaimer (English)
+
+Bản tiếng Anh của câu miễn trừ, dùng cho mọi video `"lang": "en"` (caption + thẻ cuối, pipeline tự chèn).
+
+```text
+Educational content about quantitative methods, not investment advice. Model results depend on assumptions and data; past performance does not guarantee future results.
+```
+
+## Chủ đề cờ bạc: poker, xổ số, roulette, trò cá cược
+
+Poker, xổ số, roulette chỉ được dùng như **bài toán xác suất và ra quyết định**. Cờ bạc trái phép ở Việt Nam
+(ngoài các hình thức được cấp phép), và nền tảng hạn chế nội dung cổ vũ cá cược. Vì vậy:
+
+- Không nhắc tên site/app cá cược, sòng bạc cụ thể, mã giới thiệu, link.
+- Không hướng dẫn "kiếm tiền từ poker/xổ số", không khoe tiền thắng, không gợi ý mức cược.
+- Kết luận luôn nghiêng về rủi ro và giới hạn (nhà cái có lợi thế, phương sai, xác suất cực nhỏ).
+- Episode đặt `"sensitive": "gambling"` → pipeline chèn thêm lưu ý dưới đây vào caption, thẻ cuối và dòng ghi chú
+  trên màn hình.
+
+## Lưu ý giáo dục: cờ bạc
+
+```text
+Nội dung giáo dục về xác suất và lý thuyết trò chơi. Không khuyến khích cờ bạc, cá cược dưới bất kỳ hình thức nào.
+```
+
+## Education note: gambling (English)
+
+```text
+Educational content about probability and game theory. It does not encourage gambling or betting of any kind.
+```
+
+## Banned phrases (English)
+
+Cùng quy tắc với cụm cấm tiếng Việt; áp dụng cho mọi video (caption có thể lẫn hai thứ tiếng).
+
+```text
+buy now
+sell now
+guaranteed profit
+guaranteed return
+guaranteed win
+risk-free
+risk free
+can't lose
+cannot lose
+never lose
+sure win
+sure thing
+get rich quick
+double your account
+double your money
+easy money
+free money
+price target
+buy signal
+sell signal
+you should buy
+you should sell
+hot stock
+to the moon
+bet the house
+sign up and play
+deposit now
+start betting
+how to win at poker
+beat the casino
+```
+
 ## Khi số liệu là sự kiện lịch sử
 
 Số không do code tính (ví dụ LTCM lỗ bao nhiêu) phải nằm trong `facts` của episode, mỗi số kèm `source`. Ưu tiên nguồn gốc: báo cáo chính thức, sách đã xuất bản, báo tài chính lớn. Nếu không chắc, bỏ số đó.

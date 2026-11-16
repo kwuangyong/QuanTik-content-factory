@@ -1,0 +1,22 @@
+{
+  "_about": "Stock B-roll for broll-story videos. Found with vidIQ find_broll (Pexels). Pexels License: free to use and modify, attribution appreciated; we credit every clip in captions.md. Clips (*.mp4) are not committed: run `python pipeline/broll.py` to download.",
+  "clips": {
+    "coin_flip":     {"id": 8816953,  "url": "https://videos.pexels.com/video-files/8816953/8816953-hd_1080_1920_25fps.mp4",  "credit": "cottonbro CG studio", "page": "https://www.pexels.com/video/animated-hand-flipping-a-coin-8816953/"},
+    "coin_flip2":    {"id": 8816990,  "url": "https://videos.pexels.com/video-files/8816990/8816990-hd_1080_1920_25fps.mp4",  "credit": "cottonbro CG studio", "page": "https://www.pexels.com/video/hand-flipping-a-euro-coin-8816990/"},
+    "crowd":         {"id": 10531835, "url": "https://videos.pexels.com/video-files/10531835/10531835-hd_720_1280_30fps.mp4", "credit": "Yussuf Muradov", "page": "https://www.pexels.com/video/people-walking-on-cicek-pasaji-in-istanbul-10531835/"},
+    "market_screen": {"id": 7579943,  "url": "https://videos.pexels.com/video-files/7579943/7579943-hd_1080_2048_25fps.mp4",  "credit": "Tima Miroshnichenko", "page": "https://www.pexels.com/video/video-of-stock-exchange-7579943/"},
+    "trader":        {"id": 8480284,  "url": "https://videos.pexels.com/video-files/8480284/8480284-hd_720_1280_25fps.mp4",  "credit": "ArtHouse Studio", "page": "https://www.pexels.com/video/person-looking-a-stock-market-8480284/"},
+    "poker_chips":   {"id": 6665303,  "url": "https://videos.pexels.com/video-files/6665303/6665303-hd_1080_1920_30fps.mp4",  "credit": "Anna Shvets", "page": "https://www.pexels.com/video/a-man-holding-poker-chips-6665303/"},
+    "cards_shuffle": {"id": 7608623,  "url": "https://videos.pexels.com/video-files/7608623/7608623-hd_1080_1920_24fps.mp4",  "credit": "Pavel Danilyuk", "page": "https://www.pexels.com/video/a-dealer-shuffling-cards-7608623/"},
+    "cards_deal":    {"id": 6813755,  "url": "https://videos.pexels.com/video-files/6813755/6813755-hd_720_1248_30fps.mp4",  "credit": "ROMAN ODINTSOV", "page": "https://www.pexels.com/video/distributing-cards-6813755/"},
+    "casino_table":  {"id": 7608712,  "url": "https://videos.pexels.com/video-files/7608712/7608712-hd_1080_1920_25fps.mp4",  "credit": "Pavel Danilyuk", "page": "https://www.pexels.com/video/people-playing-in-a-casino-7608712/"},
+    "handshake":     {"id": 12893607, "url": "https://videos.pexels.com/video-files/12893607/12893607-hd_1080_1920_24fps.mp4", "credit": "Mizuno K", "page": "https://www.pexels.com/video/close-up-view-of-shaking-hands-12893607/"},
+    "deal":          {"id": 8814522,  "url": "https://videos.pexels.com/video-files/8814522/8814522-hd_1080_1920_25fps.mp4",  "credit": "Kampus Production", "page": "https://www.pexels.com/video/people-making-a-deal-8814522/"},
+    "gavel":         {"id": 5637306,  "url": "https://videos.pexels.com/video-files/5637306/5637306-hd_1080_1920_24fps.mp4",  "credit": "Sora Shimazaki", "page": "https://www.pexels.com/video/video-of-gavel-and-block-5637306/"},
+    "roulette":      {"id": 9954987,  "url": "https://videos.pexels.com/video-files/9954987/9954987-hd_1080_1920_25fps.mp4",  "credit": "Petkevich Evgeniy", "page": "https://www.pexels.com/video/spinning-roulette-in-casino-9954987/"},
+    "roulette2":     {"id": 7608631,  "url": "https://videos.pexels.com/video-files/7608631/7608631-hd_720_1280_24fps.mp4",  "credit": "Pavel Danilyuk", "page": "https://www.pexels.com/video/casino-roulette-7608631/"},
+    "slots":         {"id": 9807886,  "url": "https://videos.pexels.com/video-files/9807886/9807886-hd_720_1280_25fps.mp4",  "credit": "Petkevich Evgeniy", "page": "https://www.pexels.com/video/gambling-machines-screen-in-casino-9807886/"},
+    "cash_count":    {"id": 6266433,  "url": "https://videos.pexels.com/video-files/6266433/6266433-hd_1080_1920_25fps.mp4",  "credit": "Tima Miroshnichenko", "page": "https://www.pexels.com/video/close-up-shot-of-man-counting-money-6266433/"},
+    "dollars":       {"id": 6266251,  "url": "https://videos.pexels.com/video-files/6266251/6266251-hd_1080_1920_25fps.mp4",  "credit": "Tima Miroshnichenko", "page": "https://www.pexels.com/video/a-person-counting-dollar-bills-6266251/"}
+  }
+}

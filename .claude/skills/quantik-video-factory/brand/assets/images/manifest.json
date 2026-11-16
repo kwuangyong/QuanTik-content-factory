@@ -1,0 +1,8 @@
+{
+  "_about": "Still images for broll-story (Ken Burns pan + label). Wikimedia Commons; licence and credit printed in captions.md and on screen. Files are not committed: python pipeline/broll.py downloads them.",
+  "images": {
+    "von_neumann": {"url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/JohnvonNeumann-LosAlamos.gif", "file": "von_neumann.gif", "credit": "LANL", "license": "Attribution (Los Alamos National Laboratory)", "page": "https://commons.wikimedia.org/wiki/File:JohnvonNeumann-LosAlamos.gif", "label": "John von Neumann"},
+    "axelrod": {"url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Robert_Axelrod_%285359439576%29.jpg/1280px-Robert_Axelrod_%285359439576%29.jpg", "file": "axelrod.jpg", "credit": "Mike from United States of America", "license": "CC BY 2.0", "page": "https://commons.wikimedia.org/wiki/File:Robert_Axelrod_(5359439576).jpg", "label": "Robert Axelrod"},
+    "monte_carlo_casino": {"url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Casino_de_Montecarlo%2C_M%C3%B3naco%2C_2016-06-23%2C_DD_06.jpg/1280px-Casino_de_Montecarlo%2C_M%C3%B3naco%2C_2016-06-23%2C_DD_06.jpg", "file": "monte_carlo_casino.jpg", "credit": "Diego Delso", "license": "CC BY-SA 4.0", "page": "https://commons.wikimedia.org/wiki/File:Casino_de_Montecarlo,_M%C3%B3naco,_2016-06-23,_DD_06.jpg", "label": "Casino de Monte-Carlo"}
+  }
+}

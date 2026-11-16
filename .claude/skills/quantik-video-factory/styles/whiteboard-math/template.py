@@ -28,7 +28,7 @@ def _put(img, latex, k=1.0, size=78, color=None, y=None):
 
 
 def build(ep, model, ctx):
-    from core import fmt_vi
+    from core import fmt_num as fmt_vi
 
     hi = next((o for o in ep["outputs"] if o.get("highlight")), ep["outputs"][0])
     hi_val = fmt_vi(model.values[hi["key"]], hi.get("fmt") or model.formats.get(hi["key"], "num2"))

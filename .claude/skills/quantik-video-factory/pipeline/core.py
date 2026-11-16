@@ -83,6 +83,47 @@ def font(kind: str, size: int):
     return ImageFont.truetype(font_path(kind), int(size))
 
 
+# ---------------------------------------------------------------- language of the episode being built
+# "vi" (default, every existing video) or "en" (English series). batch.py sets it per episode; number
+# formatting, disclaimer, voice and on-screen chrome follow it.
+_LANG = {"lang": "vi"}
+
+
+def set_lang(lang: str):
+    _LANG["lang"] = "en" if lang == "en" else "vi"
+
+
+def lang() -> str:
+    return _LANG["lang"]
+
+
+def tr(vi: str, en: str) -> str:
+    """Pick the on-screen/UI string for the current language."""
+    return en if _LANG["lang"] == "en" else vi
+
+
+def fmt_num(value, spec: str = "num2", lang_: str | None = None) -> str:
+    return fmt_en(value, spec) if (lang_ or _LANG["lang"]) == "en" else fmt_vi(value, spec)
+
+
+def fmt_en(value, spec: str = "num2") -> str:
+    """English print: 1,234.5 ; 12.3% ; $1,234 ; 4.4x."""
+    if isinstance(value, str):
+        return value
+    m = re.fullmatch(r"(pct|num|vnd|usd|int|x)(\d?)", spec or "num2")
+    if not m:
+        raise ValueError(f"unknown number format {spec!r}")
+    kind, digits = m.group(1), int(m.group(2) or 0)
+    if kind == "pct":
+        value = value * 100
+    if kind in ("int", "vnd", "usd"):
+        digits = 0
+    out = f"{abs(value):,.{digits}f}"
+    if value < 0 and out.strip("0,.") != "":
+        out = "-" + out
+    return out + {"pct": "%", "x": "x", "vnd": " VND"}.get(kind, "") if kind != "usd" else "$" + out
+
+
 # ---------------------------------------------------------------- numbers (vi-VN)
 def _group(intpart: str) -> str:
     out = ""
@@ -96,12 +137,14 @@ def fmt_vi(value, spec: str = "num2") -> str:
     """Format like Vietnamese print: 1.234,5 ; 12,3% ; 149.000 đ."""
     if isinstance(value, str):
         return value
-    m = re.fullmatch(r"(pct|num|vnd|int|x)(\d?)", spec or "num2")
+    m = re.fullmatch(r"(pct|num|vnd|usd|int|x)(\d?)", spec or "num2")
     if not m:
         raise ValueError(f"unknown number format {spec!r}")
     kind, digits = m.group(1), int(m.group(2) or 0)
     if kind == "pct":
         value = value * 100
+    if kind == "usd":
+        kind = "int"
     if kind in ("int", "vnd"):
         digits = 0
     neg = value < 0
@@ -132,7 +175,7 @@ def fill(text: str, values: dict, formats: dict, rendered: set | None = None) ->
         key, spec = m.group(1), m.group(2)
         if key not in values:
             raise KeyError(f"placeholder {{{key}}} has no computed value; available: {sorted(values)}")
-        out = fmt_vi(values[key], spec or formats.get(key, "num2"))
+        out = fmt_num(values[key], spec or formats.get(key, "num2"))
         if rendered is not None:
             rendered.add(out)
         return out
@@ -148,9 +191,11 @@ def fill_latex(tex: str, values: dict, formats: dict, rendered: set | None = Non
 
     def rep(m):
         key, spec = m.group(1), m.group(2)
-        out = fmt_vi(values[key], spec or formats.get(key, "num2"))
+        out = fmt_num(values[key], spec or formats.get(key, "num2"))
         if rendered is not None:
             rendered.add(out)
+        if lang() == "en":
+            return out.replace(",", "{,}").replace("%", r"\%")
         return out.replace(",", "{,}").replace(".", "{.}").replace("%", r"\%").replace("−", "-")
 
     return _PH_TEX.sub(rep, tex)
@@ -176,7 +221,7 @@ def fill_tree(obj, values, formats, rendered):
 
 
 # keys holding LaTeX (filled with <<key>>) or ids/code that are never filled
-TEX_KEYS = {"formula", "formula_parts", "formula_numeric", "sym"}
+TEX_KEYS = {"formula", "formula_parts", "formula_numeric", "sym", "latex"}
 RAW_KEYS = {"id", "topic", "style", "platforms", "key", "fmt", "hashtags", "format", "allowed_literals", "voice",
             "facts"}
 
@@ -197,16 +242,30 @@ def load_model_kb(topic: str) -> dict:
     return kb
 
 
+def _block(heading: str) -> str:
+    text = (BRAND / "compliance.md").read_text(encoding="utf-8")
+    m = re.search(r"## " + re.escape(heading) + r".*?```text\s*(.*?)```", text, re.S)
+    return m.group(1) if m else ""
+
+
 def load_banned() -> list[str]:
-    text = (BRAND / "compliance.md").read_text(encoding="utf-8")
-    m = re.search(r"## Cụm cấm.*?```text\s*(.*?)```", text, re.S)
-    return [ln.strip().lower() for ln in m.group(1).splitlines() if ln.strip() and not ln.startswith("#")]
+    """Vietnamese + English banned phrases (both always apply: captions mix languages)."""
+    lines = (_block("Cụm cấm") + "\n" + _block("Banned phrases (English)")).splitlines()
+    return [ln.strip().lower() for ln in lines if ln.strip() and not ln.startswith("#")]
 
 
-def disclaimer() -> str:
-    text = (BRAND / "compliance.md").read_text(encoding="utf-8")
-    m = re.search(r"## Câu miễn trừ.*?```text\s*(.*?)```", text, re.S)
-    return " ".join(m.group(1).split())
+def disclaimer(lang_: str | None = None) -> str:
+    if (lang_ or lang()) == "en":
+        return " ".join(_block("Disclaimer (English)").split())
+    return " ".join(_block("Câu miễn trừ").split())
+
+
+def disclaimer_extra(kind: str, lang_: str | None = None) -> str:
+    """Extra education note for sensitive themes, e.g. kind='gambling' (poker, lottery, roulette, betting games)."""
+    if kind != "gambling":
+        return ""
+    head = "Education note: gambling (English)" if (lang_ or lang()) == "en" else "Lưu ý giáo dục: cờ bạc"
+    return " ".join(_block(head).split())
 
 
 def load_json(p):

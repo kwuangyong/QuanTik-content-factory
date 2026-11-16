@@ -440,7 +440,10 @@ def surface_kelly(s, v):
 
 
 # =============================================================== registry
-TOPICS = ["garch", "hurst", "ou", "hmm", "monte_carlo", "sharpe", "sortino", "var_cvar", "kelly"]
+from models_games import *  # noqa: E402,F401,F403  (English series: game theory, poker maths, money)
+from models_games import GAME_TOPICS  # noqa: E402
+
+TOPICS = ["garch", "hurst", "ou", "hmm", "monte_carlo", "sharpe", "sortino", "var_cvar", "kelly"] + GAME_TOPICS
 
 
 def _style(ax):
@@ -463,6 +466,7 @@ class Model:
         self.values = {k: (float(v) if isinstance(v, (np.floating, float)) else int(v) if isinstance(v, (np.integer, int)) else v)
                        for k, v in self.values.items()}
         self.code = inspect.getsource(demo).rstrip()
+        self.lang = "vi"
         self._plot2d = g[f"plot2d_{topic}"]
         self._surface = g[f"surface_{topic}"]
         self.real_data = returns is not None
@@ -490,10 +494,13 @@ if __name__ == "__main__":
     # python models.py garch  → print every value (with its vi-VN format) usable as {placeholder}
     import sys
 
-    from core import fmt_vi
+    from core import fmt_num
 
-    for t in (sys.argv[1:] or TOPICS):
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    lang = "en" if "--en" in sys.argv else "vi"
+    for t in (args or TOPICS):
         m = Model(t)
         print(f"\n# {t}  (seed {m.seed})")
         for k, v in m.values.items():
-            print(f"  {{{k}}}".ljust(22), fmt_vi(v, m.formats.get(k, "num2")).ljust(12), f"[{m.formats.get(k, 'num2')}]")
+            spec = m.formats.get(k, "num2")
+            print(f"  {{{k}}}".ljust(22), fmt_num(v, spec, lang).ljust(12), f"[{spec}]")
