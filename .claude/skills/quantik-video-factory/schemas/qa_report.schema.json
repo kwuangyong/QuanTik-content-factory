@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "quantik/qa_report.schema.json",
+  "title": "QA report",
+  "description": "Phiếu QA máy đọc được (social-output/<id>/qa_report.json); qa_report.md là bản người đọc.",
+  "type": "object",
+  "required": [
+    "id",
+    "status",
+    "checks"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "pillar": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "enum": [
+        "ĐẠT",
+        "KHÔNG ĐẠT",
+        "CHẶN TRƯỚC KHI RENDER"
+      ]
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "fail"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "fail": {
+            "type": "boolean"
+          },
+          "issues": {
+            "type": "array"
+          },
+          "details": {}
+        }
+      }
+    },
+    "voice": {
+      "type": "string"
+    },
+    "duration_s": {
+      "type": "number"
+    },
+    "generated": {
+      "type": "string"
+    }
+  }
+}

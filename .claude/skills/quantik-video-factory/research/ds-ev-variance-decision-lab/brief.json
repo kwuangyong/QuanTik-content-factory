@@ -1,0 +1,81 @@
+{
+  "id": "ds-ev-variance-decision-lab",
+  "pillar": "decision-science",
+  "topic": "ds_ev_variance",
+  "question": "Một người có lợi thế thật cần bao nhiêu lần để kết quả phản ánh lợi thế, và rủi ro phá sản là bao nhiêu?",
+  "audience_problem": "Đánh giá chiến lược bằng kết quả vài tuần; bỏ chiến lược tốt sau chuỗi lỗ, giữ chiến lược tồi sau chuỗi lãi.",
+  "claims": [
+    {
+      "id": "c_setup",
+      "text": "Giả định mô phỏng: lợi thế 5 bb/100 ván, độ lệch chuẩn 100 bb/100 ván.",
+      "status": "model_output",
+      "source_ids": [],
+      "note": "Tham số minh hoạ, không phải thống kê người chơi thật"
+    },
+    {
+      "id": "c_lln",
+      "text": "Luật số lớn: trung bình mẫu hội tụ về kỳ vọng khi số lần đủ lớn; sai số giảm theo căn bậc hai số lần.",
+      "status": "documented",
+      "source_ids": [
+        "feller-1968"
+      ]
+    },
+    {
+      "id": "c_sim",
+      "text": "Mô phỏng 2.000 người chơi × 100.000 ván (pillar_models.ev_variance_demo, seed 9).",
+      "status": "model_output",
+      "source_ids": []
+    },
+    {
+      "id": "c_normal",
+      "text": "Xác suất đang lỗ sau n ván ≈ Φ(−μ√n/σ) theo xấp xỉ chuẩn.",
+      "status": "documented",
+      "source_ids": [
+        "feller-1968"
+      ]
+    },
+    {
+      "id": "c_ror",
+      "text": "Xấp xỉ rủi ro phá sản với vốn B: exp(−2μB/σ²) (khuếch tán, chân trời vô hạn).",
+      "status": "documented",
+      "source_ids": [
+        "feller-1968"
+      ]
+    },
+    {
+      "id": "c_analogy",
+      "text": "Poker giống thị trường ở EV, phương sai, quy mô vị thế; khác ở luật chơi không cố định, phân phối không biết trước, đuôi dày, lợi thế khó đo.",
+      "status": "interpretation",
+      "source_ids": []
+    },
+    {
+      "id": "c_lesson",
+      "text": "Đánh giá quyết định bằng kỳ vọng và cỡ mẫu, không bằng kết quả ngắn hạn.",
+      "status": "interpretation",
+      "source_ids": []
+    }
+  ],
+  "model": "ev_variance",
+  "analogy": {
+    "similar": [
+      "Quyết định theo kỳ vọng, không theo kết quả một lần",
+      "Phương sai lớn: đúng mà vẫn lỗ thời gian dài",
+      "Quy mô cược quyết định rủi ro cháy vốn"
+    ],
+    "breaks": [
+      "Luật chơi và xác suất thị trường đổi theo thời gian",
+      "Phân phối không biết trước, đuôi dày hơn phân phối chuẩn",
+      "Không có ván kết thúc rõ ràng; lợi thế khó đo, dễ tự ảo tưởng"
+    ]
+  },
+  "framework": {
+    "setup": "Người chơi +5bb/100, σ 100bb/100",
+    "intuition": "Chơi đúng ≠ thắng ngay",
+    "math": "Mô phỏng + công thức Φ",
+    "simulation": "Đường mẫu + rủi ro phá sản",
+    "analogy": "Giống/khác thị trường",
+    "lesson": "Cỡ mẫu"
+  },
+  "created": "2026-11-15",
+  "researcher": "game-theory-researcher (Claude, phiên này)"
+}

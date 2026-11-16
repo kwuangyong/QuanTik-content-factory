@@ -1,0 +1,113 @@
+{
+  "pillar": "quant-history",
+  "topics": [
+    {
+      "id": "qh_thorp",
+      "name": "Edward Thorp: từ blackjack tới phố Wall",
+      "group": "Con người",
+      "model": "kelly",
+      "status": "ready",
+      "example_episode": "episodes/qh-thorp-history-story.json",
+      "angle": "Thorp & Kelly, lời tự kể về công thức quyền chọn"
+    },
+    {
+      "id": "qh_simons_renaissance",
+      "name": "Jim Simons & Renaissance",
+      "group": "Con người",
+      "model": "sharpe",
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "knowledge/stories/medallion.md"
+    },
+    {
+      "id": "qh_shannon",
+      "name": "Claude Shannon & lý thuyết thông tin trong cá cược",
+      "group": "Con người",
+      "model": "kelly",
+      "status": "backlog",
+      "example_episode": null,
+      "angle": ""
+    },
+    {
+      "id": "qh_markowitz",
+      "name": "Markowitz 1952: rủi ro có giá",
+      "group": "Con người",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": ""
+    },
+    {
+      "id": "qh_black_scholes",
+      "name": "Black–Scholes–Merton 1973",
+      "group": "Con người",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Có cả phía tranh cãi (Haug & Taleb)"
+    },
+    {
+      "id": "qh_bachelier",
+      "name": "Bachelier 1900: bước ngẫu nhiên",
+      "group": "Con người",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": ""
+    },
+    {
+      "id": "qh_ltcm",
+      "name": "LTCM 1998",
+      "group": "Hãng & thất bại",
+      "model": "kelly",
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "knowledge/stories/ltcm.md"
+    },
+    {
+      "id": "qh_quant_quake_2007",
+      "name": "Quant quake 8/2007",
+      "group": "Hãng & thất bại",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": ""
+    },
+    {
+      "id": "qh_statarb_history",
+      "name": "Lịch sử statistical arbitrage (pairs trading)",
+      "group": "Hãng & thất bại",
+      "model": "ou",
+      "status": "backlog",
+      "example_episode": null,
+      "angle": ""
+    },
+    {
+      "id": "qh_knight_capital",
+      "name": "Knight Capital 2012: rủi ro vận hành",
+      "group": "Hãng & thất bại",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": ""
+    },
+    {
+      "id": "qh_algo_evolution",
+      "name": "Từ sàn hò giá tới thuật toán",
+      "group": "Tiến hoá giao dịch thuật toán",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": ""
+    },
+    {
+      "id": "qh_flash_crash_2010",
+      "name": "Flash crash 2010",
+      "group": "Tiến hoá giao dịch thuật toán",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": ""
+    }
+  ]
+}

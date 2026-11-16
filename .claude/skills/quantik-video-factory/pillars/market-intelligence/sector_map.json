@@ -1,0 +1,423 @@
+{
+ "source_id": "quantik-industry-watchlist",
+ "source_commit": "306f46dc87c2c2a8397876c5ea943c888c61364e",
+ "note": "Nhóm ngành tham chiếu do chủ sản phẩm cung cấp (không phải ICB). 'basket' = rổ theo dõi, không dùng cho phân tích ngành.",
+ "groups": [
+  {
+   "name": "Ngân hàng (BANK)",
+   "kind": "sector",
+   "symbols": [
+    "LPB",
+    "VIB",
+    "NVB",
+    "BID",
+    "STB",
+    "HDB",
+    "TPB",
+    "MBB",
+    "ACB",
+    "TCB",
+    "VPB",
+    "VCB",
+    "CTG",
+    "NAB",
+    "EVF",
+    "ABB",
+    "MSB",
+    "EIB",
+    "SSB",
+    "BVB",
+    "SHB",
+    "VAB",
+    "BAB",
+    "OCB",
+    "KLB"
+   ]
+  },
+  {
+   "name": "Bất động sản (BĐS)",
+   "kind": "sector",
+   "symbols": [
+    "DPG",
+    "CII",
+    "DIG",
+    "KBC",
+    "IDC",
+    "CEO",
+    "HHS",
+    "VGC",
+    "DXG",
+    "HDG",
+    "TCH",
+    "HQC",
+    "NHA",
+    "SGR",
+    "DXS",
+    "QCG",
+    "PDR",
+    "HDC",
+    "KDH",
+    "KHG",
+    "VPI",
+    "NTL",
+    "NVL",
+    "VC7",
+    "TIG",
+    "SCR",
+    "CKG",
+    "NLG",
+    "AGG",
+    "L14",
+    "HPX",
+    "DC4",
+    "TAL"
+   ]
+  },
+  {
+   "name": "Chứng khoán",
+   "kind": "sector",
+   "symbols": [
+    "BVS",
+    "SBS",
+    "MBS",
+    "BSI",
+    "VCI",
+    "AAS",
+    "SHS",
+    "PSI",
+    "CTS",
+    "VFS",
+    "SSI",
+    "ABW",
+    "AGR",
+    "VIG",
+    "IPA",
+    "FTS",
+    "VIX",
+    "VCK",
+    "VDS",
+    "VPX",
+    "ORS",
+    "TCX",
+    "DSE",
+    "APG"
+   ]
+  },
+  {
+   "name": "Thép",
+   "kind": "sector",
+   "symbols": [
+    "NKG",
+    "VGS",
+    "HSG",
+    "TVN",
+    "TLH",
+    "HPG",
+    "HSV"
+   ]
+  },
+  {
+   "name": "XD-VLXD-Đầu tư công",
+   "kind": "sector",
+   "symbols": [
+    "VCG",
+    "FCN",
+    "G36",
+    "HHV",
+    "LCG",
+    "C4G",
+    "DPG",
+    "CII",
+    "HBC",
+    "CTI",
+    "VLB",
+    "KSB",
+    "MSR",
+    "SZC",
+    "BMP",
+    "CTD",
+    "IJC",
+    "VCS",
+    "BCC",
+    "C32",
+    "GDA",
+    "EVG",
+    "DC4",
+    "HT1",
+    "NTP"
+   ]
+  },
+  {
+   "name": "Dầu khí",
+   "kind": "sector",
+   "symbols": [
+    "PVD",
+    "PLC",
+    "PVS",
+    "PVC",
+    "PVT",
+    "LAS",
+    "PVB",
+    "GAS",
+    "OIL",
+    "BSR",
+    "PVI",
+    "PXL"
+   ]
+  },
+  {
+   "name": "Phân bón - Hoá chất",
+   "kind": "sector",
+   "symbols": [
+    "DGC",
+    "PHR",
+    "GVR",
+    "DPM",
+    "LAS",
+    "DCM",
+    "CSV",
+    "VFG",
+    "BFC",
+    "DHB",
+    "DDV"
+   ]
+  },
+  {
+   "name": "Cảng biển",
+   "kind": "sector",
+   "symbols": [
+    "PVP",
+    "PVT",
+    "VSC",
+    "SGP",
+    "MVN",
+    "GMD",
+    "VOS",
+    "TCL",
+    "DVP",
+    "PHP",
+    "HAH"
+   ]
+  },
+  {
+   "name": "Dệt may",
+   "kind": "sector",
+   "symbols": [
+    "VGT",
+    "TNG",
+    "MSH",
+    "HDM",
+    "GIL",
+    "TCM"
+   ]
+  },
+  {
+   "name": "Không thiết yếu",
+   "kind": "sector",
+   "symbols": [
+    "STH",
+    "DHC",
+    "VEA",
+    "PAN",
+    "DLG",
+    "YEG"
+   ]
+  },
+  {
+   "name": "Công nghệ",
+   "kind": "sector",
+   "symbols": [
+    "ELC",
+    "VTP",
+    "CTR",
+    "CMG",
+    "FPT",
+    "VGI"
+   ]
+  },
+  {
+   "name": "BĐS Khu công nghiệp",
+   "kind": "sector",
+   "symbols": [
+    "PHR",
+    "KBC",
+    "CTI",
+    "GVR",
+    "IDC",
+    "VGC",
+    "SZC",
+    "CTD",
+    "SIP",
+    "IJC",
+    "LHG",
+    "BCM",
+    "TIP",
+    "NTC"
+   ]
+  },
+  {
+   "name": "Viettel",
+   "kind": "basket",
+   "symbols": [
+    "VTK",
+    "VTP",
+    "CTR",
+    "VGI"
+   ]
+  },
+  {
+   "name": "FPT nhóm",
+   "kind": "basket",
+   "symbols": [
+    "FRT",
+    "FOC",
+    "FTS",
+    "FPT",
+    "FOX"
+   ]
+  },
+  {
+   "name": "Hàng không",
+   "kind": "sector",
+   "symbols": [
+    "HVN",
+    "SCS",
+    "ACV",
+    "VJC",
+    "ATS"
+   ]
+  },
+  {
+   "name": "Điện",
+   "kind": "sector",
+   "symbols": [
+    "PC1",
+    "GEE",
+    "TV2",
+    "HDG",
+    "REE",
+    "TV1",
+    "GEX",
+    "GEG",
+    "NT2",
+    "POW",
+    "QTP",
+    "DRL",
+    "PPC"
+   ]
+  },
+  {
+   "name": "Báo hiểm",
+   "kind": "sector",
+   "symbols": [
+    "BVH",
+    "BIC",
+    "PVI",
+    "MIG"
+   ]
+  },
+  {
+   "name": "Dược phẩm",
+   "kind": "sector",
+   "symbols": [
+    "DVM",
+    "DCL"
+   ]
+  },
+  {
+   "name": "Bán lẻ",
+   "kind": "sector",
+   "symbols": [
+    "PET",
+    "DGW",
+    "MSN",
+    "FRT",
+    "MWG",
+    "TLG",
+    "VNM",
+    "PNJ",
+    "FPT",
+    "HAX",
+    "SAB"
+   ]
+  },
+  {
+   "name": "Vingroup",
+   "kind": "basket",
+   "symbols": [
+    "VPL",
+    "VRE",
+    "VHM",
+    "VIC"
+   ]
+  },
+  {
+   "name": "Tự doanh Tuấn Mượt",
+   "kind": "basket",
+   "symbols": [
+    "PC1",
+    "PET",
+    "GEE",
+    "VSC",
+    "VGC",
+    "MHC",
+    "GEX",
+    "EVF",
+    "BSR",
+    "EIB",
+    "GEL",
+    "VIX",
+    "PXL",
+    "HAH"
+   ]
+  },
+  {
+   "name": "Thuỷ sản",
+   "kind": "sector",
+   "symbols": [
+    "ASM",
+    "FMC",
+    "IDI",
+    "ACL",
+    "VHC",
+    "CMX",
+    "ANV"
+   ]
+  },
+  {
+   "name": "List CMSC",
+   "kind": "basket",
+   "symbols": [
+    "PVD",
+    "PVS",
+    "HVN",
+    "PGS",
+    "PVT",
+    "SFG",
+    "PVB",
+    "GVR",
+    "DPM",
+    "LAS",
+    "MBB",
+    "DCM",
+    "PLX",
+    "GAS",
+    "OIL",
+    "ACV",
+    "BSR",
+    "PAC",
+    "CSV",
+    "POW",
+    "DPR",
+    "TRC",
+    "DHG",
+    "VNM",
+    "FPT",
+    "FOX",
+    "DDV",
+    "RTB",
+    "BRR"
+   ]
+  }
+ ]
+}

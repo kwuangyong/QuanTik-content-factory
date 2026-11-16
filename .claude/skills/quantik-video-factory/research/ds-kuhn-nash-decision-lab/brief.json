@@ -1,0 +1,103 @@
+{
+  "id": "ds-kuhn-nash-decision-lab",
+  "pillar": "decision-science",
+  "topic": "ds_nash_kuhn",
+  "question": "Trong poker rút gọn ba lá, bluff bao nhiêu là tối ưu, và vì sao toán học bắt phải bluff?",
+  "audience_problem": "Người chơi (và nhà đầu tư) hành động theo một khuôn dễ đoán nên bị đối thủ khai thác.",
+  "claims": [
+    {
+      "id": "c_rules",
+      "text": "Kuhn poker: ba lá J, Q, K; mỗi người góp 1 chip, nhận 1 lá; người đi trước được tố 1 chip hoặc xem bài.",
+      "status": "documented",
+      "source_ids": [
+        "kuhn-1950"
+      ]
+    },
+    {
+      "id": "c_exploit",
+      "text": "Chiến lược chỉ tố khi cầm K dễ bị đối thủ khai thác (bỏ bài mỗi khi bị tố).",
+      "status": "interpretation",
+      "source_ids": []
+    },
+    {
+      "id": "c_nash",
+      "text": "Cân bằng Nash: không bên nào có lợi khi đơn phương đổi chiến lược.",
+      "status": "documented",
+      "source_ids": [
+        "nash-1950"
+      ]
+    },
+    {
+      "id": "c_cfr",
+      "text": "CFR (pillar_models.kuhn_poker_demo, 3.000 vòng) hội tụ về một cân bằng: J bluff 22%, K tố 66%, Q theo 33%, giá trị −0,057.",
+      "status": "model_output",
+      "source_ids": []
+    },
+    {
+      "id": "c_value",
+      "text": "Giá trị trò chơi ở cân bằng là −1/18 chip mỗi ván cho người đi trước.",
+      "status": "documented",
+      "source_ids": [
+        "kuhn-1950"
+      ]
+    },
+    {
+      "id": "c_family",
+      "text": "Cân bằng của người đi trước là một họ: bluff J với xác suất α ∈ [0, 1/3], tố K với 3α; người đi sau cầm Q theo 1/3 khi bị tố.",
+      "status": "documented",
+      "source_ids": [
+        "kuhn-1950"
+      ]
+    },
+    {
+      "id": "c_analogy",
+      "text": "Poker giống thị trường ở thông tin không đầy đủ và việc hành vi dễ đoán bị khai thác; khác ở chỗ thị trường không có luật cố định nên không có cân bằng tính sẵn.",
+      "status": "interpretation",
+      "source_ids": []
+    },
+    {
+      "id": "c_lesson",
+      "text": "Khi không đoán được đối thủ, trộn hành động theo tỷ lệ giúp mình khó bị khai thác.",
+      "status": "interpretation",
+      "source_ids": []
+    }
+  ],
+  "facts": {
+    "y_kuhn": {
+      "value": "1950",
+      "source_id": "kuhn-1950",
+      "claim": "c_rules"
+    },
+    "frac_value": {
+      "value": "1/18",
+      "source_id": "kuhn-1950",
+      "claim": "c_value"
+    }
+  },
+  "model": "kuhn_poker",
+  "analogy": {
+    "similar": [
+      "Thông tin không đầy đủ: không thấy bài đối thủ",
+      "Hành vi dễ đoán thì bị khai thác",
+      "Chiến lược tốt là tỷ lệ hành động, không phải một nước đi"
+    ],
+    "breaks": [
+      "Thị trường không có luật cố định, số người chơi không biết trước",
+      "Không có cân bằng tính sẵn như Kuhn poker",
+      "Giá còn phản ánh tin tức, không chỉ hành vi đối thủ"
+    ]
+  },
+  "framework": {
+    "setup": "Luật Kuhn poker",
+    "intuition": "Chỉ tố bài đẹp → bị đọc vị",
+    "math": "CFR → cân bằng Nash, giá trị −1/18",
+    "simulation": "Tần suất hành động ở cân bằng; họ α",
+    "analogy": "Giống/khác thị trường",
+    "lesson": "Làm mình khó đoán"
+  },
+  "open_questions": [
+    "Bản No-Limit Hold'em không có lời giải đóng; không suy rộng con số Kuhn sang poker thật"
+  ],
+  "created": "2026-11-15",
+  "researcher": "game-theory-researcher (Claude, phiên này)"
+}

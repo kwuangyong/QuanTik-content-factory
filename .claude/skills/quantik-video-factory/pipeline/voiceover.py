@@ -16,18 +16,30 @@ import re
 import shutil
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 from core import BRAND, LANG
 
-VOICES = {"female": "vi-VN-HoaiMyNeural", "male": "vi-VN-NamMinhNeural"}
-VOICES_EN = {"female": "en-US-AriaNeural", "male": "en-US-ChristopherNeural"}
+VOICES = {"female": "vi-VN-HoaiMyNeural", "male": "vi-VN-NamMinhNeural", "male-deep": "vi-VN-NamMinhNeural"}
+# voice profile → (edge voice, rate, pitch). Default for every video: deep male narrator (owner's choice, 11/2026).
+# QT_RATE / QT_PITCH env vars still override.
+PROFILES = {"male-deep": ("vi-VN-NamMinhNeural", "-5%", "-12Hz"), "male": ("vi-VN-NamMinhNeural", "+0%", "+0Hz"),
+            "female": ("vi-VN-HoaiMyNeural", "+0%", "+0Hz")}
+DEFAULT_VOICE = "male-deep"
 
 
-def _voice(voice):
-    table = VOICES_EN if LANG["code"] == "en" else VOICES
-    return table.get(voice, voice)
+# English episodes ("lang": "en"): same profile names, US voices.
+PROFILES_EN = {"male-deep": ("en-US-ChristopherNeural", "+0%", "-5Hz"), "male": ("en-US-ChristopherNeural", "+0%", "+0Hz"),
+               "female": ("en-US-AriaNeural", "+0%", "+0Hz")}
+
+
+def profile(voice):
+    if LANG["code"] == "en":
+        return PROFILES_EN.get(voice, (voice, "+0%", "+0Hz"))
+    return PROFILES.get(voice, (VOICES.get(voice, voice), "+0%", "+0Hz"))
 ENGINES = ["edge", "gtts", "espeak", "silent"]
+RETRIES = int(os.environ.get("QT_TTS_RETRIES", "5"))
 
 
 def lexicon():
@@ -61,20 +73,34 @@ def _to_wav(src, dst):
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(src), "-ac", "1", "-ar", "44100", str(dst)], check=True)
 
 
-def _edge(text, dst, voice, rate):
+def _trust_env_ca(edge_tts):
+    """edge-tts pins certifi's CA list; behind a TLS-inspecting proxy (SSL_CERT_FILE set) add that bundle too."""
+    ca = os.environ.get("SSL_CERT_FILE") or os.environ.get("REQUESTS_CA_BUNDLE")
+    if not ca or not Path(ca).exists():
+        return
     import ssl
 
-    import edge_tts
-    import edge_tts.communicate as _ec
+    import certifi
 
-    # behind a TLS-inspecting proxy, edge-tts must trust the proxy CA (it pins certifi by default)
-    ca = os.environ.get("SSL_CERT_FILE") or os.environ.get("REQUESTS_CA_BUNDLE")
-    if ca and Path(ca).exists():
-        _ec._SSL_CTX = ssl.create_default_context(cafile=ca)
+    ctx = ssl.create_default_context(cafile=certifi.where())
+    ctx.load_verify_locations(cafile=ca)
+    for mod in ("communicate", "voices"):
+        m = getattr(edge_tts, mod, None)
+        if m is not None and hasattr(m, "_SSL_CTX"):
+            m._SSL_CTX = ctx
+
+
+def _edge(text, dst, voice, rate, pitch="+0Hz"):
+    import edge_tts
+
     tmp = Path(dst).with_suffix(".mp3")
 
+    _trust_env_ca(edge_tts)
+    proxy = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
+
     async def go():
-        await edge_tts.Communicate(text, voice, rate=os.environ.get("QT_RATE", rate), pitch=os.environ.get("QT_PITCH", "+0Hz")).save(str(tmp))
+        await edge_tts.Communicate(text, voice, rate=os.environ.get("QT_RATE", rate), pitch=os.environ.get("QT_PITCH", pitch),
+                                   proxy=proxy).save(str(tmp))
 
     asyncio.run(asyncio.wait_for(go(), timeout=40))
     _to_wav(tmp, dst); tmp.unlink(missing_ok=True)
@@ -95,23 +121,62 @@ def _espeak(text, dst, *_):
     subprocess.run([exe, "-v", "en-us" if LANG["code"] == "en" else "vi", "-s", "150", "-w", str(dst), text], check=True, capture_output=True)
 
 
-def synth(text, dst, engine="auto", voice="female", rate="+0%"):
+def _split_synth(say, dst, voice, rate, pitch="+0Hz"):
+    parts = [p for p in re.split(r"(?<=[.!?…])\s+", say) if p.strip()]
+    if len(parts) < 2:
+        raise RuntimeError("không tách được câu")
+    tmp = []
+    for i, p in enumerate(parts):
+        out = Path(dst).with_name(Path(dst).stem + f"-s{i}.wav")
+        for k in range(RETRIES):
+            try:
+                _edge(p, out, voice, rate, pitch)
+                break
+            except Exception:
+                if k + 1 == RETRIES:
+                    raise
+                time.sleep(min(8.0, 1.0 * 2 ** k))
+        tmp.append(out)
+    lst = Path(dst).with_suffix(".txt")
+    lst.write_text("".join(f"file '{t.resolve()}'\n" for t in tmp), encoding="utf-8")
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", str(lst), "-c", "copy", str(dst)],
+                   check=True)
+    for t in tmp + [lst]:
+        t.unlink(missing_ok=True)
+
+
+def synth(text, dst, engine="auto", voice=DEFAULT_VOICE, rate=None):
     """Write dst (wav). Returns (engine_used, seconds). engine_used == 'silent' means no file was written."""
     order = ENGINES if engine == "auto" else [engine]
     errors = []
     say = speakable(text)
+    vid, prate, pitch = profile(voice)
+    rate = rate or prate
     for e in order:
         if e == "silent":
             return "silent", estimate_seconds(text), errors
-        try:
-            {"edge": _edge, "gtts": _gtts, "espeak": _espeak}[e](say, dst, _voice(voice), rate)
-            return e, duration_of(dst), errors
-        except Exception as ex:  # network blocked, package missing...
-            errors.append(f"{e}: {type(ex).__name__}: {str(ex)[:120]}")
+        # online engines fail intermittently (edge: NoAudioReceived on ~1 in 5 calls) → retry before giving up
+        attempts = RETRIES if e in ("edge", "gtts") else 1
+        for k in range(attempts):
+            try:
+                {"edge": lambda *a: _edge(*a, pitch), "gtts": _gtts, "espeak": _espeak}[e](say, dst, vid, rate)
+                return e, duration_of(dst), errors
+            except Exception as ex:  # network blocked, package missing, transient service error...
+                errors.append(f"{e}: {type(ex).__name__}: {str(ex)[:120]}")
+                if k + 1 < attempts and "Certificate" not in type(ex).__name__ and not isinstance(ex, ImportError):
+                    time.sleep(min(8.0, 1.0 * 2 ** k))
+                else:
+                    break
+        if e == "edge" and errors and "Certificate" not in errors[-1]:
+            try:  # one awkward sentence (often an English term) can sink a whole scene: retry sentence by sentence
+                _split_synth(say, dst, vid, rate, pitch)
+                return e, duration_of(dst), errors
+            except Exception as ex:
+                errors.append(f"{e} (từng câu): {type(ex).__name__}: {str(ex)[:120]}")
     return "silent", estimate_seconds(text), errors
 
 
-def probe_engine(engine="auto", voice="female"):
+def probe_engine(engine="auto", voice=DEFAULT_VOICE):
     """Pick the first engine that works once, so a whole video uses one consistent voice."""
     import tempfile
 
@@ -126,7 +191,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("text"); ap.add_argument("out")
     ap.add_argument("--engine", default="auto", choices=["auto"] + ENGINES)
-    ap.add_argument("--voice", default="female")
+    ap.add_argument("--voice", default=DEFAULT_VOICE, help="male-deep (mặc định) | male | female | edge voice id")
     a = ap.parse_args()
     used, sec, errs = synth(a.text, a.out, a.engine, a.voice)
     print(json.dumps({"engine": used, "seconds": round(sec, 2), "errors": errs}, ensure_ascii=False))

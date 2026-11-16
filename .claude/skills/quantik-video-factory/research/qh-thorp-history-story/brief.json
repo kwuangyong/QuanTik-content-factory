@@ -1,0 +1,131 @@
+{
+  "id": "qh-thorp-history-story",
+  "pillar": "quant-history",
+  "topic": "qh_thorp",
+  "question": "Thorp đi từ blackjack tới quỹ định lượng thế nào, và phần nào của câu chuyện là tư liệu, phần nào là lời tự kể?",
+  "audience_problem": "Chuyện 'thiên tài quant' thường kể như huyền thoại, trộn sự kiện với giai thoại.",
+  "claims": [
+    {
+      "id": "c_kelly",
+      "text": "John L. Kelly Jr. (Bell Labs) công bố công thức chọn tỷ lệ cược tối đa hoá tăng trưởng log năm 1956.",
+      "status": "documented",
+      "source_ids": [
+        "kelly-1956"
+      ]
+    },
+    {
+      "id": "c_btd",
+      "text": "Edward Thorp xuất bản Beat the Dealer năm 1962, trình bày hệ thống đếm bài blackjack dựa trên xác suất.",
+      "status": "documented",
+      "source_ids": [
+        "thorp-1962",
+        "poundstone-2005"
+      ]
+    },
+    {
+      "id": "c_thorp_kelly",
+      "text": "Thorp áp dụng công thức Kelly để chọn mức cược khi có lợi thế.",
+      "status": "documented",
+      "source_ids": [
+        "poundstone-2005",
+        "thorp-2017"
+      ]
+    },
+    {
+      "id": "c_ruin_math",
+      "text": "Cược vượt mức Kelly đủ xa làm tăng trưởng log âm dù lợi thế dương.",
+      "status": "model_output",
+      "source_ids": [
+        "kelly-1956"
+      ]
+    },
+    {
+      "id": "c_kelly_sim",
+      "text": "Mô phỏng Kelly (models.py, seed 4): cùng lợi thế, tài sản trung vị phụ thuộc mức cược.",
+      "status": "model_output",
+      "source_ids": []
+    },
+    {
+      "id": "c_btm",
+      "text": "Thorp và Sheen Kassouf xuất bản Beat the Market năm 1967 về định giá sai chứng quyền và chứng khoán chuyển đổi.",
+      "status": "documented",
+      "source_ids": [
+        "thorp-kassouf-1967"
+      ]
+    },
+    {
+      "id": "c_pnp",
+      "text": "Thorp và Jay Regan lập quỹ năm 1969 (Convertible Hedge Associates, sau đổi tên Princeton/Newport Partners).",
+      "status": "documented",
+      "source_ids": [
+        "poundstone-2005"
+      ],
+      "note": "Một nguồn thứ cấp ghi 1974; đa số nguồn ghi 1969."
+    },
+    {
+      "id": "c_bs",
+      "text": "Black và Scholes công bố công thức định giá quyền chọn năm 1973.",
+      "status": "documented",
+      "source_ids": [
+        "black-scholes-1973"
+      ]
+    },
+    {
+      "id": "c_bs_self",
+      "text": "Thorp kể rằng ông đã dùng một công thức định giá quyền chọn tương đương Black–Scholes trước năm 1973 nhưng không công bố.",
+      "status": "self_reported",
+      "source_ids": [
+        "thorp-2017"
+      ],
+      "note": "Chưa có tài liệu ghi ngày trước 1973 nêu đúng công thức để đối chiếu."
+    },
+    {
+      "id": "c_lesson",
+      "text": "Lợi thế chỉ có giá trị nếu sống sót đủ lâu; quy mô vị thế quan trọng ngang việc tìm lợi thế.",
+      "status": "interpretation",
+      "source_ids": []
+    }
+  ],
+  "facts": {
+    "y_kelly": {
+      "value": "1956",
+      "source_id": "kelly-1956"
+    },
+    "y_btd": {
+      "value": "1962",
+      "source_id": "thorp-1962"
+    },
+    "y_btm": {
+      "value": "1967",
+      "source_id": "thorp-kassouf-1967"
+    },
+    "y_pnp": {
+      "value": "1969",
+      "source_id": "poundstone-2005"
+    },
+    "y_bs": {
+      "value": "1973",
+      "source_id": "black-scholes-1973"
+    }
+  },
+  "model": "kelly",
+  "framework": {
+    "context": "Kelly 1956, Beat the Dealer 1962",
+    "conflict": "Có lợi thế nhỏ thì cược bao nhiêu",
+    "breakthrough": "Kelly áp dụng + mô phỏng",
+    "consequences": "Beat the Market 1967, quỹ 1969, công thức quyền chọn (lời tự kể)",
+    "lesson": "Sống sót trước, lợi nhuận sau"
+  },
+  "rejected_claims": [
+    {
+      "text": "Quỹ đạt 15,1%/năm trong 19 năm",
+      "reason": "Nguồn mâu thuẫn, số khác nhau giữa các bản kể; không dùng"
+    },
+    {
+      "text": "Quỹ lập năm 1974",
+      "reason": "Mâu thuẫn với đa số nguồn (1969)"
+    }
+  ],
+  "created": "2026-11-15",
+  "researcher": "quant-historian (Claude, phiên này)"
+}

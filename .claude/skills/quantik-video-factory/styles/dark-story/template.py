@@ -8,7 +8,7 @@ import math
 import numpy as np
 from PIL import Image, ImageDraw
 
-import figures as G
+import darkart as G
 import frames as F
 from core import SAFE, L, font
 from render import Scene
