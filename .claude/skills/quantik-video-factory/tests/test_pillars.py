@@ -83,7 +83,9 @@ class DarkTruth(unittest.TestCase):
     def test_episode_prepares_in_english_and_passes_gates(self):
         import core
         import check_banned, check_numbers, check_sources
-        ep_json = load(SKILL / "episodes/escape-velocity-dark-story.json")
+        import make
+        ep_json = make.resolve(load(SKILL / "episodes/escape-velocity.json"), "dark-story")
+        self.assertEqual(ep_json["id"], "escape-velocity-dark-story")
         core.set_lang("en")
         try:
             ep, mod, model = batch.prepare(ep_json["topic"], ep_json["style"], ep_json)
@@ -100,6 +102,22 @@ class DarkTruth(unittest.TestCase):
             self.assertFalse(check_sources.check(filled, PR.get("dark-truth"))["fail"])
         finally:
             core.set_lang("vi")
+
+
+    def test_every_version_of_every_look_episode_resolves(self):
+        import make
+        for p in sorted((SKILL / "episodes").glob("*.json")):
+            ep = load(p)
+            for st in make.variants_of(ep):
+                ov = make.resolve(ep, st)
+                self.assertEqual(ov["style"], st)
+                self.assertNotIn("variants", ov)
+        lk = make.looks()["looks"]
+        for name, l in lk.items():
+            for key in ("pillar", "lang", "styles", "default_style", "tone", "content", "thumbnail"):
+                self.assertIn(key, l, name)
+            for st in l["styles"]:
+                self.assertTrue((SKILL / "styles" / st / "template.py").exists(), st)
 
 
 class BackwardCompat(unittest.TestCase):

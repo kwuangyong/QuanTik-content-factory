@@ -292,7 +292,8 @@
       "segment_roles": [],
       "default_style": "dark-story",
       "styles": [
-        "dark-story"
+        "dark-story",
+        "chart-story"
       ],
       "claim_statuses": [
         "model_output",

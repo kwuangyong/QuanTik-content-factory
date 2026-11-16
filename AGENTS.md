@@ -10,12 +10,17 @@ quant finance và về cách dùng sản phẩm. Toàn bộ quy trình nằm tro
 **`.claude/skills/quantik-video-factory/SKILL.md`: đọc file này TRƯỚC KHI làm bất kỳ nội dung nào.**
 Đây là Markdown thường, không phụ thuộc Claude: thư mục `.claude/` chỉ là nơi để file.
 
+**Lệnh nhanh cho mọi agent** (từ `pipeline/`): `python make.py menu` in ra các *look* (tông giọng, nội dung,
+thumbnail, phiên bản style) và các tập có sẵn; `python make.py <tập|chủ đề> [--as <style|a,b|all>] [--no N] [--preview]`
+dựng video + thumbnail đúng look; `python make.py new <id> --look dark-truth` tạo khung tập mới. Look định nghĩa ở
+`looks.json` (sửa ở đó, không sửa code).
+
 Chọn nhánh theo yêu cầu:
 
 | Người dùng muốn | Đọc | Lệnh chính |
 | --- | --- | --- |
 | Video/carousel giải thích một mô hình, chỉ số, thuật ngữ quant | `SKILL.md` → `knowledge/`, `styles/` | `cd pipeline && python batch.py --topics <id> --styles <style>` |
-| Video "dark truth" tiếng Anh (tiền, địa vị, áp lực xã hội), hoạt hoạ không chart — trụ cột 5 | `pillars/dark-truth/PILLAR.md`, `styles/dark-story/spec.md` | `cd pipeline && python batch.py --episode ../episodes/escape-velocity-dark-story.json` |
+| Video "dark truth" tiếng Anh (tiền, địa vị, áp lực xã hội), hoạt hoạ không chart — trụ cột 5 | `pillars/dark-truth/PILLAR.md`, `styles/dark-story/spec.md` | `cd pipeline && python make.py escape-velocity --as dark-story,chart-story` |
 | Video **hướng dẫn dùng sản phẩm** (đăng ký, quét toàn sàn, phân tích Quant…) | `tutorial/README.md` | `bash tutorial/run.sh <workdir>` |
 | Tâm lý nhà đầu tư, thiên kiến, tài chính hành vi | `pillars/behavioral-finance/PILLAR.md`, `workers/` | `cd pipeline && python pillar.py scaffold behavioral-finance <topic>` → brief → fact-check → `python pillar.py make <episode>` |
 | Nhịp thị trường, độ rộng, dòng tiền, kịch bản | `pillars/market-intelligence/PILLAR.md` | `cd pipeline && python pillar.py market produce` |

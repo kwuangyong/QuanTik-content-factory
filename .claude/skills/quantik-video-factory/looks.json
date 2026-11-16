@@ -1,0 +1,62 @@
+{
+  "_doc": "A look = everything an agent needs to make a video in one voice: pillar, language, styles (versions), narrator voice, music, tone, content rules and thumbnail. Read by pipeline/make.py (python make.py menu). Edit here, not in code.",
+  "looks": {
+    "quant-vi": {
+      "name": "Học Quant cùng QuanTik (tiếng Việt)",
+      "pillar": "quant-education",
+      "lang": "vi",
+      "platforms": ["TikTok", "Facebook Reels", "YouTube Shorts"],
+      "styles": {
+        "code-reel": "code Python chạy thật → chart → 3D → mang về (mặc định)",
+        "kinetic-text": "chữ bay, một con số đắt đếm lên",
+        "chart-story": "một chart kể theo chương",
+        "myth-buster": "Bạn nghĩ / Thực ra, chart làm bằng chứng",
+        "whiteboard-math": "giải từng ký hiệu công thức",
+        "carousel": "7 slide đọc chậm",
+        "meme-quant": "12–20s giải trí"
+      },
+      "default_style": "code-reel",
+      "voice": "male-deep",
+      "music": null,
+      "tone": "Chuyên gia nói với bạn thông minh không học tài chính. 'mình/bạn', câu ngắn, mỗi câu một ý. Trực giác → công thức → số do code tính → giới hạn mô hình. Không hô hào, không hứa lãi. Chi tiết: brand/identity.md (Giọng văn).",
+      "content": "Chủ đề = mô hình viết tay (garch, hurst, ou, hmm, monte_carlo, sharpe, sortino, var_cvar, kelly) hoặc id catalog (python catalog.py --list). Mọi số qua {key}. Hook là nghịch lý có thật. Kết bằng giới hạn mô hình. CTA thẻ cuối: theo dõi kênh.",
+      "thumbnail": {
+        "kind": "light-series",
+        "series": "HỌC QUANT CÙNG QUANTIK #N",
+        "summary": "Nền kem sáng, tiêu đề in hoa rất to có số tô cam, chart thật của mô hình, chân 'Dữ liệu mô phỏng • Không phải khuyến nghị'.",
+        "doc": "brand/thumbnail.md",
+        "needs": "--no N (số tập)"
+      },
+      "example": "python make.py sortino --as myth-buster --no 4"
+    },
+    "dark-truth": {
+      "name": "The Dark Truth of Money (English)",
+      "pillar": "dark-truth",
+      "lang": "en",
+      "platforms": ["Instagram Reels", "YouTube Shorts"],
+      "styles": {
+        "dark-story": "animated people, social scenes (commute, the scroll, status posts, hamster wheel, crowd); no charts, no code (default)",
+        "chart-story": "one chart told in chapters (e.g. two careers racing to the escape line); same dark tone"
+      },
+      "default_style": "dark-story",
+      "voice": "male-deep",
+      "music": "drone",
+      "tone": "Second person, quiet and heavy, like a documentary narrator. Short sentences, 6–14 words. Name the uncomfortable truth, never shame the viewer. No hype, no 'secret', no promise of freedom, no advice to quit a job or buy anything. End on one line people repeat (e.g. 'Your salary was never the trap. Needing them to see it was.').",
+      "content": "Money × status × social pressure (lifestyle creep, comparison, debt as status, the 9-to-5 loop). Hook = a question the viewer has felt. 8–10 scenes, one idea each. At most ONE number per video, from the episode model ({key}) or a ledger fact, shown with its assumptions. Pillar boundaries: investing biases → behavioral-finance; poker/game theory → decision-science. Details: pillars/dark-truth/PILLAR.md, styles/dark-story/spec.md.",
+      "thumbnail": {
+        "kind": "dark",
+        "series": "THE DARK TRUTH OF MONEY #N",
+        "summary": "Near-black with red haze and film grain; 3 heavy lines (bone white, last line red, e.g. 'YOU GOT THE RAISE. / STILL / TRAPPED.'); one symbolic illustration (hamster wheel); the one sourced number; 'Simulated data • Not financial advice' + quantik.io.vn.",
+        "doc": "styles/dark-story/spec.md",
+        "needs": "episode 'thumb' block + 'episode_no'"
+      },
+      "example": "python make.py escape-velocity --as dark-story,chart-story"
+    }
+  },
+  "research_pillars": {
+    "behavioral-finance": "python pillar.py scaffold behavioral-finance <topic> → brief → fact-check → python pillar.py make <episode>",
+    "market-intelligence": "python pillar.py market produce",
+    "quant-history": "như behavioral-finance, trụ cột quant-history",
+    "decision-science": "như behavioral-finance, trụ cột decision-science"
+  }
+}

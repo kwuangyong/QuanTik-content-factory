@@ -26,11 +26,25 @@ knowledge/hooks.md       kho hook (đã kiểm chứng bằng view thật / ứn
 knowledge/stories/       chuyện lịch sử có nguồn (LTCM, Medallion)
 tutorial/                video HƯỚNG DẪN SẢN PHẨM (quay giao diện web thật): README.md · run.sh · beats.py · render.py
 styles/<style>/          spec.md (cấu trúc cảnh) + template.py (dựng cảnh) + mẫu
-pipeline/                models.py (code mô hình) · batch.py (lệnh chính) · render/voiceover/assemble
+looks.json               look: tông giọng, nội dung, thumbnail, giọng đọc, nhạc cho từng dòng nội dung (đọc bởi make.py)
+pipeline/                make.py (lệnh nhanh) · models.py (code mô hình) · batch.py (lệnh chính) · render/voiceover/assemble
 qa/                      check_numbers · check_banned · check_format · check_script · check_sources · check_market · qa_report.md
 tests/                   python -m unittest discover -s tests (không cần mạng) · RESULTS.md
 episodes/                episode JSON đã viết (ghi đè mặc định của mô hình)
 ```
+
+## Lệnh nhanh: `make.py` + `looks.json`
+
+```bash
+cd pipeline
+python make.py menu                                   # look = tông giọng + nội dung + thumbnail; tập + phiên bản
+python make.py escape-velocity --as chart-story       # một ý tưởng, nhiều phiên bản style (khối "variants")
+python make.py sortino --as myth-buster --no 4        # chủ đề quant + thumbnail series #4
+python make.py new <id> --look dark-truth             # khung tập mới, điền TODO theo look
+```
+
+Look hiện có: `quant-vi` (Học Quant cùng QuanTik, tiếng Việt, thumbnail sáng) và `dark-truth` (tiếng Anh, giọng trầm,
+nền drone, thumbnail tối). Thêm look mới = thêm khối trong `looks.json`.
 
 ## Chọn trụ cột trước
 
@@ -121,7 +135,7 @@ Quy tắc viết lời — mỗi quy tắc đều có lý do:
 **Tiếng Anh** (IG / YouTube Shorts quốc tế): thêm `"lang": "en"` vào episode (mọi trụ cột). Số in kiểu
 1,234.5 · $1,234 (`usd`), giọng `en-US-AriaNeural` / `en-US-ChristopherNeural` (`--voice male`), nhãn giao diện, câu
 miễn trừ và cụm cấm tiếng Anh lấy từ `brand/compliance.md` (cụm cấm tiếng Việt vẫn quét). Ví dụ đầy đủ:
-`episodes/escape-velocity-dark-story.json` (trụ cột 5, style `dark-story`, thumbnail tối tự sinh).
+`episodes/escape-velocity.json` (trụ cột 5, hai phiên bản `dark-story` và `chart-story`, thumbnail tối tự sinh).
 
 ### 4. Dựng
 

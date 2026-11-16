@@ -17,3 +17,6 @@ chạy trong bánh xe, đám đông, bước ra cửa sáng. Màu tối lạnh, 
 **Viết lời:** 8–10 cảnh, mỗi cảnh 1–2 câu ngắn, giọng nam trầm (`--voice male`, có thể `QT_RATE=-6%`).
 Số vẫn đi qua `{key}` và chỉ nên xuất hiện ở cảnh `crowd` (kèm `note` ghi giả định mô phỏng).
 Thêm `kind` mới: viết hàm `art_<kind>(a, t, p, ctx)` trong `template.py` và đăng ký trong `ART`.
+
+**Dựng:** `python make.py <tập>` (look `dark-truth` lo giọng, nhạc, thumbnail). Một tập có thể kèm phiên bản
+`chart-story` trong khối `variants` của cùng file JSON.

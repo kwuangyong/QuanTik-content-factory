@@ -27,7 +27,10 @@ nếu là *chiến lược trong trò chơi* thì thuộc 4b. Episode luôn khai
 ## Lệnh
 
 ```bash
-cd pipeline && python batch.py --episode ../episodes/escape-velocity-dark-story.json
+cd pipeline
+python make.py escape-velocity                         # bản hoạt hoạ (mặc định)
+python make.py escape-velocity --as chart-story        # bản chart
+python make.py new hedonic-treadmill --look dark-truth # tập mới: điền TODO theo looks.json → dark-truth
 ```
 
 ## Tập đã làm: escape velocity
