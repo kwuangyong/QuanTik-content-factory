@@ -1,0 +1,31 @@
+{
+  "_note": "Đọc bởi pipeline/batch.py --platform. Sửa ở đây thì sửa luôn README của nền tảng đó.",
+  "tiktok": {
+    "name": "TikTok",
+    "role": "education",
+    "styles": ["code-reel", "kinetic-text", "chart-story", "myth-buster", "whiteboard-math", "talking-head-script", "carousel", "meme-quant"],
+    "cta": "Thả tim và theo dõi QuanTik để học một kiến thức quant mỗi ngày",
+    "captions": ["tiktok"],
+    "requires_episode": false,
+    "max_seconds": 60
+  },
+  "facebook": {
+    "name": "Facebook",
+    "role": "conversion",
+    "styles": ["talking-head-script"],
+    "cta": "Dùng thử miễn phí Quét toàn sàn và Phân tích Quant tại quantik.io.vn",
+    "captions": ["facebook"],
+    "requires_episode": true,
+    "requires_episode_reason": "Facebook chỉ đăng nội dung sản phẩm; lời mặc định của chủ đề là lời giáo dục. Viết episode JSON góc sản phẩm (xem platforms/facebook/README.md) hoặc dùng tutorial/run.sh.",
+    "max_seconds": 60
+  },
+  "reels-shorts": {
+    "name": "Instagram Reels · YouTube Shorts",
+    "role": "experiment",
+    "styles": ["meme-quant", "kinetic-text", "carousel"],
+    "cta": "Lưu lại, gửi cho đứa bạn hay bàn chứng khoán",
+    "captions": ["instagram", "youtube"],
+    "requires_episode": false,
+    "max_seconds": 45
+  }
+}

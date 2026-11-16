@@ -10,12 +10,13 @@ quant finance và về cách dùng sản phẩm. Toàn bộ quy trình nằm tro
 **`.claude/skills/quantik-video-factory/SKILL.md`: đọc file này TRƯỚC KHI làm bất kỳ nội dung nào.**
 Đây là Markdown thường, không phụ thuộc Claude: thư mục `.claude/` chỉ là nơi để file.
 
-Chọn nhánh theo yêu cầu:
+**Mỗi nền tảng một quy trình riêng** (`platforms/README.md`). Chọn nhánh theo nền tảng trước:
 
-| Người dùng muốn | Đọc | Lệnh chính |
-| --- | --- | --- |
-| Video/carousel giải thích một mô hình, chỉ số, thuật ngữ quant | `SKILL.md` → `knowledge/`, `styles/` | `cd pipeline && python batch.py --topics <id> --styles <style>` |
-| Video **hướng dẫn dùng sản phẩm** (đăng ký, quét toàn sàn, phân tích Quant…) | `tutorial/README.md` | `bash tutorial/run.sh <workdir>` |
+| Nền tảng | Vai trò · nội dung | Đọc | Lệnh chính |
+| --- | --- | --- | --- |
+| Facebook | chuyển đổi: **sản phẩm QuanTik**, "ăn liền", không đăng video giáo dục | `platforms/facebook/README.md` → `tutorial/README.md` | `bash tutorial/run.sh <workdir>` · `batch.py --platform facebook --episode …` |
+| TikTok | giáo dục: "Học quant cùng QuanTik" | `platforms/tiktok/README.md` → `SKILL.md` | `cd pipeline && python batch.py --platform tiktok --topics <id> --styles <style>` |
+| Instagram Reels · YouTube Shorts | thử nghiệm: larping, motivational, vui, đáng share/save | `platforms/reels-shorts/README.md` | `batch.py --platform reels-shorts …` |
 
 (đường dẫn tính từ `.claude/skills/quantik-video-factory/`)
 

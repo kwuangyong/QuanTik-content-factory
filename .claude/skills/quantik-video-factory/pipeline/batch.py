@@ -35,6 +35,7 @@ import voiceover as V  # noqa: E402
 from assemble import assemble  # noqa: E402
 import check_banned, check_format, check_numbers, report  # noqa: E402
 
+PLATFORMS = {k: v for k, v in load_json(HERE.parent / "platforms" / "profiles.json").items() if not k.startswith("_")}
 STYLE_NAMES = sorted(p.name for p in STYLES.iterdir() if (p / "template.py").exists())
 
 
@@ -71,46 +72,27 @@ def build_episode(topic, style, override=None):
     return ep, mod
 
 
-def captions(ep, disc):
+def captions(ep, disc, platform=None):
+    """captions.md: only the sections of `platform` (platforms/profiles.json), or every section if None."""
     tags = " ".join("#" + h.lstrip("#") for h in ep.get("hashtags", []))
     title = ep.get("title", ep["hook"])
     cap = ep.get("caption", ep["hook"])
+    link, cta = ep.get("cta_link", ""), ep.get("cta", "")
+    fb_link = link if link and link != cta else "quantik.io.vn"
     yt_title = (title[:90] + " #Shorts") if len(title) <= 90 else title[:88] + "… #Shorts"
-    return f"""# Caption — {ep['id']}
-
-## TikTok
-{cap}
-
-{tags}
-
-{disc}
-
-## Facebook / Reels
-{title}
-
-{cap}
-
-👉 {ep.get('cta_link', '')}\n\n{ep.get('cta', '')}
-
-{tags}
-
-{disc}
-
-## YouTube Shorts
-**Tiêu đề:** {yt_title}
-
-**Mô tả:**
-{cap}
-
-{ep.get('cta_link', '')}\n{ep.get('cta', '')}
-
-{disc}
-
-{tags} #Shorts
-"""
+    sections = {
+        "tiktok": f"## TikTok\n{cap}\n\n{tags}\n\n{disc}\n",
+        # Facebook = conversion: what you can do → link early → CTA
+        "facebook": f"## Facebook\n{title}\n\n{cap}\n\n👉 {fb_link}\n\n{cta}\n\n{tags}\n\n{disc}\n",
+        "instagram": f"## Instagram Reels\n{cap}\n\n{cta}\n\n{disc}\n\n{tags}\n",
+        "youtube": f"## YouTube Shorts\n**Tiêu đề:** {yt_title}\n\n**Mô tả:**\n{cap}\n\n{link}\n{cta}\n\n{disc}\n\n{tags} #Shorts\n",
+    }
+    keys = PLATFORMS[platform]["captions"] if platform else list(sections)
+    head = f"# Caption — {ep['id']}" + (f" ({PLATFORMS[platform]['name']})" if platform else "")
+    return head + "\n\n" + "\n".join(sections[k] for k in keys)
 
 
-def log_episode(ep, out_dir, status, duration):
+def log_episode(ep, out_dir, status, duration, platform=None):
     path = KNOWLEDGE / "episodes.csv"
     new = not path.exists()
     with open(path, "a", newline="", encoding="utf-8") as fh:
@@ -119,7 +101,8 @@ def log_episode(ep, out_dir, status, duration):
             w.writerow(["id", "date", "topic", "style", "title", "hook", "duration_s", "status", "file",
                         "views_tiktok", "views_reels", "views_youtube", "notes"])
         w.writerow([ep["id"], dt.date.today().isoformat(), ep["topic"], ep["style"], ep.get("title", ""), ep["hook"],
-                    f"{duration:.0f}", status, str(out_dir), "", "", "", ""])
+                    f"{duration:.0f}", status, str(out_dir), "", "", "",
+                    f"platform={platform}" if platform else ""])
 
 
 # Thẻ cuối mọi video: kêu gọi theo dõi kênh (yêu cầu của chủ sản phẩm, áp dụng cho mọi video).
@@ -127,16 +110,38 @@ def log_episode(ep, out_dir, status, duration):
 FOLLOW_CTA = "Thả tim và theo dõi QuanTik để học một kiến thức quant mỗi ngày"
 
 
-def _follow_cta(ep, override):
+def _follow_cta(ep, override, platform=None):
     ep["cta_link"] = ep.get("cta_link") or ep.get("cta", "")
     if not (override or {}).get("cta"):
-        ep["cta"] = FOLLOW_CTA
+        ep["cta"] = PLATFORMS[platform]["cta"] if platform else FOLLOW_CTA
     return ep
 
 
-def prepare(topic, style, override=None, returns=None):
+def check_platform(platform, style, override):
+    """None if topic × style may be made for this platform, else the reason (see platforms/<name>/README.md)."""
+    if not platform:
+        return None
+    prof = PLATFORMS.get(platform)
+    if prof is None:
+        return f"unknown platform {platform!r}; choose {sorted(PLATFORMS)}"
+    if style not in prof["styles"]:
+        return f"{prof['name']} không dùng style {style} (được dùng: {', '.join(prof['styles'])}). Xem platforms/{platform}/README.md"
+    if prof.get("requires_episode") and not override:
+        return prof.get("requires_episode_reason", f"{prof['name']} cần episode JSON")
+    return None
+
+
+def prepare(topic, style, override=None, returns=None, platform=None):
+    why = check_platform(platform, style, override)
+    if why:
+        raise SystemExit(why)
     ep, mod, model = _prepare(topic, style, override, returns)
-    return _follow_cta(ep, override), mod, model
+    if platform:
+        if not (override or {}).get("id"):
+            ep["id"] = f"{ep['id']}-{platform}"
+        ep.setdefault("max_seconds", PLATFORMS[platform].get("max_seconds", 60))
+        ep["max_seconds"] = min(ep["max_seconds"], PLATFORMS[platform].get("max_seconds", 60))
+    return _follow_cta(ep, override, platform), mod, model
 
 
 def _prepare(topic, style, override=None, returns=None):
@@ -159,9 +164,10 @@ def _prepare(topic, style, override=None, returns=None):
 
 
 def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice="female", music=None,
-         scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True):
+         scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True, platform=None):
     t_start = time.time()
-    ep, mod, model = prepare(topic, style, override, returns)
+    platform = (override or {}).get("platform") or platform
+    ep, mod, model = prepare(topic, style, override, returns, platform)
     out = Path(out_root) / ep["id"]
     work = out / "_work"
     work.mkdir(parents=True, exist_ok=True)
@@ -227,14 +233,14 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
                                        expect_audio=True)
         if hasattr(mod, "export"):
             mod.export(scenes, filled, model, ctx)
-    (out / "captions.md").write_text(captions(filled, disc), encoding="utf-8")
+    (out / "captions.md").write_text(captions(filled, disc, platform), encoding="utf-8")
     status = "ĐẠT" if not (nums["fail"] or banned["fail"] or fmt["fail"]) else "KHÔNG ĐẠT"
     report.write(out, ep, nums, banned, fmt, status=status, extra={"Giọng đọc": used + (" — " + "; ".join(errors) if errors else ""),
                                                                    "Thời lượng": f"{duration:.1f}s",
                                                                    "Thời gian dựng": f"{time.time() - t_start:.0f}s"})
     print(report.summary(nums, banned, fmt))
     if log:
-        log_episode(filled, out, status, duration)
+        log_episode(filled, out, status, duration, platform)
     shutil.rmtree(work, ignore_errors=True)
     return {"id": ep["id"], "ok": status == "ĐẠT", "out": str(out), "voice": used, "duration": duration}
 
@@ -253,6 +259,8 @@ def main():
     ap.add_argument("--prices", help="CSV with a close column → real data instead of simulation")
     ap.add_argument("--data-source", help="label shown on screen for real data, e.g. 'FPT, HOSE, 2023–2025'")
     ap.add_argument("--force", action="store_true", help="render even if pre-render QA fails (never publish that)")
+    ap.add_argument("--platform", choices=sorted(PLATFORMS),
+                    help="tiktok | facebook | reels-shorts: CTA, captions, allowed styles from platforms/profiles.json")
     ap.add_argument("--no-log", action="store_true", help="do not append to knowledge/episodes.csv")
     a = ap.parse_args()
 
@@ -276,7 +284,7 @@ def main():
         try:
             results.append(make(topic, style, override, a.out, a.voice_engine, a.voice, a.music, a.scale, a.fps,
                                 returns, ("Dữ liệu thật: " + a.data_source) if a.data_source else None, a.force,
-                                not a.no_log))
+                                not a.no_log, a.platform))
         except SystemExit as ex:  # unsupported topic × style: report and keep going with the batch
             print(f"  ✗ {ex}")
             results.append({"id": f"{topic}-{style}", "ok": False, "error": str(ex)})

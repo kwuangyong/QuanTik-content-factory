@@ -11,6 +11,7 @@ Biến một chủ đề quant thành video dọc 9:16 (hoặc carousel) đúng 
 
 ```
 SKILL.md                 ← bạn đang đọc: điều phối
+platforms/               MỖI NỀN TẢNG MỘT QUY TRÌNH: README.md (điều phối) · facebook/ · tiktok/ · reels-shorts/ · profiles.json
 brand/                   identity.md (màu, chữ, giọng văn, thông tin sản phẩm) · compliance.md (cụm cấm, miễn trừ)
                          pronunciation.json (cách TTS đọc thuật ngữ) · assets/ (logo, font, nhạc có giấy phép)
 knowledge/models/*.md    8 mô hình viết tay: công thức, tham số đẹp, ngưỡng, ví dụ HOSE, sai lầm hay gặp, video_defaults
@@ -27,6 +28,12 @@ episodes/                episode JSON đã viết (ghi đè mặc định của 
 ```
 
 ## Quy trình
+
+> **Bước 0 — nền tảng nào?** Mỗi nền tảng có quy trình riêng, không làm một video rồi đăng mọi nơi.
+> Đọc `platforms/README.md`, chọn đúng một nhánh và làm theo file của nhánh đó:
+> **Facebook** = nội dung sản phẩm để chuyển đổi (`platforms/facebook/`) · **TikTok** = giáo dục "Học quant
+> cùng QuanTik" (`platforms/tiktok/`, các bước 1–6 dưới đây) · **Reels · Shorts** = thử nghiệm larping/motivational/vui
+> (`platforms/reels-shorts/`). Mọi lệnh `batch.py` thêm `--platform <tên>` để CTA, caption và style đúng nền tảng.
 
 > **Video hướng dẫn dùng sản phẩm** ("hướng dẫn sử dụng QuanTik", "workflow từ tạo tài khoản đến phân tích",
 > "demo tính năng quét sàn") không đi qua `batch.py`. Đọc `tutorial/README.md` và làm theo đó: quay giao diện
@@ -89,13 +96,13 @@ Quy tắc viết lời — mỗi quy tắc đều có lý do:
 Chạy từ thư mục `pipeline/`:
 
 ```bash
-python batch.py --topics garch --styles code-reel                      # một video
+python batch.py --platform tiktok --topics garch --styles code-reel    # một video cho TikTok
 python batch.py --topics garch,kelly --styles myth-buster,meme-quant   # 4 video
 python batch.py --episode ../episodes/kelly-meme-tap03.json            # episode tự viết
 python batch.py --topics var_cvar --styles code-reel --prices FPT.csv --data-source "FPT, HOSE, 2023–2025"
 ```
 
-Tuỳ chọn: `--scale 0.5` (bản xem nhanh 540×960, dựng lại `--scale 1` trước khi đăng) · `--voice male` (giọng nam trầm: đặt biến môi trường `QT_PITCH=-12Hz QT_RATE=-5%` trước lệnh, chỉ engine edge) · `--voice-engine edge|gtts|espeak|silent` · `--music <file có giấy phép>|none` · `--no-log` (không ghi episodes.csv, dùng khi thử) · `--force` (dựng dù QA trước render thất bại — chỉ để xem, không đăng).
+Tuỳ chọn: `--platform tiktok|facebook|reels-shorts` (CTA thẻ cuối, caption chỉ của nền tảng đó, id thêm hậu tố, từ chối style không hợp; episode JSON có thể ghi `"platform"`) · `--scale 0.5` (bản xem nhanh 540×960, dựng lại `--scale 1` trước khi đăng) · `--voice male` (giọng nam trầm: đặt biến môi trường `QT_PITCH=-12Hz QT_RATE=-5%` trước lệnh, chỉ engine edge) · `--voice-engine edge|gtts|espeak|silent` · `--music <file có giấy phép>|none` · `--no-log` (không ghi episodes.csv, dùng khi thử) · `--force` (dựng dù QA trước render thất bại — chỉ để xem, không đăng).
 
 Mỗi video ra `social-output/<id>/` (thư mục gốc repo): `final.mp4`, `thumbnail.jpg`, `captions.md`, `subtitles.srt`, `qa_report.md`, `values.json` (số + code đã chạy), `layout.json`. Carousel ra `slides/1080x1920/` và `slides/1080x1350/`. Talking-head ra `teleprompter.mp4`, `script.md`, `broll/`. Một video mất khoảng 1–2 phút dựng.
 
@@ -115,7 +122,7 @@ Mỗi video ra `social-output/<id>/` (thư mục gốc repo): `final.mp4`, `thum
 Người dùng muốn **văn bản trong chat để copy đăng ngay**. Với mỗi video:
 
 - Tiêu đề, đường dẫn file (`social-output/<id>/final.mp4`), thời lượng, kết luận QA, engine giọng.
-- Caption từng nền tảng lấy từ `captions.md` (TikTok · Facebook/Reels · YouTube Shorts), trong khối copy được, có hashtag và câu miễn trừ.
+- Caption của nền tảng đích lấy từ `captions.md` (có `--platform` thì file chỉ chứa nền tảng đó; không có thì đủ TikTok · Facebook · Instagram Reels · YouTube Shorts), trong khối copy được, có hashtag và câu miễn trừ.
 - Lưu ý còn lại cho người duyệt (giọng thiếu, giá gói cần đối chiếu, nhạc chưa có giấy phép…).
 
 Sau khi đăng, nhắc người dùng ghi view vào `knowledge/episodes.csv` sau 7 ngày (hoặc lấy qua công cụ vidIQ nếu có kết nối) để `hooks.md` dần có hook đã kiểm chứng.
