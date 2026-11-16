@@ -2,7 +2,8 @@
 
 **Vai trò:** kéo view nhanh, phủ tên QuanTik ra ngoài thị trường Việt.
 **Ngôn ngữ:** **tiếng Anh**, giọng nam trầm (edge-tts `en-US-AndrewNeural`), số viết kiểu Anh (12.3%, 1,000).
-**Độ dài:** 15–45 giây.
+**Độ dài:** không cần dưới 1 phút, tối đa **2 phút** (QA chặn > 120s). Bản ngắn 20–45s để kéo view, bản 60–120s cho
+chuyện cần kể (gambler's ruin, chuỗi thua).
 
 Giọng điệu khác hẳn TikTok: không dạy từng bước, mà nói **một sự thật khó nghe** rồi chứng minh bằng số do code tính.
 Cảm giác "dark, honest, a bit uncomfortable", không phải "học bài".
@@ -19,6 +20,7 @@ Mẫu đã viết sẵn: `episodes/en-poker-kelly-myth.json`, `episodes/en-dark-
 
 ## Quy trình
 
+0. **Hình ảnh thật bắt buộc:** thêm `"broll"` (từ khoá người/vật cụ thể, tiếng Anh) vào episode; xem `brand/identity.md`.
 1. **Chọn trụ và một sự thật** có thể chứng minh bằng một trong 8 mô hình viết tay (danh sách số: `python pipeline/models.py <topic>`).
 2. **Viết episode tiếng Anh** `episodes/en-<id>.json`, có `"platform": "youtube-shorts"`. Phải ghi đè **mọi** trường
    chữ mà style dùng (`hook`, `beats`, `myth`/`fact` hoặc `meme`, `takeaway`, `title`, `caption`, `hashtags`, `tag`),

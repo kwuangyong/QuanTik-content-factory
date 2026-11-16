@@ -1,17 +1,20 @@
 # Kế hoạch nội dung theo nền tảng — bản chốt 11/2026
 
 Một trang tổng hợp: mỗi nền tảng đăng gì, ví dụ cụ thể, dựng bằng gì, đăng bao nhiêu, đo bằng gì.
+**Mọi video, mọi nền tảng: phải có hình ảnh thật** (người, vật, nơi chốn, ảnh thật hoặc B-roll từ Openverse/Pexels;
+xem `brand/identity.md`).
+
 Chi tiết quy trình từng nền tảng ở `platforms/<nền tảng>/README.md`; lý do chọn hướng ở `RESEARCH-2026-11.md`.
 
 | | **Facebook Reels** | **TikTok** | **Instagram Reels** | **YouTube Shorts** |
 | --- | --- | --- | --- | --- |
-| Ngôn ngữ | Việt | Việt | Việt | **Anh** |
+| Ngôn ngữ | Việt | Việt | **Anh** | **Anh** |
 | Vai trò | **chuyển đổi** (ra người dùng trả tiền) | **giáo dục**, xây độ tin cậy | **lan truyền**, nhớ tên QuanTik | **kéo view nhanh** ("ăn xổi") |
-| Người xem | người muốn dùng quant làm công cụ chính | nhà đầu tư tò mò về quant | Gen Z, không thích học | người xem quốc tế, thích sự thật khó nghe |
+| Người xem | người muốn dùng quant làm công cụ chính | nhà đầu tư tò mò về quant | Gen Z quốc tế, không thích học | người xem quốc tế, thích sự thật khó nghe |
 | Nội dung | sản phẩm: Quét toàn sàn, Phân tích Quant | quant đọc tin · series Học quant · cầm tay chỉ việc | skit/POV · câu kỷ luật · thử thách 100 ngày | dark truth · tâm lý nhà đầu tư · poker theory |
-| Độ dài | 20–45s | 35–60s | 12–30s | 15–45s |
+| Độ dài | 20–45s | 35–60s | ≤ 2 phút | ≤ 2 phút |
 | Tần suất | 3/tuần | 5/tuần | 4/tuần | 5/tuần |
-| CTA thẻ cuối | Dùng thử miễn phí tại quantik.io.vn | Theo dõi để học quant mỗi ngày | Lưu lại, gửi cho bạn | Follow for the math behind the market |
+| CTA thẻ cuối | Dùng thử miễn phí tại quantik.io.vn | Theo dõi để học quant mỗi ngày | Save this. Send it to a friend who trades. | Follow for the math behind the market |
 | Đo | click link, đăng ký, nâng Pro | follow, tỉ lệ xem hết | share, save | xem hết, sub mới |
 
 ## Facebook Reels — sản phẩm, "ăn liền"
@@ -37,7 +40,9 @@ Chi tiết quy trình từng nền tảng ở `platforms/<nền tảng>/README.m
 | **Series Học quant #N** (30%) | 8 mô hình viết tay: Sharpe, Sortino, VaR/CVaR, Kelly, Hurst, HMM, Monte Carlo, GARCH · ~200 chủ đề catalog, ưu tiên chỉ số có trong báo cáo (`module_*`, `sheet-*`) | `batch.py --platform tiktok --topics … --styles …` |
 | **Cầm tay chỉ việc bằng QuanTik** (20%) | "Tập 3: đọc báo cáo Phân tích Quant trong 60 giây" · "Một chỉ số trong bảng quét, đọc sao cho đúng" | `tutorial/` (bản ngắn) |
 
-## Instagram Reels — larping, motivational, vui
+## Instagram Reels — tiếng Anh, larping, motivational, vui
+
+Ví dụ dưới đây viết lại bằng tiếng Anh khi làm episode (`episodes/en-*.json`).
 
 Không khoe lãi, không lifestyle giàu nhanh. Motivational là về kỷ luật, không về tiền.
 

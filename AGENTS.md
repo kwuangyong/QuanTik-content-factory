@@ -16,8 +16,8 @@ quant finance và về cách dùng sản phẩm. Toàn bộ quy trình nằm tro
 | --- | --- | --- | --- |
 | Facebook | chuyển đổi: **sản phẩm QuanTik**, "ăn liền", không đăng video giáo dục | `platforms/facebook/README.md` → `tutorial/README.md` | `bash tutorial/run.sh <workdir>` · `batch.py --platform facebook --episode …` |
 | TikTok | giáo dục: "Học quant cùng QuanTik" | `platforms/tiktok/README.md` → `SKILL.md` | `cd pipeline && python batch.py --platform tiktok --topics <id> --styles <style>` |
-| Instagram Reels | thử nghiệm: larping, motivational, vui, đáng share/save | `platforms/instagram/README.md` | `batch.py --platform instagram …` |
-| YouTube Shorts | **tiếng Anh**, kéo view nhanh: dark truth, tâm lý nhà đầu tư, poker theory | `platforms/youtube-shorts/README.md` | `batch.py --episode ../episodes/en-<id>.json` |
+| Instagram Reels | **tiếng Anh**, ≤ 2 phút: larping, motivational, vui, đáng share/save | `platforms/instagram/README.md` | `batch.py --platform instagram --episode ../episodes/en-<id>.json` |
+| YouTube Shorts | **tiếng Anh**, ≤ 2 phút, kéo view nhanh: dark truth, tâm lý nhà đầu tư, poker theory | `platforms/youtube-shorts/README.md` | `batch.py --episode ../episodes/en-<id>.json` |
 
 (đường dẫn tính từ `.claude/skills/quantik-video-factory/`)
 
@@ -30,14 +30,19 @@ quant finance và về cách dùng sản phẩm. Toàn bộ quy trình nằm tro
 4. Giọng văn, màu, font, vùng an toàn khung hình: `brand/identity.md`.
 5. Không dùng tài khoản/thông tin cá nhân của người dùng để đăng nhập site thật; màn cần đăng nhập thì chạy
    giao diện production local với API giả (xem `tutorial/README.md`).
-6. Output vào `social-output/<id>/` (đã gitignore). Trả về trong chat: đường dẫn file, thời lượng, kết luận QA,
+6. **Mọi video phải có hình ảnh thật** (yêu cầu cố định của chủ sản phẩm): sự vật, nơi chốn, con người, ảnh thật
+   hoặc B-roll — không làm video chỉ có chữ trên nền tối. Nguồn: **Openverse** (miễn phí, CC0/PDM/CC BY) và
+   **Pexels** (ảnh + video, cần `PEXELS_API_KEY`). `batch.py` tự gắn và QA chặn video có dưới 60% cảnh có ảnh thật;
+   ảnh CC BY phải ghi nguồn (pipeline tự ghi vào `credits.md` và caption). Chi tiết: `brand/identity.md` mục
+   *Hình ảnh thật & B-roll*.
+7. Output vào `social-output/<id>/` (đã gitignore). Trả về trong chat: đường dẫn file, thời lượng, kết luận QA,
    engine giọng, caption từng nền tảng trong khối copy được, và lưu ý còn lại cho người duyệt.
 
 ## Môi trường
 
 - Python 3.10+, `pip install -r .claude/skills/quantik-video-factory/requirements.txt edge-tts`, ffmpeg.
 - Video hướng dẫn cần thêm Node 20.9+ và Chromium cho Playwright.
-- Mạng: `speech.platform.bing.com` (giọng đọc edge-tts), `quantik.io.vn`, `github.com` (clone `QuanTik---Design`).
+- Mạng: `speech.platform.bing.com` (giọng đọc edge-tts), `api.openverse.org` (ảnh thật), `api.pexels.com` (B-roll, cần key), `quantik.io.vn`, `github.com` (clone `QuanTik---Design`).
   Không có mạng tới TTS thì pipeline lùi về gTTS → espeak → không giọng; phải báo người dùng.
 - Repo nguồn liên quan (chỉ đọc): `kwuangyong/QuanTik---Design` (web production, Next.js),
   `kwuangyong/QuanTik-website` (engine quant `backend/quant_engine/quant.py`; frontend React cũ, không dùng để quay).

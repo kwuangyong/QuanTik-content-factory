@@ -12,11 +12,12 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 import matplotlib.ticker  # noqa: E402,F401
 from matplotlib import font_manager  # noqa: E402
-from PIL import Image, ImageDraw, ImageFilter  # noqa: E402
+from PIL import Image, ImageDraw, ImageEnhance, ImageFilter  # noqa: E402
 
 import core as C  # noqa: E402
 import matplotlib.text  # noqa: E402,F401
 from core import BRAND, H, SAFE, THEME, W, font, font_path, hex_  # noqa: E402
+from pathlib import Path  # noqa: E402
 
 for _k in ("sans", "sans-bold"):
     try:
@@ -108,6 +109,78 @@ def _background(variant=0):
 
 def base():
     return _background().copy()
+
+
+# ---------------------------------------------------------------- real imagery (B-roll)
+BAND_TOP = 290  # photo band starts under the header
+
+
+def _cover(im, w, h):
+    s = max(w / im.width, h / im.height)
+    im = im.resize((max(w, int(im.width * s + 0.5)), max(h, int(im.height * s + 0.5))), Image.LANCZOS)
+    x, y = (im.width - w) // 2, (im.height - h) // 2
+    return im.crop((x, y, x + w, y + h))
+
+
+@lru_cache(maxsize=48)
+def _broll_layers(path):
+    """(background, photo-or-None). Tall photos fill the frame; landscape/square ones sit sharp in a band under the
+    header over a blurred, darkened copy of themselves (no blurry 3× upscale of a 1024-px photo)."""
+    im = Image.open(path).convert("RGB")
+    bg = ImageEnhance.Brightness(_cover(im, W, H).filter(ImageFilter.GaussianBlur(30))).enhance(0.32)
+    if im.height / im.width >= 1.45:
+        return ImageEnhance.Brightness(_cover(im, int(W * 1.07), int(H * 1.07))).enhance(0.5), None
+    bw = int(W * 1.07)
+    bh = min(int(im.height * bw / im.width), 1100)
+    band = ImageEnhance.Brightness(_cover(im, bw, bh)).enhance(0.62)
+    return bg, band
+
+
+@lru_cache(maxsize=1)
+def _band_fade(w, h):
+    m = Image.new("L", (w, h), 255)
+    d = ImageDraw.Draw(m)
+    fade = int(h * 0.45)
+    for i in range(fade):  # bottom of the photo melts into the background
+        d.line([(0, h - fade + i), (w, h - fade + i)], fill=int(255 * (1 - i / fade) ** 1.4))
+    return m
+
+
+def broll_base(bg, t, dur):
+    """Frame background for a scene carrying real imagery: slow Ken Burns zoom, darkened so text stays readable,
+    small credit line on the photo."""
+    p = max(0.0, min(1.0, t / max(dur, 1e-6)))
+    if bg.get("frames"):  # video B-roll, pre-decoded 1080×1920 @30 fps
+        files = sorted(Path(bg["frames"]).glob("*.jpg"))
+        img = ImageEnhance.Brightness(Image.open(files[min(len(files) - 1, int(t * 30)) % len(files)]).convert("RGB")).enhance(0.5)
+        band_box = None
+    else:
+        back, band = _broll_layers(bg["path"])
+        if band is None:  # full-frame tall photo
+            z = 1.0 + 0.07 * (1 - p)
+            cw, ch = int(W * 1.07 / z), int(H * 1.07 / z)
+            x, y = (back.width - cw) // 2, (back.height - ch) // 2
+            img = back.crop((x, y, x + cw, y + ch)).resize((W, H), Image.LANCZOS)
+            band_box = None
+        else:
+            img = back.copy()
+            z = 1.0 + 0.07 * p
+            cw, ch = int(band.width / z), int(band.height / z)
+            x, y = (band.width - cw) // 2, (band.height - ch) // 2
+            crop = band.crop((x, y, x + cw, y + ch)).resize((W, band.height), Image.LANCZOS)
+            img.paste(crop, (0, BAND_TOP), _band_fade(W, band.height))
+            band_box = (0, BAND_TOP, W, BAND_TOP + band.height)
+    # top scrim so the header stays legible on bright photos
+    scrim = Image.new("L", (W, 330), 0)
+    ImageDraw.Draw(scrim).rectangle([0, 0, W, 330], fill=150)
+    img.paste(Image.new("RGB", (W, 330), (8, 12, 10)), (0, 0), scrim.filter(ImageFilter.GaussianBlur(40)))
+    if bg.get("credit"):
+        d = ImageDraw.Draw(img)
+        f = font("sans", 15)
+        y = BAND_TOP + 6  # top-right under the header: clear of hook/beat text, which is left-aligned lower down
+        tw = d.textlength(bg["credit"], font=f)
+        d.text((SAFE["right"] - tw, y), bg["credit"], font=f, fill=(205, 205, 200))
+    return img
 
 
 @lru_cache(maxsize=4)

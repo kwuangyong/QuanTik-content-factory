@@ -25,5 +25,13 @@
     "quant",
     "shorts"
   ],
-  "allowed_literals": []
+  "allowed_literals": [],
+  "broll": [
+    "poker chips",
+    "poker player",
+    "casino table",
+    "stack of coins",
+    "man thinking",
+    "laptop chart"
+  ]
 }

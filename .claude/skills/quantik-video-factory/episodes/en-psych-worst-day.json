@@ -14,6 +14,18 @@
   },
   "takeaway": "Plan for the tail, not for the threshold.",
   "caption": "VaR tells you where bad days begin. CVaR tells you how bad they get. Simulated fat-tailed returns, fixed seed.",
-  "hashtags": ["investorpsychology", "risk", "investing", "stockmarket", "quant"],
-  "allowed_literals": []
+  "hashtags": [
+    "investorpsychology",
+    "risk",
+    "investing",
+    "stockmarket",
+    "quant"
+  ],
+  "allowed_literals": [],
+  "broll": [
+    "worried man",
+    "storm clouds",
+    "stock trader screen",
+    "rough sea"
+  ]
 }

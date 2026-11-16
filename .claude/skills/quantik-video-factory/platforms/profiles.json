@@ -1,5 +1,5 @@
 {
-  "_note": "Đọc bởi pipeline/batch.py --platform. Sửa ở đây thì sửa luôn README của nền tảng đó.",
+  "_note": "Đọc bởi pipeline/batch.py --platform. Sửa ở đây thì sửa luôn README của nền tảng đó. max_seconds: nền tảng quyết định giới hạn độ dài (QA định dạng).",
   "tiktok": {
     "name": "TikTok",
     "role": "education",
@@ -35,20 +35,21 @@
     "max_seconds": 60
   },
   "instagram": {
-    "name": "Instagram Reels",
+    "name": "Instagram Reels (English)",
     "role": "experiment",
-    "lang": "vi",
+    "lang": "en",
     "styles": [
       "meme-quant",
       "kinetic-text",
       "carousel"
     ],
-    "cta": "Lưu lại, gửi cho đứa bạn hay bàn chứng khoán",
+    "cta": "Save this. Send it to a friend who trades.",
     "captions": [
-      "instagram"
+      "instagram_en"
     ],
-    "requires_episode": false,
-    "max_seconds": 45
+    "requires_episode": true,
+    "max_seconds": 120,
+    "requires_episode_reason": "Instagram Reels là kênh tiếng Anh; lời mặc định của chủ đề là tiếng Việt. Viết episode JSON tiếng Anh (xem platforms/instagram/README.md và episodes/en-*.json)."
   },
   "youtube-shorts": {
     "name": "YouTube Shorts (English)",
@@ -67,6 +68,6 @@
     ],
     "requires_episode": true,
     "requires_episode_reason": "YouTube Shorts là kênh tiếng Anh; lời mặc định của chủ đề là tiếng Việt. Viết episode JSON tiếng Anh (xem platforms/youtube-shorts/README.md và episodes/en-*.json).",
-    "max_seconds": 45
+    "max_seconds": 120
   }
 }

@@ -24,6 +24,7 @@ class Scene:
     subtitles: bool = True
     duration: float = 0.0
     audio: str | None = None
+    bg: dict | None = None             # real imagery behind the scene (broll.py item + "credit")
 
 
 def chunk_text(text, max_chars=66):
@@ -81,7 +82,7 @@ def render(scenes, out_path, tag, note, fps=FPS, layout_path=None, srt_path=None
         log(f"  render {s.name:<14} {s.duration:5.1f}s {n} frames")
         for i in range(n):
             t = i / fps
-            img = F.base()
+            img = F.broll_base(s.bg, t, s.duration) if s.bg else F.base()
             if s.header:
                 F.header(img, tag, note)
             s.draw(img, t, t / s.duration)
@@ -105,7 +106,7 @@ def render(scenes, out_path, tag, note, fps=FPS, layout_path=None, srt_path=None
 def still(scene, t, tag, note, path, size=None):
     """Render one frame of a scene to PNG (thumbnails, carousel slides)."""
     F.LAYOUT.scene = scene.name
-    img = F.base()
+    img = F.broll_base(scene.bg, t, scene.duration) if scene.bg else F.base()
     if scene.header:
         F.header(img, tag, note)
     scene.draw(img, t, min(1.0, t / max(scene.duration, 1e-6)))

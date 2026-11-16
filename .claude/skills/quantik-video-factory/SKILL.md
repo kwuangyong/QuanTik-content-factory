@@ -32,8 +32,8 @@ episodes/                episode JSON đã viết (ghi đè mặc định của 
 > **Bước 0 — nền tảng nào?** Mỗi nền tảng có quy trình riêng, không làm một video rồi đăng mọi nơi.
 > Đọc `platforms/README.md`, chọn đúng một nhánh và làm theo file của nhánh đó:
 > **Facebook** = nội dung sản phẩm để chuyển đổi (`platforms/facebook/`) · **TikTok** = giáo dục "Học quant
-> cùng QuanTik" (`platforms/tiktok/`, các bước 1–6 dưới đây) · **Instagram Reels** = thử nghiệm larping/motivational/vui
-> (`platforms/instagram/`) · **YouTube Shorts** = **tiếng Anh**, dark truth / tâm lý nhà đầu tư / poker theory (`platforms/youtube-shorts/`). Mọi lệnh `batch.py` thêm `--platform <tên>` để CTA, caption và style đúng nền tảng.
+> cùng QuanTik" (`platforms/tiktok/`, các bước 1–6 dưới đây) · **Instagram Reels** = larping/motivational/vui
+> (`platforms/instagram/`, **tiếng Anh**, ≤ 2 phút) · **YouTube Shorts** = **tiếng Anh**, ≤ 2 phút, dark truth / tâm lý nhà đầu tư / poker theory (`platforms/youtube-shorts/`). Mọi lệnh `batch.py` thêm `--platform <tên>` để CTA, caption và style đúng nền tảng.
 
 > **Video hướng dẫn dùng sản phẩm** ("hướng dẫn sử dụng QuanTik", "workflow từ tạo tài khoản đến phân tích",
 > "demo tính năng quét sàn") không đi qua `batch.py`. Đọc `tutorial/README.md` và làm theo đó: quay giao diện
@@ -102,7 +102,7 @@ python batch.py --episode ../episodes/kelly-meme-tap03.json            # episode
 python batch.py --topics var_cvar --styles code-reel --prices FPT.csv --data-source "FPT, HOSE, 2023–2025"
 ```
 
-Tuỳ chọn: `--platform tiktok|facebook|instagram|youtube-shorts` (CTA thẻ cuối, caption chỉ của nền tảng đó, id thêm hậu tố, từ chối style không hợp; `youtube-shorts` chuyển cả video sang tiếng Anh; episode JSON có thể ghi `"platform"` và `"lang"`) · `--scale 0.5` (bản xem nhanh 540×960, dựng lại `--scale 1` trước khi đăng) · `--voice male` (giọng nam trầm: đặt biến môi trường `QT_PITCH=-12Hz QT_RATE=-5%` trước lệnh, chỉ engine edge) · `--voice-engine edge|gtts|espeak|silent` · `--music <file có giấy phép>|none` · `--no-log` (không ghi episodes.csv, dùng khi thử) · `--force` (dựng dù QA trước render thất bại — chỉ để xem, không đăng).
+Tuỳ chọn: `--platform tiktok|facebook|instagram|youtube-shorts` (CTA thẻ cuối, caption chỉ của nền tảng đó, id thêm hậu tố, từ chối style không hợp; `instagram` và `youtube-shorts` chuyển cả video sang tiếng Anh; episode JSON có thể ghi `"platform"` và `"lang"`) · `--scale 0.5` (bản xem nhanh 540×960, dựng lại `--scale 1` trước khi đăng) · `--voice male` (giọng nam trầm: đặt biến môi trường `QT_PITCH=-12Hz QT_RATE=-5%` trước lệnh, chỉ engine edge) · `--voice-engine edge|gtts|espeak|silent` · `--music <file có giấy phép>|none` · `--no-log` (không ghi episodes.csv, dùng khi thử) · `--force` (dựng dù QA trước render thất bại — chỉ để xem, không đăng).
 
 Mỗi video ra `social-output/<id>/` (thư mục gốc repo): `final.mp4`, `thumbnail.jpg`, `captions.md`, `subtitles.srt`, `qa_report.md`, `values.json` (số + code đã chạy), `layout.json`. Carousel ra `slides/1080x1920/` và `slides/1080x1350/`. Talking-head ra `teleprompter.mp4`, `script.md`, `broll/`. Một video mất khoảng 1–2 phút dựng.
 
@@ -112,9 +112,13 @@ Mỗi video ra `social-output/<id>/` (thư mục gốc repo): `final.mp4`, `thum
 
 **Giọng đọc:** edge-tts (vi-VN-HoaiMyNeural / NamMinhNeural) cần Internet tới `speech.platform.bing.com`. Không vào được thì pipeline lùi về gTTS → espeak-ng → không giọng (phụ đề vẫn đầy đủ, thời lượng ước theo số chữ). Engine thực tế ghi trong `qa_report.md` — phải báo người dùng nếu video không có giọng, kèm cách khắc phục: chạy lệnh trên máy có Internet, hoặc thêm host đó vào allowlist mạng của môi trường.
 
+**Hình ảnh thật (bắt buộc):** mọi cảnh trừ thẻ cuối được gắn ảnh thật/B-roll từ Pexels (có `PEXELS_API_KEY`) hoặc
+Openverse. Ghi `"broll": ["poker chips", "trader at desk", …]` trong episode để chọn ảnh sát nội dung. Output thêm
+`credits.md` và `broll.jpg`. Quy định đầy đủ: `brand/identity.md` › *Hình ảnh thật & B-roll*.
+
 ### 5. Kiểm tra
 
-1. QA tự chạy: số khớp code và cụm cấm **trước** khi render (sai thì dừng), định dạng và khung chữ **sau** render. Đọc `qa_report.md`; KHÔNG ĐẠT thì sửa episode và dựng lại, không lách bằng `--force`.
+1. QA tự chạy: số khớp code và cụm cấm **trước** khi render (sai thì dừng), định dạng, khung chữ và **tỉ lệ cảnh có ảnh thật (≥ 60%)** **sau** render. Đọc `qa_report.md`; KHÔNG ĐẠT thì sửa episode và dựng lại, không lách bằng `--force`.
 2. Tự xem: mở `thumbnail.jpg` và trích 5–7 khung hình rải đều video (`ffmpeg -ss <t> -i final.mp4 -frames:v 1 f.png`), xem chữ có đè chart, chart có đọc được trên điện thoại, lời và hình có khớp không. QA máy không bắt được lỗi "nhìn xấu".
 
 ### 6. Trả kết quả trong chat

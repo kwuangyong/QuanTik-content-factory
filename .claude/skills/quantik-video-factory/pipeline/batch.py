@@ -30,6 +30,7 @@ sys.path.insert(0, str(HERE.parent / "qa"))
 import core as Core  # noqa: E402
 from core import DEFAULT_OUT, KNOWLEDGE, STYLES, disclaimer, fill_tree, load_json, load_model_kb, save_json  # noqa: E402
 from models import TOPICS, Model, load_returns  # noqa: E402
+import broll as BR  # noqa: E402
 import catalog as C  # noqa: E402
 import term_topic as TT  # noqa: E402
 import render as R  # noqa: E402
@@ -88,6 +89,7 @@ def captions(ep, disc, platform=None):
         # Facebook = conversion: what you can do → link early → CTA
         "facebook": f"## Facebook\n{title}\n\n{cap}\n\n👉 {fb_link}\n\n{cta}\n\n{tags}\n\n{disc}\n",
         "instagram": f"## Instagram Reels\n{cap}\n\n{cta}\n\n{disc}\n\n{tags}\n",
+        "instagram_en": f"## Instagram Reels (English)\n{cap}\n\n{cta}\n\n{disc}\n\n{tags}\n",
         "youtube": f"## YouTube Shorts\n**Tiêu đề:** {yt_title}\n\n**Mô tả:**\n{cap}\n\n{link}\n{cta}\n\n{disc}\n\n{tags} #Shorts\n",
         # English Shorts: English labels, no Vietnamese hashtags unless the episode gives them
         "youtube_en": f"## YouTube Shorts (English)\n**Title:** {yt_title}\n\n**Description:**\n{cap}\n\n{cta}\n\n{disc}\n\n{tags} #Shorts\n",
@@ -144,8 +146,7 @@ def prepare(topic, style, override=None, returns=None, platform=None):
     if platform:
         if not (override or {}).get("id"):
             ep["id"] = f"{ep['id']}-{platform}"
-        ep.setdefault("max_seconds", PLATFORMS[platform].get("max_seconds", 60))
-        ep["max_seconds"] = min(ep["max_seconds"], PLATFORMS[platform].get("max_seconds", 60))
+        ep["max_seconds"] = PLATFORMS[platform].get("max_seconds", ep.get("max_seconds", 60))  # platform decides
     return _follow_cta(ep, override, platform), mod, model
 
 
@@ -168,8 +169,57 @@ def _prepare(topic, style, override=None, returns=None):
     return ep, mod, model
 
 
+def attach_broll(scenes, ep, model, topic, disabled=False):
+    """Give scenes real imagery. Episode "broll" may be a list of searches (cycled over scenes) or a dict
+    {scene_name: search}; otherwise topic defaults + generic people/places. Returns the items used."""
+    targets = [s for s in scenes if s.name != "end"]
+    if disabled or not targets:
+        return []
+    spec = ep.get("broll")
+    family = getattr(model, "family", None) or topic
+    defaults = BR.TOPIC_QUERIES.get(family, []) + BR.GENERIC
+    if isinstance(spec, dict):
+        order = [spec.get(s.name) for s in targets]
+        queries = [q for q in order if q] + defaults
+    else:
+        queries = list(spec or []) + defaults
+    items, _ = BR.pick(queries, len(targets))
+    if not items:
+        return []
+    for i, s in enumerate(targets):
+        it = items[i % len(items)]
+        s.bg = dict(it, credit=BR.credit_line(it))
+    return items
+
+
+def imagery_check(scenes):
+    targets = [s for s in scenes if s.name != "end"]
+    with_img = sum(1 for s in targets if s.bg)
+    ok = targets and with_img / len(targets) >= 0.6
+    msg = f"{with_img}/{len(targets)} cảnh có ảnh thật/B-roll"
+    return {"fail": not ok, "msg": msg + ("" if ok else " — THIẾU (cần ≥ 60%; kiểm tra mạng tới Openverse/Pexels)")}
+
+
+def contact_sheet(items, path):
+    from PIL import Image
+    thumbs = []
+    for it in items:
+        try:
+            src = sorted(Path(it["frames"]).glob("*.jpg"))[0] if it.get("frames") else it["path"]
+            im = Image.open(src).convert("RGB")
+            thumbs.append(im.resize((max(1, int(300 * im.width / im.height)), 300)))
+        except Exception:
+            pass
+    if thumbs:
+        sheet = Image.new("RGB", (sum(t.width for t in thumbs), 300))
+        x = 0
+        for t in thumbs:
+            sheet.paste(t, (x, 0)); x += t.width
+        sheet.save(path, quality=85)
+
+
 def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice="female", music=None,
-         scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True, platform=None):
+         scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True, platform=None, no_broll=False):
     t_start = time.time()
     platform = (override or {}).get("platform") or platform
     Core.set_lang((override or {}).get("lang") or (PLATFORMS[platform].get("lang", "vi") if platform in PLATFORMS else "vi"))
@@ -217,6 +267,12 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
         print(f"  ✗ blocked — fix the episode text (see {out/'qa_report.md'}) or pass --force")
         return {"id": ep["id"], "ok": False, "out": str(out)}
 
+    # ---- real imagery: every scene but the end card gets a photo / B-roll (rule: brand/identity.md › Hình ảnh thật)
+    broll_items = attach_broll(scenes, filled, model, topic, no_broll)
+    if broll_items:
+        (out / "credits.md").write_text(BR.credits_md(broll_items), encoding="utf-8")
+        contact_sheet(broll_items, out / "broll.jpg")
+
     # ---- voice
     used = "silent"; errors = []
     if kind == "video" and getattr(mod, "VOICE", True):
@@ -246,11 +302,21 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
         R.still(scenes[0], scenes[0].duration * 0.9, ctx["tag"], note, out / "thumbnail.jpg")
         fmt = check_format.check_video(final, out / "layout.json", platform_max=filled.get("max_seconds", 60),
                                        expect_audio=True)
+    imagery = imagery_check(scenes)
+    if imagery["fail"]:
+        fmt["fail"] = True
+        fmt.setdefault("issues", []).append(imagery["msg"])
         if hasattr(mod, "export"):
             mod.export(scenes, filled, model, ctx)
-    (out / "captions.md").write_text(captions(filled, disc, platform), encoding="utf-8")
+    cap_md = captions(filled, disc, platform)
+    if broll_items:  # CC BY needs credit where the video is published: one short line per caption section
+        names = sorted({BR.credit_line(it) for it in broll_items})
+        label = "Images" if Core.lang() == "en" else "Ảnh"
+        cap_md = cap_md.replace(disc, disc + f"\n\n{label}: " + "; ".join(names))
+    (out / "captions.md").write_text(cap_md, encoding="utf-8")
     status = "ĐẠT" if not (nums["fail"] or banned["fail"] or fmt["fail"]) else "KHÔNG ĐẠT"
-    report.write(out, ep, nums, banned, fmt, status=status, extra={"Giọng đọc": used + (" — " + "; ".join(errors) if errors else ""),
+    report.write(out, ep, nums, banned, fmt, status=status, extra={"Hình ảnh thật": imagery["msg"],
+                                                                   "Giọng đọc": used + (" — " + "; ".join(errors) if errors else ""),
                                                                    "Thời lượng": f"{duration:.1f}s",
                                                                    "Thời gian dựng": f"{time.time() - t_start:.0f}s"})
     print(report.summary(nums, banned, fmt))
@@ -276,6 +342,7 @@ def main():
     ap.add_argument("--force", action="store_true", help="render even if pre-render QA fails (never publish that)")
     ap.add_argument("--platform", choices=sorted(PLATFORMS),
                     help="tiktok | facebook | instagram | youtube-shorts: CTA, captions, allowed styles from platforms/profiles.json")
+    ap.add_argument("--no-broll", action="store_true", help="skip real imagery (preview only: QA will fail it)")
     ap.add_argument("--no-log", action="store_true", help="do not append to knowledge/episodes.csv")
     a = ap.parse_args()
 
@@ -299,7 +366,7 @@ def main():
         try:
             results.append(make(topic, style, override, a.out, a.voice_engine, a.voice, a.music, a.scale, a.fps,
                                 returns, ("Dữ liệu thật: " + a.data_source) if a.data_source else None, a.force,
-                                not a.no_log, a.platform))
+                                not a.no_log, a.platform, a.no_broll))
         except SystemExit as ex:  # unsupported topic × style: report and keep going with the batch
             print(f"  ✗ {ex}")
             results.append({"id": f"{topic}-{style}", "ok": False, "error": str(ex)})

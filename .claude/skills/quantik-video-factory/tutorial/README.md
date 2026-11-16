@@ -6,6 +6,10 @@ từ code mô hình, còn video hướng dẫn cần **giao diện thật** củ
 
 Kết quả mẫu (11/2026): 1080×1920, 2:28, 20 beat, giọng HoaiMy, phụ đề, CTA đọc nguyên văn của người dùng.
 
+> **Hình ảnh thật bắt buộc** (luật chung mọi video, `brand/identity.md`): xen giữa các cảnh quay giao diện vài cảnh
+> B-roll người thật dùng điện thoại/laptop, bàn làm việc, thành phố… lấy bằng `python pipeline/broll.py "<từ khoá>"`
+> (Openverse/Pexels, giữ dòng ghi nguồn vào `credits.md` và caption). Bước này chưa tự động trong `run.sh`.
+
 ## Chạy
 
 ```bash

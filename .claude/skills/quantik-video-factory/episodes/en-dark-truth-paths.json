@@ -15,6 +15,20 @@
   ],
   "takeaway": "The average is a story about many people. Your account lives on one line.",
   "caption": "One stock, one set of rules, a thousand futures. Your result is just one of them. Simulated data, fixed seed.",
-  "hashtags": ["darktruth", "investing", "stockmarket", "montecarlo", "quant"],
-  "allowed_literals": []
+  "hashtags": [
+    "darktruth",
+    "investing",
+    "stockmarket",
+    "montecarlo",
+    "quant"
+  ],
+  "allowed_literals": [],
+  "broll": [
+    "fork in the road",
+    "crowd walking",
+    "forest path",
+    "night city",
+    "man looking at phone",
+    "stock trader screen"
+  ]
 }

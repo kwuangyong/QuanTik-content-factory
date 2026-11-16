@@ -17,7 +17,7 @@ QuanTik làm nội dung **giáo dục về phương pháp định lượng**. Vi
 - Trình bày kết quả mô phỏng như dự báo giá thật của một mã.
 - Dùng số không do code tính ra hoặc không có nguồn (qa/check_numbers.py chặn).
 - Nhắc giá gói/ưu đãi mà chưa đối chiếu trang `/plans` hiện tại.
-- Dùng nhạc, ảnh, meme template có bản quyền khi chưa có giấy phép.
+- Dùng nhạc, ảnh, meme template có bản quyền khi chưa có giấy phép. Ảnh/B-roll chỉ từ Pexels hoặc Openverse CC0/PDM/CC BY (xem `identity.md` › Hình ảnh thật), ảnh CC BY phải ghi nguồn.
 
 ## Cụm cấm
 

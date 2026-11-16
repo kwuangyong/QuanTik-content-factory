@@ -32,6 +32,27 @@ Màu luôn đi cùng chữ hoặc số (giống quy tắc giao diện web): khô
 - Vùng an toàn (tránh nút và caption của TikTok/Reels/Shorts): x 60–940, y 170–1500. Mọi chữ phải nằm trong vùng này; `qa/check_format.py` bắt lỗi.
 - Phụ đề luôn bật (nhiều người xem không bật tiếng).
 
+## Hình ảnh thật & B-roll (bắt buộc cho MỌI video)
+
+Chủ sản phẩm yêu cầu cố định (11/2026): video phải có **nhiều sự vật, hình ảnh, con người, ảnh thật**, không chỉ
+chữ và chart trên nền tối.
+
+- **Nguồn:** Pexels (ảnh + video dọc, chất lượng cao; cần `PEXELS_API_KEY`) → Openverse (ảnh thật, không cần key).
+  `pipeline/broll.py` tìm, tải, lưu cache `social-output/_broll/`.
+- **Giấy phép được dùng:** Pexels License; Openverse chỉ CC0, PDM, CC BY. **Không** CC BY-SA (ép cả video theo BY-SA),
+  **không** NC (kênh thương hiệu là thương mại), **không** ND (mình cắt/zoom ảnh).
+- **Ghi nguồn:** dòng nhỏ trên ảnh, một dòng "Ảnh/Images:" trong caption, đầy đủ ở `credits.md`. Pipeline tự làm.
+- **Cách dựng:** mọi cảnh trừ thẻ cuối có ảnh. Ảnh dọc phủ kín khung; ảnh ngang/vuông nằm nét ở nửa trên, nền là bản
+  phóng mờ của chính ảnh; zoom chậm (Ken Burns); phủ tối để chữ đọc được. Chart/code vẫn đè lên trên.
+- **Chọn ảnh:** episode ghi `"broll"`: danh sách từ khoá tiếng Anh (xoay vòng theo cảnh) hoặc `{tên cảnh: từ khoá}`.
+  Không ghi thì dùng từ khoá mặc định theo mô hình (`TOPIC_QUERIES`) + người/nơi chốn chung. Từ khoá nên là vật
+  cụ thể và người ("poker chips", "trader at desk", "storm clouds"), không là khái niệm trừu tượng.
+- **Tránh:** người nổi tiếng, logo/thương hiệu thật, bảng giá có mã thật, cảnh tai nạn/bệnh tật, ảnh gợi ý người
+  trong ảnh đang dùng hay khuyên dùng QuanTik.
+- **QA:** dưới 60% cảnh có ảnh thật → KHÔNG ĐẠT. Người duyệt xem `broll.jpg` (tờ ảnh đã chọn) trước khi đăng.
+- **Video hướng dẫn sản phẩm** (`tutorial/`): chèn cảnh B-roll người dùng thật (người cầm điện thoại, ngồi trước
+  laptop…) giữa các cảnh quay giao diện; chưa tự động, làm tay theo `tutorial/README.md`.
+
 ## Giọng văn: chuyên gia, dễ hiểu
 
 - Nói như một người làm quant giải thích cho bạn thông minh nhưng không học tài chính. Câu ngắn, động từ mạnh, mỗi câu một ý.

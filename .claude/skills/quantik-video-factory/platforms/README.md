@@ -8,8 +8,8 @@ CTA, caption và cách đo riêng. Mọi yêu cầu làm nội dung bắt đầu
 | --- | --- | --- | --- | --- |
 | **Facebook** | chuyển đổi (ra người trả tiền) | sản phẩm QuanTik, xem là dùng được | [`facebook/README.md`](facebook/README.md) | `tutorial/run.sh` (chính) · `batch.py --platform facebook --episode …` (talking-head) |
 | **TikTok** | giáo dục, xây độ tin cậy | series "Học quant cùng QuanTik #N" | [`tiktok/README.md`](tiktok/README.md) | `batch.py --platform tiktok --topics … --styles …` |
-| **Instagram Reels** | thử nghiệm, lan truyền | larping, motivational, vui, đáng share/save | [`instagram/README.md`](instagram/README.md) | `batch.py --platform instagram …` |
-| **YouTube Shorts (tiếng Anh)** | kéo view nhanh, "ăn xổi" | dark truth, tâm lý nhà đầu tư, poker theory | [`youtube-shorts/README.md`](youtube-shorts/README.md) | `batch.py --platform youtube-shorts --episode ../episodes/en-….json` |
+| **Instagram Reels (tiếng Anh)** | thử nghiệm, lan truyền, ≤ 2 phút | larping, motivational, vui, đáng share/save | [`instagram/README.md`](instagram/README.md) | `batch.py --platform instagram --episode ../episodes/en-….json` |
+| **YouTube Shorts (tiếng Anh)** | kéo view nhanh, "ăn xổi", ≤ 2 phút | dark truth, tâm lý nhà đầu tư, poker theory | [`youtube-shorts/README.md`](youtube-shorts/README.md) | `batch.py --platform youtube-shorts --episode ../episodes/en-….json` |
 
 **Bản tổng hợp: mỗi nền tảng đăng gì → [`CONTENT-PLAN.md`](CONTENT-PLAN.md).**
 
@@ -17,7 +17,7 @@ Nghiên cứu nền tảng (người xem cần gì, dạng nào đang lên, vòn
 
 `profiles.json` là bản máy đọc của bảng trên: style được phép, CTA thẻ cuối, mục caption, độ dài tối đa.
 `batch.py --platform <tên>` dùng nó để gắn CTA, chỉ in caption của nền tảng đó, thêm hậu tố nền tảng vào id
-output, và từ chối style không thuộc nền tảng. Không có `--platform` thì chạy như cũ (CTA TikTok, caption mọi nơi). Nền tảng có `"lang": "en"` (YouTube Shorts) tự chuyển toàn bộ video sang tiếng Anh.
+output, và từ chối style không thuộc nền tảng. Không có `--platform` thì chạy như cũ (CTA TikTok, caption mọi nơi). Nền tảng có `"lang": "en"` (Instagram, YouTube Shorts) tự chuyển toàn bộ video sang tiếng Anh.
 
 ## Điều phối yêu cầu
 
@@ -44,6 +44,8 @@ QA số sẽ chặn).
 | SOM | người muốn dùng quant làm **công cụ chính**: tiết kiệm thời gian, ra quyết định có hệ thống | khoảng 5 nghìn | Facebook (chuyển đổi) |
 
 ## Luật chung mọi nền tảng
+
+**Mọi video phải có hình ảnh thật** (người, vật, nơi chốn; Openverse/Pexels), xem `brand/identity.md` › Hình ảnh thật & B-roll.
 
 `brand/compliance.md` và `brand/identity.md` vẫn áp dụng nguyên vẹn: không gọi mua/bán, không hứa lợi nhuận,
 câu miễn trừ trong caption và thẻ cuối, số qua placeholder, giá gói đối chiếu `/plans`, mã bịa trong demo sản phẩm.
