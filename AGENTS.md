@@ -16,7 +16,8 @@ quant finance và về cách dùng sản phẩm. Toàn bộ quy trình nằm tro
 | --- | --- | --- | --- |
 | Facebook | chuyển đổi: **sản phẩm QuanTik**, "ăn liền", không đăng video giáo dục | `platforms/facebook/README.md` → `tutorial/README.md` | `bash tutorial/run.sh <workdir>` · `batch.py --platform facebook --episode …` |
 | TikTok | giáo dục: "Học quant cùng QuanTik" | `platforms/tiktok/README.md` → `SKILL.md` | `cd pipeline && python batch.py --platform tiktok --topics <id> --styles <style>` |
-| Instagram Reels · YouTube Shorts | thử nghiệm: larping, motivational, vui, đáng share/save | `platforms/reels-shorts/README.md` | `batch.py --platform reels-shorts …` |
+| Instagram Reels | thử nghiệm: larping, motivational, vui, đáng share/save | `platforms/instagram/README.md` | `batch.py --platform instagram …` |
+| YouTube Shorts | **tiếng Anh**, kéo view nhanh: dark truth, tâm lý nhà đầu tư, poker theory | `platforms/youtube-shorts/README.md` | `batch.py --episode ../episodes/en-<id>.json` |
 
 (đường dẫn tính từ `.claude/skills/quantik-video-factory/`)
 

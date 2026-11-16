@@ -3,29 +3,70 @@
   "tiktok": {
     "name": "TikTok",
     "role": "education",
-    "styles": ["code-reel", "kinetic-text", "chart-story", "myth-buster", "whiteboard-math", "talking-head-script", "carousel", "meme-quant"],
+    "styles": [
+      "code-reel",
+      "kinetic-text",
+      "chart-story",
+      "myth-buster",
+      "whiteboard-math",
+      "talking-head-script",
+      "carousel",
+      "meme-quant"
+    ],
     "cta": "Thả tim và theo dõi QuanTik để học một kiến thức quant mỗi ngày",
-    "captions": ["tiktok"],
+    "captions": [
+      "tiktok"
+    ],
     "requires_episode": false,
     "max_seconds": 60
   },
   "facebook": {
     "name": "Facebook",
     "role": "conversion",
-    "styles": ["talking-head-script"],
+    "styles": [
+      "talking-head-script"
+    ],
     "cta": "Dùng thử miễn phí Quét toàn sàn và Phân tích Quant tại quantik.io.vn",
-    "captions": ["facebook"],
+    "captions": [
+      "facebook"
+    ],
     "requires_episode": true,
     "requires_episode_reason": "Facebook chỉ đăng nội dung sản phẩm; lời mặc định của chủ đề là lời giáo dục. Viết episode JSON góc sản phẩm (xem platforms/facebook/README.md) hoặc dùng tutorial/run.sh.",
     "max_seconds": 60
   },
-  "reels-shorts": {
-    "name": "Instagram Reels · YouTube Shorts",
+  "instagram": {
+    "name": "Instagram Reels",
     "role": "experiment",
-    "styles": ["meme-quant", "kinetic-text", "carousel"],
+    "lang": "vi",
+    "styles": [
+      "meme-quant",
+      "kinetic-text",
+      "carousel"
+    ],
     "cta": "Lưu lại, gửi cho đứa bạn hay bàn chứng khoán",
-    "captions": ["instagram", "youtube"],
+    "captions": [
+      "instagram"
+    ],
     "requires_episode": false,
+    "max_seconds": 45
+  },
+  "youtube-shorts": {
+    "name": "YouTube Shorts (English)",
+    "role": "reach",
+    "lang": "en",
+    "voice": "male",
+    "styles": [
+      "kinetic-text",
+      "myth-buster",
+      "meme-quant",
+      "code-reel"
+    ],
+    "cta": "Follow for the math behind the market",
+    "captions": [
+      "youtube_en"
+    ],
+    "requires_episode": true,
+    "requires_episode_reason": "YouTube Shorts là kênh tiếng Anh; lời mặc định của chủ đề là tiếng Việt. Viết episode JSON tiếng Anh (xem platforms/youtube-shorts/README.md và episodes/en-*.json).",
     "max_seconds": 45
   }
 }

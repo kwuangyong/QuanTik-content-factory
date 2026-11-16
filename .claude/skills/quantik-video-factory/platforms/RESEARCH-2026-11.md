@@ -1,5 +1,9 @@
 # Nghiên cứu hướng content theo nền tảng — 11/2026
 
+> **Cập nhật sau nghiên cứu:** chủ sản phẩm chốt YouTube Shorts làm **bản tiếng Anh**, nội dung dark truth,
+> tâm lý nhà đầu tư, poker theory, để kéo view nhanh (xem `youtube-shorts/README.md`). Phần YouTube Shorts dưới đây
+> (giáo dục "X là gì" tiếng Việt) không còn áp dụng; Instagram Reels giữ nguyên.
+
 Bản nghiên cứu nhanh, làm trước vòng thử. Nguồn: số liệu thị trường (VSDC qua báo chí), nghiên cứu hành vi nhà đầu
 tư, và **20 video tiếng Việt vượt trội** (view gấp 5–860 lần trung vị của chính kênh đó, từ 08–11/2026) lấy bằng
 vidIQ. Mẫu nhỏ: coi là giả thuyết để thử, chưa phải kết luận.

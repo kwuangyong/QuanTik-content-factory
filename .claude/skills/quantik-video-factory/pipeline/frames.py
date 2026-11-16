@@ -14,6 +14,8 @@ import matplotlib.ticker  # noqa: E402,F401
 from matplotlib import font_manager  # noqa: E402
 from PIL import Image, ImageDraw, ImageFilter  # noqa: E402
 
+import core as C  # noqa: E402
+import matplotlib.text  # noqa: E402,F401
 from core import BRAND, H, SAFE, THEME, W, font, font_path, hex_  # noqa: E402
 
 for _k in ("sans", "sans-bold"):
@@ -123,7 +125,7 @@ def header(img, tag: str, note: str):
     x, y = SAFE["left"], SAFE["top"] + 4
     img.paste(logo(64), (x, y), logo(64))
     d.text((x + 80, y + 8), "QuanTik", font=font("sans-bold", 34), fill=T["text"])
-    d.text((x + 80, y + 46), "quant cho cổ phiếu Việt Nam", font=font("sans", 17), fill=T["muted"])
+    d.text((x + 80, y + 46), C.L("tagline"), font=font("sans", 17), fill=T["muted"])
     f = font("mono-bold", 24)
     tw = d.textlength(tag, font=f)
     bx1 = SAFE["right"]; bx0 = bx1 - tw - 36
@@ -244,6 +246,11 @@ def paste(img, im, xy, alpha=1.0, anchor="nw"):
 
 
 def fig_to_img(fig, transparent=False):
+    if C.lang() != "vi":  # chart text from models.py is Vietnamese; translate every text artist
+        for t in fig.findobj(matplotlib.text.Text):
+            s = t.get_text()
+            if s:
+                t.set_text(C.tr_chart(s))
     buf = io.BytesIO()
     fig.savefig(buf, format="png", dpi=100, transparent=transparent)
     plt.close(fig)
@@ -385,7 +392,8 @@ def code_panel(code, width=880, chars=None, hl_line=None, title="model.py"):
     return im
 
 
-def terminal_panel(lines_shown, width=880, title="kết quả"):
+def terminal_panel(lines_shown, width=880, title=None):
+    title = title or C.L("output")
     size = 30
     while size > 20 and any(font("mono", size).getlength(a) + font("mono-bold", size).getlength(b) > width - 70
                             for a, b in lines_shown):

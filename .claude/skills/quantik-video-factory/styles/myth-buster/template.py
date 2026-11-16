@@ -1,4 +1,5 @@
 """myth-buster: "Bạn nghĩ X" (top, red) → "Thực ra Y" (bottom, green) with the chart as evidence."""
+import core as C
 import frames as F
 import scenes as S
 from core import THEME as T
@@ -28,19 +29,19 @@ def build(ep, model, ctx):
     myth, fact = ep["myth"], ep["fact"]
 
     def d_myth(img, t, p):
-        _card(img, TOP_BOX, "BẠN NGHĨ", myth, T["negative"], F.ease_out(F.seg(p, 0, 0.2)), name="myth")
+        _card(img, TOP_BOX, C.L("you_think"), myth, T["negative"], F.ease_out(F.seg(p, 0, 0.2)), name="myth")
 
     def d_fact(img, t, p):
-        _card(img, TOP_BOX, "BẠN NGHĨ", myth, T["negative"], 1.0, strike=F.ease_out(F.seg(p, 0, 0.15)), name="myth")
-        _card(img, BOT_BOX, "THỰC RA", fact, T["positive"], F.ease_out(F.seg(p, 0.1, 0.3)), name="fact")
+        _card(img, TOP_BOX, C.L("you_think"), myth, T["negative"], 1.0, strike=F.ease_out(F.seg(p, 0, 0.15)), name="myth")
+        _card(img, BOT_BOX, C.L("truth"), fact, T["positive"], F.ease_out(F.seg(p, 0.1, 0.3)), name="fact")
 
     return [
-        S.hook(ep["hook"], kicker=ep.get("hook_kicker", "Hiểu lầm phổ biến")),
-        Scene("myth", ep.get("myth_say", myth), d_myth, 3.5, texts=[myth, "BẠN NGHĨ"]),
-        Scene("fact", fact, d_fact, 4.5, texts=[fact, "THỰC RA"]),
+        S.hook(ep["hook"], kicker=ep.get("hook_kicker", C.L("myth_kicker"))),
+        Scene("myth", ep.get("myth_say", myth), d_myth, 3.5, texts=[myth, C.L("you_think")]),
+        Scene("fact", fact, d_fact, 4.5, texts=[fact, C.L("truth")]),
         S.chart(model, ep["beats"][2], title=ep.get("chart_title"), name="evidence", min_dur=5.0,
-                notes=[(0.0, "Bằng chứng từ code chạy thật")]),
+                notes=[(0.0, C.L("evidence"))]),
         S.surface(model, ep["beats"][3], min_dur=4.5),
-        S.statement(ep["takeaway"], name="takeaway", size=64, label_chip="Mang về"),
+        S.statement(ep["takeaway"], name="takeaway", size=64, label_chip=C.L("takeaway")),
         S.end(ep["cta"], ctx["disclaimer"], ctx["tag"]),
     ]

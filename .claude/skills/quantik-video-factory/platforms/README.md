@@ -8,13 +8,14 @@ CTA, caption và cách đo riêng. Mọi yêu cầu làm nội dung bắt đầu
 | --- | --- | --- | --- | --- |
 | **Facebook** | chuyển đổi (ra người trả tiền) | sản phẩm QuanTik, xem là dùng được | [`facebook/README.md`](facebook/README.md) | `tutorial/run.sh` (chính) · `batch.py --platform facebook --episode …` (talking-head) |
 | **TikTok** | giáo dục, xây độ tin cậy | series "Học quant cùng QuanTik #N" | [`tiktok/README.md`](tiktok/README.md) | `batch.py --platform tiktok --topics … --styles …` |
-| **Instagram Reels · YouTube Shorts** | thử nghiệm, lan truyền | larping, motivational, vui, đáng share/save | [`reels-shorts/README.md`](reels-shorts/README.md) | `batch.py --platform reels-shorts …` |
+| **Instagram Reels** | thử nghiệm, lan truyền | larping, motivational, vui, đáng share/save | [`instagram/README.md`](instagram/README.md) | `batch.py --platform instagram …` |
+| **YouTube Shorts (tiếng Anh)** | kéo view nhanh, "ăn xổi" | dark truth, tâm lý nhà đầu tư, poker theory | [`youtube-shorts/README.md`](youtube-shorts/README.md) | `batch.py --platform youtube-shorts --episode ../episodes/en-….json` |
 
 Nghiên cứu nền tảng (người xem cần gì, dạng nào đang lên, vòng thử 4 tuần): [`RESEARCH-2026-11.md`](RESEARCH-2026-11.md).
 
 `profiles.json` là bản máy đọc của bảng trên: style được phép, CTA thẻ cuối, mục caption, độ dài tối đa.
 `batch.py --platform <tên>` dùng nó để gắn CTA, chỉ in caption của nền tảng đó, thêm hậu tố nền tảng vào id
-output, và từ chối style không thuộc nền tảng. Không có `--platform` thì chạy như cũ (CTA TikTok, caption mọi nơi).
+output, và từ chối style không thuộc nền tảng. Không có `--platform` thì chạy như cũ (CTA TikTok, caption mọi nơi). Nền tảng có `"lang": "en"` (YouTube Shorts) tự chuyển toàn bộ video sang tiếng Anh.
 
 ## Điều phối yêu cầu
 
@@ -22,7 +23,8 @@ output, và từ chối style không thuộc nền tảng. Không có `--platfor
 | --- | --- |
 | "video Facebook", "bán hàng", "quảng bá", "chuyển đổi", "demo tính năng", "hướng dẫn dùng" | Facebook |
 | "TikTok", "học quant", "giải thích X", "series", "tập #N" | TikTok |
-| "Reels", "Instagram", "Shorts", "YouTube", "Gen Z", "viral", "meme", "trend" | Reels · Shorts |
+| "Reels", "Instagram", "Gen Z", "meme", "trend" | Instagram Reels |
+| "Shorts", "YouTube", "tiếng Anh", "English", "dark truth", "poker", "tâm lý nhà đầu tư" | YouTube Shorts (tiếng Anh) |
 | không nói nền tảng | hỏi lại một câu; nếu là chủ đề quant thuần thì mặc định TikTok |
 
 Người dùng muốn đăng một video lên nhiều nơi: làm được, nhưng nêu trong lưu ý cho người duyệt rằng nó lệch
@@ -35,7 +37,7 @@ QA số sẽ chặn).
 
 | Tầng | Ai | Quy mô ước tính | Nền tảng nuôi tầng này |
 | --- | --- | --- | --- |
-| TAM | tài khoản chứng khoán tại Việt Nam | hơn 14 triệu | Reels · Shorts (biết đến thương hiệu) |
+| TAM | tài khoản chứng khoán tại Việt Nam | hơn 14 triệu | Instagram Reels (biết đến thương hiệu); YouTube Shorts tiếng Anh nhắm ra ngoài Việt Nam |
 | SAM | nhà đầu tư biết, tò mò, hứng thú với quant | khoảng 100 nghìn | TikTok (giáo dục) |
 | SOM | người muốn dùng quant làm **công cụ chính**: tiết kiệm thời gian, ra quyết định có hệ thống | khoảng 5 nghìn | Facebook (chuyển đổi) |
 

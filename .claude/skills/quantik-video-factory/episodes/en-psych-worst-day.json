@@ -1,0 +1,19 @@
+{
+  "id": "en-psych-worst-day",
+  "platform": "youtube-shorts",
+  "topic": "var_cvar",
+  "style": "meme-quant",
+  "tag": "INVESTOR PSYCHOLOGY",
+  "title": "Your brain thinks your worst day is this. It is not.",
+  "hook": "Your brain plans for a bad day. The market plans for a worse one.",
+  "meme": {
+    "format": "expectation-reality",
+    "setup": "Me: a bad day costs me {var95}, tops",
+    "punch": "The worst day in the data: {worst}",
+    "truth": "{var95} is where bad days start, not where they end. Past it, the average loss is {cvar95}."
+  },
+  "takeaway": "Plan for the tail, not for the threshold.",
+  "caption": "VaR tells you where bad days begin. CVaR tells you how bad they get. Simulated fat-tailed returns, fixed seed.",
+  "hashtags": ["investorpsychology", "risk", "investing", "stockmarket", "quant"],
+  "allowed_literals": []
+}

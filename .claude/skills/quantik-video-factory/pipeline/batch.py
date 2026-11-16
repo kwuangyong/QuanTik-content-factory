@@ -17,6 +17,7 @@ import csv
 import datetime as dt
 import importlib.util
 import json
+import re
 import shutil
 import sys
 import time
@@ -26,6 +27,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(HERE.parent / "qa"))
 
+import core as Core  # noqa: E402
 from core import DEFAULT_OUT, KNOWLEDGE, STYLES, disclaimer, fill_tree, load_json, load_model_kb, save_json  # noqa: E402
 from models import TOPICS, Model, load_returns  # noqa: E402
 import catalog as C  # noqa: E402
@@ -35,6 +37,7 @@ import voiceover as V  # noqa: E402
 from assemble import assemble  # noqa: E402
 import check_banned, check_format, check_numbers, report  # noqa: E402
 
+VI_CHARS = re.compile(r"[ăâđêôơưàáạảãằắặẳẵầấậẩẫèéẹẻẽềếệểễìíịỉĩòóọỏõồốộổỗờớợởỡùúụủũừứựửữỳýỵỷỹ]", re.I)
 PLATFORMS = {k: v for k, v in load_json(HERE.parent / "platforms" / "profiles.json").items() if not k.startswith("_")}
 STYLE_NAMES = sorted(p.name for p in STYLES.iterdir() if (p / "template.py").exists())
 
@@ -86,6 +89,8 @@ def captions(ep, disc, platform=None):
         "facebook": f"## Facebook\n{title}\n\n{cap}\n\n👉 {fb_link}\n\n{cta}\n\n{tags}\n\n{disc}\n",
         "instagram": f"## Instagram Reels\n{cap}\n\n{cta}\n\n{disc}\n\n{tags}\n",
         "youtube": f"## YouTube Shorts\n**Tiêu đề:** {yt_title}\n\n**Mô tả:**\n{cap}\n\n{link}\n{cta}\n\n{disc}\n\n{tags} #Shorts\n",
+        # English Shorts: English labels, no Vietnamese hashtags unless the episode gives them
+        "youtube_en": f"## YouTube Shorts (English)\n**Title:** {yt_title}\n\n**Description:**\n{cap}\n\n{cta}\n\n{disc}\n\n{tags} #Shorts\n",
     }
     keys = PLATFORMS[platform]["captions"] if platform else list(sections)
     head = f"# Caption — {ep['id']}" + (f" ({PLATFORMS[platform]['name']})" if platform else "")
@@ -167,6 +172,9 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
          scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True, platform=None):
     t_start = time.time()
     platform = (override or {}).get("platform") or platform
+    Core.set_lang((override or {}).get("lang") or (PLATFORMS[platform].get("lang", "vi") if platform in PLATFORMS else "vi"))
+    if Core.lang() == "en" and voice == "female" and platform in PLATFORMS:
+        voice = PLATFORMS[platform].get("voice", voice)
     ep, mod, model = prepare(topic, style, override, returns, platform)
     out = Path(out_root) / ep["id"]
     work = out / "_work"
@@ -178,8 +186,10 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
     rendered = set()
     filled = fill_tree(ep, model.values, model.formats, rendered)
     disc = disclaimer()
-    note = data_label or ("Dữ liệu thật: " + filled.get("data_source", "CSV người dùng") if model.real_data
-                          else "Dữ liệu mô phỏng · giáo dục, không phải khuyến nghị")
+    if data_label:
+        data_label = data_label.replace("Dữ liệu thật: ", Core.L("real_note"))
+    note = data_label or (Core.L("real_note") + filled.get("data_source", "CSV") if model.real_data
+                          else Core.L("sim_note"))
     ctx = {"tag": filled.get("tag", topic.upper()), "note": note, "disclaimer": disc, "out": out}
     save_json(out / "episode.filled.json", filled)
 
@@ -196,6 +206,11 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
     nums = check_numbers.check(corpus, model.values, model.formats, rendered, filled.get("allowed_literals", []),
                                filled.get("facts", {}))
     banned = check_banned.check(corpus)
+    if Core.lang() == "en":  # English video: any Vietnamese left over from topic defaults is a bug
+        vi = [t for t in corpus if t and VI_CHARS.search(t)]
+        if vi:
+            banned["fail"] = True
+            banned["hits"] += [{"phrase": "(chữ tiếng Việt trong video tiếng Anh)", "in": t[:100]} for t in vi[:5]]
     if (nums["fail"] or banned["fail"]) and not force:
         report.write(out, ep, nums, banned, None, status="CHẶN TRƯỚC KHI RENDER")
         print(report.summary(nums, banned, None))
@@ -260,7 +275,7 @@ def main():
     ap.add_argument("--data-source", help="label shown on screen for real data, e.g. 'FPT, HOSE, 2023–2025'")
     ap.add_argument("--force", action="store_true", help="render even if pre-render QA fails (never publish that)")
     ap.add_argument("--platform", choices=sorted(PLATFORMS),
-                    help="tiktok | facebook | reels-shorts: CTA, captions, allowed styles from platforms/profiles.json")
+                    help="tiktok | facebook | instagram | youtube-shorts: CTA, captions, allowed styles from platforms/profiles.json")
     ap.add_argument("--no-log", action="store_true", help="do not append to knowledge/episodes.csv")
     a = ap.parse_args()
 

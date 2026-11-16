@@ -83,11 +83,70 @@ def font(kind: str, size: int):
     return ImageFont.truetype(font_path(kind), int(size))
 
 
-# ---------------------------------------------------------------- numbers (vi-VN)
+# ---------------------------------------------------------------- language
+# "vi" (default) or "en" (YouTube Shorts English branch, platforms/youtube-shorts). Set once per video by
+# batch.make via set_lang(); read only through the functions below (a `from core import LANG` would go stale).
+_LANG = {"code": "vi"}
+
+LABELS = {
+    "vi": {"takeaway": "Mang về", "you_think": "BẠN NGHĨ", "truth": "THỰC RA", "myth_kicker": "Hiểu lầm phổ biến",
+           "evidence": "Bằng chứng từ code chạy thật", "expect": "KỲ VỌNG", "reality": "THỰC TẾ",
+           "math_says": "Nhưng đúng toán", "tagline": "quant cho cổ phiếu Việt Nam", "output": "kết quả",
+           "main_fn": "hàm chính", "sim_note": "Dữ liệu mô phỏng · giáo dục, không phải khuyến nghị",
+           "real_note": "Dữ liệu thật: ", "swipe": "Lướt để xem →"},
+    "en": {"takeaway": "Takeaway", "you_think": "YOU THINK", "truth": "THE TRUTH", "myth_kicker": "Dark truth",
+           "evidence": "Evidence: real code, real run", "expect": "EXPECTATION", "reality": "REALITY",
+           "math_says": "But the math says", "tagline": "quant, explained", "output": "output",
+           "main_fn": "main function", "sim_note": "Simulated data · education, not financial advice",
+           "real_note": "Real data: ", "swipe": "Swipe →"},
+}
+
+# Chart / 3D text drawn by models.py is Vietnamese; English videos translate it at render time (frames.fig_to_img).
+CHART_EN = {
+    "lợi suất ngày %": "daily return %", "σ năm hoá %": "annualised σ %", "lợi suất %": "return %",
+    "bước thời gian": "time step", "xác suất trạng thái": "state probability", "tài sản trung vị (log)": "median wealth (log)",
+    "số lần đặt": "number of bets", "tỷ lệ cược f %": "bet fraction f %", "tỷ lệ thắng W %": "win rate W %",
+    "tăng trưởng log %": "log growth %", "lợi nhuận năm %": "annual return %", "biến động năm %": "annual volatility %",
+    "mức lỗ ngày %": "daily loss %", "số phiên": "sessions", "độ tin cậy %": "confidence %", "Sortino lũy kế": "cumulative Sortino",
+    "Chiến lược": "Strategy", "đỏ = ngày lỗ (Sortino phạt)": "red = loss days (penalised)", "xám = ngày lãi (bỏ qua)": "grey = gain days (ignored)",
+    "NAV (gốc 100)": "NAV (start 100)", "xu hướng": "trending", "ngẫu nhiên": "random", "hồi quy": "mean-reverting",
+    "quán tính": "trending", "đi ngang": "sideways", "mật độ": "density", "giá trị": "value", "phiên": "session",
+    "bước": "step", "giá": "price", "tăng": "up", "giảm": "down", "ngang": "flat",
+}
+
+
+def set_lang(code: str):
+    if code not in LABELS:
+        raise ValueError(f"unknown language {code!r}; choose {sorted(LABELS)}")
+    _LANG["code"] = code
+
+
+def lang() -> str:
+    return _LANG["code"]
+
+
+def L(key: str) -> str:
+    return LABELS[lang()].get(key) or LABELS["vi"][key]
+
+
+def tr_chart(s: str) -> str:
+    if lang() == "vi" or not s:
+        return s
+    for k in sorted(CHART_EN, key=len, reverse=True):
+        s = re.sub(r"(?<!\w)" + re.escape(k) + r"(?!\w)", CHART_EN[k], s)
+    return s
+
+
+def seps():
+    """(thousands, decimal) separators for the current language."""
+    return (",", ".") if lang() == "en" else (".", ",")
+
+
+# ---------------------------------------------------------------- numbers (vi-VN by default, en-US for English)
 def _group(intpart: str) -> str:
     out = ""
     while len(intpart) > 3:
-        out = "." + intpart[-3:] + out
+        out = seps()[0] + intpart[-3:] + out
         intpart = intpart[:-3]
     return intpart + out
 
@@ -110,7 +169,7 @@ def fmt_vi(value, spec: str = "num2") -> str:
         ip, fp = s.split(".")
     else:
         ip, fp = s, ""
-    out = _group(ip) + ("," + fp if fp else "")
+    out = _group(ip) + (seps()[1] + fp if fp else "")
     if neg and out.strip("0,.") != "":
         out = "−" + out
     if kind == "pct":
@@ -199,13 +258,18 @@ def load_model_kb(topic: str) -> dict:
 
 def load_banned() -> list[str]:
     text = (BRAND / "compliance.md").read_text(encoding="utf-8")
-    m = re.search(r"## Cụm cấm.*?```text\s*(.*?)```", text, re.S)
-    return [ln.strip().lower() for ln in m.group(1).splitlines() if ln.strip() and not ln.startswith("#")]
+    out = []  # both lists always apply: an English video can still carry a Vietnamese phrase and vice versa
+    for head in (r"## Cụm cấm", r"## Banned phrases \(English\)"):
+        m = re.search(head + r".*?```text\s*(.*?)```", text, re.S)
+        if m:
+            out += [ln.strip().lower() for ln in m.group(1).splitlines() if ln.strip() and not ln.startswith("#")]
+    return out
 
 
 def disclaimer() -> str:
     text = (BRAND / "compliance.md").read_text(encoding="utf-8")
-    m = re.search(r"## Câu miễn trừ.*?```text\s*(.*?)```", text, re.S)
+    head = "## Disclaimer (English)" if lang() == "en" else "## Câu miễn trừ"
+    m = re.search(re.escape(head) + r".*?```text\s*(.*?)```", text, re.S)
     return " ".join(m.group(1).split())
 
 

@@ -1,4 +1,5 @@
 """chart-story: one chart unfolds chapter by chapter; each chapter stops at a point and names what happened."""
+import core as C
 import frames as F
 import scenes as S
 from core import THEME as T
@@ -34,6 +35,6 @@ def build(ep, model, ctx):
         out.append(chapter(model, i, prev, item, len(story)))
         prev = item["at"]
     out.append(S.surface(model, ep["beats"][3], min_dur=5.0))
-    out.append(S.statement(ep["takeaway"], name="takeaway", size=64, label_chip="Mang về"))
+    out.append(S.statement(ep["takeaway"], name="takeaway", size=64, label_chip=C.L("takeaway")))
     out.append(S.end(ep["cta"], ctx["disclaimer"], ctx["tag"]))
     return out

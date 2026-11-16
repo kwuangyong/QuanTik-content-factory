@@ -1,4 +1,6 @@
-# Instagram Reels · YouTube Shorts — đang thử nghiệm
+# Instagram Reels — đang thử nghiệm
+
+(YouTube Shorts là nhánh riêng, tiếng Anh: `../youtube-shorts/README.md`.)
 
 **Vai trò:** lan truyền, đưa thương hiệu tới tầng TAM.
 **Người xem:** phần lớn Gen Z, rất trẻ, không thích học nhiều. Họ share, save, repost thứ khiến họ thấy
@@ -17,16 +19,15 @@
 ## Quy trình
 
 1. **Chọn một dạng** trong vòng thử hiện tại (mục *Vòng thử* dưới đây).
-2. **Viết episode** `episodes/<id>.json` với `"platform": "reels-shorts"`: hook ngắn, câu chữ đời thường, một ý.
+2. **Viết episode** `episodes/<id>.json` với `"platform": "instagram"`: hook ngắn, câu chữ đời thường, một ý.
    Số vẫn qua placeholder.
 3. **Dựng:**
    ```bash
-   cd pipeline && python batch.py --platform reels-shorts --episode ../episodes/<id>.json
-   python batch.py --platform reels-shorts --topics kelly,hurst --styles meme-quant   # lời mặc định
+   cd pipeline && python batch.py --platform instagram --episode ../episodes/<id>.json
+   python batch.py --platform instagram --topics kelly,hurst --styles meme-quant   # lời mặc định
    ```
    CTA thẻ cuối mặc định kêu gọi share/save ("Lưu lại, gửi cho đứa bạn hay bàn chứng khoán"). Tối đa 45 giây.
-4. **Caption:** Instagram (ngắn, emoji vừa phải, hashtag cuối) và YouTube Shorts (tiêu đề ≤ 90 ký tự + #Shorts).
-   Cả hai có câu miễn trừ.
+4. **Caption:** ngắn, emoji vừa phải, hashtag cuối, có câu miễn trừ.
 5. **QA** như mọi video.
 
 ## Ranh giới (vẫn theo `brand/compliance.md`)
@@ -46,4 +47,4 @@ Mỗi vòng 2 tuần, 2–3 dạng, mỗi dạng 3–4 video. Ghi share và save
 
 ## Đo
 
-`views_reels`, `views_youtube`, cộng share, save, repost (ghi vào `notes`).
+`views_reels`, cộng share, save, repost (ghi vào `notes`).

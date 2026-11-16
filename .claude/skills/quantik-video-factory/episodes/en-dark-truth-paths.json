@@ -1,0 +1,20 @@
+{
+  "id": "en-dark-truth-paths",
+  "platform": "youtube-shorts",
+  "topic": "monte_carlo",
+  "style": "kinetic-text",
+  "tag": "DARK TRUTH",
+  "title": "Same stock, same rules. Half the futures lose money.",
+  "hook": "Dark truth: you don't get the average return. You get one path.",
+  "kicker": "Dark truth",
+  "beats": [
+    "{prob_loss} of {n_paths} simulated futures ended below where they started, after only {days} days.",
+    "Same stock. Same {sigma} volatility. The worst path fell to {worst}. The best hit {best}.",
+    "Every line is one possible future. Same rules, wildly different endings.",
+    "The spread between them is the risk you actually signed up for."
+  ],
+  "takeaway": "The average is a story about many people. Your account lives on one line.",
+  "caption": "One stock, one set of rules, a thousand futures. Your result is just one of them. Simulated data, fixed seed.",
+  "hashtags": ["darktruth", "investing", "stockmarket", "montecarlo", "quant"],
+  "allowed_literals": []
+}

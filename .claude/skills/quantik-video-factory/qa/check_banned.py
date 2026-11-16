@@ -24,8 +24,9 @@ NEGATIONS = ("không", "chưa", "chẳng", "đừng", "không phải", "không c
 def negated(t, start, window=12):
     """True if one of the few words before the hit negates it ("không phải điểm mua", "không có nghĩa cổ phiếu sẽ tăng").
     Definitions explain what a number is NOT; those sentences are the opposite of a call to action."""
-    before = re.split(r"[.!?;:,\n]|\bnhưng\b", t[:start])[-1].split()[-window:]
-    return any(w.strip(",“”\"'()") in ("không", "chưa", "chẳng", "đừng") for w in before)
+    before = re.split(r"[.!?;:,\n]|\bnhưng\b|\bbut\b", t[:start])[-1].split()[-window:]
+    return any(w.strip(",“”\"'()") in ("không", "chưa", "chẳng", "đừng", "not", "never", "no", "don't", "doesn't",
+                                          "isn't", "won't", "nobody") for w in before)
 
 
 def check(texts):

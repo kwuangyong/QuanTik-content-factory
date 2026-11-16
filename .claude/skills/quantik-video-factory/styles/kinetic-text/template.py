@@ -1,4 +1,5 @@
 """kinetic-text: faceless — words land one by one, the key number of each beat counts up big; chart + 3D close."""
+import core as C
 import re
 
 import frames as F
@@ -9,7 +10,7 @@ from render import Scene
 KIND = "video"
 DEFAULTS = {"max_seconds": 60}
 
-_NUM = re.compile(r"([−\-]?)(\d[\d.]*)(?:,(\d+))?(%|x)?")
+_NUM = re.compile(r"([−\-]?)(\d[\d.,]*?)(?:,(\d+))?(%|x)?")
 
 
 def _countup(token, k):
@@ -17,12 +18,14 @@ def _countup(token, k):
     m = _NUM.fullmatch(token)
     if not m:
         return token
-    sign, ip, fp, suf = m.group(1), m.group(2).replace(".", ""), m.group(3) or "", m.group(4) or ""
-    val = float(ip + ("." + fp if fp else "")) * k
+    th, dec = C.seps()
+    sign, body, suf = m.group(1), m.group(2) + ("," + m.group(3) if m.group(3) else ""), m.group(4) or ""
+    ip, _, fp = body.partition(dec)
+    val = float(ip.replace(th, "") + ("." + fp if fp else "")) * k
     s = f"{val:.{len(fp)}f}"
     a, _, b = s.partition(".")
-    a = f"{int(a):,}".replace(",", ".")
-    return sign + a + ("," + b if b else "") + suf
+    a = f"{int(a):,}".replace(",", th)
+    return sign + a + (dec + b if b else "") + suf
 
 
 def beat(text, name, kicker=None, min_dur=3.5):
@@ -50,6 +53,6 @@ def build(ep, model, ctx):
         out.append(beat(b, f"beat{i + 1}"))
     out.append(S.chart(model, ep["beats"][2], title=ep.get("chart_title"), min_dur=4.5))  # beat 3 describes the chart
     out.append(S.surface(model, ep["beats"][3], min_dur=4.5))
-    out.append(S.statement(ep["takeaway"], name="takeaway", size=64, label_chip="Mang về"))
+    out.append(S.statement(ep["takeaway"], name="takeaway", size=64, label_chip=C.L("takeaway")))
     out.append(S.end(ep["cta"], ctx["disclaimer"], ctx["tag"]))
     return out

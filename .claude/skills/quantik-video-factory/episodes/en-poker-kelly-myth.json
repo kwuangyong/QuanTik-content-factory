@@ -1,0 +1,29 @@
+{
+  "id": "en-poker-kelly-myth",
+  "platform": "youtube-shorts",
+  "topic": "kelly",
+  "style": "myth-buster",
+  "tag": "POKER MATH",
+  "title": "Why poker pros never bet it all on a good hand",
+  "hook": "Poker pros with an edge still bet small. The math is brutal.",
+  "hook_kicker": "Poker theory",
+  "myth": "If you have an edge, bet as much as you can.",
+  "fact": "Win rate {W}: the best bet is {f_star} of your bankroll. Bet {quad_kelly} and after {bets} bets you keep {med_quad}.",
+  "beats": [
+    "Kelly criterion: the bet size that grows a bankroll fastest.",
+    "Same edge, four bet sizes, {bets} rounds each.",
+    "Orange is Kelly. Double it and growth stalls. Four times and you bleed out.",
+    "Growth climbs with your edge, then falls off a cliff when you overbet."
+  ],
+  "takeaway": "Your edge says play. Kelly says how much.",
+  "caption": "An edge is not enough. Bet size decides whether you survive long enough to collect it. Simulated with real code, fixed seed.",
+  "hashtags": [
+    "poker",
+    "kellycriterion",
+    "investing",
+    "riskmanagement",
+    "quant",
+    "shorts"
+  ],
+  "allowed_literals": []
+}

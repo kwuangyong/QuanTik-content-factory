@@ -4,6 +4,7 @@ Formats (ep.meme.format):
   expectation-reality — top panel "Kỳ vọng" with a naive smooth line, bottom panel "Thực tế" with the model chart
   nobody-quant        — big text setup, punchline card, no stock meme images (we draw everything ourselves)
 """
+import core as C
 import numpy as np
 
 import frames as F
@@ -33,20 +34,20 @@ def build(ep, model, ctx):
         real = F.chart_img(model, S.CW, 330)
 
         def d_setup(img, t, p):
-            F.chip(img, (S.X0, 310), "KỲ VỌNG", T["positive"], 30)
+            F.chip(img, (S.X0, 310), C.L("expect"), T["positive"], 30)
             F.text_box(img, m["setup"], (S.X0, 380, S.X1, 490), "sans-black", 50, T["text"], label="setup")
             F.paste(img, naive, (S.X0, 500), alpha=F.ease_out(F.seg(p, 0, 0.3)))
 
         def d_punch(img, t, p):
             d_setup(img, 99, 1.0)
             a = F.ease_out(F.seg(p, 0, 0.12))
-            F.chip(img, (S.X0, 830), "THỰC TẾ", T["negative"], 30)
+            F.chip(img, (S.X0, 830), C.L("reality"), T["negative"], 30)
             F.text_box(img, m["punch"], (S.X0, 900, S.X1, 970), "sans-black", 46, T["accent"], label="punch",
                        alpha=a)
             F.paste(img, real, (S.X0, 978), alpha=a)
 
-        out += [Scene("setup", m["setup"], d_setup, 2.5, texts=[m["setup"], "KỲ VỌNG"]),
-                Scene("punch", m["punch"], d_punch, 3.0, texts=[m["punch"], "THỰC TẾ"])]
+        out += [Scene("setup", m["setup"], d_setup, 2.5, texts=[m["setup"], C.L("expect")]),
+                Scene("punch", m["punch"], d_punch, 3.0, texts=[m["punch"], C.L("reality")])]
     else:
         def d_setup(img, t, p):
             F.text_box(img, m["setup"], (S.X0, 400, S.X1, 700), "sans-black", 72, T["muted"], "left", "middle",
@@ -63,6 +64,6 @@ def build(ep, model, ctx):
         out += [Scene("setup", m["setup"], d_setup, 2.2, texts=[m["setup"]]),
                 Scene("punch", m["punch"], d_punch, 3.0, texts=[m["punch"]])]
 
-    out.append(S.statement(m["truth"], name="truth", size=58, label_chip="Nhưng đúng toán"))
+    out.append(S.statement(m["truth"], name="truth", size=58, label_chip=C.L("math_says")))
     out.append(S.end(ep["cta"], ctx["disclaimer"], ctx["tag"], min_dur=3.0))
     return out

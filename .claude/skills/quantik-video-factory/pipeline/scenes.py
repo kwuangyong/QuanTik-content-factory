@@ -7,6 +7,7 @@ from __future__ import annotations
 import re
 from functools import lru_cache
 
+import core as C
 import frames as F
 from core import SAFE, THEME as T
 from render import Scene
@@ -151,6 +152,8 @@ def formula(latex, say, name="formula", caption=None, min_dur=3.0, size=72, wipe
 def code_typing(model, say, name="code", min_dur=5.0, title=None, latex=None):
     """Type out the exact source that produced the numbers; the formula it implements fades in below."""
     code = model.code
+    if C.lang() != "vi":  # on-screen code comments are Vietnamese; drop them in other languages
+        code = "\n".join(re.sub(r"\s+#[^'\"]*$", "", ln) for ln in code.split("\n"))
     total = len(code)
 
     def draw(img, t, p):
@@ -177,7 +180,7 @@ def terminal(model, outputs, say, name="run", min_dur=4.0):
 
     hi = next((r for o, r in zip(outputs, rows) if o.get("highlight")), rows[min(2, len(rows) - 1)])
     if not hi[1]:  # label-only rows (engine methods): show the label itself as the big value
-        hi = ("hàm chính", hi[0])
+        hi = (C.L("main_fn"), hi[0])
 
     def draw(img, t, p):
         k = min(len(rows), int(len(rows) * F.seg(p, 0.05, 0.7)) + 1)
@@ -203,5 +206,5 @@ def end(cta, disclaimer, tag, min_dur=3.5, say=None):
 
 
 def first_number(text):
-    m = re.search(r"[−\-]?\d[\d.]*(?:,\d+)?%?x?", text)
+    m = re.search(r"[−\-]?\d(?:[\d.,]*\d)?%?x?", text)
     return m.group(0) if m else None
