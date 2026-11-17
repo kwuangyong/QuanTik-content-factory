@@ -41,7 +41,6 @@ Ba chuỗi cùng một nguồn nhiễu (seed 1, 3.000 bước, độ trễ 2–4
   "title": "Giá có trí nhớ không? Đo bằng hệ số Hurst",
   "hook": "Bạn bắt đáy vì tin giá *sắp quay đầu*? Một con số sẽ vạch trần bạn.",
   "hook_visual": "board",
-  "kicker": "Hệ số Hurst",
   "cold_open": [
     {
       "say": "Một người say đi loạng choạng: bước sau chẳng liên quan gì bước trước. Một người lính thì bước theo quán tính.",
@@ -54,6 +53,7 @@ Ba chuỗi cùng một nguồn nhiễu (seed 1, 3.000 bước, độ trễ 2–4
       "caption": "Đo bằng số, không đo bằng cảm giác"
     }
   ],
+  "kicker": "Hệ số Hurst",
   "beats": [
     "Code tạo ba chuỗi từ cùng một nguồn nhiễu, rồi đo độ lệch của chênh lệch theo từng độ trễ. Độ dốc trên thang log chính là H.",
     "Kết quả: bước ngẫu nhiên cho H bằng {h_walk}. Chuỗi hồi quy cho {h_meanrev}. Chuỗi có quán tính cho {h_trend}.",
@@ -140,6 +140,84 @@ Ba chuỗi cùng một nguồn nhiễu (seed 1, 3.000 bước, độ trễ 2–4
     "0,5",
     "2H",
     "3 chuỗi"
-  ]
+  ],
+  "thumb": {
+    "tag": "Hurst exponent",
+    "headline": [
+      {
+        "t": "MỘT CON SỐ",
+        "size": 130
+      },
+      {
+        "t": "PHÂN BIỆT",
+        "size": 180
+      },
+      {
+        "t": "XU HƯỚNG VÀ [o]NHIỄU[/o]",
+        "size": 110
+      }
+    ],
+    "pill": "Hurst đo trí nhớ của chuỗi giá · code Python",
+    "labels": [
+      {
+        "label": "Xu hướng",
+        "value": "{h_trend}",
+        "color": "green"
+      },
+      {
+        "label": "Hồi quy",
+        "value": "{h_meanrev}",
+        "color": "orange"
+      }
+    ]
+  },
+  "thumb_variants": {
+    "chart-story": {
+      "headline": [
+        {
+          "t": "H = [g]{h_trend}[/g]",
+          "size": 170
+        },
+        {
+          "t": "HAY H = [o]{h_meanrev}[/o]",
+          "size": 140
+        },
+        {
+          "t": "CHUỖI GIÁ CỦA BẠN LÀ LOẠI NÀO?",
+          "size": 80
+        }
+      ],
+      "pill": "Ba chuỗi, ba tính cách · code Python"
+    },
+    "myth-buster": {
+      "headline": [
+        {
+          "t": "ĐỒ THỊ ĐẸP",
+          "size": 150
+        },
+        {
+          "t": "CHƯA CHẮC",
+          "size": 190
+        },
+        {
+          "t": "LÀ [o]XU HƯỚNG[/o]",
+          "size": 130
+        }
+      ],
+      "pill": "Ngẫu nhiên thuần cũng ra H = {h_walk} · code Python",
+      "labels": [
+        {
+          "label": "Ngẫu nhiên",
+          "value": "{h_walk}",
+          "color": "green"
+        },
+        {
+          "label": "Hồi quy",
+          "value": "{h_meanrev}",
+          "color": "orange"
+        }
+      ]
+    }
+  }
 }
 ```

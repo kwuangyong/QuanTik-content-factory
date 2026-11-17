@@ -40,7 +40,6 @@ $$\sigma_t^2=\omega+\alpha\,\epsilon_{t-1}^2+\beta\,\sigma_{t-1}^2$$
   "title": "Vì sao biến động đi thành cụm? GARCH giải thích bằng code chạy thật",
   "hook": "Bạn gọi đó là xui? *Sai bét.* Biến động kéo đến thành từng cơn bão.",
   "hook_visual": "storm",
-  "kicker": "Volatility clustering",
   "cold_open": [
     {
       "say": "Biển lặng nhiều tuần liền. Rồi bão kéo đến, dồn dập nhiều ngày không dứt.",
@@ -53,6 +52,7 @@ $$\sigma_t^2=\omega+\alpha\,\epsilon_{t-1}^2+\beta\,\sigma_{t-1}^2$$
       "caption": "Giật mạnh kéo theo giật mạnh"
     }
   ],
+  "kicker": "Volatility clustering",
   "beats": [
     "Đây là GARCH(1,1). Phương sai hôm nay bằng một hằng số, cộng α nhân cú sốc hôm qua, cộng β nhân phương sai hôm qua.",
     "Chạy {n_days} phiên mô phỏng: α là {alpha}, β là {beta}. Tổng α cộng β bằng {persistence}, nên một cú sốc cần khoảng {half_life} phiên mới tắt một nửa.",
@@ -149,6 +149,112 @@ $$\sigma_t^2=\omega+\alpha\,\epsilon_{t-1}^2+\beta\,\sigma_{t-1}^2$$
     "252",
     "3 tuần",
     "5 phiên"
-  ]
+  ],
+  "thumb": {
+    "tag": "GARCH(1,1)",
+    "headline": [
+      {
+        "t": "BIẾN ĐỘNG KHÔNG",
+        "size": 120
+      },
+      {
+        "t": "[o]NGẪU NHIÊN[/o]",
+        "size": 190
+      },
+      {
+        "t": "NÓ ĐI THEO [o]CỤM[/o]",
+        "size": 130
+      }
+    ],
+    "pill": "GARCH đo trí nhớ của rủi ro · code Python",
+    "labels": [
+      {
+        "label": "Đỉnh vol",
+        "value": "{vol_peak}",
+        "color": "orange"
+      },
+      {
+        "label": "Đáy vol",
+        "value": "{vol_min}",
+        "color": "green"
+      }
+    ]
+  },
+  "thumb_variants": {
+    "myth-buster": {
+      "headline": [
+        {
+          "t": "TƯỞNG RỦI RO",
+          "size": 130
+        },
+        {
+          "t": "ĐỨNG YÊN?",
+          "size": 190
+        },
+        {
+          "t": "NỬA ĐỜI [o]{half_life}[/o] NGÀY",
+          "size": 120
+        }
+      ],
+      "pill": "Cú sốc hôm nay còn vang rất lâu · code Python",
+      "labels": [
+        {
+          "label": "Persistence",
+          "value": "{persistence}",
+          "color": "orange"
+        },
+        {
+          "label": "Vol dài hạn",
+          "value": "{long_run_vol}",
+          "color": "green"
+        }
+      ]
+    },
+    "chart-story": {
+      "headline": [
+        {
+          "t": "[o]{big_moves}[/o] CÚ SỐC",
+          "size": 150
+        },
+        {
+          "t": "KÉO DÀI",
+          "size": 190
+        },
+        {
+          "t": "BAO LÂU?",
+          "size": 150
+        }
+      ],
+      "pill": "Kể lại {n_days} phiên bằng GARCH · code Python",
+      "labels": [
+        {
+          "label": "Vol cuối",
+          "value": "{vol_last}",
+          "color": "orange"
+        },
+        {
+          "label": "Vol dài hạn",
+          "value": "{long_run_vol}",
+          "color": "green"
+        }
+      ]
+    },
+    "kinetic-text": {
+      "headline": [
+        {
+          "t": "BÌNH YÊN [g]{vol_min}[/g]",
+          "size": 140
+        },
+        {
+          "t": "BÃO TỐ [o]{vol_peak}[/o]",
+          "size": 140
+        },
+        {
+          "t": "CÙNG MỘT CHUỖI GIÁ",
+          "size": 100
+        }
+      ]
+    }
+  }
 }
 ```

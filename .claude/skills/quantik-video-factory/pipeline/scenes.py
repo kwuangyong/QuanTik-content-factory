@@ -181,10 +181,18 @@ def _fallback(model, say, name, caption, min_dur):
     return Scene(name, say, draw, min_dur, texts=[title, sub])
 
 
-def surface(model, say, caption=None, name="surface3d", min_dur=3.4, sweep=(-120, -35), elev=(32, 22), flex=True):
+# Góc quay 3D: (azim đầu, azim cuối), (elev đầu, elev cuối). Mỗi video chọn một góc để 3D không lặp lại.
+VIEWS = {"orbit": ((-120, -35), (32, 22)), "top": ((-60, -20), (72, 50)), "low": ((-130, -50), (8, 20)),
+         "spin": ((-180, 120), (26, 26)), "dive": ((20, -40), (60, 12)), "side": ((-95, -80), (14, 30))}
+
+
+def surface(model, say, caption=None, name="surface3d", min_dur=3.4, sweep=(-120, -35), elev=(32, 22), flex=True,
+            view=None):
     """3D linh hoạt: bề mặt mọc lên từ mặt phẳng, camera quay vừa đủ để thấy hình khối (không lật ra mặt sau),
-    độ cao nhấp nhô nhẹ. Không zoom-crop (cắt mất nhãn trục).
+    độ cao nhấp nhô nhẹ. Không zoom-crop (cắt mất nhãn trục). view = một góc trong VIEWS.
     flex=False (carousel) → góc cố định."""
+    if view:
+        sweep, elev = VIEWS[view]
     if not getattr(model, "has_surface", True):
         return _fallback(model, say, name, caption, min_dur)
     _MODELS[id(model)] = model

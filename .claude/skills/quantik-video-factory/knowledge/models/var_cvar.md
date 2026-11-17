@@ -37,7 +37,6 @@ Lịch sử: VaR = phân vị α của chuỗi lỗ; CVaR = trung bình các m�
   "title": "VaR không phải mức lỗ tối đa. CVaR mới cho thấy đuôi rủi ro",
   "hook": "Nghĩ VaR là lỗ tối đa? *Sai bét.* VaR nói {var95}, phiên tệ nhất lỗ {worst}.",
   "hook_visual": "iceberg",
-  "kicker": "Rủi ro đuôi",
   "cold_open": [
     {
       "say": "Tàu Titanic nhìn thấy phần nổi của tảng băng. Thứ đánh chìm nó nằm dưới mặt nước.",
@@ -50,6 +49,7 @@ Lịch sử: VaR = phân vị α của chuỗi lỗ; CVaR = trung bình các m�
       "caption": "VaR = phần nổi · CVaR = phần chìm"
     }
   ],
+  "kicker": "Rủi ro đuôi",
   "beats": [
     "Code tạo {n_days} phiên lợi suất đuôi dày. VaR 95 là ngưỡng mà chỉ 5 phần trăm số phiên lỗ vượt qua. CVaR là trung bình của chính những phiên đó.",
     "Kết quả: VaR 95 bằng {var95}, CVaR 95 bằng {cvar95}. Ở mức 99, VaR lịch sử là {var99}, còn giả định phân phối chuẩn chỉ cho {var99_normal}.",
@@ -142,6 +142,95 @@ Lịch sử: VaR = phân vị α của chuỗi lỗ; CVaR = trung bình các m�
     "99%",
     "5 phần trăm",
     "1 phiên"
-  ]
+  ],
+  "thumb": {
+    "tag": "VaR · CVaR",
+    "headline": [
+      {
+        "t": "VaR NÓI [g]{var95}[/g]",
+        "size": 120
+      },
+      {
+        "t": "NGÀY XẤU",
+        "size": 190
+      },
+      {
+        "t": "MẤT TỚI [o]{cvar95}[/o]",
+        "size": 140
+      }
+    ],
+    "pill": "CVaR đo phần đuôi VaR bỏ qua · code Python",
+    "labels": [
+      {
+        "label": "VaR 95",
+        "value": "{var95}",
+        "color": "green"
+      },
+      {
+        "label": "CVaR 95",
+        "value": "{cvar95}",
+        "color": "orange"
+      }
+    ]
+  },
+  "thumb_variants": {
+    "myth-buster": {
+      "headline": [
+        {
+          "t": "TÍNH THEO",
+          "size": 120
+        },
+        {
+          "t": "PHÂN PHỐI CHUẨN",
+          "size": 140
+        },
+        {
+          "t": "THIẾU [o]{underestimate}[/o] RỦI RO",
+          "size": 120
+        }
+      ],
+      "pill": "Đuôi dày làm VaR chuẩn hụt · code Python",
+      "labels": [
+        {
+          "label": "VaR 99 thực",
+          "value": "{var99}",
+          "color": "orange"
+        },
+        {
+          "label": "VaR 99 chuẩn",
+          "value": "{var99_normal}",
+          "color": "green"
+        }
+      ]
+    },
+    "kinetic-text": {
+      "headline": [
+        {
+          "t": "NGÀY TỆ NHẤT",
+          "size": 140
+        },
+        {
+          "t": "MẤT [o]{worst}[/o]",
+          "size": 190
+        },
+        {
+          "t": "VaR CÓ THẤY KHÔNG?",
+          "size": 110
+        }
+      ],
+      "labels": [
+        {
+          "label": "VaR 99",
+          "value": "{var99}",
+          "color": "green"
+        },
+        {
+          "label": "CVaR 99",
+          "value": "{cvar99}",
+          "color": "orange"
+        }
+      ]
+    }
+  }
 }
 ```

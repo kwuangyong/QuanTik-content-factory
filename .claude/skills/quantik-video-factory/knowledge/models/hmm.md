@@ -38,7 +38,6 @@ $$P(z_t=k\mid x_{1:t})\propto p(x_t\mid z_t=k)\sum_j P_{jk}\,P(z_{t-1}=j\mid x_{
   "title": "Thị trường đang ở trạng thái nào? Mô hình Markov ẩn",
   "hook": "Nhìn chart bằng mắt mà đòi đọc thị trường? Trạng thái thật của nó *ẩn*.",
   "hook_visual": "weather",
-  "kicker": "Hidden Markov Model",
   "cold_open": [
     {
       "say": "Bạn ngồi trong phòng kín, không thấy trời. Bạn chỉ thấy người bước vào có mang ô hay không.",
@@ -51,6 +50,7 @@ $$P(z_t=k\mid x_{1:t})\propto p(x_t\mid z_t=k)\sum_j P_{jk}\,P(z_{t-1}=j\mid x_{
       "caption": "Nắng? Mưa? Bão?"
     }
   ],
+  "kicker": "Hidden Markov Model",
   "beats": [
     "Code mô phỏng {n_days} phiên chuyển qua lại giữa ba trạng thái: tăng, giảm, đi ngang. Rồi một bộ lọc tiến tính xác suất từng trạng thái, chỉ dùng dữ liệu đến hôm đó.",
     "Phiên cuối: xác suất trạng thái tăng là {p_bull_last}, giảm {p_bear_last}, đi ngang {p_side_last}. Trạng thái tăng kéo dài trung bình {bull_len} phiên.",
@@ -140,6 +140,90 @@ $$P(z_t=k\mid x_{1:t})\propto p(x_t\mid z_t=k)\sum_j P_{jk}\,P(z_{t-1}=j\mid x_{
   "allowed_literals": [
     "3 tuần",
     "ba trạng thái"
-  ]
+  ],
+  "thumb": {
+    "tag": "Hidden Markov",
+    "headline": [
+      {
+        "t": "THỊ TRƯỜNG CÓ",
+        "size": 130
+      },
+      {
+        "t": "TÂM TRẠNG",
+        "size": 190
+      },
+      {
+        "t": "MÁY ĐOÁN ĐÚNG [g]{accuracy}[/g]",
+        "size": 100
+      }
+    ],
+    "pill": "HMM tìm chế độ ẩn · code Python",
+    "labels": [
+      {
+        "label": "Đúng chế độ",
+        "value": "{accuracy}",
+        "color": "green"
+      }
+    ]
+  },
+  "thumb_variants": {
+    "code-reel": {
+      "headline": [
+        {
+          "t": "PHA TĂNG KÉO DÀI",
+          "size": 120
+        },
+        {
+          "t": "[g]{bull_len}[/g] NGÀY",
+          "size": 190
+        },
+        {
+          "t": "PHA GIẢM [o]{bear_len}[/o] NGÀY",
+          "size": 110
+        }
+      ],
+      "pill": "Ma trận chuyển trạng thái · code Python",
+      "labels": [
+        {
+          "label": "Ở lại tăng",
+          "value": "{stay_bull}",
+          "color": "green"
+        },
+        {
+          "label": "Ở lại giảm",
+          "value": "{stay_bear}",
+          "color": "orange"
+        }
+      ]
+    },
+    "myth-buster": {
+      "headline": [
+        {
+          "t": "ĐỒ THỊ KHÔNG",
+          "size": 140
+        },
+        {
+          "t": "NÓI RA",
+          "size": 190
+        },
+        {
+          "t": "NÓ ĐANG [o]Ở PHA NÀO[/o]",
+          "size": 110
+        }
+      ],
+      "labels": [
+        {
+          "label": "Pha trội",
+          "value": "{p_dom_last}",
+          "color": "green"
+        },
+        {
+          "label": "Pha giảm",
+          "value": "{p_bear_last}",
+          "color": "orange"
+        }
+      ]
+    }
+  }
 }
 ```

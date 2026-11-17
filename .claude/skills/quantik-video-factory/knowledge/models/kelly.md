@@ -38,7 +38,6 @@ W = 55%, R = 1 → f* = 10%. 2.000 người × 500 lần đặt, seed 4. Trung v
   "title": "Có lợi thế mà vẫn mất tiền? Bài toán Kelly",
   "hook": "Có lợi thế vẫn *cháy tài khoản*? Một giáo sư toán từng khiến sòng bài phải đổi luật.",
   "hook_visual": "casino",
-  "kicker": "Kelly criterion",
   "cold_open": [
     {
       "say": "Giáo sư toán Edward Thorp ngồi vào bàn blackjack ở Las Vegas và bắt đầu đếm bài.",
@@ -51,6 +50,7 @@ W = 55%, R = 1 → f* = 10%. 2.000 người × 500 lần đặt, seed 4. Trung v
       "caption": "Sòng bài phải *đổi luật*"
     }
   ],
+  "kicker": "Kelly criterion",
   "beats": [
     "Công thức Kelly: tỷ lệ thắng trừ tỷ lệ thua chia cho tỷ lệ lãi lỗ. Code mô phỏng 2.000 người, mỗi người đặt {bets} lần, với bốn mức cược khác nhau.",
     "Với tỷ lệ thắng {W}, Kelly là {f_star} vốn mỗi lần. Đặt đúng mức đó, tài sản trung vị nhân {med_full}. Đặt gấp đôi, chỉ còn {med_double}.",
@@ -147,6 +147,94 @@ W = 55%, R = 1 → f* = 10%. 2.000 người × 500 lần đặt, seed 4. Trung v
     "0",
     "bốn mức"
   ],
+  "thumb": {
+    "tag": "Kelly criterion",
+    "headline": [
+      {
+        "t": "CÙNG MỘT LỢI THẾ",
+        "size": 110
+      },
+      {
+        "t": "CƯỢC GẤP ĐÔI",
+        "size": 160
+      },
+      {
+        "t": "CÒN LẠI [o]{med_double}[/o]",
+        "size": 140
+      }
+    ],
+    "pill": "Kelly chọn tỷ trọng vốn · code Python",
+    "labels": [
+      {
+        "label": "Nửa Kelly",
+        "value": "{med_half}",
+        "color": "green"
+      },
+      {
+        "label": "Gấp đôi",
+        "value": "{med_double}",
+        "color": "orange"
+      }
+    ]
+  },
+  "thumb_variants": {
+    "meme-quant": {
+      "headline": [
+        {
+          "t": "CƯỢC [o]{quad_kelly}[/o] VỐN",
+          "size": 130
+        },
+        {
+          "t": "TÀI SẢN CÒN",
+          "size": 150
+        },
+        {
+          "t": "[o]{med_quad}[/o]",
+          "size": 190
+        }
+      ],
+      "labels": [
+        {
+          "label": "Kelly",
+          "value": "{f_star}",
+          "color": "green"
+        },
+        {
+          "label": "Quá tay",
+          "value": "{quad_kelly}",
+          "color": "orange"
+        }
+      ]
+    },
+    "myth-buster": {
+      "headline": [
+        {
+          "t": "CÀNG CƯỢC NHIỀU",
+          "size": 120
+        },
+        {
+          "t": "CÀNG GIÀU?",
+          "size": 180
+        },
+        {
+          "t": "KELLY NÓI [g]{f_star}[/g]",
+          "size": 130
+        }
+      ],
+      "labels": [
+        {
+          "label": "Kelly đủ",
+          "value": "{med_full}",
+          "color": "green"
+        },
+        {
+          "label": "Gấp bốn",
+          "value": "{med_quad}",
+          "color": "orange"
+        }
+      ]
+    }
+  },
   "facts": {
     "thorp": {
       "value": "Edward Thorp đếm bài blackjack và dùng tiêu chuẩn Kelly để định cỡ cược; sách Beat the Dealer khiến sòng bài đổi luật",

@@ -39,7 +39,6 @@ $$dX_t=\theta(\mu-X_t)\,dt+\sigma\,dW_t$$
   "title": "Spread lệch xa rồi sẽ quay về? Mô hình OU và nửa đời",
   "hook": "*Giá lệch xa kiểu gì cũng về*? Câu đó từng xoá sổ một quỹ có người đoạt Nobel.",
   "hook_visual": "money_burn",
-  "kicker": "Mean reversion",
   "cold_open": [
     {
       "say": "Dắt chó đi dạo: nó chạy xa đến đâu, sợi dây cũng kéo nó về chỗ bạn.",
@@ -52,6 +51,7 @@ $$dX_t=\theta(\mu-X_t)\,dt+\sigma\,dW_t$$
       "caption": "Đúng hướng, nhưng *sụp trước*"
     }
   ],
+  "kicker": "Mean reversion",
   "beats": [
     "Mô phỏng một spread bắt đầu ở {start}, bị kéo về 0 với tốc độ θ bằng {theta_true}. Sau đó code ước lượng lại θ bằng hồi quy AR(1).",
     "Code ước lượng θ bằng {theta_hat}. Nửa đời là ln 2 chia θ, khoảng {half_life} phiên. Giá trị thật là {half_life_true} phiên.",
@@ -143,6 +143,62 @@ $$dX_t=\theta(\mu-X_t)\,dt+\sigma\,dW_t$$
     "AR(1)",
     "0"
   ],
+  "thumb": {
+    "tag": "Ornstein–Uhlenbeck",
+    "headline": [
+      {
+        "t": "LỆCH XA RỒI",
+        "size": 130
+      },
+      {
+        "t": "BAO LÂU",
+        "size": 190
+      },
+      {
+        "t": "THÌ [o]QUAY VỀ[/o]?",
+        "size": 140
+      }
+    ],
+    "pill": "Mô hình hồi quy về trung bình · code Python",
+    "labels": [
+      {
+        "label": "Nửa đời (ngày)",
+        "value": "{half_life}",
+        "color": "orange"
+      }
+    ]
+  },
+  "thumb_variants": {
+    "whiteboard-math": {
+      "headline": [
+        {
+          "t": "BA KÝ HIỆU",
+          "size": 150
+        },
+        {
+          "t": "θ · μ · σ",
+          "size": 190
+        },
+        {
+          "t": "HIỂU [o]TỪNG CÁI[/o]",
+          "size": 120
+        }
+      ],
+      "pill": "Đọc công thức Ornstein–Uhlenbeck · code Python",
+      "labels": [
+        {
+          "label": "θ ước lượng",
+          "value": "{theta_hat}",
+          "color": "green"
+        },
+        {
+          "label": "Nửa đời (ngày)",
+          "value": "{half_life}",
+          "color": "orange"
+        }
+      ]
+    }
+  },
   "facts": {
     "ltcm_nobel": {
       "value": "Myron Scholes và Robert Merton, Nobel kinh tế, là thành viên LTCM",

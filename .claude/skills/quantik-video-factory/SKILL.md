@@ -37,7 +37,7 @@ episodes/                episode JSON đã viết (ghi đè mặc định của 
 Xác định từ lời người dùng (hỏi lại chỉ khi thật sự mơ hồ):
 
 - **Chủ đề → topic.** Có hai tầng:
-  - **Viết tay (sâu nhất):** `garch`, `hurst`, `ou`, `hmm`, `monte_carlo`, `sharpe`, `var_cvar`, `kelly`. Code mô hình chạy thật trong video, mọi số đến từ lần chạy đó.
+  - **Viết tay (sâu nhất):** `garch`, `hurst`, `ou`, `hmm`, `monte_carlo`, `sharpe`, `sortino`, `var_cvar`, `kelly` (trong `models.py`) và `rsi`, `max_drawdown`, `beta`, `ols`, `lln_clt` (luật số lớn & CLT), `egarch`, `fat_tails` (chuẩn/log-normal/đuôi dày), `momentum`, `martingale`, `psr` (PSR/DSR), `cmf` (trong `models_extra.py`). Code mô hình chạy thật trong video, mọi số đến từ lần chạy đó.
   - **Catalog (rộng nhất):** mọi id trong `knowledge/CATALOG.md`, gồm thuật ngữ (`sortino`, `calmar`, `cmf`, `psr`…), chỉ số module (`module_egarch_gamma`, `module_adf_p`, `module_lightgbm`…), trường hành động (`action_kelly_half`…), cột sheet (`sheet-…`), mô hình trang Home (`home_…`) và engine (`engine_garch`, `engine_meta_label`, `engine_cross_sectional_light_gbm`…). Tìm: `python pipeline/catalog.py --list | grep -i <từ khoá>`; xem chi tiết: `--show <id>`.
   - Người dùng nói tên thường ("EGARCH", "meta-label", "độ phủ mô hình") thì tra catalog để ra id. Chủ đề trùng một mô hình viết tay thì ưu tiên bản viết tay.
 - **Style.** Người dùng không chọn thì gợi ý theo bảng:
@@ -52,8 +52,12 @@ Xác định từ lời người dùng (hỏi lại chỉ khi thật sự mơ h�
 | `talking-head-script` | bạn tự quay: kịch bản + teleprompter + B-roll | 45–90s |
 | `carousel` | feed Facebook/TikTok photo, đọc chậm, 7 slide | — |
 | `meme-quant` | giải trí, kéo người mới, 12–20s | 12–20s |
+| `story-mix` | **loạt bài nhiều tập cùng mô hình**: episode tự xếp cảnh (lịch sử, cách dùng, đố vui, so sánh, code trích dòng, 2D/3D tuỳ chọn) | 45–75s |
 
-- **Số lượng.** "Làm loạt", "cả tuần" → nhiều cặp topic × style, chạy một lệnh batch.
+- **Số lượng.** "Làm loạt", "cả tuần" → mỗi video một episode JSON riêng (thường là `story-mix`), không chạy topic × style hàng loạt.
+- **Đã đăng / đã có (đừng làm lại):** Monte Carlo, Sharpe, Sortino, Autoregressive, Hurst; loạt #6–#23 trong `episodes/ep*.json` (cột `series_no`). Đọc `episodes.csv` và thư mục `episodes/` trước khi lên kế hoạch.
+- **Mỗi chủ đề tối đa một tập trong một loạt**; không đủ chủ đề viết tay thì lấy từ catalog (gần 200 chủ đề) hoặc nâng chủ đề catalog lên viết tay (mục Mở rộng).
+- **Chống lặp (bắt buộc với loạt bài).** Các style cũ dùng chung lời, seed, chart, 3D và caption theo chủ đề, nên cùng chủ đề khác style vẫn ra nội dung gần như y hệt. Mỗi video trong loạt phải khác ở: góc kể (thứ tự cảnh), `seed` + `params`, hình (2D/3D, góc quay `view`, đoạn code trích), và `title`/`caption`/`thumb`. Xem `styles/story-mix/spec.md`. Trình bày kế hoạch nội dung cho người dùng duyệt trước khi dựng cả lô.
 
 Đọc `knowledge/episodes.csv` trước: tránh trùng cặp topic × style đã đăng; nếu là loạt bài, tham chiếu tập trước trong hook hoặc CTA ("Tập trước mình nói về GARCH…").
 
@@ -100,7 +104,7 @@ Tuỳ chọn: `--scale 0.5` (bản xem nhanh 540×960, dựng lại `--scale 1` 
 
 Mỗi video ra `social-output/<id>/` (thư mục gốc repo): `final.mp4`, `thumbnail.jpg`, `captions.md`, `subtitles.srt`, `qa_report.md`, `values.json` (số + code đã chạy), `layout.json`. Carousel ra `slides/1080x1920/` và `slides/1080x1350/`. Talking-head ra `teleprompter.mp4`, `script.md`, `broll/`. Một video mất khoảng 1–2 phút dựng.
 
-**Thumbnail** (series "Học Quant cùng QuanTik #N", nền sáng): đọc `brand/thumbnail.md` rồi chạy `python thumbnail.py --topic <topic> --no <N> --out <thư mục output>` → `thumbnail-NN.jpg`. Nội dung lấy từ khối `thumb` trong `video_defaults`. Hỏi người dùng số tập nếu chưa rõ.
+**Thumbnail** (series "Học Quant cùng QuanTik #N", nền sáng): đọc `brand/thumbnail.md` rồi chạy `python thumbnail.py --episode <episode.json> --no <N> --out <thư mục output>` (hoặc `--topic <topic> [--style <style>]`) → `thumbnail-NN.jpg`. Nội dung: khối `thumb` của mô hình ← `thumb_variants[style]` ← khối `thumb` trong episode (ưu tiên cao nhất); seed/params lấy theo episode nên số trên ảnh khớp video. Hỏi người dùng số tập nếu chưa rõ.
 
 **Dữ liệu thật:** `--prices` nhận CSV có cột `close`. Chỉ dùng để minh hoạ cách tính, nhãn nguồn hiện trên màn hình; vẫn không nói gì về hướng giá của mã đó. Không có `--prices` thì luôn là dữ liệu mô phỏng có seed cố định, và màn hình ghi "Dữ liệu mô phỏng".
 
@@ -114,7 +118,8 @@ Mỗi video ra `social-output/<id>/` (thư mục gốc repo): `final.mp4`, `thum
 
 1. QA tự chạy: số khớp code và cụm cấm **trước** khi render (sai thì dừng), định dạng và khung chữ **sau** render. Đọc `qa_report.md`; KHÔNG ĐẠT thì sửa episode và dựng lại, không lách bằng `--force`.
 2. Tự xem: mở `thumbnail.jpg` và trích 5–7 khung hình rải đều video (`ffmpeg -ss <t> -i final.mp4 -frames:v 1 f.png`), xem chữ có đè chart, chart có đọc được trên điện thoại, lời và hình có khớp không. QA máy không bắt được lỗi "nhìn xấu".
-3. Chart và 3D phải **tự giải thích, khớp lời**: nhãn đường đặt đúng tên lời đọc dùng (vd "½ Kelly, Kelly, 2×, 4×", không phải "f = 5%"), số cuối đường bằng đúng số được đọc, thứ lời đọc nhắc ("có một đỉnh") phải nhìn thấy được trên hình. Chuỗi khác biên độ thì chuẩn hoá và ghi rõ trên trục.
+3. **Chi tiết trong hình phải đúng logic**, không chỉ "trông giống": số đếm bài phải tính từ đúng các lá đang hiện (Hi-Lo: 2–6 = +1, 7–9 = 0, 10/J/Q/K/A = −1), đồng hồ chỉ đúng giờ được nói, mũi tên lên/xuống đúng màu tăng/giảm, nhãn đúng thuật ngữ. Không vẽ số trang trí; số nào xuất hiện thì phải tính ra được.
+4. Chart và 3D phải **tự giải thích, khớp lời**: nhãn đường đặt đúng tên lời đọc dùng (vd "½ Kelly, Kelly, 2×, 4×", không phải "f = 5%"), số cuối đường bằng đúng số được đọc, thứ lời đọc nhắc ("có một đỉnh") phải nhìn thấy được trên hình. Chuỗi khác biên độ thì chuẩn hoá và ghi rõ trên trục.
 
 ### 6. Trả kết quả trong chat
 

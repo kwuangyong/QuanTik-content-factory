@@ -335,6 +335,9 @@ def surface_img(model, azim=-60, elev=28, w=880, h=820, surf=None, rise=1.0):
     if surf.get("yticks"):
         ax.set_yticks(range(len(surf["yticks"])))
         ax.set_yticklabels(surf["yticks"], fontsize=15)
+    if surf.get("dots") is not None and rise >= 1:
+        ax.scatter(*surf["dots"], s=40, color=hex_(T["accent"]), edgecolors="white", linewidths=1, depthshade=False,
+                   zorder=10)
     if surf.get("ridge") is not None and rise >= 1:
         rx, ry, rz = surf["ridge"]
         ax.plot(rx, ry, rz, color="white", lw=3.2, zorder=10)

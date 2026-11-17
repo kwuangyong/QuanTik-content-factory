@@ -2,7 +2,8 @@
 
 Mỗi tag trong knowledge/visuals.json có một hàm draw_<tag>(d, w, h, p, t) vẽ lên canvas RGBA w×h.
   p = tiến độ cảnh 0..1, t = giây trong cảnh (cho chuyển động lặp: nhấp nháy, sóng, lắc).
-Nguyên tắc: hình phải khớp lời. pick(text) chọn tag theo từ khoá; 'code' chỉ khi lời nói về code/Python.
+Nguyên tắc: hình phải khớp lời, và MỌI chi tiết trong hình phải đúng logic (số đếm bài tính từ đúng các lá
+đang lật, đồng hồ chỉ đúng giờ được nói, mũi tên/màu đúng chiều). Không vẽ số trang trí vô nghĩa. pick(text) chọn tag theo từ khoá; 'code' chỉ khi lời nói về code/Python.
 
   frame(tag, w, h, p, t, photo=None) → ảnh RGBA (ảnh thật nếu có ảnh B-roll của tag, không thì hình vẽ)
   pick(text) → tag | None
@@ -169,8 +170,11 @@ def draw_casino(d, w, h, p, t):
     d.ellipse([-w * 0.2, h * 0.52, w * 1.2, h * 1.5], fill=FELT)
     d.arc([w * 0.1, h * 0.62, w * 0.9, h * 1.2], 200, 340, fill=GOLD, width=3)
     # dealt cards fly from dealer to player spots
-    hands = [("A", "♠"), ("K", "♥"), ("10", "♦"), ("7", "♣")]
+    # Bài nhỏ ra trước → bộ bài còn lại nhiều lá lớn → người đếm bài có lợi thế. Số đếm Hi-Lo TÍNH từ đúng các lá
+    # đã lật (2–6: +1, 7–9: 0, 10/J/Q/K/A: −1), không gõ tay: chi tiết trong hình cũng phải đúng logic.
+    hands = [("5", "♠"), ("3", "♥"), ("6", "♦"), ("2", "♣")]
     spots = [(w * 0.18, h * 0.72), (w * 0.3, h * 0.74), (w * 0.62, h * 0.74), (w * 0.74, h * 0.72)]
+    shown = []
     for i, ((r_, s_), (tx, ty)) in enumerate(zip(hands, spots)):
         k = ease((p - 0.08 * i) / 0.25)
         if k <= 0:
@@ -178,6 +182,8 @@ def draw_casino(d, w, h, p, t):
         x = lerp(w * 0.47, tx, k)
         y = lerp(h * 0.5, ty, k)
         card(d, x, y, r_, s_, s=h / 900, face_up=k > 0.7)
+        if k > 0.7:
+            shown.append(r_)
     # chips: the player's stack grows (the bet sizing)
     n = 2 + int(6 * ease((p - 0.3) / 0.5))
     chip_stack(d, w * 0.5, h * 0.92, n, (220, 60, 60), s=h / 800)
@@ -185,8 +191,15 @@ def draw_casino(d, w, h, p, t):
     # the professor (glasses) in front, seen from behind-ish, counting cards
     person(d, w * 0.12, h * 1.08, s=h / 620, shirt=(150, 120, 90), face="happy", glasses=True, seed=7,
            arm=(0.2, -1.2 - 0.1 * math.sin(t * 4)), legs=False)
-    cnt = "+" + str(1 + int(4 * ease(p)))
-    label(d, w * 0.12 + 80, h * 0.48, "đếm: " + cnt, size=int(h * 0.05), color=GOLD)
+    cnt = hilo_count(shown)
+    label(d, w * 0.12 + 110, h * 0.48, f"đếm Hi-Lo: {cnt:+d}" if shown else "đếm Hi-Lo: 0", size=int(h * 0.05),
+          color=GREEN if cnt > 0 else (RED if cnt < 0 else GOLD))
+
+
+def hilo_count(ranks):
+    """Đếm bài Hi-Lo (Thorp/Braun): 2–6 = +1, 7–9 = 0, 10/J/Q/K/A = −1."""
+    val = {"2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 0, "8": 0, "9": 0}
+    return sum(val.get(r, -1) for r in ranks)
 
 
 def draw_roulette(d, w, h, p, t):
@@ -616,6 +629,222 @@ def draw_code(d, w, h, p, t):
         x = w * 0.78 + i * 34
         yy = h * 0.8 + i * 34
         d.rounded_rectangle([x, yy, x + 60, yy + 60], radius=18, fill=col)
+
+
+def draw_banker(d, w, h, p, t):
+    """Văn phòng ngân hàng, đồng hồ chỉ 4:15, sếp chờ một tờ báo cáo rủi ro được đưa tới."""
+    d.rectangle([0, 0, w, h], fill=(52, 46, 60))
+    d.rectangle([0, h * 0.72, w, h], fill=(90, 60, 45))
+    d.rectangle([w * 0.62, h * 0.1, w * 0.95, h * 0.5], fill=(150, 190, 230))
+    for i in range(5):
+        x = w * 0.64 + i * w * 0.065
+        d.rectangle([x, h * 0.25 + (i % 3) * 18, x + w * 0.045, h * 0.5], fill=(70, 80, 100))
+    cx, cy, R = w * 0.22, h * 0.24, h * 0.15
+    d.ellipse([cx - R, cy - R, cx + R, cy + R], fill=WHITE, outline=(40, 40, 40), width=6)
+    for k in range(12):
+        a = k * math.pi / 6
+        d.line([(cx + math.cos(a) * R * 0.82, cy + math.sin(a) * R * 0.82), (cx + math.cos(a) * R * 0.95, cy + math.sin(a) * R * 0.95)], fill=(40, 40, 40), width=3)
+    mins = 13 + 2 * p  # 4:13 → 4:15
+    am = -math.pi / 2 + mins / 60 * 2 * math.pi
+    ah = -math.pi / 2 + (4 + mins / 60) / 12 * 2 * math.pi
+    d.line([(cx, cy), (cx + math.cos(ah) * R * 0.5, cy + math.sin(ah) * R * 0.5)], fill=(30, 30, 30), width=8)
+    d.line([(cx, cy), (cx + math.cos(am) * R * 0.8, cy + math.sin(am) * R * 0.8)], fill=RED, width=5)
+    d.rectangle([w * 0.15, h * 0.62, w * 0.85, h * 0.72], fill=(110, 70, 45))
+    person(d, w * 0.62, h * 0.95, s=h / 760, shirt=(30, 34, 50), face="neutral", hair=(200, 200, 205), seed=70,
+           arm=(-0.4, 0.4), legs=False)
+    k = ease((p - 0.2) / 0.5)
+    px = lerp(-w * 0.1, w * 0.4, k)
+    person(d, px, h * 1.0, s=h / 820, shirt=(70, 110, 170), face="neutral", seed=71, arm=(-1.3, 0.3), legs=False)
+    d.rectangle([px + 70, h * 0.5, px + 150, h * 0.62], fill=WHITE, outline=(150, 150, 150), width=2)
+    for j in range(4):
+        d.line([(px + 80, h * 0.52 + j * 14), (px + 140, h * 0.52 + j * 14)], fill=(120, 120, 120), width=3)
+    label(d, w * 0.22, h * 0.48, "4:15", size=int(h * 0.06), color=GOLD)
+
+
+def draw_telescope(d, w, h, p, t):
+    """Đêm sao, nhà thiên văn nhìn kính viễn vọng, sao chổi vạch quỹ đạo, các chấm quan sát lệch quanh đường cong."""
+    d.rectangle([0, 0, w, h], fill=(10, 14, 34))
+    rnd = random.Random(3)
+    for _ in range(70):
+        x, y = rnd.uniform(0, w), rnd.uniform(0, h * 0.7)
+        b = 140 + int(90 * (0.5 + 0.5 * math.sin(t * 2 + x)))
+        d.ellipse([x - 2, y - 2, x + 2, y + 2], fill=(b, b, b))
+    pts = [(w * (0.15 + 0.75 * u), h * (0.6 - 0.45 * math.sin(math.pi * u * 0.9))) for u in [i / 40 for i in range(41)]]
+    k = max(2, int(41 * ease(p / 0.8)))
+    d.line(pts[:k], fill=GOLD + (160,), width=3)
+    obs = random.Random(9)
+    for i in range(0, k, 4):
+        x, y = pts[i]
+        oy = y + obs.uniform(-1, 1) * h * 0.05
+        d.ellipse([x - 7, oy - 7, x + 7, oy + 7], fill=(120, 200, 255))
+    cx, cy = pts[k - 1]
+    for j in range(6):
+        d.line([(cx, cy), (cx - 30 - j * 8, cy + 10 + j * 6)], fill=(200, 230, 255), width=4 - j // 2)
+    d.ellipse([cx - 12, cy - 12, cx + 12, cy + 12], fill=WHITE)
+    d.rectangle([0, h * 0.82, w, h], fill=(30, 34, 40))
+    tx, ty = w * 0.2, h * 0.82
+    d.line([(tx, ty), (tx - 30, h)], fill=(90, 90, 100), width=6)
+    d.line([(tx, ty), (tx + 30, h)], fill=(90, 90, 100), width=6)
+    d.polygon([(tx - 10, ty - 10), (tx + 120, ty - 90), (tx + 130, ty - 70), (tx, ty + 10)], fill=(170, 140, 90))
+    person(d, tx - 60, h * 1.02, s=h / 900, shirt=(90, 60, 50), face="happy", hair=(220, 220, 220), seed=72,
+           arm=(0.3, -1.6), legs=False)
+
+
+def draw_news(d, w, h, p, t):
+    """Hai tờ báo: tin tốt (xanh) khiến người đọc gật gù, tin xấu (đỏ) khiến cả đám đông nhảy dựng."""
+    d.rectangle([0, 0, w, h], fill=(34, 30, 36))
+    for i, (txt, col, face) in enumerate((("TIN TỐT ▲", GREEN, "happy"), ("TIN XẤU ▼", RED, "shock"))):
+        x0 = w * (0.04 + i * 0.5)
+        k = ease((p - i * 0.3) / 0.15)
+        if k <= 0:
+            continue
+        shake = 8 * math.sin(t * 30) if i == 1 else 0
+        d.rectangle([x0 + shake, h * 0.06, x0 + w * 0.42 + shake, h * 0.46], fill=(235, 230, 215))
+        d.text((x0 + 20 + shake, h * 0.09), txt, font=font("sans-black", int(h * 0.07)), fill=col)
+        for j in range(5):
+            d.line([(x0 + 20 + shake, h * 0.22 + j * h * 0.045), (x0 + w * 0.4 + shake, h * 0.22 + j * h * 0.045)], fill=(150, 150, 140), width=4)
+        n = 1 if i == 0 else 3
+        for m in range(n):
+            jump = (abs(math.sin(t * 9 + m)) * h * 0.05) if i == 1 else 0
+            person(d, x0 + w * (0.21 if n == 1 else 0.08 + m * 0.13), h * 1.04 - jump, s=h / (900 if n == 1 else 1100),
+                   face=face, seed=80 + i * 5 + m, sweat=(t + m * 0.3) % 1 if i == 1 else 0,
+                   arm=(-2.5, 2.5) if i == 1 else (0.2, -0.2), legs=False)
+
+
+def draw_speech(d, w, h, p, t):
+    """Một người nói vào micro, sóng âm bay vào máy tính, máy đoán từng âm tiết (trạng thái ẩn → quan sát)."""
+    d.rectangle([0, 0, w, h], fill=(22, 30, 44))
+    person(d, w * 0.2, h * 1.02, s=h / 760, shirt=(70, 120, 200), face="happy", seed=90, arm=(0.4, -1.0), legs=False)
+    mx, my = w * 0.36, h * 0.5
+    d.rounded_rectangle([mx - 16, my - 40, mx + 16, my + 10], radius=14, fill=(60, 60, 70))
+    d.line([(mx, my + 10), (mx, h * 0.8)], fill=(60, 60, 70), width=6)
+    for k in range(40):
+        x = mx + 30 + k * w * 0.0075
+        amp = h * 0.12 * abs(math.sin(k * 0.6 + t * 8)) * (0.4 + 0.6 * abs(math.sin(k * 0.13)))
+        d.line([(x, my - 15 - amp), (x, my - 15 + amp)], fill=T["accent"], width=4)
+    cx0, cy0 = w * 0.7, h * 0.2
+    d.rounded_rectangle([cx0, cy0, cx0 + w * 0.27, cy0 + h * 0.42], radius=12, fill=(10, 12, 18), outline=(90, 100, 120), width=4)
+    words = ["xin", "chào", "thị", "trường"]
+    n = int(len(words) * ease(p / 0.8) + 0.999)
+    for i, wd in enumerate(words[:n]):
+        d.text((cx0 + 18, cy0 + 16 + i * h * 0.09), wd, font=font("mono-bold", int(h * 0.06)), fill=GREEN)
+    d.rectangle([cx0 + w * 0.1, cy0 + h * 0.42, cx0 + w * 0.17, cy0 + h * 0.5], fill=(90, 100, 120))
+    label(d, w * 0.83, h * 0.8, "trạng thái ẩn → âm thanh", size=int(h * 0.035), color=GOLD)
+
+
+def draw_swan(d, w, h, p, t):
+    """Hồ nước toàn thiên nga trắng; một con thiên nga đen bất ngờ bơi vào khung (sự kiện hiếm mà có thật)."""
+    d.rectangle([0, 0, w, h], fill=(150, 200, 230))
+    d.rectangle([0, h * 0.5, w, h], fill=(60, 120, 170))
+    for y in range(int(h * 0.55), h, 30):
+        d.arc([(t * 40) % 80 - 80, y, w + 80, y + 20], 0, 180, fill=(90, 150, 200), width=2)
+
+    def swan(x, y, col, s=1.0, bob=0.0):
+        y += bob
+        d.ellipse([x - 60 * s, y - 30 * s, x + 60 * s, y + 25 * s], fill=col)
+        d.line([(x + 40 * s, y - 10 * s), (x + 55 * s, y - 80 * s)], fill=col, width=int(16 * s))
+        d.ellipse([x + 42 * s, y - 100 * s, x + 74 * s, y - 72 * s], fill=col)
+        d.polygon([(x + 72 * s, y - 88 * s), (x + 98 * s, y - 82 * s), (x + 72 * s, y - 78 * s)], fill=(240, 120, 40))
+
+    for i in range(5):
+        swan(w * (0.1 + i * 0.17), h * (0.62 + 0.08 * (i % 2)), WHITE, h / 600, 5 * math.sin(t * 2 + i))
+    bx = lerp(w * 1.15, w * 0.62, ease((p - 0.25) / 0.45))
+    swan(bx, h * 0.85, (20, 20, 24), h / 520, 5 * math.sin(t * 2.5))
+    if p > 0.6:
+        label(d, w * 0.5, h * 0.1, "hiếm… nhưng CÓ", size=int(h * 0.055), color=RED)
+
+
+def draw_exit(d, w, h, p, t):
+    """Căn phòng đông người, chỉ một cửa thoát hiểm hẹp: lúc yên ổn đi thong thả, lúc báo động thì chen nhau."""
+    alarm = p > 0.45
+    d.rectangle([0, 0, w, h], fill=(60, 30, 32) if alarm and int(t * 4) % 2 else (40, 40, 48))
+    d.rectangle([w * 0.82, h * 0.25, w * 0.95, h * 0.85], fill=(30, 120, 70))
+    d.text((w * 0.83, h * 0.27), "EXIT", font=font("sans-black", int(h * 0.06)), fill=WHITE)
+    d.rectangle([w * 0.84, h * 0.4, w * 0.93, h * 0.85], fill=(15, 20, 18))
+    rnd = random.Random(4)
+    for i in range(9):
+        bx = rnd.uniform(0.05, 0.6) * w
+        if alarm:
+            bx = lerp(bx, w * 0.75, ease((p - 0.45) / 0.5) * (0.6 + 0.04 * i))
+            bx += 10 * math.sin(t * 20 + i)
+        person(d, bx, h * (0.9 + 0.03 * (i % 3)), s=h / 1300, face="shock" if alarm else "neutral", seed=100 + i,
+               sweat=((t + i * 0.2) % 1) if alarm else 0, arm=(-2.4, 2.4) if alarm else (0.1, -0.1))
+    label(d, w * 0.4, h * 0.08, "BÁO ĐỘNG!" if alarm else "vào thì dễ…", size=int(h * 0.055), color=RED if alarm else GOLD)
+
+
+def draw_particle(d, w, h, p, t):
+    """Cốc nước dưới kính hiển vi: hạt bụi bị va đập ngẫu nhiên nhưng luôn bị kéo về tâm (Ornstein–Uhlenbeck)."""
+    d.rectangle([0, 0, w, h], fill=(24, 28, 40))
+    cx, cy, R = w * 0.5, h * 0.5, min(w, h) * 0.42
+    d.ellipse([cx - R - 14, cy - R - 14, cx + R + 14, cy + R + 14], fill=(80, 85, 100))
+    d.ellipse([cx - R, cy - R, cx + R, cy + R], fill=(60, 130, 190))
+    rnd = random.Random(int(t * 8))
+    for _ in range(40):
+        a, r = rnd.uniform(0, 6.28), rnd.uniform(0, R * 0.95)
+        x, y = cx + math.cos(a) * r, cy + math.sin(a) * r
+        d.ellipse([x - 3, y - 3, x + 3, y + 3], fill=(150, 200, 240))
+    gen = random.Random(12)
+    x, y, path = R * 0.7, -R * 0.4, []
+    steps = int(160 * ease(p))
+    for _ in range(max(2, steps)):
+        x += -0.06 * x + gen.gauss(0, R * 0.05)
+        y += -0.06 * y + gen.gauss(0, R * 0.05)
+        path.append((cx + x, cy + y))
+    d.line(path, fill=GOLD + (200,), width=2)
+    px, py = path[-1]
+    d.ellipse([px - 12, py - 12, px + 12, py + 12], fill=T["accent"])
+    d.line([(cx - 14, cy), (cx + 14, cy)], fill=WHITE, width=3)
+    d.line([(cx, cy - 14), (cx, cy + 14)], fill=WHITE, width=3)
+    label(d, cx, h * 0.06, "va đập ngẫu nhiên + lực kéo về", size=int(h * 0.04), color=GOLD)
+
+
+def draw_coin_crowd(d, w, h, p, t):
+    """Rất nhiều người cùng tung xu; người tung ngửa liền nhiều lần được đội vương miện 'thiên tài' (thật ra là may)."""
+    d.rectangle([0, 0, w, h], fill=(26, 30, 44))
+    cols, rows = 6, 3
+    win = (2, 1)
+    for r in range(rows):
+        for c in range(cols):
+            x = w * (0.09 + c * 0.165)
+            y = h * (0.42 + r * 0.27)
+            out = (r, c) != win and p > 0.35 + 0.05 * ((r * cols + c) % 7)
+            person(d, x, y, s=h / 2100, face="sad" if out else "neutral", seed=110 + r * cols + c,
+                   arm=(0.2, -2.4), legs=False)
+            if not out:
+                cy = y - 200 * h / 2100 - abs(math.sin(t * 6 + c + r)) * h * 0.06
+                sx = abs(math.cos(t * 10 + c))
+                d.ellipse([x + 30 - 14 * sx, cy - 14, x + 30 + 14 * sx, cy + 14], fill=(240, 200, 70))
+    if p > 0.6:
+        x = w * (0.09 + win[1] * 0.165)
+        y = h * (0.42 + win[0] * 0.27) - 330 * h / 2100
+        d.polygon([(x - 30, y), (x - 30, y - 30), (x - 15, y - 15), (x, y - 36), (x + 15, y - 15), (x + 30, y - 30), (x + 30, y)], fill=GOLD)
+        label(d, w * 0.5, h * 0.07, "“THIÊN TÀI”?", size=int(h * 0.06), color=GOLD)
+
+
+def draw_water_flow(d, w, h, p, t):
+    """Bể nước = giá; vòi bơm vào (xanh) và vòi xả ra (đỏ) = dòng tiền. Mực nước dâng nhưng vòi xả mở to dần."""
+    d.rectangle([0, 0, w, h], fill=(30, 34, 46))
+    tx0, ty0, tx1, ty1 = w * 0.3, h * 0.25, w * 0.7, h * 0.9
+    level = ty1 - (ty1 - ty0) * (0.35 + 0.25 * ease(p))
+    d.rectangle([tx0, level, tx1, ty1], fill=(60, 140, 210))
+    for x in range(int(tx0), int(tx1), 24):
+        d.arc([x, level - 6 + 4 * math.sin(t * 4 + x), x + 24, level + 6], 180, 360, fill=(140, 200, 240), width=3)
+    d.rectangle([tx0 - 8, ty0, tx0, ty1], fill=(180, 190, 200))
+    d.rectangle([tx1, ty0, tx1 + 8, ty1], fill=(180, 190, 200))
+    d.rectangle([tx0 - 8, ty1, tx1 + 8, ty1 + 8], fill=(180, 190, 200))
+    d.rectangle([w * 0.05, h * 0.12, w * 0.4, h * 0.17], fill=GREEN)
+    win_ = 6 + 4 * (1 - p)
+    for k in range(int(win_)):
+        yy = h * 0.17 + ((t * 300 + k * 40) % (level - h * 0.17))
+        d.ellipse([w * 0.38 - 6, yy - 6, w * 0.38 + 6, yy + 6], fill=GREEN)
+    out = 0.3 + 0.7 * ease(p)
+    d.rectangle([tx1 + 8, ty1 - 60, w * 0.95, ty1 - 60 + 30 * out + 10], fill=RED)
+    for k in range(int(4 + 8 * out)):
+        xx = tx1 + 30 + ((t * 300 + k * 50) % (w * 0.95 - tx1 - 30))
+        d.ellipse([xx - 6, ty1 - 50, xx + 6, ty1 - 38], fill=(255, 170, 170))
+    label(d, w * 0.22, h * 0.07, "tiền vào", size=int(h * 0.045), color=GREEN)
+    label(d, w * 0.84, ty1 + 0.0 - 100, "tiền ra", size=int(h * 0.045), color=RED)
+    label(d, w * 0.5, ty0 - 40, "mực nước = giá", size=int(h * 0.04), color=WHITE)
 
 
 DRAW = {k[5:]: v for k, v in dict(globals()).items() if k.startswith("draw_")}

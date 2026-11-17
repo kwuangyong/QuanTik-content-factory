@@ -1,0 +1,111 @@
+{
+  "id": "ep16-hmm-renaissance",
+  "topic": "hmm",
+  "seed": 19,
+  "title": "Mô hình nhận dạng giọng nói đã đi vào quỹ quant huyền thoại như thế nào",
+  "caption": "Hidden Markov Model ra đời cuối thập niên sáu mươi và làm nên nhận dạng giọng nói ở IBM. Năm 1993, hai nhà nghiên cứu giọng nói của IBM là Peter Brown và Robert Mercer gia nhập Renaissance Technologies. QuanTik dùng HMM để nhận diện trạng thái thị trường.",
+  "hashtags": [
+    "quant",
+    "HMM",
+    "Renaissance",
+    "lichsutaichinh",
+    "QuanTik"
+  ],
+  "facts": {
+    "baum": {
+      "value": "1966",
+      "source": "Baum & Petrie (1966), Annals of Mathematical Statistics 37(6)"
+    },
+    "rentec": {
+      "value": "1993",
+      "source": "Zuckerman, The Man Who Solved the Market (2019)"
+    }
+  },
+  "scenes": [
+    {
+      "type": "hook",
+      "text": "Quỹ quant huyền thoại tuyển người từ… phòng *nhận dạng giọng nói*. Vì sao?",
+      "kicker": "Lịch sử quant",
+      "visual": "speech"
+    },
+    {
+      "type": "story",
+      "chip": "Năm 1966",
+      "era": "1966",
+      "title": "Leonard Baum và trạng thái ẩn",
+      "text": "Ý tưởng: thứ ta quan sát (âm thanh, lợi suất) sinh ra từ một trạng thái ta không nhìn thấy, và trạng thái đó chuyển đổi theo xác suất.",
+      "source": "Baum & Petrie (1966)",
+      "say": "Năm 1966, Leonard Baum công bố nền tảng của mô hình Markov ẩn: thứ ta quan sát được sinh ra từ một trạng thái ta không nhìn thấy.",
+      "visual": "professor"
+    },
+    {
+      "type": "story",
+      "chip": "Năm 1993",
+      "era": "1993",
+      "title": "Từ IBM sang Renaissance",
+      "text": "HMM làm nên nhận dạng giọng nói ở IBM. Hai nhà nghiên cứu Peter Brown và Robert Mercer rời IBM sang Renaissance Technologies.",
+      "source": "Zuckerman (2019)",
+      "say": "HMM làm nên nhận dạng giọng nói ở IBM. Năm 1993, hai nhà nghiên cứu giọng nói Peter Brown và Robert Mercer rời IBM để gia nhập quỹ Renaissance.",
+      "visual": "speech"
+    },
+    {
+      "type": "code",
+      "lines": [
+        12,
+        15
+      ],
+      "hl": 14,
+      "note": "Mỗi phiên: cập nhật xác suất ba trạng thái tăng · giảm · đi ngang",
+      "say": "Lõi của bộ lọc chỉ vài dòng: mỗi phiên, nhân xác suất chuyển trạng thái với độ khớp của lợi suất mới, rồi chuẩn hoá."
+    },
+    {
+      "type": "chart",
+      "title": "Xác suất ba trạng thái theo thời gian",
+      "say": "Xanh là trạng thái tăng, vàng đi ngang, đỏ là giảm. Mô hình đoán đúng trạng thái thật {accuracy} số phiên."
+    },
+    {
+      "type": "surface",
+      "view": "top",
+      "caption": "Mỗi điểm là một phiên trong không gian ba xác suất",
+      "say": "Nhìn từ trên xuống, mỗi điểm là một phiên. Thị trường không nhảy lung tung: nó ở lâu trong một góc rồi mới chuyển sang góc khác."
+    },
+    {
+      "type": "statement",
+      "chip": "Mang về",
+      "text": "Thị trường có tâm trạng. HMM không đoán giá, nó đoán tâm trạng.",
+      "say": "Thị trường có tâm trạng. HMM không đoán giá, nó đoán tâm trạng."
+    }
+  ],
+  "thumb": {
+    "tag": "HMM · Lịch sử",
+    "headline": [
+      {
+        "t": "TỪ GIỌNG NÓI",
+        "size": 140
+      },
+      {
+        "t": "ĐẾN QUỸ",
+        "size": 170
+      },
+      {
+        "t": "[o]RENAISSANCE[/o]",
+        "size": 140
+      }
+    ],
+    "pill": "Baum 1966 · IBM → Renaissance 1993 · code Python",
+    "labels": [
+      {
+        "label": "Đoán đúng",
+        "value": "{accuracy}",
+        "color": "green"
+      },
+      {
+        "label": "Trạng thái trội",
+        "value": "{p_dom_last}",
+        "color": "orange"
+      }
+    ]
+  },
+  "style": "story-mix",
+  "series_no": 16
+}

@@ -37,7 +37,6 @@ S₀ = 100, μ = 10%/năm, σ = 35%/năm (cổ phiếu biến động cao), 1.00
   "title": "1.000 tương lai của một cổ phiếu: Monte Carlo bằng code chạy thật",
   "hook": "Bạn cược vào *một* tương lai. Code chạy {n_paths} tương lai. Bao nhiêu cái lỗ?",
   "hook_visual": "multiverse",
-  "kicker": "Mô phỏng Monte Carlo",
   "cold_open": [
     {
       "say": "Nhà toán học Stanislaw Ulam nằm dưỡng bệnh, chơi bài solitaire và tự hỏi: xác suất thắng một ván là bao nhiêu?",
@@ -50,6 +49,7 @@ S₀ = 100, μ = 10%/năm, σ = 35%/năm (cổ phiếu biến động cao), 1.00
       "caption": "Đặt tên theo *sòng bạc*"
     }
   ],
+  "kicker": "Mô phỏng Monte Carlo",
   "beats": [
     "Code sinh {n_paths} đường giá, mỗi đường {days} phiên, từ giá {s0}, biến động {sigma} một năm. Mỗi phiên là một cú tung xúc xắc chuẩn.",
     "Kết quả: phân vị 5 là {p5}, trung vị {p50}, phân vị 95 là {p95}. Có {prob_loss} số đường kết thúc dưới giá ban đầu.",
@@ -139,6 +139,37 @@ S₀ = 100, μ = 10%/năm, σ = 35%/năm (cổ phiếu biến động cao), 1.00
     "5",
     "95"
   ],
+  "thumb": {
+    "tag": "Monte Carlo",
+    "headline": [
+      {
+        "t": "KHÔNG THỂ NHÌN THẤY",
+        "size": 110
+      },
+      {
+        "t": "TƯƠNG LAI",
+        "size": 190
+      },
+      {
+        "t": "NHƯNG THẤY [o]{n_paths}[/o] KỊCH BẢN",
+        "size": 96
+      }
+    ],
+    "pill": "Mô phỏng nhiều đường giá · code Python",
+    "labels": [
+      {
+        "label": "P95",
+        "value": "{p95}",
+        "color": "green"
+      },
+      {
+        "label": "P5",
+        "value": "{p5}",
+        "color": "orange"
+      }
+    ],
+    "footer": "Dữ liệu mô phỏng • Không phải dự báo giá"
+  },
   "facts": {
     "ulam": {
       "value": "Stanislaw Ulam nghĩ ra phương pháp Monte Carlo khi chơi solitaire lúc dưỡng bệnh; tên do Nicholas Metropolis đặt theo sòng bạc Monte Carlo",

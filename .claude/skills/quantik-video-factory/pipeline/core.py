@@ -144,6 +144,8 @@ def fill(text: str, values: dict, formats: dict, rendered: set | None = None) ->
 
     def rep(m):
         key, spec = m.group(1), m.group(2)
+        if not spec and re.search(r"(\\[A-Za-z]+|[_^}])$", text[:m.start()]):
+            return m.group(0)  # đối số LaTeX (\frac{L}, \mathrm{Cov}, x_{t}) chứ không phải placeholder
         if key not in values:
             raise KeyError(f"placeholder {{{key}}} has no computed value; available: {sorted(values)}")
         out = fmt_vi(values[key], spec or formats.get(key, "num2"))

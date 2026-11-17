@@ -152,7 +152,7 @@ def _prepare(topic, style, override=None, returns=None):
     """(episode, style module, model) for a hand-written topic or any catalog topic."""
     if topic in TOPICS:
         ep, mod = build_episode(topic, style, override)
-        return ep, mod, Model(topic, ep.get("seed"), returns)
+        return ep, mod, Model(topic, ep.get("seed"), returns, ep.get("params"))
     entry = C.get(topic)
     if entry is None:
         raise SystemExit(f"unknown topic {topic!r}. Hand-written: {TOPICS}. Catalog: python catalog.py --list")
@@ -176,6 +176,8 @@ def insert_cold_open(scenes, ep, kind, style):
     at = 1 if scenes and scenes[0].name == "hook" else 0
     extra = [SC.broll(it["say"], it.get("visual"), it.get("caption"), name=f"story{i + 1}", slot=i)
              for i, it in enumerate(items)]
+    for sc in extra:
+        sc.optional = True
     return scenes[:at] + extra + scenes[at:]
 
 
@@ -189,7 +191,7 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
     work.mkdir(parents=True, exist_ok=True)
     print(f"\n=== {ep['id']}  ({topic} × {style}) → {out}")
 
-    save_json(out / "values.json", {"topic": topic, "seed": model.seed, "real_data": model.real_data,
+    save_json(out / "values.json", {"topic": topic, "seed": model.seed, "params": getattr(model, "params", {}), "real_data": model.real_data,
                                     "values": model.values, "formats": model.formats, "code": model.code})
     rendered = set()
     filled = fill_tree(ep, model.values, model.formats, rendered)
@@ -237,7 +239,7 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
     # giữ dưới giới hạn nền tảng: bớt cảnh kể chuyện cuối (cold_open) trước, không bao giờ cắt nội dung chính
     limit = filled.get("max_seconds", 60) - 0.5
     while kind == "video" and sum(sc.duration for sc in scenes) > limit:
-        story = [sc for sc in scenes if sc.name.startswith("story")]
+        story = [sc for sc in scenes if getattr(sc, "optional", False)]
         if not story:
             break
         print(f"  quá {limit + 0.5:.0f}s → bỏ cảnh {story[-1].name}")

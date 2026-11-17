@@ -33,7 +33,6 @@ Hai chiến lược, 750 phiên, seed 12: A có trung bình 0,06%/phiên, σ 1,0
   "title": "Lãi nhiều hơn mà Sharpe thấp hơn? Đọc đúng chỉ số Sharpe",
   "hook": "Khoe lãi {cagr_b}? *Xin lỗi*, chiến lược lãi {cagr_a} còn tốt hơn của bạn.",
   "hook_visual": "race",
-  "kicker": "Sharpe ratio",
   "cold_open": [
     {
       "say": "Hai tay đua. Một người phóng bạt mạng, lúc vượt lên, lúc văng khỏi đường. Người kia chạy đều từ đầu đến cuối.",
@@ -46,6 +45,7 @@ Hai chiến lược, 750 phiên, seed 12: A có trung bình 0,06%/phiên, σ 1,0
       "caption": "Lãi trên mỗi đơn vị rủi ro"
     }
   ],
+  "kicker": "Sharpe ratio",
   "beats": [
     "Code tạo hai chiến lược trong {n_days} phiên. Sharpe bằng lợi suất vượt trội trung bình chia độ lệch chuẩn, nhân căn 252 để quy ra năm.",
     "Kết quả: Sharpe A bằng {sharpe_a}, B bằng {sharpe_b}. B lãi nhiều hơn nhưng biến động {vol_b} một năm, gấp đôi A.",
@@ -135,6 +135,36 @@ Hai chiến lược, 750 phiên, seed 12: A có trung bình 0,06%/phiên, σ 1,0
   "allowed_literals": [
     "252",
     "2 chiến lược"
-  ]
+  ],
+  "thumb": {
+    "tag": "Sharpe ratio",
+    "headline": [
+      {
+        "t": "LÃI [o]{cagr_b}[/o] MỖI NĂM",
+        "size": 110
+      },
+      {
+        "t": "VẪN THUA",
+        "size": 190
+      },
+      {
+        "t": "CHIẾN LƯỢC LÃI [g]{cagr_a}[/g]",
+        "size": 100
+      }
+    ],
+    "pill": "Sharpe chia lãi cho rủi ro · code Python",
+    "labels": [
+      {
+        "label": "A · Sharpe",
+        "value": "{sharpe_a}",
+        "color": "green"
+      },
+      {
+        "label": "B · Sharpe",
+        "value": "{sharpe_b}",
+        "color": "orange"
+      }
+    ]
+  }
 }
 ```

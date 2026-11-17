@@ -1,0 +1,137 @@
+{
+  "id": "ep09-diem-quant",
+  "topic": "quant_score",
+  "title": "Điểm Quant trong Quét toàn sàn được ghép từ những gì?",
+  "caption": "Khi quét toàn sàn, QuanTik xếp hạng mã theo Điểm Quant. Điểm này ghép nhiều thành phần (dự báo, thanh khoản, xu hướng, Sharpe, dòng tiền CMF, trạng thái HMM…), mỗi thành phần chuẩn hoá bằng z-score bền vững rồi nhân trọng số. Video đọc thẳng từ code engine.",
+  "hashtags": [
+    "QuanTik",
+    "quetoansan",
+    "quant",
+    "chungkhoan",
+    "phantichdinhluong"
+  ],
+  "cta_link": "Xem bảng Quét toàn sàn và Điểm Quant tại quantik.io.vn",
+  "facts": {
+    "w_fc": {
+      "value": "0,12",
+      "source": "QuanTik-website/backend/quant_engine/quant.py:2304 (AdaptiveScorer.WEIGHTS)"
+    },
+    "w_liq": {
+      "value": "0,12",
+      "source": "quant.py:2304"
+    },
+    "w_trend": {
+      "value": "0,10",
+      "source": "quant.py:2304"
+    },
+    "w_sharpe": {
+      "value": "0,08",
+      "source": "quant.py:2304"
+    },
+    "w_cmf": {
+      "value": "0,08",
+      "source": "quant.py:2304"
+    },
+    "w_hmm": {
+      "value": "0,07",
+      "source": "quant.py:2304"
+    },
+    "cols": {
+      "value": "34",
+      "source": "brand/identity.md (Quét toàn sàn: 34 cột chỉ tiêu có định nghĩa)"
+    },
+    "pct": {
+      "value": "75",
+      "source": "quant.py robust z-score: percentile 75 − percentile 25"
+    },
+    "pct25": {
+      "value": "25",
+      "source": "quant.py robust z-score"
+    }
+  },
+  "scenes": [
+    {
+      "type": "hook",
+      "text": "Bảng Quét toàn sàn xếp mã theo Điểm Quant. Con số đó được ghép từ đâu?",
+      "kicker": "Quét toàn sàn"
+    },
+    {
+      "type": "formula",
+      "latex": "\\text{Score} = \\sum_i w_i\\, s_i",
+      "caption": "Mỗi thành phần s được chuẩn hoá, rồi nhân trọng số w",
+      "say": "Điểm Quant là tổng có trọng số. Mỗi thành phần được chuẩn hoá về cùng thang, rồi nhân với trọng số của nó."
+    },
+    {
+      "type": "code",
+      "lines": [
+        1,
+        6
+      ],
+      "say": "Đây là bảng trọng số trích thẳng từ engine của QuanTik. Dự báo lợi suất và thanh khoản cùng nặng nhất, 0,12. Xu hướng 0,10. Sharpe và dòng tiền CMF 0,08."
+    },
+    {
+      "type": "compare",
+      "title": "Hai thành phần nặng nhất",
+      "left": {
+        "label": "Dự báo lợi suất",
+        "value": "0,12",
+        "color": "positive"
+      },
+      "right": {
+        "label": "Thanh khoản",
+        "value": "0,12",
+        "note": "mã khó giao dịch bị kéo điểm xuống",
+        "color": "neutral"
+      },
+      "say": "Thanh khoản nặng ngang dự báo. Một mã dự báo đẹp mà khó giao dịch vẫn bị kéo điểm xuống."
+    },
+    {
+      "type": "code",
+      "lines": [
+        7,
+        12
+      ],
+      "hl": 11,
+      "note": "Chuẩn hoá bằng trung vị và khoảng tứ phân vị, không bằng trung bình",
+      "say": "Mỗi thành phần được chuẩn hoá bằng z-score bền vững: trừ trung vị, chia khoảng giữa phân vị 75 và 25. Một mã cực đoan không kéo lệch cả bảng."
+    },
+    {
+      "type": "usage",
+      "title": "Đọc Điểm Quant khi quét sàn",
+      "steps": [
+        "Đây là thứ hạng theo bộ chỉ tiêu công bố, không phải xác suất sinh lời",
+        "Mở 34 cột để xem thành phần nào kéo điểm",
+        "Cổng dữ liệu, rủi ro và chi phí vẫn phải đạt"
+      ],
+      "say": "Khi đọc: đây là thứ hạng theo bộ chỉ tiêu công bố, không phải xác suất sinh lời. Mở các cột chỉ tiêu để xem thành phần nào kéo điểm. Và cổng dữ liệu, rủi ro, chi phí vẫn phải đạt."
+    },
+    {
+      "type": "statement",
+      "chip": "Mang về",
+      "text": "Điểm cao là điểm khởi đầu để đọc kỹ, không phải kết luận.",
+      "say": "Điểm cao là điểm khởi đầu để đọc kỹ, không phải kết luận."
+    }
+  ],
+  "thumb": {
+    "tag": "Điểm Quant",
+    "headline": [
+      {
+        "t": "ĐIỂM QUANT",
+        "size": 160
+      },
+      {
+        "t": "GHÉP TỪ",
+        "size": 160
+      },
+      {
+        "t": "[o]NHỮNG GÌ?[/o]",
+        "size": 170
+      }
+    ],
+    "pill": "Đọc thẳng từ engine QuanTik",
+    "labels": [],
+    "footer": "Quét toàn sàn • Không phải khuyến nghị"
+  },
+  "style": "story-mix",
+  "series_no": 9
+}
