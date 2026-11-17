@@ -53,7 +53,7 @@
         {
           "kind": "spend",
           "show": "The first spends all of it.",
-          "say": "The first spends all of it. Phone, bag, a car on payments."
+          "say": "The first spends it all. Phone, bag, a car on payments."
         },
         {
           "kind": "compare",
@@ -73,8 +73,8 @@
         {
           "kind": "paycheck_stops",
           "show": "{years} years later, the paycheck stops.",
-          "say": "{years} years later, the paycheck stops. A layoff. One bad year.",
-          "min_dur": 3.4
+          "say": "{years} years later, the paycheck stops.",
+          "min_dur": 2.8
         },
         {
           "kind": "paycheck_stops",
@@ -94,8 +94,8 @@
         {
           "kind": "walkaway",
           "show": "Same salary. Different audience.",
-          "say": "The difference was never the income. It was who they paid to impress.",
-          "min_dur": 4.0
+          "say": "It was never the income. It was who they paid to impress.",
+          "min_dur": 3.5
         }
       ],
       "takeaway": "Looking rich is loud. Being free is quiet.",
