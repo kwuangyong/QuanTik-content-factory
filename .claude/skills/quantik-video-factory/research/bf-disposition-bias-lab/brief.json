@@ -1,0 +1,104 @@
+{
+  "id": "bf-disposition-bias-lab",
+  "pillar": "behavioral-finance",
+  "topic": "bf_disposition_effect",
+  "question": "Vì sao nhà đầu tư bán mã đang lãi và giữ mã đang lỗ, và bằng chứng nói gì?",
+  "audience_problem": "Danh mục toàn mã lỗ 'chờ gỡ' trong khi mã tốt đã bán sớm.",
+  "claims": [
+    {
+      "id": "c_disp_def",
+      "text": "Nhà đầu tư có xu hướng bán cổ phiếu đang lãi quá sớm và giữ cổ phiếu đang lỗ quá lâu (hiệu ứng disposition).",
+      "status": "documented",
+      "source_ids": [
+        "shefrin-statman-1985",
+        "odean-1998"
+      ]
+    },
+    {
+      "id": "c_pt",
+      "text": "Lý thuyết triển vọng: người ta đánh giá lãi/lỗ so với một điểm tham chiếu, và hàm giá trị dốc hơn ở vùng lỗ.",
+      "status": "documented",
+      "source_ids": [
+        "kahneman-tversky-1979"
+      ]
+    },
+    {
+      "id": "c_lambda",
+      "text": "Ước lượng trung vị hệ số né lỗ λ = 2,25 và độ cong α = 0,88.",
+      "status": "documented",
+      "source_ids": [
+        "tversky-kahneman-1992"
+      ],
+      "locator": "ước lượng tham số, mục cuối bài"
+    },
+    {
+      "id": "c_mech_dispute",
+      "text": "Lý thuyết triển vọng chưa chắc giải thích được hiệu ứng disposition; với tham số Tversky–Kahneman và lãi/lỗ tính theo năm, mô hình có thể dự báo ngược lại.",
+      "status": "disputed",
+      "source_ids": [
+        "barberis-xiong-2009"
+      ]
+    },
+    {
+      "id": "c_odean",
+      "text": "Trên 10.000 tài khoản môi giới, tỷ lệ hiện thực hoá lãi (PGR) là 0,148, tỷ lệ hiện thực hoá lỗ (PLR) là 0,098.",
+      "status": "documented",
+      "source_ids": [
+        "odean-1998"
+      ],
+      "locator": "bảng tổng hợp toàn mẫu"
+    },
+    {
+      "id": "c_gmin",
+      "text": "Với λ = 2,25, α = 0,88, cược 50/50 mất 1 chỉ có giá trị dương khi lãi lớn hơn λ^(1/α) ≈ 2,51.",
+      "status": "model_output",
+      "source_ids": [
+        "tversky-kahneman-1992"
+      ]
+    },
+    {
+      "id": "c_lesson",
+      "text": "Giá mua là chi phí chìm; quyết định bán nên dựa trên triển vọng từ hôm nay.",
+      "status": "interpretation",
+      "source_ids": []
+    },
+    {
+      "id": "c_quant",
+      "text": "Luật thoát định trước theo rủi ro giúp tách quyết định khỏi điểm tham chiếu giá mua.",
+      "status": "interpretation",
+      "source_ids": []
+    }
+  ],
+  "facts": {
+    "pgr": {
+      "value": "0,148",
+      "source_id": "odean-1998",
+      "claim": "c_odean"
+    },
+    "plr": {
+      "value": "0,098",
+      "source_id": "odean-1998",
+      "claim": "c_odean"
+    }
+  },
+  "framework": {
+    "problem": "Tình huống hai mã lãi/lỗ, cần tiền thì bán mã nào",
+    "mechanism": "Điểm tham chiếu + né lỗ (KT 1979, TK 1992); nói rõ cơ chế còn tranh cãi (Barberis & Xiong 2009)",
+    "evidence": "Odean 1998: PGR vs PLR",
+    "implication": "Hàm giá trị → cược công bằng bị từ chối; lãi tối thiểu λ^(1/α)",
+    "lesson": "Giá mua là chi phí chìm",
+    "quant": "Luật thoát viết trước theo rủi ro"
+  },
+  "model": "prospect_theory",
+  "rejected_claims": [
+    {
+      "text": "Mã đã bán sau đó vượt mã giữ lại 3,41% trong năm tiếp theo",
+      "reason": "Không tìm được nguồn xác nhận con số khi kiểm chứng ngày 2026-11-15; cần đọc bản gốc Odean (1998) trước khi dùng"
+    }
+  ],
+  "open_questions": [
+    "Bằng chứng disposition effect trên thị trường Việt Nam (cần nghiên cứu có bình duyệt)"
+  ],
+  "created": "2026-11-15",
+  "researcher": "behavioral-finance-researcher (Claude, phiên này)"
+}

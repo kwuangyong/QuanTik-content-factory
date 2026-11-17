@@ -1,6 +1,6 @@
 ---
 name: quantik-video-factory
-description: Dựng video ngắn và carousel cho mạng xã hội của QuanTik (TikTok, Reels, YouTube Shorts, Facebook) giải thích công thức, mô hình và thuật ngữ quant finance — code Python chạy thật, chart, 3D xoay, phụ đề, giọng đọc tiếng Việt, kèm caption từng nền tảng và phiếu QA. Có 8 style (code-reel, kinetic-text, chart-story, myth-buster, whiteboard-math, talking-head-script, carousel, meme-quant), 8 mô hình chạy code thật (GARCH, Hurst, OU, HMM, Monte Carlo, Sharpe, VaR/CVaR, Kelly) và catalog gần 200 chủ đề lấy từ chính QuanTik: mọi thuật ngữ glossary, chỉ số 16 module báo cáo Quant, trường hành động, cột sheet quét sàn và 27 engine trong quant.py (ARIMA, EGARCH, LightGBM, meta-label, agreement, residual reversion…). Dùng skill này bất cứ khi nào người dùng muốn làm nội dung social media, video, reel, short, TikTok, carousel, kịch bản quay, caption, hook, lịch đăng hoặc nội dung quảng bá cho QuanTik — kể cả khi chỉ nói "làm video về GARCH", "giải thích Sharpe cho TikTok", "viết kịch bản về VaR", "làm loạt bài về Kelly" hay "quảng bá gói Pro" mà không nhắc tới skill.
+description: Dựng video ngắn và carousel cho mạng xã hội của QuanTik (TikTok, Reels, YouTube Shorts, Facebook) giải thích công thức, mô hình và thuật ngữ quant finance — code Python chạy thật, chart, 3D xoay, phụ đề, giọng đọc tiếng Việt, kèm caption từng nền tảng và phiếu QA. Có 8 style (code-reel, kinetic-text, chart-story, myth-buster, whiteboard-math, talking-head-script, carousel, meme-quant), 8 mô hình chạy code thật (GARCH, Hurst, OU, HMM, Monte Carlo, Sharpe, VaR/CVaR, Kelly) và catalog gần 200 chủ đề lấy từ chính QuanTik: mọi thuật ngữ glossary, chỉ số 16 module báo cáo Quant, trường hành động, cột sheet quét sàn và 27 engine trong quant.py (ARIMA, EGARCH, LightGBM, meta-label, agreement, residual reversion…). Ngoài trụ cột học quant gốc còn có bốn kiến trúc nội dung riêng: tâm lý nhà đầu tư & tài chính hành vi (bias-lab), nhịp thị trường từ dữ liệu thật có dấu thời gian (market-brief), lịch sử quant & nhân vật huyền thoại (history-story), lý thuyết trò chơi, poker & ra quyết định (decision-lab) — mỗi trụ cột có worker nghiên cứu, fact-check, sổ nguồn và gate QA riêng. Dùng skill này bất cứ khi nào người dùng muốn làm nội dung social media, video, reel, short, TikTok, carousel, kịch bản quay, caption, hook, lịch đăng hoặc nội dung quảng bá cho QuanTik — kể cả khi chỉ nói "làm video về GARCH", "giải thích Sharpe cho TikTok", "viết kịch bản về VaR", "làm loạt bài về Kelly", "video về hiệu ứng FOMO", "tóm tắt thị trường hôm nay", "kể chuyện Jim Simons", "poker và Kelly" hay "quảng bá gói Pro" mà không nhắc tới skill.
 ---
 
 # QuanTik Video Factory
@@ -11,6 +11,11 @@ Biến một chủ đề quant thành video dọc 9:16 (hoặc carousel) đúng 
 
 ```
 SKILL.md                 ← bạn đang đọc: điều phối
+pillars/                 6 trụ cột (1–4b + 5 dark-truth): registry.json · <id>/PILLAR.md · <id>/catalog.json · README.md (kiến trúc)
+workers/                 vai nghiên cứu/kiểm chứng/sản xuất: đầu vào, đầu ra, ràng buộc, bàn giao
+schemas/                 hợp đồng JSON (pillar, brief, ledger, factcheck, market report/editorial, episode, storyboard, assets, QA)
+research/<id>/           brief.json + factcheck.json của từng tập nghiên cứu
+knowledge/sources/       ledger.json — sổ nguồn dùng chung
 brand/                   identity.md (màu, chữ, giọng văn, thông tin sản phẩm) · compliance.md (cụm cấm, miễn trừ)
                          pronunciation.json (cách TTS đọc thuật ngữ) · assets/ (logo, font, nhạc có giấy phép)
 knowledge/models/*.md    8 mô hình viết tay: công thức, tham số đẹp, ngưỡng, ví dụ HOSE, sai lầm hay gặp, video_defaults
@@ -21,12 +26,55 @@ knowledge/hooks.md       kho hook (đã kiểm chứng bằng view thật / ứn
 knowledge/stories/       chuyện lịch sử có nguồn (LTCM, Medallion)
 tutorial/                video HƯỚNG DẪN SẢN PHẨM (quay giao diện web thật): README.md · run.sh · beats.py · render.py
 styles/<style>/          spec.md (cấu trúc cảnh) + template.py (dựng cảnh) + mẫu
-pipeline/                models.py (code mô hình) · batch.py (lệnh chính) · render/voiceover/assemble
-qa/                      check_numbers · check_banned · check_format · qa_report.md (mẫu phiếu)
+looks.json               look: tông giọng, nội dung, thumbnail, giọng đọc, nhạc cho từng dòng nội dung (đọc bởi make.py)
+pipeline/                make.py (lệnh nhanh) · models.py (code mô hình) · batch.py (lệnh chính) · render/voiceover/assemble
+qa/                      check_numbers · check_banned · check_format · check_script · check_sources · check_market · qa_report.md
+tests/                   python -m unittest discover -s tests (không cần mạng) · RESULTS.md
 episodes/                episode JSON đã viết (ghi đè mặc định của mô hình)
 ```
 
-## Quy trình
+## Lệnh nhanh: `make.py` + `looks.json`
+
+```bash
+cd pipeline
+python make.py menu                                   # look = tông giọng + nội dung + thumbnail; tập + phiên bản
+python make.py escape-velocity --as chart-story       # một ý tưởng, nhiều phiên bản style (khối "variants")
+python make.py sortino --as myth-buster --no 4        # chủ đề quant + thumbnail series #4
+python make.py new <id> --look dark-truth             # khung tập mới, điền TODO theo look
+```
+
+Look hiện có: `quant-vi` (Học Quant cùng QuanTik, tiếng Việt, thumbnail sáng) và `dark-truth` (tiếng Anh, giọng trầm,
+nền drone, thumbnail tối). Thêm look mới = thêm khối trong `looks.json`.
+
+## Chọn trụ cột trước
+
+Repo có sáu kiến trúc nội dung (1, 2, 3, 4a, 4b, 5) (chi tiết: `pillars/README.md`). Xác định trụ cột từ yêu cầu, rồi đọc `PILLAR.md` của nó:
+
+| Người dùng muốn | Trụ cột | Đọc | Lệnh |
+| --- | --- | --- | --- |
+| giải thích mô hình, chỉ số, thuật ngữ quant | 1 `quant-education` | phần Quy trình bên dưới | `python batch.py --topics <id> --styles <style>` |
+| tâm lý, thiên kiến, sai lầm nhà đầu tư (FOMO, né lỗ, bầy đàn…) | 2 `behavioral-finance` | `pillars/behavioral-finance/PILLAR.md` | `pillar.py scaffold` → brief → fact-check → `pillar.py make` |
+| thị trường hôm nay/tuần này, độ rộng, dòng tiền, kịch bản | 3 `market-intelligence` | `pillars/market-intelligence/PILLAR.md` | `python pillar.py market produce` |
+| lịch sử quant, Thorp, Simons, LTCM, Black–Scholes | 4a `quant-history` | `pillars/quant-history/PILLAR.md` | như trụ cột 2 |
+| EV, Nash, poker, Kelly, rủi ro phá sản | 4b `decision-science` | `pillars/decision-science/PILLAR.md` | như trụ cột 2 |
+| "dark truth" tiếng Anh cho IG/Shorts: tiền, địa vị, áp lực xã hội, vòng 9-5 (hoạt hoạ, không chart) | 5 `dark-truth` | `pillars/dark-truth/PILLAR.md` | `python batch.py --episode ../episodes/<id>.json` |
+
+Trụ cột 2, 4a, 4b đi qua các vai trong `workers/` (researcher → fact-checker → scriptwriter), mỗi vai bàn giao một file
+JSON theo `schemas/`. Mọi claim trỏ về `knowledge/sources/ledger.json`; `qa/check_sources.py` chặn render nếu thiếu
+nguồn, thiếu fact-check, hoặc lời kể một giai thoại/lời tự kể như sự kiện. Trụ cột 3 không bao giờ bịa số thị trường:
+không có dữ liệu thì không có video, dữ liệu cũ phải khai báo (`qa/check_market.py`).
+
+**Hình ảnh:** dùng skill **`quantik-visual-assets`** (`.claude/skills/quantik-visual-assets/SKILL.md`) cho ảnh thật,
+ảnh minh hoạ, nhân vật, hiện vật, biểu tượng; lệnh nhanh `python pipeline/visuals.py auto <episode> --write`.
+Nhắc tới người, hãng, sự kiện thì phải có ảnh — ảnh Wikimedia Commons giấy phép tự do (ghi tác giả + giấy
+phép trên màn hình) hoặc ảnh minh hoạ vẽ bằng code (ghi "minh hoạ"). Khai báo trong `entities` của episode;
+`qa/check_images.py` chặn nếu thiếu. Hướng dẫn: `knowledge/images/README.md`, lệnh `python pipeline/images.py`.
+
+Chạy từ `pipeline/`: `python pillar.py list` · `python pillar.py topics <pillar>` · `python pillar.py check <episode>` ·
+`python pillar.py make <episode> --scale 0.5`. Kết quả thêm `sources.md`, `storyboard.json`, `visual_assets.json`,
+`qa_report.json` cạnh các file cũ. Trả kết quả trong chat như mục 6, kèm danh sách nguồn chính và nhãn trạng thái.
+
+## Quy trình (trụ cột 1 — Quant Education)
 
 > **Video hướng dẫn dùng sản phẩm** ("hướng dẫn sử dụng QuanTik", "workflow từ tạo tài khoản đến phân tích",
 > "demo tính năng quét sàn") không đi qua `batch.py`. Đọc `tutorial/README.md` và làm theo đó: quay giao diện
@@ -89,6 +137,11 @@ Quy tắc viết lời — mỗi quy tắc đều có lý do:
 - Hook phải tự hiểu được với người mới: đặt câu hỏi "X là gì? Vì sao nó quan trọng với bạn?" theo cách bất ngờ, không mở bằng số khô.
 - CTA quảng bá: chỉ nói tính năng đúng như `identity.md`. Nhắc giá gói thì đối chiếu https://quantik.io.vn/plans trước, vì ưu đãi có thể đã đổi.
 
+**Tiếng Anh** (IG / YouTube Shorts quốc tế): thêm `"lang": "en"` vào episode (mọi trụ cột). Số in kiểu
+1,234.5 · $1,234 (`usd`), giọng `en-US-AriaNeural` / `en-US-ChristopherNeural` (`--voice male`), nhãn giao diện, câu
+miễn trừ và cụm cấm tiếng Anh lấy từ `brand/compliance.md` (cụm cấm tiếng Việt vẫn quét). Ví dụ đầy đủ:
+`episodes/escape-velocity.json` (trụ cột 5, hai phiên bản `dark-story` và `chart-story`, thumbnail tối tự sinh).
+
 ### 4. Dựng
 
 Chạy từ thư mục `pipeline/`:
@@ -100,7 +153,7 @@ python batch.py --episode ../episodes/kelly-meme-tap03.json            # episode
 python batch.py --topics var_cvar --styles code-reel --prices FPT.csv --data-source "FPT, HOSE, 2023–2025"
 ```
 
-Tuỳ chọn: `--scale 0.5` (bản xem nhanh 540×960, dựng lại `--scale 1` trước khi đăng) · `--voice male|female|en-male` (mặc định **male**: nam miền Bắc, sáng và thanh) · `--broll auto|draw|photo` (ảnh thật xen kẽ hoạt hoạ tự vẽ / chỉ vẽ / ưu tiên ảnh thật) · `--voice-engine edge|gtts|espeak|silent` · `--music <file có giấy phép>|none` · `--no-log` (không ghi episodes.csv, dùng khi thử) · `--force` (dựng dù QA trước render thất bại — chỉ để xem, không đăng).
+Tuỳ chọn: `--scale 0.5` (bản xem nhanh 540×960, dựng lại `--scale 1` trước khi đăng) · `--voice male|male-deep|female` (mặc định **male**: nam miền Bắc, sáng và thanh, +25%; `male-deep` = nam trầm; episode `"lang": "en"` tự dùng giọng en-US cùng tên) · `--broll auto|draw|photo` (ảnh thật xen kẽ hoạt hoạ tự vẽ / chỉ vẽ / ưu tiên ảnh thật) · `--voice-engine edge|gtts|espeak|silent` · `--music <file có giấy phép>|none` · `--no-log` (không ghi episodes.csv, dùng khi thử) · `--force` (dựng dù QA trước render thất bại — chỉ để xem, không đăng).
 
 Mỗi video ra `social-output/<id>/` (thư mục gốc repo): `final.mp4`, `thumbnail.jpg`, `captions.md`, `subtitles.srt`, `qa_report.md`, `values.json` (số + code đã chạy), `layout.json`. Carousel ra `slides/1080x1920/` và `slides/1080x1350/`. Talking-head ra `teleprompter.mp4`, `script.md`, `broll/`. Một video mất khoảng 1–2 phút dựng.
 

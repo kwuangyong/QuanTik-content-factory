@@ -1,0 +1,319 @@
+{
+  "version": 1,
+  "pillars": [
+    {
+      "id": "quant-education",
+      "number": "1",
+      "name": "Quant Education — Học quant",
+      "purpose": "Giải thích mô hình, chỉ số, thuật ngữ quant; mọi số do code chạy thật tính.",
+      "research_worker": null,
+      "segment_roles": [],
+      "default_style": "code-reel",
+      "styles": [
+        "code-reel",
+        "kinetic-text",
+        "chart-story",
+        "myth-buster",
+        "whiteboard-math",
+        "talking-head-script",
+        "carousel",
+        "meme-quant"
+      ],
+      "claim_statuses": [
+        "model_output",
+        "documented"
+      ],
+      "hedge_markers": {},
+      "min_source_tier": "B",
+      "requires_factcheck": false,
+      "catalog": "knowledge/catalog.json",
+      "doc": "pillars/quant-education/PILLAR.md",
+      "max_seconds": 60,
+      "require_entity_images": false
+    },
+    {
+      "id": "behavioral-finance",
+      "number": "2",
+      "name": "Investor Psychology & Behavioral Finance — Tâm lý nhà đầu tư",
+      "purpose": "Vấn đề thật của nhà đầu tư → cơ chế tâm lý → bằng chứng học thuật → hệ quả tài chính → bài học → góc nhìn quant.",
+      "research_worker": "behavioral-finance-researcher",
+      "segment_roles": [
+        "problem",
+        "mechanism",
+        "evidence",
+        "implication",
+        "lesson",
+        "quant"
+      ],
+      "default_style": "bias-lab",
+      "styles": [
+        "bias-lab",
+        "kinetic-text",
+        "myth-buster",
+        "carousel",
+        "talking-head-script"
+      ],
+      "claim_statuses": [
+        "documented",
+        "disputed",
+        "speculation",
+        "model_output",
+        "interpretation"
+      ],
+      "hedge_markers": {
+        "disputed": [
+          "còn tranh cãi",
+          "tranh cãi",
+          "chưa thống nhất",
+          "có nguồn cho rằng",
+          "nguồn khác"
+        ],
+        "speculation": [
+          "có thể",
+          "suy đoán",
+          "giả thuyết",
+          "chưa có bằng chứng"
+        ],
+        "interpretation": [
+          "có thể",
+          "nhiều khả năng",
+          "nếu",
+          "theo nhận định",
+          "khả năng",
+          "cho thấy"
+        ]
+      },
+      "extra_banned": [
+        "bí kíp tâm lý",
+        "chiến thắng bản thân để giàu",
+        "tư duy triệu phú"
+      ],
+      "min_source_tier": "A",
+      "requires_factcheck": true,
+      "catalog": "pillars/behavioral-finance/catalog.json",
+      "doc": "pillars/behavioral-finance/PILLAR.md",
+      "max_seconds": 90,
+      "require_entity_images": true
+    },
+    {
+      "id": "market-intelligence",
+      "number": "3",
+      "name": "Market Intelligence & Research — Nhịp thị trường",
+      "purpose": "Đọc trạng thái thị trường bằng dữ liệu có dấu thời gian: độ rộng, thanh khoản, luân chuyển ngành, regime, rủi ro, ba kịch bản có điều kiện.",
+      "research_worker": "market-intelligence-analyst",
+      "segment_roles": [
+        "asof",
+        "breadth",
+        "liquidity",
+        "sectors",
+        "regime",
+        "interpretation",
+        "scenarios",
+        "risk"
+      ],
+      "optional_roles": [
+        "regime"
+      ],
+      "default_style": "market-brief",
+      "styles": [
+        "market-brief"
+      ],
+      "claim_statuses": [
+        "observed",
+        "model_output",
+        "interpretation"
+      ],
+      "hedge_markers": {
+        "interpretation": [
+          "có thể",
+          "nhiều khả năng",
+          "nếu",
+          "theo nhận định",
+          "khả năng",
+          "cho thấy"
+        ]
+      },
+      "extra_banned": [
+        "chắc chắn",
+        "sẽ tăng",
+        "sẽ giảm",
+        "sẽ vượt",
+        "sẽ thủng",
+        "không thể giảm",
+        "không thể tăng",
+        "đáy rồi",
+        "đỉnh rồi",
+        "cơ hội vàng",
+        "bắt đáy",
+        "múc",
+        "xả hàng"
+      ],
+      "min_source_tier": "A",
+      "requires_factcheck": false,
+      "max_data_sessions_behind": 0,
+      "catalog": "pillars/market-intelligence/catalog.json",
+      "doc": "pillars/market-intelligence/PILLAR.md",
+      "max_seconds": 90,
+      "require_entity_images": false
+    },
+    {
+      "id": "quant-history",
+      "number": "4a",
+      "name": "Quant History & Legendary Minds — Lịch sử quant",
+      "purpose": "Kể chuyện quỹ, người và đột phá toán học trong tài chính; tách rõ sự kiện có tư liệu, lời tự kể, giai thoại, tranh cãi, suy đoán.",
+      "research_worker": "quant-historian",
+      "segment_roles": [
+        "context",
+        "conflict",
+        "breakthrough",
+        "consequences",
+        "lesson"
+      ],
+      "default_style": "history-story",
+      "styles": [
+        "history-story",
+        "chart-story",
+        "talking-head-script",
+        "carousel"
+      ],
+      "claim_statuses": [
+        "documented",
+        "self_reported",
+        "anecdote",
+        "disputed",
+        "speculation",
+        "model_output",
+        "interpretation"
+      ],
+      "hedge_markers": {
+        "self_reported": [
+          "theo lời kể",
+          "theo hồi ký",
+          "ông kể",
+          "bà kể",
+          "tự kể",
+          "theo chính"
+        ],
+        "anecdote": [
+          "giai thoại",
+          "tương truyền",
+          "người ta kể",
+          "được kể"
+        ],
+        "disputed": [
+          "còn tranh cãi",
+          "tranh cãi",
+          "chưa thống nhất",
+          "có nguồn cho rằng",
+          "nguồn khác"
+        ],
+        "speculation": [
+          "có thể",
+          "suy đoán",
+          "giả thuyết",
+          "chưa có bằng chứng"
+        ]
+      },
+      "extra_banned": [
+        "thiên tài bí ẩn",
+        "công thức kiếm tiền",
+        "bí mật của các quỹ"
+      ],
+      "min_source_tier": "B",
+      "requires_factcheck": true,
+      "catalog": "pillars/quant-history/catalog.json",
+      "doc": "pillars/quant-history/PILLAR.md",
+      "max_seconds": 90,
+      "require_entity_images": true
+    },
+    {
+      "id": "decision-science",
+      "number": "4b",
+      "name": "Game Theory, Poker & Decision Science — Ra quyết định",
+      "purpose": "EV, phương sai, Nash, poker, Kelly, rủi ro phá sản; chỉ rõ poker giống và khác thị trường ở đâu.",
+      "research_worker": "game-theory-researcher",
+      "segment_roles": [
+        "setup",
+        "intuition",
+        "math",
+        "simulation",
+        "analogy",
+        "lesson"
+      ],
+      "default_style": "decision-lab",
+      "styles": [
+        "decision-lab",
+        "code-reel",
+        "kinetic-text",
+        "whiteboard-math",
+        "carousel"
+      ],
+      "claim_statuses": [
+        "documented",
+        "model_output",
+        "interpretation",
+        "disputed"
+      ],
+      "hedge_markers": {
+        "interpretation": [
+          "có thể",
+          "nhiều khả năng",
+          "nếu",
+          "theo nhận định",
+          "khả năng",
+          "cho thấy"
+        ],
+        "disputed": [
+          "còn tranh cãi",
+          "tranh cãi",
+          "chưa thống nhất",
+          "có nguồn cho rằng",
+          "nguồn khác"
+        ]
+      },
+      "extra_banned": [
+        "kiếm tiền từ poker",
+        "cờ bạc thắng chắc",
+        "bất bại"
+      ],
+      "min_source_tier": "A",
+      "requires_factcheck": true,
+      "catalog": "pillars/decision-science/catalog.json",
+      "doc": "pillars/decision-science/PILLAR.md",
+      "max_seconds": 90,
+      "require_entity_images": true
+    },
+    {
+      "id": "dark-truth",
+      "number": "5",
+      "name": "Dark Truth — Money & social pressure (EN)",
+      "purpose": "English IG Reels / YouTube Shorts: uncomfortable truths about money, status and social comparison, told with animated people (no charts, no code). At most one sourced number per episode, from a model run or the ledger.",
+      "research_worker": null,
+      "segment_roles": [],
+      "default_style": "dark-story",
+      "styles": [
+        "dark-story",
+        "chart-story"
+      ],
+      "claim_statuses": [
+        "model_output",
+        "documented",
+        "interpretation"
+      ],
+      "hedge_markers": {},
+      "extra_banned": [
+        "quit your job now",
+        "get rich quick",
+        "financial freedom guaranteed",
+        "secret they don't want you to know"
+      ],
+      "min_source_tier": "B",
+      "requires_factcheck": false,
+      "catalog": "pillars/dark-truth/catalog.json",
+      "doc": "pillars/dark-truth/PILLAR.md",
+      "max_seconds": 60,
+      "require_entity_images": false,
+      "lang": "en"
+    }
+  ]
+}

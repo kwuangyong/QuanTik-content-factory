@@ -1,0 +1,246 @@
+{
+  "id": "ds-kuhn-nash-decision-lab",
+  "pillar": "decision-science",
+  "topic": "ds_nash_kuhn",
+  "style": "decision-lab",
+  "model": "kuhn_poker",
+  "brief": "research/ds-kuhn-nash-decision-lab/brief.json",
+  "factcheck": "research/ds-kuhn-nash-decision-lab/factcheck.json",
+  "tag": "POKER · NASH",
+  "note": "CFR chạy thật · giáo dục, không phải khuyến nghị",
+  "title": "Poker ba lá: toán học bắt bạn phải bluff, và bluff bao nhiêu",
+  "hook": "Poker rút gọn chỉ còn ba lá bài. Toán học vẫn bảo bạn phải bluff, và bluff đúng tỷ lệ.",
+  "analogy": {
+    "similar": [
+      "Thông tin không đầy đủ: không thấy bài đối thủ",
+      "Hành vi dễ đoán thì bị khai thác",
+      "Chiến lược tốt là tỷ lệ hành động, không phải một nước đi"
+    ],
+    "breaks": [
+      "Thị trường không có luật cố định, số người chơi không biết trước",
+      "Không có cân bằng tính sẵn như Kuhn poker",
+      "Giá còn phản ánh tin tức, không chỉ hành vi đối thủ"
+    ]
+  },
+  "segments": [
+    {
+      "role": "setup",
+      "say": "Ba lá J, Q, K. Mỗi người góp một chip, nhận một lá. Người đi trước chọn tố hoặc xem bài. Đây là Kuhn poker, công bố năm {y_kuhn}.",
+      "screen": "J · Q · K — mỗi người một lá",
+      "claims": [
+        "c_rules"
+      ],
+      "visual": {
+        "kind": "image",
+        "image": "kuhn"
+      }
+    },
+    {
+      "role": "intuition",
+      "say": "Trực giác nói: bài đẹp thì tố, bài xấu thì thôi. Nhưng nếu chỉ tố khi cầm K, đối thủ sẽ bỏ bài mỗi lần bạn tố.",
+      "screen": "Chỉ tố khi có K → bị đọc vị",
+      "claims": [
+        "c_exploit"
+      ],
+      "visual": {
+        "kind": "statement",
+        "scene": {
+          "cast": [
+            {
+              "who": "investor",
+              "pose": "point",
+              "face": "smile",
+              "x": 0.24
+            },
+            {
+              "who": "rival",
+              "pose": "shrug",
+              "face": "neutral",
+              "x": 0.76,
+              "flip": true
+            }
+          ],
+          "props": [
+            {
+              "what": "poker_table"
+            },
+            {
+              "what": "chips",
+              "x": 0.5,
+              "y": 0.84,
+              "s": 0.6
+            }
+          ],
+          "bubble": {
+            "text": "Lại có K à? Tôi bỏ.",
+            "who": 1
+          }
+        }
+      }
+    },
+    {
+      "role": "math",
+      "say": "Code cho hai bên tự chơi hàng nghìn vòng, giảm dần hối tiếc, tới cân bằng Nash. Người đi trước vẫn thua trung bình một phần mười tám chip mỗi ván; code ra {game_value}.",
+      "claims": [
+        "c_nash",
+        "c_cfr",
+        "c_value"
+      ],
+      "visual": {
+        "kind": "code",
+        "rows": [
+          {
+            "label": "giá trị, code",
+            "key": "game_value"
+          },
+          {
+            "label": "giá trị, lý thuyết",
+            "key": "theory_value"
+          },
+          {
+            "label": "J bluff",
+            "key": "j_bluff"
+          },
+          {
+            "label": "K tố",
+            "key": "k_bet"
+          },
+          {
+            "label": "Q bị tố: theo",
+            "key": "q_call"
+          }
+        ]
+      }
+    },
+    {
+      "role": "simulation",
+      "say": "Ở cân bằng, cầm J vẫn bluff {j_bluff} số lần, cầm K tố {k_bet}, gần gấp ba. Bị tố khi cầm Q, người đi sau theo {q_call}.",
+      "screen": "K tố ≈ 3 × J bluff",
+      "claims": [
+        "c_cfr",
+        "c_family"
+      ],
+      "visual": {
+        "kind": "chart",
+        "title": "tần suất ở cân bằng (CFR)"
+      }
+    },
+    {
+      "role": "analogy",
+      "say": "Poker giống thị trường ở chỗ không thấy bài đối thủ, và hành vi dễ đoán sẽ bị khai thác. Nhưng thị trường không có luật cố định, nên phép so sánh có thể chỉ dừng ở trực giác.",
+      "claims": [
+        "c_analogy"
+      ]
+    },
+    {
+      "role": "lesson",
+      "say": "Nếu không đoán được đối thủ, hãy làm mình khó đoán: hành động theo tỷ lệ đã tính, không theo cảm hứng.",
+      "screen": "Khó đoán là một lợi thế",
+      "claims": [
+        "c_lesson"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "c_rules",
+      "text": "Kuhn poker: ba lá J, Q, K; mỗi người góp 1 chip, nhận 1 lá; người đi trước được tố 1 chip hoặc xem bài.",
+      "status": "documented",
+      "source_ids": [
+        "kuhn-1950"
+      ]
+    },
+    {
+      "id": "c_exploit",
+      "text": "Chiến lược chỉ tố khi cầm K dễ bị đối thủ khai thác (bỏ bài mỗi khi bị tố).",
+      "status": "interpretation",
+      "source_ids": []
+    },
+    {
+      "id": "c_nash",
+      "text": "Cân bằng Nash: không bên nào có lợi khi đơn phương đổi chiến lược.",
+      "status": "documented",
+      "source_ids": [
+        "nash-1950"
+      ]
+    },
+    {
+      "id": "c_cfr",
+      "text": "CFR (pillar_models.kuhn_poker_demo, 3.000 vòng) hội tụ về một cân bằng: J bluff 22%, K tố 66%, Q theo 33%, giá trị −0,057.",
+      "status": "model_output",
+      "source_ids": []
+    },
+    {
+      "id": "c_value",
+      "text": "Giá trị trò chơi ở cân bằng là −1/18 chip mỗi ván cho người đi trước.",
+      "status": "documented",
+      "source_ids": [
+        "kuhn-1950"
+      ]
+    },
+    {
+      "id": "c_family",
+      "text": "Cân bằng của người đi trước là một họ: bluff J với xác suất α ∈ [0, 1/3], tố K với 3α; người đi sau cầm Q theo 1/3 khi bị tố.",
+      "status": "documented",
+      "source_ids": [
+        "kuhn-1950"
+      ]
+    },
+    {
+      "id": "c_analogy",
+      "text": "Poker giống thị trường ở thông tin không đầy đủ và việc hành vi dễ đoán bị khai thác; khác ở chỗ thị trường không có luật cố định nên không có cân bằng tính sẵn.",
+      "status": "interpretation",
+      "source_ids": []
+    },
+    {
+      "id": "c_lesson",
+      "text": "Khi không đoán được đối thủ, trộn hành động theo tỷ lệ giúp mình khó bị khai thác.",
+      "status": "interpretation",
+      "source_ids": []
+    }
+  ],
+  "facts": {
+    "y_kuhn": {
+      "value": "1950",
+      "source_id": "kuhn-1950",
+      "claim": "c_rules"
+    },
+    "frac_value": {
+      "value": "1/18",
+      "source_id": "kuhn-1950",
+      "claim": "c_value"
+    }
+  },
+  "takeaway": "Bluff không phải liều. Ở cân bằng, nó là một tỷ lệ tính được.",
+  "caption": "Kuhn poker chỉ có ba lá J, Q, K, vậy mà cân bằng Nash vẫn yêu cầu bluff. Code CFR chạy thật tìm ra tỷ lệ: tố bằng K gần gấp ba bluff bằng J, người đi trước thua trung bình 1/18 chip mỗi ván. Poker giống và khác thị trường ở đâu.",
+  "hashtags": [
+    "poker",
+    "gametheory",
+    "nashequilibrium",
+    "quant",
+    "QuanTik"
+  ],
+  "allowed_literals": [
+    "3.000"
+  ],
+  "max_seconds": 90,
+  "entities": [
+    {
+      "name": "Harold W. Kuhn",
+      "aliases": [
+        "Kuhn"
+      ],
+      "kind": "person",
+      "image": "kuhn"
+    },
+    {
+      "name": "John Nash",
+      "aliases": [
+        "Nash"
+      ],
+      "kind": "person",
+      "image": null,
+      "waiver": "chỉ nhắc như tên khái niệm 'cân bằng Nash', không phải nhân vật của tập"
+    }
+  ]
+}

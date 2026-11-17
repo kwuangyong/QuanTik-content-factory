@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "quantik/research_brief.schema.json",
+  "title": "Research brief",
+  "description": "Đầu ra của worker nghiên cứu (research/<episode>/brief.json). Đầu vào của fact-checker và scriptwriter.",
+  "type": "object",
+  "required": [
+    "id",
+    "pillar",
+    "topic",
+    "question",
+    "audience_problem",
+    "claims",
+    "framework",
+    "created",
+    "researcher"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "pillar": {
+      "type": "string"
+    },
+    "topic": {
+      "type": "string"
+    },
+    "question": {
+      "type": "string",
+      "description": "Câu hỏi tập phim trả lời"
+    },
+    "audience_problem": {
+      "type": "string"
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "text",
+          "status",
+          "source_ids"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_\\-]+$"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 5,
+            "description": "Nhận định ở dạng có thể kiểm chứng, tiếng Việt"
+          },
+          "status": {
+            "enum": [
+              "documented",
+              "self_reported",
+              "anecdote",
+              "disputed",
+              "speculation",
+              "observed",
+              "model_output",
+              "interpretation"
+            ],
+            "description": "documented: có nguồn cấp A/B · self_reported: chỉ có lời của nhân vật · anecdote: giai thoại · disputed: nguồn mâu thuẫn · speculation: suy đoán · observed: dữ liệu thị trường quan sát · model_output: do code tính · interpretation: nhận định của biên tập"
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "locator": {
+            "type": "string",
+            "description": "trang, bảng, mục trong nguồn"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "facts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": [
+              "string",
+              "number"
+            ]
+          },
+          "source": {
+            "type": "string",
+            "description": "legacy: nguồn dạng chữ"
+          },
+          "source_id": {
+            "type": "string"
+          },
+          "claim": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "framework": {
+      "type": "object",
+      "description": "role → ghi chú nội dung, theo segment_roles của trụ cột",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "model": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "topic mô hình chạy code (pillar_models / models)"
+    },
+    "analogy": {
+      "type": "object",
+      "properties": {
+        "similar": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "breaks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rejected_claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "created": {
+      "type": "string"
+    },
+    "researcher": {
+      "type": "string"
+    }
+  }
+}

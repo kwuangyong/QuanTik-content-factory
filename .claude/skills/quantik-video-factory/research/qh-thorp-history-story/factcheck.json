@@ -1,0 +1,58 @@
+{
+  "brief": "research/qh-thorp-history-story/brief.json",
+  "checked": "2026-11-15",
+  "checker": "fact-checker (Claude, web search)",
+  "verdicts": [
+    {
+      "claim": "c_kelly",
+      "verdict": "verified",
+      "evidence": [
+        "doi:10.1002/j.1538-7305.1956.tb03809.x"
+      ]
+    },
+    {
+      "claim": "c_btd",
+      "verdict": "verified",
+      "note": "Một số danh mục ghi năm ấn bản sau (1964/1966); bản đầu 1962."
+    },
+    {
+      "claim": "c_thorp_kelly",
+      "verdict": "verified"
+    },
+    {
+      "claim": "c_ruin_math",
+      "verdict": "verified"
+    },
+    {
+      "claim": "c_kelly_sim",
+      "verdict": "verified"
+    },
+    {
+      "claim": "c_btm",
+      "verdict": "verified"
+    },
+    {
+      "claim": "c_pnp",
+      "verdict": "verified_with_correction",
+      "note": "Giữ 1969; ghi chú nguồn mâu thuẫn 1974 trong brief."
+    },
+    {
+      "claim": "c_bs",
+      "verdict": "verified",
+      "evidence": [
+        "doi:10.1086/260062"
+      ]
+    },
+    {
+      "claim": "c_bs_self",
+      "verdict": "status_changed",
+      "status": "self_reported",
+      "note": "Chỉ có lời của Thorp và nguồn thứ cấp nhắc lại; không được kể như sự kiện."
+    },
+    {
+      "claim": "c_lesson",
+      "verdict": "verified",
+      "status": "interpretation"
+    }
+  ]
+}

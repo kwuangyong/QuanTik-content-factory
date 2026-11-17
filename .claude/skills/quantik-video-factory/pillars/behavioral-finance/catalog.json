@@ -1,0 +1,176 @@
+{
+  "pillar": "behavioral-finance",
+  "topics": [
+    {
+      "id": "bf_loss_aversion",
+      "name": "Né lỗ (loss aversion)",
+      "group": "Lợi ích & thua lỗ",
+      "model": "prospect_theory",
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Vì sao lỗ đau gấp đôi lãi vui"
+    },
+    {
+      "id": "bf_prospect_theory",
+      "name": "Lý thuyết triển vọng",
+      "group": "Lợi ích & thua lỗ",
+      "model": "prospect_theory",
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Điểm tham chiếu, hàm giá trị cong"
+    },
+    {
+      "id": "bf_disposition_effect",
+      "name": "Hiệu ứng bán lời giữ lỗ",
+      "group": "Lợi ích & thua lỗ",
+      "model": "prospect_theory",
+      "status": "ready",
+      "example_episode": "episodes/bf-disposition-bias-lab.json",
+      "angle": "Odean (1998): PGR vs PLR"
+    },
+    {
+      "id": "bf_breakeven_trap",
+      "name": "Bẫy 'gỡ hoà rồi bán'",
+      "group": "Lợi ích & thua lỗ",
+      "model": "prospect_theory",
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Điểm tham chiếu = giá mua"
+    },
+    {
+      "id": "bf_fomo",
+      "name": "FOMO đuổi giá",
+      "group": "Cảm xúc & đám đông",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Chú ý có giới hạn, mua sau tin tốt"
+    },
+    {
+      "id": "bf_panic_selling",
+      "name": "Bán tháo khi hoảng loạn",
+      "group": "Cảm xúc & đám đông",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Rủi ro cảm nhận > rủi ro thực"
+    },
+    {
+      "id": "bf_herding",
+      "name": "Hành vi bầy đàn",
+      "group": "Cảm xúc & đám đông",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Cascade thông tin"
+    },
+    {
+      "id": "bf_attention",
+      "name": "Cổ phiếu gây chú ý",
+      "group": "Cảm xúc & đám đông",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Barber & Odean (2008)"
+    },
+    {
+      "id": "bf_overconfidence",
+      "name": "Quá tự tin, giao dịch quá nhiều",
+      "group": "Tự tin & niềm tin",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Barber & Odean (2000)"
+    },
+    {
+      "id": "bf_confirmation_bias",
+      "name": "Thiên kiến xác nhận",
+      "group": "Tự tin & niềm tin",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Chỉ đọc tin ủng hộ vị thế"
+    },
+    {
+      "id": "bf_hindsight",
+      "name": "Thiên kiến 'biết trước'",
+      "group": "Tự tin & niềm tin",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": ""
+    },
+    {
+      "id": "bf_anchoring",
+      "name": "Neo giá",
+      "group": "Tự tin & niềm tin",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Đỉnh cũ làm điểm neo"
+    },
+    {
+      "id": "bf_risk_perception",
+      "name": "Rủi ro cảm nhận vs rủi ro đo được",
+      "group": "Rủi ro & bất định",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": ""
+    },
+    {
+      "id": "bf_probability_weighting",
+      "name": "Phóng đại xác suất nhỏ",
+      "group": "Rủi ro & bất định",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Vì sao thích cổ phiếu 'xổ số'"
+    },
+    {
+      "id": "bf_ambiguity_aversion",
+      "name": "Ngại mơ hồ (Ellsberg)",
+      "group": "Rủi ro & bất định",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": ""
+    },
+    {
+      "id": "bf_mental_accounting",
+      "name": "Kế toán tinh thần",
+      "group": "Rủi ro & bất định",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Thaler"
+    },
+    {
+      "id": "bf_retail_mistakes",
+      "name": "5 sai lầm có bằng chứng",
+      "group": "Sai lầm nhà đầu tư cá nhân",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Tổng hợp tài liệu"
+    },
+    {
+      "id": "bf_diversification",
+      "name": "Đa dạng hoá ngây thơ (1/N)",
+      "group": "Sai lầm nhà đầu tư cá nhân",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": ""
+    },
+    {
+      "id": "bf_home_bias",
+      "name": "Thiên vị sân nhà",
+      "group": "Sai lầm nhà đầu tư cá nhân",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": ""
+    }
+  ]
+}

@@ -14,7 +14,7 @@ import matplotlib.ticker  # noqa: E402,F401
 from matplotlib import font_manager  # noqa: E402
 from PIL import Image, ImageDraw, ImageFilter  # noqa: E402
 
-from core import BRAND, H, SAFE, THEME, W, font, font_path, hex_  # noqa: E402
+from core import BRAND, H, SAFE, THEME, W, L, font, font_path, hex_  # noqa: E402
 
 for _k in ("sans", "sans-bold"):
     try:
@@ -123,7 +123,7 @@ def header(img, tag: str, note: str):
     x, y = SAFE["left"], SAFE["top"] + 4
     img.paste(logo(64), (x, y), logo(64))
     d.text((x + 80, y + 8), "QuanTik", font=font("sans-bold", 34), fill=T["text"])
-    d.text((x + 80, y + 46), "quant cho cổ phiếu Việt Nam", font=font("sans", 17), fill=T["muted"])
+    d.text((x + 80, y + 46), L("tagline"), font=font("sans", 17), fill=T["muted"])
     f = font("mono-bold", 24)
     tw = d.textlength(tag, font=f)
     bx1 = SAFE["right"]; bx0 = bx1 - tw - 36
@@ -227,15 +227,52 @@ def text_box(img, text, box, kind="sans-bold", size=64, color=None, align="left"
     return used
 
 
-def subtitle(img, text):
+def fit_size(text, box, kind="sans-bold", size=64, min_size=26, spacing=1.18, max_lines=None):
+    """Font size text_box would settle on for the full text (so a word-by-word reveal never changes size)."""
+    x0, y0, x1, y1 = box
+    d = ImageDraw.Draw(Image.new("RGB", (8, 8)))
+    s = size
+    while True:
+        f = font(kind, s)
+        lines = wrap(text, f, x1 - x0, d)
+        ok = int(s * spacing) * len(lines) <= y1 - y0 and max((d.textlength(l, font=f) for l in lines), default=0) <= x1 - x0
+        if (ok and (max_lines is None or len(lines) <= max_lines)) or s <= min_size:
+            return s
+        s = max(min_size, int(s * 0.92))
+
+
+def subtitle(img, text, k=None):
+    """Two-line caption bar. With k (0..1 progress through this chunk) words light up as they are spoken."""
     if not text:
         return
     x0, x1 = SAFE["left"] + 10, SAFE["right"] - 10
     box = (x0 + 24, 1338, x1 - 24, 1478)
     d = ImageDraw.Draw(img, "RGBA")
     d.rounded_rectangle([x0, 1326, x1, 1488], radius=24, fill=(0, 0, 0, 165))
-    text_box(img, text, box, "sans-bold", 42, T["text"], "center", "middle", min_size=30, label="subtitle",
-             max_lines=2, hl_numbers=True, hl_color=T["neutral"])
+    if k is None:
+        text_box(img, text, box, "sans-bold", 42, T["text"], "center", "middle", min_size=30, label="subtitle",
+                 max_lines=2, hl_numbers=True, hl_color=T["neutral"])
+        return
+    size = fit_size(text, box, "sans-bold", 46, 30, max_lines=2)
+    f = font("sans-bold", size)
+    lines = wrap(text, f, box[2] - box[0], d)
+    lh = int(size * 1.18)
+    y = box[1] + (box[3] - box[1] - lh * len(lines)) // 2
+    n_words = len(text.split())
+    spoken = k * n_words
+    wi = 0
+    used = [box[2], y, box[0], y + lh * len(lines)]
+    for ln in lines:
+        lw = d.textlength(ln, font=f)
+        x = box[0] + (box[2] - box[0] - lw) / 2
+        used[0] = min(used[0], x); used[2] = max(used[2], x + lw)
+        for tok in ln.split(" "):
+            col = T["accent"] if wi <= spoken < wi + 1 else (T["text"] if wi < spoken else (150, 165, 156))
+            d.text((x, y), tok, font=f, fill=col)
+            x += d.textlength(tok + " ", font=f)
+            wi += 1
+        y += lh
+    LAYOUT.log("subtitle", used, len(lines) > 2 or used[2] - used[0] > box[2] - box[0], size, 30)
 
 
 def chip(img, xy, text, color=None, size=26):
@@ -443,7 +480,8 @@ def code_panel(code, width=880, chars=None, hl_line=None, title="model.py"):
     return im
 
 
-def terminal_panel(lines_shown, width=880, title="kết quả"):
+def terminal_panel(lines_shown, width=880, title=None):
+    title = title or L("result")
     size = 30
     while size > 20 and any(font("mono", size).getlength(a) + font("mono-bold", size).getlength(b) > width - 70
                             for a, b in lines_shown):

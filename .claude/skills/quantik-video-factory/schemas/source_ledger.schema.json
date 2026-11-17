@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "quantik/source_ledger.schema.json",
+  "title": "Source ledger",
+  "description": "Sổ nguồn dùng chung (knowledge/sources/ledger.json). Mọi claim và fact của trụ cột nghiên cứu trỏ về id ở đây.",
+  "type": "object",
+  "required": [
+    "version",
+    "sources"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "title",
+          "year",
+          "tier",
+          "cite_short",
+          "accessed"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_\\-]+$"
+          },
+          "type": {
+            "enum": [
+              "journal_article",
+              "book",
+              "memoir",
+              "official_report",
+              "dataset",
+              "data_feed",
+              "news",
+              "web",
+              "working_paper",
+              "lecture"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "authors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "year": {
+            "type": [
+              "integer",
+              "string"
+            ]
+          },
+          "venue": {
+            "type": "string"
+          },
+          "doi": {
+            "type": "string"
+          },
+          "isbn": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "tier": {
+            "enum": [
+              "A",
+              "B",
+              "C"
+            ],
+            "description": "A: peer-reviewed/báo cáo chính thức/dữ liệu gốc · B: sách nghiên cứu, báo tài chính lớn · C: hồi ký, blog, nguồn thứ cấp (chỉ đủ cho self_reported/anecdote)"
+          },
+          "cite_short": {
+            "type": "string",
+            "description": "chuỗi hiện trên màn hình, ví dụ 'Odean (1998), J. Finance'"
+          },
+          "accessed": {
+            "type": "string",
+            "format": "date"
+          },
+          "verified_by": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "URL/ghi chú các lần kiểm chứng chéo"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

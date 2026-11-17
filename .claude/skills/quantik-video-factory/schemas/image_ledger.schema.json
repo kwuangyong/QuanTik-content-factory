@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "quantik/image_ledger.schema.json",
+  "title": "Image ledger",
+  "description": "knowledge/images/ledger.json — mọi ảnh dùng trong video: ảnh thật có giấy phép mở hoặc ảnh minh hoạ tạo bằng code.",
+  "type": "object",
+  "required": [
+    "version",
+    "images"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "subject",
+          "depicts",
+          "file",
+          "author",
+          "license",
+          "credit",
+          "retrieved"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_\\-]+$"
+          },
+          "kind": {
+            "enum": [
+              "photo",
+              "illustration"
+            ]
+          },
+          "subject": {
+            "type": "string"
+          },
+          "depicts": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "license_url": {
+            "type": "string"
+          },
+          "credit": {
+            "type": "string",
+            "description": "dòng ghi công hiện trên màn hình và caption"
+          },
+          "generator": {
+            "type": "string"
+          },
+          "retrieved": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "photo"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "source_url"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,295 @@
+{
+  "id": "qh-thorp-history-story",
+  "pillar": "quant-history",
+  "topic": "qh_thorp",
+  "style": "history-story",
+  "model": "kelly",
+  "brief": "research/qh-thorp-history-story/brief.json",
+  "factcheck": "research/qh-thorp-history-story/factcheck.json",
+  "tag": "THORP",
+  "note": "Lịch sử có nguồn · mô phỏng Kelly seed cố định",
+  "title": "Edward Thorp: từ sòng blackjack tới phố Wall bằng xác suất",
+  "hook": "Một giáo sư toán thắng sòng bài bằng xác suất, rồi mang đúng bài toán đó lên phố Wall.",
+  "timeline": [
+    {
+      "year": "1956",
+      "label": "Kelly công bố công thức cược tối ưu",
+      "claim": "c_kelly",
+      "image": "kelly"
+    },
+    {
+      "year": "1962",
+      "label": "Thorp xuất bản Beat the Dealer",
+      "claim": "c_btd",
+      "image": "thorp"
+    },
+    {
+      "year": "1967",
+      "label": "Beat the Market (với Kassouf)",
+      "claim": "c_btm",
+      "image": "kassouf"
+    },
+    {
+      "year": "1969",
+      "label": "Lập quỹ cùng Jay Regan",
+      "claim": "c_pnp",
+      "image": "regan"
+    },
+    {
+      "year": "1973",
+      "label": "Black–Scholes công bố; Thorp kể đã có công thức tương đương",
+      "claim": "c_bs_self",
+      "image": "black-scholes"
+    }
+  ],
+  "segments": [
+    {
+      "role": "context",
+      "say": "Năm 1956, John Kelly ở Bell Labs công bố công thức chọn mức cược để tài sản tăng nhanh nhất. Năm 1962, Edward Thorp xuất bản Beat the Dealer về đếm bài blackjack.",
+      "claims": [
+        "c_kelly",
+        "c_btd"
+      ],
+      "visual": {
+        "kind": "timeline",
+        "upto": 1
+      }
+    },
+    {
+      "role": "conflict",
+      "say": "Đếm bài cho Thorp một lợi thế nhỏ. Câu hỏi khó hơn: cược bao nhiêu? Cược quá tay, một chuỗi thua là cháy vốn.",
+      "screen": "Có lợi thế nhỏ. Cược bao nhiêu?",
+      "claims": [
+        "c_ruin_math"
+      ],
+      "visual": {
+        "kind": "image",
+        "image": "thorp"
+      }
+    },
+    {
+      "role": "breakthrough",
+      "say": "Thorp dùng công thức Kelly. Chạy lại bằng code: thắng {W}, cược {f_star} vốn, tài sản trung vị nhân {med_full}. Cược gấp đôi chỉ còn {med_double}.",
+      "screen": "Cược Kelly: {med_full} · gấp đôi Kelly: {med_double}",
+      "claims": [
+        "c_thorp_kelly",
+        "c_kelly_sim"
+      ],
+      "visual": {
+        "kind": "chart",
+        "title": "mô phỏng Kelly · 4 mức cược"
+      }
+    },
+    {
+      "role": "consequences",
+      "say": "Năm 1967 ông viết Beat the Market cùng Kassouf, năm 1969 lập quỹ với Jay Regan. Theo lời kể của chính ông, ông có công thức định giá quyền chọn tương đương Black–Scholes trước năm 1973, nhưng chưa có tài liệu nào công bố trước đó để đối chiếu.",
+      "claims": [
+        "c_btm",
+        "c_pnp",
+        "c_bs",
+        "c_bs_self"
+      ],
+      "visual": {
+        "kind": "timeline",
+        "upto": 4
+      }
+    },
+    {
+      "role": "lesson",
+      "say": "Lợi thế chỉ đáng tiền nếu bạn sống sót đủ lâu. Quy mô vị thế quan trọng ngang việc tìm ra lợi thế.",
+      "claims": [
+        "c_lesson"
+      ],
+      "visual": {
+        "kind": "terminal",
+        "title": "kelly.py · kết quả",
+        "rows": [
+          {
+            "label": "tỷ lệ thắng W",
+            "key": "W"
+          },
+          {
+            "label": "Kelly f*",
+            "key": "f_star"
+          },
+          {
+            "label": "trung vị, Kelly",
+            "key": "med_full"
+          },
+          {
+            "label": "trung vị, 2× Kelly",
+            "key": "med_double"
+          }
+        ]
+      },
+      "screen": "Sống sót trước, lợi nhuận sau"
+    }
+  ],
+  "claims": [
+    {
+      "id": "c_kelly",
+      "text": "John L. Kelly Jr. (Bell Labs) công bố công thức chọn tỷ lệ cược tối đa hoá tăng trưởng log năm 1956.",
+      "status": "documented",
+      "source_ids": [
+        "kelly-1956"
+      ]
+    },
+    {
+      "id": "c_btd",
+      "text": "Edward Thorp xuất bản Beat the Dealer năm 1962, trình bày hệ thống đếm bài blackjack dựa trên xác suất.",
+      "status": "documented",
+      "source_ids": [
+        "thorp-1962",
+        "poundstone-2005"
+      ]
+    },
+    {
+      "id": "c_thorp_kelly",
+      "text": "Thorp áp dụng công thức Kelly để chọn mức cược khi có lợi thế.",
+      "status": "documented",
+      "source_ids": [
+        "poundstone-2005",
+        "thorp-2017"
+      ]
+    },
+    {
+      "id": "c_ruin_math",
+      "text": "Cược vượt mức Kelly đủ xa làm tăng trưởng log âm dù lợi thế dương.",
+      "status": "model_output",
+      "source_ids": [
+        "kelly-1956"
+      ]
+    },
+    {
+      "id": "c_kelly_sim",
+      "text": "Mô phỏng Kelly (models.py, seed 4): cùng lợi thế, tài sản trung vị phụ thuộc mức cược.",
+      "status": "model_output",
+      "source_ids": []
+    },
+    {
+      "id": "c_btm",
+      "text": "Thorp và Sheen Kassouf xuất bản Beat the Market năm 1967 về định giá sai chứng quyền và chứng khoán chuyển đổi.",
+      "status": "documented",
+      "source_ids": [
+        "thorp-kassouf-1967"
+      ]
+    },
+    {
+      "id": "c_pnp",
+      "text": "Thorp và Jay Regan lập quỹ năm 1969 (Convertible Hedge Associates, sau đổi tên Princeton/Newport Partners).",
+      "status": "documented",
+      "source_ids": [
+        "poundstone-2005"
+      ],
+      "note": "Một nguồn thứ cấp ghi 1974; đa số nguồn ghi 1969."
+    },
+    {
+      "id": "c_bs",
+      "text": "Black và Scholes công bố công thức định giá quyền chọn năm 1973.",
+      "status": "documented",
+      "source_ids": [
+        "black-scholes-1973"
+      ]
+    },
+    {
+      "id": "c_bs_self",
+      "text": "Thorp kể rằng ông đã dùng một công thức định giá quyền chọn tương đương Black–Scholes trước năm 1973 nhưng không công bố.",
+      "status": "self_reported",
+      "source_ids": [
+        "thorp-2017"
+      ],
+      "note": "Chưa có tài liệu ghi ngày trước 1973 nêu đúng công thức để đối chiếu."
+    },
+    {
+      "id": "c_lesson",
+      "text": "Lợi thế chỉ có giá trị nếu sống sót đủ lâu; quy mô vị thế quan trọng ngang việc tìm lợi thế.",
+      "status": "interpretation",
+      "source_ids": []
+    }
+  ],
+  "facts": {
+    "y_kelly": {
+      "value": "1956",
+      "source_id": "kelly-1956"
+    },
+    "y_btd": {
+      "value": "1962",
+      "source_id": "thorp-1962"
+    },
+    "y_btm": {
+      "value": "1967",
+      "source_id": "thorp-kassouf-1967"
+    },
+    "y_pnp": {
+      "value": "1969",
+      "source_id": "poundstone-2005"
+    },
+    "y_bs": {
+      "value": "1973",
+      "source_id": "black-scholes-1973"
+    }
+  },
+  "takeaway": "Thorp không có công thức kiếm tiền thần kỳ. Ông có lợi thế đo được và kỷ luật về quy mô cược.",
+  "caption": "Edward Thorp: Beat the Dealer (1962), công thức Kelly, Beat the Market (1967) và quỹ đầu tiên (1969). Phần nào là tư liệu, phần nào là lời tự kể, đều ghi rõ trên màn hình. Mô phỏng Kelly chạy bằng code.",
+  "hashtags": [
+    "lichsuquant",
+    "edwardthorp",
+    "kelly",
+    "quant",
+    "QuanTik"
+  ],
+  "allowed_literals": [],
+  "max_seconds": 90,
+  "entities": [
+    {
+      "name": "Edward O. Thorp",
+      "aliases": [
+        "Thorp",
+        "Edward Thorp"
+      ],
+      "kind": "person",
+      "image": "thorp"
+    },
+    {
+      "name": "John L. Kelly Jr.",
+      "aliases": [
+        "Kelly",
+        "John Kelly"
+      ],
+      "kind": "person",
+      "image": "kelly"
+    },
+    {
+      "name": "Sheen T. Kassouf",
+      "aliases": [
+        "Kassouf"
+      ],
+      "kind": "person",
+      "image": "kassouf"
+    },
+    {
+      "name": "Jay Regan",
+      "aliases": [
+        "Regan"
+      ],
+      "kind": "person",
+      "image": "regan"
+    },
+    {
+      "name": "Fischer Black & Myron Scholes",
+      "aliases": [
+        "Black",
+        "Scholes",
+        "Black–Scholes"
+      ],
+      "kind": "person",
+      "image": "black-scholes"
+    },
+    {
+      "name": "Bell Labs",
+      "kind": "firm",
+      "image": null,
+      "waiver": "chỉ nhắc như nơi làm việc của Kelly; ảnh thật cần tải từ Wikimedia Commons khi có mạng"
+    }
+  ]
+}

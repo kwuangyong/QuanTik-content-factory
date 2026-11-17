@@ -10,12 +10,26 @@ quant finance và về cách dùng sản phẩm. Toàn bộ quy trình nằm tro
 **`.claude/skills/quantik-video-factory/SKILL.md`: đọc file này TRƯỚC KHI làm bất kỳ nội dung nào.**
 Đây là Markdown thường, không phụ thuộc Claude: thư mục `.claude/` chỉ là nơi để file.
 
+**Lệnh nhanh cho mọi agent** (từ `pipeline/`): `python make.py menu` in ra các *look* (tông giọng, nội dung,
+thumbnail, phiên bản style) và các tập có sẵn; `python make.py <tập|chủ đề> [--as <style|a,b|all>] [--no N] [--preview]`
+dựng video + thumbnail đúng look; `python make.py new <id> --look dark-truth` tạo khung tập mới. Look định nghĩa ở
+`looks.json` (sửa ở đó, không sửa code).
+
 Chọn nhánh theo yêu cầu:
 
 | Người dùng muốn | Đọc | Lệnh chính |
 | --- | --- | --- |
 | Video/carousel giải thích một mô hình, chỉ số, thuật ngữ quant | `SKILL.md` → `knowledge/`, `styles/` | `cd pipeline && python batch.py --topics <id> --styles <style>` |
+| Video "dark truth" tiếng Anh (tiền, địa vị, áp lực xã hội), hoạt hoạ không chart — trụ cột 5 | `pillars/dark-truth/PILLAR.md`, `styles/dark-story/spec.md` | `cd pipeline && python make.py escape-velocity --as dark-story,chart-story` |
 | Video **hướng dẫn dùng sản phẩm** (đăng ký, quét toàn sàn, phân tích Quant…) | `tutorial/README.md` | `bash tutorial/run.sh <workdir>` |
+| Tâm lý nhà đầu tư, thiên kiến, tài chính hành vi | `pillars/behavioral-finance/PILLAR.md`, `workers/` | `cd pipeline && python pillar.py scaffold behavioral-finance <topic>` → brief → fact-check → `python pillar.py make <episode>` |
+| Nhịp thị trường, độ rộng, dòng tiền, kịch bản | `pillars/market-intelligence/PILLAR.md` | `cd pipeline && python pillar.py market produce` |
+| Lịch sử quant, nhân vật, quỹ | `pillars/quant-history/PILLAR.md` | như dòng tâm lý, trụ cột `quant-history` |
+| Lý thuyết trò chơi, poker, EV, Kelly, rủi ro phá sản | `pillars/decision-science/PILLAR.md` | như dòng tâm lý, trụ cột `decision-science` |
+| Ảnh thật / minh hoạ cho người, hãng, sự kiện; nhân vật, hiện vật, biểu tượng | `../quantik-visual-assets/SKILL.md` | `cd pipeline && python visuals.py auto <episode> --write` |
+
+Kiến trúc các trụ cột (1–4b + 5 dark-truth): `pillars/README.md`. Vai nghiên cứu/kiểm chứng/sản xuất và hợp đồng bàn giao: `workers/README.md`,
+`schemas/`. Chuyển đổi và lệnh mẫu: `MIGRATION.md`. Kiểm thử: `python -m unittest discover -s tests -v` (từ thư mục skill).
 
 (đường dẫn tính từ `.claude/skills/quantik-video-factory/`)
 
@@ -30,7 +44,16 @@ Chọn nhánh theo yêu cầu:
    nhịp x1.25, giọng nam miền Bắc sáng (`vi-VN-NamMinhNeural`).
 5. Không dùng tài khoản/thông tin cá nhân của người dùng để đăng nhập site thật; màn cần đăng nhập thì chạy
    giao diện production local với API giả (xem `tutorial/README.md`).
-6. Output vào `social-output/<id>/` (đã gitignore). Trả về trong chat: đường dẫn file, thời lượng, kết luận QA,
+6. **Nguồn truy được** (trụ cột 2–4): mọi claim có `status` và `source_ids` trong `knowledge/sources/ledger.json`; tập
+   nghiên cứu cần `research/<id>/factcheck.json` đạt. Lời tự kể, giai thoại, tranh cãi, nhận định phải nói rõ bằng lời
+   (QA `check_sources` chặn). Không bịa thống kê, năm, hay trích dẫn.
+7. **Thị trường** (trụ cột 3): chỉ dùng dữ liệu có dấu thời gian trong bundle; tách quan sát / mô hình / nhận định; ba
+   kịch bản có điều kiện xác nhận và vô hiệu; không nhắc mã cụ thể, không "sẽ tăng/giảm". Không có dữ liệu → nói rõ
+   giới hạn, không dựng video.
+8. **Ảnh người/hãng/sự kiện**: nhắc ai thì có ảnh — Wikimedia Commons giấy phép tự do (ghi tác giả, giấy phép) hoặc ảnh
+   minh hoạ tạo bằng code ghi rõ "minh hoạ"; không bao giờ tạo ảnh giả như ảnh chụp người thật
+   (`knowledge/images/README.md`, QA `check_images` chặn).
+9. Output vào `social-output/<id>/` (đã gitignore). Trả về trong chat: đường dẫn file, thời lượng, kết luận QA,
    engine giọng, caption từng nền tảng trong khối copy được, và lưu ý còn lại cho người duyệt.
 
 ## Môi trường
@@ -38,7 +61,9 @@ Chọn nhánh theo yêu cầu:
 - Python 3.10+, `pip install -r .claude/skills/quantik-video-factory/requirements.txt edge-tts`, ffmpeg.
 - Video hướng dẫn cần thêm Node 20.9+ và Chromium cho Playwright.
 - Mạng: `speech.platform.bing.com` (giọng đọc edge-tts), `quantik.io.vn`, `github.com` (clone `QuanTik---Design`),
-  `commons.wikimedia.org` + `upload.wikimedia.org` (ảnh thật B-roll, tuỳ chọn; thiếu thì dùng hình tự vẽ).
+  `trading.agr.vn` (dữ liệu thị trường cho trụ cột 3), `commons.wikimedia.org` + `upload.wikimedia.org` (ảnh có giấy phép mở;
+  `thumb.wikimedia.org` nếu muốn tải trực tiếp, không bắt buộc).
+  `videos.pexels.com` (video B-roll Pexels, tuỳ chọn).
   Không có mạng tới TTS thì pipeline lùi về gTTS → espeak → không giọng; phải báo người dùng.
 - Repo nguồn liên quan (chỉ đọc): `kwuangyong/QuanTik---Design` (web production, Next.js),
   `kwuangyong/QuanTik-website` (engine quant `backend/quant_engine/quant.py`; frontend React cũ, không dùng để quay).
@@ -46,4 +71,4 @@ Chọn nhánh theo yêu cầu:
 ## Người dùng
 
 Chủ sản phẩm QuanTik, nói tiếng Việt, muốn kết quả nhanh và văn bản copy đăng được ngay. Trọng tâm quảng bá là
-**Quét toàn sàn** và **Phân tích Quant**. Báo tiến độ ngắn gọn khi việc kéo dài.
+**Quét toàn sàn** và **Phân tích Quant**. Trả kết quả tập trụ cột mới kèm nguồn chính và nhãn trạng thái từ `sources.md`. Báo tiến độ ngắn gọn khi việc kéo dài.

@@ -1,0 +1,198 @@
+{
+  "id": "bf-disposition-bias-lab",
+  "pillar": "behavioral-finance",
+  "topic": "bf_disposition_effect",
+  "style": "bias-lab",
+  "model": "prospect_theory",
+  "brief": "research/bf-disposition-bias-lab/brief.json",
+  "factcheck": "research/bf-disposition-bias-lab/factcheck.json",
+  "tag": "DISPOSITION",
+  "note": "Mô hình Tversky–Kahneman · giáo dục, không phải khuyến nghị",
+  "title": "Vì sao ta bán mã lãi và ôm mã lỗ? Hiệu ứng disposition",
+  "hook": "Bán mã đang lãi rất nhanh, nhưng ôm mã đang lỗ rất lâu? Bạn không cô đơn.",
+  "segments": [
+    {
+      "role": "problem",
+      "say": "Hai mã, một lãi, một lỗ. Cần tiền, phần đông bán mã lãi và giữ mã lỗ chờ gỡ. Đó là hiệu ứng disposition.",
+      "screen": "Cần tiền: bán mã lãi, giữ mã lỗ “chờ gỡ”",
+      "claims": [
+        "c_disp_def"
+      ]
+    },
+    {
+      "role": "mechanism",
+      "say": "Giải thích kinh điển là lý thuyết triển vọng: lỗ đau gấp khoảng {lam} lần lãi vui, so với giá mua. Nhưng cơ chế này còn tranh cãi.",
+      "screen": "Đường đỏ (lỗ) dốc gấp {lam} lần đường xanh (lãi)",
+      "claims": [
+        "c_pt",
+        "c_lambda",
+        "c_mech_dispute"
+      ],
+      "visual": {
+        "kind": "chart",
+        "title": "hàm giá trị Tversky–Kahneman"
+      }
+    },
+    {
+      "role": "evidence",
+      "say": "Odean xem mười nghìn tài khoản môi giới: tỷ lệ chốt lãi {pgr}, tỷ lệ chốt lỗ chỉ {plr}.",
+      "screen": "Chốt lãi: 0,148 · chốt lỗ: 0,098",
+      "claims": [
+        "c_odean"
+      ],
+      "visual": {
+        "kind": "citation",
+        "image": "odean"
+      }
+    },
+    {
+      "role": "implication",
+      "say": "Với hàm đó, cược năm mươi năm mươi có thể mất một triệu chỉ đáng chơi khi lãi từ {g_min} triệu. Né lỗ càng mạnh, phía lỗ càng dốc.",
+      "screen": "Cược 50/50 mất 1 triệu: cần lãi ≥ {g_min} triệu mới thấy đáng",
+      "claims": [
+        "c_gmin"
+      ]
+    },
+    {
+      "role": "lesson",
+      "say": "Thị trường không biết bạn mua giá nào. Khi cân nhắc bán, hỏi: nếu hôm nay chưa có mã này, mình có mua không?",
+      "claims": [
+        "c_lesson"
+      ]
+    },
+    {
+      "role": "quant",
+      "say": "Dân quant viết luật thoát trước khi vào lệnh, theo rủi ro chứ không theo giá mua. Hệ số {lam} cho thấy cảm xúc có thể đắt thế nào.",
+      "screen": "Luật thoát viết trước > cảm xúc lúc đang lỗ",
+      "claims": [
+        "c_quant"
+      ],
+      "visual": {
+        "kind": "terminal",
+        "title": "prospect_theory.py · kết quả",
+        "rows": [
+          {
+            "label": "độ cong α",
+            "key": "alpha"
+          },
+          {
+            "label": "hệ số né lỗ λ",
+            "key": "lam"
+          },
+          {
+            "label": "lãi tối thiểu (cược mất 1)",
+            "key": "g_min"
+          },
+          {
+            "label": "lãi 10 triệu → cảm nhận",
+            "key": "v_gain10"
+          },
+          {
+            "label": "lỗ 10 triệu → cảm nhận",
+            "key": "v_loss10"
+          }
+        ]
+      }
+    }
+  ],
+  "claims": [
+    {
+      "id": "c_disp_def",
+      "text": "Nhà đầu tư có xu hướng bán cổ phiếu đang lãi quá sớm và giữ cổ phiếu đang lỗ quá lâu (hiệu ứng disposition).",
+      "status": "documented",
+      "source_ids": [
+        "shefrin-statman-1985",
+        "odean-1998"
+      ]
+    },
+    {
+      "id": "c_pt",
+      "text": "Lý thuyết triển vọng: người ta đánh giá lãi/lỗ so với một điểm tham chiếu, và hàm giá trị dốc hơn ở vùng lỗ.",
+      "status": "documented",
+      "source_ids": [
+        "kahneman-tversky-1979"
+      ]
+    },
+    {
+      "id": "c_lambda",
+      "text": "Ước lượng trung vị hệ số né lỗ λ = 2,25 và độ cong α = 0,88.",
+      "status": "documented",
+      "source_ids": [
+        "tversky-kahneman-1992"
+      ],
+      "locator": "ước lượng tham số, mục cuối bài"
+    },
+    {
+      "id": "c_mech_dispute",
+      "text": "Lý thuyết triển vọng chưa chắc giải thích được hiệu ứng disposition; với tham số Tversky–Kahneman và lãi/lỗ tính theo năm, mô hình có thể dự báo ngược lại.",
+      "status": "disputed",
+      "source_ids": [
+        "barberis-xiong-2009"
+      ]
+    },
+    {
+      "id": "c_odean",
+      "text": "Trên 10.000 tài khoản môi giới, tỷ lệ hiện thực hoá lãi (PGR) là 0,148, tỷ lệ hiện thực hoá lỗ (PLR) là 0,098.",
+      "status": "documented",
+      "source_ids": [
+        "odean-1998"
+      ],
+      "locator": "bảng tổng hợp toàn mẫu"
+    },
+    {
+      "id": "c_gmin",
+      "text": "Với λ = 2,25, α = 0,88, cược 50/50 mất 1 chỉ có giá trị dương khi lãi lớn hơn λ^(1/α) ≈ 2,51.",
+      "status": "model_output",
+      "source_ids": [
+        "tversky-kahneman-1992"
+      ]
+    },
+    {
+      "id": "c_lesson",
+      "text": "Giá mua là chi phí chìm; quyết định bán nên dựa trên triển vọng từ hôm nay.",
+      "status": "interpretation",
+      "source_ids": []
+    },
+    {
+      "id": "c_quant",
+      "text": "Luật thoát định trước theo rủi ro giúp tách quyết định khỏi điểm tham chiếu giá mua.",
+      "status": "interpretation",
+      "source_ids": []
+    }
+  ],
+  "facts": {
+    "pgr": {
+      "value": "0,148",
+      "source_id": "odean-1998",
+      "claim": "c_odean"
+    },
+    "plr": {
+      "value": "0,098",
+      "source_id": "odean-1998",
+      "claim": "c_odean"
+    }
+  },
+  "takeaway": "Nhận ra hiệu ứng là bước một. Luật thoát viết sẵn là bước hai.",
+  "caption": "Vì sao ta bán mã đang lãi và ôm mã đang lỗ? Hiệu ứng disposition: bằng chứng từ Odean (1998), cơ chế lý thuyết triển vọng (và vì sao nó còn tranh cãi), cộng mô hình Tversky–Kahneman chạy bằng code.",
+  "hashtags": [
+    "taichinhhanhvi",
+    "tamlydautu",
+    "chungkhoan",
+    "quant",
+    "QuanTik"
+  ],
+  "allowed_literals": [
+    "50/50"
+  ],
+  "max_seconds": 90,
+  "entities": [
+    {
+      "name": "Terrance Odean",
+      "aliases": [
+        "Odean"
+      ],
+      "kind": "person",
+      "image": "odean"
+    }
+  ]
+}
