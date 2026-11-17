@@ -41,12 +41,16 @@ S₀ = 100, μ = 10%/năm, σ = 35%/năm (cổ phiếu biến động cao), 1.00
     {
       "say": "Nhà toán học Stanislaw Ulam nằm dưỡng bệnh, chơi bài solitaire và tự hỏi: xác suất thắng một ván là bao nhiêu?",
       "visual": "professor",
-      "caption": "Một nhà toán học và ván bài"
+      "caption": "Một nhà toán học và ván bài",
+      "image": "ulam",
+      "label": "Stanislaw Ulam"
     },
     {
       "say": "Không giải nổi bằng giấy bút, ông cho máy chơi thật nhiều ván rồi đếm. Phương pháp được đặt tên theo sòng bạc Monte Carlo.",
       "visual": "roulette",
-      "caption": "Đặt tên theo *sòng bạc*"
+      "caption": "Đặt tên theo *sòng bạc*",
+      "image": "monte-carlo-casino",
+      "label": "Casino de Monte-Carlo"
     }
   ],
   "kicker": "Mô phỏng Monte Carlo",

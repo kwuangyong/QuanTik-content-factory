@@ -39,7 +39,8 @@
       "text": "Hai nhà vật lý mô tả một hạt bị va đập ngẫu nhiên nhưng luôn bị lực ma sát kéo về trạng thái cân bằng.",
       "source": "Uhlenbeck & Ornstein (1930), Physical Review",
       "say": "Năm 1930, hai nhà vật lý Uhlenbeck và Ornstein mô tả một hạt bị va đập ngẫu nhiên, nhưng luôn bị ma sát kéo về cân bằng.",
-      "visual": "particle"
+      "visual": "particle",
+      "image": "uhlenbeck"
     },
     {
       "type": "story",

@@ -17,8 +17,8 @@ dùng, đố vui. Độ dài mục tiêu 45–75s (`max_seconds` mặc định 7
 | type | Trường | Ghi chú |
 | --- | --- | --- |
 | `hook` | `text`, `say?`, `kicker?`, `visual?` | luôn đặt đầu; ragebait ≤ 16 từ, `*cụm nhấn*`; `visual` = tag hình (mặc định tự khớp) |
-| `broll` | `say`, `visual?`, `caption?`, `optional?` | cảnh hình khớp lời (ảnh thật hoặc hoạt hoạ), thường ngay sau hook; `optional: true` = được bỏ nếu video quá dài |
-| `story` | `era`, `title`, `text`, `say`, `chip?`, `source?`, `visual?` | lịch sử/nhân vật; có hình khớp (tự khớp hoặc `visual`) thì hình ở trên, năm + tiêu đề bên dưới; số năm, số tiền vào `facts` kèm nguồn |
+| `broll` | `say`, `visual?`, `caption?`, `image?`, `label?`, `optional?` | cảnh hình khớp lời (ảnh thật hoặc hoạt hoạ), thường ngay sau hook; `optional: true` = được bỏ nếu video quá dài |
+| `story` | `era`, `title`, `text`, `say`, `chip?`, `source?`, `visual?` | lịch sử/nhân vật; `image` = id ảnh thật trong sổ ảnh (ưu tiên số một, ghi công trên màn hình); có hình khớp (tự khớp hoặc `visual`) thì hình ở trên, năm + tiêu đề bên dưới; số năm, số tiền vào `facts` kèm nguồn |
 | `usage` | `title?`, `steps[]` (2–4 bước), `say`, `chip?` | cách dùng/đọc chỉ số, nơi xem trong QuanTik |
 | `quiz` | `question`, `options[]` (2–4), `answer` (chỉ số 0..), `say`, `reveal_at?` (0..1, mặc định 0,62) | lời nên đặt câu hỏi, ngập ngừng, rồi nói đáp án |
 | `compare` | `title?`, `left`/`right` = `{label, value, note?, color?}`, `say` | hai con số đối đầu; `color`: positive/negative/neutral/accent |

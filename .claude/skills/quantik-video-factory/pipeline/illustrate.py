@@ -873,7 +873,29 @@ def _photo(path, w, h):
     return Image.blend(im, tint, 0.18)
 
 
+@lru_cache(maxsize=32)
+def _portrait(path, w, h):
+    """Ảnh dọc / nhỏ (chân dung): hiện TRỌN ảnh ở giữa, nền là chính ảnh đó phóng to làm mờ — không cắt mất mặt."""
+    src = Image.open(path).convert("RGB")
+    bg = src.resize((w, max(1, int(src.height * w / src.width))), Image.LANCZOS)
+    top = max(0, (bg.height - h) // 2)
+    bg = bg.crop((0, top, w, top + h)).filter(ImageFilter.GaussianBlur(28))
+    bg = Image.blend(bg, Image.new("RGB", (w, h), (8, 13, 11)), 0.45)
+    s = min(h * 0.96 / src.height, w * 0.9 / src.width)
+    fg = src.resize((max(1, int(src.width * s)), max(1, int(src.height * s))), Image.LANCZOS)
+    return bg, fg
+
+
 def photo_frame(path, w, h, p, seed=0):
+    with Image.open(str(path)) as probe:
+        iw, ih = probe.size
+    if ih / iw > (h / w) * 1.15 or iw < w * 0.6:  # chân dung hoặc ảnh nhỏ → contain, không cover-crop
+        bg, fg = _portrait(str(path), w, h)
+        z = 1.0 + 0.04 * p
+        fz = fg.resize((int(fg.width * z), int(fg.height * z)), Image.BILINEAR)
+        out = bg.copy()
+        out.paste(fz, ((w - fz.width) // 2, (h - fz.height) // 2))
+        return out.convert("RGBA")
     im = _photo(str(path), w, h)
     z = 1.0 + 0.14 * p  # slow push-in
     cw, ch = int(im.width / 1.2 / z * 1.0), int(im.height / 1.2 / z)
@@ -886,7 +908,15 @@ def photo_frame(path, w, h, p, seed=0):
 
 def frame(tag, w, h, p, t, photo=None, radius=28, seed=0):
     """Vẽ một khung minh hoạ w×h (RGBA, bo góc). photo: đường dẫn ảnh thật B-roll (ưu tiên nếu có)."""
-    if photo:
+    if isinstance(photo, tuple) and photo[0] == "clip":   # video B-roll Pexels
+        import clips
+
+        fr = clips.frame(photo[1], w, h, t, scene_key=seed)
+        im = Image.fromarray(fr).convert("RGBA") if fr is not None else None
+        if im is None:
+            im = Image.new("RGBA", (w, h), T["surface"] + (255,))
+            DRAW.get(tag, draw_trader)(ImageDraw.Draw(im, "RGBA"), w, h, p, t)
+    elif photo:
         im = photo_frame(photo, w, h, p, seed)
     else:
         im = Image.new("RGBA", (w, h), T["surface"] + (255,))
@@ -944,12 +974,25 @@ def configure(mode="auto", fetch=True, topic=None, board=None):
 
 
 def source(tag, slot=0):
-    """Ảnh thật cho tag ở vị trí slot, hoặc None (= vẽ). auto: slot lẻ dùng ảnh thật, slot chẵn dùng hình vẽ,
-    để video xen kẽ B-roll thật và hoạt hoạ. 'code' luôn vẽ (ảnh code thật không khớp code của mình)."""
+    """Nguồn hình THẬT cho tag ở vị trí slot, hoặc None (= hoạt hoạ tự vẽ).
+    Ưu tiên: video Pexels khớp nghĩa → ảnh của kênh / Wikimedia. auto: slot lẻ dùng hình thật, slot chẵn dùng hoạt
+    hoạ để video xen kẽ; photo: luôn ưu tiên hình thật; draw: chỉ vẽ. 'code' luôn vẽ.
+    Trả về ("clip", key) cho video, đường dẫn ảnh cho ảnh tĩnh."""
     if CFG["mode"] == "draw" or not tag or tag == "code":
         return None
     if CFG["mode"] == "auto" and slot % 2 == 0:
         return None
+    import clips
+
+    ks = [k for k in clips.keys_for(tag)]
+    if ks:
+        k = ks[slot // 2 % len(ks)]
+        if clips.ensure(k):
+            c = clips.manifest()["clips"][k]
+            it = {"kind": "clip", "url": c["page"], "artist": c["credit"], "license": "Pexels License"}
+            if it not in USED:
+                USED.append(it)
+            return ("clip", k)
     from broll import photos
 
     got = photos(tag, CFG["fetch"])
@@ -959,3 +1002,21 @@ def source(tag, slot=0):
     if it not in USED:
         USED.append(it)
     return it["path"]
+
+
+def entity(image_id):
+    """Ảnh của một người / nơi / sự kiện có thật trong sổ ảnh (knowledge/images/ledger.json, quản lý bằng images.py).
+    Trả về (đường dẫn, dòng ghi công, là ảnh thật?) hoặc None. Ảnh thật luôn được ưu tiên hơn hình vẽ."""
+    if not image_id:
+        return None
+    import images as IMG
+
+    e = IMG.index().get(image_id)
+    if not e:
+        print(f"  ảnh '{image_id}' chưa có trong sổ ảnh → dùng hình vẽ (python images.py fetch …)")
+        return None
+    it = {"kind": "ledger", "url": e.get("source_url") or e["id"], "artist": e.get("author", ""),
+          "license": e.get("license", ""), "credit": e["credit"]}
+    if it not in USED:
+        USED.append(it)
+    return str(IMG.path_of(e)), e["credit"], e.get("kind") == "photo"

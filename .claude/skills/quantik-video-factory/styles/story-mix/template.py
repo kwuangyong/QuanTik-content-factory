@@ -18,7 +18,7 @@ DEFAULTS = {"max_seconds": 75}
 def _story(sc, i):
     era, title, body, src = sc.get("era", ""), sc.get("title", ""), sc.get("text", ""), sc.get("source", "")
     tag = sc.get("visual") or I.pick(sc["say"] + " " + title + " " + body)
-    if tag:
+    if tag or sc.get("image"):
         return _story_visual(sc, i, tag, era, title, src)
 
     def draw(img, t, p):
@@ -41,23 +41,29 @@ def _story(sc, i):
 
 
 def _story_visual(sc, i, tag, era, title, src):
-    """Chuyện kể có hình: hoạt hoạ/ảnh thật khớp câu chuyện ở trên, năm + tiêu đề bên dưới (lời đọc kể phần thân)."""
-    photo = I.source(tag, i)
+    """Chuyện kể có hình: ảnh thật của người/nơi/sự kiện (image) → video/ảnh/hoạt hoạ khớp câu chuyện ở trên,
+    năm + tiêu đề bên dưới (lời đọc kể phần thân). Ảnh thật có dòng ghi công trên màn hình."""
+    ent = I.entity(sc.get("image"))
+    photo, credit = (ent[0], ent[1]) if ent else (I.source(tag, i), None)
 
     def draw(img, t, p):
         a = F.ease_out(F.seg(p, 0, 0.15))
-        F.paste(img, I.frame(tag, S.CW, 620, p, t, photo, seed=i), (S.X0, 300 + int(30 * (1 - a))), alpha=a)
+        F.paste(img, I.frame(tag or "trader", S.CW, 620, p, t, photo, seed=i), (S.X0, 300 + int(30 * (1 - a))), alpha=a)
         F.chip(img, (S.X0, 945), sc.get("chip", "Câu chuyện"), T["neutral"], 26)
         if era:
             F.text_box(img, era, (S.X0 + 330, 935, S.X1, 1005), "mono-bold", 60, T["accent"], "right", "middle",
                        label=f"story{i}-era", alpha=a, min_size=32)
         F.text_box(img, title, (S.X0, 1020, S.X1, 1240), "sans-black", 62, T["text"], label=f"story{i}-title",
                    alpha=a, min_size=34, marks=True)
-        if src:
-            F.text_box(img, "Nguồn: " + src, (S.X0, 1252, S.X1, S.BOT), "sans-bold", 22, T["muted"],
-                       label=f"story{i}-src", min_size=16)
+        foot = " · ".join(x for x in (credit, ("Nguồn: " + src) if src else "") if x)
+        if foot:
+            F.text_box(img, foot, (S.X0, 1252, S.X1, S.BOT), "sans-bold", 20, T["muted"],
+                       label=f"story{i}-src", min_size=15)
 
-    return Scene(f"story{i}", sc["say"], draw, sc.get("min_dur", 3.2), texts=[era, title])
+    out = Scene(f"story{i}", sc["say"], draw, sc.get("min_dur", 3.2), texts=[era, title, credit or ""])
+    if ent:
+        out.images = [sc["image"]]
+    return out
 
 
 def _usage(sc, i):
@@ -196,7 +202,7 @@ def build(ep, model, ctx):
             out.append(S.hook(sc["text"], say=sc.get("say"), kicker=sc.get("kicker"), visual=sc.get("visual", "auto")))
         elif k == "broll":
             b = S.broll(sc["say"], sc.get("visual"), sc.get("caption"), name=f"broll{i}", slot=i,
-                        min_dur=sc.get("min_dur", 2.6))
+                        min_dur=sc.get("min_dur", 2.6), image=sc.get("image"), label=sc.get("label"))
             b.optional = sc.get("optional", False)
             out.append(b)
         elif k == "story":

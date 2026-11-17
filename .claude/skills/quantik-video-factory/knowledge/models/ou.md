@@ -48,7 +48,9 @@ $$dX_t=\theta(\mu-X_t)\,dt+\sigma\,dW_t$$
     {
       "say": "Quỹ LTCM, có hai nhà kinh tế đoạt Nobel, cũng cược chênh lệch sẽ quay về. Nó quay về thật, nhưng quỹ sụp trước khi kịp thấy.",
       "visual": "money_burn",
-      "caption": "Đúng hướng, nhưng *sụp trước*"
+      "caption": "Đúng hướng, nhưng *sụp trước*",
+      "image": "myron-scholes",
+      "label": "Myron Scholes · LTCM"
     }
   ],
   "kicker": "Mean reversion",

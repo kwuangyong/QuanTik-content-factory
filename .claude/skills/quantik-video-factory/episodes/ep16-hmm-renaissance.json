@@ -46,7 +46,8 @@
       "text": "HMM làm nên nhận dạng giọng nói ở IBM. Hai nhà nghiên cứu Peter Brown và Robert Mercer rời IBM sang Renaissance Technologies.",
       "source": "Zuckerman (2019)",
       "say": "HMM làm nên nhận dạng giọng nói ở IBM. Năm 1993, hai nhà nghiên cứu giọng nói Peter Brown và Robert Mercer rời IBM để gia nhập quỹ Renaissance.",
-      "visual": "speech"
+      "visual": "speech",
+      "image": "ibm-watson"
     },
     {
       "type": "code",

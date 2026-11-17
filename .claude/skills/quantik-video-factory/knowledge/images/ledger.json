@@ -98,6 +98,32 @@
       "retrieved": "2026-11-15"
     },
     {
+      "id": "legendre",
+      "kind": "photo",
+      "subject": "Adrien-Marie Legendre",
+      "depicts": "Adrien-Marie Legendre, tranh biếm hoạ của Boilly",
+      "file": "files/legendre.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Legendre.jpg",
+      "author": "Julien-Léopold Boilly",
+      "license": "Public domain",
+      "license_url": "",
+      "credit": "Ảnh: Julien-Léopold Boilly · Public domain · Wikimedia Commons",
+      "retrieved": "2026-11-17"
+    },
+    {
+      "id": "myron-scholes",
+      "kind": "photo",
+      "subject": "Myron Scholes",
+      "depicts": "Myron Scholes tại Lindau",
+      "file": "files/myron-scholes.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Myron_Scholes_2008_in_Lindau.png",
+      "author": "Nobellaureatesphotographer (en.wikipedia)",
+      "license": "CC BY-SA 3.0",
+      "license_url": "",
+      "credit": "Ảnh: Nobellaureatesphotographer (en.wikipedia) · CC BY-SA 3.0 · Wikimedia Commons",
+      "retrieved": "2026-11-17"
+    },
+    {
       "id": "odean",
       "kind": "illustration",
       "subject": "Terrance Odean",
@@ -126,6 +152,19 @@
       "retrieved": "2026-11-15"
     },
     {
+      "id": "robert-merton",
+      "kind": "photo",
+      "subject": "Robert C. Merton",
+      "depicts": "Robert C. Merton",
+      "file": "files/robert-merton.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Robert_C._Merton.jpg",
+      "author": "Digarnick (en.wikipedia)",
+      "license": "Public domain",
+      "license_url": "",
+      "credit": "Ảnh: Digarnick (en.wikipedia) · Public domain · Wikimedia Commons",
+      "retrieved": "2026-11-17"
+    },
+    {
       "id": "thorp",
       "kind": "illustration",
       "subject": "Edward O. Thorp",
@@ -138,6 +177,19 @@
       "credit": "Ảnh minh hoạ tạo bằng code, không phải ảnh thật",
       "generator": "images.py person --name 'Edward O. Thorp' --role 'nhà toán học, tác giả Beat the Dealer'",
       "retrieved": "2026-11-15"
+    },
+    {
+      "id": "titanic",
+      "kind": "photo",
+      "subject": "RMS Titanic",
+      "depicts": "tàu RMS Titanic",
+      "file": "files/titanic.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:RMS_Titanic_3.jpg",
+      "author": "Francis Godolphin Osbourne Stuart",
+      "license": "Public domain",
+      "license_url": "",
+      "credit": "Ảnh: Francis Godolphin Osbourne Stuart · Public domain · Wikimedia Commons",
+      "retrieved": "2026-11-17"
     }
   ]
 }

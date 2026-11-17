@@ -186,8 +186,8 @@ def insert_cold_open(scenes, ep, kind, style):
     if kind != "video" or not items or style in ("talking-head-script", "meme-quant", "story-mix"):
         return scenes
     at = 1 if scenes and scenes[0].name == "hook" else 0
-    extra = [SC.broll(it["say"], it.get("visual"), it.get("caption"), name=f"story{i + 1}", slot=i)
-             for i, it in enumerate(items)]
+    extra = [SC.broll(it["say"], it.get("visual"), it.get("caption"), name=f"story{i + 1}", slot=i,
+                      image=it.get("image"), label=it.get("label")) for i, it in enumerate(items)]
     for sc in extra:
         sc.optional = True
     return scenes[:at] + extra + scenes[at:]
@@ -253,8 +253,9 @@ def _write_provenance(out, filled, scenes, model, kind, pillar):
                 "provenance": iidx[i].get("source_url") or iidx[i].get("generator", ""), "license": iidx[i]["license"]}
                for i in imgs_used if i in iidx]
     save_json(out / "visual_assets.json", {"id": filled["id"], "assets": assets})
-    if not pillar:
-        return ""
+    if not pillar:  # video thường: vẫn phải ghi công ảnh thật (CC BY/BY-SA bắt buộc)
+        credits = sorted({iidx[i]["credit"] for i in imgs_used if i in iidx})
+        return ("\n## Ảnh\n" + "\n".join("- " + c for c in credits) + "\n") if credits else ""
     used = []
     for s in filled.get("segments", []):
         for c in s.get("claims", []):

@@ -108,13 +108,19 @@ def photos(tag, allow_fetch=True):
 
 
 def credit_line(items):
+    """Dòng ghi công cho caption: ảnh Wikimedia, ảnh trong sổ ảnh, video Pexels (bỏ ảnh của kênh)."""
     seen, out = set(), []
     for it in items:
-        if it["url"] in seen or it["license"] == "của kênh":
+        if it["url"] in seen or it.get("license") == "của kênh":
             continue
         seen.add(it["url"])
-        out.append(f"{it['artist']} ({it['license']}, Wikimedia Commons)")
-    return "Ảnh: " + "; ".join(out) if out else ""
+        if it.get("kind") == "clip":
+            out.append(f"Video: {it['artist']} (Pexels) {it['url']}")
+        elif it.get("kind") == "ledger":
+            continue  # ảnh trong sổ ảnh được batch._write_provenance ghi ở mục "## Ảnh" (scene.images)
+        else:
+            out.append(f"{it['artist']} ({it['license']}, Wikimedia Commons)")
+    return "Hình: " + "; ".join(out) if out else ""
 
 
 if __name__ == "__main__":

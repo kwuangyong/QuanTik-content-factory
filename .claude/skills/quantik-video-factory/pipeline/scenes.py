@@ -67,22 +67,40 @@ def hook(text, say=None, kicker=None, min_dur=2.2, visual="auto", photo=None):
     return Scene("hook", strip_marks(say) if say is not None else clean, draw, min_dur, texts=[clean, kicker or ""])
 
 
-def broll(say, visual=None, caption=None, name="broll", min_dur=2.6, photo=None, slot=0):
-    """Cảnh B-roll/kể chuyện: hình (ảnh thật hoặc hoạt hoạ) khớp đúng câu đang nói, chú thích ngắn bên dưới."""
+def broll(say, visual=None, caption=None, name="broll", min_dur=2.6, photo=None, slot=0, image=None, label=None):
+    """Cảnh B-roll/kể chuyện: hình khớp đúng câu đang nói, chú thích ngắn bên dưới.
+    image = id trong sổ ảnh (người / nơi / sự kiện có thật) → ảnh thật lớn + tên + dòng ghi công trên màn hình,
+    luôn ưu tiên hơn hoạt hoạ. Không có image: video Pexels / ảnh / hoạt hoạ theo tag (illustrate.source)."""
     tag = visual or I.pick(say) or "trader"
-    photo = photo if photo is not None else I.source(tag, slot)
+    ent = I.entity(image)
+    credit = None
+    if ent:
+        photo, credit = ent[0], ent[1]
+    elif photo is None:
+        photo = I.source(tag, slot)
 
     def draw(img, t, p):
         a = F.ease_out(F.seg(p, 0, 0.12))
-        h = 900 if caption else 1000
+        h = 820 if (caption or label) else 1000
         F.paste(img, I.frame(tag, CW, h, p, t, photo, seed=slot), (X0, 300 + int(40 * (1 - a))), alpha=a)
+        y = 300 + h + 16
+        if label:
+            F.text_box(img, label, (X0, y, X1, y + 70), "sans-black", 56, T["accent"], "left", "middle",
+                       min_size=30, label=f"{name}-label")
+            y += 76
         if caption:
-            F.text_box(img, caption, (X0, 1220, X1, BOT), "sans-black", 52, T["accent"], "left", "middle",
-                       min_size=30, label=f"{name}-caption", hl_numbers=True, marks=True)
+            F.text_box(img, caption, (X0, y, X1, BOT - (30 if credit else 0)), "sans-black", 48 if label else 52,
+                       T["text"] if label else T["accent"], "left", "top", min_size=28, label=f"{name}-caption",
+                       hl_numbers=True, marks=True)
+        if credit:
+            F.text_box(img, credit, (X0, BOT - 28, X1, BOT + 6), "sans", 20, T["muted"], label=f"{name}-credit",
+                       min_size=16)
 
-    sc = Scene(name, say, draw, min_dur, texts=[strip_marks(caption or "")])
+    sc = Scene(name, say, draw, min_dur, texts=[strip_marks(caption or ""), label or "", credit or ""])
     sc.visual = tag
     sc.photo = photo
+    if image and ent:
+        sc.images = [image]
     return sc
 
 

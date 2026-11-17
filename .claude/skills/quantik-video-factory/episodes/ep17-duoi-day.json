@@ -29,7 +29,9 @@
       "say": "Người châu Âu từng tin mọi con thiên nga đều trắng, cho tới khi thấy thiên nga đen ở Úc. Cú sập thị trường cũng thế.",
       "visual": "swan",
       "caption": "Hiếm, nhưng *có thật*",
-      "optional": true
+      "optional": true,
+      "image": "black-swan",
+      "label": "Thiên nga đen · Úc"
     },
     {
       "type": "formula",
@@ -45,7 +47,8 @@
       "text": "Benoit Mandelbrot nghiên cứu giá bông hàng trăm năm và thấy những cú nhảy lớn xuất hiện quá thường xuyên so với hình chuông.",
       "source": "Mandelbrot (1963), Journal of Business",
       "say": "Năm 1963, Benoit Mandelbrot nghiên cứu giá bông và thấy những cú nhảy lớn xuất hiện thường xuyên hơn hình chuông cho phép rất nhiều.",
-      "visual": "professor"
+      "visual": "professor",
+      "image": "mandelbrot"
     },
     {
       "type": "run",

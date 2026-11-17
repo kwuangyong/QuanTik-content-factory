@@ -1,2 +1,5 @@
 __pycache__/
 *.pyc
+
+# Pexels B-roll clips (downloaded on demand)
+brand/assets/broll/*.mp4

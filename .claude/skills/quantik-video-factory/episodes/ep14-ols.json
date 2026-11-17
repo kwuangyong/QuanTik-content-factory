@@ -32,7 +32,8 @@
       "text": "Adrien-Marie Legendre cần khớp quỹ đạo từ các lần quan sát có sai số. Ông chọn đường làm tổng bình phương sai số nhỏ nhất.",
       "source": "Legendre (1805)",
       "say": "Năm 1805, Legendre cần khớp quỹ đạo sao chổi từ các lần quan sát có sai số. Ông chọn đường làm tổng bình phương sai số nhỏ nhất.",
-      "visual": "telescope"
+      "visual": "telescope",
+      "image": "legendre"
     },
     {
       "type": "code",

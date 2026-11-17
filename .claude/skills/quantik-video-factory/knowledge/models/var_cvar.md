@@ -41,7 +41,9 @@ Lịch sử: VaR = phân vị α của chuỗi lỗ; CVaR = trung bình các m�
     {
       "say": "Tàu Titanic nhìn thấy phần nổi của tảng băng. Thứ đánh chìm nó nằm dưới mặt nước.",
       "visual": "iceberg",
-      "caption": "Thứ giết bạn nằm *dưới mặt nước*"
+      "caption": "Thứ giết bạn nằm *dưới mặt nước*",
+      "image": "titanic",
+      "label": "RMS Titanic"
     },
     {
       "say": "VaR là phần nổi. CVaR nhìn xuống phần chìm: những ngày tệ nhất trung bình lỗ bao nhiêu.",
