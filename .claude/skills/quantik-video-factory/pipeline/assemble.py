@@ -1,7 +1,8 @@
 """Mux silent video + per-scene voice clips + background music into the final mp4.
 
 Music: brand/assets/music/*.(mp3|wav|m4a) if present (must be licensed — see brand/assets/README.md),
-otherwise a soft pad synthesised here from sine waves (original, royalty-free).
+otherwise a suspense bed synthesised here (drone + heartbeat kick + clock tick, original, royalty-free), at the
+TEMPO of core.py so the music pushes as fast as the cut.
 Voice is placed at each scene's start time; music is ducked under the voice with a sidechain compressor.
 """
 from __future__ import annotations
@@ -10,7 +11,7 @@ import subprocess
 import wave
 from pathlib import Path
 
-from core import BRAND
+from core import BRAND, TEMPO
 
 SR = 44100
 
@@ -39,6 +40,45 @@ def synth_pad(path, seconds, seed_chord=0):
     return path
 
 
+def synth_suspense(path, seconds, bpm=None):
+    """Nhạc nền hồi hộp: drone trầm (La thứ) + nhịp tim "thình thịch" + tiếng tích tắc, căng dần về cuối.
+    bpm mặc định 96 × TEMPO (1.25 → 120)."""
+    import numpy as np
+
+    bpm = bpm or 96 * TEMPO
+    n = int(seconds * SR)
+    t = np.arange(n) / SR
+    rise = np.clip(t / max(seconds, 1), 0, 1)  # tension builds towards the end
+    drone = (np.sin(2 * np.pi * 55 * t) + 0.6 * np.sin(2 * np.pi * 82.41 * t) + 0.25 * np.sin(2 * np.pi * 110 * t * (1 + 0.002 * np.sin(t))))
+    drone *= 0.35 + 0.25 * rise
+    beat = 60.0 / bpm
+    sig = drone.copy()
+    rng = np.random.default_rng(7)
+    k_len = int(0.18 * SR)
+    kt = np.arange(k_len) / SR
+    kick = np.sin(2 * np.pi * (60 + 60 * np.exp(-kt * 30)) * kt) * np.exp(-kt * 18)
+    tick = rng.standard_normal(int(0.03 * SR)) * np.exp(-np.arange(int(0.03 * SR)) / SR * 160)
+    b = 0.0
+    while b < seconds:
+        for off, amp in ((0.0, 1.6), (beat * 0.28, 1.0)):  # "thình-thịch"
+            i = int((b + off) * SR)
+            j = min(n, i + k_len)
+            if i < n:
+                sig[i:j] += amp * kick[: j - i]
+        for half in (0.5, 1.0):
+            i = int((b + beat * half) * SR) - int(0.03 * SR) // 2
+            j = min(n, i + len(tick))
+            if 0 <= i < n:
+                sig[i:j] += (0.25 + 0.35 * rise[i]) * tick[: j - i]
+        b += beat
+    fade = np.minimum(1, np.minimum(t / 0.6, (seconds - t) / 1.2))
+    pcm = (np.clip(sig / 4 * fade, -1, 1) * 12000).astype("<i2")
+    with wave.open(str(path), "wb") as w:
+        w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR)
+        w.writeframes(pcm.tobytes())
+    return path
+
+
 def pick_music(work: Path, seconds: float, music: str | None):
     if music == "none":
         return None
@@ -48,7 +88,7 @@ def pick_music(work: Path, seconds: float, music: str | None):
     lib = [p for p in lib if p.suffix.lower() in (".mp3", ".wav", ".m4a")]
     if lib:
         return lib[0]
-    return synth_pad(work / "pad.wav", seconds + 1)
+    return synth_suspense(work / "suspense.wav", seconds + 1)
 
 
 def assemble(video, scenes, out, work: Path, music=None, music_db=-20):

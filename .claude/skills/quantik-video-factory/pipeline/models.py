@@ -109,27 +109,39 @@ def compute_hurst(seed=1, returns=None):
         sd = [np.std(x[l:] - x[:-l]) for l in lags]
         values["h_real"] = float(np.polyfit(np.log(lags), np.log(sd), 1)[0])
     formats = {k: "num2" for k in values}; formats["n_lags"] = "int"
-    return values, formats, {"walk": walk, "mr": mr, "tr": tr, "lags": lags}
+    return values, formats, {"walk": walk, "mr": mr, "tr": tr, "lags": lags,
+                             "h": {"walk": h_rw, "mr": h_mr, "tr": h_tr}}
+
+
+def _lanes(s):
+    """Ba chuỗi khác hẳn biên độ: chuẩn hoá cùng thang rồi xếp ba làn để so HÌNH DẠNG, không so độ lớn."""
+    out = []
+    for key in ("tr", "walk", "mr"):
+        y = s[key] - s[key][0]
+        out.append(y / (np.abs(y).max() + 1e-9))
+    return out
 
 
 def plot2d_hurst(ax, s, upto=1.0):
+    from core import fmt_vi
+
     n = len(s["walk"]); k = max(2, int(n * upto))
-    for key, c, lab in (("tr", POS, "xu hướng"), ("walk", MUT, "ngẫu nhiên"), ("mr", ACC, "hồi quy")):
-        y = s[key][:k]
-        ax.plot(np.arange(k), y - y[0], color=c, lw=1.8, label=lab)
-    allv = np.concatenate([s[k] - s[k][0] for k in ("tr", "walk", "mr")])
-    ax.set_xlim(0, n); ax.set_ylim(allv.min() * 1.05, allv.max() * 1.05)
-    ax.legend(loc="upper left", fontsize=18, frameon=False, labelcolor=TXT)
-    ax.set_xlabel("bước thời gian")
+    hs = (s["h"]["tr"], s["h"]["walk"], s["h"]["mr"])
+    for i, (y, c, lab, h) in enumerate(zip(_lanes(s), (POS, MUT, ACC), ("quán tính", "ngẫu nhiên", "hồi quy"), hs)):
+        off = (2 - i) * 2.4
+        ax.axhline(off, color=MUT, lw=0.8, ls=":")
+        ax.plot(np.arange(k), off + y[:k], color=c, lw=2)
+        ax.text(n * 0.01, off + 1.05, f"{lab} · H = {fmt_vi(h, 'num2')}", color=c, fontsize=18, weight="bold")
+    ax.set_xlim(0, n); ax.set_ylim(-1.3, 6.3); ax.set_yticks([])
+    ax.set_xlabel("bước thời gian (mỗi làn đã chuẩn hoá cùng thang)")
 
 
 def surface_hurst(s, v):
     n = 1500; x = np.arange(0, n, 5)
     lines = []
-    for i, (key, c) in enumerate((("mr", ACC), ("walk", MUT), ("tr", POS))):
-        z = s[key][:n:5] - s[key][0]
-        lines.append((x, np.full(len(x), i), z, c))
-    return {"lines": lines, "xl": "bước", "yl": "", "zl": "giá trị", "yticks": ["hồi quy", "ngẫu nhiên", "quán tính"]}
+    for i, (y, c) in enumerate(zip(_lanes(s)[::-1], (ACC, MUT, POS))):
+        lines.append((x, np.full(len(x), i), y[:n:5], c))
+    return {"lines": lines, "xl": "bước", "yl": "", "zl": "giá (chuẩn hoá)", "yticks": ["hồi quy", "ngẫu nhiên", "quán tính"]}
 
 
 # =============================================================== Ornstein–Uhlenbeck
@@ -167,10 +179,11 @@ def plot2d_ou(ax, s, upto=1.0):
 
 def surface_ou(s, v):
     th, mu, sig, x0 = 0.10, 0.0, 0.6, 4.0
-    t = np.linspace(0, 60, 60); y = np.linspace(-6, 7, 70)
+    # mật độ xác suất của spread theo thời gian: bắt đầu quanh x0, trôi về mu và loe ra tới độ rộng cân bằng
+    t = np.linspace(3, 60, 58); y = np.linspace(-5, 7, 70)
     T, Y = np.meshgrid(t, y)
     m = mu + (x0 - mu) * np.exp(-th * T)
-    var = sig ** 2 / (2 * th) * (1 - np.exp(-2 * th * T)) + 1e-3
+    var = sig ** 2 / (2 * th) * (1 - np.exp(-2 * th * T)) + 0.15
     Z = np.exp(-0.5 * (Y - m) ** 2 / var) / np.sqrt(2 * np.pi * var)
     return {"X": T, "Y": Y, "Z": Z, "xl": "phiên", "yl": "spread", "zl": "mật độ"}
 
@@ -214,9 +227,15 @@ def plot2d_hmm(ax, s, upto=1.0):
 
 
 def surface_hmm(s, v):
-    p = s["probs"]
-    return {"line": (p[:, 0], p[:, 1], p[:, 2]), "xl": "P(tăng)", "yl": "P(giảm)", "zl": "P(ngang)",
-            "colors": [POS, NEG, NEU][0:1]}
+    """Ba dải xác suất (tăng / đi ngang / giảm) theo thời gian, mỗi trạng thái một làn: thấy rõ lúc nào
+    trạng thái nào chiếm ưu thế, thay vì đám điểm trên một mặt phẳng nghiêng khó đọc."""
+    p = s["probs"]; n = len(p); x = np.arange(0, n, 3)
+    ker = np.ones(5) / 5
+    lines = []
+    for i, (col, c) in enumerate(((1, NEG), (2, NEU), (0, POS))):
+        z = np.convolve(p[:, col], ker, mode="same")[::3] * 100
+        lines.append((x, np.full(len(x), i), z, c))
+    return {"lines": lines, "xl": "phiên", "yl": "", "zl": "xác suất %", "yticks": ["giảm", "đi ngang", "tăng"]}
 
 
 # =============================================================== Monte Carlo (GBM)
@@ -424,19 +443,49 @@ def compute_kelly(seed=4, returns=None):
 
 
 def plot2d_kelly(ax, s, upto=1.0):
-    win = s["win"][:400]; bets = win.shape[1]; k = max(2, int(bets * upto)); x = np.arange(k)
-    for f, c in zip(s["fracs"], [MUT, POS, NEU, NEG]):
+    """Bốn đường = bốn mức cược, đặt tên đúng như lời đọc (½ Kelly, Kelly, 2×, 4×); số cuối đường = đúng giá trị
+    trung vị code tính (cùng 2.000 người mô phỏng), để hình và lời không bao giờ lệch nhau."""
+    import matplotlib.ticker as mt
+
+    from core import fmt_vi
+
+    win = s["win"]; bets = win.shape[1]; k = max(2, int(bets * upto)); x = np.arange(1, k + 1)
+    names = ["½ Kelly", "Kelly", "2× Kelly", "4× Kelly"]
+    ax.axhline(1, color=MUT, lw=1.2, ls="--")
+    placed = []
+    for f, c, name, lw in zip(s["fracs"], [MUT, POS, NEU, NEG], names, [2.2, 3.6, 2.6, 3.0]):
         w = np.median(np.cumprod(np.where(win, 1 + f * s["R"], 1 - f), axis=1), axis=0)
-        ax.plot(x, w[:k], color=c, lw=2.2, label=f"f = {f*100:.0f}%".replace(".", ","))
-    ax.set_yscale("log"); ax.set_xlim(0, bets); ax.set_ylim(1e-3, 1e2); ax.set_xlabel("số lần đặt"); ax.set_ylabel("tài sản trung vị (log)")
-    ax.legend(loc="upper left", fontsize=18, frameon=False, labelcolor=TXT)
+        ax.plot(x, w[:k], color=c, lw=lw)
+        y_end = max(w[k - 1], 2.5e-3)
+        for q in placed:  # nhãn cách nhau tối thiểu ~0,55 bậc log để không chồng chữ
+            if abs(np.log10(y_end) - np.log10(q)) < 0.55:
+                y_end = q / 10 ** 0.55 if y_end <= q else q * 10 ** 0.55
+        placed.append(y_end)
+        ax.annotate(f"{name} ({fmt_vi(f, 'pct0')})\n{fmt_vi(w[k - 1], 'x2' if w[k - 1] < 0.1 else 'x1')}",
+                    (k, y_end), xytext=(8, 0), textcoords="offset points", color=c, fontsize=17, weight="bold",
+                    va="center")
+    ax.set_yscale("log"); ax.set_xlim(0, bets * 1.32); ax.set_ylim(1e-3, 1e2)
+    ax.yaxis.set_major_formatter(mt.FuncFormatter(
+        lambda v, _: (f"{v:g}".replace(".", ",") + "x") if v < 1 else fmt_vi(v, "x0")))
+    ax.set_xticks([0, bets // 2, bets])
+    ax.set_xlabel("số lần đặt cược"); ax.set_ylabel("tài sản trung vị (lần vốn)")
 
 
 def surface_kelly(s, v):
-    f = np.linspace(0.0, 0.6, 50); W = np.linspace(0.45, 0.70, 40)
+    """Tốc độ tăng trưởng log mỗi lần cược theo (mức cược f, tỷ lệ thắng W). Sàn cắt ở mức âm vừa phải để
+    thấy rõ cái đỉnh; đường trắng = đỉnh f* = 2W−1 (R = 1), chấm cam = trường hợp trong video."""
+    f = np.linspace(0.0, 0.42, 60); W = np.linspace(0.50, 0.65, 40)
     F, Wm = np.meshgrid(f, W)
-    G = Wm * np.log1p(F) + (1 - Wm) * np.log(np.clip(1 - F, 1e-6, None))
-    return {"X": F * 100, "Y": Wm * 100, "Z": G * 100, "xl": "tỷ lệ cược f %", "yl": "tỷ lệ thắng W %", "zl": "tăng trưởng log %"}
+    G = Wm * np.log1p(F) + (1 - Wm) * np.log1p(-F)
+    floor = -0.03
+    Z = np.maximum(G, floor) * 100
+    wr = np.linspace(0.505, 0.65, 30); fr = np.clip(2 * wr - 1, 0, 0.42)
+    gr = wr * np.log1p(fr) + (1 - wr) * np.log1p(-fr)
+    w0, f0 = v["W"], v["f_star"]
+    g0 = w0 * np.log1p(f0) + (1 - w0) * np.log1p(-f0)
+    return {"X": F * 100, "Y": Wm * 100, "Z": Z, "xl": "mức cược f %", "yl": "tỷ lệ thắng W %",
+            "zl": "tăng trưởng/lần %", "ridge": (fr * 100, wr * 100, gr * 100 + 0.05),
+            "point": (f0 * 100, w0 * 100, g0 * 100 + 0.1, "đỉnh Kelly"), "label_z": 4.6}
 
 
 # =============================================================== registry

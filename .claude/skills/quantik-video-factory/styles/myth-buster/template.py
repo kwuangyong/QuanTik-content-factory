@@ -35,7 +35,7 @@ def build(ep, model, ctx):
         _card(img, BOT_BOX, "THỰC RA", fact, T["positive"], F.ease_out(F.seg(p, 0.1, 0.3)), name="fact")
 
     return [
-        S.hook(ep["hook"], kicker=ep.get("hook_kicker", "Hiểu lầm phổ biến")),
+        S.hook(ep["hook"], kicker=ep.get("hook_kicker", "Hiểu lầm phổ biến"), visual=ep.get("hook_visual", "auto")),
         Scene("myth", ep.get("myth_say", myth), d_myth, 3.5, texts=[myth, "BẠN NGHĨ"]),
         Scene("fact", fact, d_fact, 4.5, texts=[fact, "THỰC RA"]),
         S.chart(model, ep["beats"][2], title=ep.get("chart_title"), name="evidence", min_dur=5.0,

@@ -78,7 +78,8 @@ Quy tắc viết lời — mỗi quy tắc đều có lý do:
 - Trong LaTeX (`formula_numeric`) dùng `<<key>>` vì ngoặc nhọn đã thuộc về LaTeX.
 - Số không do code tính: số nhỏ dùng như chữ (0–10) tự qua; con số cố định của công thức ("252", "GARCH(1,1)") vào `allowed_literals`; sự kiện lịch sử vào `facts` kèm `source`.
 - Mỗi beat một ý, câu ngắn, đọc to được trong 6–10 giây. Beat mô tả đúng thứ đang hiện trên màn hình ("đường cam là…").
-- Hook gây tò mò bằng nghịch lý hoặc quan sát có thật, không bằng lời hứa lãi. Tham khảo `knowledge/hooks.md`; ưu tiên hook đã kiểm chứng.
+- **Hook phải nổ, ragebait, dễ hiểu ngay câu đầu** (yêu cầu chủ sản phẩm 11/2026): chọc thẳng vào niềm tin sai của người xem ("Khoe lãi {cagr_b}? *Xin lỗi*, chiến lược lãi {cagr_a} còn tốt hơn của bạn."), ≤ 16 từ, đọc xong trong khoảng 4 giây. Đánh dấu cụm khiêu khích bằng `*...*` → vẽ đỏ, gạch chân, rung và chớp khung; lời đọc và caption tự bỏ dấu sao. Ragebait nhưng **phải đúng sự thật** và vẫn theo `compliance.md`: không hứa lãi, không gọi mua/bán, không bịa số. Xem mẫu trong `knowledge/hooks.md`.
+- **Hình khớp lời.** `hook_visual` chọn hình minh hoạ cho hook (tag trong `knowledge/visuals.json`); `cold_open` là 1–2 câu chuyện kể ngay sau hook, mỗi câu một cảnh B-roll có hình đúng nội dung (nói giáo sư toán vào casino → hình bàn blackjack, nói Titanic → tảng băng). Không ghi `visual` thì pipeline tự khớp theo từ khoá. Hình code/Python (`code`) chỉ xuất hiện khi lời thật sự nói về code.
 - Kết bằng giới hạn của mô hình hoặc một câu mang về được. Không bao giờ chuyển thành lời khuyên mua/bán.
 - Thẻ cuối luôn là CTA theo dõi kênh (like, follow QuanTik để học quant mỗi ngày), pipeline tự gắn; trường `cta` trong kiến thức chỉ còn là câu dẫn link trong caption.
 - Hook phải tự hiểu được với người mới: đặt câu hỏi "X là gì? Vì sao nó quan trọng với bạn?" theo cách bất ngờ, không mở bằng số khô.
@@ -95,7 +96,7 @@ python batch.py --episode ../episodes/kelly-meme-tap03.json            # episode
 python batch.py --topics var_cvar --styles code-reel --prices FPT.csv --data-source "FPT, HOSE, 2023–2025"
 ```
 
-Tuỳ chọn: `--scale 0.5` (bản xem nhanh 540×960, dựng lại `--scale 1` trước khi đăng) · `--voice male` (giọng nam trầm: đặt biến môi trường `QT_PITCH=-12Hz QT_RATE=-5%` trước lệnh, chỉ engine edge) · `--voice-engine edge|gtts|espeak|silent` · `--music <file có giấy phép>|none` · `--no-log` (không ghi episodes.csv, dùng khi thử) · `--force` (dựng dù QA trước render thất bại — chỉ để xem, không đăng).
+Tuỳ chọn: `--scale 0.5` (bản xem nhanh 540×960, dựng lại `--scale 1` trước khi đăng) · `--voice male|female|en-male` (mặc định **male**: nam miền Bắc, sáng và thanh) · `--broll auto|draw|photo` (ảnh thật xen kẽ hoạt hoạ tự vẽ / chỉ vẽ / ưu tiên ảnh thật) · `--voice-engine edge|gtts|espeak|silent` · `--music <file có giấy phép>|none` · `--no-log` (không ghi episodes.csv, dùng khi thử) · `--force` (dựng dù QA trước render thất bại — chỉ để xem, không đăng).
 
 Mỗi video ra `social-output/<id>/` (thư mục gốc repo): `final.mp4`, `thumbnail.jpg`, `captions.md`, `subtitles.srt`, `qa_report.md`, `values.json` (số + code đã chạy), `layout.json`. Carousel ra `slides/1080x1920/` và `slides/1080x1350/`. Talking-head ra `teleprompter.mp4`, `script.md`, `broll/`. Một video mất khoảng 1–2 phút dựng.
 
@@ -103,12 +104,17 @@ Mỗi video ra `social-output/<id>/` (thư mục gốc repo): `final.mp4`, `thum
 
 **Dữ liệu thật:** `--prices` nhận CSV có cột `close`. Chỉ dùng để minh hoạ cách tính, nhãn nguồn hiện trên màn hình; vẫn không nói gì về hướng giá của mã đó. Không có `--prices` thì luôn là dữ liệu mô phỏng có seed cố định, và màn hình ghi "Dữ liệu mô phỏng".
 
-**Giọng đọc:** edge-tts (vi-VN-HoaiMyNeural / NamMinhNeural) cần Internet tới `speech.platform.bing.com`. Không vào được thì pipeline lùi về gTTS → espeak-ng → không giọng (phụ đề vẫn đầy đủ, thời lượng ước theo số chữ). Engine thực tế ghi trong `qa_report.md` — phải báo người dùng nếu video không có giọng, kèm cách khắc phục: chạy lệnh trên máy có Internet, hoặc thêm host đó vào allowlist mạng của môi trường.
+**Nhịp và giọng:** mặc định nhịp x1.25 (`TEMPO` trong `pipeline/core.py`, đổi bằng `QT_TEMPO`): giọng đọc +25%, cảnh ngắn lại, nhạc nền hồi hộp tự tổng hợp (nhịp tim + tích tắc, căng dần) ở 120 bpm. Giọng mặc định `vi-VN-NamMinhNeural` (nam, Hà Nội) nâng cao độ +8Hz cho sáng và thanh; ghi đè bằng `QT_VOICE`, `QT_PITCH`, `QT_RATE`.
+
+**Hình minh hoạ và B-roll:** `pipeline/illustrate.py` có 18 cảnh hoạt hoạ tự vẽ có người, vật, hiện tượng chuyển động (casino/blackjack, roulette, giáo sư bên bảng đen, biển lặng → bão, người say vs người lính, dắt chó, cửa sổ thời tiết, đua xe, tàu lượn, tảng băng, đốt tiền, đám đông hoảng loạn, trader, bảng điện mã giả, đồng xu, đa vũ trụ, tên lửa, laptop code). Xem nhanh: `python pipeline/illustrate.py casino /tmp/x.png`. Ảnh thật: thả ảnh có giấy phép vào `brand/assets/broll/<tag>/` (ưu tiên số một), hoặc pipeline tự tìm trên Wikimedia Commons (chỉ Public domain/CC0/CC BY/CC BY-SA, ghi công tự động vào caption). Không vào được Commons thì dùng hình vẽ. Code panel tự zoom theo dòng đang gõ rồi quét từng dòng; 3D mọc lên từ mặt phẳng, camera quay và nhấp nhô.
+
+**Giọng đọc:** edge-tts (vi-VN-NamMinhNeural mặc định / HoaiMyNeural) cần Internet tới `speech.platform.bing.com`. Không vào được thì pipeline lùi về gTTS → espeak-ng → không giọng (phụ đề vẫn đầy đủ, thời lượng ước theo số chữ). Engine thực tế ghi trong `qa_report.md` — phải báo người dùng nếu video không có giọng, kèm cách khắc phục: chạy lệnh trên máy có Internet, hoặc thêm host đó vào allowlist mạng của môi trường.
 
 ### 5. Kiểm tra
 
 1. QA tự chạy: số khớp code và cụm cấm **trước** khi render (sai thì dừng), định dạng và khung chữ **sau** render. Đọc `qa_report.md`; KHÔNG ĐẠT thì sửa episode và dựng lại, không lách bằng `--force`.
 2. Tự xem: mở `thumbnail.jpg` và trích 5–7 khung hình rải đều video (`ffmpeg -ss <t> -i final.mp4 -frames:v 1 f.png`), xem chữ có đè chart, chart có đọc được trên điện thoại, lời và hình có khớp không. QA máy không bắt được lỗi "nhìn xấu".
+3. Chart và 3D phải **tự giải thích, khớp lời**: nhãn đường đặt đúng tên lời đọc dùng (vd "½ Kelly, Kelly, 2×, 4×", không phải "f = 5%"), số cuối đường bằng đúng số được đọc, thứ lời đọc nhắc ("có một đỉnh") phải nhìn thấy được trên hình. Chuỗi khác biên độ thì chuẩn hoá và ghi rõ trên trục.
 
 ### 6. Trả kết quả trong chat
 

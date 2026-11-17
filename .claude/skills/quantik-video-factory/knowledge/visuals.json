@@ -1,0 +1,23 @@
+{
+  "_doc": "Bản đồ hình minh hoạ: tag → từ khoá (vi + en) để tự khớp hình với lời thoại, và truy vấn ảnh thật trên Wikimedia Commons. Thêm tag mới: thêm hàm draw_<tag> trong pipeline/illustrate.py. 'code' chỉ được chọn khi lời thật sự nói về code/Python.",
+  "tags": {
+    "casino": {"kw": ["casino", "sòng bài", "sòng bạc", "blackjack", "xì dách", "đếm bài", "lá bài", "chia bài", "las vegas", "cược", "đặt cược", "nhà cái", "dealer", "đánh bài"], "commons": "blackjack table casino"},
+    "roulette": {"kw": ["roulette", "vòng quay", "monte carlo", "may rủi", "quay số"], "commons": "roulette wheel casino"},
+    "professor": {"kw": ["giáo sư", "nhà toán học", "toán học", "bảng đen", "nobel", "ulam", "thorp", "nhà khoa học", "professor", "mathematician"], "commons": "chalkboard mathematics equations"},
+    "storm": {"kw": ["bão", "biển lặng", "sóng", "giông", "dồn dập", "cụm", "volatility clustering", "storm"], "commons": "storm waves sea"},
+    "drunk_walk": {"kw": ["người say", "loạng choạng", "bước ngẫu nhiên", "random walk", "người lính", "quán tính", "trí nhớ"], "commons": "night street lamp"},
+    "leash": {"kw": ["dắt chó", "sợi dây", "dây kéo", "kéo về", "quay về", "lò xo", "dây thun", "mean reversion"], "commons": "dog on leash walking"},
+    "weather": {"kw": ["thời tiết", "trời mưa", "trời nắng", "mang ô", "cửa sổ", "trạng thái ẩn", "nhìn thấy trạng thái", "weather"], "commons": "rain umbrella street"},
+    "race": {"kw": ["tay đua", "đua xe", "về đích", "phóng", "lao khỏi đường", "chạy đều", "race"], "commons": "motor racing track cars"},
+    "rollercoaster": {"kw": ["tàu lượn", "cú rơi", "lên xuống", "rollercoaster", "chóng mặt", "mất ngủ"], "commons": "roller coaster drop"},
+    "iceberg": {"kw": ["tảng băng", "titanic", "phần chìm", "phần nổi", "đuôi rủi ro", "dưới mặt nước", "iceberg"], "commons": "iceberg ocean"},
+    "money_burn": {"kw": ["cháy tài khoản", "mất sạch", "mất gần hết", "đốt tiền", "sụp", "phá sản", "xoá sổ", "mất trắng", "thua lỗ"], "commons": "burning banknotes"},
+    "panic": {"kw": ["hoảng loạn", "hoảng", "bán tháo", "sợ hãi", "fomo", "đám đông", "mất ngủ", "panic"], "commons": "stock exchange trading floor crowd"},
+    "trader": {"kw": ["nhà đầu tư", "trader", "giao dịch", "nhìn bảng", "màn hình", "đầu tư", "chơi chứng khoán"], "commons": "trader monitors stock charts"},
+    "board": {"kw": ["bảng điện", "sàn", "toàn sàn", "hose", "mã cổ phiếu", "quét", "screening", "bảng giá"], "commons": "stock ticker board"},
+    "coin": {"kw": ["tung đồng xu", "đồng xu", "xác suất", "ngẫu nhiên", "sấp ngửa", "may mắn", "xui"], "commons": "coin flip"},
+    "multiverse": {"kw": ["tương lai", "kịch bản", "nhánh", "ngã rẽ", "đa vũ trụ", "mô phỏng"], "commons": "crossroads road fork"},
+    "rocket": {"kw": ["tên lửa", "tăng nóng", "bay cao", "phóng lên", "to the moon"], "commons": "rocket launch"},
+    "code": {"kw": ["python", "dòng code", "đoạn code", "code này", "lập trình", "chạy code", "code chạy", "numpy"], "commons": "laptop programming code screen"}
+  }
+}

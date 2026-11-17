@@ -4,11 +4,13 @@ Main content area: x 60..940, y 300..1310 (the subtitle bar sits at 1326..1488, 
 """
 from __future__ import annotations
 
+import math
 import re
 from functools import lru_cache
 
 import frames as F
-from core import SAFE, THEME as T
+import illustrate as I
+from core import SAFE, THEME as T, strip_marks
 from render import Scene
 
 X0, X1 = SAFE["left"], SAFE["right"]
@@ -16,31 +18,96 @@ TOP, BOT = 300, 1310
 CW = X1 - X0
 
 
-def hook(text, say=None, kicker=None, min_dur=2.6):
-    """Big hook text that pops in word by word (first 1-2 s decide whether people keep watching)."""
+def _flash(img, k, color=None):
+    if k <= 0:
+        return
+    layer = F.Image.new("RGBA", img.size, (color or T["accent"]) + (int(110 * k),))
+    img.paste(layer, (0, 0), layer)
+
+
+def _visual(text, visual):
+    if visual == "auto":
+        return I.pick(text)
+    return visual or None
+
+
+def hook(text, say=None, kicker=None, min_dur=2.2, visual="auto", photo=None):
+    """Hook ragebait: chữ to đập vào từng từ, *cụm nhấn* đỏ + rung + chớp sáng, hình minh hoạ khớp câu ở nửa trên.
+    visual: tag (knowledge/visuals.json) | "auto" (khớp theo từ khoá) | None (chỉ chữ)."""
+    clean = strip_marks(text)
     words = text.split()
+    tag = _visual(clean, visual)
+    hl_at = next((i for i, w in enumerate(words) if w.startswith("*")), None)
 
     def draw(img, t, p):
-        k = max(1, int(len(words) * F.ease_out(F.seg(p, 0, 0.45)) + 0.999))
-        if kicker:
-            F.chip(img, (X0, 420), kicker, T["accent"], 28)
-        F.text_box(img, " ".join(words[:k]), (X0, 520, X1, 1200), "sans-black", 92, T["text"], "left", "middle",
-                   min_size=48, label="hook", spacing=1.12, hl_numbers=True)
-        w = int(CW * 0.35 * F.ease_out(F.seg(p, 0.1, 0.5)))
-        F.ImageDraw.Draw(img).rounded_rectangle([X0, 1230, X0 + w, 1242], radius=6, fill=T["accent"])
+        k = max(1, int(len(words) * F.ease_out(F.seg(p, 0, 0.32)) + 0.999))
+        land = F.seg(p, 0, 0.32) * len(words)  # vị trí từ đang đập vào
+        hit = (land - hl_at) if hl_at is not None else land - len(words) + 1
+        dx, dy = (int(10 * (1 - min(1, hit)) * math.sin(t * 90)), int(10 * (1 - min(1, hit)) * math.cos(t * 70))) \
+            if 0 < hit < 1 else (0, 0)
+        if tag:
+            zoom = 1.0 + 0.05 * F.ease_out(F.seg(p, 0, 0.5))
+            iw, ih = int(CW * zoom), int(500 * zoom)
+            F.paste(img, I.frame(tag, iw, ih, p, t, photo), (X0 + (CW - iw) // 2 + dx, 290 + (500 - ih) // 2 + dy))
+            box, size = (X0, 850, X1, 1300), 84  # chữ đứng yên trong vùng an toàn, chỉ hình rung
+            if kicker:
+                F.chip(img, (X0, 800), kicker, T["accent"], 26)
+        else:
+            box, size = (X0, 520, X1, 1200), 96
+            if kicker:
+                F.chip(img, (X0, 420), kicker, T["accent"], 28)
+        F.text_box(img, " ".join(words[:k]), box, "sans-black", size, T["text"], "left", "middle",
+                   min_size=44, label="hook", spacing=1.1, hl_numbers=True, marks=True)
+        if not tag:
+            w = int(CW * 0.35 * F.ease_out(F.seg(p, 0.1, 0.5)))
+            F.ImageDraw.Draw(img).rounded_rectangle([X0, 1230, X0 + w, 1242], radius=6, fill=T["accent"])
+        if 0 < hit < 1:
+            _flash(img, 1 - hit, T["negative"])
 
-    return Scene("hook", say if say is not None else text, draw, min_dur, texts=[text, kicker or ""])
+    return Scene("hook", strip_marks(say) if say is not None else clean, draw, min_dur, texts=[clean, kicker or ""])
 
 
-def statement(text, say=None, name="statement", color=None, size=72, min_dur=2.5, label_chip=None):
+def broll(say, visual=None, caption=None, name="broll", min_dur=2.6, photo=None, slot=0):
+    """Cảnh B-roll/kể chuyện: hình (ảnh thật hoặc hoạt hoạ) khớp đúng câu đang nói, chú thích ngắn bên dưới."""
+    tag = visual or I.pick(say) or "trader"
+    photo = photo if photo is not None else I.source(tag, slot)
+
+    def draw(img, t, p):
+        a = F.ease_out(F.seg(p, 0, 0.12))
+        h = 900 if caption else 1000
+        F.paste(img, I.frame(tag, CW, h, p, t, photo, seed=slot), (X0, 300 + int(40 * (1 - a))), alpha=a)
+        if caption:
+            F.text_box(img, caption, (X0, 1220, X1, BOT), "sans-black", 52, T["accent"], "left", "middle",
+                       min_size=30, label=f"{name}-caption", hl_numbers=True, marks=True)
+
+    sc = Scene(name, say, draw, min_dur, texts=[strip_marks(caption or "")])
+    sc.visual = tag
+    sc.photo = photo
+    return sc
+
+
+def statement(text, say=None, name="statement", color=None, size=72, min_dur=2.2, label_chip=None, visual="auto"):
+    """Một câu lớn. Nếu câu khớp một hình (casino, bão, tảng băng…) thì hình hoạ động chiếm nửa trên."""
+    clean = strip_marks(text)
+    tag = _visual(clean, visual)
+
     def draw(img, t, p):
         a = F.ease_out(F.seg(p, 0, 0.2))
+        if tag:
+            F.paste(img, I.frame(tag, CW, 480, p, t), (X0, 300), alpha=a)
+            if label_chip:
+                F.chip(img, (X0, 810), label_chip, T["accent"], 26)
+            F.text_box(img, text, (X0, 880 + 20 * (1 - a), X1, 1300), "sans-black", min(size, 62),
+                       color or T["text"], "left", "middle", min_size=36, label=name, hl_numbers=True, alpha=a,
+                       marks=True)
+            return
         if label_chip:
             F.chip(img, (X0, 440), label_chip, T["accent"], 26)
         F.text_box(img, text, (X0, 540 + 30 * (1 - a), X1, 1250), "sans-black", size, color or T["text"], "left",
-                   "middle", min_size=40, label=name, hl_numbers=True, alpha=a)
+                   "middle", min_size=40, label=name, hl_numbers=True, alpha=a, marks=True)
 
-    return Scene(name, say if say is not None else text, draw, min_dur, texts=[text, label_chip or ""])
+    return Scene(name, strip_marks(say) if say is not None else clean, draw, min_dur,
+                 texts=[clean, label_chip or ""])
 
 
 @lru_cache(maxsize=256)
@@ -75,8 +142,8 @@ def chart(model, say, title=None, name="chart", reveal=True, notes=None, min_dur
 
 
 @lru_cache(maxsize=512)
-def _surface_cached(model_id, azim, elev, w, h):
-    return F.surface_img(_MODELS[model_id], azim, elev, w, h)
+def _surface_cached(model_id, azim, elev, w, h, rise=10):
+    return F.surface_img(_MODELS[model_id], azim, elev, w, h, rise=rise / 10)
 
 
 def _model_formula(model):
@@ -114,18 +181,27 @@ def _fallback(model, say, name, caption, min_dur):
     return Scene(name, say, draw, min_dur, texts=[title, sub])
 
 
-def surface(model, say, caption=None, name="surface3d", min_dur=4.0, sweep=(-75, 15), elev=(32, 22)):
-    """Rotating 3D view of the model (density surface / regime trajectory); formula card if the topic has none."""
+def surface(model, say, caption=None, name="surface3d", min_dur=3.4, sweep=(-120, -35), elev=(32, 22), flex=True):
+    """3D linh hoạt: bề mặt mọc lên từ mặt phẳng, camera quay vừa đủ để thấy hình khối (không lật ra mặt sau),
+    độ cao nhấp nhô nhẹ. Không zoom-crop (cắt mất nhãn trục).
+    flex=False (carousel) → góc cố định."""
     if not getattr(model, "has_surface", True):
         return _fallback(model, say, name, caption, min_dur)
     _MODELS[id(model)] = model
     w, h = CW, 860
+    still_frame = sweep[0] == sweep[1]
 
     def draw(img, t, p):
         e = F.ease_in_out(p)
-        az = int(sweep[0] + (sweep[1] - sweep[0]) * e)
-        el = int(elev[0] + (elev[1] - elev[0]) * e)
-        F.paste(img, _surface_cached(id(model), az, el, w, h), (X0, 330))
+        az = sweep[0] + (sweep[1] - sweep[0]) * e
+        el = elev[0] + (elev[1] - elev[0]) * e
+        rise = 10
+        if flex and not still_frame:
+            el += 4 * math.sin(p * math.pi * 2)
+            rise = max(1, min(10, int(round(10 * F.ease_out(F.seg(p, 0, 0.3))))))
+            az = int(az / 2) * 2  # bước 2° để cache, vẫn mượt ở 30 fps
+        im = _surface_cached(id(model), int(az), int(el), w, h, rise)
+        F.paste(img, im, (X0, 330))
         if caption:
             F.text_box(img, caption, (X0, 1200, X1, BOT), "sans-bold", 36, T["muted"], "left", "top", min_size=26,
                        label=f"{name}-caption", hl_numbers=True)
@@ -148,17 +224,30 @@ def formula(latex, say, name="formula", caption=None, min_dur=3.0, size=72, wipe
     return Scene(name, say, draw, min_dur, texts=[caption or ""])
 
 
-def code_typing(model, say, name="code", min_dur=5.0, title=None, latex=None):
-    """Type out the exact source that produced the numbers; the formula it implements fades in below."""
+def code_typing(model, say, name="code", min_dur=4.0, title=None, latex=None):
+    """Gõ đúng code đã tính ra số. Camera linh hoạt: zoom theo con trỏ khi gõ, trôi nhẹ, rồi lùi ra và quét
+    từng dòng như đang chạy; công thức nó hiện thực hiện dần bên dưới."""
     code = model.code
     total = len(code)
+    n_lines = max(1, len(code.splitlines()))
+    title = title or getattr(model, "code_title", "") or f"{model.topic}.py"
 
     def draw(img, t, p):
-        n = int(total * F.ease_in_out(F.seg(p, 0, 0.85)))
-        im = F.fit_width(F.code_panel(code, CW, chars=n if n < total else None,
-                                      title=title or getattr(model, "code_title", "") or f"{model.topic}.py"),
-                         CW, 760)
-        F.paste(img, im, (X0, 330))
+        typing = F.seg(p, 0, 0.7)
+        n = int(total * F.ease_in_out(typing))
+        cur_line = code[:n].count("\n")
+        hl = None if p < 0.72 else int(F.seg(p, 0.72, 1.0) * n_lines * 0.999)
+        im = F.fit_width(F.code_panel(code, CW, chars=n if n < total else None, hl_line=hl, title=title), CW, 760)
+        # zoom vào dòng đang gõ, lùi ra khi gõ xong
+        z = 1.0 + 0.22 * math.sin(math.pi * min(1.0, typing * 1.05))
+        if z > 1.01:
+            cw, ch = int(im.width / z), int(im.height / z)
+            fy = (70 + (im.height - 100) * (cur_line + 0.5) / n_lines)
+            y0 = int(min(max(0, fy - ch / 2), im.height - ch))
+            x0 = int((im.width - cw) * 0.15)
+            im = im.crop((x0, y0, x0 + cw, y0 + ch)).resize((im.width, im.height), F.Image.BILINEAR)
+        drift = int(8 * math.sin(t * 1.7))
+        F.paste(img, im, (X0, 330 + drift))
         if latex:
             y = 330 + im.height + 40
             fm = F.fit_width(F.math_img(latex, 54, F.hex_(T["accent"])), CW, BOT - y)

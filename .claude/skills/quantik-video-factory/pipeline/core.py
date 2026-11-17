@@ -16,6 +16,12 @@ DEFAULT_OUT = REPO / "social-output"
 W, H = 1080, 1920
 FPS = 30
 
+# Nhịp dựng: 1.25 = nhanh hơn 25% so với nhịp giảng giải cũ (giọng đọc +25%, cảnh ngắn lại, nhạc nhanh hơn).
+# Đổi bằng biến môi trường QT_TEMPO (ví dụ QT_TEMPO=1 để về nhịp cũ).
+import os as _os
+
+TEMPO = float(_os.environ.get("QT_TEMPO", "1.25"))
+
 # Vertical safe zone for TikTok / Reels / Shorts overlays (in 1080x1920 coordinates).
 # Top: status bar + "Following/For you"; bottom: caption, music ticker; right: like/share rail.
 SAFE = {"left": 60, "top": 170, "right": 940, "bottom": 1500}
@@ -33,6 +39,14 @@ THEME = {
     "negative": (240, 128, 136),
     "neutral": (227, 193, 108),
 }
+
+
+_MARK = re.compile(r"\*([^*]+)\*")
+
+
+def strip_marks(text: str) -> str:
+    """Hook có thể đánh dấu *cụm nhấn* (vẽ màu đỏ, rung); lời đọc, phụ đề và caption dùng bản không dấu sao."""
+    return _MARK.sub(r"\1", text) if isinstance(text, str) else text
 
 
 def hex_(c):

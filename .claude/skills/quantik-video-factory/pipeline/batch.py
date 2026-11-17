@@ -26,7 +26,10 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(HERE.parent / "qa"))
 
-from core import DEFAULT_OUT, KNOWLEDGE, STYLES, disclaimer, fill_tree, load_json, load_model_kb, save_json  # noqa: E402
+from core import (DEFAULT_OUT, KNOWLEDGE, STYLES, TEMPO, disclaimer, fill_tree, load_json, load_model_kb,  # noqa: E402
+                  save_json, strip_marks)
+import illustrate as I  # noqa: E402
+import scenes as SC  # noqa: E402
 from models import TOPICS, Model, load_returns  # noqa: E402
 import catalog as C  # noqa: E402
 import term_topic as TT  # noqa: E402
@@ -71,10 +74,16 @@ def build_episode(topic, style, override=None):
     return ep, mod
 
 
-def captions(ep, disc):
+def captions(ep, disc, credits=""):
     tags = " ".join("#" + h.lstrip("#") for h in ep.get("hashtags", []))
-    title = ep.get("title", ep["hook"])
-    cap = ep.get("caption", ep["hook"])
+    hook = strip_marks(ep["hook"])
+    title = strip_marks(ep.get("title", hook))
+    # caption mở bằng chính câu hook (ragebait) để giữ người lướt feed, rồi mới tới nội dung
+    cap = strip_marks(ep.get("caption", hook))
+    if ep.get("caption_hook", True) and not cap.startswith(hook):
+        cap = hook + "\n\n" + cap
+    if credits:
+        disc = disc + "\n\n" + credits
     yt_title = (title[:90] + " #Shorts") if len(title) <= 90 else title[:88] + "… #Shorts"
     return f"""# Caption — {ep['id']}
 
@@ -118,7 +127,7 @@ def log_episode(ep, out_dir, status, duration):
         if new:
             w.writerow(["id", "date", "topic", "style", "title", "hook", "duration_s", "status", "file",
                         "views_tiktok", "views_reels", "views_youtube", "notes"])
-        w.writerow([ep["id"], dt.date.today().isoformat(), ep["topic"], ep["style"], ep.get("title", ""), ep["hook"],
+        w.writerow([ep["id"], dt.date.today().isoformat(), ep["topic"], ep["style"], ep.get("title", ""), strip_marks(ep["hook"]),
                     f"{duration:.0f}", status, str(out_dir), "", "", "", ""])
 
 
@@ -158,9 +167,22 @@ def _prepare(topic, style, override=None, returns=None):
     return ep, mod, model
 
 
-def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice="female", music=None,
-         scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True):
+def insert_cold_open(scenes, ep, kind, style):
+    """Mở bằng chuyện kể (giáo sư vào casino, Titanic…) sau hook: mỗi câu một cảnh B-roll có hình khớp lời.
+    ep["cold_open"] = [{"say": ..., "visual": tag | bỏ trống = tự khớp, "caption": chữ ngắn trên màn hình}]."""
+    items = ep.get("cold_open") or []
+    if kind != "video" or not items or style in ("talking-head-script", "meme-quant"):
+        return scenes
+    at = 1 if scenes and scenes[0].name == "hook" else 0
+    extra = [SC.broll(it["say"], it.get("visual"), it.get("caption"), name=f"story{i + 1}", slot=i)
+             for i, it in enumerate(items)]
+    return scenes[:at] + extra + scenes[at:]
+
+
+def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice=None, music=None,
+         scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True, broll_mode="auto"):
     t_start = time.time()
+    I.configure(broll_mode, fetch=broll_mode != "draw")
     ep, mod, model = prepare(topic, style, override, returns)
     out = Path(out_root) / ep["id"]
     work = out / "_work"
@@ -183,8 +205,11 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
     # ---- pre-render QA on every word that will be heard or seen
     texts = result.get("texts", []) if isinstance(result, dict) else []
     scenes = result["scenes"] if isinstance(result, dict) else result
+    scenes = insert_cold_open(scenes, filled, kind, style)
+    if isinstance(result, dict):
+        result["scenes"] = scenes
     corpus = [s.say for s in scenes] + [x for s in scenes for x in s.texts] + texts
-    corpus += [filled.get("caption", ""), filled.get("title", "")]
+    corpus += [strip_marks(filled.get("caption", "")), strip_marks(filled.get("title", ""))]
     save_json(out / "narration.json", {"scenes": [{"name": s.name, "say": s.say, "texts": s.texts} for s in scenes],
                                        "extra": texts})
     nums = check_numbers.check(corpus, model.values, model.formats, rendered, filled.get("allowed_literals", []),
@@ -207,7 +232,8 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
             wav = work / f"{i:02d}-{s.name}.wav"
             u, sec, _ = V.synth(s.say, wav, used, voice)
             s.audio = str(wav) if u != "silent" else None
-        s.duration = max(s.min_dur, sec + 0.45)
+        # nhịp nhanh: cảnh ngắn lại theo TEMPO, chỉ chừa khoảng thở rất ngắn sau lời
+        s.duration = max(s.min_dur / TEMPO, sec + 0.3)
     if hasattr(mod, "after_timing"):
         mod.after_timing(scenes, filled, model, ctx)
 
@@ -227,9 +253,11 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
                                        expect_audio=True)
         if hasattr(mod, "export"):
             mod.export(scenes, filled, model, ctx)
-    (out / "captions.md").write_text(captions(filled, disc), encoding="utf-8")
+    credits = __import__("broll").credit_line(I.USED)
+    (out / "captions.md").write_text(captions(filled, disc, credits), encoding="utf-8")
     status = "ĐẠT" if not (nums["fail"] or banned["fail"] or fmt["fail"]) else "KHÔNG ĐẠT"
-    report.write(out, ep, nums, banned, fmt, status=status, extra={"Giọng đọc": used + (" — " + "; ".join(errors) if errors else ""),
+    report.write(out, ep, nums, banned, fmt, status=status, extra={"Giọng đọc": used + f" ({voice or V.DEFAULT_VOICE}, tốc độ {V.RATE})" + (" — " + "; ".join(errors) if errors else ""),
+                                                                   "Ảnh thật (B-roll)": credits or "không dùng — toàn bộ hình tự vẽ",
                                                                    "Thời lượng": f"{duration:.1f}s",
                                                                    "Thời gian dựng": f"{time.time() - t_start:.0f}s"})
     print(report.summary(nums, banned, fmt))
@@ -246,7 +274,9 @@ def main():
     ap.add_argument("--episode", action="append", default=[], help="episode JSON (needs topic + style)")
     ap.add_argument("--out", default=str(DEFAULT_OUT))
     ap.add_argument("--voice-engine", default="auto", choices=["auto"] + V.ENGINES)
-    ap.add_argument("--voice", default="female", help="female | male | any edge-tts voice id")
+    ap.add_argument("--voice", default=V.DEFAULT_VOICE, help="male (mặc định, nam miền Bắc) | female | en-male | edge-tts voice id")
+    ap.add_argument("--broll", default="auto", choices=["auto", "draw", "photo"],
+                    help="auto = xen kẽ ảnh thật (Wikimedia, giấy phép tự do) và hoạt hoạ tự vẽ; draw = chỉ vẽ; photo = ưu tiên ảnh thật")
     ap.add_argument("--music", default=None, help="path to a licensed track, or 'none'")
     ap.add_argument("--scale", type=float, default=1.0, help="0.5 = fast 540x960 preview")
     ap.add_argument("--fps", type=int, default=30)
@@ -276,7 +306,7 @@ def main():
         try:
             results.append(make(topic, style, override, a.out, a.voice_engine, a.voice, a.music, a.scale, a.fps,
                                 returns, ("Dữ liệu thật: " + a.data_source) if a.data_source else None, a.force,
-                                not a.no_log))
+                                not a.no_log, a.broll))
         except SystemExit as ex:  # unsupported topic × style: report and keep going with the batch
             print(f"  ✗ {ex}")
             results.append({"id": f"{topic}-{style}", "ok": False, "error": str(ex)})

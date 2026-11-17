@@ -36,8 +36,21 @@ W = 55%, R = 1 → f* = 10%. 2.000 người × 500 lần đặt, seed 4. Trung v
 {
   "tag": "KELLY",
   "title": "Có lợi thế mà vẫn mất tiền? Bài toán Kelly",
-  "hook": "Thắng {W} mỗi lần, có lợi thế rõ ràng. Vẫn có cách khiến bạn mất gần hết.",
+  "hook": "Có lợi thế vẫn *cháy tài khoản*? Một giáo sư toán từng khiến sòng bài phải đổi luật.",
+  "hook_visual": "casino",
   "kicker": "Kelly criterion",
+  "cold_open": [
+    {
+      "say": "Giáo sư toán Edward Thorp ngồi vào bàn blackjack ở Las Vegas và bắt đầu đếm bài.",
+      "visual": "casino",
+      "caption": "Giáo sư toán vào *sòng bài*"
+    },
+    {
+      "say": "Ông dùng công thức Kelly để biết nên cược bao nhiêu. Sòng bài phải đổi luật.",
+      "visual": "casino",
+      "caption": "Sòng bài phải *đổi luật*"
+    }
+  ],
   "beats": [
     "Công thức Kelly: tỷ lệ thắng trừ tỷ lệ thua chia cho tỷ lệ lãi lỗ. Code mô phỏng 2.000 người, mỗi người đặt {bets} lần, với bốn mức cược khác nhau.",
     "Với tỷ lệ thắng {W}, Kelly là {f_star} vốn mỗi lần. Đặt đúng mức đó, tài sản trung vị nhân {med_full}. Đặt gấp đôi, chỉ còn {med_double}.",
@@ -45,14 +58,33 @@ W = 55%, R = 1 → f* = 10%. 2.000 người × 500 lần đặt, seed 4. Trung v
     "Bề mặt 3D là tốc độ tăng trưởng theo mức cược và tỷ lệ thắng. Có một đỉnh. Vượt qua đỉnh, càng đặt nhiều càng nghèo."
   ],
   "outputs": [
-    {"label": "tỷ lệ thắng W", "key": "W"},
-    {"label": "Kelly f*", "key": "f_star", "highlight": true},
-    {"label": "trung vị, ½ Kelly", "key": "med_half"},
-    {"label": "trung vị, Kelly", "key": "med_full"},
-    {"label": "trung vị, 2× Kelly", "key": "med_double"},
-    {"label": "trung vị, 4× Kelly", "key": "med_quad"}
+    {
+      "label": "tỷ lệ thắng W",
+      "key": "W"
+    },
+    {
+      "label": "Kelly f*",
+      "key": "f_star",
+      "highlight": true
+    },
+    {
+      "label": "trung vị, ½ Kelly",
+      "key": "med_half"
+    },
+    {
+      "label": "trung vị, Kelly",
+      "key": "med_full"
+    },
+    {
+      "label": "trung vị, 2× Kelly",
+      "key": "med_double"
+    },
+    {
+      "label": "trung vị, 4× Kelly",
+      "key": "med_quad"
+    }
   ],
-  "takeaway": "Lợi thế chưa đủ. Quy mô vị thế quyết định bạn có sống sót để lợi thế phát huy hay không. Thực tế, dân quant thường dùng nửa Kelly.",
+  "takeaway": "Lợi thế chưa đủ. Cỡ cược quyết định bạn có sống sót hay không. Dân quant thường chỉ dùng nửa Kelly.",
   "cta": "Xem Kelly và các tham số quản lý vốn trong phân tích Quant tại quantik.io.vn",
   "myth": "Có lợi thế thì càng đặt nhiều càng giàu nhanh.",
   "fact": "Sai. Cùng tỷ lệ thắng {W}, đặt {f_star} cho trung vị {med_full}; đặt {double_kelly} chỉ còn {med_double}.",
@@ -63,9 +95,21 @@ W = 55%, R = 1 → f* = 10%. 2.000 người × 500 lần đặt, seed 4. Trung v
     "truth": "Đặt {quad_kelly} mỗi lần, tài sản trung vị gần như về 0 dù có lợi thế."
   },
   "story": [
-    {"at": 0.2, "label": "Xuất phát", "say": "Bốn nhóm người, cùng lợi thế, chỉ khác mức cược."},
-    {"at": 0.6, "label": "Tách đôi", "say": "Nhóm cược vừa phải tăng đều. Nhóm cược lớn rung lắc dữ dội."},
-    {"at": 1.0, "label": "Kết quả", "say": "Kelly nhân {med_full}. Gấp đôi Kelly còn {med_double}. Gấp bốn gần như về 0."}
+    {
+      "at": 0.2,
+      "label": "Xuất phát",
+      "say": "Bốn nhóm người, cùng lợi thế, chỉ khác mức cược."
+    },
+    {
+      "at": 0.6,
+      "label": "Tách đôi",
+      "say": "Nhóm cược vừa phải tăng đều. Nhóm cược lớn rung lắc dữ dội."
+    },
+    {
+      "at": 1.0,
+      "label": "Kết quả",
+      "say": "Kelly nhân {med_full}. Gấp đôi Kelly còn {med_double}. Gấp bốn gần như về 0."
+    }
   ],
   "formula": "f^*=W-\\frac{1-W}{R}",
   "formula_parts": [
@@ -75,12 +119,39 @@ W = 55%, R = 1 → f* = 10%. 2.000 người × 500 lần đặt, seed 4. Trung v
   ],
   "formula_numeric": "f^*=<<W>>-\\frac{1-<<W>>}{1}=<<f_star>>",
   "symbols": [
-    {"sym": "W", "say": "Tỷ lệ thắng mỗi lần."},
-    {"sym": "R", "say": "Lãi trung bình chia lỗ trung bình."},
-    {"sym": "f^*", "say": "Tỷ lệ vốn đặt mỗi lần để tài sản tăng nhanh nhất về dài hạn."}
+    {
+      "sym": "W",
+      "say": "Tỷ lệ thắng mỗi lần."
+    },
+    {
+      "sym": "R",
+      "say": "Lãi trung bình chia lỗ trung bình."
+    },
+    {
+      "sym": "f^*",
+      "say": "Tỷ lệ vốn đặt mỗi lần để tài sản tăng nhanh nhất về dài hạn."
+    }
   ],
   "caption": "Có lợi thế vẫn có thể mất tiền nếu đặt quá tay. Kelly tìm mức cược tối ưu, và vì sao dân quant chỉ dùng một nửa. Code chạy thật, mô phỏng seed cố định.",
-  "hashtags": ["quant", "kelly", "quanlyvon", "chungkhoan", "dautu", "QuanTik"],
-  "allowed_literals": ["2.000", "1", "0", "bốn mức"]
+  "hashtags": [
+    "quant",
+    "kelly",
+    "quanlyvon",
+    "chungkhoan",
+    "dautu",
+    "QuanTik"
+  ],
+  "allowed_literals": [
+    "2.000",
+    "1",
+    "0",
+    "bốn mức"
+  ],
+  "facts": {
+    "thorp": {
+      "value": "Edward Thorp đếm bài blackjack và dùng tiêu chuẩn Kelly để định cỡ cược; sách Beat the Dealer khiến sòng bài đổi luật",
+      "source": "Thorp, Beat the Dealer (1962); Poundstone, Fortune's Formula (2005)"
+    }
+  }
 }
 ```

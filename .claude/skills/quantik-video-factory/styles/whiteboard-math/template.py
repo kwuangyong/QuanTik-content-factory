@@ -34,7 +34,7 @@ def build(ep, model, ctx):
     hi_val = fmt_vi(model.values[hi["key"]], hi.get("fmt") or model.formats.get(hi["key"], "num2"))
     parts = ep["formula_parts"]
     full = parts[-1]
-    out = [S.hook(ep["hook"], kicker=ep.get("kicker"))]
+    out = [S.hook(ep["hook"], kicker=ep.get("kicker"), visual=ep.get("hook_visual", "auto"))]
 
     def d_write(img, t, p):
         _board(img)

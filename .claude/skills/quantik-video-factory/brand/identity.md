@@ -37,11 +37,20 @@ Màu luôn đi cùng chữ hoặc số (giống quy tắc giao diện web): khô
 - Nói như một người làm quant giải thích cho bạn thông minh nhưng không học tài chính. Câu ngắn, động từ mạnh, mỗi câu một ý.
 - Luôn đi từ trực giác → công thức → con số do code tính → giới hạn của mô hình.
 - Dùng “mình” và “bạn”. Thuật ngữ tiếng Anh giữ nguyên lần đầu kèm nghĩa Việt: “volatility, tức độ biến động”.
-- Không hô hào, không hứa hẹn, không giật tít sai sự thật. Hook gây tò mò bằng nghịch lý có thật (“Sharpe cao hơn mà lãi ít hơn?”), không bằng lời hứa.
+- **Hook: ragebait, nổ, dễ hiểu ngay** (yêu cầu chủ sản phẩm 11/2026). Câu đầu chọc thẳng vào niềm tin sai hoặc thói quen của người xem: “Nghĩ VaR là lỗ tối đa? *Sai bét.*”, “Khoe lãi cao? *Xin lỗi*, chiến lược lãi ít hơn còn tốt hơn của bạn.” Gắt với *niềm tin*, không xúc phạm *con người*; không hô hào mua bán, không hứa lãi, không bịa số. Khiêu khích được, nói sai thì không.
+- Nhịp nhanh: câu ngắn, cắt cảnh nhanh (x1.25), mở bằng chuyện có hình (giáo sư vào casino, Titanic…) rồi mới vào công thức.
 - Kết bằng một câu “mang về được” và giới hạn của mô hình.
 
 Ví dụ tốt: “Biến động không rải đều. Nó đi thành cụm. GARCH đo đúng điều đó.”
-Ví dụ tránh: “Bí kíp GARCH giúp bạn bắt đáy chuẩn 100%!”
+Ví dụ tránh: “Bí kíp GARCH giúp bạn bắt đáy chuẩn 100%!” (hứa hẹn sai, không phải ragebait).
+
+## Giọng đọc
+
+Nam, giọng Bắc, sáng và thanh: edge-tts `vi-VN-NamMinhNeural`, cao độ +8Hz, tốc độ +25%. Bản tiếng Anh: `en-US-AndrewNeural` (`--voice en-male`).
+
+## Hình ảnh
+
+Mỗi câu thoại có hình khớp nghĩa: chuyện casino → bàn blackjack; biến động thành cụm → biển lặng rồi bão; rủi ro đuôi → tảng băng. Hình code/Python chỉ khi lời nói về code. Nguồn: hoạt hoạ tự vẽ (`pipeline/illustrate.py`), ảnh của kênh (`brand/assets/broll/<tag>/`), ảnh Wikimedia giấy phép tự do (tự ghi công trong caption).
 
 ## Sản phẩm (dùng cho CTA và video quảng bá)
 

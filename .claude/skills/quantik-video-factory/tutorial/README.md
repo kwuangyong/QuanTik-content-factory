@@ -4,7 +4,7 @@ Dùng khi người dùng muốn video **hướng dẫn dùng QuanTik** (tạo t�
 không phải video giải thích một mô hình. Pipeline `pipeline/batch.py` KHÔNG làm được việc này: nó dựng cảnh
 từ code mô hình, còn video hướng dẫn cần **giao diện thật** của web.
 
-Kết quả mẫu (11/2026): 1080×1920, 2:28, 20 beat, giọng HoaiMy, phụ đề, CTA đọc nguyên văn của người dùng.
+Kết quả mẫu (11/2026): 1080×1920, 2:28, 20 beat, giọng HoaiMy (bản cũ; nay mặc định NamMinh nam miền Bắc, +25%), phụ đề, CTA đọc nguyên văn của người dùng.
 
 ## Chạy
 

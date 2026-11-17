@@ -19,7 +19,7 @@ def _swipe(img, p):
 
 def build(ep, model, ctx):
     def cover(img, t, p):
-        S.hook(ep["hook"], kicker=ep.get("kicker")).draw(img, 99, 1.0)
+        S.hook(ep["hook"], kicker=ep.get("kicker"), visual=ep.get("hook_visual", "auto")).draw(img, 99, 1.0)
         _swipe(img, p)
 
     def myth_fact(img, t, p):

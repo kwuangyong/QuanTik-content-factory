@@ -28,7 +28,7 @@ def chapter(model, idx, prev_at, item, n_total):
 
 def build(ep, model, ctx):
     story = ep["story"]
-    out = [S.hook(ep["hook"], kicker=ep.get("kicker"))]
+    out = [S.hook(ep["hook"], kicker=ep.get("kicker"), visual=ep.get("hook_visual", "auto"))]
     prev = 0.0
     for i, item in enumerate(story, 1):
         out.append(chapter(model, i, prev, item, len(story)))

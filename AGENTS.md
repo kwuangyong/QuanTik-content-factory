@@ -25,7 +25,9 @@ Chọn nhánh theo yêu cầu:
    cấm. Caption và thẻ cuối luôn có câu miễn trừ. Video sản phẩm dùng **mã cổ phiếu bịa** (QTA…, QTV…).
 2. **Số phải có nguồn**: số trong video mô hình đi qua placeholder `{key}` do code tính; QA chặn số gõ tay.
 3. **Giá gói**: đối chiếu `https://quantik.io.vn/plans` trước khi nhắc. Ưu đãi thay đổi theo thời gian.
-4. Giọng văn, màu, font, vùng an toàn khung hình: `brand/identity.md`.
+4. Giọng văn, màu, font, vùng an toàn khung hình: `brand/identity.md`. Mọi video (Việt và Anh): hook ragebait
+   nổ ngay câu đầu (đúng sự thật), hình minh hoạ/B-roll khớp từng câu thoại, code Python chỉ hiện khi lời nói về code,
+   nhịp x1.25, giọng nam miền Bắc sáng (`vi-VN-NamMinhNeural`).
 5. Không dùng tài khoản/thông tin cá nhân của người dùng để đăng nhập site thật; màn cần đăng nhập thì chạy
    giao diện production local với API giả (xem `tutorial/README.md`).
 6. Output vào `social-output/<id>/` (đã gitignore). Trả về trong chat: đường dẫn file, thời lượng, kết luận QA,
@@ -35,7 +37,8 @@ Chọn nhánh theo yêu cầu:
 
 - Python 3.10+, `pip install -r .claude/skills/quantik-video-factory/requirements.txt edge-tts`, ffmpeg.
 - Video hướng dẫn cần thêm Node 20.9+ và Chromium cho Playwright.
-- Mạng: `speech.platform.bing.com` (giọng đọc edge-tts), `quantik.io.vn`, `github.com` (clone `QuanTik---Design`).
+- Mạng: `speech.platform.bing.com` (giọng đọc edge-tts), `quantik.io.vn`, `github.com` (clone `QuanTik---Design`),
+  `commons.wikimedia.org` + `upload.wikimedia.org` (ảnh thật B-roll, tuỳ chọn; thiếu thì dùng hình tự vẽ).
   Không có mạng tới TTS thì pipeline lùi về gTTS → espeak → không giọng; phải báo người dùng.
 - Repo nguồn liên quan (chỉ đọc): `kwuangyong/QuanTik---Design` (web production, Next.js),
   `kwuangyong/QuanTik-website` (engine quant `backend/quant_engine/quant.py`; frontend React cũ, không dùng để quay).

@@ -35,8 +35,21 @@ S₀ = 100, μ = 10%/năm, σ = 35%/năm (cổ phiếu biến động cao), 1.00
 {
   "tag": "MONTE CARLO",
   "title": "1.000 tương lai của một cổ phiếu: Monte Carlo bằng code chạy thật",
-  "hook": "Cùng một cổ phiếu, {n_paths} tương lai khác nhau. Bao nhiêu kết thúc ở mức lỗ?",
+  "hook": "Bạn cược vào *một* tương lai. Code chạy {n_paths} tương lai. Bao nhiêu cái lỗ?",
+  "hook_visual": "multiverse",
   "kicker": "Mô phỏng Monte Carlo",
+  "cold_open": [
+    {
+      "say": "Nhà toán học Stanislaw Ulam nằm dưỡng bệnh, chơi bài solitaire và tự hỏi: xác suất thắng một ván là bao nhiêu?",
+      "visual": "professor",
+      "caption": "Một nhà toán học và ván bài"
+    },
+    {
+      "say": "Không giải nổi bằng giấy bút, ông cho máy chơi thật nhiều ván rồi đếm. Phương pháp được đặt tên theo sòng bạc Monte Carlo.",
+      "visual": "roulette",
+      "caption": "Đặt tên theo *sòng bạc*"
+    }
+  ],
   "beats": [
     "Code sinh {n_paths} đường giá, mỗi đường {days} phiên, từ giá {s0}, biến động {sigma} một năm. Mỗi phiên là một cú tung xúc xắc chuẩn.",
     "Kết quả: phân vị 5 là {p5}, trung vị {p50}, phân vị 95 là {p95}. Có {prob_loss} số đường kết thúc dưới giá ban đầu.",
@@ -44,11 +57,27 @@ S₀ = 100, μ = 10%/năm, σ = 35%/năm (cổ phiếu biến động cao), 1.00
     "Nhìn 3D: phân phối giá bè dần theo thời gian. Càng xa hôm nay, vùng có thể xảy ra càng rộng."
   ],
   "outputs": [
-    {"label": "số đường mô phỏng", "key": "n_paths"},
-    {"label": "phân vị 5", "key": "p5"},
-    {"label": "trung vị", "key": "p50"},
-    {"label": "phân vị 95", "key": "p95"},
-    {"label": "tần suất lỗ", "key": "prob_loss", "highlight": true}
+    {
+      "label": "số đường mô phỏng",
+      "key": "n_paths"
+    },
+    {
+      "label": "phân vị 5",
+      "key": "p5"
+    },
+    {
+      "label": "trung vị",
+      "key": "p50"
+    },
+    {
+      "label": "phân vị 95",
+      "key": "p95"
+    },
+    {
+      "label": "tần suất lỗ",
+      "key": "prob_loss",
+      "highlight": true
+    }
   ],
   "takeaway": "Monte Carlo không cho bạn một con số dự báo. Nó cho bạn hình dạng của rủi ro, theo đúng giả định bạn đưa vào.",
   "cta": "Xem vùng giá mô phỏng cho từng mã trong phân tích Quant tại quantik.io.vn",
@@ -61,9 +90,21 @@ S₀ = 100, μ = 10%/năm, σ = 35%/năm (cổ phiếu biến động cao), 1.00
     "truth": "Ở đây {prob_loss} số tương lai mô phỏng kết thúc ở mức lỗ."
   },
   "story": [
-    {"at": 0.15, "label": "Cùng xuất phát", "say": "Tất cả {n_paths} tương lai bắt đầu ở cùng giá {s0}."},
-    {"at": 0.55, "label": "Toả ra", "say": "Mỗi phiên, nhiễu ngẫu nhiên đẩy các đường xa nhau dần."},
-    {"at": 1.0, "label": "Phiên {days}", "say": "Đến phiên {days}, vùng 5 đến 95 trải từ {p5} đến {p95}. Đường tệ nhất về {worst}."}
+    {
+      "at": 0.15,
+      "label": "Cùng xuất phát",
+      "say": "Tất cả {n_paths} tương lai bắt đầu ở cùng giá {s0}."
+    },
+    {
+      "at": 0.55,
+      "label": "Toả ra",
+      "say": "Mỗi phiên, nhiễu ngẫu nhiên đẩy các đường xa nhau dần."
+    },
+    {
+      "at": 1.0,
+      "label": "Phiên {days}",
+      "say": "Đến phiên {days}, vùng 5 đến 95 trải từ {p5} đến {p95}. Đường tệ nhất về {worst}."
+    }
   ],
   "formula": "\\widehat{E}[f(X)]=\\frac{1}{M}\\sum_{m=1}^{M}f(X^{(m)})",
   "formula_parts": [
@@ -73,12 +114,36 @@ S₀ = 100, μ = 10%/năm, σ = 35%/năm (cổ phiếu biến động cao), 1.00
   ],
   "formula_numeric": "\\widehat{P}(S_T<S_0)=\\frac{1}{<<n_paths>>}\\sum_{m}\\mathbf{1}[S_T^{(m)}<S_0]=<<prob_loss>>",
   "symbols": [
-    {"sym": "X^{(m)}", "say": "Một tương lai mô phỏng, đánh số m."},
-    {"sym": "f(\\cdot)", "say": "Điều bạn muốn đo: giá cuối kỳ, có lỗ hay không."},
-    {"sym": "\\frac{1}{M}\\sum", "say": "Lấy trung bình trên M tương lai. M càng lớn, ước lượng càng ổn định."}
+    {
+      "sym": "X^{(m)}",
+      "say": "Một tương lai mô phỏng, đánh số m."
+    },
+    {
+      "sym": "f(\\cdot)",
+      "say": "Điều bạn muốn đo: giá cuối kỳ, có lỗ hay không."
+    },
+    {
+      "sym": "\\frac{1}{M}\\sum",
+      "say": "Lấy trung bình trên M tương lai. M càng lớn, ước lượng càng ổn định."
+    }
   ],
   "caption": "Monte Carlo: sinh 1.000 tương lai để thấy hình dạng rủi ro thay vì một con số dự báo. Code chạy thật, GBM với seed cố định.",
-  "hashtags": ["quant", "montecarlo", "chungkhoan", "quanlyruiro", "QuanTik"],
-  "allowed_literals": ["5", "95"]
+  "hashtags": [
+    "quant",
+    "montecarlo",
+    "chungkhoan",
+    "quanlyruiro",
+    "QuanTik"
+  ],
+  "allowed_literals": [
+    "5",
+    "95"
+  ],
+  "facts": {
+    "ulam": {
+      "value": "Stanislaw Ulam nghĩ ra phương pháp Monte Carlo khi chơi solitaire lúc dưỡng bệnh; tên do Nicholas Metropolis đặt theo sòng bạc Monte Carlo",
+      "source": "Metropolis, The Beginning of the Monte Carlo Method, Los Alamos Science (1987)"
+    }
+  }
 }
 ```

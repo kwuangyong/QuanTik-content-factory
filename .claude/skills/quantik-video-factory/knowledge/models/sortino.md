@@ -25,8 +25,21 @@ Không dùng mã thật; minh hoạ bằng dữ liệu mô phỏng.
 {
   "tag": "SORTINO",
   "title": "Cùng Sharpe, nhưng một chiến lược làm bạn mất ngủ: Sortino",
-  "hook": "Có một chỉ số chỉ đếm ngày bạn lỗ. Nó tên Sortino, và nó biết vì sao bạn mất ngủ.",
+  "hook": "Sharpe đẹp mà vẫn *mất ngủ*? Chỉ số này lôi ra thứ Sharpe giấu đi.",
+  "hook_visual": "rollercoaster",
   "kicker": "Sortino ratio",
+  "cold_open": [
+    {
+      "say": "Hai chiếc tàu lượn đưa bạn lên cùng độ cao. Một chiếc lắc nhẹ. Chiếc kia toàn những cú rơi thẳng đứng.",
+      "visual": "rollercoaster",
+      "caption": "Cùng độ cao, khác *cú rơi*"
+    },
+    {
+      "say": "Sharpe phạt cả cú lên lẫn cú xuống. Sortino chỉ đếm những cú rơi làm bạn đau.",
+      "visual": "rollercoaster",
+      "caption": "Chỉ đếm cú rơi"
+    }
+  ],
   "beats": [
     "Code tạo chiến lược A trong {n_days} phiên, rồi soi gương thành B. Cùng trung bình, cùng độ lệch chuẩn, nên Sharpe đều là {sharpe_a}.",
     "Sortino chỉ phạt ngày lỗ. A được {sortino_a}, B chỉ {sortino_b}: chênh {ratio}.",

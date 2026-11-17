@@ -7,3 +7,8 @@
 - `music/` — nhạc nền **có giấy phép** (mp3/wav/m4a). Pipeline lấy file đầu tiên theo tên. Ghi nguồn và loại giấy phép vào `music/LICENSES.md` cho từng file. Không có file nào thì pipeline tự tổng hợp một đoạn pad nhẹ (sóng sin, tự tạo, không vướng bản quyền).
 
 Không đưa nhạc thịnh hành trên TikTok vào đây: chúng chỉ được dùng qua thư viện âm thanh trong app, không được ghép sẵn vào file.
+
+## broll/ — ảnh thật B-roll của kênh
+
+`broll/<tag>/*.jpg|png` (tag theo `knowledge/visuals.json`: casino, storm, iceberg, trader…). Chỉ thả ảnh kênh có
+quyền dùng. Pipeline ưu tiên ảnh ở đây trước ảnh Wikimedia và hình tự vẽ (`--broll auto` xen kẽ ảnh thật và hoạt hoạ).

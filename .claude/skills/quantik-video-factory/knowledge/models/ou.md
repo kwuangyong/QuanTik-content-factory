@@ -37,8 +37,21 @@ $$dX_t=\theta(\mu-X_t)\,dt+\sigma\,dW_t$$
 {
   "tag": "ORNSTEIN–UHLENBECK",
   "title": "Spread lệch xa rồi sẽ quay về? Mô hình OU và nửa đời",
-  "hook": "Bao lâu thì một khoảng chênh lệch quay về một nửa? Có công thức.",
+  "hook": "*Giá lệch xa kiểu gì cũng về*? Câu đó từng xoá sổ một quỹ có người đoạt Nobel.",
+  "hook_visual": "money_burn",
   "kicker": "Mean reversion",
+  "cold_open": [
+    {
+      "say": "Dắt chó đi dạo: nó chạy xa đến đâu, sợi dây cũng kéo nó về chỗ bạn.",
+      "visual": "leash",
+      "caption": "Chạy xa, rồi bị *kéo về*"
+    },
+    {
+      "say": "Quỹ LTCM, có hai nhà kinh tế đoạt Nobel, cũng cược chênh lệch sẽ quay về. Nó quay về thật, nhưng quỹ sụp trước khi kịp thấy.",
+      "visual": "money_burn",
+      "caption": "Đúng hướng, nhưng *sụp trước*"
+    }
+  ],
   "beats": [
     "Mô phỏng một spread bắt đầu ở {start}, bị kéo về 0 với tốc độ θ bằng {theta_true}. Sau đó code ước lượng lại θ bằng hồi quy AR(1).",
     "Code ước lượng θ bằng {theta_hat}. Nửa đời là ln 2 chia θ, khoảng {half_life} phiên. Giá trị thật là {half_life_true} phiên.",
@@ -46,11 +59,27 @@ $$dX_t=\theta(\mu-X_t)\,dt+\sigma\,dW_t$$
     "Bề mặt 3D là phân phối của spread theo thời gian: đỉnh trượt dần về 0 rồi đứng yên. Đó là trạng thái dừng."
   ],
   "outputs": [
-    {"label": "θ thật", "key": "theta_true"},
-    {"label": "θ ước lượng", "key": "theta_hat"},
-    {"label": "nửa đời (phiên)", "key": "half_life", "highlight": true},
-    {"label": "nửa đời thật", "key": "half_life_true"},
-    {"label": "μ ước lượng", "key": "mu_hat"}
+    {
+      "label": "θ thật",
+      "key": "theta_true"
+    },
+    {
+      "label": "θ ước lượng",
+      "key": "theta_hat"
+    },
+    {
+      "label": "nửa đời (phiên)",
+      "key": "half_life",
+      "highlight": true
+    },
+    {
+      "label": "nửa đời thật",
+      "key": "half_life_true"
+    },
+    {
+      "label": "μ ước lượng",
+      "key": "mu_hat"
+    }
   ],
   "takeaway": "Nửa đời biến cảm giác “sắp quay về” thành một con số kiểm tra được. Nhưng trung bình có thể dịch chuyển; hãy kiểm định lại thường xuyên.",
   "cta": "Tìm hiểu các mô hình định lượng QuanTik dùng tại quantik.io.vn",
@@ -63,9 +92,21 @@ $$dX_t=\theta(\mu-X_t)\,dt+\sigma\,dW_t$$
     "truth": "Với θ bằng {theta_hat}, nửa đời khoảng {half_life} phiên."
   },
   "story": [
-    {"at": 0.08, "label": "Lệch xa", "say": "Spread xuất phát ở {start}, rất xa mức trung bình."},
-    {"at": 0.3, "label": "Kéo về", "say": "Mỗi phiên, θ kéo nó về gần 0 hơn một chút. Sau khoảng {half_life} phiên, độ lệch còn một nửa."},
-    {"at": 1.0, "label": "Dao động quanh 0", "say": "Sau đó spread chỉ dao động quanh 0, phần lớn trong khoảng cộng trừ {band}."}
+    {
+      "at": 0.08,
+      "label": "Lệch xa",
+      "say": "Spread xuất phát ở {start}, rất xa mức trung bình."
+    },
+    {
+      "at": 0.3,
+      "label": "Kéo về",
+      "say": "Mỗi phiên, θ kéo nó về gần 0 hơn một chút. Sau khoảng {half_life} phiên, độ lệch còn một nửa."
+    },
+    {
+      "at": 1.0,
+      "label": "Dao động quanh 0",
+      "say": "Sau đó spread chỉ dao động quanh 0, phần lớn trong khoảng cộng trừ {band}."
+    }
   ],
   "formula": "dX_t=\\theta(\\mu-X_t)\\,dt+\\sigma\\,dW_t",
   "formula_parts": [
@@ -76,12 +117,37 @@ $$dX_t=\theta(\mu-X_t)\,dt+\sigma\,dW_t$$
   ],
   "formula_numeric": "t_{1/2}=\\frac{\\ln 2}{<<theta_hat>>}\\approx <<half_life>>\\ phiên",
   "symbols": [
-    {"sym": "\\theta(\\mu-X_t)", "say": "Lực kéo: càng xa trung bình μ, lực kéo về càng mạnh."},
-    {"sym": "\\sigma\\,dW_t", "say": "Nhiễu ngẫu nhiên đẩy spread lệch đi mỗi phiên."},
-    {"sym": "\\frac{\\ln 2}{\\theta}", "say": "Nửa đời: số phiên để độ lệch giảm còn một nửa."}
+    {
+      "sym": "\\theta(\\mu-X_t)",
+      "say": "Lực kéo: càng xa trung bình μ, lực kéo về càng mạnh."
+    },
+    {
+      "sym": "\\sigma\\,dW_t",
+      "say": "Nhiễu ngẫu nhiên đẩy spread lệch đi mỗi phiên."
+    },
+    {
+      "sym": "\\frac{\\ln 2}{\\theta}",
+      "say": "Nửa đời: số phiên để độ lệch giảm còn một nửa."
+    }
   ],
   "caption": "Ornstein–Uhlenbeck: mô hình hồi quy về trung bình. Từ θ ra nửa đời, tức bao lâu để độ lệch giảm một nửa. Code chạy thật, dữ liệu mô phỏng.",
-  "hashtags": ["quant", "meanreversion", "pairstrading", "chungkhoan", "QuanTik"],
-  "allowed_literals": ["ln 2", "AR(1)", "0"]
+  "hashtags": [
+    "quant",
+    "meanreversion",
+    "pairstrading",
+    "chungkhoan",
+    "QuanTik"
+  ],
+  "allowed_literals": [
+    "ln 2",
+    "AR(1)",
+    "0"
+  ],
+  "facts": {
+    "ltcm_nobel": {
+      "value": "Myron Scholes và Robert Merton, Nobel kinh tế, là thành viên LTCM",
+      "source": "Lowenstein, When Genius Failed (2000)"
+    }
+  }
 }
 ```
