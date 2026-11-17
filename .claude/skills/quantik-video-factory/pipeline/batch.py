@@ -171,7 +171,8 @@ def insert_cold_open(scenes, ep, kind, style):
     """Mở bằng chuyện kể (giáo sư vào casino, Titanic…) sau hook: mỗi câu một cảnh B-roll có hình khớp lời.
     ep["cold_open"] = [{"say": ..., "visual": tag | bỏ trống = tự khớp, "caption": chữ ngắn trên màn hình}]."""
     items = ep.get("cold_open") or []
-    if kind != "video" or not items or style in ("talking-head-script", "meme-quant"):
+    # story-mix tự xếp cảnh (loại "broll"): không chèn cold_open mặc định của chủ đề vào giữa câu chuyện riêng
+    if kind != "video" or not items or style in ("talking-head-script", "meme-quant", "story-mix"):
         return scenes
     at = 1 if scenes and scenes[0].name == "hook" else 0
     extra = [SC.broll(it["say"], it.get("visual"), it.get("caption"), name=f"story{i + 1}", slot=i)
@@ -184,8 +185,9 @@ def insert_cold_open(scenes, ep, kind, style):
 def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice=None, music=None,
          scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True, broll_mode="auto"):
     t_start = time.time()
-    I.configure(broll_mode, fetch=broll_mode != "draw")
     ep, mod, model = prepare(topic, style, override, returns)
+    I.configure(broll_mode, fetch=broll_mode != "draw", topic=getattr(model, "family", None) or topic,
+                board=ep.get("board"))
     out = Path(out_root) / ep["id"]
     work = out / "_work"
     work.mkdir(parents=True, exist_ok=True)
@@ -193,6 +195,10 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
 
     save_json(out / "values.json", {"topic": topic, "seed": model.seed, "params": getattr(model, "params", {}), "real_data": model.real_data,
                                     "values": model.values, "formats": model.formats, "code": model.code})
+    # story-mix: hook thật là cảnh hook đầu tiên của episode, không phải hook mặc định của chủ đề
+    first = (ep.get("scenes") or [{}])[0]
+    if first.get("type") == "hook":
+        ep["hook"] = first["text"]
     rendered = set()
     filled = fill_tree(ep, model.values, model.formats, rendered)
     disc = disclaimer()
@@ -211,7 +217,8 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
     if isinstance(result, dict):
         result["scenes"] = scenes
     corpus = [s.say for s in scenes] + [x for s in scenes for x in s.texts] + texts
-    corpus += [strip_marks(filled.get("caption", "")), strip_marks(filled.get("title", ""))]
+    corpus += [strip_marks(filled.get("caption", "")), strip_marks(filled.get("title", "")),
+               strip_marks(filled.get("hook", ""))]  # caption mở bằng hook → QA cả dòng đó
     save_json(out / "narration.json", {"scenes": [{"name": s.name, "say": s.say, "texts": s.texts} for s in scenes],
                                        "extra": texts})
     nums = check_numbers.check(corpus, model.values, model.formats, rendered, filled.get("allowed_literals", []),

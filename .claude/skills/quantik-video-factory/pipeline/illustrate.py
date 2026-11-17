@@ -230,8 +230,20 @@ def draw_professor(d, w, h, p, t):
     bx0, by0, bx1, by1 = w * 0.06, h * 0.08, w * 0.94, h * 0.66
     d.rectangle([bx0 - 12, by0 - 12, bx1 + 12, by1 + 12], fill=WOOD)
     d.rectangle([bx0, by0, bx1, by1], fill=(30, 62, 48))
-    lines = ["f* = W − (1−W)/R", "E[X] = Σ p·x", "σ² = ω + α·ε² + β·σ²", "P(A|B) = P(B|A)P(A)/P(B)"]
+    # Bảng đen viết đúng công thức của chủ đề đang kể (episode "board" > theo topic); không có thì chỉ nét phấn,
+    # vì công thức sai ngữ cảnh (Kelly trong chuyện HMM) là lỗi chi tiết người xem bắt được ngay.
+    lines = CFG.get("board") or BOARD.get(CFG.get("topic"), [])
     f = font("mono-bold", int(h * 0.06))
+    if not lines:  # nét phấn trừu tượng
+        k = ease(p)
+        for i in range(4):
+            y = by0 + 50 + i * h * 0.13
+            pts = [(bx0 + 30 + x, y + 10 * math.sin(x / 23 + i)) for x in range(0, int((bx1 - bx0 - 80) * k), 8)]
+            if len(pts) > 1:
+                d.line(pts, fill=(225, 235, 225), width=4)
+        person(d, w * 0.82, h * 1.02, s=h / 640, shirt=(110, 90, 70), face="happy", glasses=True,
+               hair=(200, 200, 205), seed=11, arm=(0.1, -2.3 + 0.15 * math.sin(t * 9)), legs=False)
+        return
     shown = p * len(lines) * 1.3
     for i, ln in enumerate(lines):
         k = max(0.0, min(1.0, shown - i))
@@ -903,12 +915,31 @@ if __name__ == "__main__":  # python illustrate.py casino out.png  → xem nhanh
 
 
 # ---------------------------------------------------------------- photo policy (set by batch.py per video)
-CFG = {"mode": "auto", "fetch": True}   # mode: auto (ảnh thật xen kẽ hình vẽ) | draw | photo
+CFG = {"mode": "auto", "fetch": True, "topic": None, "board": None}   # mode: auto | draw | photo
+BOARD = {  # công thức viết lên bảng đen theo chủ đề. Chỉ ký tự font có (không dùng chỉ số dưới ₜ ᵢ ᵀ)
+    "kelly": ["f* = W - (1-W)/R", "g(f) = W·ln(1+f) + (1-W)·ln(1-f)"],
+    "monte_carlo": ["P(thắng) ≈ số ván thắng / số ván", "S_t = S_0·exp(Σ ε)"],
+    "hmm": ["P(z_t | x_1 … x_t)", "α ← (α·A)·b(x)", "A = [a_ij]"],
+    "garch": ["σ²_t = ω + α·ε²_t-1 + β·σ²_t-1"],
+    "egarch": ["ln σ²_t = ω + β·ln σ²_t-1", "        + α|z| + γ·z"],
+    "ou": ["dX = θ(μ - X)dt + σ·dW"],
+    "fat_tails": ["P(|X| > x) ~ x^(-α)", "Gauss: đuôi mỏng"],
+    "momentum": ["WML = Thắng - Thua", "r(sau)  vs  r(trước)"],
+    "ols": ["β = (X'X)^-1 · X'y", "min Σ (y - Xβ)²"],
+    "beta": ["β = Cov(r_i, r_m) / Var(r_m)"],
+    "var_cvar": ["VaR_α = -q(α)", "CVaR = E[L | L > VaR]"],
+    "sharpe": ["S = (R - R_f) / σ"],
+    "sortino": ["S = (R - R_f) / σ_giảm"],
+    "psr": ["PSR = P(SR thật > SR*)"],
+    "martingale": ["cược: 1, 2, 4, 8, 16 …", "E[lãi] ≤ 0"],
+    "cmf": ["CMF = Σ MFV / Σ V"],
+    "hurst": ["E[R/S] ~ c·n^H"],
+}
 USED = []                                # ảnh thật đã dùng trong video hiện tại → dòng ghi công ở caption
 
 
-def configure(mode="auto", fetch=True):
-    CFG.update(mode=mode, fetch=fetch)
+def configure(mode="auto", fetch=True, topic=None, board=None):
+    CFG.update(mode=mode, fetch=fetch, topic=topic, board=board)
     USED.clear()
 
 

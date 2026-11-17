@@ -20,7 +20,7 @@
   "scenes": [
     {
       "type": "hook",
-      "text": "Sách giáo khoa nói cú sập này {once_every_years} năm mới có một lần. Dữ liệu: *{big_t} lần*.",
+      "text": "Sách giáo khoa: ngày giật 4 sigma {once_every_years} năm mới có một lần. Mô phỏng đuôi dày: *{big_t} lần*.",
       "kicker": "Phân phối",
       "visual": "swan"
     },
