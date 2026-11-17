@@ -234,6 +234,14 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
             s.audio = str(wav) if u != "silent" else None
         # nhịp nhanh: cảnh ngắn lại theo TEMPO, chỉ chừa khoảng thở rất ngắn sau lời
         s.duration = max(s.min_dur / TEMPO, sec + 0.3)
+    # giữ dưới giới hạn nền tảng: bớt cảnh kể chuyện cuối (cold_open) trước, không bao giờ cắt nội dung chính
+    limit = filled.get("max_seconds", 60) - 0.5
+    while kind == "video" and sum(sc.duration for sc in scenes) > limit:
+        story = [sc for sc in scenes if sc.name.startswith("story")]
+        if not story:
+            break
+        print(f"  quá {limit + 0.5:.0f}s → bỏ cảnh {story[-1].name}")
+        scenes.remove(story[-1])
     if hasattr(mod, "after_timing"):
         mod.after_timing(scenes, filled, model, ctx)
 
