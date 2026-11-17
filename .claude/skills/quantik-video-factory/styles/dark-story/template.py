@@ -200,11 +200,190 @@ def art_alone(a, t, p, c):
     a.line([(690, GROUND - 14), (706, GROUND + 2), (696, GROUND + 18)], P["bone"], 2.5)
 
 
+# ---------------------------------------------------------------- three people, same salary (#2)
+TRIO = [(200, P["red"]), (540, P["crowd"]), (880, P["bone"])]      # spender · middle · builder
+
+
+def _paycheck(a, x, y, s, al=1.0):
+    col = tuple(int(v * al) for v in P["green"])
+    a.rect([x - s * 0.5, y - s * 0.28, x + s * 0.5, y + s * 0.28], fill=col, r=s * 0.06)
+    a.circle(x, y, s * 0.13, tuple(int(v * al) for v in (60, 120, 80)))
+
+
+def art_payday3(a, t, p, c):
+    # three people side by side; the exact same paycheck drops into each pair of hands
+    a.rect([0, GROUND + 6, AW, GROUND + 14], fill=P["crowd_dk"])
+    for i, (x, col) in enumerate(TRIO):
+        a.glow(x, 300, 170, P["glow"], 40)
+        G.person(a, x, GROUND, 380, col, arms_up=False)
+        e = F.ease_out(F.seg(p, 0.1 + i * 0.12, 0.45 + i * 0.12))
+        _paycheck(a, x, 40 + e * 150, 140, 0.4 + 0.6 * e)
+
+
+def art_split3(a, t, p, c):
+    # time runs; spender's lane fills with things, middle grows a small pile, builder a tall quiet block
+    v = c.get("v", {})
+    mb = max(v.get("months_b", 48), 1)
+    g = F.ease_in_out(F.seg(p, 0.05, 0.95))
+    a.rect([0, GROUND + 6, AW, GROUND + 14], fill=P["crowd_dk"])
+    for k in (360, 720):
+        a.line([(k, 20), (k, GROUND)], (40, 42, 52), 4)
+    # spender: status objects pop in, nothing stacks
+    for j, (k, dx, dy) in enumerate([("phone", -80, 150), ("bag", 70, 230), ("car", 0, 360), ("ring", -90, 300),
+                                    ("plane", 80, 90)]):
+        e = F.ease_out(F.seg(g, j * 0.17, j * 0.17 + 0.2))
+        if e > 0:
+            a.glow(200 + dx, dy, 60, P["gold"], int(50 * e))
+            G.icon(a, k, 200 + dx, dy, 90 * e, P["gold"])
+    G.person(a, 200, GROUND, 250, P["red"], phone=True, head_down=0.7)
+    # middle and builder: a pile of coins/blocks whose height follows the model's runway
+    for x, key, col in ((540, "months_m", P["muted"]), (880, "months_b", P["warm"])):
+        hgt = 470 * g * v.get(key, 0) / mb
+        if hgt > 2:
+            a.glow(x + 70, GROUND - hgt / 2, 90 + hgt / 4, col, 50)
+            a.rect([x + 20, GROUND - hgt, x + 130, GROUND], fill=tuple(int(q * 0.75) for q in col), r=8)
+            for yy in range(int(GROUND - hgt) + 24, GROUND, 36):
+                a.line([(x + 26, yy), (x + 124, yy)], P["ink"], 3)
+    G.person(a, 500, GROUND, 250, P["crowd"], head_down=0.3)
+    G.person(a, 830, GROUND, 250, P["bone"], head_down=0.1)
+
+
+def art_paycheck_stops(a, t, p, c):
+    # the paychecks stop; each walks out on a bridge as long as their savings; the gap below is dark
+    v = c.get("v", {})
+    mb = max(v.get("months_b", 48), 1)
+    a.rect([0, GROUND + 20, AW, AH], fill=(6, 6, 8))
+    e = F.ease_in_out(F.seg(p, 0.15, 0.95))
+    for i, (key, col) in enumerate((("months_s", P["red"]), ("months_m", P["crowd"]), ("months_b", P["bone"]))):
+        y = 215 + i * 195
+        length = 60 + 880 * v.get(key, 0) / mb
+        a.rect([0, y, 60, y + 16], fill=P["crowd_dk"])           # solid ground: the last paycheck
+        a.rect([60, y, length, y + 16], fill=(70, 62, 46) if i else P["red_dk"], r=4)
+        walk = min(e * 900, length - 40)
+        sway = 0 if walk >= length - 41 else t * 7
+        G.person(a, 40 + walk, y, 175, col, phase=sway if walk < length - 41 else None, head_down=0.4 if i == 0 else 0.1)
+        if i == 0:   # the spender stops at the edge, looking down
+            a.glow(80, y - 60, 70, P["red"], int(60 * e))
+
+
+def art_flex(a, t, p, c):
+    # the photo shoot: posing by a car that isn't theirs, flashes popping, hearts floating up
+    flash = max(0.0, math.sin(t * 7.0)) ** 8
+    a.glow(540, 330, 420, (255, 255, 255), int(40 + 120 * flash))
+    G.icon(a, "car", 600, GROUND - 90, 520, P["gold"])
+    G.person(a, 270, GROUND, 400, (150, 132, 96), arms_up=True)
+    G.icon(a, "bag", 360, GROUND - 120, 70, P["gold"])
+    for j in range(7):
+        ph = (t * 0.5 + j / 7) % 1
+        G.icon(a, "heart", 120 + j * 130 + 20 * math.sin(t + j), 520 - ph * 480, 40 * (1 - ph * 0.5),
+               tuple(int(q * (1 - ph)) for q in P["red"]))
+    a.rect([880, 260, 980, 440], fill=(12, 12, 16), r=18, outline=(70, 72, 80), width=4)   # the phone filming it
+    a.circle(930, 300, 12, (255, 255, 255) if flash > 0.3 else (80, 80, 90))
+
+
+def art_reveal(a, t, p, c):
+    # after the shoot: the car drives off without them, the bag goes back in its box, bills drift down
+    e = F.ease_in_out(F.seg(p, 0.05, 0.7))
+    G.icon(a, "car", 600 + e * 900, GROUND - 90, 520, P["gold"])
+    a.rect([700, GROUND - 120, 860, GROUND], fill=(96, 78, 52), r=6)               # return box
+    a.line([(700, GROUND - 120), (860, GROUND - 120)], (60, 48, 30), 6)
+    G.icon(a, "bag", 780, GROUND - 160 + 110 * e, 70, P["gold"])
+    G.person(a, 270, GROUND, 400, (110, 100, 84), phone=True, head_down=0.8)
+    for j in range(9):
+        ph = (t * 0.25 + j / 9) % 1
+        x = 80 + j * 110 + 30 * math.sin(t * 1.3 + j)
+        y = -40 + ph * (GROUND + 40)
+        a.rect([x - 26, y - 34, x + 26, y + 34], fill=(220, 214, 200), r=3)
+        for k in range(4):
+            a.line([(x - 16, y - 18 + k * 12), (x + 16, y - 18 + k * 12)], P["red"] if k == 3 else (120, 116, 108), 3)
+
+
+def art_quiet(a, t, p, c):
+    # nobody looks: the crowd stares at phones while a plain person walks past a tree that keeps growing
+    a.rect([0, GROUND + 6, AW, GROUND + 14], fill=P["crowd_dk"])
+    g = F.ease_in_out(F.seg(p, 0.0, 1.0))
+    tx, h = 760, 120 + 380 * g
+    a.rect([tx - 14, GROUND - h, tx + 14, GROUND], fill=(90, 70, 46))
+    for k, (dx, dy, r) in enumerate([(0, 0, 1.0), (-70, 60, 0.75), (70, 60, 0.75), (0, 110, 0.8)]):
+        rr = (60 + 120 * g) * r
+        a.glow(tx + dx * g, GROUND - h + dy * g, rr * 1.4, P["warm"], int(40 * g))
+        a.circle(tx + dx * g, GROUND - h + dy * g, rr, (176, 140, 70))
+    for i, x in enumerate((90, 220, 980)):
+        G.person(a, x, GROUND, 290 + (i % 2) * 20, P["crowd"], phone=True, head_down=0.9, facing=1 if x < 500 else -1)
+    G.person(a, 380 + 200 * g, GROUND, 320, P["bone"], phase=t * 6)
+
+
+def _card(a, x, y, s, col, ang=0.0):
+    w, h = s, s * 0.63
+    a.rect([x - w / 2, y - h / 2, x + w / 2, y + h / 2], fill=col, r=s * 0.06)
+    a.rect([x - w * 0.36, y - h * 0.18, x - w * 0.14, y + h * 0.06], fill=P["gold"], r=s * 0.02)
+    a.line([(x - w * 0.36, y + h * 0.28), (x + w * 0.2, y + h * 0.28)], P["ink"], s * 0.03)
+
+
+def art_blade(a, t, p, c):
+    # a double-edged blade turning slowly: one edge lit gold (a home, a skill), the other red (a swipe)
+    cx, top, bot = 540, 20, GROUND - 40
+    turn = math.cos(t * 1.1)
+    hw = 40 + 50 * abs(turn)
+    left, right = (P["gold"], P["red"]) if turn > 0 else (P["red"], P["gold"])
+    a.glow(cx - 220, 300, 200, P["gold"], 70); a.glow(cx + 220, 300, 200, P["red"], 70)
+    a.poly([(cx, top), (cx + hw, top + 120), (cx + hw * 0.8, bot - 120), (cx, bot - 80)], (150, 152, 160))
+    a.poly([(cx, top), (cx - hw, top + 120), (cx - hw * 0.8, bot - 120), (cx, bot - 80)], (120, 122, 130))
+    a.line([(cx - hw, top + 120), (cx - hw * 0.8, bot - 120)], left, 8)
+    a.line([(cx + hw, top + 120), (cx + hw * 0.8, bot - 120)], right, 8)
+    a.rect([cx - 120, bot - 80, cx + 120, bot - 50], fill=P["crowd_dk"], r=8)
+    a.rect([cx - 22, bot - 50, cx + 22, GROUND + 10], fill=(60, 44, 30), r=8)
+    G.icon(a, "house", cx - 300, 330, 220, P["gold"])
+    _card(a, cx + 300, 330, 220, P["red_dk"])
+
+
+def art_ladder(a, t, p, c):
+    # the good edge: a loan as a ladder up to something that grows (a house), climbed rung by rung
+    a.rect([0, GROUND + 6, AW, GROUND + 14], fill=P["crowd_dk"])
+    x0, x1 = 360, 500
+    a.glow(760, 150, 230, P["warm"], 80)
+    G.icon(a, "house", 760, 190, 330, P["gold"])
+    a.rect([600, 296, 1000, 314], fill=P["crowd_dk"])
+    a.line([(x0, GROUND), (x0 + 160, 296)], (130, 110, 80), 12)
+    a.line([(x1, GROUND), (x1 + 160, 296)], (130, 110, 80), 12)
+    for k in range(9):
+        f = k / 8
+        a.line([(x0 + 160 * f, GROUND - (GROUND - 296) * f), (x1 + 160 * f, GROUND - (GROUND - 296) * f)],
+               (130, 110, 80), 8)
+    e = F.ease_in_out(F.seg(p, 0.05, 0.95)) * 0.85
+    G.person(a, x0 + 70 + 160 * e, GROUND - (GROUND - 296) * e, 240, P["bone"], phase=t * 5)
+
+
+def art_snowball(a, t, p, c):
+    # the bad edge: pushing a red ball up a hill with minimum payments; it barely shrinks
+    a.poly([(0, GROUND + 14), (AW, 140), (AW, AH), (0, AH)], (26, 28, 36))
+    g = F.ease_in_out(F.seg(p, 0.0, 1.0))
+    bx = 520 + 70 * g
+    by = GROUND + 14 - (GROUND - 126) * bx / AW
+    r = 170 - 25 * g
+    a.glow(bx, by - r, r * 1.3, P["red"], 70)
+    a.circle(bx, by - r, r, P["red_dk"], outline=P["red"], width=6)
+    for k in range(5):  # interest keeps rolling in
+        ph = (t * 0.6 + k / 5) % 1
+        G.icon(a, "coin", bx + 260 - ph * 200, by - r - 220 + ph * 150, 36, P["red"])
+    px = bx - r - 50
+    py = GROUND + 14 - (GROUND - 126) * px / AW
+    G.person(a, px, py, 280, P["bone"], phase=t * 3, run=True, head_down=0.5)
+    for k in range(3):   # small coins out: the minimum payment
+        ph = (t * 0.8 + k / 3) % 1
+        G.icon(a, "coin", px - 40 - ph * 120, py - 120 + ph * 90, 24, P["gold"])
+
+
 ART = {"office": art_office, "commute": art_commute, "scroll": art_scroll, "compare": art_compare,
-       "spend": art_spend, "wheel": art_wheel, "crowd": art_crowd, "walkaway": art_walkaway, "alone": art_alone}
+       "spend": art_spend, "wheel": art_wheel, "crowd": art_crowd, "walkaway": art_walkaway, "alone": art_alone,
+       "payday3": art_payday3, "split3": art_split3, "paycheck_stops": art_paycheck_stops, "flex": art_flex,
+       "reveal": art_reveal, "quiet": art_quiet, "blade": art_blade, "ladder": art_ladder, "snowball": art_snowball}
 TINT = {"office": (P["glow"], 0.45, 0.45), "scroll": (P["glow"], 0.5, 0.4), "compare": (P["gold"], 0.5, 0.4),
         "spend": (P["gold"], 0.5, 0.5), "wheel": (P["red"], 0.5, 0.55), "crowd": (P["warm"], 0.5, 0.35),
-        "walkaway": (P["warm"], 0.9, 0.5), "alone": (P["warm"], 0.5, 0.3)}
+        "walkaway": (P["warm"], 0.9, 0.5), "alone": (P["warm"], 0.5, 0.3), "payday3": (P["green"], 0.5, 0.3),
+        "split3": (P["gold"], 0.5, 0.4), "paycheck_stops": (P["red"], 0.5, 0.45), "flex": (P["gold"], 0.5, 0.5),
+        "reveal": (P["red"], 0.5, 0.45), "quiet": (P["warm"], 0.7, 0.4), "blade": (P["red"], 0.5, 0.4),
+        "ladder": (P["warm"], 0.7, 0.4), "snowball": (P["red"], 0.5, 0.55)}
 
 
 # ================================================================ frame assembly
@@ -255,14 +434,14 @@ def end_scene(ep, ctx):
 
 def build(ep, model, ctx):
     v = model.values
-    art_ctx = {"n": int(v.get("n_paths", 2000)), "k": int(v.get("esc_a_n", 30))}
+    art_ctx = {"n": int(v.get("n_paths", 2000)), "k": int(v.get("esc_a_n", 30)), "v": v}
     out = [story_scene(i, it, ctx, art_ctx) for i, it in enumerate(ep["scenes"], 1)]
     out.append(end_scene(ep, ctx))
     return out
 
 
 def export(scenes, ep, model, ctx):
-    """Dark cover (thumbnail.jpg): heavy headline + the hamster-wheel illustration + the one sourced number."""
+    """Dark cover (thumbnail.jpg): heavy headline + one illustration (thumb.art, default wheel) + the one sourced number."""
     thumbnail(ep, model, ctx["out"] / "thumbnail.jpg", ep.get("episode_no"))
 
 
@@ -292,7 +471,7 @@ def thumbnail(ep, model, path, no=None):
         y += int(sz * 0.98) + 18
     # illustration: running in the wheel with the bag of upgrades
     a = G.Art(AW, AH)
-    art_wheel(a, 0.17, 1.0, {})
+    ART[th.get("art", "wheel")](a, th.get("art_t", 0.17), th.get("art_p", 1.0), {"v": model.values, "n": 1, "k": 0})
     im = a.image().resize((int(AW * 1.0), int(AH * 1.0)))
     img.paste(im, (0, y + 10), im)
     # the one number, from the model

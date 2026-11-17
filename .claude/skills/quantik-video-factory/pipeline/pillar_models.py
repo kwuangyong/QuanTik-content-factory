@@ -251,7 +251,116 @@ def surface_escape_velocity(s, v):
             "zl": "% of bills paid"}
 
 
-TOPICS = ["prospect_theory", "ev_variance", "kuhn_poker", "escape_velocity"]
+# =============================================================== Same salary, three futures (dark-truth #2)
+def same_salary_demo(seed=9, years=10, n=2000):
+    rng = np.random.default_rng(seed)
+    r = rng.normal(0.05, 0.15, (n, years))  # real
+    save = {"spender": 0.0, "middle": 0.10,
+            "builder": 0.25}         # same pay
+    runway = {}
+    for who, s in save.items():
+        nest = np.zeros(n)
+        for t in range(years):
+            nest = nest * (1 + r[:, t]) + s
+        # months you could live with no paycheck
+        runway[who] = nest / (1 - s) * 12
+    return runway
+
+
+def compute_same_salary(seed=9, returns=None):
+    rw = same_salary_demo(seed)
+    n = len(rw["builder"])
+    values = {"years": 10, "n_paths": n, "ret": 0.05, "vol": 0.15,
+              "save_s": 0.0, "save_m": 0.10, "save_b": 0.25,
+              "months_s": float(np.median(rw["spender"])), "months_m": float(np.median(rw["middle"])),
+              "months_b": float(np.median(rw["builder"])),
+              "esc_a_n": int((rw["builder"] >= 36).sum())}
+    formats = {"years": "int", "n_paths": "int", "ret": "pct0", "vol": "pct0", "save_s": "pct0",
+               "save_m": "pct0", "save_b": "pct0", "months_s": "int", "months_m": "int", "months_b": "int",
+               "esc_a_n": "int"}
+    return values, formats, rw
+
+
+def plot2d_same_salary(ax, s, upto=1.0):
+    names = [("spender", NEG), ("middle", TXT), ("builder", POS)]
+    for i, (k, c) in enumerate(names):
+        ax.bar(i, np.median(s[k]) * upto, color=c, width=0.6)
+    ax.set_xticks(range(3)); ax.set_xticklabels([k for k, _ in names])
+    ax.set_ylabel("months you could live with no paycheck")
+
+
+def surface_same_salary(s, v):
+    return None
+
+
+# =============================================================== LARP: the cost of looking rich (dark-truth #3)
+def larp_demo(seed=9, years=10, n=2000, flex=0.25, dep=0.30):
+    rng = np.random.default_rng(seed)
+    r = rng.normal(0.05, 0.15, (n, years))  # real
+    stuff, kept = 0.0, np.zeros(n)  # in years of pay
+    for t in range(years):
+        # what the flex is worth on resale
+        stuff = stuff * (1 - dep) + flex
+        # same money, owned quietly instead
+        kept = kept * (1 + r[:, t]) + flex
+    return flex * years, stuff, kept
+
+
+def compute_larp(seed=9, returns=None):
+    spent, stuff, kept = larp_demo(seed)
+    values = {"years": 10, "n_paths": len(kept), "flex": 0.25, "dep": 0.30, "ret": 0.05, "vol": 0.15,
+              "spent": float(spent), "stuff_left": float(stuff), "kept_med": float(np.median(kept)),
+              "esc_a_n": 0}
+    formats = {"years": "int", "n_paths": "int", "flex": "pct0", "dep": "pct0", "ret": "pct0", "vol": "pct0",
+               "spent": "num1", "stuff_left": "num1", "kept_med": "num1", "esc_a_n": "int"}
+    return values, formats, {"kept": kept, "spent": spent, "stuff": stuff}
+
+
+def plot2d_larp(ax, s, upto=1.0):
+    ax.bar([0, 1, 2], [s["spent"] * upto, s["stuff"] * upto, np.median(s["kept"]) * upto],
+           color=[TXT, NEG, POS], width=0.6)
+    ax.set_xticks([0, 1, 2]); ax.set_xticklabels(["spent", "resale", "owned"])
+    ax.set_ylabel("years of salary")
+
+
+def surface_larp(s, v):
+    return None
+
+
+# =============================================================== Credit, the double-edged blade (dark-truth #4)
+def credit_demo(seed=0, apr=0.24, grow=0.05):
+    b, paid, months = 1.0, 0.0, 0  # owe 1 month's pay
+    while b > 1e-9:
+        i = b * apr / 12
+        # minimum: interest + 1% of balance,
+        # never below 2.5% of what you borrowed
+        pay = min(b + i, max(i + 0.01 * b, 0.025))
+        b, paid, months = b + i - pay, paid + pay, months + 1
+    # same compounding, the other edge
+    double_debt = np.log(2) / np.log(1 + apr / 12) / 12
+    double_asset = np.log(2) / np.log(1 + grow)
+    return months, paid, double_debt, double_asset
+
+
+def compute_credit(seed=0, returns=None):
+    months, paid, dd, da = credit_demo(seed)
+    values = {"apr": 0.24, "grow": 0.05, "min_pct": 0.01, "floor": 0.025, "payoff_years": months / 12, "payoff_months": months, "paid_x": paid,
+              "interest_x": paid - 1, "double_debt": dd, "double_asset": da, "esc_a_n": 0, "n_paths": 1}
+    formats = {"apr": "pct0", "grow": "pct0", "min_pct": "pct0", "floor": "pct1", "payoff_years": "num1", "payoff_months": "int", "paid_x": "x1",
+               "interest_x": "pct0", "double_debt": "num1", "double_asset": "num0", "esc_a_n": "int",
+               "n_paths": "int"}
+    return values, formats, {"months": months}
+
+
+def plot2d_credit(ax, s, upto=1.0):
+    ax.text(0.5, 0.5, "minimum payments", ha="center", color=TXT)
+
+
+def surface_credit(s, v):
+    return None
+
+
+TOPICS = ["prospect_theory", "ev_variance", "kuhn_poker", "escape_velocity", "same_salary", "larp", "credit"]
 
 
 class Model(BaseModel):

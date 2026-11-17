@@ -36,6 +36,33 @@
       "status": "backlog",
       "example_episode": null,
       "angle": "Consumer debt as status signal"
+    },
+    {
+      "id": "dt_same_salary",
+      "name": "Same salary. Three different futures",
+      "group": "Money & status",
+      "model": "same_salary",
+      "status": "published",
+      "example_episode": "episodes/same-salary.json",
+      "angle": "Savings rate as runway; what nobody sees"
+    },
+    {
+      "id": "dt_larp",
+      "name": "LARP: the people who look rich are paying for it",
+      "group": "Money & status",
+      "model": "larp",
+      "status": "published",
+      "example_episode": "episodes/larp.json",
+      "angle": "Faking wealth online, depreciation vs ownership"
+    },
+    {
+      "id": "dt_credit",
+      "name": "Credit is a double-edged blade",
+      "group": "Money & status",
+      "model": "credit",
+      "status": "published",
+      "example_episode": "episodes/credit-blade.json",
+      "angle": "Credit for assets vs credit for appearances; minimum-payment trap"
     }
   ]
 }

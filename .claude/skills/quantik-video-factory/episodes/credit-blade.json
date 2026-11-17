@@ -1,0 +1,110 @@
+{
+  "look": "dark-truth",
+  "pillar": "dark-truth",
+  "lang": "en",
+  "tag": "DARK TRUTH",
+  "allowed_literals": [],
+  "cta": "Like and follow QuanTik for more dark truths about money",
+  "id": "credit-blade",
+  "topic": "dt_credit",
+  "model": "credit",
+  "episode_no": 4,
+  "title": "Credit is a double-edged blade",
+  "hook": "Credit is a blade with two edges. Most people only learn about one.",
+  "caption": "Credit is a blade with two edges. Used for something that can grow, it can lift you. Used to look like you've already made it, it compounds against you. Owe one month of pay at {apr} a year, pay only the minimum, and it takes {payoff_years} years to clear. You hand back {paid_x} what you borrowed.\n\n(Model: {apr} APR, minimum payment = interest + {min_pct} of the balance, never below {floor} of the original, no new spending. Card terms vary. Education, not advice.)",
+  "hashtags": [
+    "darktruth",
+    "creditcard",
+    "debt",
+    "minimumpayment",
+    "moneymindset",
+    "personalfinance",
+    "QuanTik"
+  ],
+  "claims": [
+    {
+      "id": "calc_minpay",
+      "text": "Tính toán: nợ bằng 1 tháng lương, lãi 24%/năm, chỉ trả tối thiểu (lãi + 1% dư nợ, sàn 2,5% khoản gốc) thì mất ~6 năm, trả lại ~1,9 lần",
+      "status": "model_output",
+      "source_ids": []
+    },
+    {
+      "id": "interp_good_debt",
+      "text": "Vay để mua thứ có thể tăng giá trị khác bản chất với vay để tiêu dùng khoe mẽ",
+      "status": "interpretation",
+      "source_ids": []
+    }
+  ],
+  "thumb": {
+    "series": "THE DARK TRUTH OF MONEY",
+    "headline": [
+      "CREDIT HAS",
+      "TWO",
+      "EDGES."
+    ],
+    "sub": "{payoff_years} years to clear one month of pay",
+    "footer": "Illustrative calculation • Not financial advice",
+    "art": "blade",
+    "art_t": 0.0,
+    "art_p": 1.0
+  },
+  "variants": {
+    "dark-story": {
+      "scenes": [
+        {
+          "kind": "blade",
+          "show": "Credit has two edges.",
+          "say": "Credit is a blade with two edges. Most people only learn one.",
+          "min_dur": 3.4
+        },
+        {
+          "kind": "ladder",
+          "show": "Edge one: it can lift you.",
+          "say": "Edge one. Borrowing for something that can grow, like a home or a skill, can lift you.",
+          "min_dur": 4.2,
+          "claims": [
+            "interp_good_debt"
+          ]
+        },
+        {
+          "kind": "scroll",
+          "show": "Edge two: it lets you pretend.",
+          "say": "Edge two. It lets you buy the life on your feed, early."
+        },
+        {
+          "kind": "spend",
+          "show": "Tap. No pain today.",
+          "say": "Tap the card. The bill belongs to future you."
+        },
+        {
+          "kind": "snowball",
+          "show": "{payoff_years} years.",
+          "say": "Owe one month of pay at {apr}. Pay only the minimum. It takes {payoff_years} years, and costs {paid_x} what you borrowed.",
+          "note": "Model: {apr} APR · minimum = interest + {min_pct} of balance, floor {floor} of original · no new spending",
+          "min_dur": 5.4,
+          "claims": [
+            "calc_minpay"
+          ]
+        },
+        {
+          "kind": "wheel",
+          "show": "Same math. Other direction.",
+          "say": "Same compounding that grows savings. On a card, it runs against you."
+        },
+        {
+          "kind": "blade",
+          "show": "The blade doesn't choose.",
+          "say": "The blade cuts toward whatever you bought with it."
+        },
+        {
+          "kind": "alone",
+          "show": "Borrow to grow. Not to be seen.",
+          "say": "Borrow to grow. Not to look like you've grown.",
+          "min_dur": 4.2
+        }
+      ],
+      "takeaway": "Borrow for things that can grow. Not for things that only look like you've grown.",
+      "about": "Double-edged blade: a loan as a ladder to an asset vs a card balance pushed uphill with minimum payments."
+    }
+  }
+}

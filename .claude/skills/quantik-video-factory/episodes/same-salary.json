@@ -1,0 +1,105 @@
+{
+  "look": "dark-truth",
+  "pillar": "dark-truth",
+  "lang": "en",
+  "tag": "DARK TRUTH",
+  "allowed_literals": [],
+  "cta": "Like and follow QuanTik for more dark truths about money",
+  "id": "same-salary",
+  "topic": "dt_same_salary",
+  "model": "same_salary",
+  "episode_no": 2,
+  "title": "Same salary. Three different futures",
+  "hook": "Three people. Same job. Same salary. Watch where it goes.",
+  "caption": "Same salary. Three different futures. The one who looks richest is often the one who's one bad month from zero. We simulated {n_paths} careers for {years} years: spend everything, save {save_m}, save {save_b}. When the paycheck stopped, the first had nothing to stand on. The third could live {months_b} months on what nobody ever saw.\n\n(Simulation: {ret} real return, {vol} volatility, median outcome, no taxes or fees. An illustration of a mechanism, not a plan.)",
+  "hashtags": [
+    "darktruth",
+    "samesalary",
+    "moneymindset",
+    "personalfinance",
+    "emergencyfund",
+    "lifestylecreep",
+    "QuanTik"
+  ],
+  "claims": [
+    {
+      "id": "sim_runway",
+      "text": "Mô phỏng 2.000 sự nghiệp cùng lương trong 10 năm: tiết kiệm 0%, 10%, 25%; số tháng sống được khi mất lương (trung vị)",
+      "status": "model_output",
+      "source_ids": []
+    }
+  ],
+  "thumb": {
+    "series": "THE DARK TRUTH OF MONEY",
+    "headline": [
+      "SAME SALARY.",
+      "THREE",
+      "FUTURES."
+    ],
+    "sub": "Paycheck stops: zero months vs {months_b}",
+    "footer": "Simulated data • Not financial advice",
+    "art": "split3",
+    "art_p": 1.0
+  },
+  "variants": {
+    "dark-story": {
+      "scenes": [
+        {
+          "kind": "payday3",
+          "show": "Same salary. Three different futures.",
+          "say": "Three people. Same salary. Watch where it goes.",
+          "min_dur": 3.2
+        },
+        {
+          "kind": "spend",
+          "show": "The first spends all of it.",
+          "say": "The first spends all of it. Phone, bag, a car on payments."
+        },
+        {
+          "kind": "compare",
+          "show": "He looks the richest.",
+          "say": "He looks the richest. That's the point."
+        },
+        {
+          "kind": "commute",
+          "show": "The second saves a little.",
+          "say": "The second saves {save_m}. Safe. Nobody's impressed."
+        },
+        {
+          "kind": "quiet",
+          "show": "The third disappears.",
+          "say": "The third saves {save_b}. Same old car. Nobody notices."
+        },
+        {
+          "kind": "paycheck_stops",
+          "show": "{years} years later, the paycheck stops.",
+          "say": "{years} years later, the paycheck stops. A layoff. One bad year.",
+          "min_dur": 3.4
+        },
+        {
+          "kind": "paycheck_stops",
+          "show": "{months_b} months.",
+          "say": "The first can't last a month. The second, {months_m}. The third, {months_b} months.",
+          "note": "Simulation: {n_paths} careers · {years} years · {ret} real return · {vol} volatility · median · no taxes or fees",
+          "min_dur": 5.0,
+          "claims": [
+            "sim_runway"
+          ]
+        },
+        {
+          "kind": "alone",
+          "show": "Looking rich is loud.",
+          "say": "Looking rich is loud. Being free is quiet."
+        },
+        {
+          "kind": "walkaway",
+          "show": "Same salary. Different audience.",
+          "say": "The difference was never the income. It was who they paid to impress.",
+          "min_dur": 4.0
+        }
+      ],
+      "takeaway": "Looking rich is loud. Being free is quiet.",
+      "about": "Three people, same paycheck: spender, saver, builder; ten years later the paycheck stops and only savings hold them up."
+    }
+  }
+}

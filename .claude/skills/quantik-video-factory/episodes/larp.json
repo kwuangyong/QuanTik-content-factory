@@ -1,0 +1,102 @@
+{
+  "look": "dark-truth",
+  "pillar": "dark-truth",
+  "lang": "en",
+  "tag": "DARK TRUTH",
+  "allowed_literals": [],
+  "cta": "Like and follow QuanTik for more dark truths about money",
+  "id": "larp",
+  "topic": "dt_larp",
+  "model": "larp",
+  "episode_no": 3,
+  "title": "LARP: the people who look rich are paying for it",
+  "hook": "Nice car. Nice bag. Looks rich, right?",
+  "caption": "Looks rich, right? The car goes back after the shoot. What's left is the bill. Spend {flex} of your pay on looking rich for {years} years and it resells for {stuff_left} years of salary. The same money, owned quietly, is about {kept_med} years of salary. The people who look rich are usually the ones paying for it.\n\n(Simulation: {dep} yearly loss in resale value, {ret} real return, {vol} volatility, median outcome, no taxes or fees. An illustration of a mechanism, not a plan.)",
+  "hashtags": [
+    "darktruth",
+    "larp",
+    "fakerich",
+    "moneymindset",
+    "personalfinance",
+    "socialmedia",
+    "QuanTik"
+  ],
+  "claims": [
+    {
+      "id": "sim_larp",
+      "text": "Mô phỏng: chi 25% lương cho đồ để khoe trong 10 năm, mất giá 30%/năm, so với giữ cùng số tiền đó (lợi suất thực 5%, biến động 15%)",
+      "status": "model_output",
+      "source_ids": []
+    }
+  ],
+  "thumb": {
+    "series": "THE DARK TRUTH OF MONEY",
+    "headline": [
+      "THEY LOOK RICH.",
+      "THEY'RE",
+      "PAYING."
+    ],
+    "sub": "The flex cost {kept_med} years of salary",
+    "footer": "Simulated data • Not financial advice",
+    "art": "flex",
+    "art_t": 0.224,
+    "art_p": 1.0
+  },
+  "variants": {
+    "dark-story": {
+      "scenes": [
+        {
+          "kind": "flex",
+          "show": "Looks rich, right?",
+          "say": "Nice car. Nice bag. Looks rich, right?",
+          "min_dur": 3.2
+        },
+        {
+          "kind": "scroll",
+          "show": "The post goes up.",
+          "say": "The post goes up. The likes roll in."
+        },
+        {
+          "kind": "reveal",
+          "show": "Then the shoot ends.",
+          "say": "Then the shoot ends. The car goes back. The bag goes back in its box.",
+          "min_dur": 4.0
+        },
+        {
+          "kind": "wheel",
+          "show": "Looking rich is a subscription.",
+          "say": "Looking rich is a subscription. {flex} of every paycheck, just to stay seen.",
+          "min_dur": 4.0
+        },
+        {
+          "kind": "quiet",
+          "show": "Nobody follows him.",
+          "say": "Meanwhile, someone nobody follows keeps the same money."
+        },
+        {
+          "kind": "spend",
+          "show": "{kept_med} years of salary.",
+          "say": "After {years} years, the flex resells for {stuff_left} years of pay. Kept quietly, it's {kept_med}.",
+          "note": "Simulation: {flex} of pay · {dep} resale loss a year · {ret} real return · {vol} volatility · median · no taxes or fees",
+          "min_dur": 5.0,
+          "claims": [
+            "sim_larp"
+          ]
+        },
+        {
+          "kind": "compare",
+          "show": "Who's actually paying?",
+          "say": "The people who look rich are usually the ones paying for it."
+        },
+        {
+          "kind": "alone",
+          "show": "Nobody remembers the car.",
+          "say": "Nobody remembers your car. Your bank account remembers everything.",
+          "min_dur": 4.0
+        }
+      ],
+      "takeaway": "Nobody remembers your car. Your bank account remembers everything.",
+      "about": "Photo shoot with a car that isn't theirs, the reveal, the subscription to being seen, the quiet one who keeps the money."
+    }
+  }
+}
