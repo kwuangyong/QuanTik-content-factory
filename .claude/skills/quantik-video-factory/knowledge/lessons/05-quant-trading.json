@@ -732,7 +732,7 @@
         "hook": "Phe bắt đáy và phe đu trend cãi nhau cả đời. Sự thật là cả hai đều đúng, và cả hai đều sai. Một con số sẽ phân xử.",
         "title": "Hồi quy về trung bình vs động lượng: một con số phân xử",
         "beats": [
-          "Hai tập trước mình nói về hồi quy về trung bình và động lượng. Code tạo ba chuỗi: một chuỗi hay đảo chiều, một chuỗi ngẫu nhiên, một chuỗi có quán tính. Rồi tính tỷ số phương sai.",
+          "Nối hai tập trước: code tạo ba chuỗi, một chuỗi hay đảo chiều, một chuỗi ngẫu nhiên, một chuỗi có quán tính, rồi tính tỷ số phương sai.",
           "Chuỗi hay đảo chiều có tỷ số {vr_mr}, nhỏ hơn một. Chuỗi ngẫu nhiên {vr_rw}, sát một. Chuỗi có quán tính {vr_tr}, lớn hơn một.",
           "Vạch ngang ở mức một là ranh giới. Dưới vạch là sân của phe bắt đáy, trên vạch là sân của phe đu trend.",
           "Tỷ số phương sai so độ biến động của lợi suất nhiều phiên với tổng các phiên lẻ. Nó cho biết chuỗi đang nghiêng về đảo chiều hay về quán tính, ở khung thời gian bạn chọn."
@@ -778,7 +778,7 @@
             "query": "Andrew Lo MIT",
             "label": "Andrew Lo",
             "draw": "scale",
-            "say": "Kiểm định tỷ số phương sai nổi tiếng nhờ Andrew Lo và Craig MacKinlay, khi họ chứng minh giá cổ phiếu không hoàn toàn là bước đi ngẫu nhiên."
+            "say": "Kiểm định này nổi tiếng nhờ Andrew Lo và Craig MacKinlay."
           }
         ]
       }
