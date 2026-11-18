@@ -12,6 +12,7 @@ from core import THEME as T
 from render import Scene
 
 KIND = "video"
+BROLL = "hook"  # meme ngắn: chỉ nền B-roll sau hook, không chèn cảnh
 DEFAULTS = {"max_seconds": 30}
 
 

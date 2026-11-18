@@ -15,6 +15,23 @@ Hook = 1–2 giây đầu quyết định người xem có ở lại. Kho này c
 | --- | --- | --- | --- | --- |
 | _(chưa có — kênh chưa đăng video nào qua pipeline này)_ | | | | |
 
+## Giọng hook của kênh: ragebait, nổ căng (bắt buộc từ series Học Quant)
+
+Hook phải khiến người xem **khó chịu đến mức phải xem tiếp để cãi lại hoặc để chắc mình không sai**. Công thức: chọc thẳng vào "bạn" + một niềm tin sai phổ biến + cú phản đòn bằng sự thật đo được (số đến từ code).
+
+| Mẫu bait | Ví dụ (đã dùng) | Đòn tâm lý |
+| --- | --- | --- |
+| Tát vào niềm tin | "Tung xúc xắc mãi không ra số 6 rồi tự nhủ 'sắp ra rồi'? Đó chính là kiểu nghĩ khiến người ta cháy tài khoản." | Người xem nhận ra mình từng nghĩ y vậy |
+| Chúc mừng mỉa | "Hai đường giá đi giống hệt nhau và bạn kết luận chúng liên quan? Chúc mừng, bạn vừa bị thống kê lừa." | Mỉa mai → muốn chứng minh mình không ngu |
+| Bạn đang tính sai | "Rủi ro danh mục bằng trung bình rủi ro từng mã? Nếu bạn đang tính như vậy, bạn đang tính sai hoàn toàn." | Đe doạ năng lực |
+| Kẻ thù giấu giếm | "Bot giao dịch tự động kiếm tiền khi bạn ngủ? Đây là sự thật mà người bán bot không bao giờ cho bạn xem." | Bí mật bị che giấu (không nêu tên ai) |
+| Sách/giới chuyên gia sai | "Sách giáo khoa nói sập mạnh là chuyện trăm năm có một. Thị trường cười vào mặt sách giáo khoa." | Lật đổ uy quyền |
+| Cái tôi chiến thắng | "Tám trên mười phiên tăng và bạn tưởng mình có biệt tài? Toán nói đó có thể chỉ là may mắn." | Đánh vào cái tôi của người đang thắng |
+| Phe phái | "Phe bắt đáy và phe đu trend cãi nhau cả đời. Sự thật là cả hai đều đúng, và cả hai đều sai." | Kéo cả hai phe vào bình luận |
+| Thách thức | "Tín hiệu chính xác 90% báo mua và bạn tin sái cổ? Toán Bayes nói phần lớn lần báo đó là sai." | Muốn kiểm tra lại ngay |
+
+Không được: hứa lãi, gọi mua/bán, cụm cấm trong `brand/compliance.md`, nêu tên người/công ty/KOL có thật để công kích, xúc phạm thô tục, số gõ tay. Bait bằng **sự thật gây sốc**, không bằng bịa đặt.
+
 ## Mẫu hook (dùng để viết hook mới)
 
 | Mẫu | Ví dụ | Vì sao hiệu quả |

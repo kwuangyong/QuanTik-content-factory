@@ -1,0 +1,297 @@
+{
+  "series": "Toán tài chính",
+  "lessons": [
+    {
+      "id": "hq34-risk-free-rate",
+      "no": 34,
+      "name": "Risk-Free Rate – Lãi suất phi rủi ro",
+      "short": "PHI RỦI RO",
+      "code": "import numpy as np\nrf = 0.045         # lợi suất phi rủi ro (giả định)\nyears = 10\nsafe = 100 * (1 + rf) ** years\nrng = np.random.default_rng(34)\nr = rng.normal(0.09, 0.25, (10_000, years))  # mỗi năm\nrisky = 100 * np.prod(1 + r, axis=1)\nlose_rf = (risky < safe).mean()\nlose_cap = (risky < 100).mean()\nexcess = r.mean() - rf",
+      "values": {
+        "rf": "pct1",
+        "safe": "num1",
+        "lose_rf": "pct0",
+        "lose_cap": "pct0",
+        "excess": "pct1",
+        "years": "int"
+      },
+      "chart": {
+        "type": "hist",
+        "data": "risky",
+        "bins": 60,
+        "range": [
+          0,
+          600
+        ],
+        "vlines": [
+          [
+            "safe",
+            "phi rủi ro",
+            "pos"
+          ]
+        ],
+        "xlabel": "giá trị 100 đồng sau 10 năm"
+      },
+      "episode": {
+        "kicker": "Risk-free rate",
+        "hook": "Bạn khoe năm nay lãi. Câu hỏi là: có hơn gửi tiết kiệm không? Nếu không, bạn vừa chấp nhận rủi ro mà chẳng được trả công.",
+        "title": "Lãi suất phi rủi ro: thước đo mà nhà đầu tư hay quên",
+        "beats": [
+          "Code đặt lãi suất phi rủi ro giả định {rf} một năm, so với mười nghìn kịch bản đầu tư cổ phiếu trong {years} năm.",
+          "An toàn tuyệt đối, một trăm đồng thành {safe}. Mà vẫn có {lose_rf} kịch bản cổ phiếu thua mức đó, {lose_cap} kịch bản mất cả vốn. Phần bù kỳ vọng là {excess} mỗi năm.",
+          "Vạch xanh là mức phi rủi ro. Mọi thứ bên trái vạch là rủi ro bạn gánh mà không được thưởng.",
+          "Lãi suất phi rủi ro là lợi suất bạn nhận được mà không chịu rủi ro vỡ nợ, thường lấy theo trái phiếu chính phủ. Mọi khoản đầu tư rủi ro phải được so với nó."
+        ],
+        "outputs": [
+          {
+            "label": "rf / năm",
+            "key": "rf"
+          },
+          {
+            "label": "100 → an toàn",
+            "key": "safe"
+          },
+          {
+            "label": "thua rf",
+            "key": "lose_rf",
+            "highlight": true
+          },
+          {
+            "label": "mất vốn",
+            "key": "lose_cap"
+          },
+          {
+            "label": "phần bù",
+            "key": "excess"
+          }
+        ],
+        "chart_title": "Kết quả đầu tư rủi ro so với phi rủi ro",
+        "formula": "\\text{Phần bù} = E[R] - r_f",
+        "takeaway": "Lãi chưa đủ. Phải lãi hơn lãi suất phi rủi ro, đủ để bù cho rủi ro bạn đang gánh.",
+        "caption": "Lãi bao nhiêu mới gọi là lãi? Lãi suất phi rủi ro là vạch xuất phát mà mọi khoản đầu tư phải vượt qua.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "laisuatphiruiro",
+          "riskfree",
+          "taichinh",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "0.045",
+          "10_000",
+          "10.000",
+          "0.09",
+          "0.25"
+        ],
+        "hook_broll": {
+          "query": "State Bank of Vietnam building",
+          "label": "Lãi suất",
+          "draw": "clock"
+        },
+        "broll": [
+          {
+            "query": "United States Treasury building",
+            "label": "Trái phiếu chính phủ",
+            "draw": "scale",
+            "say": "Trên thế giới, lợi suất trái phiếu chính phủ Mỹ thường được dùng làm lãi suất phi rủi ro chuẩn."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq35-arbitrage",
+      "no": 35,
+      "name": "Arbitrage – Kinh doanh chênh lệch giá",
+      "short": "ARBITRAGE",
+      "code": "import numpy as np\n# tỷ giá minh hoạ\nusd_vnd = 25_400\neur_usd = 1.085\neur_vnd = 27_700             # giá chéo niêm yết\nimplied = usd_vnd * eur_usd  # giá chéo 'đúng'\ngap = eur_vnd / implied - 1\nfee = 0.0015                 # phí mỗi lần đổi\nnet = gap - 3 * fee\ncap = 1_000_000_000\nprofit = cap * net",
+      "values": {
+        "implied": "int",
+        "gap": "pct2",
+        "net": "pct2",
+        "profit": "vnd"
+      },
+      "chart": {
+        "type": "bar",
+        "heights": "np.array([gap, -3 * fee, net])",
+        "labels": "['chênh lệch', 'phí', 'còn lại']",
+        "signed": true,
+        "ylabel": "% trên vốn"
+      },
+      "episode": {
+        "kicker": "Arbitrage",
+        "hook": "Ai bảo bạn kiếm tiền không rủi ro là lừa đảo? Có một thứ như vậy thật, nhưng nó biến mất nhanh hơn bạn kịp đọc hết câu này.",
+        "title": "Arbitrage: tiền không rủi ro có thật, nhưng không dành cho bạn",
+        "beats": [
+          "Code lấy ba tỷ giá minh hoạ: đô la Mỹ, euro và đồng Việt Nam. Rồi tính giá chéo euro lẽ ra phải là bao nhiêu.",
+          "Giá chéo đúng là {implied}. Giá niêm yết lệch {gap}. Trừ phí ba lần đổi còn {net}, tức {profit} trên một tỷ đồng.",
+          "Cột chênh lệch bị phí ăn gần hết. Trên thị trường thật, các thuật toán xoá khoảng lệch này trong tích tắc.",
+          "Arbitrage là mua rẻ ở nơi này, bán đắt ở nơi khác cùng lúc, không chịu rủi ro giá. Chính nó giữ cho giá cả các thị trường nhất quán."
+        ],
+        "outputs": [
+          {
+            "label": "giá chéo đúng",
+            "key": "implied"
+          },
+          {
+            "label": "chênh lệch",
+            "key": "gap"
+          },
+          {
+            "label": "sau phí",
+            "key": "net",
+            "highlight": true
+          },
+          {
+            "label": "trên 1 tỷ",
+            "key": "profit"
+          }
+        ],
+        "chart_title": "Chênh lệch trước và sau phí",
+        "formula": "\\frac{\\mathrm{EUR/VND}}{\\mathrm{USD/VND}\\times\\mathrm{EUR/USD}} - 1",
+        "takeaway": "Arbitrage thật tồn tại vài phần nghìn giây và thuộc về ai nhanh nhất, phí thấp nhất. Nó là lực kéo giá về đúng, không phải cửa kiếm tiền cho số đông.",
+        "caption": "Tiền không rủi ro có thật không? Arbitrage tồn tại, nhưng biến mất trong tích tắc. Ví dụ arbitrage tỷ giá tam giác.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "arbitrage",
+          "tygia",
+          "taichinh",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "25_400",
+          "25.400",
+          "1.085",
+          "27_700",
+          "27.700",
+          "0.0015",
+          "1_000_000_000"
+        ],
+        "hook_broll": {
+          "query": "currency exchange board",
+          "label": "Tỷ giá",
+          "draw": "scale"
+        },
+        "broll": [
+          {
+            "draw": "scale",
+            "label": "Mua rẻ, bán đắt, cùng lúc",
+            "say": "Hình dung một món hàng bán hai giá ở hai đầu phố. Ai chạy nhanh nhất sẽ mua đầu này, bán đầu kia."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq36-present-future-value",
+      "no": 36,
+      "name": "Present Value & Future Value – Giá trị hiện tại và tương lai",
+      "short": "PV & FV",
+      "code": "import numpy as np\nr = 0.08                       # lợi suất mỗi năm\npv = 100_000_000\nfv10 = pv * (1 + r) ** 10\nfv30 = pv * (1 + r) ** 30\ntarget = 1_000_000_000\npv_need = target / (1 + r) ** 20  # cần bỏ vào hôm nay\ndouble = np.log(2) / np.log(1 + r)\nsimple30 = pv * (1 + r * 30)    # lãi đơn để so",
+      "plot": "t = np.arange(31); comp = pv * (1 + r) ** t / 1e6; simp = pv * (1 + r * t) / 1e6",
+      "values": {
+        "r": "pct0",
+        "fv10": "vnd",
+        "fv30": "vnd",
+        "pv_need": "vnd",
+        "double": "num1",
+        "simple30": "vnd"
+      },
+      "chart": {
+        "type": "line",
+        "x": "t",
+        "ys": [
+          [
+            "comp",
+            "lãi kép",
+            "accent"
+          ],
+          [
+            "simp",
+            "lãi đơn",
+            "muted"
+          ]
+        ],
+        "xlabel": "năm",
+        "ylabel": "triệu đồng"
+      },
+      "surface": {
+        "type": "grid",
+        "fn": "lambda X, Y: (1 + X) ** Y",
+        "x": [
+          0.02,
+          0.15
+        ],
+        "y": [
+          0,
+          30
+        ],
+        "xl": "lãi suất",
+        "yl": "số năm",
+        "zl": "hệ số nhân"
+      },
+      "episode": {
+        "kicker": "Present & future value",
+        "hook": "Một trăm triệu hôm nay và một trăm triệu mười năm sau không phải là cùng một số tiền. Ai bảo bằng nhau là đang làm bạn nghèo đi.",
+        "title": "Giá trị hiện tại và tương lai: tiền có giá theo thời gian",
+        "beats": [
+          "Code lấy lợi suất {r} một năm, đẩy một trăm triệu ra tương lai, và kéo một tỷ ở tương lai về hiện tại.",
+          "Sau mười năm thành {fv10}, ba mươi năm thành {fv30}, trong khi lãi đơn chỉ được {simple30}. Muốn có một tỷ sau hai mươi năm, hôm nay cần {pv_need}. Cứ khoảng {double} năm tiền nhân đôi.",
+          "Đường cam là lãi kép, cong vút lên về cuối. Đường xám là lãi đơn, thẳng đuột. Khoảng cách giữa chúng là sức mạnh của thời gian.",
+          "Giá trị tương lai là tiền hôm nay sau khi sinh lời. Giá trị hiện tại là tiền tương lai chiết khấu về hôm nay. Mọi định giá tài sản đều dựa trên hai phép tính này."
+        ],
+        "outputs": [
+          {
+            "label": "FV 10 năm",
+            "key": "fv10"
+          },
+          {
+            "label": "FV 30 năm",
+            "key": "fv30",
+            "highlight": true
+          },
+          {
+            "label": "lãi đơn 30 năm",
+            "key": "simple30"
+          },
+          {
+            "label": "PV cho 1 tỷ",
+            "key": "pv_need"
+          },
+          {
+            "label": "năm nhân đôi",
+            "key": "double"
+          }
+        ],
+        "chart_title": "Lãi kép vs lãi đơn",
+        "formula": "FV = PV\\,(1+r)^n \\qquad PV = \\frac{FV}{(1+r)^n}",
+        "takeaway": "Thời gian là biến số mạnh nhất trong công thức. Mỗi năm chậm trễ là một năm lãi kép bị mất.",
+        "caption": "100 triệu hôm nay không bằng 100 triệu 10 năm sau. Giá trị hiện tại và tương lai giải thích bằng code.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "laikep",
+          "giatrihientai",
+          "taichinh",
+          "dautu"
+        ],
+        "allowed_literals": [
+          "0.08",
+          "100_000_000",
+          "1_000_000_000"
+        ],
+        "hook_broll": {
+          "draw": "clock"
+        },
+        "broll": [
+          {
+            "query": "Albert Einstein portrait",
+            "label": "Lãi kép",
+            "draw": "chart-up",
+            "say": "Có một câu nói nổi tiếng được gán cho Einstein: lãi kép là kỳ quan thứ tám của thế giới. Dù ai nói, nó đúng."
+          }
+        ]
+      }
+    }
+  ]
+}

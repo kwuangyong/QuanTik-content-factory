@@ -12,6 +12,7 @@ from render import Scene, still
 KIND = "video"
 VOICE = False
 MUSIC = False
+BROLL = False  # có broll/ gợi ý riêng cho người tự quay
 DEFAULTS = {"max_seconds": 90}
 
 CUES = {

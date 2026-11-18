@@ -30,6 +30,8 @@ from core import DEFAULT_OUT, KNOWLEDGE, STYLES, disclaimer, fill_tree, load_jso
 from models import TOPICS, Model, load_returns  # noqa: E402
 import catalog as C  # noqa: E402
 import term_topic as TT  # noqa: E402
+import lesson as L  # noqa: E402
+import broll as B  # noqa: E402
 import render as R  # noqa: E402
 import voiceover as V  # noqa: E402
 from assemble import assemble  # noqa: E402
@@ -144,9 +146,21 @@ def _prepare(topic, style, override=None, returns=None):
     if topic in TOPICS:
         ep, mod = build_episode(topic, style, override)
         return ep, mod, Model(topic, ep.get("seed"), returns)
+    les = L.get(topic)
+    if les is not None:
+        mod = load_style(style)
+        model = L.LessonModel(les)
+        why = TT.supports(model, style)
+        if why:
+            raise SystemExit(f"{topic} × {style}: {why}")
+        ep = merge(getattr(mod, "DEFAULTS", {}), L.episode(les), (les.get("styles") or {}).get(style, {}), override or {})
+        ep["topic"], ep["style"] = topic, style
+        ep.setdefault("id", f"{topic}-{style}")
+        return ep, mod, model
     entry = C.get(topic)
     if entry is None:
-        raise SystemExit(f"unknown topic {topic!r}. Hand-written: {TOPICS}. Catalog: python catalog.py --list")
+        raise SystemExit(f"unknown topic {topic!r}. Hand-written: {TOPICS}. Lessons: python lesson.py --list. "
+                         "Catalog: python catalog.py --list")
     mod = load_style(style)
     model = TT.TermModel(entry, (override or {}).get("seed"), returns)
     why = TT.supports(model, style)
@@ -158,7 +172,7 @@ def _prepare(topic, style, override=None, returns=None):
     return ep, mod, model
 
 
-def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice="female", music=None,
+def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice=V.DEFAULT_VOICE, music=None,
          scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True):
     t_start = time.time()
     ep, mod, model = prepare(topic, style, override, returns)
@@ -183,6 +197,10 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
     # ---- pre-render QA on every word that will be heard or seen
     texts = result.get("texts", []) if isinstance(result, dict) else []
     scenes = result["scenes"] if isinstance(result, dict) else result
+    # ---- B-roll: real Wikimedia photo with credit, or hand-drawn animation (style may opt out via BROLL)
+    broll_mode = getattr(mod, "BROLL", "full") if kind == "video" else False
+    brolls = B.apply(scenes, filled, broll_mode)
+    save_json(out / "broll.json", brolls)
     corpus = [s.say for s in scenes] + [x for s in scenes for x in s.texts] + texts
     corpus += [filled.get("caption", ""), filled.get("title", "")]
     save_json(out / "narration.json", {"scenes": [{"name": s.name, "say": s.say, "texts": s.texts} for s in scenes],
@@ -207,7 +225,7 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
             wav = work / f"{i:02d}-{s.name}.wav"
             u, sec, _ = V.synth(s.say, wav, used, voice)
             s.audio = str(wav) if u != "silent" else None
-        s.duration = max(s.min_dur, sec + 0.45)
+        s.duration = max(s.min_dur, sec + 0.3)  # tight gaps: fast, tense pacing
     if hasattr(mod, "after_timing"):
         mod.after_timing(scenes, filled, model, ctx)
 
@@ -227,10 +245,11 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
                                        expect_audio=True)
         if hasattr(mod, "export"):
             mod.export(scenes, filled, model, ctx)
-    (out / "captions.md").write_text(captions(filled, disc), encoding="utf-8")
+    (out / "captions.md").write_text(captions(filled, disc) + B.captions_block(brolls), encoding="utf-8")
     status = "ĐẠT" if not (nums["fail"] or banned["fail"] or fmt["fail"]) else "KHÔNG ĐẠT"
     report.write(out, ep, nums, banned, fmt, status=status, extra={"Giọng đọc": used + (" — " + "; ".join(errors) if errors else ""),
                                                                    "Thời lượng": f"{duration:.1f}s",
+                                                                   "B-roll": "; ".join(f"{r['scene']}: {r['kind']} — {r.get('credit') or r['what']}" for r in brolls) or "không",
                                                                    "Thời gian dựng": f"{time.time() - t_start:.0f}s"})
     print(report.summary(nums, banned, fmt))
     if log:
@@ -246,7 +265,8 @@ def main():
     ap.add_argument("--episode", action="append", default=[], help="episode JSON (needs topic + style)")
     ap.add_argument("--out", default=str(DEFAULT_OUT))
     ap.add_argument("--voice-engine", default="auto", choices=["auto"] + V.ENGINES)
-    ap.add_argument("--voice", default="female", help="female | male | any edge-tts voice id")
+    ap.add_argument("--voice", default=V.DEFAULT_VOICE,
+                    help="male (mặc định: nam Bắc, sáng, x1.25) | female | male-deep | edge-tts voice id")
     ap.add_argument("--music", default=None, help="path to a licensed track, or 'none'")
     ap.add_argument("--scale", type=float, default=1.0, help="0.5 = fast 540x960 preview")
     ap.add_argument("--fps", type=int, default=30)

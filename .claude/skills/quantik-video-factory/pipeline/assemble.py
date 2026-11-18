@@ -39,6 +39,34 @@ def synth_pad(path, seconds, seed_chord=0):
     return path
 
 
+def synth_tense(path, seconds, bpm=112):
+    """Suspense bed (original, royalty-free): low minor drone, heartbeat kick, ticking clock, rising riser."""
+    import numpy as np
+
+    t = np.arange(int(seconds * SR)) / SR
+    beat = 60.0 / bpm
+    drone = sum(np.sin(2 * np.pi * f * t + ph) for f, ph in [(55.0, 0), (65.41, 1.1), (82.41, 2.3)])  # A1 C2 E2
+    drone *= 0.55 + 0.45 * np.sin(2 * np.pi * t / 8.0) ** 2
+    pos = t % beat
+    kick_env = np.exp(-pos * 28)
+    kick = np.sin(2 * np.pi * (48 + 90 * np.exp(-pos * 40)) * pos) * kick_env       # thump
+    pos2 = (t - 0.22 * beat) % beat                                                  # "lub-dub" second hit
+    kick += 0.6 * np.sin(2 * np.pi * (44 + 70 * np.exp(-pos2 * 40)) * pos2) * np.exp(-pos2 * 30)
+    rng = np.random.default_rng(7)
+    noise = rng.standard_normal(len(t))
+    tpos = t % (beat / 2)
+    tick = noise * np.exp(-tpos * 160) * 0.35
+    rise = (t % 16.0) / 16.0
+    riser = np.sin(2 * np.pi * (220 + 660 * rise ** 2) * t) * rise ** 3 * 0.25
+    sig = 0.28 * drone + 0.9 * kick + tick + riser
+    fade = np.minimum(1, np.minimum(t / 0.6, (seconds - t) / 1.5))
+    pcm = (np.clip(sig / 2.2 * fade, -1, 1) * 12000).astype("<i2")
+    with wave.open(str(path), "wb") as w:
+        w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR)
+        w.writeframes(pcm.tobytes())
+    return path
+
+
 def pick_music(work: Path, seconds: float, music: str | None):
     if music == "none":
         return None
@@ -48,10 +76,12 @@ def pick_music(work: Path, seconds: float, music: str | None):
     lib = [p for p in lib if p.suffix.lower() in (".mp3", ".wav", ".m4a")]
     if lib:
         return lib[0]
-    return synth_pad(work / "pad.wav", seconds + 1)
+    if music == "calm":
+        return synth_pad(work / "pad.wav", seconds + 1)
+    return synth_tense(work / "tense.wav", seconds + 1)  # mặc định kênh: nhạc nền hồi hộp
 
 
-def assemble(video, scenes, out, work: Path, music=None, music_db=-20):
+def assemble(video, scenes, out, work: Path, music=None, music_db=-17):
     """scenes: list with .duration and optional .audio (wav path)."""
     total = sum(s.duration for s in scenes)
     inputs = ["-i", str(video)]

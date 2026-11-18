@@ -205,3 +205,57 @@ def end(cta, disclaimer, tag, min_dur=3.5, say=None):
 def first_number(text):
     m = re.search(r"[−\-]?\d[\d.]*(?:,\d+)?%?x?", text)
     return m.group(0) if m else None
+
+
+# ---------------------------------------------------------------- B-roll (real photo with credit, or hand-drawn)
+def broll(spec, say, name="broll", min_dur=3.0):
+    """Cutaway: Wikimedia photo with slow zoom + credit line, else an animated hand-drawn doodle.
+    spec comes from broll.resolve() (has 'path' + credit, or 'draw')."""
+    import broll as B
+
+    label = spec.get("label") or ""
+    credit = B.credit_line(spec) if spec.get("path") else ""
+    kind = spec.get("draw") or B.guess_doodle(label, say)
+    box = (X0, 330, X1, 1230)
+
+    def draw(img, t, p):
+        a = F.ease_out(F.seg(p, 0, 0.15))
+        if spec.get("path"):
+            B.ken_burns(img, spec["path"], box, p)
+            d = F.ImageDraw.Draw(img, "RGBA")
+            d.rounded_rectangle([X0, 1236, X1, 1306], radius=16, fill=(0, 0, 0, 170))
+            F.text_box(img, credit, (X0 + 20, 1248, X1 - 20, 1298), "sans", 22, T["muted"], "left", "middle",
+                       min_size=16, label=f"{name}-credit", max_lines=2)
+        else:
+            F.panel(img, box, fill=T["surface"])
+            B.draw_doodle(img, kind, (X0 + 90, 420, X1 - 90, 1140), p, t=t)
+            F.text_box(img, "minh hoạ vẽ tay", (X0 + 30, 1170, X1 - 30, 1215), "sans", 22, T["muted"], "right",
+                       label=f"{name}-drawn")
+        if label:
+            F.chip(img, (X0 + 24, 356 + int(20 * (1 - a))), label, T["accent"], 30)
+
+    return Scene(name, say, draw, min_dur, texts=[label])
+
+
+def with_backdrop(scene, spec, dim=0.62):
+    """Put a B-roll photo (dimmed) or a faint hand-drawn doodle behind an existing scene, e.g. the hook."""
+    import broll as B
+
+    inner = scene.draw
+    kind = spec.get("draw") or B.guess_doodle(spec.get("label"), scene.say)
+    box = (0, 300, 1080, 1310)
+
+    def draw(img, t, p):
+        if spec.get("path"):
+            B.ken_burns(img, spec["path"], box, p, dim=dim, radius=0)
+        else:
+            layer = F.Image.new("RGB", img.size, T["bg"])
+            B.draw_doodle(layer, kind, (180, 360, 900, 1080), min(1.0, p * 1.6), color=T["raised"], width=14, t=t)
+            img.paste(layer.crop((0, 300, 1080, 1310)), (0, 300))
+        inner(img, t, p)
+        if spec.get("path"):
+            F.text_box(img, B.credit_line(spec), (X0, 1262, X1, 1300), "sans", 18, T["muted"], "right", "middle",
+                       min_size=14, label=f"{scene.name}-credit", max_lines=1)
+
+    scene.draw = draw
+    return scene

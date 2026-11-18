@@ -1,0 +1,1002 @@
+{
+  "series": "Chuỗi thời gian",
+  "lessons": [
+    {
+      "id": "hq38-time-series",
+      "no": 38,
+      "name": "Time Series – Chuỗi thời gian là gì?",
+      "short": "CHUỖI THỜI GIAN",
+      "code": "import numpy as np\nrng = np.random.default_rng(38)\nr = rng.normal(0.0004, 0.018, 500)\np1 = 100 * np.cumprod(1 + r)\n# cùng các lợi suất đó, chỉ xáo thứ tự\np2 = 100 * np.cumprod(1 + rng.permutation(r))\nend1, end2 = p1[-1], p2[-1]\ndef max_dd(p):\n    return (p / np.maximum.accumulate(p) - 1).min()\ndd1, dd2 = max_dd(p1), max_dd(p2)",
+      "values": {
+        "end1": "num1",
+        "end2": "num1",
+        "dd1": "pct1",
+        "dd2": "pct1"
+      },
+      "chart": {
+        "type": "line",
+        "ys": [
+          [
+            "p1",
+            "thứ tự gốc",
+            "accent"
+          ],
+          [
+            "p2",
+            "xáo thứ tự",
+            "pos"
+          ]
+        ],
+        "xlabel": "phiên",
+        "ylabel": "giá"
+      },
+      "episode": {
+        "kicker": "Time series",
+        "hook": "Cùng một bộ lợi suất, cùng điểm cuối, mà một người sống sót, một người bỏ cuộc giữa đường. Bạn nghĩ thứ tự không quan trọng ư?",
+        "title": "Chuỗi thời gian: thứ tự mới là thứ quyết định",
+        "beats": [
+          "Code sinh năm trăm phiên lợi suất, dựng đường giá, rồi xáo trộn đúng các lợi suất đó và dựng đường thứ hai.",
+          "Hai đường kết thúc ở {end1} và {end2}, y hệt nhau. Nhưng mức sụt giảm sâu nhất lần lượt là {dd1} và {dd2}.",
+          "Cùng nguyên liệu, khác thứ tự, hai hành trình khác hẳn. Một trong hai đủ để làm người ta bán tháo giữa chừng.",
+          "Chuỗi thời gian là dữ liệu có thứ tự theo thời gian, và thứ tự đó mang thông tin. Phân tích chuỗi thời gian là học từ chính thứ tự ấy."
+        ],
+        "outputs": [
+          {
+            "label": "giá cuối gốc",
+            "key": "end1"
+          },
+          {
+            "label": "giá cuối xáo",
+            "key": "end2"
+          },
+          {
+            "label": "sụt sâu nhất gốc",
+            "key": "dd1",
+            "highlight": true
+          },
+          {
+            "label": "sụt sâu nhất xáo",
+            "key": "dd2"
+          }
+        ],
+        "chart_title": "Cùng lợi suất, khác thứ tự",
+        "formula": "\\{X_t\\}_{t=1}^{T}",
+        "takeaway": "Trung bình và độ lệch chuẩn không nhìn thấy thứ tự. Chuỗi thời gian thì có.",
+        "caption": "Cùng lợi suất, cùng điểm đến, mà hành trình khác hẳn. Vì sao thứ tự thời gian là tất cả? 👇",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "chuoithoigian",
+          "timeseries",
+          "thongke",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "0.0004",
+          "0.018",
+          "500"
+        ],
+        "hook_broll": {
+          "draw": "clock"
+        },
+        "broll": [
+          {
+            "query": "stock ticker board",
+            "label": "Từng phiên một",
+            "draw": "chart-up",
+            "say": "Mỗi bảng giá bạn nhìn mỗi ngày là một điểm trong một chuỗi thời gian dài không có hồi kết."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq39-stationarity",
+      "no": 39,
+      "name": "Stationarity – Tính dừng",
+      "short": "TÍNH DỪNG",
+      "code": "import numpy as np\nrng = np.random.default_rng(39)\nr = rng.normal(0.0005, 0.02, 1000)   # lợi suất\np = 100 * np.cumprod(1 + r)          # giá\nh = len(p) // 2\np_m1, p_m2 = p[:h].mean(), p[h:].mean()\nr_m1, r_m2 = r[:h].mean(), r[h:].mean()\nr_s1, r_s2 = r[:h].std(), r[h:].std()\np_jump = p_m2 / p_m1 - 1",
+      "values": {
+        "p_m1": "num1",
+        "p_m2": "num1",
+        "p_jump": "pct0",
+        "r_m1": "pct2",
+        "r_m2": "pct2",
+        "r_s1": "pct2",
+        "r_s2": "pct2"
+      },
+      "chart": {
+        "type": "line",
+        "ys": [
+          [
+            "p",
+            "giá"
+          ]
+        ],
+        "hlines": [
+          [
+            "p_m1",
+            "TB nửa đầu",
+            "pos"
+          ],
+          [
+            "p_m2",
+            "TB nửa sau",
+            "neu"
+          ]
+        ],
+        "xlabel": "phiên",
+        "ylabel": "giá"
+      },
+      "episode": {
+        "kicker": "Stationarity",
+        "hook": "Đưa thẳng giá cổ phiếu vào mô hình? Đó là lỗi số một của người mới làm quant, và mô hình của bạn sẽ học toàn điều vô nghĩa.",
+        "title": "Tính dừng: vì sao không được đưa giá vào mô hình",
+        "beats": [
+          "Code sinh một nghìn phiên, rồi chia đôi. So trung bình của giá và của lợi suất ở hai nửa.",
+          "Trung bình giá nhảy từ {p_m1} lên {p_m2}, lệch {p_jump}. Lợi suất thì gần như đứng yên: {r_m1} so với {r_m2}, độ lệch chuẩn {r_s1} so với {r_s2}.",
+          "Hai vạch ngang cách xa nhau: giá không có một mức trung bình cố định. Học từ nửa đầu, bạn sẽ đoán sai nửa sau.",
+          "Chuỗi dừng có trung bình, phương sai và cấu trúc tương quan không đổi theo thời gian. Giá thường không dừng, lợi suất thì gần dừng hơn."
+        ],
+        "outputs": [
+          {
+            "label": "TB giá nửa đầu",
+            "key": "p_m1"
+          },
+          {
+            "label": "TB giá nửa sau",
+            "key": "p_m2"
+          },
+          {
+            "label": "chênh",
+            "key": "p_jump",
+            "highlight": true
+          },
+          {
+            "label": "TB lợi suất 1",
+            "key": "r_m1"
+          },
+          {
+            "label": "TB lợi suất 2",
+            "key": "r_m2"
+          }
+        ],
+        "chart_title": "Giá không có trung bình cố định",
+        "formula": "E[X_t]=\\mu,\\;\\mathrm{Var}(X_t)=\\sigma^2\\;\\;\\forall t",
+        "takeaway": "Trước khi mô hình hoá bất cứ thứ gì, hãy biến nó thành chuỗi dừng. Với giá, bước đầu tiên là lấy lợi suất.",
+        "caption": "Đưa giá thẳng vào mô hình là lỗi kinh điển. Tính dừng là gì và vì sao nó quan trọng với mọi mô hình quant.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "tinhdung",
+          "stationarity",
+          "chuoithoigian",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "0.0005",
+          "0.02",
+          "1000"
+        ],
+        "hook_broll": {
+          "draw": "warning"
+        },
+        "broll": [
+          {
+            "draw": "chart-up",
+            "label": "Nền đất dịch chuyển",
+            "say": "Học từ một chuỗi không dừng giống như vẽ bản đồ trên một mặt đất đang trôi."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq40-acf",
+      "no": 40,
+      "name": "Autocorrelation (ACF) – Tự tương quan",
+      "short": "ACF",
+      "code": "import numpy as np\nrng = np.random.default_rng(40)\nn = 2000\nr, s2 = np.zeros(n), 1e-4\nfor t in range(1, n):\n    s2 = 2e-6 + 0.1 * r[t-1] ** 2 + 0.88 * s2\n    r[t] = np.sqrt(s2) * rng.standard_normal()\ndef acf(x, k):\n    x = x - x.mean()\n    return (x[:-k] * x[k:]).sum() / (x * x).sum()\na_r, a_abs = acf(r, 1), acf(np.abs(r), 1)\nband = 2 / np.sqrt(n)",
+      "plot": "acf_abs = np.array([acf(np.abs(r), k) for k in range(1, 21)])",
+      "values": {
+        "a_r": "num2",
+        "a_abs": "num2",
+        "band": "num2",
+        "n": "int"
+      },
+      "chart": {
+        "type": "bar",
+        "heights": "acf_abs",
+        "labels": "list(range(1, 21))",
+        "band": [
+          "band"
+        ],
+        "xlabel": "độ trễ (phiên)",
+        "ylabel": "ACF của |lợi suất|"
+      },
+      "episode": {
+        "kicker": "Autocorrelation",
+        "hook": "Người ta bảo thị trường không có trí nhớ. Đúng một nửa. Nửa còn lại là thứ khiến bạn bị bất ngờ hết lần này đến lần khác.",
+        "title": "Tự tương quan ACF: thị trường nhớ gì, quên gì",
+        "beats": [
+          "Code sinh {n} phiên có biến động đi theo cụm, rồi tự viết hàm tự tương quan: so chuỗi với chính nó lùi một phiên.",
+          "Tự tương quan của lợi suất chỉ {a_r}, nằm trong dải nhiễu {band}. Nhưng của độ lớn lợi suất là {a_abs}, vượt xa dải đó.",
+          "Hướng đi thì quên ngay, nhưng độ mạnh yếu thì nhớ rất lâu: các cột vẫn cao sau cả chục phiên. Vùng xám là dải nhiễu.",
+          "ACF đo tương quan của chuỗi với chính nó ở các độ trễ. Cột vượt dải xám là dấu hiệu chuỗi có trí nhớ ở độ trễ đó."
+        ],
+        "outputs": [
+          {
+            "label": "ACF lợi suất",
+            "key": "a_r"
+          },
+          {
+            "label": "ACF |lợi suất|",
+            "key": "a_abs",
+            "highlight": true
+          },
+          {
+            "label": "dải nhiễu ±",
+            "key": "band"
+          }
+        ],
+        "chart_title": "ACF của độ lớn lợi suất",
+        "formula": "\\rho_k = \\frac{\\mathrm{Cov}(X_t, X_{t-k})}{\\mathrm{Var}(X_t)}",
+        "takeaway": "Thị trường quên hướng đi nhưng nhớ cơn bão. Rủi ro hôm nay báo trước rủi ro ngày mai.",
+        "caption": "Thị trường có trí nhớ không? ACF cho thấy: quên hướng đi, nhưng nhớ rất lâu độ biến động.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "ACF",
+          "tutuongquan",
+          "chuoithoigian",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "1e-4",
+          "2e-6",
+          "0.1",
+          "0.88"
+        ],
+        "hook_broll": {
+          "draw": "zigzag"
+        },
+        "broll": [
+          {
+            "query": "George E. P. Box",
+            "label": "George Box",
+            "draw": "two-lines",
+            "say": "George Box, đồng tác giả phương pháp Box-Jenkins, biến ACF thành công cụ chuẩn để đọc chuỗi thời gian."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq41-pacf",
+      "no": 41,
+      "name": "Partial Autocorrelation (PACF) – Tự tương quan riêng phần",
+      "short": "PACF",
+      "code": "import numpy as np\nrng = np.random.default_rng(41)\nn = 3000\nx, e = np.zeros(n), rng.standard_normal(n)\nfor t in range(2, n):   # AR(2)\n    x[t] = 0.5 * x[t-1] + 0.3 * x[t-2] + e[t]\ndef pacf(x, k):\n    m = len(x)\n    X = [x[k-j-1:m-j-1] for j in range(k)]\n    b = np.linalg.lstsq(np.array(X).T, x[k:],\n                        rcond=None)[0]\n    return b[-1]\np1, p2, p3 = pacf(x, 1), pacf(x, 2), pacf(x, 3)\nband = 2 / np.sqrt(n)",
+      "plot": "pac = np.array([pacf(x, k) for k in range(1, 11)])\nxc = x - x.mean(); acf_ = np.array([(xc[:-k]*xc[k:]).sum()/(xc*xc).sum() for k in range(1, 11)])",
+      "values": {
+        "p1": "num2",
+        "p2": "num2",
+        "p3": "num2",
+        "band": "num2"
+      },
+      "chart": {
+        "type": "bar",
+        "heights": "pac",
+        "labels": "list(range(1, 11))",
+        "band": [
+          "band"
+        ],
+        "signed": true,
+        "xlabel": "độ trễ",
+        "ylabel": "PACF"
+      },
+      "episode": {
+        "kicker": "Partial autocorrelation",
+        "hook": "ACF nói giá hôm nay liên quan tới cả tuần trước? Coi chừng, đó có thể chỉ là tin đồn truyền miệng qua từng phiên.",
+        "title": "PACF: tách ảnh hưởng trực tiếp khỏi tin đồn truyền miệng",
+        "beats": [
+          "Code sinh một chuỗi mà hôm nay chỉ phụ thuộc trực tiếp vào hai phiên gần nhất. Rồi tính PACF bằng hồi quy từng bậc.",
+          "PACF độ trễ một là {p1}, độ trễ hai là {p2}, đến độ trễ ba thì rơi về {p3}, nằm trong dải nhiễu {band}.",
+          "Hai cột đầu nổi bật, sau đó tắt hẳn. ACF sẽ kéo dài nhiều phiên, nhưng PACF chỉ ra đúng hai phiên có ảnh hưởng thật.",
+          "PACF đo tương quan với độ trễ k sau khi đã loại bỏ ảnh hưởng của các độ trễ ngắn hơn. Nó cho biết nên chọn bậc mấy cho mô hình AR."
+        ],
+        "outputs": [
+          {
+            "label": "PACF lag 1",
+            "key": "p1"
+          },
+          {
+            "label": "PACF lag 2",
+            "key": "p2",
+            "highlight": true
+          },
+          {
+            "label": "PACF lag 3",
+            "key": "p3"
+          },
+          {
+            "label": "dải nhiễu ±",
+            "key": "band"
+          }
+        ],
+        "chart_title": "PACF cắt sau độ trễ 2",
+        "formula": "\\phi_{kk} = \\mathrm{Corr}(X_t, X_{t-k} \\mid X_{t-1},\\dots,X_{t-k+1})",
+        "takeaway": "ACF thấy mọi mối liên hệ, kể cả gián tiếp. PACF chỉ giữ lại ảnh hưởng trực tiếp, đó là thứ mô hình cần.",
+        "caption": "ACF và PACF khác nhau ở đâu? PACF tách ảnh hưởng trực tiếp khỏi hiệu ứng truyền qua nhiều phiên.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "PACF",
+          "chuoithoigian",
+          "ARIMA",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "3000",
+          "0.5",
+          "0.3",
+          "AR(2)"
+        ],
+        "hook_broll": {
+          "draw": "network"
+        },
+        "broll": [
+          {
+            "draw": "network",
+            "label": "Truyền miệng",
+            "say": "Giống trò chơi truyền tin: người thứ ba nghe được thông điệp, nhưng chỉ vì người thứ hai kể lại."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq42-white-noise",
+      "no": 42,
+      "name": "White Noise – Nhiễu trắng",
+      "short": "NHIỄU TRẮNG",
+      "code": "import numpy as np\nrng = np.random.default_rng(42)\ne = rng.normal(0, 1, 1000)        # nhiễu trắng\ndef acf(x, k):\n    x = x - x.mean()\n    return (x[:-k] * x[k:]).sum() / (x * x).sum()\nacfs = np.array([acf(e, k) for k in range(1, 21)])\nband = 2 / np.sqrt(len(e))\nout = int((np.abs(acfs) > band).sum())\nbiggest = np.abs(acfs).max()\nmu, sd = e.mean(), e.std()",
+      "values": {
+        "out": "int",
+        "band": "num2",
+        "biggest": "num2",
+        "mu": "num2",
+        "sd": "num2"
+      },
+      "chart": {
+        "type": "bar",
+        "heights": "acfs",
+        "labels": "list(range(1, 21))",
+        "band": [
+          "band"
+        ],
+        "signed": true,
+        "xlabel": "độ trễ",
+        "ylabel": "ACF"
+      },
+      "episode": {
+        "kicker": "White noise",
+        "hook": "Bạn soi biểu đồ cả ngày và thấy mô hình ở khắp nơi. Đây là cách kiểm tra xem bạn đang thấy tín hiệu, hay chỉ đang thấy ma.",
+        "title": "Nhiễu trắng: khi biểu đồ không có gì để đọc",
+        "beats": [
+          "Code sinh một nghìn giá trị hoàn toàn ngẫu nhiên, độc lập với nhau, rồi tính tự tương quan ở hai mươi độ trễ.",
+          "Trung bình {mu}, độ lệch chuẩn {sd}. Có {out} trên hai mươi cột vượt dải {band}, cột lớn nhất chỉ {biggest}: đúng mức may rủi.",
+          "Các cột nhảy lên xuống trong vùng xám, không có cấu trúc gì. Dù vậy mắt người vẫn sẽ cố tìm ra mô hình.",
+          "Nhiễu trắng là chuỗi có trung bình không, phương sai cố định và không tự tương quan. Nó là đích đến của phần dư một mô hình tốt."
+        ],
+        "outputs": [
+          {
+            "label": "trung bình",
+            "key": "mu"
+          },
+          {
+            "label": "độ lệch chuẩn",
+            "key": "sd"
+          },
+          {
+            "label": "cột vượt dải",
+            "key": "out",
+            "highlight": true
+          },
+          {
+            "label": "|ACF| lớn nhất",
+            "key": "biggest"
+          }
+        ],
+        "chart_title": "ACF của nhiễu trắng",
+        "formula": "\\varepsilon_t \\sim \\mathrm{iid}(0, \\sigma^2)",
+        "takeaway": "Nếu chuỗi của bạn trông như nhiễu trắng, không có chỉ báo nào cứu được. Còn phần dư mô hình mà như nhiễu trắng là tin tốt.",
+        "caption": "Bạn đang thấy tín hiệu hay đang thấy ma? Nhiễu trắng là phép thử mà mọi mô hình phải qua.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "nhieutrang",
+          "whitenoise",
+          "chuoithoigian",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "1000"
+        ],
+        "hook_broll": {
+          "draw": "zigzag"
+        },
+        "broll": [
+          {
+            "query": "television static noise",
+            "label": "Nhiễu",
+            "draw": "zigzag",
+            "say": "Như màn hình tivi mất sóng: lấm tấm khắp nơi nhưng không chứa một hình ảnh nào."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq43-random-walk",
+      "no": 43,
+      "name": "Random Walk – Bước đi ngẫu nhiên",
+      "short": "RANDOM WALK",
+      "code": "import numpy as np\nrng = np.random.default_rng(43)\nsteps = rng.normal(0, 1, (2000, 250))\npaths = steps.cumsum(axis=1)       # 2000 đường đi\nsd25 = paths[:, 24].std()\nsd100 = paths[:, 99].std()\nsd250 = paths[:, 249].std()\nratio = sd100 / sd25               # thời gian x4\nup = (paths[:, -1] > 0).mean()",
+      "values": {
+        "sd25": "num1",
+        "sd100": "num1",
+        "sd250": "num1",
+        "ratio": "num2",
+        "up": "pct0"
+      },
+      "chart": {
+        "type": "line",
+        "ys": [
+          [
+            "paths[0]",
+            "",
+            "accent"
+          ],
+          [
+            "paths[1]",
+            "",
+            "pos"
+          ],
+          [
+            "paths[2]",
+            "",
+            "neu"
+          ],
+          [
+            "paths[3]",
+            "",
+            "neg"
+          ],
+          [
+            "paths[4]",
+            "",
+            "muted"
+          ]
+        ],
+        "xlabel": "bước",
+        "ylabel": "vị trí"
+      },
+      "surface": {
+        "type": "grid",
+        "fn": "lambda X, Y: np.exp(-X**2/(2*Y)) / np.sqrt(2*np.pi*Y)",
+        "x": [
+          -40,
+          40
+        ],
+        "y": [
+          5,
+          250
+        ],
+        "xl": "vị trí",
+        "yl": "thời gian",
+        "zl": "mật độ"
+      },
+      "episode": {
+        "kicker": "Random walk",
+        "hook": "Đường giá bạn đang vẽ trendline có thể được tạo ra bởi một đồng xu. Và bạn sẽ không phân biệt được.",
+        "title": "Random walk: khi đồng xu vẽ biểu đồ giống hệt cổ phiếu",
+        "beats": [
+          "Code cho hai nghìn người đi ngẫu nhiên, mỗi bước tiến hay lùi một khoảng ngẫu nhiên, trong hai trăm năm mươi bước.",
+          "Độ phân tán sau hai mươi lăm bước là {sd25}, sau một trăm bước {sd100}, sau hai trăm năm mươi bước {sd250}. Thời gian gấp bốn, độ phân tán chỉ gấp {ratio}. Kết thúc trên số không: {up}.",
+          "Năm đường này có xu hướng, có đỉnh, có đáy, có cả mô hình hai đáy. Tất cả chỉ là tung đồng xu.",
+          "Bước đi ngẫu nhiên là chuỗi mà mỗi bước là một cú sốc độc lập cộng dồn. Độ bất định tăng theo căn bậc hai của thời gian."
+        ],
+        "outputs": [
+          {
+            "label": "σ sau 25 bước",
+            "key": "sd25"
+          },
+          {
+            "label": "σ sau 100 bước",
+            "key": "sd100"
+          },
+          {
+            "label": "σ sau 250 bước",
+            "key": "sd250"
+          },
+          {
+            "label": "100 / 25",
+            "key": "ratio",
+            "highlight": true
+          },
+          {
+            "label": "kết thúc > 0",
+            "key": "up"
+          }
+        ],
+        "chart_title": "Năm đường đi ngẫu nhiên",
+        "formula": "P_t = P_{t-1} + \\varepsilon_t",
+        "takeaway": "Trước khi tin vào một mô hình nến, hãy hỏi: đồng xu có vẽ ra được nó không?",
+        "caption": "Đồng xu vẽ được biểu đồ giống hệt cổ phiếu, có cả trendline lẫn hai đáy. Random walk là gì?",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "randomwalk",
+          "buocdingaunhien",
+          "chuoithoigian",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "2000",
+          "250"
+        ],
+        "hook_broll": {
+          "draw": "coin"
+        },
+        "broll": [
+          {
+            "query": "Louis Bachelier",
+            "label": "Louis Bachelier",
+            "draw": "zigzag",
+            "say": "Louis Bachelier là người đầu tiên mô tả giá cổ phiếu như một bước đi ngẫu nhiên, trong luận án tiến sĩ của ông."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq44-ar-model",
+      "no": 44,
+      "name": "AR Model – Mô hình tự hồi quy",
+      "short": "AR",
+      "code": "import numpy as np\nrng = np.random.default_rng(44)\nphi, n = 0.7, 1000\nx, e = np.zeros(n), rng.standard_normal(n)\nfor t in range(1, n):          # AR(1)\n    x[t] = phi * x[t-1] + e[t]\nphi_hat = x[1:] @ x[:-1] / (x[:-1] @ x[:-1])\nhalf = np.log(0.5) / np.log(phi_hat)\nresid = x[1:] - phi_hat * x[:-1]\nr2 = 1 - resid.var() / x[1:].var()",
+      "values": {
+        "phi_hat": "num2",
+        "half": "num1",
+        "r2": "pct0"
+      },
+      "chart": {
+        "type": "scatter",
+        "x": "x[:-1]",
+        "y": "x[1:]",
+        "fit": true,
+        "s": 14,
+        "xlabel": "x hôm qua",
+        "ylabel": "x hôm nay"
+      },
+      "episode": {
+        "kicker": "AR model",
+        "hook": "Hôm qua dự báo hôm nay. Nghe như bói toán? Đây là mô hình nền móng của cả ngành dự báo, và nó có cơ sở hẳn hoi.",
+        "title": "Mô hình AR: khi hôm qua nói được về hôm nay",
+        "beats": [
+          "Code sinh một chuỗi mà hôm nay bằng một phần của hôm qua cộng cú sốc mới. Rồi ước lượng lại hệ số bằng bình phương nhỏ nhất.",
+          "Hệ số ước lượng là {phi_hat}. Một cú sốc mất khoảng {half} phiên để giảm một nửa. Hôm qua giải thích được {r2} biến động hôm nay.",
+          "Mỗi chấm là một cặp hôm qua, hôm nay. Đường xanh dốc lên chính là hệ số tự hồi quy.",
+          "Mô hình tự hồi quy dự báo giá trị hiện tại bằng tổ hợp tuyến tính các giá trị quá khứ của chính nó. Hệ số nhỏ hơn một thì chuỗi luôn bị kéo về trung bình."
+        ],
+        "outputs": [
+          {
+            "label": "φ ước lượng",
+            "key": "phi_hat",
+            "highlight": true
+          },
+          {
+            "label": "nửa đời (phiên)",
+            "key": "half"
+          },
+          {
+            "label": "R²",
+            "key": "r2"
+          }
+        ],
+        "chart_title": "Hôm qua vs hôm nay",
+        "formula": "X_t = \\phi\\, X_{t-1} + \\varepsilon_t",
+        "takeaway": "AR không đoán tương lai bằng phép màu. Nó đo xem quá khứ để lại bao nhiêu dấu vết, và dấu vết đó phai nhanh cỡ nào.",
+        "caption": "Hôm qua có dự báo được hôm nay không? Mô hình tự hồi quy AR trả lời bằng một hệ số.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "ARmodel",
+          "tuhoiquy",
+          "chuoithoigian",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "0.7",
+          "1000",
+          "0.5",
+          "AR(1)"
+        ],
+        "hook_broll": {
+          "draw": "arrows"
+        },
+        "broll": [
+          {
+            "query": "George Udny Yule",
+            "label": "Udny Yule",
+            "draw": "chart-up",
+            "say": "Mô hình tự hồi quy được Udny Yule đề xuất khi nghiên cứu chu kỳ vết đen trên Mặt Trời."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq45-ma-model",
+      "no": 45,
+      "name": "MA Model – Mô hình trung bình trượt",
+      "short": "MA",
+      "code": "import numpy as np\nrng = np.random.default_rng(45)\ntheta, n = 0.6, 5000\ne = rng.standard_normal(n + 1)\nx = e[1:] + theta * e[:-1]       # MA(1)\ndef acf(x, k):\n    x = x - x.mean()\n    return (x[:-k] * x[k:]).sum() / (x * x).sum()\na1, a2 = acf(x, 1), acf(x, 2)\ntheory = theta / (1 + theta ** 2)",
+      "plot": "acfs = np.array([acf(x, k) for k in range(1, 11)]); band = 2 / np.sqrt(n)",
+      "values": {
+        "a1": "num2",
+        "a2": "num2",
+        "theory": "num2"
+      },
+      "chart": {
+        "type": "bar",
+        "heights": "acfs",
+        "labels": "list(range(1, 11))",
+        "band": [
+          "band"
+        ],
+        "signed": true,
+        "xlabel": "độ trễ",
+        "ylabel": "ACF"
+      },
+      "episode": {
+        "kicker": "MA model",
+        "hook": "Không phải đường MA trên app giao dịch đâu. Mô hình MA thật sự là thứ hoàn toàn khác, và rất nhiều người đang nhầm hai cái.",
+        "title": "Mô hình MA: không phải đường trung bình động trên app",
+        "beats": [
+          "Code dựng chuỗi mà hôm nay bằng cú sốc hôm nay cộng một phần cú sốc hôm qua. Rồi đo tự tương quan.",
+          "Tự tương quan độ trễ một là {a1}, khớp lý thuyết {theory}. Sang độ trễ hai chỉ còn {a2}: cú sốc bị quên sạch sau đúng một phiên.",
+          "Một cột duy nhất nổi lên, rồi tắt hẳn. Đó là dấu vân tay của mô hình MA bậc một.",
+          "Mô hình trung bình trượt mô tả chuỗi bằng các cú sốc hiện tại và quá khứ. Trí nhớ của nó ngắn và có hạn, khác hẳn mô hình AR."
+        ],
+        "outputs": [
+          {
+            "label": "ACF lag 1",
+            "key": "a1",
+            "highlight": true
+          },
+          {
+            "label": "lý thuyết",
+            "key": "theory"
+          },
+          {
+            "label": "ACF lag 2",
+            "key": "a2"
+          }
+        ],
+        "chart_title": "ACF cắt sau độ trễ 1",
+        "formula": "X_t = \\varepsilon_t + \\theta\\,\\varepsilon_{t-1}",
+        "takeaway": "AR nhớ dài và phai dần. MA nhớ ngắn rồi quên hẳn. Chọn sai loại, mô hình sẽ dự báo sai từ gốc.",
+        "caption": "Mô hình MA không phải đường MA20 trên app. Đây là sự khác biệt mà nhiều người nhầm.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "MAmodel",
+          "chuoithoigian",
+          "ARIMA",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "0.6",
+          "5000",
+          "MA(1)"
+        ],
+        "hook_broll": {
+          "draw": "question"
+        },
+        "broll": [
+          {
+            "draw": "zigzag",
+            "label": "Dư chấn",
+            "say": "Như một dư chấn: cú sốc hôm qua còn rung nhẹ hôm nay, rồi biến mất hoàn toàn."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq46-arima",
+      "no": 46,
+      "name": "ARIMA – Mô hình ARIMA",
+      "short": "ARIMA",
+      "code": "import numpy as np\nrng = np.random.default_rng(46)\nn = 400\nd, e = np.zeros(n), rng.standard_normal(n)\nfor t in range(1, n):\n    d[t] = 0.5 * d[t-1] + e[t]\ny = 100 + d.cumsum()            # ARIMA(1,1,0)\ndy = np.diff(y)                 # chữ I: lấy sai phân\nphi = dy[1:] @ dy[:-1] / (dy[:-1] @ dy[:-1])\nsig = (dy[1:] - phi * dy[:-1]).std()\nf, s = [y[-1]], dy[-1]\nfor h in range(20):\n    s = phi * s\n    f.append(f[-1] + s)\nf1, f20 = f[1], f[-1]",
+      "plot": "hist = np.r_[y, np.full(20, np.nan)]\nfc = np.r_[np.full(n - 1, np.nan), np.array(f)]\nhs = np.r_[np.zeros(n - 1), np.sqrt(np.arange(21))]\nup = fc + 2 * sig * hs / (1 - phi); lo = fc - 2 * sig * hs / (1 - phi)",
+      "values": {
+        "phi": "num2",
+        "sig": "num2",
+        "f1": "num1",
+        "f20": "num1"
+      },
+      "chart": {
+        "type": "line",
+        "ys": [
+          [
+            "hist",
+            "dữ liệu",
+            "text"
+          ],
+          [
+            "fc",
+            "dự báo",
+            "accent",
+            3
+          ],
+          [
+            "up",
+            "vùng bất định",
+            "neu",
+            1.6
+          ],
+          [
+            "lo",
+            "",
+            "neu",
+            1.6
+          ]
+        ],
+        "xlabel": "phiên",
+        "ylabel": "giá trị"
+      },
+      "episode": {
+        "kicker": "ARIMA",
+        "hook": "Dự báo giá bằng ARIMA cho ra một đường đẹp như mơ? Hãy nhìn cái vùng bất định nở toang ra, rồi bạn sẽ thôi tin vào đường đẹp đó.",
+        "title": "ARIMA: dự báo thì dễ, độ bất định mới là sự thật",
+        "beats": [
+          "Code dựng một chuỗi có xu hướng ngẫu nhiên, lấy sai phân để làm dừng, ước lượng phần AR, rồi dự báo hai mươi bước.",
+          "Hệ số AR là {phi}, cú sốc mỗi bước cỡ {sig}. Dự báo bước một là {f1}, bước hai mươi là {f20}.",
+          "Đường cam là dự báo, phẳng dần về cuối. Hai đường vàng là vùng bất định, càng xa càng nở rộng.",
+          "ARIMA ghép ba phần: tự hồi quy, lấy sai phân để làm dừng, và trung bình trượt. Nó là cỗ máy dự báo chuỗi thời gian kinh điển."
+        ],
+        "outputs": [
+          {
+            "label": "φ (AR)",
+            "key": "phi"
+          },
+          {
+            "label": "σ cú sốc",
+            "key": "sig"
+          },
+          {
+            "label": "dự báo +1",
+            "key": "f1"
+          },
+          {
+            "label": "dự báo +20",
+            "key": "f20",
+            "highlight": true
+          }
+        ],
+        "chart_title": "Dự báo và vùng bất định",
+        "formula": "\\Delta y_t = \\phi\\,\\Delta y_{t-1} + \\varepsilon_t",
+        "takeaway": "Một dự báo không có vùng bất định là một lời nói dối có số liệu. Hãy luôn hỏi khoảng tin cậy rộng cỡ nào.",
+        "caption": "ARIMA dự báo được giá không? Đường dự báo thì đẹp, nhưng vùng bất định mới nói lên sự thật.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "ARIMA",
+          "dubao",
+          "chuoithoigian",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "400",
+          "0.5",
+          "100",
+          "20",
+          "ARIMA(1,1,0)"
+        ],
+        "hook_broll": {
+          "draw": "chart-up"
+        },
+        "broll": [
+          {
+            "query": "Gwilym Jenkins",
+            "label": "Box và Jenkins",
+            "draw": "two-lines",
+            "say": "Phương pháp Box-Jenkins đã biến ARIMA thành quy trình chuẩn của ngành dự báo suốt nhiều thập kỷ."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq47-arch",
+      "no": 47,
+      "name": "ARCH Model – Mô hình ARCH",
+      "short": "ARCH",
+      "code": "import numpy as np\nrng = np.random.default_rng(47)\na0, a1, n = 1e-4, 0.6, 3000\nr, z = np.zeros(n), rng.standard_normal(n)\nfor t in range(1, n):          # ARCH(1)\n    r[t] = np.sqrt(a0 + a1 * r[t-1] ** 2) * z[t]\nx, y = r[:-1] ** 2, r[1:] ** 2\na1_hat = np.cov(x, y)[0, 1] / x.var()\nk = ((r - r.mean()) / r.std())\nkurt = (k ** 4).mean() - 3",
+      "plot": "sig = np.sqrt(a0 + a1 * np.r_[0, r[:-1]] ** 2)",
+      "values": {
+        "a1_hat": "num2",
+        "kurt": "num1"
+      },
+      "chart": {
+        "type": "line",
+        "ys": [
+          [
+            "r[:600]",
+            "lợi suất",
+            "muted",
+            1.2
+          ],
+          [
+            "2 * sig[:600]",
+            "±2σ có điều kiện",
+            "accent",
+            2.4
+          ],
+          [
+            "-2 * sig[:600]",
+            "",
+            "accent",
+            2.4
+          ]
+        ],
+        "xlabel": "phiên",
+        "ylabel": "lợi suất"
+      },
+      "episode": {
+        "kicker": "ARCH",
+        "hook": "Có một mô hình được trao giải Nobel chỉ vì nói một điều ai cũng thấy mà không ai chịu viết thành công thức: sau bão thì thường còn bão.",
+        "title": "Mô hình ARCH: sau bão thường còn bão",
+        "beats": [
+          "Code sinh chuỗi mà phương sai hôm nay phụ thuộc vào bình phương cú sốc hôm qua. Rồi ước lượng lại hệ số đó.",
+          "Hệ số phản ứng ước lượng là {a1_hat}. Chuỗi sinh ra có kurtosis dư tới {kurt}: đuôi dày tự nhiên, không cần ép.",
+          "Dải cam co giãn theo từng cú sốc. Một phiên giật mạnh lập tức làm dải phình ra ở phiên sau.",
+          "ARCH mô hình hoá phương sai có điều kiện bằng các cú sốc gần đây. Nó là tổ tiên trực tiếp của GARCH, tập tiếp theo."
+        ],
+        "outputs": [
+          {
+            "label": "α₁ ước lượng",
+            "key": "a1_hat",
+            "highlight": true
+          },
+          {
+            "label": "kurtosis dư",
+            "key": "kurt"
+          }
+        ],
+        "chart_title": "Biến động co giãn theo cú sốc",
+        "formula": "\\sigma_t^2 = \\alpha_0 + \\alpha_1\\,\\varepsilon_{t-1}^2",
+        "takeaway": "Biến động không cố định. Nó phản ứng với tin tức, và phản ứng đó đo được.",
+        "caption": "Sau bão thường còn bão. Mô hình ARCH viết điều đó thành công thức và nhận giải Nobel.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "ARCH",
+          "volatility",
+          "chuoithoigian",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "1e-4",
+          "0.6",
+          "3000",
+          "ARCH(1)"
+        ],
+        "hook_broll": {
+          "query": "Robert F. Engle",
+          "label": "Robert Engle",
+          "draw": "zigzag"
+        },
+        "broll": [
+          {
+            "query": "Nobel Prize medal",
+            "label": "Giải Nobel kinh tế",
+            "draw": "zigzag",
+            "say": "Robert Engle nhận giải Nobel kinh tế nhờ mô hình ARCH, công cụ đo biến động thay đổi theo thời gian."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq49-egarch",
+      "no": 49,
+      "name": "EGARCH Model – Mô hình EGARCH",
+      "short": "EGARCH",
+      "code": "import numpy as np\nrng = np.random.default_rng(49)\nw, a, g, b = -0.24, 0.15, -0.12, 0.97\nn = 4000\nlv, z = np.zeros(n), rng.standard_normal(n)\nlv[0] = w / (1 - b)\nfor t in range(1, n):          # log phương sai\n    lv[t] = (w + b * lv[t-1]\n             + a * (abs(z[t-1]) - 0.8) + g * z[t-1])\ns = np.exp(lv / 2)\ndn = s[1:][z[:-1] < -1.5].mean()\nup = s[1:][z[:-1] > 1.5].mean()\nasym = dn / up",
+      "plot": "zs = np.linspace(-3, 3, 200); nic = np.exp((a * (np.abs(zs) - 0.8) + g * zs) / 2)",
+      "values": {
+        "dn": [
+          "dn * np.sqrt(252)",
+          "pct1"
+        ],
+        "up": [
+          "up * np.sqrt(252)",
+          "pct1"
+        ],
+        "asym": "x2",
+        "g": "num2"
+      },
+      "chart": {
+        "type": "line",
+        "x": "zs",
+        "ys": [
+          [
+            "nic",
+            "phản ứng biến động",
+            "accent"
+          ]
+        ],
+        "xlabel": "cú sốc hôm qua (độ lệch chuẩn)",
+        "ylabel": "hệ số nhân biến động"
+      },
+      "episode": {
+        "kicker": "EGARCH",
+        "hook": "Tin xấu và tin tốt cùng độ lớn, nhưng thị trường hoảng gấp nhiều lần với tin xấu. GARCH thường không thấy điều đó. EGARCH thì thấy.",
+        "title": "EGARCH: vì sao tin xấu làm thị trường hoảng hơn tin tốt",
+        "beats": [
+          "Code mô phỏng EGARCH, mô hình hoá log của phương sai và thêm hệ số bất đối xứng gamma bằng {g}.",
+          "Sau một cú giảm mạnh, biến động năm hoá trung bình là {dn}. Sau một cú tăng mạnh cùng độ lớn chỉ {up}. Tin xấu nặng gấp {asym} lần.",
+          "Đường cong lệch hẳn sang trái: cú sốc âm đẩy biến động lên cao hơn cú sốc dương. Đó là hiệu ứng đòn bẩy.",
+          "EGARCH là bản nâng cấp của GARCH tập trước: dùng log phương sai nên luôn dương, và có hệ số riêng cho chiều của cú sốc."
+        ],
+        "outputs": [
+          {
+            "label": "γ (bất đối xứng)",
+            "key": "g"
+          },
+          {
+            "label": "σ sau tin xấu",
+            "key": "dn"
+          },
+          {
+            "label": "σ sau tin tốt",
+            "key": "up"
+          },
+          {
+            "label": "xấu / tốt",
+            "key": "asym",
+            "highlight": true
+          }
+        ],
+        "chart_title": "Đường phản ứng tin tức của EGARCH",
+        "formula": "\\ln\\sigma_t^2 = \\omega + \\beta\\ln\\sigma_{t-1}^2 + \\alpha(|z_{t-1}|-E|z|) + \\gamma z_{t-1}",
+        "takeaway": "Rủi ro không đối xứng. Mô hình biến động tốt phải biết rằng sợ hãi lan nhanh hơn hưng phấn.",
+        "caption": "Tin xấu làm thị trường hoảng hơn tin tốt cùng độ lớn. EGARCH đo chính xác mức bất đối xứng đó.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "EGARCH",
+          "GARCH",
+          "volatility",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "-0.24",
+          "0.15",
+          "-0.12",
+          "0.97",
+          "4000",
+          "0.8",
+          "-1.5",
+          "1.5",
+          "252"
+        ],
+        "hook_broll": {
+          "draw": "crash"
+        },
+        "broll": [
+          {
+            "query": "Daniel B. Nelson economist",
+            "label": "Daniel Nelson",
+            "draw": "skew",
+            "say": "EGARCH do nhà kinh tế Daniel Nelson đề xuất, để bắt được hiệu ứng tin xấu mạnh hơn tin tốt."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -14,6 +14,7 @@ SKILL.md                 ← bạn đang đọc: điều phối
 brand/                   identity.md (màu, chữ, giọng văn, thông tin sản phẩm) · compliance.md (cụm cấm, miễn trừ)
                          pronunciation.json (cách TTS đọc thuật ngữ) · assets/ (logo, font, nhạc có giấy phép)
 knowledge/models/*.md    8 mô hình viết tay: công thức, tham số đẹp, ngưỡng, ví dụ HOSE, sai lầm hay gặp, video_defaults
+knowledge/lessons/*.json series "Học Quant cùng QuanTik" (#1–#74): mỗi bài một đoạn code chạy thật + chart/3D + hook + B-roll
 knowledge/catalog.json   ~200 chủ đề sinh tự động từ QuanTik (định nghĩa, công thức, ngưỡng đọc, code engine trích)
 knowledge/CATALOG.md     bảng tra id → tên, nhóm, engine, mô hình demo
 knowledge/episodes.csv   tập đã dựng/đăng → tránh trùng, nối mạch, ghi view
@@ -36,7 +37,8 @@ episodes/                episode JSON đã viết (ghi đè mặc định của 
 
 Xác định từ lời người dùng (hỏi lại chỉ khi thật sự mơ hồ):
 
-- **Chủ đề → topic.** Có hai tầng:
+- **Chủ đề → topic.** Có ba tầng:
+  - **Lesson (series Học Quant):** id dạng `hq07-normal-distribution`, xem `python pipeline/lesson.py --list`. 50 bài nền tảng: xác suất thống kê, đại số tuyến tính, toán tài chính, chuỗi thời gian, giao dịch định lượng. Thêm bài: viết vào `knowledge/lessons/<nhóm>.json` rồi `python pipeline/lesson.py --check <id>`.
   - **Viết tay (sâu nhất):** `garch`, `hurst`, `ou`, `hmm`, `monte_carlo`, `sharpe`, `var_cvar`, `kelly`. Code mô hình chạy thật trong video, mọi số đến từ lần chạy đó.
   - **Catalog (rộng nhất):** mọi id trong `knowledge/CATALOG.md`, gồm thuật ngữ (`sortino`, `calmar`, `cmf`, `psr`…), chỉ số module (`module_egarch_gamma`, `module_adf_p`, `module_lightgbm`…), trường hành động (`action_kelly_half`…), cột sheet (`sheet-…`), mô hình trang Home (`home_…`) và engine (`engine_garch`, `engine_meta_label`, `engine_cross_sectional_light_gbm`…). Tìm: `python pipeline/catalog.py --list | grep -i <từ khoá>`; xem chi tiết: `--show <id>`.
   - Người dùng nói tên thường ("EGARCH", "meta-label", "độ phủ mô hình") thì tra catalog để ra id. Chủ đề trùng một mô hình viết tay thì ưu tiên bản viết tay.
@@ -78,37 +80,46 @@ Quy tắc viết lời — mỗi quy tắc đều có lý do:
 - Trong LaTeX (`formula_numeric`) dùng `<<key>>` vì ngoặc nhọn đã thuộc về LaTeX.
 - Số không do code tính: số nhỏ dùng như chữ (0–10) tự qua; con số cố định của công thức ("252", "GARCH(1,1)") vào `allowed_literals`; sự kiện lịch sử vào `facts` kèm `source`.
 - Mỗi beat một ý, câu ngắn, đọc to được trong 6–10 giây. Beat mô tả đúng thứ đang hiện trên màn hình ("đường cam là…").
-- Hook gây tò mò bằng nghịch lý hoặc quan sát có thật, không bằng lời hứa lãi. Tham khảo `knowledge/hooks.md`; ưu tiên hook đã kiểm chứng.
+- Hook ragebait, nổ căng (xem *Luật dựng của chủ kênh*): khiêu khích bằng nghịch lý hoặc sự thật đo được, không bằng lời hứa lãi. Tham khảo `knowledge/hooks.md`; ưu tiên hook đã kiểm chứng.
 - Kết bằng giới hạn của mô hình hoặc một câu mang về được. Không bao giờ chuyển thành lời khuyên mua/bán.
 - Thẻ cuối luôn là CTA theo dõi kênh (like, follow QuanTik để học quant mỗi ngày), pipeline tự gắn; trường `cta` trong kiến thức chỉ còn là câu dẫn link trong caption.
-- Hook phải tự hiểu được với người mới: đặt câu hỏi "X là gì? Vì sao nó quan trọng với bạn?" theo cách bất ngờ, không mở bằng số khô.
+- Hook phải tự hiểu được với người mới và đánh thẳng vào người xem ("bạn"), không mở bằng số khô.
 - CTA quảng bá: chỉ nói tính năng đúng như `identity.md`. Nhắc giá gói thì đối chiếu https://quantik.io.vn/plans trước, vì ưu đãi có thể đã đổi.
+
+### Luật dựng của chủ kênh (áp dụng cho MỌI video, không cần nhắc lại)
+
+1. **B-roll bắt buộc, linh hoạt.** Mỗi video có nền B-roll sau hook và ít nhất một cảnh cắt B-roll (`hook_broll`, `broll` trong episode/lesson). Ưu tiên **ảnh thật từ Wikimedia Commons** (chỉ CC0 / Public domain / CC BY / CC BY-SA, không NC/ND), luôn **ghi nguồn** trên hình ("Ảnh: tác giả · giấy phép · Wikimedia Commons") và trong `captions.md` (mục *Nguồn ảnh*). Không lấy được ảnh hợp lệ thì **tự vẽ tay hoạt hoạ** (`draw`: bell, dice, coin, zigzag, crash, matrix, arrows, orderbook… xem `pipeline/broll.py`). Ảnh tải về được lưu kèm nguồn trong `brand/assets/broll/`; làm nóng cache: `python pipeline/prefetch_broll.py`. Không dùng ảnh chân dung người thật trong ngữ cảnh gây hiểu là họ phát ngôn/khuyến nghị.
+2. **Giọng mặc định: nam miền Bắc, sáng, tempo x1.25, nhạc nền hồi hộp.** `--voice male` (mặc định) = vi-VN-NamMinhNeural, rate +25%, pitch +6Hz; nhạc `synth_tense` (drone + nhịp tim + tích tắc, tự tổng hợp, không bản quyền). `--voice male-deep` / `--music calm` chỉ khi người dùng yêu cầu.
+3. **Hook ragebait, nổ căng.** Câu đầu phải chọc vào niềm tin sai phổ biến, cái tôi, hoặc nỗi sợ mất tiền của người xem; giọng thách thức ("Bạn đang tính sai hoàn toàn", "Chúc mừng, bạn vừa bị thống kê lừa", "Đó là cách người ta cháy tài khoản"). Xem mẫu ở `knowledge/hooks.md`. Ranh giới không đổi: không hứa lãi, không gọi mua/bán, không cụm cấm, không nhắm vào cá nhân/tổ chức có thật, không số gõ tay. Gây sốc bằng sự thật đo được, không bằng bịa đặt.
+4. **Loạt bài nối mạch.** Bài nâng cấp phải nhắc tập trước trong hook hoặc beat ("Tập trước Black-Scholes…" → Heston; ARCH → GARCH; MR + Momentum → MR vs Momentum).
 
 ### 4. Dựng
 
 Chạy từ thư mục `pipeline/`:
 
 ```bash
+python batch.py --topics hq07-normal-distribution --styles code-reel  # một bài series Học Quant
 python batch.py --topics garch --styles code-reel                      # một video
 python batch.py --topics garch,kelly --styles myth-buster,meme-quant   # 4 video
 python batch.py --episode ../episodes/kelly-meme-tap03.json            # episode tự viết
 python batch.py --topics var_cvar --styles code-reel --prices FPT.csv --data-source "FPT, HOSE, 2023–2025"
 ```
 
-Tuỳ chọn: `--scale 0.5` (bản xem nhanh 540×960, dựng lại `--scale 1` trước khi đăng) · `--voice male` (giọng nam trầm: đặt biến môi trường `QT_PITCH=-12Hz QT_RATE=-5%` trước lệnh, chỉ engine edge) · `--voice-engine edge|gtts|espeak|silent` · `--music <file có giấy phép>|none` · `--no-log` (không ghi episodes.csv, dùng khi thử) · `--force` (dựng dù QA trước render thất bại — chỉ để xem, không đăng).
+Tuỳ chọn: `--scale 0.5` (bản xem nhanh 540×960, dựng lại `--scale 1` trước khi đăng) · `--voice male|female|male-deep` (mặc định `male`: nam Bắc sáng x1.25; `QT_RATE`/`QT_PITCH` ghi đè) · `--voice-engine edge|gtts|espeak|silent` · `--music <file có giấy phép>|calm|none` (mặc định: nhạc hồi hộp tự tổng hợp) · `--no-log` (không ghi episodes.csv, dùng khi thử) · `--force` (dựng dù QA trước render thất bại — chỉ để xem, không đăng).
 
-Mỗi video ra `social-output/<id>/` (thư mục gốc repo): `final.mp4`, `thumbnail.jpg`, `captions.md`, `subtitles.srt`, `qa_report.md`, `values.json` (số + code đã chạy), `layout.json`. Carousel ra `slides/1080x1920/` và `slides/1080x1350/`. Talking-head ra `teleprompter.mp4`, `script.md`, `broll/`. Một video mất khoảng 1–2 phút dựng.
+Mỗi video ra `social-output/<id>/` (thư mục gốc repo): `final.mp4`, `thumbnail.jpg`, `captions.md`, `subtitles.srt`, `qa_report.md`, `values.json` (số + code đã chạy), `layout.json`, `broll.json` (cảnh nào ảnh thật kèm nguồn, cảnh nào vẽ tay và vì sao). Carousel ra `slides/1080x1920/` và `slides/1080x1350/`. Talking-head ra `teleprompter.mp4`, `script.md`, `broll/`. Một video mất khoảng 1–2 phút dựng.
 
 **Thumbnail** (series "Học Quant cùng QuanTik #N", nền sáng): đọc `brand/thumbnail.md` rồi chạy `python thumbnail.py --topic <topic> --no <N> --out <thư mục output>` → `thumbnail-NN.jpg`. Nội dung lấy từ khối `thumb` trong `video_defaults`. Hỏi người dùng số tập nếu chưa rõ.
 
 **Dữ liệu thật:** `--prices` nhận CSV có cột `close`. Chỉ dùng để minh hoạ cách tính, nhãn nguồn hiện trên màn hình; vẫn không nói gì về hướng giá của mã đó. Không có `--prices` thì luôn là dữ liệu mô phỏng có seed cố định, và màn hình ghi "Dữ liệu mô phỏng".
 
-**Giọng đọc:** edge-tts (vi-VN-HoaiMyNeural / NamMinhNeural) cần Internet tới `speech.platform.bing.com`. Không vào được thì pipeline lùi về gTTS → espeak-ng → không giọng (phụ đề vẫn đầy đủ, thời lượng ước theo số chữ). Engine thực tế ghi trong `qa_report.md` — phải báo người dùng nếu video không có giọng, kèm cách khắc phục: chạy lệnh trên máy có Internet, hoặc thêm host đó vào allowlist mạng của môi trường.
+**Giọng đọc:** edge-tts (vi-VN-NamMinhNeural mặc định / HoaiMyNeural) cần Internet tới `speech.platform.bing.com` (sau proxy kiểm tra TLS, pipeline tự tin CA trong `SSL_CERT_FILE`). Không vào được thì pipeline lùi về gTTS → espeak-ng → không giọng (phụ đề vẫn đầy đủ, thời lượng ước theo số chữ). Engine thực tế ghi trong `qa_report.md` — phải báo người dùng nếu video không có giọng, kèm cách khắc phục: chạy lệnh trên máy có Internet, hoặc thêm host đó vào allowlist mạng của môi trường.
 
 ### 5. Kiểm tra
 
 1. QA tự chạy: số khớp code và cụm cấm **trước** khi render (sai thì dừng), định dạng và khung chữ **sau** render. Đọc `qa_report.md`; KHÔNG ĐẠT thì sửa episode và dựng lại, không lách bằng `--force`.
-2. Tự xem: mở `thumbnail.jpg` và trích 5–7 khung hình rải đều video (`ffmpeg -ss <t> -i final.mp4 -frames:v 1 f.png`), xem chữ có đè chart, chart có đọc được trên điện thoại, lời và hình có khớp không. QA máy không bắt được lỗi "nhìn xấu".
+2. Đọc `broll.json`: cảnh nào lùi về vẽ tay vì lỗi mạng (429, bị chặn) thì chạy `prefetch_broll.py` rồi dựng lại nếu muốn có ảnh thật.
+3. Tự xem: mở `thumbnail.jpg` và trích 5–7 khung hình rải đều video (`ffmpeg -ss <t> -i final.mp4 -frames:v 1 f.png`), xem chữ có đè chart, chart có đọc được trên điện thoại, lời và hình có khớp không. QA máy không bắt được lỗi "nhìn xấu".
 
 ### 6. Trả kết quả trong chat
 

@@ -15,6 +15,7 @@ Chọn nhánh theo yêu cầu:
 | Người dùng muốn | Đọc | Lệnh chính |
 | --- | --- | --- |
 | Video/carousel giải thích một mô hình, chỉ số, thuật ngữ quant | `SKILL.md` → `knowledge/`, `styles/` | `cd pipeline && python batch.py --topics <id> --styles <style>` |
+| Series "Học Quant cùng QuanTik" (#1–#74, nền tảng) | `knowledge/lessons/*.json`, `pipeline/lesson.py` | `cd pipeline && python batch.py --topics hq07-normal-distribution --styles code-reel` |
 | Video **hướng dẫn dùng sản phẩm** (đăng ký, quét toàn sàn, phân tích Quant…) | `tutorial/README.md` | `bash tutorial/run.sh <workdir>` |
 
 (đường dẫn tính từ `.claude/skills/quantik-video-factory/`)
@@ -26,6 +27,9 @@ Chọn nhánh theo yêu cầu:
 2. **Số phải có nguồn**: số trong video mô hình đi qua placeholder `{key}` do code tính; QA chặn số gõ tay.
 3. **Giá gói**: đối chiếu `https://quantik.io.vn/plans` trước khi nhắc. Ưu đãi thay đổi theo thời gian.
 4. Giọng văn, màu, font, vùng an toàn khung hình: `brand/identity.md`.
+4b. **Luật dựng của chủ kênh** (chi tiết trong `SKILL.md`): B-roll bắt buộc (ảnh thật Wikimedia có ghi nguồn, không có
+   thì vẽ tay hoạt hoạ) · giọng nam miền Bắc sáng, tempo x1.25, nhạc nền hồi hộp · hook ragebait nổ căng (vẫn trong
+   ranh giới compliance) · loạt bài nối mạch tập trước.
 5. Không dùng tài khoản/thông tin cá nhân của người dùng để đăng nhập site thật; màn cần đăng nhập thì chạy
    giao diện production local với API giả (xem `tutorial/README.md`).
 6. Output vào `social-output/<id>/` (đã gitignore). Trả về trong chat: đường dẫn file, thời lượng, kết luận QA,
@@ -35,7 +39,8 @@ Chọn nhánh theo yêu cầu:
 
 - Python 3.10+, `pip install -r .claude/skills/quantik-video-factory/requirements.txt edge-tts`, ffmpeg.
 - Video hướng dẫn cần thêm Node 20.9+ và Chromium cho Playwright.
-- Mạng: `speech.platform.bing.com` (giọng đọc edge-tts), `quantik.io.vn`, `github.com` (clone `QuanTik---Design`).
+- Mạng: `speech.platform.bing.com` (giọng đọc edge-tts), `commons.wikimedia.org` + `upload.wikimedia.org` (ảnh B-roll),
+  `quantik.io.vn`, `github.com` (clone `QuanTik---Design`).
   Không có mạng tới TTS thì pipeline lùi về gTTS → espeak → không giọng; phải báo người dùng.
 - Repo nguồn liên quan (chỉ đọc): `kwuangyong/QuanTik---Design` (web production, Next.js),
   `kwuangyong/QuanTik-website` (engine quant `backend/quant_engine/quant.py`; frontend React cũ, không dùng để quay).

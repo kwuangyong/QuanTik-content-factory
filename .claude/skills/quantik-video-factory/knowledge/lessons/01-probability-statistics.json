@@ -1,0 +1,1174 @@
+{
+  "series": "Xác suất & Thống kê",
+  "lessons": [
+    {
+      "id": "hq01-probability",
+      "no": 1,
+      "name": "Probability – Xác suất là gì?",
+      "short": "XÁC SUẤT",
+      "code": "import numpy as np\nrng = np.random.default_rng(7)\nrolls = rng.integers(1, 7, size=10_000)\nhit = rolls == 6\np10 = hit[:10].mean()\np100 = hit[:100].mean()\np_all = hit.mean()\np_true = 1 / 6\nn = len(rolls)",
+      "plot": "run = np.cumsum(hit) / np.arange(1, n + 1)",
+      "values": {
+        "p10": "pct0",
+        "p100": "pct1",
+        "p_all": "pct2",
+        "p_true": "pct2",
+        "n": "int"
+      },
+      "chart": {
+        "type": "line",
+        "ys": [
+          [
+            "run[:3000]",
+            "tần suất ra số 6"
+          ]
+        ],
+        "hlines": [
+          [
+            "p_true",
+            "1/6",
+            "pos"
+          ]
+        ],
+        "xlabel": "số lần tung",
+        "ylabel": "tần suất"
+      },
+      "episode": {
+        "kicker": "Probability",
+        "hook": "Tung xúc xắc mãi không ra số 6 rồi tự nhủ 'sắp ra rồi'? Đó chính là kiểu nghĩ khiến người ta cháy tài khoản.",
+        "title": "Xác suất là gì? Vì sao trực giác của bạn sai bét",
+        "beats": [
+          "Mình tung xúc xắc {n} lần bằng code và đếm số lần ra mặt 6.",
+          "Mười lần đầu, tần suất là {p10}. Một trăm lần: {p100}. Hết {n} lần: {p_all}, sát lý thuyết {p_true}.",
+          "Đường cam nhảy loạn lúc đầu rồi bị kéo dần về đường xanh. Xác suất chỉ hiện ra khi số lần đủ lớn.",
+          "Xác suất là tỷ lệ một sự kiện xảy ra khi lặp lại rất nhiều lần. Nó không nợ bạn lần tiếp theo."
+        ],
+        "outputs": [
+          {
+            "label": "10 lần đầu",
+            "key": "p10"
+          },
+          {
+            "label": "100 lần",
+            "key": "p100"
+          },
+          {
+            "label": "toàn bộ",
+            "key": "p_all",
+            "highlight": true
+          },
+          {
+            "label": "lý thuyết",
+            "key": "p_true"
+          }
+        ],
+        "chart_title": "Tần suất ra số 6 theo số lần tung",
+        "formula": "P(A) \\approx \\frac{n_A}{n}",
+        "takeaway": "Vài phiên gần nhất không nói lên xác suất. Mẫu nhỏ là nơi trực giác lừa bạn nhiều nhất.",
+        "caption": "Xúc xắc không có trí nhớ, thị trường cũng không nợ bạn một phiên xanh. Xác suất thật sự là gì? 👇",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "xacsuat",
+          "thongke",
+          "chungkhoan",
+          "dautu"
+        ],
+        "allowed_literals": [
+          "1/6"
+        ],
+        "hook_broll": {
+          "query": "dice game",
+          "draw": "dice"
+        },
+        "broll": [
+          {
+            "query": "Blaise Pascal portrait",
+            "label": "Blaise Pascal",
+            "draw": "dice",
+            "say": "Lý thuyết xác suất ra đời từ một ván cờ bạc, khi Pascal và Fermat tranh luận cách chia tiền cược."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq02-random-variable",
+      "no": 2,
+      "name": "Random Variables – Biến ngẫu nhiên là gì?",
+      "short": "BIẾN NGẪU NHIÊN",
+      "code": "import numpy as np\nrng = np.random.default_rng(3)\n# X = lợi suất ngày: chưa biết trước, có phân phối\nX = rng.normal(0.0005, 0.018, 2000)\nup = (X > 0).mean()\nbig = (np.abs(X) > 0.03).mean()\nx_min, x_max = X.min(), X.max()\nn = len(X)",
+      "values": {
+        "up": "pct1",
+        "big": "pct1",
+        "x_min": "pct1",
+        "x_max": "pct1",
+        "n": "int"
+      },
+      "chart": {
+        "type": "hist",
+        "data": "X",
+        "bins": 45,
+        "xlabel": "lợi suất ngày",
+        "ylabel": "mật độ"
+      },
+      "episode": {
+        "kicker": "Random variable",
+        "hook": "Bạn nghĩ giá ngày mai là một con số? Sai. Nó là cả một đám mây khả năng, và bạn đang chỉ nhìn một chấm.",
+        "title": "Biến ngẫu nhiên là gì? Cách quant nhìn giá ngày mai",
+        "beats": [
+          "Mình gọi X là lợi suất ngày mai và cho code sinh {n} giá trị X có thể xảy ra.",
+          "Có {up} khả năng X dương. Có {big} khả năng biến động mạnh hơn ba phần trăm. Tệ nhất {x_min}, đẹp nhất {x_max}.",
+          "Mỗi cột cam là một vùng giá trị và độ cao cho biết vùng đó hay xảy ra cỡ nào.",
+          "Biến ngẫu nhiên là một đại lượng chưa biết trước nhưng có quy luật phân phối. Quant làm việc với quy luật đó, không đoán một con số."
+        ],
+        "outputs": [
+          {
+            "label": "P(X > 0)",
+            "key": "up",
+            "highlight": true
+          },
+          {
+            "label": "P(|X| > 3%)",
+            "key": "big"
+          },
+          {
+            "label": "min",
+            "key": "x_min"
+          },
+          {
+            "label": "max",
+            "key": "x_max"
+          }
+        ],
+        "chart_title": "Các giá trị có thể của X",
+        "formula": "X: \\Omega \\rightarrow \\mathbb{R}",
+        "takeaway": "Đừng hỏi 'mai giá bao nhiêu'. Hãy hỏi 'mai có những khả năng nào, mỗi khả năng nặng bao nhiêu'.",
+        "caption": "Giá ngày mai không phải một con số mà là một phân phối. Biến ngẫu nhiên giải thích trong 40 giây.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "bienngaunhien",
+          "xacsuat",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "0.0005",
+          "0.018",
+          "0.03",
+          "2000",
+          "3%"
+        ],
+        "hook_broll": {
+          "draw": "question"
+        },
+        "broll": [
+          {
+            "query": "Andrey Kolmogorov",
+            "label": "Andrey Kolmogorov",
+            "draw": "dice",
+            "say": "Kolmogorov là người đặt nền móng tiên đề cho xác suất hiện đại, nơi biến ngẫu nhiên có định nghĩa chặt chẽ."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq03-expected-value",
+      "no": 3,
+      "name": "Expected Value – Giá trị kỳ vọng",
+      "short": "KỲ VỌNG",
+      "code": "import numpy as np\n# Kèo: thắng 60% được +1, thua 40% mất -2\np = np.array([0.6, 0.4])\nx = np.array([1.0, -2.0])\nev = (p * x).sum()\nrng = np.random.default_rng(1)\nbets = rng.choice(x, size=500, p=p)\nwin_rate = (bets > 0).mean()\npnl = bets.sum()\nn = len(bets)",
+      "plot": "eq = np.cumsum(bets)",
+      "values": {
+        "ev": "num2",
+        "win_rate": "pct0",
+        "pnl": "num0",
+        "n": "int"
+      },
+      "chart": {
+        "type": "line",
+        "ys": [
+          [
+            "eq",
+            "tài khoản"
+          ]
+        ],
+        "hlines": [
+          [
+            "0",
+            "",
+            "muted"
+          ]
+        ],
+        "xlabel": "số lần chơi",
+        "ylabel": "lãi lỗ tích luỹ"
+      },
+      "episode": {
+        "kicker": "Expected value",
+        "hook": "Thắng nhiều hơn thua mà vẫn lỗ. Nếu bạn thấy vô lý, bạn đang trade bằng cảm xúc chứ không phải bằng toán.",
+        "title": "Thắng nhiều vẫn lỗ? Giá trị kỳ vọng giải thích",
+        "beats": [
+          "Một trò chơi: thắng sáu phần mười được một đồng, thua bốn phần mười mất hai đồng. Code tính kỳ vọng rồi chơi thử {n} lần.",
+          "Kỳ vọng mỗi lần là {ev}. Tỷ lệ thắng thực tế {win_rate}, mà sau {n} lần tổng lãi lỗ là {pnl}.",
+          "Đường cam đi lên lúc đầu cho bạn ảo tưởng, rồi bị kỳ vọng âm kéo xuống không thương tiếc.",
+          "Giá trị kỳ vọng là trung bình có trọng số của mọi kết quả. Nó mới là thứ quyết định bạn lãi hay lỗ về lâu dài."
+        ],
+        "outputs": [
+          {
+            "label": "E[X] mỗi lần",
+            "key": "ev",
+            "highlight": true
+          },
+          {
+            "label": "tỷ lệ thắng",
+            "key": "win_rate"
+          },
+          {
+            "label": "tổng P&L",
+            "key": "pnl"
+          }
+        ],
+        "chart_title": "Tài khoản qua từng lần chơi",
+        "formula": "E[X] = \\sum_i p_i \\, x_i",
+        "takeaway": "Tỷ lệ thắng là thứ để khoe. Kỳ vọng là thứ trả tiền cho bạn.",
+        "caption": "Thắng 60% vẫn lỗ là chuyện có thật. Giá trị kỳ vọng là con số mà dân trade cảm tính hay bỏ qua.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "kyvong",
+          "xacsuat",
+          "quanlyvon",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "60%",
+          "40%",
+          "0.6",
+          "0.4",
+          "1.0",
+          "-2.0",
+          "-2",
+          "+1",
+          "500"
+        ],
+        "hook_broll": {
+          "draw": "coin"
+        },
+        "broll": [
+          {
+            "query": "Christiaan Huygens portrait",
+            "label": "Christiaan Huygens",
+            "draw": "coin",
+            "say": "Huygens là người đầu tiên viết về giá trị kỳ vọng, khi tính xem một ván cược đáng giá bao nhiêu."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq04-variance",
+      "no": 4,
+      "name": "Variance – Phương sai",
+      "short": "PHƯƠNG SAI",
+      "code": "import numpy as np\nrng = np.random.default_rng(5)\nz1, z2 = rng.standard_normal((2, 250))\nz1 = (z1 - z1.mean()) / z1.std()\nz2 = (z2 - z2.mean()) / z2.std()\nA = 0.0006 + 0.008 * z1\nB = 0.0006 + 0.025 * z2\nmean_a, mean_b = A.mean(), B.mean()\nvar_a = ((A - mean_a) ** 2).mean()\nvar_b = ((B - mean_b) ** 2).mean()\nratio = var_b / var_a",
+      "plot": "wa = np.cumprod(1 + A); wb = np.cumprod(1 + B)",
+      "values": {
+        "mean_a": "pct2",
+        "mean_b": "pct2",
+        "var_a": [
+          "var_a * 1e4",
+          "num2"
+        ],
+        "var_b": [
+          "var_b * 1e4",
+          "num2"
+        ],
+        "ratio": "x1"
+      },
+      "chart": {
+        "type": "line",
+        "ys": [
+          [
+            "wa",
+            "A: phương sai nhỏ",
+            "pos"
+          ],
+          [
+            "wb",
+            "B: phương sai lớn",
+            "neg"
+          ]
+        ],
+        "xlabel": "phiên",
+        "ylabel": "giá trị 1 đồng"
+      },
+      "episode": {
+        "kicker": "Variance",
+        "hook": "Hai cổ phiếu cùng lãi trung bình như nhau. Một cái cho bạn ngủ ngon, cái kia cho bạn mất ngủ. Bạn đang cầm cái nào?",
+        "title": "Phương sai: cùng lãi trung bình, khác hẳn trải nghiệm",
+        "beats": [
+          "Code sinh hai chuỗi lợi suất A và B, cùng kỳ vọng, chỉ khác độ phân tán. Rồi tính phương sai bằng tay.",
+          "Trung bình A là {mean_a}, B cũng là {mean_b}. Nhưng phương sai của B gấp {ratio} lần A.",
+          "Đường xanh đi êm, đường đỏ giật lên giật xuống. Cùng điểm xuất phát, cảm giác cầm hoàn toàn khác.",
+          "Phương sai là trung bình bình phương độ lệch khỏi giá trị trung bình. Nó đo mức phân tán, tức là rủi ro."
+        ],
+        "outputs": [
+          {
+            "label": "mean A",
+            "key": "mean_a"
+          },
+          {
+            "label": "mean B",
+            "key": "mean_b"
+          },
+          {
+            "label": "Var A (×10⁴)",
+            "key": "var_a"
+          },
+          {
+            "label": "Var B (×10⁴)",
+            "key": "var_b"
+          },
+          {
+            "label": "Var B / Var A",
+            "key": "ratio",
+            "highlight": true
+          }
+        ],
+        "chart_title": "Cùng kỳ vọng, khác phương sai",
+        "formula": "\\mathrm{Var}(X) = E\\left[(X-\\mu)^2\\right]",
+        "takeaway": "Chỉ nhìn lãi trung bình là nhìn một nửa bức tranh. Nửa còn lại tên là phương sai.",
+        "caption": "Cùng lãi trung bình mà một mã làm bạn mất ngủ. Phương sai là lý do.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "phuongsai",
+          "ruiro",
+          "thongke",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "0.0006",
+          "0.008",
+          "0.025",
+          "250",
+          "1e4",
+          "×10⁴"
+        ],
+        "hook_broll": {
+          "draw": "zigzag"
+        },
+        "broll": [
+          {
+            "query": "Ronald Fisher",
+            "label": "Ronald Fisher",
+            "draw": "zigzag",
+            "say": "Chữ phương sai, variance, được nhà thống kê Ronald Fisher đặt tên."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq05-standard-deviation",
+      "no": 5,
+      "name": "Standard Deviation – Độ lệch chuẩn",
+      "short": "ĐỘ LỆCH CHUẨN",
+      "code": "import numpy as np\nrng = np.random.default_rng(11)\nr = rng.normal(0.0005, 0.02, 1000)\nmu, sd = r.mean(), r.std()\nsd_year = sd * np.sqrt(252)\nin1 = (np.abs(r - mu) < sd).mean()\nin2 = (np.abs(r - mu) < 2 * sd).mean()\nn = len(r)",
+      "plot": "xs = np.linspace(r.min(), r.max(), 200)\npdf = np.exp(-(xs-mu)**2/(2*sd*sd))/(sd*np.sqrt(2*np.pi))",
+      "values": {
+        "sd": "pct2",
+        "sd_year": "pct1",
+        "in1": "pct0",
+        "in2": "pct0",
+        "n": "int"
+      },
+      "chart": {
+        "type": "hist",
+        "data": "r",
+        "bins": 45,
+        "curves": [
+          [
+            "xs",
+            "pdf",
+            "chuông chuẩn",
+            "pos"
+          ]
+        ],
+        "vlines": [
+          [
+            "mu - sd",
+            "±1 độ lệch chuẩn",
+            "neu"
+          ],
+          [
+            "mu + sd",
+            "",
+            "neu"
+          ]
+        ],
+        "xlabel": "lợi suất ngày"
+      },
+      "episode": {
+        "kicker": "Standard deviation",
+        "hook": "Người ta nói 'cổ phiếu này biến động mạnh'. Mạnh là bao nhiêu? Không trả lời được thì bạn đang chém gió.",
+        "title": "Độ lệch chuẩn: biến động mạnh là mạnh bao nhiêu?",
+        "beats": [
+          "Code sinh {n} phiên lợi suất, tính độ lệch chuẩn ngày rồi quy ra năm bằng căn của hai trăm năm mươi hai.",
+          "Độ lệch chuẩn ngày là {sd}, quy ra năm là {sd_year}. Có {in1} số phiên nằm trong một độ lệch chuẩn, {in2} nằm trong hai.",
+          "Hai vạch vàng là một độ lệch chuẩn hai bên trung bình. Phần lớn các phiên nằm gọn giữa hai vạch đó.",
+          "Độ lệch chuẩn là căn bậc hai của phương sai, cùng đơn vị với lợi suất. Nó là thước đo biến động phổ biến nhất."
+        ],
+        "outputs": [
+          {
+            "label": "σ ngày",
+            "key": "sd"
+          },
+          {
+            "label": "σ năm",
+            "key": "sd_year",
+            "highlight": true
+          },
+          {
+            "label": "trong ±1σ",
+            "key": "in1"
+          },
+          {
+            "label": "trong ±2σ",
+            "key": "in2"
+          }
+        ],
+        "chart_title": "Lợi suất ngày và dải ±1σ",
+        "formula": "\\sigma = \\sqrt{\\frac{1}{n}\\sum_i (x_i-\\bar{x})^2}",
+        "takeaway": "Nói biến động thì phải nói ra con số. Độ lệch chuẩn biến cảm giác thành thước đo.",
+        "caption": "'Mã này biến động mạnh' là mạnh bao nhiêu? Độ lệch chuẩn trả lời bằng một con số.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "dolechchuan",
+          "volatility",
+          "ruiro",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "252",
+          "0.0005",
+          "0.02",
+          "1000",
+          "±1σ",
+          "±2σ",
+          "±1"
+        ],
+        "hook_broll": {
+          "draw": "bell"
+        },
+        "broll": [
+          {
+            "query": "Karl Pearson",
+            "label": "Karl Pearson",
+            "draw": "bell",
+            "say": "Thuật ngữ độ lệch chuẩn do Karl Pearson đưa ra cuối thế kỷ mười chín."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq06-probability-distribution",
+      "no": 6,
+      "name": "Probability Distribution – Phân phối xác suất",
+      "short": "PHÂN PHỐI",
+      "code": "import numpy as np\nrng = np.random.default_rng(2)\n# số phiên tăng trong 10 phiên, mỗi phiên p = 0.5\nk = rng.binomial(10, 0.5, size=20_000)\npmf = np.bincount(k, minlength=11) / len(k)\np5 = pmf[5]\np_ge8 = pmf[8:].sum()\np_all = pmf.sum()",
+      "values": {
+        "p5": "pct1",
+        "p_ge8": "pct1",
+        "p_all": "pct0"
+      },
+      "chart": {
+        "type": "bar",
+        "heights": "pmf",
+        "labels": "list(range(11))",
+        "xlabel": "số phiên tăng trong 10 phiên",
+        "ylabel": "xác suất"
+      },
+      "surface": {
+        "type": "grid",
+        "fn": "lambda X, Y: np.exp(-(X-5)**2/(2*Y)) / np.sqrt(2*np.pi*Y)",
+        "x": [
+          0,
+          10
+        ],
+        "y": [
+          1,
+          6
+        ],
+        "xl": "số phiên tăng",
+        "yl": "độ phân tán",
+        "zl": "xác suất"
+      },
+      "episode": {
+        "kicker": "Probability distribution",
+        "hook": "Tám trên mười phiên tăng và bạn tưởng mình có biệt tài? Toán nói đó có thể chỉ là may mắn.",
+        "title": "Phân phối xác suất: chuỗi thắng của bạn có phải may mắn?",
+        "beats": [
+          "Giả sử mỗi phiên tăng hay giảm như tung đồng xu. Code mô phỏng hai mươi nghìn chuỗi mười phiên.",
+          "Đúng năm phiên tăng có xác suất {p5}. Từ tám phiên tăng trở lên vẫn có {p_ge8}, chẳng cần tài năng gì. Tổng các cột đúng {p_all}.",
+          "Mỗi cột là xác suất của một kết quả. Cả bức tranh này gọi là phân phối.",
+          "Phân phối xác suất gán xác suất cho mọi kết quả có thể. Nó cho bạn biết điều gì là bình thường, điều gì mới thật sự bất thường."
+        ],
+        "outputs": [
+          {
+            "label": "P(đúng 5)",
+            "key": "p5"
+          },
+          {
+            "label": "P(≥ 8)",
+            "key": "p_ge8",
+            "highlight": true
+          },
+          {
+            "label": "tổng xác suất",
+            "key": "p_all"
+          }
+        ],
+        "chart_title": "Phân phối số phiên tăng trong 10 phiên",
+        "formula": "\\sum_x P(X=x) = 1",
+        "takeaway": "Trước khi khen mình giỏi, hãy hỏi kết quả đó hiếm cỡ nào trong phân phối của may mắn.",
+        "caption": "Thắng 8/10 lệnh chưa chắc là giỏi. Phân phối xác suất cho biết may mắn tạo ra chuỗi đó thường xuyên cỡ nào.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "phanphoi",
+          "xacsuat",
+          "thongke",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "0.5",
+          "20.000",
+          "20_000",
+          "8/10"
+        ],
+        "hook_broll": {
+          "draw": "dice"
+        },
+        "broll": [
+          {
+            "query": "Galton board",
+            "label": "Bảng Galton",
+            "draw": "bell",
+            "say": "Bảng Galton cho thấy phân phối bằng mắt: từng viên bi rơi ngẫu nhiên nhưng cả đống bi lại xếp thành hình rất đều."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq07-normal-distribution",
+      "no": 7,
+      "name": "Normal Distribution – Phân phối chuẩn",
+      "short": "PHÂN PHỐI CHUẨN",
+      "code": "import numpy as np\nfrom math import erf, sqrt\nrng = np.random.default_rng(9)\nr = rng.standard_t(3, 5000) * 0.012  # lợi suất 'thật'\nsd = r.std()\nk = 4\np_norm = 1 - erf(k / sqrt(2))  # P(|Z| > 4σ)\np_real = (np.abs(r) > k * sd).mean()\nmiss = p_real / p_norm\nn = len(r)",
+      "plot": "xs = np.linspace(-6*sd, 6*sd, 300)\npdf = np.exp(-xs**2/(2*sd*sd))/(sd*np.sqrt(2*np.pi))",
+      "values": {
+        "p_norm": "pct3",
+        "p_real": "pct2",
+        "miss": "x1",
+        "n": "int"
+      },
+      "chart": {
+        "type": "hist",
+        "data": "r",
+        "bins": 60,
+        "range": [
+          -0.06,
+          0.06
+        ],
+        "curves": [
+          [
+            "xs",
+            "pdf",
+            "phân phối chuẩn",
+            "pos"
+          ]
+        ],
+        "xlabel": "lợi suất ngày"
+      },
+      "surface": {
+        "type": "gauss2d",
+        "cov": "np.array([[1.0, 0.0], [0.0, 1.0]])",
+        "lim": 3,
+        "xl": "z₁",
+        "yl": "z₂",
+        "zl": "mật độ"
+      },
+      "episode": {
+        "kicker": "Normal distribution",
+        "hook": "Sách giáo khoa nói sập mạnh là chuyện trăm năm có một. Thị trường cười vào mặt sách giáo khoa.",
+        "title": "Phân phối chuẩn: đẹp trong sách, nguy hiểm ngoài thị trường",
+        "beats": [
+          "Code sinh {n} phiên lợi suất đuôi dày, giống thị trường thật, rồi so với hình chuông chuẩn.",
+          "Phân phối chuẩn nói một phiên vượt bốn độ lệch chuẩn chỉ có {p_norm} khả năng. Dữ liệu cho ra {p_real}, gấp {miss} lần.",
+          "Đường xanh là chuông chuẩn. Cột cam cao hơn ở giữa và dày hơn ở hai đuôi. Hai đuôi đó là nơi tiền mất.",
+          "Phân phối chuẩn là hình chuông đối xứng, xác định bởi trung bình và độ lệch chuẩn. Nó là điểm xuất phát, không phải sự thật."
+        ],
+        "outputs": [
+          {
+            "label": "P chuẩn (>4σ)",
+            "key": "p_norm"
+          },
+          {
+            "label": "P thực tế",
+            "key": "p_real"
+          },
+          {
+            "label": "đánh giá thấp",
+            "key": "miss",
+            "highlight": true
+          }
+        ],
+        "chart_title": "Dữ liệu đuôi dày vs chuông chuẩn",
+        "formula": "f(x)=\\frac{1}{\\sigma\\sqrt{2\\pi}}e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}",
+        "takeaway": "Dùng chuông chuẩn để hiểu, nhưng đừng dùng nó để ước rủi ro đuôi. Đuôi thật dày hơn nhiều.",
+        "caption": "Sập mạnh không hiếm như sách nói. Phân phối chuẩn đánh giá thấp rủi ro đuôi bao nhiêu lần? Code trả lời.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "phanphoichuan",
+          "fattail",
+          "ruiro",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "0.012",
+          "5000",
+          "4σ",
+          ">4σ"
+        ],
+        "hook_broll": {
+          "query": "Carl Friedrich Gauss portrait",
+          "label": "Gauss",
+          "draw": "bell"
+        },
+        "broll": [
+          {
+            "query": "Deutsche Mark Gauss banknote",
+            "label": "Gauss trên tờ 10 Mark",
+            "draw": "bell",
+            "say": "Đường cong này mang tên Gauss, từng được in lên cả tờ tiền giấy của Đức."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq08-skewness",
+      "no": 8,
+      "name": "Skewness – Độ lệch phân phối",
+      "short": "SKEWNESS",
+      "code": "import numpy as np\nrng = np.random.default_rng(4)\n# 'nhặt tiền lẻ': lãi nhỏ đều, thỉnh thoảng sập\ncrash = rng.random(1000) < 0.03\nr = np.where(crash, -0.08, 0.004)\nr = r + rng.normal(0, 0.003, 1000)\nz = (r - r.mean()) / r.std()\nskew = (z ** 3).mean()\nwin = (r > 0).mean()\nworst = r.min()",
+      "plot": "eq = np.cumprod(1 + r)",
+      "values": {
+        "skew": "num2",
+        "win": "pct0",
+        "worst": "pct1"
+      },
+      "chart": {
+        "type": "hist",
+        "data": "r",
+        "bins": 50,
+        "xlabel": "lợi suất mỗi lần"
+      },
+      "episode": {
+        "kicker": "Skewness",
+        "hook": "Chiến lược thắng gần như mọi lệnh. Nghe ngon? Đó chính là kiểu chiến lược âm thầm xoá sổ tài khoản.",
+        "title": "Skewness: vì sao chiến lược thắng liên tục lại nguy hiểm",
+        "beats": [
+          "Code mô phỏng chiến lược nhặt tiền lẻ: lãi nhỏ đều đặn, thỉnh thoảng sập mạnh. Rồi tính độ lệch skewness.",
+          "Tỷ lệ thắng tới {win}. Nhưng skewness bằng {skew}, và lần tệ nhất mất {worst}.",
+          "Cột cam dồn hết bên phải, nhưng có một cái đuôi dài vươn sang trái. Đuôi đó là cú sập.",
+          "Skewness đo độ lệch của phân phối. Âm nghĩa là đuôi trái dài: lãi nhỏ thường xuyên, lỗ lớn bất ngờ."
+        ],
+        "outputs": [
+          {
+            "label": "tỷ lệ thắng",
+            "key": "win"
+          },
+          {
+            "label": "skewness",
+            "key": "skew",
+            "highlight": true
+          },
+          {
+            "label": "lần tệ nhất",
+            "key": "worst"
+          }
+        ],
+        "chart_title": "Lãi nhỏ đều, lỗ lớn hiếm",
+        "formula": "\\mathrm{Skew} = E\\left[\\left(\\frac{X-\\mu}{\\sigma}\\right)^3\\right]",
+        "takeaway": "Tỷ lệ thắng cao kèm skewness âm là tín hiệu cảnh báo, không phải huy chương.",
+        "caption": "Thắng gần như mọi lệnh vẫn có thể cháy. Skewness âm là con số mà dân khoe winrate không bao giờ nhắc.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "skewness",
+          "ruiro",
+          "thongke",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "0.03",
+          "-0.08",
+          "0.004",
+          "0.003",
+          "1000"
+        ],
+        "hook_broll": {
+          "draw": "skew"
+        },
+        "broll": [
+          {
+            "draw": "crash",
+            "label": "Đuôi trái",
+            "say": "Hình dung một cái cân: bên phải là rất nhiều đồng xu nhỏ, bên trái là một tảng đá rơi bất ngờ."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq09-kurtosis",
+      "no": 9,
+      "name": "Kurtosis – Độ nhọn phân phối",
+      "short": "KURTOSIS",
+      "code": "import numpy as np\nrng = np.random.default_rng(8)\nnorm = rng.normal(0, 1, 20_000)\nfat = rng.standard_t(4, 20_000)\nfat = fat / fat.std()\ndef kurt(x):\n    z = (x - x.mean()) / x.std()\n    return (z ** 4).mean() - 3\nk_norm, k_fat = kurt(norm), kurt(fat)\nt_norm = (np.abs(norm) > 4).mean()\nt_fat = (np.abs(fat) > 4).mean()",
+      "values": {
+        "k_norm": "num2",
+        "k_fat": "num1",
+        "t_norm": "pct3",
+        "t_fat": "pct2"
+      },
+      "chart": {
+        "type": "hist",
+        "data": "fat",
+        "bins": 70,
+        "range": [
+          -6,
+          6
+        ],
+        "xlabel": "độ lệch chuẩn"
+      },
+      "surface": {
+        "type": "grid",
+        "fn": "lambda X, Y: (1 + X**2/Y) ** (-(Y+1)/2)",
+        "x": [
+          -5,
+          5
+        ],
+        "y": [
+          2.5,
+          30
+        ],
+        "xl": "giá trị",
+        "yl": "bậc tự do",
+        "zl": "mật độ"
+      },
+      "episode": {
+        "kicker": "Kurtosis",
+        "hook": "Ai dạy bạn rằng sập sàn là thiên nga đen hiếm gặp? Kurtosis nói nó đến thường hơn bạn tưởng rất nhiều.",
+        "title": "Kurtosis: vì sao cú sập đến thường hơn bạn nghĩ",
+        "beats": [
+          "Code sinh hai bộ dữ liệu cùng độ lệch chuẩn: một bộ phân phối chuẩn, một bộ đuôi dày. Rồi tính độ nhọn dư.",
+          "Phân phối chuẩn có kurtosis dư {k_norm}. Bộ đuôi dày lên tới {k_fat}. Cú vượt bốn độ lệch chuẩn: {t_norm} so với {t_fat}.",
+          "Phân phối đuôi dày nhọn ở giữa và hai đuôi kéo dài. Nhiều ngày yên ả hơn, và nhiều cú sốc hơn.",
+          "Kurtosis đo độ dày của đuôi. Cao nghĩa là biến cố cực đoan xảy ra thường hơn phân phối chuẩn dự đoán."
+        ],
+        "outputs": [
+          {
+            "label": "kurt chuẩn",
+            "key": "k_norm"
+          },
+          {
+            "label": "kurt đuôi dày",
+            "key": "k_fat",
+            "highlight": true
+          },
+          {
+            "label": "P(>4σ) chuẩn",
+            "key": "t_norm"
+          },
+          {
+            "label": "P(>4σ) đuôi dày",
+            "key": "t_fat"
+          }
+        ],
+        "chart_title": "Phân phối đuôi dày",
+        "formula": "\\mathrm{Kurt} = E\\left[\\left(\\frac{X-\\mu}{\\sigma}\\right)^4\\right] - 3",
+        "takeaway": "Thị trường có kurtosis cao. Hãy chuẩn bị cho cú sốc như một chuyện chắc chắn sẽ đến, chỉ chưa biết lúc nào.",
+        "caption": "Thiên nga đen không hiếm như người ta nói. Kurtosis là con số đo độ dày của đuôi rủi ro.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "kurtosis",
+          "fattail",
+          "ruiro",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "20.000",
+          "20_000",
+          "4σ",
+          ">4σ"
+        ],
+        "hook_broll": {
+          "query": "black swan bird",
+          "label": "Thiên nga đen",
+          "draw": "warning"
+        },
+        "broll": [
+          {
+            "query": "Black Monday 1987 stock market",
+            "label": "Thứ Hai Đen",
+            "draw": "crash",
+            "say": "Những ngày như Thứ Hai Đen gần như không thể xảy ra nếu thị trường thật sự tuân theo phân phối chuẩn."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq10-covariance",
+      "no": 10,
+      "name": "Covariance – Hiệp phương sai",
+      "short": "HIỆP PHƯƠNG SAI",
+      "code": "import numpy as np\nrng = np.random.default_rng(6)\nm = rng.normal(0, 0.015, 500)        # thị trường\na = 0.9 * m + rng.normal(0, 0.008, 500)\nb = -0.3 * m + rng.normal(0, 0.012, 500)\ncov_am = ((a - a.mean()) * (m - m.mean())).mean()\ncov_bm = ((b - b.mean()) * (m - m.mean())).mean()\nvar_m = m.var()\nbeta_a = cov_am / var_m",
+      "values": {
+        "cov_am": [
+          "cov_am * 1e4",
+          "num2"
+        ],
+        "cov_bm": [
+          "cov_bm * 1e4",
+          "num2"
+        ],
+        "beta_a": "num2"
+      },
+      "chart": {
+        "type": "scatter",
+        "x": "m",
+        "y": "a",
+        "fit": true,
+        "xlabel": "lợi suất thị trường",
+        "ylabel": "lợi suất mã A"
+      },
+      "surface": {
+        "type": "gauss2d",
+        "cov": "np.cov(np.vstack([m, a]) * 100)",
+        "xl": "thị trường",
+        "yl": "mã A",
+        "zl": "mật độ"
+      },
+      "episode": {
+        "kicker": "Covariance",
+        "hook": "Mua mười mã tưởng là đa dạng hoá? Nếu chúng cùng chiều với nhau thì bạn chỉ đang mua một mã, mười lần.",
+        "title": "Hiệp phương sai: mười mã cổ phiếu, hay một mã mười lần?",
+        "beats": [
+          "Code sinh lợi suất thị trường, mã A đi cùng thị trường, mã B đi ngược nhẹ. Rồi tính hiệp phương sai bằng tay.",
+          "Hiệp phương sai A với thị trường là {cov_am} phần vạn, dương. Của B là {cov_bm}, âm. Chia cho phương sai thị trường ra beta của A bằng {beta_a}.",
+          "Mỗi chấm là một phiên. Đám chấm xếp chéo lên: thị trường tăng thì A cũng tăng.",
+          "Hiệp phương sai đo hai biến số có cùng chiều với nhau không. Dương là cùng chiều, âm là ngược chiều."
+        ],
+        "outputs": [
+          {
+            "label": "Cov(A, TT) ×10⁴",
+            "key": "cov_am",
+            "highlight": true
+          },
+          {
+            "label": "Cov(B, TT) ×10⁴",
+            "key": "cov_bm"
+          },
+          {
+            "label": "beta A",
+            "key": "beta_a"
+          }
+        ],
+        "chart_title": "Mã A theo thị trường",
+        "formula": "\\mathrm{Cov}(X,Y)=E[(X-\\mu_X)(Y-\\mu_Y)]",
+        "takeaway": "Đa dạng hoá thật là gom những thứ không cùng chiều, chứ không phải gom thật nhiều mã.",
+        "caption": "Mua 10 mã cùng ngành chưa chắc là đa dạng hoá. Hiệp phương sai cho biết các mã có cùng nhịp với nhau không.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "hiepphuongsai",
+          "danghoa",
+          "danhmuc",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "0.015",
+          "0.9",
+          "0.008",
+          "-0.3",
+          "0.012",
+          "500",
+          "1e4",
+          "×10⁴"
+        ],
+        "hook_broll": {
+          "draw": "two-lines"
+        },
+        "broll": [
+          {
+            "query": "Harry Markowitz",
+            "label": "Harry Markowitz",
+            "draw": "network",
+            "say": "Markowitz đưa hiệp phương sai vào trung tâm của lý thuyết danh mục hiện đại."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq11-correlation",
+      "no": 11,
+      "name": "Correlation – Hệ số tương quan",
+      "short": "TƯƠNG QUAN",
+      "code": "import numpy as np\nrng = np.random.default_rng(40)\nx = rng.normal(0, 1, 300)\ny = 0.7 * x + rng.normal(0, 0.7, 300)\nrho = np.corrcoef(x, y)[0, 1]\n# tương quan giả: hai chuỗi đi ngẫu nhiên độc lập\np = np.cumsum(rng.normal(0, 1, 300))\nq = np.cumsum(rng.normal(0, 1, 300))\nfake = np.corrcoef(p, q)[0, 1]\nreal = np.corrcoef(np.diff(p), np.diff(q))[0, 1]",
+      "values": {
+        "rho": "num2",
+        "fake": "num2",
+        "real": "num2"
+      },
+      "chart": {
+        "type": "line",
+        "ys": [
+          [
+            "p",
+            "chuỗi P"
+          ],
+          [
+            "q",
+            "chuỗi Q",
+            "pos"
+          ]
+        ],
+        "xlabel": "phiên",
+        "ylabel": "giá"
+      },
+      "episode": {
+        "kicker": "Correlation",
+        "hook": "Hai đường giá đi giống hệt nhau và bạn kết luận chúng liên quan? Chúc mừng, bạn vừa bị thống kê lừa.",
+        "title": "Hệ số tương quan và cái bẫy tương quan giả",
+        "beats": [
+          "Code tạo cặp x, y có liên hệ thật. Rồi tạo hai chuỗi giá P và Q hoàn toàn độc lập với nhau.",
+          "Cặp thật có hệ số tương quan {rho}. Hai chuỗi độc lập mà tương quan giá lên tới {fake}. Đổi sang lợi suất chỉ còn {real}.",
+          "Hai đường này không hề biết nhau tồn tại, vậy mà nhìn như đi cùng nhịp. Đó là tương quan giả.",
+          "Hệ số tương quan chuẩn hoá hiệp phương sai về khoảng từ trừ một đến một. Luôn tính trên lợi suất, đừng tính trên giá."
+        ],
+        "outputs": [
+          {
+            "label": "ρ cặp thật",
+            "key": "rho"
+          },
+          {
+            "label": "ρ giá độc lập",
+            "key": "fake",
+            "highlight": true
+          },
+          {
+            "label": "ρ lợi suất",
+            "key": "real"
+          }
+        ],
+        "chart_title": "Hai chuỗi độc lập trông như liên quan",
+        "formula": "\\rho_{XY} = \\frac{\\mathrm{Cov}(X,Y)}{\\sigma_X \\sigma_Y}",
+        "takeaway": "Tính tương quan trên giá là cách nhanh nhất để tự lừa mình. Hãy dùng lợi suất.",
+        "caption": "Hai mã đi cùng nhịp chưa chắc liên quan. Tương quan giả là cái bẫy mà rất nhiều phân tích mắc phải.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "tuongquan",
+          "correlation",
+          "thongke",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "0.7",
+          "300"
+        ],
+        "hook_broll": {
+          "draw": "two-lines"
+        },
+        "broll": [
+          {
+            "query": "Francis Galton portrait",
+            "label": "Francis Galton",
+            "draw": "two-lines",
+            "say": "Francis Galton là người đầu tiên đưa ra khái niệm tương quan khi đo chiều cao cha mẹ và con cái."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq12-conditional-probability",
+      "no": 12,
+      "name": "Conditional Probability – Xác suất có điều kiện",
+      "short": "XS CÓ ĐIỀU KIỆN",
+      "code": "import numpy as np\nrng = np.random.default_rng(10)\nn = 100_000\ncrash = rng.random(n) < 0.05      # phiên sập\nvol_hi = np.where(crash, rng.random(n) < 0.8,\n                  rng.random(n) < 0.2)\np_crash = crash.mean()\np_c_given_v = crash[vol_hi].mean()\np_c_given_lo = crash[~vol_hi].mean()\nlift = p_c_given_v / p_crash",
+      "values": {
+        "p_crash": "pct1",
+        "p_c_given_v": "pct1",
+        "p_c_given_lo": "pct1",
+        "lift": "x1"
+      },
+      "chart": {
+        "type": "bar",
+        "heights": "np.array([p_crash, p_c_given_v, p_c_given_lo])",
+        "labels": "['chung', 'vol cao', 'vol thấp']",
+        "xlabel": "",
+        "ylabel": "xác suất"
+      },
+      "episode": {
+        "kicker": "Conditional probability",
+        "hook": "Hỏi 'xác suất sập là bao nhiêu' là câu hỏi vô nghĩa. Người chuyên nghiệp luôn hỏi kèm hai chữ: 'khi mà'.",
+        "title": "Xác suất có điều kiện: câu hỏi đúng là 'khi mà…'",
+        "beats": [
+          "Code mô phỏng một trăm nghìn phiên. Phiên sập hiếm, nhưng trước khi sập, biến động thường đã tăng cao.",
+          "Xác suất sập nói chung là {p_crash}. Khi biến động cao, con số nhảy lên {p_c_given_v}, gấp {lift} lần. Khi biến động thấp chỉ còn {p_c_given_lo}.",
+          "Cùng một sự kiện, ba cột ba con số. Thông tin bạn biết làm thay đổi xác suất.",
+          "Xác suất có điều kiện là xác suất của A khi đã biết B xảy ra. Mọi mô hình quant đều xoay quanh câu hỏi này."
+        ],
+        "outputs": [
+          {
+            "label": "P(sập)",
+            "key": "p_crash"
+          },
+          {
+            "label": "P(sập | vol cao)",
+            "key": "p_c_given_v",
+            "highlight": true
+          },
+          {
+            "label": "P(sập | vol thấp)",
+            "key": "p_c_given_lo"
+          },
+          {
+            "label": "tăng",
+            "key": "lift"
+          }
+        ],
+        "chart_title": "Cùng sự kiện, khác điều kiện",
+        "formula": "P(A\\mid B)=\\frac{P(A\\cap B)}{P(B)}",
+        "takeaway": "Xác suất không đứng yên. Mỗi thông tin mới là một điều kiện mới, và con số phải được cập nhật.",
+        "caption": "Xác suất sập không phải một con số cố định. Nó đổi theo điều kiện bạn đang thấy. Xác suất có điều kiện là gì?",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "xacsuat",
+          "dieukien",
+          "thongke",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "100.000",
+          "100_000",
+          "0.05",
+          "0.8",
+          "0.2"
+        ],
+        "hook_broll": {
+          "draw": "question"
+        },
+        "broll": [
+          {
+            "draw": "warning",
+            "label": "Khi mà…",
+            "say": "Thời tiết cũng vậy: xác suất mưa hôm nay khác hẳn xác suất mưa khi trời đã kéo mây đen."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hq13-bayes-theorem",
+      "no": 13,
+      "name": "Bayes' Theorem – Định lý Bayes",
+      "short": "BAYES",
+      "code": "# Tín hiệu báo 'sắp tăng mạnh' đúng 90% khi có tăng,\n# nhưng cũng báo nhầm 10% khi không có gì\nprior = 0.02          # 2% phiên thật sự tăng mạnh\nhit = 0.90            # P(báo | tăng mạnh)\nfalse = 0.10          # P(báo | không)\np_signal = hit * prior + false * (1 - prior)\npost = hit * prior / p_signal\nwrong = 1 - post",
+      "plot": "pri = np.linspace(0.005, 0.5, 100); curve = hit*pri/(hit*pri + false*(1-pri))",
+      "values": {
+        "prior": "pct0",
+        "hit": "pct0",
+        "false": "pct0",
+        "post": "pct1",
+        "wrong": "pct0"
+      },
+      "chart": {
+        "type": "line",
+        "x": "pri",
+        "ys": [
+          [
+            "curve",
+            "P(tăng mạnh | có tín hiệu)"
+          ]
+        ],
+        "xlabel": "tỷ lệ nền (prior)",
+        "ylabel": "xác suất sau"
+      },
+      "episode": {
+        "kicker": "Bayes' theorem",
+        "hook": "Tín hiệu chính xác {hit} báo mua và bạn tin sái cổ? Toán Bayes nói phần lớn lần báo đó là sai.",
+        "title": "Định lý Bayes: tín hiệu chính xác 90% vẫn sai phần lớn",
+        "beats": [
+          "Một tín hiệu bắt đúng {hit} các phiên tăng mạnh, nhưng báo nhầm {false} các phiên bình thường. Phiên tăng mạnh chỉ chiếm {prior}.",
+          "Khi tín hiệu kêu, xác suất thật sự có tăng mạnh chỉ là {post}. Nghĩa là {wrong} số lần báo là báo nhầm.",
+          "Đường cam cho thấy: tỷ lệ nền càng thấp, tín hiệu càng dễ báo nhầm, dù độ chính xác không đổi.",
+          "Định lý Bayes cập nhật niềm tin khi có bằng chứng mới, và luôn bắt bạn tính đến tỷ lệ nền."
+        ],
+        "outputs": [
+          {
+            "label": "prior",
+            "key": "prior"
+          },
+          {
+            "label": "độ nhạy",
+            "key": "hit"
+          },
+          {
+            "label": "báo nhầm",
+            "key": "false"
+          },
+          {
+            "label": "P(thật | báo)",
+            "key": "post",
+            "highlight": true
+          }
+        ],
+        "chart_title": "Xác suất sau theo tỷ lệ nền",
+        "formula": "P(A\\mid B)=\\frac{P(B\\mid A)\\,P(A)}{P(B)}",
+        "takeaway": "Độ chính xác của tín hiệu chẳng nói lên gì nếu bạn không biết sự kiện đó hiếm cỡ nào.",
+        "caption": "Tín hiệu đúng 90% mà vẫn sai đa số lần báo? Định lý Bayes và cái bẫy tỷ lệ nền.",
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "bayes",
+          "xacsuat",
+          "tinhieu",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "90%",
+          "10%",
+          "2%",
+          "0.02",
+          "0.90",
+          "0.10"
+        ],
+        "hook_broll": {
+          "query": "Thomas Bayes",
+          "label": "Thomas Bayes",
+          "draw": "question"
+        },
+        "broll": [
+          {
+            "query": "Bayes theorem neon sign",
+            "label": "Định lý Bayes",
+            "draw": "scale",
+            "say": "Định lý mang tên mục sư Thomas Bayes, được công bố sau khi ông qua đời."
+          }
+        ]
+      }
+    }
+  ]
+}
