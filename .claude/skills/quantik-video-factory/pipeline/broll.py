@@ -187,7 +187,7 @@ def _wobble(pts, seed, amp=0.006):
     return out
 
 
-def draw_doodle(img, kind, box, p, color=None, width=9, t=0.0):
+def draw_doodle(img, kind, box, p, color=None, width=9, t=0.0, mono=False):
     """Animated sketch: strokes are drawn progressively (p 0..0.7), then breathe gently."""
     from PIL import ImageDraw
 
@@ -218,12 +218,12 @@ def draw_doodle(img, kind, box, p, color=None, width=9, t=0.0):
         if len(xy) > 1 and budget > -ln:
             tip = xy[-1]
         if len(xy) > 1:
-            c = colors[0] if k == 0 or kind in ("dice", "coin", "clock", "warning", "question") else colors[min(k, 3) % 4 or 1]
+            c = colors[0] if mono or k == 0 or kind in ("dice", "coin", "clock", "warning", "question") else colors[min(k, 3) % 4 or 1]
             d.line(xy, fill=c, width=width, joint="curve")
             r = width // 2
             for q in (xy[0], xy[-1]):
                 d.ellipse([q[0] - r, q[1] - r, q[0] + r, q[1] + r], fill=c)
-    if tip and p < 0.5:  # pen tip while drawing: reads as a hand sketching live
+    if tip and p < 0.5 and not mono:  # pen tip while drawing: reads as a hand sketching live
         R = width * 1.6
         d.ellipse([tip[0] - R, tip[1] - R, tip[0] + R, tip[1] + R], fill=T["accent"])
 

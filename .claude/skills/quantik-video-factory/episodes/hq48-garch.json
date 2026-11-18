@@ -4,12 +4,27 @@
   "style": "code-reel",
   "tag": "#48 GARCH",
   "kicker": "GARCH(1,1)",
-  "hook": "Tập trước ARCH chỉ nhớ đúng một phiên. Thị trường thì ôm hận cả tháng trời. GARCH là mô hình sinh ra để nhớ dai như vậy.",
+  "hook": "Tập trước ARCH chỉ nhớ một phiên. Thị trường thì ôm hận cả tháng. GARCH sinh ra để nhớ dai như vậy.",
   "title": "Mô hình GARCH: thị trường nhớ dai hơn bạn tưởng",
   "takeaway": "GARCH không đoán giá lên hay xuống. Nó cho biết rủi ro đang phình to tới đâu, và cần bao lâu để nguội lại.",
   "caption": "Tập trước là ARCH, tập này là GARCH: vì sao biến động nhớ dai đến vậy. Code chạy thật, dữ liệu mô phỏng có seed cố định.",
-  "hashtags": ["QuanTik", "HocQuant", "GARCH", "volatility", "chuoithoigian", "chungkhoan"],
-  "hook_broll": {"draw": "zigzag"},
-  "broll": [{"query": "Tim Bollerslev", "label": "Tim Bollerslev", "draw": "zigzag",
-             "say": "Tim Bollerslev, học trò của Robert Engle, mở rộng ARCH thành GARCH bằng cách cho biến động nhớ cả chính nó."}]
+  "hashtags": [
+    "QuanTik",
+    "HocQuant",
+    "GARCH",
+    "volatility",
+    "chuoithoigian",
+    "chungkhoan"
+  ],
+  "hook_broll": {
+    "draw": "zigzag"
+  },
+  "broll": [
+    {
+      "query": "Tim Bollerslev",
+      "label": "Tim Bollerslev",
+      "draw": "zigzag",
+      "say": "Tim Bollerslev mở rộng ARCH thành GARCH: biến động nhớ cả chính nó."
+    }
+  ]
 }

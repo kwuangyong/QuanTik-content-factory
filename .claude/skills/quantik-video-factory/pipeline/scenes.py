@@ -250,7 +250,8 @@ def with_backdrop(scene, spec, dim=0.62):
             B.ken_burns(img, spec["path"], box, p, dim=dim, radius=0)
         else:
             layer = F.Image.new("RGB", img.size, T["bg"])
-            B.draw_doodle(layer, kind, (180, 360, 900, 1080), min(1.0, p * 1.6), color=T["raised"], width=14, t=t)
+            B.draw_doodle(layer, kind, (180, 360, 900, 1080), min(1.0, p * 1.6), color=(34, 54, 44), width=14, t=t,
+                          mono=True)
             img.paste(layer.crop((0, 300, 1080, 1310)), (0, 300))
         inner(img, t, p)
         if spec.get("path"):
