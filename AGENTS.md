@@ -31,6 +31,14 @@ Chọn nhánh theo yêu cầu:
 6. Output vào `social-output/<id>/` (đã gitignore). Trả về trong chat: đường dẫn file, thời lượng, kết luận QA,
    engine giọng, caption từng nền tảng trong khối copy được, và lưu ý còn lại cho người duyệt.
 
+## Dàn agent (Claude Code)
+
+`.claude/agents/` có 7 worker chia theo model để tiết kiệm token: `quantik-scout` (haiku, tìm nguồn),
+`quantik-scriptwriter` (sonnet, viết), `quantik-producer` (haiku, dựng), `quantik-compliance` (sonnet),
+`quantik-visual-qa` (sonnet), `quantik-director` (opus, duyệt cuối), `quantik-analyst` (haiku, view sau đăng).
+Luồng điều phối: `.claude/skills/quantik-orchestra/SKILL.md` (gõ `/quantik-orchestra`). Agent khác (Codex, Cursor)
+đọc các file đó như checklist vai trò và làm tuần tự.
+
 ## Môi trường
 
 - Python 3.10+, `pip install -r .claude/skills/quantik-video-factory/requirements.txt edge-tts`, ffmpeg.
