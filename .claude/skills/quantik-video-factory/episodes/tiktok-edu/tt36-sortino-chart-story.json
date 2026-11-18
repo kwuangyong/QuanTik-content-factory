@@ -1,0 +1,32 @@
+{
+  "id": "tt36-sortino-chart-story",
+  "topic": "sortino",
+  "style": "chart-story",
+  "hook": "Hai chiến lược cùng Sharpe {sharpe_a}. Một cái làm bạn mất ngủ.",
+  "kicker": "Học Quant #36",
+  "hook_kicker": "Học Quant #36 · hiểu lầm",
+  "wiki": {
+    "title": "Tỷ số Sortino",
+    "en": "Sortino ratio",
+    "lines": [
+      "Đặt theo tên Frank Sortino.",
+      "Sortino và Price công bố khung đo rủi ro giảm năm 1994.",
+      "Chỉ phạt biến động phía lỗ."
+    ],
+    "source": "Sortino & Price (1994), Journal of Investing",
+    "say": "Tỷ số Sortino mang tên Frank Sortino. Khác Sharpe, nó chỉ phạt những ngày lỗ."
+  },
+  "max_seconds": 90,
+  "allowed_literals": [
+    "252",
+    "2 chiến lược",
+    "1994",
+    "10 dòng",
+    "12 dòng",
+    "0 đến 1",
+    "90%",
+    "2.000",
+    "ba tuần",
+    "năm phiên"
+  ]
+}

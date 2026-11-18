@@ -1,0 +1,36 @@
+{
+  "id": "tt11-garch-myth-buster",
+  "topic": "garch",
+  "style": "myth-buster",
+  "hook": "\"Hôm nay giật mạnh chẳng nói gì về ngày mai.\" Câu này sai, và có Nobel chứng minh.",
+  "kicker": "Học Quant #11",
+  "hook_kicker": "Học Quant #11 · hiểu lầm",
+  "wiki": {
+    "title": "GARCH",
+    "en": "Generalized AutoRegressive Conditional Heteroskedasticity",
+    "lines": [
+      "Robert Engle đề xuất ARCH năm 1982.",
+      "Tim Bollerslev mở rộng thành GARCH năm 1986.",
+      "Engle nhận Nobel Kinh tế năm 2003 nhờ mô hình biến động."
+    ],
+    "source": "Engle (1982), Econometrica; Bollerslev (1986), Journal of Econometrics",
+    "say": "GARCH ra đời năm 1986, mở rộng từ ARCH của Robert Engle. Engle nhận giải Nobel nhờ cách đo biến động này."
+  },
+  "max_seconds": 90,
+  "allowed_literals": [
+    "GARCH(1,1)",
+    "252",
+    "3 tuần",
+    "5 phiên",
+    "1982",
+    "1986",
+    "2003",
+    "10 dòng",
+    "12 dòng",
+    "0 đến 1",
+    "90%",
+    "2.000",
+    "ba tuần",
+    "năm phiên"
+  ]
+}

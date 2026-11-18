@@ -1,0 +1,42 @@
+{
+  "id": "tt47-kelly-meme-quant",
+  "topic": "kelly",
+  "style": "meme-quant",
+  "hook": "Bạn: thắng {W}, đặt hết luôn! Kelly:",
+  "kicker": "Học Quant #47",
+  "hook_kicker": "Học Quant #47 · hiểu lầm",
+  "wiki": {
+    "title": "Tiêu chuẩn Kelly",
+    "en": "Kelly criterion",
+    "lines": [
+      "John L. Kelly Jr., Bell Labs, công bố năm 1956.",
+      "Ban đầu là bài toán truyền tín hiệu qua kênh nhiễu.",
+      "Edward Thorp mang nó vào blackjack rồi thị trường."
+    ],
+    "source": "Kelly (1956), Bell System Technical Journal; Thorp (1962)",
+    "say": "Công thức Kelly đến từ Bell Labs năm 1956, ban đầu là bài toán truyền tín hiệu, rồi Edward Thorp mang ra thị trường."
+  },
+  "max_seconds": 90,
+  "allowed_literals": [
+    "2.000",
+    "1",
+    "0",
+    "bốn mức",
+    "1956",
+    "1962",
+    "10 dòng",
+    "12 dòng",
+    "0 đến 1",
+    "90%",
+    "2.000",
+    "ba tuần",
+    "năm phiên"
+  ],
+  "use_wiki": false,
+  "meme": {
+    "format": "nobody-quant",
+    "setup": "Bạn: thắng {W}, đặt hết luôn! Kelly:",
+    "punch": "Kelly: “Bình tĩnh. {f_star} thôi.”",
+    "truth": "Đặt {quad_kelly} mỗi lần, tài sản trung vị gần như về 0 dù có lợi thế."
+  }
+}

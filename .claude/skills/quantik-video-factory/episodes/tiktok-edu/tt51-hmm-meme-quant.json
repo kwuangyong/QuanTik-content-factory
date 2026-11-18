@@ -1,0 +1,41 @@
+{
+  "id": "tt51-hmm-meme-quant",
+  "topic": "hmm",
+  "style": "meme-quant",
+  "hook": "Người mới: giá tăng là thị trường tăng. HMM:",
+  "kicker": "Học Quant #51",
+  "hook_kicker": "Học Quant #51 · hiểu lầm",
+  "wiki": {
+    "title": "Mô hình Markov ẩn",
+    "en": "Hidden Markov Model",
+    "lines": [
+      "Leonard Baum và cộng sự phát triển cuối thập niên 1960.",
+      "Từng là lõi của nhận dạng giọng nói.",
+      "Hamilton năm 1989 đưa ý tưởng chuyển trạng thái vào kinh tế."
+    ],
+    "source": "Baum et al. (1970), Annals of Mathematical Statistics; Hamilton (1989), Econometrica",
+    "say": "Mô hình Markov ẩn từng là lõi của nhận dạng giọng nói, rồi được dùng để đo trạng thái thị trường."
+  },
+  "max_seconds": 90,
+  "allowed_literals": [
+    "3 tuần",
+    "ba trạng thái",
+    "1960",
+    "1970",
+    "1989",
+    "10 dòng",
+    "12 dòng",
+    "0 đến 1",
+    "90%",
+    "2.000",
+    "ba tuần",
+    "năm phiên"
+  ],
+  "use_wiki": false,
+  "meme": {
+    "format": "nobody-quant",
+    "setup": "Người mới: giá tăng là thị trường tăng. HMM:",
+    "punch": "Dân quant: “P(ngang) cao, đừng đổi chiến lược vội”",
+    "truth": "Bộ lọc tiến chỉ dùng dữ liệu đến hôm nay. Ở đây nó khớp trạng thái thật {accuracy} số phiên."
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "id": "tt43-hurst-whiteboard-math",
+  "topic": "hurst",
+  "style": "whiteboard-math",
+  "hook": "Vì sao H bằng {h_walk} lại có nghĩa là ngẫu nhiên? Giải thích bằng một đường thẳng.",
+  "kicker": "Học Quant #43",
+  "hook_kicker": "Học Quant #43 · hiểu lầm",
+  "wiki": {
+    "title": "Số mũ Hurst",
+    "en": "Hurst exponent",
+    "lines": [
+      "Harold Edwin Hurst, kỹ sư thuỷ văn, đo lũ sông Nile.",
+      "Công bố năm 1951.",
+      "H = 0,5 là ngẫu nhiên; lớn hơn là quán tính; nhỏ hơn là quay đầu."
+    ],
+    "source": "Hurst (1951), Transactions of the American Society of Civil Engineers",
+    "say": "Số mũ Hurst đến từ một kỹ sư đo lũ sông Nile, công bố năm 1951."
+  },
+  "max_seconds": 90,
+  "allowed_literals": [
+    "0,5",
+    "2H",
+    "3 chuỗi",
+    "1951",
+    "0,5",
+    "10 dòng",
+    "12 dòng",
+    "0 đến 1",
+    "90%",
+    "2.000",
+    "ba tuần",
+    "năm phiên"
+  ]
+}

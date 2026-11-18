@@ -1,0 +1,34 @@
+{
+  "id": "tt07-hmm-kinetic-text",
+  "topic": "hmm",
+  "style": "kinetic-text",
+  "hook": "Bạn thấy giá. Bạn không thấy trạng thái. Đó là lý do bạn hay đổi chiến lược quá muộn.",
+  "kicker": "Học Quant #7",
+  "hook_kicker": "Học Quant #7 · hiểu lầm",
+  "wiki": {
+    "title": "Mô hình Markov ẩn",
+    "en": "Hidden Markov Model",
+    "lines": [
+      "Leonard Baum và cộng sự phát triển cuối thập niên 1960.",
+      "Từng là lõi của nhận dạng giọng nói.",
+      "Hamilton năm 1989 đưa ý tưởng chuyển trạng thái vào kinh tế."
+    ],
+    "source": "Baum et al. (1970), Annals of Mathematical Statistics; Hamilton (1989), Econometrica",
+    "say": "Mô hình Markov ẩn từng là lõi của nhận dạng giọng nói, rồi được dùng để đo trạng thái thị trường."
+  },
+  "max_seconds": 90,
+  "allowed_literals": [
+    "3 tuần",
+    "ba trạng thái",
+    "1960",
+    "1970",
+    "1989",
+    "10 dòng",
+    "12 dòng",
+    "0 đến 1",
+    "90%",
+    "2.000",
+    "ba tuần",
+    "năm phiên"
+  ]
+}

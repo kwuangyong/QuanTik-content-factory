@@ -1,0 +1,35 @@
+{
+  "id": "tt21-kelly-code-reel",
+  "topic": "kelly",
+  "style": "code-reel",
+  "hook": "Có lợi thế vẫn cháy tài khoản. Code mô phỏng 2.000 người để chứng minh.",
+  "kicker": "Học Quant #21",
+  "hook_kicker": "Học Quant #21 · hiểu lầm",
+  "wiki": {
+    "title": "Tiêu chuẩn Kelly",
+    "en": "Kelly criterion",
+    "lines": [
+      "John L. Kelly Jr., Bell Labs, công bố năm 1956.",
+      "Ban đầu là bài toán truyền tín hiệu qua kênh nhiễu.",
+      "Edward Thorp mang nó vào blackjack rồi thị trường."
+    ],
+    "source": "Kelly (1956), Bell System Technical Journal; Thorp (1962)",
+    "say": "Công thức Kelly đến từ Bell Labs năm 1956, ban đầu là bài toán truyền tín hiệu, rồi Edward Thorp mang ra thị trường."
+  },
+  "max_seconds": 90,
+  "allowed_literals": [
+    "2.000",
+    "1",
+    "0",
+    "bốn mức",
+    "1956",
+    "1962",
+    "10 dòng",
+    "12 dòng",
+    "0 đến 1",
+    "90%",
+    "2.000",
+    "ba tuần",
+    "năm phiên"
+  ]
+}

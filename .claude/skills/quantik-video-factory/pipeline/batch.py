@@ -158,6 +158,19 @@ def _prepare(topic, style, override=None, returns=None):
     return ep, mod, model
 
 
+def _insert_extras(scenes, ep):
+    """Wiki card and/or animation right after the hook, when the episode has them (dark-truth places its own)."""
+    import anims as A
+
+    extra = []
+    if ep.get("wiki") and ep.get("use_wiki", True):
+        extra.append(A.wiki(ep["wiki"]))
+    if ep.get("anim") and ep.get("anim_say") and ep.get("use_anim", True):
+        extra.append(A.anim(ep["anim"], ep["anim_say"], min_dur=4.0))
+    at = 1 if scenes and scenes[0].name == "hook" else 0
+    scenes[at:at] = extra
+
+
 def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice="female", music=None,
          scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True):
     t_start = time.time()
@@ -179,6 +192,8 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
 
     result = mod.build(filled, model, ctx)
     kind = getattr(mod, "KIND", "video")
+    if kind == "video" and style not in ("dark-truth", "meme-quant", "talking-head-script"):
+        _insert_extras(result["scenes"] if isinstance(result, dict) else result, filled)
 
     # ---- pre-render QA on every word that will be heard or seen
     texts = result.get("texts", []) if isinstance(result, dict) else []

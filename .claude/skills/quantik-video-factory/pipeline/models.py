@@ -442,6 +442,12 @@ def surface_kelly(s, v):
 # =============================================================== registry
 TOPICS = ["garch", "hurst", "ou", "hmm", "monte_carlo", "sharpe", "sortino", "var_cvar", "kelly"]
 
+# psychology / poker / game theory (pipeline/mind_models.py)
+from mind_models import *  # noqa: E402,F401,F403
+from mind_models import MIND_TOPICS  # noqa: E402
+
+TOPICS += MIND_TOPICS
+
 
 def _style(ax):
     ax.tick_params(colors=MUT, labelsize=18)

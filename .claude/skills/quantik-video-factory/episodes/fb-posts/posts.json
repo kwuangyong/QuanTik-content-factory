@@ -1,0 +1,1454 @@
+[
+ {
+  "id": "fb01",
+  "kind": "screener",
+  "title": "Quét toàn sàn: 1 bảng thay 1.600 tab",
+  "text": "Bạn có bao nhiêu tab bảng giá đang mở? 😅\n\nQuét toàn sàn của QuanTik đọc bản screening mới nhất và xếp hạng toàn bộ mã theo một bộ chỉ tiêu công bố rõ ràng. Mở ra là thấy 5 mã điểm cao nhất và 5 mã xếp hạng thấp nhất, kèm 34 cột chỉ tiêu, cột nào cũng có định nghĩa.\n\nKhông phải \"phím\". Là xếp hạng có phương pháp, bạn tự kiểm tra từng cột.",
+  "tag": "QUÉT TOÀN SÀN",
+  "link": "quantik.io.vn → Quét toàn sàn",
+  "hashtags": [
+   "chungkhoan",
+   "dautu",
+   "quant"
+  ],
+  "allowed_literals": [
+   "1.600",
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "headline": "Bạn mở bao nhiêu tab bảng giá mỗi sáng?",
+  "sub": "Một bảng xếp hạng toàn sàn, 34 cột có định nghĩa.",
+  "seed": 3
+ },
+ {
+  "id": "fb02",
+  "kind": "screener",
+  "title": "Không ai đọc hết 34 cột. Vì vậy mới cần xếp hạng",
+  "text": "Thật lòng: không ai có thời gian đọc báo cáo của từng mã trên cả ba sàn.\n\nQuét toàn sàn gom 34 chỉ tiêu về một thứ hạng. Bạn bắt đầu từ đầu bảng và cuối bảng, rồi bấm vào cột nào thấy lạ để đọc định nghĩa.\n\nXếp hạng là điểm khởi đầu để nghiên cứu, không phải lệnh giao dịch.",
+  "tag": "QUÉT TOÀN SÀN",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "chungkhoan",
+   "dautu",
+   "quant"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "headline": "Không ai đọc hết 34 chỉ tiêu của cả sàn. Máy thì đọc được.",
+  "sub": "Đầu bảng, cuối bảng, rồi tự đào sâu.",
+  "seed": 8
+ },
+ {
+  "id": "fb03",
+  "kind": "screener",
+  "title": "Cuối bảng quan trọng không kém đầu bảng",
+  "text": "Ai cũng nhìn top đầu. Dân quant nhìn cả top cuối.\n\nNhững mã xếp hạng thấp nhất cho bạn biết bộ chỉ tiêu đang \"phạt\" điều gì: biến động quá cao, thanh khoản mỏng, hay mô hình không đồng thuận. Hiểu vì sao một mã bị xếp thấp cũng là một cách học quant.\n\nXem 5 mã xếp hạng thấp nhất và lý do trong Quét toàn sàn.",
+  "tag": "QUÉT TOÀN SÀN",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "chungkhoan",
+   "dautu",
+   "quant"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "headline": "Ai cũng nhìn top đầu. Dân quant nhìn cả top cuối.",
+  "sub": "Biết bộ chỉ tiêu đang phạt điều gì.",
+  "seed": 11
+ },
+ {
+  "id": "fb04",
+  "kind": "screener",
+  "title": "Thứ hai, 7 giờ sáng",
+  "text": "Thứ hai, 7 giờ sáng, cà phê chưa kịp nguội ☕\n\nThay vì lướt 20 hội nhóm, mở Quét toàn sàn: bản screening mới nhất, thứ hạng toàn sàn, 34 cột có định nghĩa. Năm phút là có danh sách để nghiên cứu cả tuần.\n\nNghiên cứu xong mới quyết định, và quyết định là của bạn.",
+  "tag": "QUÉT TOÀN SÀN",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "chungkhoan",
+   "dautu",
+   "quant"
+  ],
+  "allowed_literals": [
+   "7 giờ",
+   "20 hội nhóm",
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "headline": "Thứ hai, 7 giờ sáng. Bạn bắt đầu tuần bằng gì?",
+  "sub": "Năm phút, một bảng, cả tuần nghiên cứu.",
+  "seed": 21
+ },
+ {
+  "id": "fb05",
+  "kind": "screener",
+  "title": "Hội nhóm vs bảng xếp hạng",
+  "text": "Một bên: \"Anh em ơi mã này sắp bay\" 🚀\nMột bên: 34 chỉ tiêu, công thức công khai, cột nào cũng có định nghĩa.\n\nQuét toàn sàn không hứa mã nào sẽ tăng. Nó cho bạn một cách xếp hạng có thể kiểm tra, thay vì một lời đồn không thể kiểm tra.",
+  "tag": "QUÉT TOÀN SÀN",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "chungkhoan",
+   "dautu",
+   "quant"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "headline": "Lời đồn không kiểm tra được. Bảng xếp hạng thì có.",
+  "sub": "34 chỉ tiêu, công thức công khai.",
+  "seed": 5
+ },
+ {
+  "id": "fb06",
+  "kind": "screener",
+  "title": "Định nghĩa từng cột",
+  "text": "Bạn có biết mỗi cột trong Quét toàn sàn đều có định nghĩa riêng? Sharpe, Sortino, Hurst, độ đồng thuận mô hình… di chuột vào là đọc được nó đo gì và đọc ngưỡng ra sao.\n\nVừa xem bảng vừa học quant. Không cần bằng tài chính.",
+  "tag": "QUÉT TOÀN SÀN",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "chungkhoan",
+   "dautu",
+   "quant"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "headline": "Mỗi cột một định nghĩa. Xem bảng là đang học quant.",
+  "sub": "Sharpe, Sortino, Hurst… đọc ngay trong bảng.",
+  "seed": 13
+ },
+ {
+  "id": "fb07",
+  "kind": "quant",
+  "title": "Phân tích Quant: kết luận một câu",
+  "text": "Gõ một mã, nhận một câu kết luận dễ đọc. Muốn sâu hơn thì mở tiếp: xu hướng, vùng giá mô phỏng, rủi ro, mô hình 3D tương tác, và 16 nhóm chỉ tiêu chuyên sâu với HMM, GARCH, Monte Carlo.\n\nNgười mới đọc dòng đầu. Người làm quant đọc đến dòng cuối.",
+  "tag": "PHÂN TÍCH QUANT",
+  "link": "quantik.io.vn → Phân tích Quant",
+  "hashtags": [
+   "chungkhoan",
+   "dautu",
+   "quant"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "garch",
+  "ticker": "QTA",
+  "headline": "Gõ một mã. Người mới đọc dòng đầu, dân quant đọc đến dòng cuối.",
+  "sub": "Kết luận dễ đọc + 16 nhóm chỉ tiêu chuyên sâu."
+ },
+ {
+  "id": "fb08",
+  "kind": "quant",
+  "title": "Mô hình 3D xoay được",
+  "text": "Rủi ro không phải một con số. Nó có hình dạng.\n\nTrong Phân tích Quant, bạn xoay được bề mặt 3D của mô hình để thấy biến động phình ra lúc nào, phân phối lệch về phía nào. Nhìn một lần là nhớ lâu hơn đọc mười trang.",
+  "tag": "PHÂN TÍCH QUANT",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "chungkhoan",
+   "dautu",
+   "quant"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "var_cvar",
+  "ticker": "QTV",
+  "headline": "Rủi ro không phải một con số. Nó có hình dạng.",
+  "sub": "Xoay mô hình 3D ngay trên trình duyệt."
+ },
+ {
+  "id": "fb09",
+  "kind": "quant",
+  "title": "HMM: thị trường đang ở trạng thái nào",
+  "text": "Bạn thấy giá, nhưng không thấy \"trạng thái\" của thị trường: tăng, giảm hay đi ngang.\n\nPhân tích Quant dùng HMM, mô hình Markov ẩn, để ước lượng xác suất từng trạng thái. Lưu ý: đó là xác suất trạng thái của mô hình, không phải xác suất giá tăng. Đọc đúng thì hữu ích, đọc sai thì nguy hiểm.",
+  "tag": "HMM",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "chungkhoan",
+   "dautu",
+   "quant"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "hmm",
+  "ticker": "QTB",
+  "headline": "Bạn thấy giá. Bạn không thấy trạng thái.",
+  "sub": "HMM ước lượng xác suất trạng thái, có giải thích cách đọc."
+ },
+ {
+  "id": "fb10",
+  "kind": "quant",
+  "title": "Monte Carlo: một nghìn tương lai",
+  "text": "Ai đưa bạn một con số dự báo giá là đang giấu những kịch bản còn lại.\n\nPhân tích Quant chạy Monte Carlo cho vùng giá mô phỏng: không phải một mức giá, mà một dải kịch bản, kèm xác suất kết thúc dưới mức hiện tại theo giả định của mô hình.",
+  "tag": "MONTE CARLO",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "chungkhoan",
+   "dautu",
+   "quant"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "monte_carlo",
+  "ticker": "QTC",
+  "headline": "Một con số dự báo đang giấu những tương lai còn lại.",
+  "sub": "Vùng giá mô phỏng, không phải giá mục tiêu."
+ },
+ {
+  "id": "fb11",
+  "kind": "quant",
+  "title": "GARCH: lúc nào rủi ro đang phình",
+  "text": "GARCH không đoán giá lên hay xuống. Nó cho biết lúc nào rủi ro đang phình to.\n\nTrong Phân tích Quant, biến động theo GARCH nằm ngay phần rủi ro, để bạn chỉnh khối lượng cho hợp lý thay vì bị bất ngờ.",
+  "tag": "GARCH",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "chungkhoan",
+   "dautu",
+   "quant"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "garch",
+  "ticker": "QTD",
+  "headline": "Không đoán giá. Đo xem rủi ro đang phình to tới đâu.",
+  "sub": "Biến động theo GARCH ngay trong báo cáo."
+ },
+ {
+  "id": "fb12",
+  "kind": "quant",
+  "title": "Từ người mới đến dân quant",
+  "text": "Một báo cáo, hai tầng đọc.\n\nTầng 1: kết luận, xu hướng, vùng giá mô phỏng, rủi ro, viết bằng tiếng Việt dễ hiểu.\nTầng 2: 16 nhóm chỉ tiêu, HMM, GARCH, Monte Carlo cho người muốn kiểm tra tận gốc.\n\nBạn đang ở tầng nào? 👇",
+  "tag": "PHÂN TÍCH QUANT",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "chungkhoan",
+   "dautu",
+   "quant"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "sharpe",
+  "ticker": "QTE",
+  "headline": "Một báo cáo, hai tầng đọc. Bạn ở tầng nào?",
+  "rows": [
+   [
+    "Tầng 1",
+    "kết luận dễ đọc"
+   ],
+   [
+    "Tầng 1",
+    "xu hướng · rủi ro"
+   ],
+   [
+    "Tầng 1",
+    "vùng giá mô phỏng"
+   ],
+   [
+    "Tầng 2",
+    "16 nhóm chỉ tiêu"
+   ],
+   [
+    "Tầng 2",
+    "HMM · GARCH · Monte Carlo"
+   ]
+  ],
+  "sub": "Tiếng Việt dễ hiểu, công thức kiểm tra được."
+ },
+ {
+  "id": "fb13",
+  "kind": "feature",
+  "title": "QuanTik có gì",
+  "text": "Một nơi cho cả ba việc: xem thị trường, lọc mã, hiểu rủi ro.\n\n1. Dashboard realtime: HOSE, HNX, UPCoM, VN-INDEX, VN30.\n2. Quét toàn sàn: xếp hạng toàn bộ mã, 34 cột có định nghĩa.\n3. Phân tích Quant: kết luận dễ đọc + 16 nhóm chỉ tiêu chuyên sâu.\n4. Mô hình 3D tương tác.\n\nXem các gói tại quantik.io.vn/plans.",
+  "tag": "SẢN PHẨM",
+  "link": "quantik.io.vn/plans",
+  "hashtags": [
+   "chungkhoan",
+   "dautu",
+   "quant"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "headline": "Xem thị trường, lọc mã, hiểu rủi ro. Một chỗ.",
+  "items": [
+   "Dashboard realtime HOSE, HNX, UPCoM",
+   "Quét toàn sàn, 34 cột có định nghĩa",
+   "Phân tích Quant, 16 nhóm chỉ tiêu",
+   "Mô hình 3D tương tác",
+   "Xem gói tại quantik.io.vn/plans"
+  ]
+ },
+ {
+  "id": "fb14",
+  "kind": "feature",
+  "title": "4 câu hỏi trước khi vào lệnh",
+  "text": "4 câu hỏi dân quant luôn tự hỏi, và chỗ trả lời trong QuanTik:\n\n1. Rủi ro đang cao hay thấp? → GARCH trong Phân tích Quant\n2. Thị trường đang ở trạng thái nào? → HMM\n3. Tệ nhất có thể ra sao? → VaR, CVaR, Monte Carlo\n4. Mã này đứng đâu so với toàn sàn? → Quét toàn sàn\n\nQuyết định vẫn là của bạn. Chúng tôi chỉ giúp bạn hỏi đúng câu.",
+  "tag": "CHECKLIST",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "chungkhoan",
+   "dautu",
+   "quant"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "headline": "4 câu hỏi dân quant luôn tự hỏi trước khi vào lệnh",
+  "items": [
+   "Rủi ro đang cao hay thấp? → GARCH",
+   "Thị trường ở trạng thái nào? → HMM",
+   "Tệ nhất ra sao? → VaR · Monte Carlo",
+   "Mã này đứng đâu toàn sàn? → Quét toàn sàn"
+  ]
+ },
+ {
+  "id": "fb15",
+  "kind": "feature",
+  "title": "Glossary miễn phí",
+  "text": "Bạn không cần bằng tài chính để hiểu Sharpe, Sortino, VaR hay Kelly.\n\nMọi thuật ngữ trong QuanTik đều có định nghĩa tiếng Việt, cách đọc ngưỡng và ví dụ. Lưu bài này lại, tối nay đọc một thuật ngữ thôi cũng được.",
+  "tag": "HỌC QUANT",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "chungkhoan",
+   "dautu",
+   "quant"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "headline": "Không cần bằng tài chính để hiểu Sharpe, VaR hay Kelly.",
+  "items": [
+   "Sharpe: lãi trên mỗi đơn vị rung lắc",
+   "Sortino: chỉ phạt ngày lỗ",
+   "VaR: ranh giới của ngày xấu",
+   "Kelly: đặt bao nhiêu là vừa",
+   "Đọc định nghĩa đầy đủ tại quantik.io.vn"
+  ]
+ },
+ {
+  "id": "fb16",
+  "kind": "feature",
+  "title": "Vì sao QuanTik không bao giờ \"hô mã\"",
+  "text": "Chúng tôi nhận câu hỏi này mỗi ngày: \"Sao không gợi ý luôn mã nào nên vào?\"\n\nVì ba lý do:\n1. Tư vấn đầu tư cần giấy phép.\n2. Mô hình nào cũng có giả định và có lúc sai.\n3. Bạn hiểu vì sao thì mới cầm được khi thị trường rung.\n\nQuanTik đưa phương pháp và số liệu. Quyết định là của bạn.",
+  "tag": "NGUYÊN TẮC",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "chungkhoan",
+   "dautu",
+   "quant"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "headline": "Vì sao QuanTik không bao giờ hô mã?",
+  "items": [
+   "Tư vấn đầu tư cần giấy phép",
+   "Mô hình nào cũng có giả định",
+   "Hiểu vì sao mới cầm được khi rung",
+   "Phương pháp + số liệu, quyết định là của bạn"
+  ]
+ },
+ {
+  "id": "fb17",
+  "kind": "hottake",
+  "title": "Hot take: bạn không cần thêm tín hiệu",
+  "text": "Hot take: thứ bạn thiếu không phải là thêm một tín hiệu mua bán. Thứ bạn thiếu là biết mình đang chịu bao nhiêu rủi ro.\n\nĐồng ý hay phản đối? 👇",
+  "tag": "HOT TAKE",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "chungkhoan",
+   "dautu",
+   "quant"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "take": "Bạn không thiếu tín hiệu. Bạn thiếu một con số rủi ro.",
+  "sub": "Biến động, VaR, chuỗi lỗ tệ nhất: bạn biết của mình chưa?"
+ },
+ {
+  "id": "fb18",
+  "kind": "hottake",
+  "title": "Hot take: vẽ đường không phải là quant",
+  "text": "Nói thẳng: kẻ vài đường trên chart chưa phải là quant.\n\nQuant là có giả thuyết, đo được, kiểm định được, và biết khi nào mô hình sai. Phân tích kỹ thuật có chỗ đứng riêng, nhưng hai thứ khác nhau.\n\nTeam nào vào cãi nào 👇",
+  "tag": "HOT TAKE",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "quant",
+   "phantichkythuat",
+   "chungkhoan"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "take": "Kẻ vài đường trên chart chưa phải là quant.",
+  "sub": "Quant = giả thuyết, đo được, kiểm định được, biết lúc mình sai."
+ },
+ {
+  "id": "fb19",
+  "kind": "poll",
+  "title": "Bạn chọn bảng nào?",
+  "text": "Sáng mai bạn chỉ được mở một thứ trước phiên:\n\nA. 20 hội nhóm, 200 tin nhắn \"sắp bay\"\nB. Một bảng xếp hạng toàn sàn, 34 cột có định nghĩa\n\nBình luận A hay B, và vì sao 👇",
+  "tag": "BẠN CHỌN",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "chungkhoan",
+   "dautu",
+   "quant"
+  ],
+  "allowed_literals": [
+   "20 hội nhóm",
+   "200 tin",
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "question": "Trước phiên, bạn chỉ được mở một thứ:",
+  "options": [
+   "20 hội nhóm, 200 tin \"sắp bay\"",
+   "Một bảng xếp hạng toàn sàn, 34 cột"
+  ]
+ },
+ {
+  "id": "fb20",
+  "kind": "poll",
+  "title": "Kết luận ngắn hay báo cáo dài?",
+  "text": "Bạn thích kiểu nào hơn khi phân tích một mã?\n\nA. Một câu kết luận, đọc 5 giây\nB. Báo cáo 16 nhóm chỉ tiêu, đọc 30 phút\n\nPhân tích Quant có cả hai, nhưng chúng tôi tò mò bạn đọc phần nào nhiều hơn 👇",
+  "tag": "BẠN CHỌN",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "chungkhoan",
+   "dautu",
+   "quant"
+  ],
+  "allowed_literals": [
+   "5 giây",
+   "30 phút",
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "question": "Phân tích một mã, bạn đọc kiểu nào?",
+  "options": [
+   "Một câu kết luận, 5 giây",
+   "16 nhóm chỉ tiêu, 30 phút"
+  ]
+ },
+ {
+  "id": "fb21",
+  "kind": "meme",
+  "title": "Gấp thếp",
+  "text": "Ai từng nghe \"cứ gấp thếp là gỡ được\" điểm danh 🙋\n\nMô phỏng 10.000 người chơi gấp thếp: một phần tư cháy vốn chỉ sau 200 ván. Thắng nhỏ đều đặn che đi cú thua khổng lồ.\n\nVideo đầy đủ bên kênh của QuanTik.",
+  "tag": "MEME",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "meme",
+   "xacsuat",
+   "quant"
+  ],
+  "allowed_literals": [
+   "10.000",
+   "200",
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "martingale",
+  "setup": "Gấp thếp: thắng, thắng, thắng, thắng…",
+  "punch": "Ván thứ {path_len}: về 0.",
+  "truth": "{ruined} trong {players} người gấp thếp cháy vốn sau {rounds} ván."
+ },
+ {
+  "id": "fb22",
+  "kind": "meme",
+  "title": "Kelly",
+  "text": "Có lợi thế thì đặt hết cho nhanh giàu? Kelly lắc đầu.\n\nCùng tỷ lệ thắng, đặt gấp bốn mức Kelly thì tài sản trung vị gần như về 0. Lợi thế chưa đủ, cỡ vị thế mới quyết định bạn có sống sót.",
+  "tag": "MEME",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "meme",
+   "kelly",
+   "quanlyvon"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "kelly",
+  "setup": "Bạn: “Thắng {W}, đặt hết vốn luôn!”",
+  "punch": "Kelly: “Bình tĩnh. {f_star} thôi.”",
+  "truth": "Đặt {quad_kelly} mỗi lần: tài sản trung vị còn {med_quad}."
+ },
+ {
+  "id": "fb23",
+  "kind": "meme",
+  "title": "VaR",
+  "text": "\"VaR 95% là lỗ tối đa\" — câu nói đắt nhất trong quản trị rủi ro 😬\n\nVaR chỉ là ranh giới. Bên kia ranh giới, CVaR mới cho biết tệ đến mức nào.",
+  "tag": "MEME",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "meme",
+   "var",
+   "quanlyruiro"
+  ],
+  "allowed_literals": [
+   "95%",
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "var_cvar",
+  "setup": "VaR: “Lỗ tối đa {var95} một ngày thôi.”",
+  "punch": "Phiên tệ nhất: {worst}.",
+  "truth": "CVaR 95%: trung bình những ngày xấu là {cvar95}."
+ },
+ {
+  "id": "fb24",
+  "kind": "meme",
+  "title": "Sharpe",
+  "text": "Khoe lãi mà không khoe rủi ro là khoe một nửa sự thật.\n\nChiến lược B lãi nhiều hơn nhưng sụt sâu gấp mấy lần. Sharpe hỏi: mỗi đơn vị rung lắc đổi được bao nhiêu lợi nhuận?",
+  "tag": "MEME",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "meme",
+   "sharpe",
+   "quant"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "sharpe",
+  "setup": "Chiến lược B: “Mình lãi {cagr_b}!”",
+  "punch": "Sharpe: “Ừ, nhưng sụt {dd_b} kìa.”",
+  "truth": "Sharpe A {sharpe_a}, B chỉ {sharpe_b}."
+ },
+ {
+  "id": "fb25",
+  "kind": "meme",
+  "title": "Lãi 50 lỗ 50",
+  "text": "Bài toán lớp 5 mà nhiều người đầu tư lâu năm vẫn sai 👇\n\nLãi 50% rồi lỗ 50% không phải hoà vốn. Và lỗ 50% phải lãi 100% mới về bờ.",
+  "tag": "MEME",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "meme",
+   "quanlyvon",
+   "dautu"
+  ],
+  "allowed_literals": [
+   "50%",
+   "100%",
+   "lớp 5",
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "vol_drag",
+  "setup": "Bạn: “Lãi 50%, lỗ 50%, vậy là hoà.”",
+  "punch": "Tài khoản: {up_down}.",
+  "truth": "Lỗ 50% phải lãi {need50} mới hoà vốn."
+ },
+ {
+  "id": "fb26",
+  "kind": "meme",
+  "title": "Phí giao dịch",
+  "text": "Lướt sóng 20 vòng mỗi tháng. Người vui nhất là ai? 😅\n\nMô phỏng cùng một danh mục: giữ nguyên và giao dịch liên tục cho kết quả khác hẳn nhau. Mức phí là giả định, hãy kiểm tra biểu phí của bạn.",
+  "tag": "MEME",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "meme",
+   "chiphigiaodich"
+  ],
+  "allowed_literals": [
+   "20 vòng",
+   "5 lệnh",
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "overtrading",
+  "setup": "Bạn: “Hôm nay lướt 5 lệnh.”",
+  "punch": "Phí và thuế: “Cảm ơn nhé.”",
+  "truth": "20 vòng mỗi tháng: chi phí khoảng {cost20} vốn một năm."
+ },
+ {
+  "id": "fb27",
+  "kind": "meme",
+  "title": "Kẻ sống sót",
+  "text": "Quảng cáo luôn khoe quỹ thắng. Không ai khoe nghĩa địa quỹ.\n\nTrong 10.000 quỹ tung đồng xu, vẫn có vài quỹ thắng 10 năm liền. Thành tích đẹp có thể chỉ là may mắn sống sót.",
+  "tag": "MEME",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "meme",
+   "thienkien"
+  ],
+  "allowed_literals": [
+   "10.000",
+   "10 năm",
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "survivorship",
+  "setup": "Quảng cáo: “Quỹ thắng {years} năm liền!”",
+  "punch": "{dead} quỹ đã đóng cửa: …",
+  "truth": "Trong {funds} quỹ tung đồng xu, {survivors} quỹ thắng {years} năm liền."
+ },
+ {
+  "id": "fb28",
+  "kind": "meme",
+  "title": "Sợ lỗ",
+  "text": "Lãi thì \"ừ cũng được\". Lỗ thì mất ngủ ba đêm. Bạn có vậy không? 😂\n\nKahneman và Tversky đo được: nỗi đau mất mát nặng khoảng hơn gấp đôi niềm vui cùng số tiền.",
+  "tag": "MEME",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "meme",
+   "tamlyhoc"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "loss_aversion",
+  "setup": "Lãi {stake}: “Ừ, cũng được.”",
+  "punch": "Lỗ {stake}: mất ngủ ba đêm.",
+  "truth": "Cảm giác: được {stake} như {v_gain}, mất {stake} như {v_loss}."
+ },
+ {
+  "id": "fb29",
+  "kind": "er",
+  "title": "Kỳ vọng vs thực tế: biến động",
+  "text": "Kỳ vọng: thị trường dao động đều đặn.\nThực tế: yên ắng cả tháng rồi giật liền mấy phiên.\n\nĐó là biến động đi thành cụm, và GARCH đo đúng điều đó.",
+  "tag": "GARCH",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "garch",
+   "quant"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "garch",
+  "setup": "Thị trường dao động đều mỗi ngày",
+  "punch": "Thực tế: biến động đi thành cụm"
+ },
+ {
+  "id": "fb30",
+  "kind": "er",
+  "title": "Kỳ vọng vs thực tế: một đường giá",
+  "text": "Ai đó vẽ cho bạn một đường giá tương lai. Monte Carlo vẽ cho bạn {n_paths} đường.\n\nTương lai là một dải, không phải một đường.",
+  "tag": "MONTE CARLO",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "montecarlo",
+   "quant"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "monte_carlo",
+  "setup": "Giá sẽ đi theo một đường",
+  "punch": "Thực tế: {n_paths} tương lai, {prob_loss} kết thúc ở mức lỗ"
+ },
+ {
+  "id": "fb31",
+  "kind": "er",
+  "title": "Kỳ vọng vs thực tế: chơi giỏi là lãi đều",
+  "text": "Kỳ vọng: giỏi thì tháng nào cũng lãi.\nThực tế: người có lợi thế thật vẫn có thể lỗ cả tháng vì phương sai.\n\nĐừng chấm điểm kỹ năng bằng vài tuần kết quả.",
+  "tag": "VARIANCE",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "xacsuat",
+   "tamlyhoc"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "poker_variance",
+  "setup": "Giỏi thì tháng nào cũng lãi",
+  "punch": "Thực tế: {lose_20k} người giỏi vẫn lỗ sau {hands_20k} tay"
+ },
+ {
+  "id": "fb32",
+  "kind": "er",
+  "title": "Kỳ vọng vs thực tế: phí",
+  "text": "Kỳ vọng: giao dịch nhiều, nhiều cơ hội.\nThực tế: không có lợi thế thì chỉ có nhiều chi phí.",
+  "tag": "PHÍ",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "chiphigiaodich",
+   "quanlyvon"
+  ],
+  "allowed_literals": [
+   "20 vòng",
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "overtrading",
+  "setup": "Giao dịch nhiều = nhiều cơ hội lãi",
+  "punch": "Thực tế: 20 vòng/tháng còn {ret20}"
+ },
+ {
+  "id": "fb33",
+  "kind": "poll",
+  "title": "Gấp thếp hay Kelly",
+  "text": "Bạn có 100 triệu và một lợi thế nhỏ. Chọn đi:\n\nA. Gấp thếp: thua thì gấp đôi\nB. Kelly: mỗi lần chỉ đặt một phần nhỏ cố định\n\nĐáp án có code chứng minh, nhưng bình luận trước đã 👇",
+  "tag": "BẠN CHỌN",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "quanlyvon",
+   "kelly"
+  ],
+  "allowed_literals": [
+   "100 triệu",
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "question": "Có một lợi thế nhỏ. Bạn quản lý vốn kiểu nào?",
+  "options": [
+   "Gấp thếp: thua thì gấp đôi",
+   "Kelly: một phần nhỏ cố định"
+  ]
+ },
+ {
+  "id": "fb34",
+  "kind": "poll",
+  "title": "Lãi đều hay lãi khủng",
+  "text": "Hai chiến lược, bạn cầm cái nào được 3 năm?\n\nA. Lãi vừa phải, sụt tối đa nhỏ\nB. Lãi nhiều hơn, nhưng có lúc sụt gần một phần ba tài khoản\n\nCâu trả lời nói lên nhiều điều về bạn 👀",
+  "tag": "BẠN CHỌN",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "sharpe",
+   "quanlyruiro"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "sharpe",
+  "question": "Bạn cầm chiến lược nào được 3 năm?",
+  "options": [
+   "Lãi {cagr_a}/năm, sụt tối đa {dd_a}",
+   "Lãi {cagr_b}/năm, sụt tối đa {dd_b}"
+  ]
+ },
+ {
+  "id": "fb35",
+  "kind": "poll",
+  "title": "Đổi cửa hay giữ",
+  "text": "Ba cánh cửa, một chiếc xe. Bạn chọn cửa 1. Người dẫn (biết xe ở đâu) mở cửa 3: con dê.\n\nA. Giữ cửa 1\nB. Đổi sang cửa 2\n\nBình luận trước, đáp án sau 😏",
+  "tag": "BẠN CHỌN",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "montyhall",
+   "xacsuat"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "question": "Người dẫn mở một cửa có dê. Bạn làm gì?",
+  "options": [
+   "Giữ cửa đã chọn",
+   "Đổi sang cửa còn lại"
+  ]
+ },
+ {
+  "id": "fb36",
+  "kind": "poll",
+  "title": "Bán lãi hay bán lỗ",
+  "text": "Bạn cần tiền gấp, trong danh mục có một mã đang lãi và một mã đang lỗ. Bán mã nào?\n\nA. Bán mã lãi, \"chốt cho chắc\"\nB. Bán mã lỗ, \"cắt cho nhẹ\"\n\nKhông có đáp án đúng tuyệt đối, nhưng câu trả lời của bạn tiết lộ một thiên kiến rất phổ biến 👇",
+  "tag": "BẠN CHỌN",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "tamlyhoc",
+   "lossaversion"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "question": "Cần tiền gấp. Bạn bán mã nào?",
+  "options": [
+   "Mã đang lãi, chốt cho chắc",
+   "Mã đang lỗ, cắt cho nhẹ"
+  ]
+ },
+ {
+  "id": "fb37",
+  "kind": "poll",
+  "title": "Tin vào chuỗi",
+  "text": "Thị trường tăng 6 phiên liền. Bạn nghĩ gì?\n\nA. Sắp điều chỉnh, tăng nhiều quá rồi\nB. Đang có đà, sẽ tăng tiếp\n\nGợi ý: trong dữ liệu ngẫu nhiên, chuỗi 6 rất bình thường 👀",
+  "tag": "BẠN CHỌN",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "tamlyhoc",
+   "xacsuat"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "question": "Thị trường tăng 6 phiên liền. Bạn nghĩ:",
+  "options": [
+   "Sắp điều chỉnh, tăng nhiều quá rồi",
+   "Đang có đà, sẽ tăng tiếp"
+  ]
+ },
+ {
+  "id": "fb38",
+  "kind": "quiz",
+  "title": "Đố: 2% và 90%",
+  "text": "Đố vui 🧠 Một sự kiện \"sập\" chỉ xảy ra 2% số phiên. Một tín hiệu đúng 90% vừa báo động. Xác suất sập thật là bao nhiêu?\n\nĐáp án kèm code mô phỏng ở bình luận đầu.",
+  "tag": "ĐỐ VUI",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "bayes",
+   "xacsuat"
+  ],
+  "allowed_literals": [
+   "2%",
+   "90%",
+   "50%",
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "base_rate",
+  "question": "Sự kiện xảy ra {base} số phiên. Tín hiệu đúng {acc} vừa báo động. Xác suất là thật?",
+  "options": [
+   "Khoảng {acc}",
+   "Khoảng 50%",
+   "Khoảng {hit_exact}",
+   "Không tính được"
+  ]
+ },
+ {
+  "id": "fb39",
+  "kind": "quiz",
+  "title": "Đố: chuỗi dài nhất",
+  "text": "100 lần tung đồng xu công bằng. Chuỗi cùng mặt dài nhất thường dài bao nhiêu?\n\nĐa số đoán sai vì đánh giá thấp ngẫu nhiên 😄",
+  "tag": "ĐỐ VUI",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "xacsuat",
+   "toanhoc"
+  ],
+  "allowed_literals": [
+   "100",
+   "2 đến 3",
+   "6 đến 8",
+   "15",
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "streaks",
+  "question": "Tung đồng xu {flips} lần. Chuỗi cùng mặt dài nhất thường là?",
+  "options": [
+   "2 đến 3",
+   "4",
+   "6 đến 8",
+   "Trên 15"
+  ]
+ },
+ {
+  "id": "fb40",
+  "kind": "quiz",
+  "title": "Đố: lỗ 50%",
+  "text": "Tài khoản lỗ 50%. Phải lãi bao nhiêu phần trăm để về bờ?\n\nCâu dễ nhất nhưng sai nhiều nhất 😅",
+  "tag": "ĐỐ VUI",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "quanlyvon",
+   "toanhoc"
+  ],
+  "allowed_literals": [
+   "50%",
+   "75%",
+   "150%",
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "vol_drag",
+  "question": "Tài khoản lỗ 50%. Phải lãi bao nhiêu để hoà vốn?",
+  "options": [
+   "50%",
+   "75%",
+   "{need50}",
+   "150%"
+  ]
+ },
+ {
+  "id": "fb41",
+  "kind": "quiz",
+  "title": "Đố: hai phần ba trung bình",
+  "text": "Trò chơi của Keynes: mọi người đoán một số từ 0 đến 100, ai gần nhất với 2/3 trung bình thì thắng. Bạn đoán số mấy?\n\nViết con số của bạn xuống bình luận. Tuần sau QuanTik công bố số thắng của chính bài này 😎",
+  "tag": "ĐỐ VUI",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "keynes",
+   "lythuyettrochoi"
+  ],
+  "allowed_literals": [
+   "0 đến 100",
+   "2/3",
+   "50",
+   "33",
+   "22",
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "question": "Đoán một số từ 0 đến 100. Ai gần nhất với 2/3 trung bình của mọi người thì thắng.",
+  "options": [
+   "50",
+   "33",
+   "22",
+   "0"
+  ],
+  "cta_line": "Viết con số của bạn vào bình luận"
+ },
+ {
+  "id": "fb42",
+  "kind": "quiz",
+  "title": "Đố: đấu giá",
+  "text": "10 người cùng đấu giá một món, ai cũng ước lượng giá trị (có người cao, người thấp). Người thắng thường thế nào?\n\nĐáp án gọi là \"lời nguyền người thắng\" 👀",
+  "tag": "ĐỐ VUI",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "lythuyettrochoi"
+  ],
+  "allowed_literals": [
+   "10 người",
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "winners_curse",
+  "question": "10 người đấu giá một món giá trị {value}. Người thắng thường:",
+  "options": [
+   "Mua được giá hời",
+   "Trả đúng giá trị",
+   "Trả dư khoảng {over10}",
+   "Không đoán được"
+  ]
+ },
+ {
+  "id": "fb43",
+  "kind": "stat",
+  "title": "Monty Hall bằng code",
+  "text": "Code chơi 10.000 ván Monty Hall. Đổi cửa thắng gấp đôi giữ cửa.\n\nTrực giác nói 50/50, vì quên rằng người dẫn biết đáp án. Khi người có thông tin hành động, hành động đó là dữ liệu.",
+  "tag": "MONTY HALL",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "montyhall",
+   "xacsuat"
+  ],
+  "allowed_literals": [
+   "10.000",
+   "50/50",
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "monty_hall",
+  "big": "{p_switch}",
+  "line": "Tỷ lệ thắng khi đổi cửa, sau {games} ván mô phỏng. Giữ cửa: {p_stay}."
+ },
+ {
+  "id": "fb44",
+  "kind": "stat",
+  "title": "Hồi quy về trung bình",
+  "text": "Nhóm quỹ đứng đầu năm nay, sang năm thường tụt hạng. Không phải vì họ kém đi, mà vì may mắn không lặp lại.",
+  "tag": "HỒI QUY",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "thongke",
+   "dautu"
+  ],
+  "allowed_literals": [
+   "năm 1",
+   "năm 2",
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "regression_mean",
+  "big": "{top_y2}",
+  "line": "Lợi nhuận năm 2 của nhóm top năm 1 (năm 1: {top_y1})."
+ },
+ {
+  "id": "fb45",
+  "kind": "stat",
+  "title": "Phá sản con bạc",
+  "text": "Chỉ cần lệch một chút mỗi ván, chơi đủ lâu là gần như chắc thua. Nhà cái không cần bạn thua nhiều, chỉ cần bạn chơi lâu.",
+  "tag": "PHÁ SẢN",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "xacsuat",
+   "tamlyhoc"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "gambler_ruin",
+  "big": "{ruin_edge}",
+  "line": "Xác suất cháy khi mỗi ván thắng {p_player}, từ {start} muốn lên {target}."
+ },
+ {
+  "id": "fb46",
+  "kind": "stat",
+  "title": "Tù nhân và Axelrod",
+  "text": "Kẻ phản bội thắng từng trận nhưng thua cả giải. Trong trò chơi lặp lại, uy tín là tài sản.",
+  "tag": "TÙ NHÂN",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "lythuyettrochoi"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "topic": "prisoners",
+  "big": "{s_tft}",
+  "line": "Điểm của \"ăn miếng trả miếng\". Luôn phản bội chỉ {s_defect}."
+ },
+ {
+  "id": "fb47",
+  "kind": "hottake",
+  "title": "Hot take: bạn không thắng thị trường, bạn may",
+  "text": "Hot take: phần lớn các tháng \"thắng thị trường\" của nhà đầu tư cá nhân là may mắn, không phải kỹ năng.\n\nMuốn biết phần nào là kỹ năng, cần mẫu dài và cần đo rủi ro. Vào cãi nào 👇",
+  "tag": "HOT TAKE",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "tamlyhoc",
+   "dautu"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "take": "Tháng này bạn thắng thị trường? Có thể chỉ là may.",
+  "sub": "Kỹ năng cần mẫu dài để lộ ra. Vài tuần chủ yếu là nhiễu."
+ },
+ {
+  "id": "fb48",
+  "kind": "hottake",
+  "title": "Hot take: cắt lỗ khó vì não",
+  "text": "Hot take: bạn không cắt lỗ được không phải vì thiếu kỷ luật. Mà vì não bạn được lập trình để sợ lỗ hơn gấp đôi thích lãi.\n\nGiải pháp không phải là cố gắng hơn, mà là viết quy tắc trước khi vào lệnh.",
+  "tag": "HOT TAKE",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "tamlyhoc",
+   "lossaversion"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "take": "Bạn không thiếu kỷ luật. Não bạn sợ lỗ gấp đôi thích lãi.",
+  "sub": "Viết quy tắc trước khi vào lệnh, đừng quyết định lúc đang đau."
+ },
+ {
+  "id": "fb49",
+  "kind": "hottake",
+  "title": "Hot take: tỷ lệ thắng là con số vô nghĩa",
+  "text": "Hot take: khoe tỷ lệ thắng 80% mà không nói thắng bao nhiêu, thua bao nhiêu là khoe vô nghĩa.\n\nGấp thếp có tỷ lệ thắng ván cực cao, và vẫn cháy tài khoản.",
+  "tag": "HOT TAKE",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "quanlyvon",
+   "quant"
+  ],
+  "allowed_literals": [
+   "80%",
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "take": "Khoe tỷ lệ thắng 80% mà giấu mức lỗ là khoe vô nghĩa.",
+  "sub": "Gấp thếp thắng gần như mọi ván, và vẫn cháy tài khoản."
+ },
+ {
+  "id": "fb50",
+  "kind": "hottake",
+  "title": "Hot take: dự báo giá chính xác không tồn tại",
+  "text": "Hot take: không ai, kể cả mô hình xịn nhất, dự báo chính xác giá ngày mai.\n\nThứ quant làm được là đo rủi ro và xác suất. Ai hứa chắc chắn, hãy chạy.",
+  "tag": "HOT TAKE",
+  "link": "quantik.io.vn",
+  "hashtags": [
+   "quant",
+   "dautu",
+   "AI"
+  ],
+  "allowed_literals": [
+   "34 cột",
+   "34",
+   "16 nhóm",
+   "16",
+   "5 mã",
+   "3D",
+   "VN-INDEX",
+   "VN30",
+   "HNX-INDEX"
+  ],
+  "take": "Không ai dự báo chính xác giá ngày mai. Kể cả AI.",
+  "sub": "Quant đo rủi ro và xác suất. Ai hứa chắc chắn, hãy cẩn thận."
+ }
+]

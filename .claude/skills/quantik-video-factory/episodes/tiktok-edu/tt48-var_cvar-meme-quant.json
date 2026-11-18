@@ -1,0 +1,37 @@
+{
+  "id": "tt48-var_cvar-meme-quant",
+  "topic": "var_cvar",
+  "style": "meme-quant",
+  "hook": "Kỳ vọng: lỗ tối đa {var95}. Thực tế:",
+  "kicker": "Học Quant #48",
+  "hook_kicker": "Học Quant #48 · hiểu lầm",
+  "wiki": {
+    "title": "VaR và CVaR",
+    "en": "Value at Risk · Expected Shortfall",
+    "lines": [
+      "J.P. Morgan công bố RiskMetrics năm 1994, phổ biến VaR.",
+      "Basel dùng VaR cho vốn ngân hàng nhiều năm.",
+      "Sau này chuyển sang Expected Shortfall, tức CVaR."
+    ],
+    "source": "J.P. Morgan RiskMetrics (1994); Basel Committee, FRTB",
+    "say": "VaR phổ biến từ năm 1994 nhờ RiskMetrics của J.P. Morgan. Các ngân hàng sau này chuyển dần sang CVaR."
+  },
+  "max_seconds": 90,
+  "allowed_literals": [
+    "95",
+    "99",
+    "95%",
+    "99%",
+    "5 phần trăm",
+    "1 phiên",
+    "1994",
+    "10 dòng",
+    "12 dòng",
+    "0 đến 1",
+    "90%",
+    "2.000",
+    "ba tuần",
+    "năm phiên"
+  ],
+  "use_wiki": false
+}

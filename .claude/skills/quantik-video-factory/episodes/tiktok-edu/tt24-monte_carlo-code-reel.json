@@ -1,0 +1,33 @@
+{
+  "id": "tt24-monte_carlo-code-reel",
+  "topic": "monte_carlo",
+  "style": "code-reel",
+  "hook": "Đặt tên theo sòng bạc, nhưng là cách nghiêm túc nhất để nhìn rủi ro: {n_paths} tương lai.",
+  "kicker": "Học Quant #24",
+  "hook_kicker": "Học Quant #24 · hiểu lầm",
+  "wiki": {
+    "title": "Phương pháp Monte Carlo",
+    "en": "Monte Carlo method",
+    "lines": [
+      "Stanislaw Ulam và John von Neumann phát triển ở Los Alamos, thập niên 1940.",
+      "Đặt tên theo sòng bạc Monte Carlo.",
+      "Ý tưởng: mô phỏng ngẫu nhiên thật nhiều lần."
+    ],
+    "source": "Wikipedia: Monte Carlo method; Metropolis & Ulam (1949)",
+    "say": "Monte Carlo ra đời ở Los Alamos thập niên 1940, đặt tên theo một sòng bạc, vì nó dựa trên ngẫu nhiên."
+  },
+  "max_seconds": 90,
+  "allowed_literals": [
+    "5",
+    "95",
+    "1940",
+    "1949",
+    "10 dòng",
+    "12 dòng",
+    "0 đến 1",
+    "90%",
+    "2.000",
+    "ba tuần",
+    "năm phiên"
+  ]
+}

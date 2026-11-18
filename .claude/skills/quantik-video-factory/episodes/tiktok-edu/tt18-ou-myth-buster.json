@@ -1,0 +1,34 @@
+{
+  "id": "tt18-ou-myth-buster",
+  "topic": "ou",
+  "style": "myth-buster",
+  "hook": "\"Lệch càng xa thì càng chắc quay về.\" Nghe hợp lý. Toán không đồng ý hoàn toàn.",
+  "kicker": "Học Quant #18",
+  "hook_kicker": "Học Quant #18 · hiểu lầm",
+  "wiki": {
+    "title": "Quá trình Ornstein–Uhlenbeck",
+    "en": "Ornstein–Uhlenbeck process",
+    "lines": [
+      "Uhlenbeck và Ornstein công bố năm 1930, mô tả hạt chuyển động trong chất lỏng.",
+      "Vasicek dùng nó cho lãi suất năm 1977.",
+      "Ý tưởng: lệch xa thì bị kéo về trung bình."
+    ],
+    "source": "Uhlenbeck & Ornstein (1930), Physical Review; Vasicek (1977)",
+    "say": "Quá trình Ornstein–Uhlenbeck ra đời năm 1930 trong vật lý, rồi được dùng cho lãi suất và chênh lệch giá."
+  },
+  "max_seconds": 90,
+  "allowed_literals": [
+    "ln 2",
+    "AR(1)",
+    "0",
+    "1930",
+    "1977",
+    "10 dòng",
+    "12 dòng",
+    "0 đến 1",
+    "90%",
+    "2.000",
+    "ba tuần",
+    "năm phiên"
+  ]
+}

@@ -52,6 +52,7 @@ Xác định từ lời người dùng (hỏi lại chỉ khi thật sự mơ h�
 | `talking-head-script` | bạn tự quay: kịch bản + teleprompter + B-roll | 45–90s |
 | `carousel` | feed Facebook/TikTok photo, đọc chậm, 7 slide | — |
 | `meme-quant` | giải trí, kéo người mới, 12–20s | 12–20s |
+| `dark-truth` | YouTube Shorts tâm lý / poker / lý thuyết trò chơi: hook gây tranh cãi nhưng đúng → thẻ wiki → hoạt họa → số → chart → 3D → mặt tối | 55–80s |
 
 - **Số lượng.** "Làm loạt", "cả tuần" → nhiều cặp topic × style, chạy một lệnh batch.
 
@@ -143,6 +144,33 @@ python pipeline/catalog.py --design <đường dẫn QuanTik---Design> --website
 ```
 
 Cần Node 22.6+ (đọc file TypeScript trực tiếp). Script ghi `knowledge/catalog.json` và `knowledge/CATALOG.md`, kèm commit nguồn để biết catalog lấy từ phiên bản nào.
+
+## Lô lớn (nhiều nền tảng một lần)
+
+**Chủ đề tâm lý, poker, lý thuyết trò chơi** (17, code chạy thật trong `pipeline/mind_models.py`): `martingale`,
+`gambler_ruin`, `monty_hall`, `prisoners`, `penalty`, `pot_odds`, `poker_variance`, `bluff`, `loss_aversion`,
+`survivorship`, `regression_mean`, `streaks`, `beauty`, `vol_drag`, `base_rate`, `winners_curse`, `overtrading`.
+Kiến thức ở `knowledge/models/<topic>.md` như mô hình viết tay, cộng thêm `wiki` (thẻ bách khoa có nguồn), `anim`
+(hoạt họa vẽ bằng code, `pipeline/anims.py`), `dark` (cú twist). Poker/roulette chỉ là phòng thí nghiệm xác suất,
+không cổ vũ cờ bạc; tránh cụm "all in".
+
+**Thẻ wiki + hoạt họa cho mọi style:** episode có `wiki` thì `batch.py` tự chèn thẻ sau hook; có `anim` + `anim_say`
+thì chèn hoạt họa (trừ `dark-truth` tự đặt, `meme-quant`, `talking-head-script`). Tắt bằng `use_wiki: false`.
+
+**Chạy lô song song, chạy lại được** (bỏ qua video đã ĐẠT):
+
+```bash
+python run_lot.py --dir ../episodes/tiktok-edu --jobs 3 --env QT_RATE=+8%
+python run_lot.py --dir ../episodes/yt-shorts --jobs 3 --voice male --env QT_PITCH=-10Hz --env QT_RATE=+6%
+python collect.py --dir ../episodes/yt-shorts --platform "YouTube Shorts" --title "50 YouTube Shorts"
+```
+
+**Bài Facebook (ảnh 4:5 + nội dung):** `python fbpost.py --spec ../episodes/fb-posts/posts.json` → `social-output/fb-posts/`
+(`ALL.md` để copy). Loại: meme, er, poll, quiz, stat, hottake, screener/quant (giao diện minh hoạ, mã giả lập), feature.
+Số đi qua `{key}` của `topic` hoặc `allowed_literals` (sự kiện sản phẩm trong `identity.md`); không nhắc giá gói.
+
+**Ragebait có trách nhiệm:** hook được phép gây tranh cãi bằng một sự thật trái trực giác ("Gấp thếp thắng gần như
+mọi ván. Đó chính là cái bẫy."), không được bịa, không hứa lãi, không công kích cá nhân/nhóm, không gọi mua bán.
 
 ## Mở rộng
 

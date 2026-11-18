@@ -15,6 +15,8 @@ Chọn nhánh theo yêu cầu:
 | Người dùng muốn | Đọc | Lệnh chính |
 | --- | --- | --- |
 | Video/carousel giải thích một mô hình, chỉ số, thuật ngữ quant | `SKILL.md` → `knowledge/`, `styles/` | `cd pipeline && python batch.py --topics <id> --styles <style>` |
+| YouTube Shorts tâm lý / poker / lý thuyết trò chơi | `SKILL.md` → mục Lô lớn, `styles/dark-truth/` | `cd pipeline && python run_lot.py --dir ../episodes/yt-shorts --voice male` |
+| Bài Facebook ảnh + nội dung | `SKILL.md` → mục Lô lớn | `cd pipeline && python fbpost.py --spec ../episodes/fb-posts/posts.json` |
 | Video **hướng dẫn dùng sản phẩm** (đăng ký, quét toàn sàn, phân tích Quant…) | `tutorial/README.md` | `bash tutorial/run.sh <workdir>` |
 
 (đường dẫn tính từ `.claude/skills/quantik-video-factory/`)

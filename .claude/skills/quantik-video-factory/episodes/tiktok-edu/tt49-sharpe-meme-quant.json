@@ -1,0 +1,40 @@
+{
+  "id": "tt49-sharpe-meme-quant",
+  "topic": "sharpe",
+  "style": "meme-quant",
+  "hook": "Bạn: chiến lược mình lãi {cagr_b}! Sharpe:",
+  "kicker": "Học Quant #49",
+  "hook_kicker": "Học Quant #49 · hiểu lầm",
+  "wiki": {
+    "title": "Tỷ số Sharpe",
+    "en": "Sharpe ratio",
+    "lines": [
+      "William F. Sharpe đề xuất năm 1966.",
+      "Sharpe nhận Nobel Kinh tế năm 1990.",
+      "Đo lợi nhuận vượt trội trên mỗi đơn vị biến động."
+    ],
+    "source": "Sharpe (1966), Journal of Business",
+    "say": "Tỷ số Sharpe do William Sharpe đề xuất năm 1966. Ông nhận giải Nobel năm 1990."
+  },
+  "max_seconds": 90,
+  "allowed_literals": [
+    "252",
+    "2 chiến lược",
+    "1966",
+    "1990",
+    "10 dòng",
+    "12 dòng",
+    "0 đến 1",
+    "90%",
+    "2.000",
+    "ba tuần",
+    "năm phiên"
+  ],
+  "use_wiki": false,
+  "meme": {
+    "format": "nobody-quant",
+    "setup": "Bạn: chiến lược mình lãi {cagr_b}! Sharpe:",
+    "punch": "Dân quant: “Sharpe bao nhiêu? Sụt tối đa bao nhiêu?”",
+    "truth": "Sharpe {sharpe_b}, từng sụt {dd_b}. Lợi nhuận chỉ là một nửa câu chuyện."
+  }
+}
