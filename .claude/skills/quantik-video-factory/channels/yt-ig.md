@@ -43,3 +43,11 @@ Môi trường cloud dùng chung IP nên Commons hay trả HTTP 429: tải chậ
 - `brand/compliance.md` (cụm cấm Việt + Anh), không gọi mua/bán, không hứa lợi nhuận.
 - Số trong nghiên cứu tâm lý học cần người duyệt đối chiếu bản gốc trước khi đăng (37, 43, 45, 48, 50, 51, 53).
 - Nhạc/ảnh/B-roll phải có giấy phép; ảnh CC BY/BY-SA bắt buộc ghi công (pipeline tự ghi trên khung và trong caption).
+
+## Tiến độ (18/11/2026)
+
+- **Đã dựng và giao (50):** 01–42, 56, 57, 58, 71, 72, 77, 78, 80. Tất cả đạt QA.
+- **Còn lại (30):** 43–55, 59–70, 73–76, 79. Kịch bản đã viết và đã qua QA trước render (`--check-only`).
+- Ảnh thật dự phòng khi Commons trả 429: `python openverse_images.py "<id>|<truy vấn>[|person]" …` (kiểm tra bằng mắt
+  mọi ảnh người; xoá ảnh nhận nhầm người khỏi sổ ảnh).
+- Đóng gói giao hàng: `python package_yt.py 43-55 59-70 73-76 79 --name yt-ig-lot-30` → `social-output/_zip/`.
