@@ -1,6 +1,6 @@
 """Gather one lot into a copy-paste sheet: path, duration, QA, voice and the platform caption of every video.
 
-  python collect.py --dir ../episodes/tiktok-edu --platform TikTok --title "50 video TikTok giáo dục"
+  python collect.py --dir ../episodes/yt-shorts --platform "YouTube Shorts" --title "50 YouTube Shorts"
   python collect.py --dir ../episodes/yt-shorts --platform "YouTube Shorts" --title "50 YouTube Shorts"
 Writes social-output/<dir name>-ALL.md.
 """

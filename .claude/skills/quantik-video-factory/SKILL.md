@@ -160,7 +160,6 @@ thì chèn hoạt họa (trừ `dark-truth` tự đặt, `meme-quant`, `talking-
 **Chạy lô song song, chạy lại được** (bỏ qua video đã ĐẠT):
 
 ```bash
-python run_lot.py --dir ../episodes/tiktok-edu --jobs 3 --env QT_RATE=+8%
 python run_lot.py --dir ../episodes/yt-shorts --jobs 3 --voice male --env QT_PITCH=-10Hz --env QT_RATE=+6%
 python collect.py --dir ../episodes/yt-shorts --platform "YouTube Shorts" --title "50 YouTube Shorts"
 ```

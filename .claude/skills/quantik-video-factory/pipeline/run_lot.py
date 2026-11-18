@@ -1,6 +1,6 @@
 """Render many episode JSONs in parallel worker processes (one batch.py per episode), resumable.
 
-  python run_lot.py --dir ../episodes/tiktok-edu --jobs 3 --env QT_RATE=+8%
+  python run_lot.py --dir ../episodes/yt-shorts --jobs 3 --voice male --env QT_PITCH=-10Hz
   python run_lot.py --dir ../episodes/yt-shorts --voice male --env QT_PITCH=-10Hz --env QT_RATE=+6%
 Skips episodes whose social-output/<id>/qa_report.md already says ĐẠT. Writes <dir>/_lot.json.
 """
