@@ -75,7 +75,8 @@
           "dautu"
         ],
         "allowed_literals": [
-          "1/6"
+          "1/6",
+          "100"
         ],
         "hook_broll": {
           "query": "dice game",
@@ -143,7 +144,7 @@
         "chart_title": "Các giá trị có thể của X",
         "formula": "X: \\Omega \\rightarrow \\mathbb{R}",
         "takeaway": "Đừng hỏi 'mai giá bao nhiêu'. Hãy hỏi 'mai có những khả năng nào, mỗi khả năng nặng bao nhiêu'.",
-        "caption": "Giá ngày mai không phải một con số mà là một phân phối. Biến ngẫu nhiên giải thích trong 40 giây.",
+        "caption": "Giá ngày mai không phải một con số mà là một phân phối. Biến ngẫu nhiên giải thích.",
         "hashtags": [
           "QuanTik",
           "HocQuant",

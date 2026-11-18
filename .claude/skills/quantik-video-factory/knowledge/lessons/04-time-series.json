@@ -538,7 +538,9 @@
           "chungkhoan"
         ],
         "allowed_literals": [
+          "100",
           "2000",
+          "25",
           "250"
         ],
         "hook_broll": {

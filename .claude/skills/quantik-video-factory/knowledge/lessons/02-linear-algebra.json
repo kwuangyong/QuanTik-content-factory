@@ -2,11 +2,50 @@
   "series": "Đại số tuyến tính",
   "lessons": [
     {
-      "id": "hq16-vector-matrix", "no": 16, "name": "Vector và ma trận là gì", "short": "VECTOR & MA TRẬN",
+      "id": "hq16-vector-matrix",
+      "no": 16,
+      "name": "Vector và ma trận là gì",
+      "short": "VECTOR & MA TRẬN",
       "code": "import numpy as np\nrng = np.random.default_rng(16)\nw = np.array([0.5, 0.3, 0.2])   # vector tỷ trọng\n# ma trận lợi suất: 250 phiên x 3 mã\nR = rng.normal(0.0008, 0.02, (250, 3))\nport = R @ w                     # cả danh mục, 1 dòng\nn_days, n_assets = R.shape\navg = port.mean()\nvol = port.std()\nvol_one = R[:, 0].std()",
       "plot": "eq = np.cumprod(1 + R, axis=0); pe = np.cumprod(1 + port)",
-      "values": {"n_days": "int", "n_assets": "int", "avg": "pct2", "vol": "pct2", "vol_one": "pct2"},
-      "chart": {"type": "line", "ys": [["eq[:, 0]", "mã 1", "muted", 1.6], ["eq[:, 1]", "mã 2", "muted", 1.6], ["eq[:, 2]", "mã 3", "muted", 1.6], ["pe", "danh mục R·w", "accent", 3.4]], "xlabel": "phiên", "ylabel": "giá trị 1 đồng"},
+      "values": {
+        "n_days": "int",
+        "n_assets": "int",
+        "avg": "pct2",
+        "vol": "pct2",
+        "vol_one": "pct2"
+      },
+      "chart": {
+        "type": "line",
+        "ys": [
+          [
+            "eq[:, 0]",
+            "mã 1",
+            "muted",
+            1.6
+          ],
+          [
+            "eq[:, 1]",
+            "mã 2",
+            "muted",
+            1.6
+          ],
+          [
+            "eq[:, 2]",
+            "mã 3",
+            "muted",
+            1.6
+          ],
+          [
+            "pe",
+            "danh mục R·w",
+            "accent",
+            3.4
+          ]
+        ],
+        "xlabel": "phiên",
+        "ylabel": "giá trị 1 đồng"
+      },
       "episode": {
         "kicker": "Vector & Matrix",
         "hook": "Bạn ghét môn đại số vì nghĩ nó vô dụng? Mọi quỹ đầu tư trên đời đang chạy bằng đúng thứ bạn đã bỏ qua.",
@@ -17,23 +56,92 @@
           "Ba đường xám là từng mã. Đường cam là danh mục, tính bằng một phép nhân ma trận với vector.",
           "Vector là một dãy số có thứ tự. Ma trận là bảng số. Quant dùng chúng để tính cả nghìn mã cùng lúc thay vì từng mã một."
         ],
-        "outputs": [{"label": "R: phiên × mã", "key": "n_days"}, {"label": "số mã", "key": "n_assets"}, {"label": "TB danh mục", "key": "avg"}, {"label": "σ danh mục", "key": "vol", "highlight": true}, {"label": "σ một mã", "key": "vol_one"}],
+        "outputs": [
+          {
+            "label": "R: phiên × mã",
+            "key": "n_days"
+          },
+          {
+            "label": "số mã",
+            "key": "n_assets"
+          },
+          {
+            "label": "TB danh mục",
+            "key": "avg"
+          },
+          {
+            "label": "σ danh mục",
+            "key": "vol",
+            "highlight": true
+          },
+          {
+            "label": "σ một mã",
+            "key": "vol_one"
+          }
+        ],
         "chart_title": "Danh mục = ma trận × vector",
         "formula": "\\mathbf{r}_p = R\\,\\mathbf{w}",
         "takeaway": "Nhìn danh mục như một vector, thị trường như một ma trận, và mọi phép tính quant bỗng gọn trong một dòng.",
         "caption": "Đại số tuyến tính không vô dụng: cả danh mục đầu tư gói gọn trong một phép nhân ma trận.",
-        "hashtags": ["QuanTik", "HocQuant", "daisotuyentinh", "matran", "danhmuc", "chungkhoan"],
-        "allowed_literals": ["0.5", "0.3", "0.2", "250", "0.0008", "0.02"],
-        "hook_broll": {"draw": "matrix"},
-        "broll": [{"query": "Arthur Cayley", "label": "Arthur Cayley", "draw": "matrix", "say": "Arthur Cayley là người đầu tiên định nghĩa ma trận như một đối tượng toán học có thể cộng và nhân."}]
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "daisotuyentinh",
+          "matran",
+          "danhmuc",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "0.5",
+          "0.3",
+          "0.2",
+          "250",
+          "0.0008",
+          "0.02"
+        ],
+        "hook_broll": {
+          "draw": "matrix"
+        },
+        "broll": [
+          {
+            "query": "Arthur Cayley",
+            "label": "Arthur Cayley",
+            "draw": "matrix",
+            "say": "Arthur Cayley là người đầu tiên định nghĩa ma trận như một đối tượng toán học có thể cộng và nhân."
+          }
+        ]
       }
     },
     {
-      "id": "hq17-matrix-multiplication", "no": 17, "name": "Matrix Multiplication – Phép nhân ma trận", "short": "NHÂN MA TRẬN",
+      "id": "hq17-matrix-multiplication",
+      "no": 17,
+      "name": "Matrix Multiplication – Phép nhân ma trận",
+      "short": "NHÂN MA TRẬN",
       "code": "import numpy as np\nrng = np.random.default_rng(17)\nW = np.array([[0.6, 0.4, 0.0],     # quỹ thận trọng\n              [0.2, 0.3, 0.5]])    # quỹ mạo hiểm\nR = rng.normal(0.0006, 0.018, (3, 250))\nP = W @ R          # (2x3) @ (3x250) -> (2x250)\nrows, cols = P.shape\nn_mult = 2 * 3 * 250\nA = np.array([[1, 2], [0, 1]])\nB = np.array([[1, 0], [3, 1]])\ndiff = np.abs(A @ B - B @ A).max()",
       "plot": "e1 = np.cumprod(1 + P[0]); e2 = np.cumprod(1 + P[1])",
-      "values": {"rows": "int", "cols": "int", "n_mult": "int", "diff": "int"},
-      "chart": {"type": "line", "ys": [["e1", "quỹ thận trọng", "pos"], ["e2", "quỹ mạo hiểm", "accent"]], "xlabel": "phiên", "ylabel": "giá trị 1 đồng"},
+      "values": {
+        "rows": "int",
+        "cols": "int",
+        "n_mult": "int",
+        "diff": "int"
+      },
+      "chart": {
+        "type": "line",
+        "ys": [
+          [
+            "e1",
+            "quỹ thận trọng",
+            "pos"
+          ],
+          [
+            "e2",
+            "quỹ mạo hiểm",
+            "accent"
+          ]
+        ],
+        "xlabel": "phiên",
+        "ylabel": "giá trị 1 đồng"
+      },
       "episode": {
         "kicker": "Matrix multiplication",
         "hook": "A nhân B khác B nhân A. Nếu điều này làm bạn khó chịu, bạn chưa thật sự hiểu phép nhân ma trận.",
@@ -44,22 +152,89 @@
           "Hai đường này ra đời từ đúng một phép nhân ma trận, không cần vòng lặp nào.",
           "Nhân ma trận là lấy từng dòng của ma trận trái nhân vô hướng với từng cột của ma trận phải. Số cột bên trái phải bằng số dòng bên phải."
         ],
-        "outputs": [{"label": "số dòng", "key": "rows"}, {"label": "số cột", "key": "cols"}, {"label": "số phép nhân", "key": "n_mult", "highlight": true}, {"label": "|AB − BA|", "key": "diff"}],
+        "outputs": [
+          {
+            "label": "số dòng",
+            "key": "rows"
+          },
+          {
+            "label": "số cột",
+            "key": "cols"
+          },
+          {
+            "label": "số phép nhân",
+            "key": "n_mult",
+            "highlight": true
+          },
+          {
+            "label": "|AB − BA|",
+            "key": "diff"
+          }
+        ],
         "chart_title": "Hai quỹ từ một phép nhân W·R",
         "formula": "(AB)_{ij} = \\sum_k A_{ik} B_{kj}",
         "takeaway": "Nhân ma trận không giao hoán. Đổi thứ tự là đổi ý nghĩa, như đổi thứ tự áp dụng hai chiến lược.",
         "caption": "AB khác BA, và đó là điều quan trọng nhất của phép nhân ma trận. Kèm ví dụ tính 2 quỹ đầu tư trong 1 dòng.",
-        "hashtags": ["QuanTik", "HocQuant", "nhanmatran", "daisotuyentinh", "python", "chungkhoan"],
-        "allowed_literals": ["0.6", "0.4", "0.0", "0.2", "0.3", "0.5", "0.0006", "0.018", "250", "2x3", "3x250", "2x250"],
-        "hook_broll": {"draw": "matrix"},
-        "broll": [{"draw": "arrows", "label": "Dòng × cột", "say": "Hình dung mỗi dòng là một công thức pha chế, mỗi cột là một rổ nguyên liệu. Nhân hai thứ là ra món."}]
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "nhanmatran",
+          "daisotuyentinh",
+          "python",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "0.6",
+          "0.4",
+          "0.0",
+          "0.2",
+          "0.3",
+          "0.5",
+          "0.0006",
+          "0.018",
+          "250",
+          "2x3",
+          "3x250",
+          "2x250"
+        ],
+        "hook_broll": {
+          "draw": "matrix"
+        },
+        "broll": [
+          {
+            "draw": "arrows",
+            "label": "Dòng × cột",
+            "say": "Hình dung mỗi dòng là một công thức pha chế, mỗi cột là một rổ nguyên liệu. Nhân hai thứ là ra món."
+          }
+        ]
       }
     },
     {
-      "id": "hq18-dot-product", "no": 18, "name": "Dot Product – Tích vô hướng", "short": "TÍCH VÔ HƯỚNG",
+      "id": "hq18-dot-product",
+      "no": 18,
+      "name": "Dot Product – Tích vô hướng",
+      "short": "TÍCH VÔ HƯỚNG",
       "code": "import numpy as np\nw = np.array([0.4, 0.35, 0.25])     # tỷ trọng\nr = np.array([0.021, -0.013, 0.008]) # lợi suất hôm nay\ncontrib = w * r\nport = w @ r                         # tích vô hướng\nrng = np.random.default_rng(18)\na = rng.normal(0, 1, 500)\nb = 0.6 * a + rng.normal(0, 0.8, 500)\na, b = a - a.mean(), b - b.mean()\ncos = a @ b / (np.linalg.norm(a) * np.linalg.norm(b))\nrho = np.corrcoef(a, b)[0, 1]",
-      "values": {"port": "pct2", "cos": "num3", "rho": "num3", "c0": ["contrib[0]", "pct2"], "c1": ["contrib[1]", "pct2"]},
-      "chart": {"type": "bar", "heights": "contrib", "labels": "['mã A', 'mã B', 'mã C']", "signed": true, "ylabel": "đóng góp vào danh mục"},
+      "values": {
+        "port": "pct2",
+        "cos": "num3",
+        "rho": "num3",
+        "c0": [
+          "contrib[0]",
+          "pct2"
+        ],
+        "c1": [
+          "contrib[1]",
+          "pct2"
+        ]
+      },
+      "chart": {
+        "type": "bar",
+        "heights": "contrib",
+        "labels": "['mã A', 'mã B', 'mã C']",
+        "signed": true,
+        "ylabel": "đóng góp vào danh mục"
+      },
       "episode": {
         "kicker": "Dot product",
         "hook": "Có một phép tính bạn học từ cấp ba mà dân quant dùng mỗi giây. Và chắc chắn bạn đã quên nó.",
@@ -70,22 +245,81 @@
           "Mỗi cột là tỷ trọng nhân lợi suất của một mã. Cộng các cột lại chính là tích vô hướng.",
           "Tích vô hướng là nhân từng cặp phần tử rồi cộng lại. Chuẩn hoá nó lên, bạn được góc giữa hai vector, tức là tương quan."
         ],
-        "outputs": [{"label": "w · r", "key": "port", "highlight": true}, {"label": "đóng góp A", "key": "c0"}, {"label": "đóng góp B", "key": "c1"}, {"label": "cos(a, b)", "key": "cos"}, {"label": "ρ(a, b)", "key": "rho"}],
+        "outputs": [
+          {
+            "label": "w · r",
+            "key": "port",
+            "highlight": true
+          },
+          {
+            "label": "đóng góp A",
+            "key": "c0"
+          },
+          {
+            "label": "đóng góp B",
+            "key": "c1"
+          },
+          {
+            "label": "cos(a, b)",
+            "key": "cos"
+          },
+          {
+            "label": "ρ(a, b)",
+            "key": "rho"
+          }
+        ],
         "chart_title": "Đóng góp của từng mã",
         "formula": "\\mathbf{w}\\cdot\\mathbf{r} = \\sum_i w_i r_i",
         "takeaway": "Lợi suất danh mục, tương quan, độ tương đồng: đều là một tích vô hướng đội lốt.",
         "caption": "Tích vô hướng cấp ba hoá ra là trái tim của lợi suất danh mục và hệ số tương quan.",
-        "hashtags": ["QuanTik", "HocQuant", "tichvohuong", "vector", "daisotuyentinh", "chungkhoan"],
-        "allowed_literals": ["0.4", "0.35", "0.25", "0.021", "-0.013", "0.008", "0.6", "0.8", "500"],
-        "hook_broll": {"draw": "arrows"},
-        "broll": [{"draw": "arrows", "label": "Góc giữa hai vector", "say": "Hai vector cùng hướng thì tích vô hướng lớn, vuông góc thì bằng không, ngược hướng thì âm."}]
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "tichvohuong",
+          "vector",
+          "daisotuyentinh",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "0.4",
+          "0.35",
+          "0.25",
+          "0.021",
+          "-0.013",
+          "0.008",
+          "0.6",
+          "0.8",
+          "500"
+        ],
+        "hook_broll": {
+          "draw": "arrows"
+        },
+        "broll": [
+          {
+            "draw": "arrows",
+            "label": "Góc giữa hai vector",
+            "say": "Hai vector cùng hướng thì tích vô hướng lớn, vuông góc thì bằng không, ngược hướng thì âm."
+          }
+        ]
       }
     },
     {
-      "id": "hq19-eigen", "no": 19, "name": "Eigenvalues & Eigenvectors – Trị riêng và vector riêng", "short": "TRỊ RIÊNG",
+      "id": "hq19-eigen",
+      "no": 19,
+      "name": "Eigenvalues & Eigenvectors – Trị riêng và vector riêng",
+      "short": "TRỊ RIÊNG",
       "code": "import numpy as np\nrng = np.random.default_rng(19)\nmkt = rng.normal(0, 0.015, (500, 1))   # nhân tố chung\nR = mkt + rng.normal(0, 0.01, (500, 5))\nC = np.cov(R.T)\nvals, vecs = np.linalg.eigh(C)\nvals, vecs = vals[::-1], vecs[:, ::-1]\nshare1 = vals[0] / vals.sum()\nratio = vals[0] / vals[1]\nv1 = vecs[:, 0] * np.sign(vecs[:, 0].sum())\nv1_min = v1.min()",
-      "values": {"share1": "pct0", "ratio": "x1", "v1_min": "num2"},
-      "chart": {"type": "bar", "heights": "vals / vals.sum()", "labels": "['λ1', 'λ2', 'λ3', 'λ4', 'λ5']", "ylabel": "tỷ lệ phương sai"},
+      "values": {
+        "share1": "pct0",
+        "ratio": "x1",
+        "v1_min": "num2"
+      },
+      "chart": {
+        "type": "bar",
+        "heights": "vals / vals.sum()",
+        "labels": "['λ1', 'λ2', 'λ3', 'λ4', 'λ5']",
+        "ylabel": "tỷ lệ phương sai"
+      },
       "episode": {
         "kicker": "Eigenvalues & eigenvectors",
         "hook": "Bạn tưởng mình cầm năm mã khác nhau? Trị riêng sẽ cho bạn thấy thật ra bạn chỉ đang đặt cược một ván duy nhất.",
@@ -96,22 +330,83 @@
           "Một cột cao vượt trội, bốn cột còn lại lùn tịt. Rủi ro của cả rổ dồn vào một hướng duy nhất: thị trường.",
           "Vector riêng là hướng mà ma trận chỉ kéo giãn chứ không xoay. Trị riêng cho biết kéo giãn bao nhiêu, tức là rủi ro theo hướng đó lớn cỡ nào."
         ],
-        "outputs": [{"label": "λ1 / tổng", "key": "share1", "highlight": true}, {"label": "λ1 / λ2", "key": "ratio"}, {"label": "min v1", "key": "v1_min"}],
+        "outputs": [
+          {
+            "label": "λ1 / tổng",
+            "key": "share1",
+            "highlight": true
+          },
+          {
+            "label": "λ1 / λ2",
+            "key": "ratio"
+          },
+          {
+            "label": "min v1",
+            "key": "v1_min"
+          }
+        ],
         "chart_title": "Phương sai theo từng trị riêng",
         "formula": "\\Sigma\\,\\mathbf{v} = \\lambda\\,\\mathbf{v}",
         "takeaway": "Số mã không nói lên mức đa dạng hoá. Phổ trị riêng mới nói.",
         "caption": "Cầm 5 mã mà thật ra chỉ cược một ván: trị riêng của ma trận hiệp phương sai cho thấy điều đó.",
-        "hashtags": ["QuanTik", "HocQuant", "triieng", "eigenvalue", "daisotuyentinh", "chungkhoan"],
-        "allowed_literals": ["0.015", "0.01", "500"],
-        "hook_broll": {"draw": "matrix"},
-        "broll": [{"query": "David Hilbert", "label": "David Hilbert", "draw": "arrows", "say": "Chữ eigen trong tiếng Đức nghĩa là 'riêng', được David Hilbert đưa vào toán học."}]
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "triieng",
+          "eigenvalue",
+          "daisotuyentinh",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "0.015",
+          "0.01",
+          "500"
+        ],
+        "hook_broll": {
+          "draw": "matrix"
+        },
+        "broll": [
+          {
+            "query": "David Hilbert",
+            "label": "David Hilbert",
+            "draw": "arrows",
+            "say": "Chữ eigen trong tiếng Đức nghĩa là 'riêng', được David Hilbert đưa vào toán học."
+          }
+        ]
       }
     },
     {
-      "id": "hq20-matrix-inverse", "no": 20, "name": "Matrix Inverse – Ma trận nghịch đảo", "short": "NGHỊCH ĐẢO",
+      "id": "hq20-matrix-inverse",
+      "no": 20,
+      "name": "Matrix Inverse – Ma trận nghịch đảo",
+      "short": "NGHỊCH ĐẢO",
       "code": "import numpy as np\nC = np.array([[0.040, 0.006, 0.010],\n              [0.006, 0.090, 0.012],\n              [0.010, 0.012, 0.0225]])\nCi = np.linalg.inv(C)\nerr = np.abs(C @ Ci - np.eye(3)).max()\none = np.ones(3)\nw = Ci @ one / (one @ Ci @ one)    # min variance\nvol_mv = np.sqrt(w @ C @ w)\nw_eq = one / 3\nvol_eq = np.sqrt(w_eq @ C @ w_eq)",
-      "values": {"w0": ["w[0]", "pct0"], "w1": ["w[1]", "pct0"], "w2": ["w[2]", "pct0"], "vol_mv": "pct1", "vol_eq": "pct1", "err": ["float(err < 1e-12)", "int"]},
-      "chart": {"type": "bar", "heights": "w", "labels": "['mã A', 'mã B', 'mã C']", "ylabel": "tỷ trọng rủi ro thấp nhất"},
+      "values": {
+        "w0": [
+          "w[0]",
+          "pct0"
+        ],
+        "w1": [
+          "w[1]",
+          "pct0"
+        ],
+        "w2": [
+          "w[2]",
+          "pct0"
+        ],
+        "vol_mv": "pct1",
+        "vol_eq": "pct1",
+        "err": [
+          "float(err < 1e-12)",
+          "int"
+        ]
+      },
+      "chart": {
+        "type": "bar",
+        "heights": "w",
+        "labels": "['mã A', 'mã B', 'mã C']",
+        "ylabel": "tỷ trọng rủi ro thấp nhất"
+      },
       "episode": {
         "kicker": "Matrix inverse",
         "hook": "Chia tiền đều cho ba mã nghe công bằng? Toán nói đó là cách chia khiến bạn gánh rủi ro nhiều hơn cần thiết.",
@@ -122,24 +417,86 @@
           "Mã B biến động mạnh nhất nên nhận ít vốn nhất. Mã C êm nhất nhận nhiều nhất.",
           "Ma trận nghịch đảo là thứ nhân vào ra ma trận đơn vị, như phép chia cho ma trận. Trong tối ưu danh mục, nó gần như xuất hiện ở mọi công thức."
         ],
-        "outputs": [{"label": "w A", "key": "w0"}, {"label": "w B", "key": "w1"}, {"label": "w C", "key": "w2"}, {"label": "σ min-var", "key": "vol_mv", "highlight": true}, {"label": "σ chia đều", "key": "vol_eq"}],
+        "outputs": [
+          {
+            "label": "w A",
+            "key": "w0"
+          },
+          {
+            "label": "w B",
+            "key": "w1"
+          },
+          {
+            "label": "w C",
+            "key": "w2"
+          },
+          {
+            "label": "σ min-var",
+            "key": "vol_mv",
+            "highlight": true
+          },
+          {
+            "label": "σ chia đều",
+            "key": "vol_eq"
+          }
+        ],
         "chart_title": "Tỷ trọng danh mục rủi ro thấp nhất",
         "formula": "\\mathbf{w}^* = \\frac{\\Sigma^{-1}\\mathbf{1}}{\\mathbf{1}^\\top\\Sigma^{-1}\\mathbf{1}}",
         "takeaway": "Chia đều không phải trung lập. Mỗi cách chia vốn là một lựa chọn rủi ro, và nghịch đảo ma trận giúp bạn chọn có ý thức.",
         "caption": "Chia đều tiền cho 3 mã chưa chắc an toàn nhất. Ma trận nghịch đảo tìm cách chia rủi ro thấp nhất.",
-        "hashtags": ["QuanTik", "HocQuant", "nghichdao", "toiuudanhmuc", "daisotuyentinh", "chungkhoan"],
-        "allowed_literals": ["0.040", "0.006", "0.010", "0.090", "0.012", "0.0225"],
-        "hook_broll": {"draw": "scale"},
-        "broll": [{"draw": "matrix", "label": "A × A⁻¹ = I", "say": "Nhân một ma trận với nghịch đảo của nó, bạn quay về ma trận đơn vị, giống như năm chia năm bằng một."}]
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "nghichdao",
+          "toiuudanhmuc",
+          "daisotuyentinh",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "0.040",
+          "0.006",
+          "0.010",
+          "0.090",
+          "0.012",
+          "0.0225"
+        ],
+        "hook_broll": {
+          "draw": "scale"
+        },
+        "broll": [
+          {
+            "draw": "matrix",
+            "label": "A × A⁻¹ = I",
+            "say": "Nhân một ma trận với nghịch đảo của nó, bạn quay về ma trận đơn vị, giống như năm chia năm bằng một."
+          }
+        ]
       }
     },
     {
-      "id": "hq21-covariance-matrix", "no": 21, "name": "Covariance Matrix – Ma trận hiệp phương sai", "short": "MA TRẬN HIỆP PS",
+      "id": "hq21-covariance-matrix",
+      "no": 21,
+      "name": "Covariance Matrix – Ma trận hiệp phương sai",
+      "short": "MA TRẬN HIỆP PS",
       "code": "import numpy as np\nrng = np.random.default_rng(21)\nf = rng.normal(0, 0.012, (500, 1))\nload = np.array([1.0, 0.8, 0.3, -0.2])\nR = f * load + rng.normal(0, 0.01, (500, 4))\nS = np.cov(R.T)                  # ma trận 4x4\nw = np.full(4, 0.25)\nvol_p = np.sqrt(w @ S @ w)\nvol_avg = w @ np.sqrt(np.diag(S))\ncut = 1 - vol_p / vol_avg",
       "plot": "Cr = np.corrcoef(R.T)",
-      "values": {"vol_p": "pct2", "vol_avg": "pct2", "cut": "pct0"},
-      "chart": {"type": "heatmap", "M": "Cr", "labels": "['A', 'B', 'C', 'D']", "vmax": 1},
-      "surface": {"type": "gauss2d", "cov": "S[:2, :2] * 1e4", "xl": "mã A", "yl": "mã B", "zl": "mật độ"},
+      "values": {
+        "vol_p": "pct2",
+        "vol_avg": "pct2",
+        "cut": "pct0"
+      },
+      "chart": {
+        "type": "heatmap",
+        "M": "Cr",
+        "labels": "['A', 'B', 'C', 'D']",
+        "vmax": 1
+      },
+      "surface": {
+        "type": "gauss2d",
+        "cov": "S[:2, :2] * 1e4",
+        "xl": "mã A",
+        "yl": "mã B",
+        "zl": "mật độ"
+      },
       "episode": {
         "kicker": "Covariance matrix",
         "hook": "Rủi ro danh mục bằng trung bình rủi ro từng mã? Nếu bạn đang tính như vậy, bạn đang tính sai hoàn toàn.",
@@ -150,23 +507,90 @@
           "Mỗi ô là tương quan của một cặp mã. Đường chéo luôn bằng một. Ô đỏ là cặp đi ngược nhau, đó là nơi đa dạng hoá phát huy.",
           "Ma trận hiệp phương sai chứa phương sai của từng mã trên đường chéo và hiệp phương sai mọi cặp ở ngoài. Rủi ro danh mục bằng w chuyển vị nhân Sigma nhân w."
         ],
-        "outputs": [{"label": "TB σ từng mã", "key": "vol_avg"}, {"label": "σ danh mục", "key": "vol_p"}, {"label": "giảm rủi ro", "key": "cut", "highlight": true}],
+        "outputs": [
+          {
+            "label": "TB σ từng mã",
+            "key": "vol_avg"
+          },
+          {
+            "label": "σ danh mục",
+            "key": "vol_p"
+          },
+          {
+            "label": "giảm rủi ro",
+            "key": "cut",
+            "highlight": true
+          }
+        ],
         "chart_title": "Tương quan giữa bốn mã",
         "formula": "\\sigma_p^2 = \\mathbf{w}^\\top \\Sigma\\, \\mathbf{w}",
         "takeaway": "Rủi ro danh mục nằm ở ngoài đường chéo. Bỏ qua các cặp, bạn bỏ qua phần quan trọng nhất.",
         "caption": "Rủi ro danh mục không phải trung bình rủi ro từng mã. Ma trận hiệp phương sai giải thích vì sao.",
-        "hashtags": ["QuanTik", "HocQuant", "matranhiepphuongsai", "danhmuc", "ruiro", "chungkhoan"],
-        "allowed_literals": ["0.012", "1.0", "0.8", "0.3", "-0.2", "0.01", "500", "0.25", "4x4"],
-        "hook_broll": {"draw": "matrix"},
-        "broll": [{"query": "Harry Markowitz", "label": "Harry Markowitz", "draw": "network", "say": "Ma trận này là trái tim của lý thuyết danh mục hiện đại do Harry Markowitz xây dựng."}]
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "matranhiepphuongsai",
+          "danhmuc",
+          "ruiro",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "0.012",
+          "1.0",
+          "0.8",
+          "0.3",
+          "-0.2",
+          "0.01",
+          "500",
+          "0.25",
+          "4x4"
+        ],
+        "hook_broll": {
+          "draw": "matrix"
+        },
+        "broll": [
+          {
+            "query": "Harry Markowitz",
+            "label": "Harry Markowitz",
+            "draw": "network",
+            "say": "Ma trận này là trái tim của lý thuyết danh mục hiện đại do Harry Markowitz xây dựng."
+          }
+        ]
       }
     },
     {
-      "id": "hq22-positive-definite", "no": 22, "name": "Positive Definite Matrix – Ma trận xác định dương", "short": "XÁC ĐỊNH DƯƠNG",
+      "id": "hq22-positive-definite",
+      "no": 22,
+      "name": "Positive Definite Matrix – Ma trận xác định dương",
+      "short": "XÁC ĐỊNH DƯƠNG",
       "code": "import numpy as np\n# ma trận tương quan 'tự chế' bằng tay\nbad = np.array([[1.0, 0.9, 0.9],\n                [0.9, 1.0, -0.9],\n                [0.9, -0.9, 1.0]])\nlam_bad = np.linalg.eigvalsh(bad)\nv = np.linalg.eigh(bad)[1][:, 0]\nvar_bad = v @ bad @ v          # 'phương sai' âm!\nrng = np.random.default_rng(22)\ngood = np.corrcoef(rng.normal(size=(3, 300)))\nlam_good = np.linalg.eigvalsh(good).min()\nlam_min = lam_bad.min()",
-      "values": {"lam_min": "num2", "var_bad": "num2", "lam_good": "num2"},
-      "chart": {"type": "bar", "heights": "lam_bad", "labels": "['λ1', 'λ2', 'λ3']", "signed": true, "ylabel": "trị riêng (ma trận tự chế)"},
-      "surface": {"type": "grid", "fn": "lambda X, Y: X**2 + Y**2 + 1.2*X*Y", "x": [-2, 2], "y": [-2, 2], "xl": "w₁", "yl": "w₂", "zl": "wᵀΣw"},
+      "values": {
+        "lam_min": "num2",
+        "var_bad": "num2",
+        "lam_good": "num2"
+      },
+      "chart": {
+        "type": "bar",
+        "heights": "lam_bad",
+        "labels": "['λ1', 'λ2', 'λ3']",
+        "signed": true,
+        "ylabel": "trị riêng (ma trận tự chế)"
+      },
+      "surface": {
+        "type": "grid",
+        "fn": "lambda X, Y: X**2 + Y**2 + 1.2*X*Y",
+        "x": [
+          -2,
+          2
+        ],
+        "y": [
+          -2,
+          2
+        ],
+        "xl": "w₁",
+        "yl": "w₂",
+        "zl": "wᵀΣw"
+      },
       "episode": {
         "kicker": "Positive definite",
         "hook": "Tự điền ma trận tương quan bằng tay cho nhanh? Mô hình của bạn vừa tạo ra một danh mục có rủi ro âm. Chúc mừng.",
@@ -177,22 +601,88 @@
           "Một cột đỏ chìm dưới số không. Chỉ cần một trị riêng âm, mọi phép tối ưu phía sau đều hỏng.",
           "Ma trận xác định dương có mọi trị riêng dương, nên mọi danh mục đều có phương sai dương. Mặt rủi ro là một cái bát ngửa, có đáy rõ ràng."
         ],
-        "outputs": [{"label": "λ min tự chế", "key": "lam_min", "highlight": true}, {"label": "'phương sai'", "key": "var_bad"}, {"label": "λ min dữ liệu", "key": "lam_good"}],
+        "outputs": [
+          {
+            "label": "λ min tự chế",
+            "key": "lam_min",
+            "highlight": true
+          },
+          {
+            "label": "'phương sai'",
+            "key": "var_bad"
+          },
+          {
+            "label": "λ min dữ liệu",
+            "key": "lam_good"
+          }
+        ],
         "chart_title": "Trị riêng của ma trận tự chế",
         "formula": "\\mathbf{x}^\\top \\Sigma\\, \\mathbf{x} > 0 \\quad \\forall\\, \\mathbf{x} \\neq 0",
         "takeaway": "Ma trận hiệp phương sai phải xác định dương. Kiểm tra trị riêng trước khi đưa vào bất kỳ bộ tối ưu nào.",
         "caption": "Tự chế ma trận tương quan có thể cho ra 'rủi ro âm'. Xác định dương là điều kiện sống còn của mọi mô hình danh mục.",
-        "hashtags": ["QuanTik", "HocQuant", "xacdinhduong", "matran", "daisotuyentinh", "chungkhoan"],
-        "allowed_literals": ["1.0", "0.9", "-0.9", "300"],
-        "hook_broll": {"draw": "warning"},
-        "broll": [{"query": "André-Louis Cholesky", "label": "André-Louis Cholesky", "draw": "matrix", "say": "Phân rã Cholesky, công cụ quen thuộc để mô phỏng danh mục, chỉ chạy được trên ma trận xác định dương."}]
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "xacdinhduong",
+          "matran",
+          "daisotuyentinh",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "1.0",
+          "0.9",
+          "-0.9",
+          "300"
+        ],
+        "hook_broll": {
+          "draw": "warning"
+        },
+        "broll": [
+          {
+            "query": "André-Louis Cholesky",
+            "label": "André-Louis Cholesky",
+            "draw": "matrix",
+            "say": "Phân rã Cholesky, công cụ quen thuộc để mô phỏng danh mục, chỉ chạy được trên ma trận xác định dương."
+          }
+        ]
       }
     },
     {
-      "id": "hq23-linear-transformation", "no": 23, "name": "Linear Transformation – Phép biến đổi tuyến tính", "short": "BIẾN ĐỔI TUYẾN TÍNH",
+      "id": "hq23-linear-transformation",
+      "no": 23,
+      "name": "Linear Transformation – Phép biến đổi tuyến tính",
+      "short": "BIẾN ĐỔI TUYẾN TÍNH",
       "code": "import numpy as np\nM = np.array([[1.5, 0.6],\n              [0.2, 1.1]])\ne1, e2 = np.array([1, 0]), np.array([0, 1])\nMe1, Me2 = M @ e1, M @ e2      # hai cột của M\ndet = np.linalg.det(M)         # hệ số phóng diện tích\nv = np.array([1.0, 1.0])\nMv = M @ v\nstretch = np.linalg.norm(Mv) / np.linalg.norm(v)\ncheck = np.allclose(M @ (2 * v), 2 * Mv)",
-      "values": {"det": "num2", "stretch": "num2", "check": ["int(check)", "int"]},
-      "chart": {"type": "vectors", "grid": "M", "lim": 3, "vecs": [["Me1", "Me₁", "accent"], ["Me2", "Me₂", "pos"], ["Mv", "Mv", "neu"]]},
+      "values": {
+        "det": "num2",
+        "stretch": "num2",
+        "check": [
+          "int(check)",
+          "int"
+        ]
+      },
+      "chart": {
+        "type": "vectors",
+        "grid": "M",
+        "lim": 3,
+        "vecs": [
+          [
+            "Me1",
+            "Me₁",
+            "accent"
+          ],
+          [
+            "Me2",
+            "Me₂",
+            "pos"
+          ],
+          [
+            "Mv",
+            "Mv",
+            "neu"
+          ]
+        ]
+      },
       "episode": {
         "kicker": "Linear transformation",
         "hook": "Ma trận không phải một cái bảng số vô hồn. Nó là cỗ máy bẻ cong cả không gian, và đa số người học toán chưa bao giờ được dạy điều đó.",
@@ -203,22 +693,69 @@
           "Cả lưới ô vuông bị xô nghiêng và kéo giãn, nhưng đường thẳng vẫn thẳng, gốc vẫn ở gốc. Đó là tuyến tính.",
           "Phép biến đổi tuyến tính giữ nguyên phép cộng và phép nhân với số. Mỗi ma trận là một phép biến đổi, ví dụ đổi từ tỷ trọng mã sang mức chịu nhân tố."
         ],
-        "outputs": [{"label": "det(M)", "key": "det", "highlight": true}, {"label": "‖Mv‖ / ‖v‖", "key": "stretch"}, {"label": "M(2v) = 2Mv", "key": "check"}],
+        "outputs": [
+          {
+            "label": "det(M)",
+            "key": "det",
+            "highlight": true
+          },
+          {
+            "label": "‖Mv‖ / ‖v‖",
+            "key": "stretch"
+          },
+          {
+            "label": "M(2v) = 2Mv",
+            "key": "check"
+          }
+        ],
         "chart_title": "Lưới không gian dưới tác động của M",
         "formula": "T(a\\mathbf{x}+b\\mathbf{y}) = aT(\\mathbf{x})+bT(\\mathbf{y})",
         "takeaway": "Đọc ma trận như một chuyển động của không gian, và mọi thứ từ PCA đến hedging trở nên trực quan.",
         "caption": "Ma trận là cỗ máy biến đổi không gian. Nhìn được điều này thì PCA, beta, hedging đều dễ hiểu.",
-        "hashtags": ["QuanTik", "HocQuant", "bienDoituyentinh", "matran", "daisotuyentinh", "toanhoc"],
-        "allowed_literals": ["1.5", "0.6", "0.2", "1.1", "1.0"],
-        "hook_broll": {"draw": "arrows"},
-        "broll": [{"draw": "arrows", "label": "Kéo, xoay, nghiêng", "say": "Hình dung bạn kéo một tấm lưới cao su: mọi ô vuông cùng méo theo một kiểu. Đó là một ma trận đang làm việc."}]
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "bienDoituyentinh",
+          "matran",
+          "daisotuyentinh",
+          "toanhoc"
+        ],
+        "allowed_literals": [
+          "1.5",
+          "0.6",
+          "0.2",
+          "1.1",
+          "1.0"
+        ],
+        "hook_broll": {
+          "draw": "arrows"
+        },
+        "broll": [
+          {
+            "draw": "arrows",
+            "label": "Kéo, xoay, nghiêng",
+            "say": "Hình dung bạn kéo một tấm lưới cao su: mọi ô vuông cùng méo theo một kiểu. Đó là một ma trận đang làm việc."
+          }
+        ]
       }
     },
     {
-      "id": "hq24-pca", "no": 24, "name": "Principal Component Analysis (PCA) – Phân tích thành phần chính", "short": "PCA",
+      "id": "hq24-pca",
+      "no": 24,
+      "name": "Principal Component Analysis (PCA) – Phân tích thành phần chính",
+      "short": "PCA",
       "code": "import numpy as np\nrng = np.random.default_rng(24)\nmkt = rng.normal(0, 0.015, (500, 1))\nsec = rng.normal(0, 0.01, (500, 1))\nside = np.array([1, 1, 1, -1, -1, -1])\nR = mkt + sec * side + rng.normal(0, 0.008, (500, 6))\nX = R - R.mean(0)\nU, s, Vt = np.linalg.svd(X, full_matrices=False)\nev = s ** 2 / (s ** 2).sum()\npc1, pc2 = ev[0], ev[1]\ntwo = ev[:2].sum()",
-      "values": {"pc1": "pct0", "pc2": "pct0", "two": "pct0"},
-      "chart": {"type": "bar", "heights": "ev", "labels": "['PC1', 'PC2', 'PC3', 'PC4', 'PC5', 'PC6']", "ylabel": "tỷ lệ phương sai giải thích"},
+      "values": {
+        "pc1": "pct0",
+        "pc2": "pct0",
+        "two": "pct0"
+      },
+      "chart": {
+        "type": "bar",
+        "heights": "ev",
+        "labels": "['PC1', 'PC2', 'PC3', 'PC4', 'PC5', 'PC6']",
+        "ylabel": "tỷ lệ phương sai giải thích"
+      },
       "episode": {
         "kicker": "PCA",
         "hook": "Sáu mã, sáu biểu đồ, bạn soi cả ngày. PCA làm việc đó trong một dòng code, và chỉ ra bạn đang soi thừa.",
@@ -229,15 +766,50 @@
           "Hai cột đầu cao vượt trội: một là thị trường, hai là cuộc giằng co giữa hai ngành. Bốn cột còn lại chủ yếu là nhiễu.",
           "PCA tìm các hướng giải thích nhiều biến động nhất, xếp theo thứ tự. Nó là trị riêng và vector riêng của ma trận hiệp phương sai, dùng để giảm chiều dữ liệu."
         ],
-        "outputs": [{"label": "PC1", "key": "pc1", "highlight": true}, {"label": "PC2", "key": "pc2"}, {"label": "PC1 + PC2", "key": "two"}],
+        "outputs": [
+          {
+            "label": "PC1",
+            "key": "pc1",
+            "highlight": true
+          },
+          {
+            "label": "PC2",
+            "key": "pc2"
+          },
+          {
+            "label": "PC1 + PC2",
+            "key": "two"
+          }
+        ],
         "chart_title": "Phương sai giải thích theo thành phần",
         "formula": "X = U\\,S\\,V^\\top",
         "takeaway": "Dữ liệu nhiều chiều thường chỉ có vài câu chuyện thật. PCA giúp bạn nghe đúng câu chuyện, bỏ qua tiếng ồn.",
         "caption": "6 mã cổ phiếu nhưng chỉ có 2 câu chuyện thật. PCA tìm ra chúng trong một dòng code.",
-        "hashtags": ["QuanTik", "HocQuant", "PCA", "machinelearning", "daisotuyentinh", "chungkhoan"],
-        "allowed_literals": ["0.015", "0.01", "0.008", "500"],
-        "hook_broll": {"draw": "network"},
-        "broll": [{"query": "Karl Pearson", "label": "Karl Pearson", "draw": "arrows", "say": "PCA được Karl Pearson đề xuất từ đầu thế kỷ hai mươi, trước cả khi có máy tính."}]
+        "hashtags": [
+          "QuanTik",
+          "HocQuant",
+          "PCA",
+          "machinelearning",
+          "daisotuyentinh",
+          "chungkhoan"
+        ],
+        "allowed_literals": [
+          "0.015",
+          "0.01",
+          "0.008",
+          "500"
+        ],
+        "hook_broll": {
+          "draw": "network"
+        },
+        "broll": [
+          {
+            "query": "Karl Pearson",
+            "label": "Karl Pearson",
+            "draw": "arrows",
+            "say": "PCA được Karl Pearson đề xuất từ đầu thế kỷ hai mươi, trước cả khi có máy tính."
+          }
+        ]
       }
     }
   ]

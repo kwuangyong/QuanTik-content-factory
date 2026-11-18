@@ -79,10 +79,11 @@
         ],
         "allowed_literals": [
           "0.045",
-          "10_000",
-          "10.000",
           "0.09",
-          "0.25"
+          "0.25",
+          "10.000",
+          "100",
+          "10_000"
         ],
         "hook_broll": {
           "query": "State Bank of Vietnam building",
@@ -278,7 +279,8 @@
         "allowed_literals": [
           "0.08",
           "100_000_000",
-          "1_000_000_000"
+          "1_000_000_000",
+          "30"
         ],
         "hook_broll": {
           "draw": "clock"
