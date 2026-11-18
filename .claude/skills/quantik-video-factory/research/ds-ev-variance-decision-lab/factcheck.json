@@ -1,0 +1,40 @@
+{
+  "brief": "research/ds-ev-variance-decision-lab/brief.json",
+  "checked": "2026-11-15",
+  "checker": "fact-checker (Claude)",
+  "verdicts": [
+    {
+      "claim": "c_setup",
+      "verdict": "verified",
+      "note": "Tham số giả định, được nói rõ là giả sử."
+    },
+    {
+      "claim": "c_lln",
+      "verdict": "verified"
+    },
+    {
+      "claim": "c_sim",
+      "verdict": "verified",
+      "note": "Mô phỏng khớp công thức: 30% vs Φ(−0,5)=31% ở 10.000 ván."
+    },
+    {
+      "claim": "c_normal",
+      "verdict": "verified"
+    },
+    {
+      "claim": "c_ror",
+      "verdict": "verified",
+      "note": "Mô phỏng chân trời hữu hạn (35%) thấp hơn công thức vô hạn (37%) là đúng chiều."
+    },
+    {
+      "claim": "c_analogy",
+      "verdict": "verified",
+      "status": "interpretation"
+    },
+    {
+      "claim": "c_lesson",
+      "verdict": "verified",
+      "status": "interpretation"
+    }
+  ]
+}

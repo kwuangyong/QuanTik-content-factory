@@ -14,7 +14,7 @@ import matplotlib.ticker  # noqa: E402,F401
 from matplotlib import font_manager  # noqa: E402
 from PIL import Image, ImageDraw, ImageFilter  # noqa: E402
 
-from core import BRAND, H, SAFE, THEME, W, font, font_path, hex_  # noqa: E402
+from core import BRAND, H, SAFE, THEME, W, L, font, font_path, hex_  # noqa: E402
 
 for _k in ("sans", "sans-bold"):
     try:
@@ -123,7 +123,7 @@ def header(img, tag: str, note: str):
     x, y = SAFE["left"], SAFE["top"] + 4
     img.paste(logo(64), (x, y), logo(64))
     d.text((x + 80, y + 8), "QuanTik", font=font("sans-bold", 34), fill=T["text"])
-    d.text((x + 80, y + 46), "quant cho cổ phiếu Việt Nam", font=font("sans", 17), fill=T["muted"])
+    d.text((x + 80, y + 46), L("tagline"), font=font("sans", 17), fill=T["muted"])
     f = font("mono-bold", 24)
     tw = d.textlength(tag, font=f)
     bx1 = SAFE["right"]; bx0 = bx1 - tw - 36
@@ -158,11 +158,27 @@ def wrap(text, f, width, draw):
 
 
 def text_box(img, text, box, kind="sans-bold", size=64, color=None, align="left", valign="top",
-             min_size=26, label="text", spacing=1.18, hl_numbers=False, hl_color=None, alpha=1.0, max_lines=None):
+             min_size=26, label="text", spacing=1.18, hl_numbers=False, hl_color=None, alpha=1.0, max_lines=None,
+             marks=False, mark_color=None):
     """Wrap text into box, shrinking the font until it fits. Logs overflow for QA. Returns used bbox."""
     color = color or T["text"]
     hl_color = hl_color or T["accent"]
     x0, y0, x1, y1 = box
+    marked_all = None
+    if marks and "*" in text:  # *cụm nhấn* → đỏ + gạch chân; dấu sao không hiện
+        marked_all, on = [], False
+        clean = []
+        for w_ in text.split():
+            start = w_.startswith("*")
+            if start:
+                on = True
+            end = w_.rstrip(".,!?:;…”\"").endswith("*")
+            marked_all.append(on)
+            clean.append(w_.replace("*", ""))
+            if end:
+                on = False
+        text = " ".join(clean)
+    mark_color = mark_color or T["negative"]
     layer = Image.new("RGBA", img.size, (0, 0, 0, 0)) if alpha < 1 else None
     d = ImageDraw.Draw(layer or img)
     s = size
@@ -179,11 +195,22 @@ def text_box(img, text, box, kind="sans-bold", size=64, color=None, align="left"
     overflow = th > y1 - y0 or widest > x1 - x0 or too_many
     y = y0 if valign == "top" else (y0 + (y1 - y0 - th) // 2 if valign == "middle" else y1 - th)
     used = [x1, y, x0, y + th]
+    marked = list(marked_all) if marked_all is not None else None
     for ln in lines:
         lw = d.textlength(ln, font=f)
         x = x0 if align == "left" else (x0 + (x1 - x0 - lw) / 2 if align == "center" else x1 - lw)
         used[0] = min(used[0], x); used[2] = max(used[2], x + lw)
-        if hl_numbers:
+        if marked is not None:
+            cx = x
+            for tok in ln.split(" "):
+                on = marked.pop(0) if marked else False
+                c = mark_color if on else (hl_color if hl_numbers and _NUM.fullmatch(tok.strip(".,:;!?()")) else color)
+                if on:
+                    tw_ = d.textlength(tok, font=f)
+                    d.rectangle([cx - 4, y + s * 0.92, cx + tw_ + 4, y + s * 1.04], fill=mark_color)
+                d.text((cx, y), tok, font=f, fill=c)
+                cx += d.textlength(tok + " ", font=f)
+        elif hl_numbers:
             cx = x
             for tok in re.split(r"(\s+)", ln):
                 c = hl_color if _NUM.fullmatch(tok.strip(".,:;!?()")) else color
@@ -200,15 +227,52 @@ def text_box(img, text, box, kind="sans-bold", size=64, color=None, align="left"
     return used
 
 
-def subtitle(img, text):
+def fit_size(text, box, kind="sans-bold", size=64, min_size=26, spacing=1.18, max_lines=None):
+    """Font size text_box would settle on for the full text (so a word-by-word reveal never changes size)."""
+    x0, y0, x1, y1 = box
+    d = ImageDraw.Draw(Image.new("RGB", (8, 8)))
+    s = size
+    while True:
+        f = font(kind, s)
+        lines = wrap(text, f, x1 - x0, d)
+        ok = int(s * spacing) * len(lines) <= y1 - y0 and max((d.textlength(l, font=f) for l in lines), default=0) <= x1 - x0
+        if (ok and (max_lines is None or len(lines) <= max_lines)) or s <= min_size:
+            return s
+        s = max(min_size, int(s * 0.92))
+
+
+def subtitle(img, text, k=None):
+    """Two-line caption bar. With k (0..1 progress through this chunk) words light up as they are spoken."""
     if not text:
         return
     x0, x1 = SAFE["left"] + 10, SAFE["right"] - 10
     box = (x0 + 24, 1338, x1 - 24, 1478)
     d = ImageDraw.Draw(img, "RGBA")
     d.rounded_rectangle([x0, 1326, x1, 1488], radius=24, fill=(0, 0, 0, 165))
-    text_box(img, text, box, "sans-bold", 42, T["text"], "center", "middle", min_size=30, label="subtitle",
-             max_lines=2, hl_numbers=True, hl_color=T["neutral"])
+    if k is None:
+        text_box(img, text, box, "sans-bold", 42, T["text"], "center", "middle", min_size=30, label="subtitle",
+                 max_lines=2, hl_numbers=True, hl_color=T["neutral"])
+        return
+    size = fit_size(text, box, "sans-bold", 46, 30, max_lines=2)
+    f = font("sans-bold", size)
+    lines = wrap(text, f, box[2] - box[0], d)
+    lh = int(size * 1.18)
+    y = box[1] + (box[3] - box[1] - lh * len(lines)) // 2
+    n_words = len(text.split())
+    spoken = k * n_words
+    wi = 0
+    used = [box[2], y, box[0], y + lh * len(lines)]
+    for ln in lines:
+        lw = d.textlength(ln, font=f)
+        x = box[0] + (box[2] - box[0] - lw) / 2
+        used[0] = min(used[0], x); used[2] = max(used[2], x + lw)
+        for tok in ln.split(" "):
+            col = T["accent"] if wi <= spoken < wi + 1 else (T["text"] if wi < spoken else (150, 165, 156))
+            d.text((x, y), tok, font=f, fill=col)
+            x += d.textlength(tok + " ", font=f)
+            wi += 1
+        y += lh
+    LAYOUT.log("subtitle", used, len(lines) > 2 or used[2] - used[0] > box[2] - box[0], size, 30)
 
 
 def chip(img, xy, text, color=None, size=26):
@@ -261,8 +325,24 @@ def chart_img(model, w=880, h=760, upto=1.0, title=None):
     return fig_to_img(fig)
 
 
-def surface_img(model, azim=-60, elev=28, w=880, h=820, surf=None):
+def surface_img(model, azim=-60, elev=28, w=880, h=820, surf=None, rise=1.0):
+    """rise < 1: bề mặt/đường còn đang "mọc" lên từ đáy (trục z giữ nguyên để thấy nó lớn dần)."""
     surf = surf or model.surface()
+    zlim = None
+    if rise < 1:
+        import numpy as np
+
+        surf = dict(surf)
+        if "X" in surf:
+            Z = np.asarray(surf["Z"], float); z0 = np.nanmin(Z)
+            zlim = (z0, np.nanmax(Z)); surf["Z"] = z0 + (Z - z0) * rise
+        elif "lines" in surf:
+            allz = np.concatenate([np.asarray(z, float) for _, _, z, _ in surf["lines"]]); z0 = allz.min()
+            zlim = (z0, allz.max())
+            surf["lines"] = [(x, y, z0 + (np.asarray(z, float) - z0) * rise, c) for x, y, z, c in surf["lines"]]
+        elif "line" in surf:
+            x, y, z = surf["line"]; n = max(2, int(len(x) * rise))
+            surf["line"] = (x[:n], y[:n], z[:n])
     fig = plt.figure(figsize=(w / 100, h / 100))
     ax = fig.add_axes([0.0, 0.02, 1.0, 0.96], projection="3d")
     ax.set_facecolor(hex_(T["surface"]))
@@ -292,6 +372,21 @@ def surface_img(model, azim=-60, elev=28, w=880, h=820, surf=None):
     if surf.get("yticks"):
         ax.set_yticks(range(len(surf["yticks"])))
         ax.set_yticklabels(surf["yticks"], fontsize=15)
+    if surf.get("dots") is not None and rise >= 1:
+        ax.scatter(*surf["dots"], s=40, color=hex_(T["accent"]), edgecolors="white", linewidths=1, depthshade=False,
+                   zorder=10)
+    if surf.get("ridge") is not None and rise >= 1:
+        rx, ry, rz = surf["ridge"]
+        ax.plot(rx, ry, rz, color="white", lw=3.2, zorder=10)
+    if surf.get("point") is not None and rise >= 1:
+        px_, py_, pz_, lab = surf["point"]
+        ax.scatter([px_], [py_], [pz_], s=160, color=hex_(T["accent"]), edgecolors="white", linewidths=2,
+                   depthshade=False, zorder=11)
+        lz = surf.get("label_z", pz_ + 0.35)  # nhãn đặt cao hẳn trên bề mặt, nối bằng vạch để không bị che
+        ax.plot([px_, px_], [py_, py_], [pz_, lz], color=hex_(T["accent"]), lw=2, zorder=12)
+        ax.text(px_, py_, lz, " " + lab, color=hex_(T["accent"]), fontsize=20, weight="bold", zorder=13)
+    if zlim is not None:
+        ax.set_zlim(*zlim)
     ax.view_init(elev=elev, azim=azim)
     return fig_to_img(fig)
 
@@ -385,7 +480,8 @@ def code_panel(code, width=880, chars=None, hl_line=None, title="model.py"):
     return im
 
 
-def terminal_panel(lines_shown, width=880, title="kết quả"):
+def terminal_panel(lines_shown, width=880, title=None):
+    title = title or L("result")
     size = 30
     while size > 20 and any(font("mono", size).getlength(a) + font("mono-bold", size).getlength(b) > width - 70
                             for a, b in lines_shown):

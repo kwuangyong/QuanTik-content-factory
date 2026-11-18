@@ -1,0 +1,68 @@
+{
+ "s": "ok",
+ "ec": 0,
+ "em": "",
+ "_note": "SYNTHETIC FIXTURE — không phải dữ liệu thị trường thật",
+ "d": [
+  {
+   "tradingdate": "05/11/2026",
+   "marketIndex": "1500.0",
+   "indexTime": "15:05:00",
+   "indexChange": "7.5",
+   "indexPercentChange": "0.5",
+   "totalVolume": "500000000.0",
+   "totalValue": "12000000000000.0",
+   "advances": "250",
+   "declines": "100",
+   "noChange": "50",
+   "advancesVolumn": "200000000",
+   "declinesVolumn": "250000000",
+   "marketCode": "HOSE"
+  },
+  {
+   "tradingdate": "05/11/2026",
+   "marketIndex": "1600.0",
+   "indexTime": "15:05:00",
+   "indexChange": "6.4",
+   "indexPercentChange": "0.4",
+   "totalVolume": "500000000.0",
+   "totalValue": "7000000000000.0",
+   "advances": "20",
+   "declines": "8",
+   "noChange": "2",
+   "advancesVolumn": "200000000",
+   "declinesVolumn": "250000000",
+   "marketCode": "30"
+  },
+  {
+   "tradingdate": "05/11/2026",
+   "marketIndex": "240.0",
+   "indexTime": "15:05:00",
+   "indexChange": "-0.48",
+   "indexPercentChange": "-0.2",
+   "totalVolume": "500000000.0",
+   "totalValue": "600000000000.0",
+   "advances": "60",
+   "declines": "70",
+   "noChange": "50",
+   "advancesVolumn": "200000000",
+   "declinesVolumn": "250000000",
+   "marketCode": "HNX"
+  },
+  {
+   "tradingdate": "05/11/2026",
+   "marketIndex": "110.0",
+   "indexTime": "15:05:00",
+   "indexChange": "0.11",
+   "indexPercentChange": "0.1",
+   "totalVolume": "500000000.0",
+   "totalValue": "300000000000.0",
+   "advances": "100",
+   "declines": "90",
+   "noChange": "100",
+   "advancesVolumn": "200000000",
+   "declinesVolumn": "250000000",
+   "marketCode": "UPCOM"
+  }
+ ]
+}

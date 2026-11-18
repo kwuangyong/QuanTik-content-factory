@@ -3,6 +3,7 @@
 The 1350 version is a crop of the 9:16 slide from y=150 to y=1500, which is exactly the safe zone, so one
 layout serves both.
 """
+from core import L
 import frames as F
 import scenes as S
 from core import THEME as T
@@ -19,14 +20,14 @@ def _swipe(img, p):
 
 def build(ep, model, ctx):
     def cover(img, t, p):
-        S.hook(ep["hook"], kicker=ep.get("kicker")).draw(img, 99, 1.0)
+        S.hook(ep["hook"], kicker=ep.get("kicker"), visual=ep.get("hook_visual", "auto")).draw(img, 99, 1.0)
         _swipe(img, p)
 
     def myth_fact(img, t, p):
-        F.chip(img, (S.X0, 330), "BẠN NGHĨ", T["negative"], 28)
+        F.chip(img, (S.X0, 330), L("myth"), T["negative"], 28)
         F.text_box(img, ep["myth"], (S.X0, 400, S.X1, 760), "sans-bold", 52, T["text"], label="myth",
                    hl_numbers=True)
-        F.chip(img, (S.X0, 800), "THỰC RA", T["positive"], 28)
+        F.chip(img, (S.X0, 800), L("fact"), T["positive"], 28)
         F.text_box(img, ep["fact"], (S.X0, 870, S.X1, 1300), "sans-bold", 52, T["text"], label="fact",
                    hl_numbers=True)
 
@@ -36,7 +37,7 @@ def build(ep, model, ctx):
         S.chart(model, "", name="03-chart", reveal=False, notes=[(0, ep["beats"][2])]),
         S.surface(model, "", caption=ep["beats"][3], name="04-surface3d", sweep=(-55, -55), elev=(26, 26)),
         Scene("05-myth-fact", "", myth_fact, 1, texts=[ep["myth"], ep["fact"]]),
-        S.statement(ep["takeaway"], "", name="06-takeaway", size=64, label_chip="Mang về"),
+        S.statement(ep["takeaway"], "", name="06-takeaway", size=64, label_chip=L("takeaway")),
         S.end(ep["cta"], ctx["disclaimer"], ctx["tag"], say=""),
     ]
     slides[-1].name = "07-cta"

@@ -1,0 +1,41 @@
+{
+  "pillar": "dark-truth",
+  "topics": [
+    {
+      "id": "dt_escape_velocity",
+      "name": "Escape velocity: why you can't escape the 9-to-5",
+      "group": "Money & status",
+      "model": "escape_velocity",
+      "status": "published",
+      "example_episode": "episodes/escape-velocity.json",
+      "angle": "Lifestyle creep, social comparison"
+    },
+    {
+      "id": "dt_hedonic_treadmill",
+      "name": "The hedonic treadmill: why the new car stops feeling new",
+      "group": "Money & status",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Adaptation"
+    },
+    {
+      "id": "dt_keeping_up",
+      "name": "Keeping up with people you don't even like",
+      "group": "Money & status",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Relative income, social comparison"
+    },
+    {
+      "id": "dt_debt_status",
+      "name": "Debt is how you rent a life you can't afford",
+      "group": "Money & status",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Consumer debt as status signal"
+    }
+  ]
+}

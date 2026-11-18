@@ -1,4 +1,5 @@
 """whiteboard-math: the formula is written piece by piece, each symbol explained, then real numbers plugged in."""
+from core import L
 import frames as F
 import scenes as S
 from core import THEME as T
@@ -34,7 +35,7 @@ def build(ep, model, ctx):
     hi_val = fmt_vi(model.values[hi["key"]], hi.get("fmt") or model.formats.get(hi["key"], "num2"))
     parts = ep["formula_parts"]
     full = parts[-1]
-    out = [S.hook(ep["hook"], kicker=ep.get("kicker"))]
+    out = [S.hook(ep["hook"], kicker=ep.get("kicker"), visual=ep.get("hook_visual", "auto"))]
 
     def d_write(img, t, p):
         _board(img)
@@ -73,6 +74,6 @@ def build(ep, model, ctx):
 
     out.append(Scene("numbers", ep["beats"][1], d_numbers, 5.0, texts=[hi["label"], hi_val]))
     out.append(S.chart(model, ep["beats"][2], title=ep.get("chart_title"), min_dur=4.5))
-    out.append(S.statement(ep["takeaway"], name="takeaway", size=64, label_chip="Mang về"))
+    out.append(S.statement(ep["takeaway"], name="takeaway", size=64, label_chip=L("takeaway")))
     out.append(S.end(ep["cta"], ctx["disclaimer"], ctx["tag"]))
     return out

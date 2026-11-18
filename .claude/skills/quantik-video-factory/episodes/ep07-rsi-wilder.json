@@ -1,0 +1,131 @@
+{
+  "id": "ep07-rsi-wilder",
+  "topic": "rsi",
+  "seed": 5,
+  "title": "RSI: chỉ báo một kỹ sư tự tính tay năm 1978. Trên 70 có phải sắp giảm?",
+  "caption": "RSI được J. Welles Wilder công bố năm 1978, thời chưa có máy tính cá nhân, nên ông thiết kế để tính tay được. Gần nửa thế kỷ sau ai cũng dùng, và cũng hay hiểu sai: trên 70 không có nghĩa sắp giảm. Mình kiểm chứng bằng code.",
+  "hashtags": [
+    "quant",
+    "RSI",
+    "phantichkythuat",
+    "lichsutaichinh",
+    "QuanTik"
+  ],
+  "facts": {
+    "wilder": {
+      "value": "1978",
+      "source": "Wilder, New Concepts in Technical Trading Systems (1978)"
+    }
+  },
+  "allowed_literals": [
+    "0 đến 100"
+  ],
+  "scenes": [
+    {
+      "type": "hook",
+      "text": "Chỉ báo bạn dùng mỗi ngày được thiết kế để tính bằng giấy bút",
+      "say": "Chỉ báo kỹ thuật phổ biến bậc nhất hiện nay được thiết kế để tính bằng giấy bút.",
+      "kicker": "Lịch sử chỉ báo"
+    },
+    {
+      "type": "story",
+      "chip": "Năm 1978",
+      "era": "1978",
+      "title": "J. Welles Wilder, kỹ sư cơ khí",
+      "text": "Wilder công bố RSI trong cuốn New Concepts in Technical Trading Systems. Ông chọn cách làm mượt đơn giản để trader tính tay mỗi tối.",
+      "source": "Wilder (1978)",
+      "say": "Năm 1978, kỹ sư cơ khí J. Welles Wilder công bố RSI. Thời đó chưa có máy tính cá nhân, nên công thức phải đủ đơn giản để tính tay mỗi tối."
+    },
+    {
+      "type": "code",
+      "lines": [
+        7,
+        11
+      ],
+      "hl": 11,
+      "note": "Trung bình tăng chia trung bình giảm, rồi quy về thang 0 đến 100",
+      "say": "Toàn bộ RSI là đây: trung bình phiên tăng chia trung bình phiên giảm, làm mượt {period} phiên, rồi ép về thang không đến một trăm."
+    },
+    {
+      "type": "quiz",
+      "question": "RSI vượt {hi}. Mười phiên sau, giá giảm bao nhiêu phần trăm số lần?",
+      "options": [
+        "Gần như luôn giảm",
+        "Khoảng một nửa",
+        "Gần như luôn tăng"
+      ],
+      "answer": 1,
+      "say": "Đố bạn. RSI vượt {hi}, quá mua. Mười phiên sau giá giảm bao nhiêu phần trăm số lần? Đáp án: khoảng một nửa."
+    },
+    {
+      "type": "run",
+      "outputs": [
+        {
+          "label": "số phiên mô phỏng",
+          "key": "n_days"
+        },
+        {
+          "label": "số lần RSI > 70",
+          "key": "days_ob"
+        },
+        {
+          "label": "tăng sau 10 phiên",
+          "key": "up_after_ob",
+          "highlight": true
+        }
+      ],
+      "say": "Trên {n_days} phiên có {days_ob} lần RSI vượt {hi}. Mười phiên sau, giá tăng {up_after_ob} số lần. Không hơn tung đồng xu."
+    },
+    {
+      "type": "chart",
+      "title": "RSI và giá",
+      "notes": [
+        [
+          0.0,
+          "Đường cam: RSI · Vùng đỏ: trên 70"
+        ],
+        [
+          0.6,
+          "Quá mua vẫn có thể quá mua lâu hơn"
+        ]
+      ],
+      "say": "Đường cam là RSI. Nó chạm vùng đỏ nhiều lần, còn giá phía trên vẫn đi theo hướng của nó."
+    },
+    {
+      "type": "usage",
+      "title": "Đọc RSI cho đúng",
+      "steps": [
+        "RSI cao = phiên tăng đang áp đảo, không phải lệnh đảo chiều",
+        "So với chính lịch sử RSI của mã đó",
+        "Đọc cùng xu hướng và biến động"
+      ],
+      "say": "Đọc RSI cho đúng: RSI cao nghĩa là phiên tăng đang áp đảo. So với lịch sử của chính mã đó. Và luôn đọc cùng xu hướng."
+    },
+    {
+      "type": "statement",
+      "chip": "Mang về",
+      "text": "RSI kể lại động lượng đã qua. Nó không hứa điều gì về phiên tới.",
+      "say": "RSI kể lại động lượng đã qua. Nó không hứa điều gì về phiên tới."
+    }
+  ],
+  "thumb": {
+    "tag": "RSI · Lịch sử",
+    "headline": [
+      {
+        "t": "RSI TRÊN 70",
+        "size": 150
+      },
+      {
+        "t": "LÀ SẮP GIẢM?",
+        "size": 150
+      },
+      {
+        "t": "TĂNG [o]{up_after_ob}[/o] SỐ LẦN",
+        "size": 110
+      }
+    ],
+    "pill": "Wilder 1978 → kiểm chứng {days_ob} lần · code Python"
+  },
+  "style": "story-mix",
+  "series_no": 7
+}

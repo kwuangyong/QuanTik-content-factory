@@ -1,0 +1,333 @@
+{
+  "_doc": "Bản đồ hình minh hoạ: tag → từ khoá (vi + en) để tự khớp hình với lời thoại, và truy vấn ảnh thật trên Wikimedia Commons. Thêm tag mới: thêm hàm draw_<tag> trong pipeline/illustrate.py. 'code' chỉ được chọn khi lời thật sự nói về code/Python.",
+  "tags": {
+    "casino": {
+      "kw": [
+        "casino",
+        "sòng bài",
+        "sòng bạc",
+        "blackjack",
+        "xì dách",
+        "đếm bài",
+        "lá bài",
+        "chia bài",
+        "las vegas",
+        "cược",
+        "đặt cược",
+        "nhà cái",
+        "dealer",
+        "đánh bài"
+      ],
+      "commons": "blackjack table casino"
+    },
+    "roulette": {
+      "kw": [
+        "roulette",
+        "vòng quay",
+        "monte carlo",
+        "may rủi",
+        "quay số"
+      ],
+      "commons": "roulette wheel casino"
+    },
+    "professor": {
+      "kw": [
+        "giáo sư",
+        "nhà toán học",
+        "toán học",
+        "bảng đen",
+        "nobel",
+        "ulam",
+        "thorp",
+        "nhà khoa học",
+        "professor",
+        "mathematician"
+      ],
+      "commons": "chalkboard mathematics equations"
+    },
+    "storm": {
+      "kw": [
+        "bão",
+        "biển lặng",
+        "sóng",
+        "giông",
+        "dồn dập",
+        "cụm",
+        "volatility clustering",
+        "storm"
+      ],
+      "commons": "storm waves sea"
+    },
+    "drunk_walk": {
+      "kw": [
+        "người say",
+        "loạng choạng",
+        "bước ngẫu nhiên",
+        "random walk",
+        "người lính",
+        "quán tính",
+        "trí nhớ"
+      ],
+      "commons": "night street lamp"
+    },
+    "leash": {
+      "kw": [
+        "dắt chó",
+        "sợi dây",
+        "dây kéo",
+        "kéo về",
+        "quay về",
+        "lò xo",
+        "dây thun",
+        "mean reversion"
+      ],
+      "commons": "dog on leash walking"
+    },
+    "weather": {
+      "kw": [
+        "thời tiết",
+        "trời mưa",
+        "trời nắng",
+        "mang ô",
+        "cửa sổ",
+        "trạng thái ẩn",
+        "nhìn thấy trạng thái",
+        "weather"
+      ],
+      "commons": "rain umbrella street"
+    },
+    "race": {
+      "kw": [
+        "tay đua",
+        "đua xe",
+        "về đích",
+        "phóng",
+        "lao khỏi đường",
+        "chạy đều",
+        "race"
+      ],
+      "commons": "motor racing track cars"
+    },
+    "rollercoaster": {
+      "kw": [
+        "tàu lượn",
+        "cú rơi",
+        "lên xuống",
+        "rollercoaster",
+        "chóng mặt",
+        "mất ngủ"
+      ],
+      "commons": "roller coaster drop"
+    },
+    "iceberg": {
+      "kw": [
+        "tảng băng",
+        "titanic",
+        "phần chìm",
+        "phần nổi",
+        "đuôi rủi ro",
+        "dưới mặt nước",
+        "iceberg"
+      ],
+      "commons": "iceberg ocean"
+    },
+    "money_burn": {
+      "kw": [
+        "cháy tài khoản",
+        "mất sạch",
+        "mất gần hết",
+        "đốt tiền",
+        "sụp",
+        "phá sản",
+        "xoá sổ",
+        "mất trắng",
+        "thua lỗ"
+      ],
+      "commons": "burning banknotes"
+    },
+    "panic": {
+      "kw": [
+        "hoảng loạn",
+        "hoảng",
+        "bán tháo",
+        "sợ hãi",
+        "fomo",
+        "đám đông",
+        "mất ngủ",
+        "panic"
+      ],
+      "commons": "stock exchange trading floor crowd"
+    },
+    "trader": {
+      "kw": [
+        "nhà đầu tư",
+        "trader",
+        "giao dịch",
+        "nhìn bảng",
+        "màn hình",
+        "đầu tư",
+        "chơi chứng khoán"
+      ],
+      "commons": "trader monitors stock charts"
+    },
+    "board": {
+      "kw": [
+        "bảng điện",
+        "sàn",
+        "toàn sàn",
+        "hose",
+        "mã cổ phiếu",
+        "quét",
+        "screening",
+        "bảng giá"
+      ],
+      "commons": "stock ticker board"
+    },
+    "coin": {
+      "kw": [
+        "tung đồng xu",
+        "đồng xu",
+        "xác suất",
+        "ngẫu nhiên",
+        "sấp ngửa",
+        "may mắn",
+        "xui"
+      ],
+      "commons": "coin flip"
+    },
+    "multiverse": {
+      "kw": [
+        "tương lai",
+        "kịch bản",
+        "nhánh",
+        "ngã rẽ",
+        "đa vũ trụ",
+        "mô phỏng"
+      ],
+      "commons": "crossroads road fork"
+    },
+    "rocket": {
+      "kw": [
+        "tên lửa",
+        "tăng nóng",
+        "bay cao",
+        "phóng lên",
+        "to the moon"
+      ],
+      "commons": "rocket launch"
+    },
+    "code": {
+      "kw": [
+        "python",
+        "dòng code",
+        "đoạn code",
+        "code này",
+        "lập trình",
+        "chạy code",
+        "code chạy",
+        "numpy"
+      ],
+      "commons": "laptop programming code screen"
+    },
+    "banker": {
+      "kw": [
+        "j.p. morgan",
+        "ngân hàng",
+        "4:15",
+        "bốn giờ mười lăm",
+        "chủ tịch",
+        "báo cáo rủi ro",
+        "trang giấy"
+      ],
+      "commons": "bank office trading desk"
+    },
+    "telescope": {
+      "kw": [
+        "sao chổi",
+        "quỹ đạo",
+        "thiên văn",
+        "legendre",
+        "kính thiên văn",
+        "bình phương nhỏ nhất"
+      ],
+      "commons": "telescope night sky comet"
+    },
+    "news": {
+      "kw": [
+        "tin xấu",
+        "tin tốt",
+        "tin tức",
+        "bất đối xứng",
+        "sợ nhiều hơn mừng"
+      ],
+      "commons": "newspaper headlines"
+    },
+    "speech": {
+      "kw": [
+        "giọng nói",
+        "nhận dạng giọng",
+        "âm thanh",
+        "ibm",
+        "micro"
+      ],
+      "commons": "microphone speech recognition"
+    },
+    "swan": {
+      "kw": [
+        "thiên nga",
+        "đuôi dày",
+        "sự kiện hiếm",
+        "hình chuông",
+        "mandelbrot",
+        "thiên nga đen"
+      ],
+      "commons": "black swan lake"
+    },
+    "exit": {
+      "kw": [
+        "thanh khoản",
+        "cửa ra",
+        "cửa thoát",
+        "bán ra mới khó",
+        "khớp vài trăm triệu",
+        "chen"
+      ],
+      "commons": "emergency exit crowd"
+    },
+    "particle": {
+      "kw": [
+        "hạt bụi",
+        "va đập",
+        "ma sát",
+        "vật lý",
+        "ornstein",
+        "uhlenbeck"
+      ],
+      "commons": "brownian motion pollen microscope"
+    },
+    "coin_crowd": {
+      "kw": [
+        "backtest",
+        "thử nhiều",
+        "nhờ may",
+        "thiên tài",
+        "lần thử",
+        "chọn cái tốt nhất",
+        "quá khớp"
+      ],
+      "commons": "coin toss"
+    },
+    "water_flow": {
+      "kw": [
+        "dòng tiền",
+        "tiền vào",
+        "tiền ra",
+        "rút ra",
+        "chaikin",
+        "cmf",
+        "vòi"
+      ],
+      "commons": "water tank pipe"
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "id": "ep10-kelly-bell-labs",
+  "topic": "kelly",
+  "seed": 31,
+  "params": {
+    "W": 0.53,
+    "R": 1.2
+  },
+  "title": "Công thức từ Bell Labs giúp một giáo sư toán thắng sòng blackjack",
+  "caption": "Năm 1956 John Kelly ở Bell Labs viết công thức chọn mức cược tối ưu. Vài năm sau Ed Thorp dùng nó cho blackjack và viết Beat the Dealer (1962). Ý tưởng cốt lõi: có lợi thế vẫn phải cược đúng cỡ. Code mô phỏng thật.",
+  "hashtags": [
+    "quant",
+    "kelly",
+    "quanlyvon",
+    "lichsutaichinh",
+    "QuanTik"
+  ],
+  "facts": {
+    "kelly": {
+      "value": "1956",
+      "source": "Kelly, J. L. (1956), A New Interpretation of Information Rate, Bell System Technical Journal 35(4)"
+    },
+    "thorp": {
+      "value": "1962",
+      "source": "Thorp, E. O. (1962), Beat the Dealer"
+    }
+  },
+  "scenes": [
+    {
+      "type": "hook",
+      "text": "Một công thức viết cho đường dây điện thoại, rồi được mang vào sòng bạc",
+      "kicker": "Lịch sử quant"
+    },
+    {
+      "type": "story",
+      "chip": "Năm 1956",
+      "era": "1956",
+      "title": "John Kelly, Bell Labs",
+      "text": "Kelly nghiên cứu truyền tin qua kênh nhiễu và hỏi: nếu biết trước một chút, nên đặt bao nhiêu để tài sản tăng nhanh nhất?",
+      "source": "Kelly (1956), Bell System Technical Journal",
+      "say": "Năm 1956, John Kelly ở Bell Labs nghiên cứu truyền tin qua kênh nhiễu. Ông hỏi: nếu có chút thông tin lợi thế, nên đặt bao nhiêu để tài sản tăng nhanh nhất?"
+    },
+    {
+      "type": "story",
+      "chip": "Năm 1962",
+      "era": "1962",
+      "title": "Ed Thorp mang Kelly vào blackjack",
+      "text": "Giáo sư toán Ed Thorp đếm bài để biết lúc nào có lợi thế, và dùng Kelly để quyết định đặt bao nhiêu. Ông viết lại trong Beat the Dealer.",
+      "source": "Thorp (1962), Beat the Dealer",
+      "say": "Giáo sư toán Ed Thorp đếm bài để biết khi nào mình có lợi thế, rồi dùng Kelly để quyết định đặt bao nhiêu. Năm 1962 ông viết cuốn Beat the Dealer."
+    },
+    {
+      "type": "formula",
+      "latex": "f^* = W - \\frac{1-W}{R}",
+      "caption": "W: xác suất thắng · R: lãi khi thắng / lỗ khi thua",
+      "say": "Công thức Kelly: tỷ lệ thắng trừ tỷ lệ thua chia cho tỷ lệ lãi trên lỗ."
+    },
+    {
+      "type": "run",
+      "outputs": [
+        {
+          "label": "xác suất thắng W",
+          "key": "W"
+        },
+        {
+          "label": "tỷ lệ lãi/lỗ R",
+          "key": "R"
+        },
+        {
+          "label": "Kelly f*",
+          "key": "f_star",
+          "highlight": true
+        },
+        {
+          "label": "trung vị, đặt gấp đôi",
+          "key": "med_double"
+        }
+      ],
+      "say": "Thắng {W}, lãi {R} lần khi thắng. Kelly bảo đặt {f_star} vốn. Đặt gấp đôi mức đó, tài sản trung vị còn {med_double}."
+    },
+    {
+      "type": "chart",
+      "title": "Bốn mức cược, cùng một lợi thế",
+      "say": "Bốn đường, cùng lợi thế. Đường xanh là Kelly. Đường đỏ đặt {quad_kelly} mỗi lần và gần như về không."
+    },
+    {
+      "type": "statement",
+      "chip": "Mang về",
+      "text": "Lợi thế cho bạn biết có nên chơi. Kelly cho bạn biết chơi bao nhiêu.",
+      "say": "Lợi thế cho bạn biết có nên chơi. Kelly cho bạn biết chơi bao nhiêu."
+    }
+  ],
+  "thumb": {
+    "tag": "Kelly · Lịch sử",
+    "headline": [
+      {
+        "t": "TỪ BELL LABS",
+        "size": 130
+      },
+      {
+        "t": "ĐẾN SÒNG",
+        "size": 170
+      },
+      {
+        "t": "[o]BLACKJACK[/o]",
+        "size": 160
+      }
+    ],
+    "pill": "Kelly 1956 · Thorp 1962 · code Python",
+    "labels": [
+      {
+        "label": "Kelly",
+        "value": "{f_star}",
+        "color": "green"
+      },
+      {
+        "label": "Gấp đôi",
+        "value": "{med_double}",
+        "color": "orange"
+      }
+    ]
+  },
+  "style": "story-mix",
+  "series_no": 10
+}

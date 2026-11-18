@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import inspect
 import math
+import re
 
 import numpy as np
 
@@ -23,9 +24,9 @@ ACC, POS, NEG, NEU, MUT, TXT = (hex_(THEME[k]) for k in ("accent", "positive", "
 
 
 # =============================================================== GARCH(1,1)
-def garch_demo(seed=7, n=500):
+def garch_demo(seed=7, n=500, a=0.09, b=0.89):
     rng = np.random.default_rng(seed)
-    w, a, b = 2e-6, 0.09, 0.89   # ω, α, β
+    w = 2e-6                     # ω; α=a, β=b
     r = np.zeros(n)
     s2 = np.full(n, w / (1 - a - b))
     for t in range(1, n):
@@ -35,8 +36,8 @@ def garch_demo(seed=7, n=500):
     return r, vol, a, b, w
 
 
-def compute_garch(seed=7, returns=None):
-    r, vol, a, b, w = garch_demo(seed)
+def compute_garch(seed=7, returns=None, **kw):
+    r, vol, a, b, w = garch_demo(seed, **kw)
     if returns is not None:  # real data: filter its variance with the same parameters
         r = np.asarray(returns, float)
         s2 = np.full(len(r), r.var())
@@ -86,13 +87,13 @@ def surface_garch(s, v):
 
 
 # =============================================================== Hurst exponent
-def hurst_demo(seed=1, n=3000):
+def hurst_demo(seed=1, n=3000, phi=0.9):
     rng = np.random.default_rng(seed)
     e = rng.normal(size=n)
     mr, inc = np.zeros(n), np.zeros(n)
     for t in range(1, n):
-        mr[t] = 0.9*mr[t-1] + e[t]    # hồi quy
-        inc[t] = 0.9*inc[t-1] + e[t]  # quán tính
+        mr[t] = phi*mr[t-1] + e[t]    # hồi quy
+        inc[t] = phi*inc[t-1] + e[t]  # quán tính
     walk, trend = np.cumsum(e), np.cumsum(inc)
     lags = np.arange(2, 50)
     def H(x):  # độ dốc log(σ_τ) theo log(τ)
@@ -101,41 +102,53 @@ def hurst_demo(seed=1, n=3000):
     return H(walk), H(mr), H(trend), (walk, mr, trend, lags)
 
 
-def compute_hurst(seed=1, returns=None):
-    h_rw, h_mr, h_tr, (walk, mr, tr, lags) = hurst_demo(seed)
+def compute_hurst(seed=1, returns=None, **kw):
+    h_rw, h_mr, h_tr, (walk, mr, tr, lags) = hurst_demo(seed, **kw)
     values = {"h_walk": h_rw, "h_meanrev": h_mr, "h_trend": h_tr, "n_lags": int(len(lags))}
     if returns is not None:
         x = np.cumsum(np.asarray(returns, float))
         sd = [np.std(x[l:] - x[:-l]) for l in lags]
         values["h_real"] = float(np.polyfit(np.log(lags), np.log(sd), 1)[0])
     formats = {k: "num2" for k in values}; formats["n_lags"] = "int"
-    return values, formats, {"walk": walk, "mr": mr, "tr": tr, "lags": lags}
+    return values, formats, {"walk": walk, "mr": mr, "tr": tr, "lags": lags,
+                             "h": {"walk": h_rw, "mr": h_mr, "tr": h_tr}}
+
+
+def _lanes(s):
+    """Ba chuỗi khác hẳn biên độ: chuẩn hoá cùng thang rồi xếp ba làn để so HÌNH DẠNG, không so độ lớn."""
+    out = []
+    for key in ("tr", "walk", "mr"):
+        y = s[key] - s[key][0]
+        out.append(y / (np.abs(y).max() + 1e-9))
+    return out
 
 
 def plot2d_hurst(ax, s, upto=1.0):
+    from core import fmt_vi
+
     n = len(s["walk"]); k = max(2, int(n * upto))
-    for key, c, lab in (("tr", POS, "xu hướng"), ("walk", MUT, "ngẫu nhiên"), ("mr", ACC, "hồi quy")):
-        y = s[key][:k]
-        ax.plot(np.arange(k), y - y[0], color=c, lw=1.8, label=lab)
-    allv = np.concatenate([s[k] - s[k][0] for k in ("tr", "walk", "mr")])
-    ax.set_xlim(0, n); ax.set_ylim(allv.min() * 1.05, allv.max() * 1.05)
-    ax.legend(loc="upper left", fontsize=18, frameon=False, labelcolor=TXT)
-    ax.set_xlabel("bước thời gian")
+    hs = (s["h"]["tr"], s["h"]["walk"], s["h"]["mr"])
+    for i, (y, c, lab, h) in enumerate(zip(_lanes(s), (POS, MUT, ACC), ("quán tính", "ngẫu nhiên", "hồi quy"), hs)):
+        off = (2 - i) * 2.4
+        ax.axhline(off, color=MUT, lw=0.8, ls=":")
+        ax.plot(np.arange(k), off + y[:k], color=c, lw=2)
+        ax.text(n * 0.01, off + 1.05, f"{lab} · H = {fmt_vi(h, 'num2')}", color=c, fontsize=18, weight="bold")
+    ax.set_xlim(0, n); ax.set_ylim(-1.3, 6.3); ax.set_yticks([])
+    ax.set_xlabel("bước thời gian (mỗi làn đã chuẩn hoá cùng thang)")
 
 
 def surface_hurst(s, v):
     n = 1500; x = np.arange(0, n, 5)
     lines = []
-    for i, (key, c) in enumerate((("mr", ACC), ("walk", MUT), ("tr", POS))):
-        z = s[key][:n:5] - s[key][0]
-        lines.append((x, np.full(len(x), i), z, c))
-    return {"lines": lines, "xl": "bước", "yl": "", "zl": "giá trị", "yticks": ["hồi quy", "ngẫu nhiên", "quán tính"]}
+    for i, (y, c) in enumerate(zip(_lanes(s)[::-1], (ACC, MUT, POS))):
+        lines.append((x, np.full(len(x), i), y[:n:5], c))
+    return {"lines": lines, "xl": "bước", "yl": "", "zl": "giá (chuẩn hoá)", "yticks": ["hồi quy", "ngẫu nhiên", "quán tính"]}
 
 
 # =============================================================== Ornstein–Uhlenbeck
-def ou_demo(seed=1, n=1000):
+def ou_demo(seed=1, n=1000, theta=0.10, sigma=0.6):
     rng = np.random.default_rng(seed)
-    theta, mu, sigma = 0.10, 0.0, 0.6
+    mu = 0.0
     x = np.zeros(n); x[0] = 4.0
     for t in range(1, n):
         x[t] = (x[t-1] + theta*(mu - x[t-1])
@@ -146,12 +159,12 @@ def ou_demo(seed=1, n=1000):
     return x, theta, theta_hat, half_life, a/(1-b)
 
 
-def compute_ou(seed=1, returns=None):
-    x, th, th_hat, hl, mu_hat = ou_demo(seed)
-    values = {"theta_true": th, "theta_hat": float(th_hat), "half_life": float(hl), "mu_hat": float(mu_hat),
+def compute_ou(seed=1, returns=None, **kw):
+    x, th, th_hat, hl, mu_hat = ou_demo(seed, **kw)
+    values = {"sigma": kw.get("sigma", 0.6), "theta_true": th, "theta_hat": float(th_hat), "half_life": float(hl), "mu_hat": float(mu_hat),
               "half_life_true": math.log(2) / th,
               "start": float(x[0]), "n_days": len(x), "band": float(2 * x[50:].std())}
-    formats = {"theta_true": "num2", "theta_hat": "num2", "half_life": "num1", "half_life_true": "num1", "mu_hat": "num2",
+    formats = {"sigma": "num1", "theta_true": "num2", "theta_hat": "num2", "half_life": "num1", "half_life_true": "num1", "mu_hat": "num2",
                "start": "num1", "n_days": "int", "band": "num1"}
     return values, formats, {"x": x}
 
@@ -166,11 +179,12 @@ def plot2d_ou(ax, s, upto=1.0):
 
 
 def surface_ou(s, v):
-    th, mu, sig, x0 = 0.10, 0.0, 0.6, 4.0
-    t = np.linspace(0, 60, 60); y = np.linspace(-6, 7, 70)
+    th, mu, sig, x0 = v["theta_true"], 0.0, v.get("sigma", 0.6), 4.0
+    # mật độ xác suất của spread theo thời gian: bắt đầu quanh x0, trôi về mu và loe ra tới độ rộng cân bằng
+    t = np.linspace(3, 60, 58); y = np.linspace(-5, 7, 70)
     T, Y = np.meshgrid(t, y)
     m = mu + (x0 - mu) * np.exp(-th * T)
-    var = sig ** 2 / (2 * th) * (1 - np.exp(-2 * th * T)) + 1e-3
+    var = sig ** 2 / (2 * th) * (1 - np.exp(-2 * th * T)) + 0.15
     Z = np.exp(-0.5 * (Y - m) ** 2 / var) / np.sqrt(2 * np.pi * var)
     return {"X": T, "Y": Y, "Z": Z, "xl": "phiên", "yl": "spread", "zl": "mật độ"}
 
@@ -193,8 +207,8 @@ def hmm_demo(seed=5, n=600):
     return np.array(probs), np.array(z), r, P
 
 
-def compute_hmm(seed=5, returns=None):
-    probs, z, r, P = hmm_demo(seed)
+def compute_hmm(seed=5, returns=None, **kw):
+    probs, z, r, P = hmm_demo(seed, **kw)
     dom = probs.argmax(1)
     values = {"p_bull_last": float(probs[-1, 0]), "p_bear_last": float(probs[-1, 1]), "p_side_last": float(probs[-1, 2]),
               "p_dom_last": float(probs[-1].max()), "stay_bull": float(P[0, 0]), "stay_bear": float(P[1, 1]),
@@ -214,9 +228,15 @@ def plot2d_hmm(ax, s, upto=1.0):
 
 
 def surface_hmm(s, v):
-    p = s["probs"]
-    return {"line": (p[:, 0], p[:, 1], p[:, 2]), "xl": "P(tăng)", "yl": "P(giảm)", "zl": "P(ngang)",
-            "colors": [POS, NEG, NEU][0:1]}
+    """Ba dải xác suất (tăng / đi ngang / giảm) theo thời gian, mỗi trạng thái một làn: thấy rõ lúc nào
+    trạng thái nào chiếm ưu thế, thay vì đám điểm trên một mặt phẳng nghiêng khó đọc."""
+    p = s["probs"]; n = len(p); x = np.arange(0, n, 3)
+    ker = np.ones(5) / 5
+    lines = []
+    for i, (col, c) in enumerate(((1, NEG), (2, NEU), (0, POS))):
+        z = np.convolve(p[:, col], ker, mode="same")[::3] * 100
+        lines.append((x, np.full(len(x), i), z, c))
+    return {"lines": lines, "xl": "phiên", "yl": "", "zl": "xác suất %", "yticks": ["giảm", "đi ngang", "tăng"]}
 
 
 # =============================================================== Monte Carlo (GBM)
@@ -233,8 +253,8 @@ def monte_carlo_demo(seed=21, paths=1000, days=60):
     return S, p5, p50, p95, prob_loss
 
 
-def compute_monte_carlo(seed=21, returns=None):
-    S, p5, p50, p95, pl = monte_carlo_demo(seed)
+def compute_monte_carlo(seed=21, returns=None, **kw):
+    S, p5, p50, p95, pl = monte_carlo_demo(seed, **kw)
     values = {"p5": p5, "p50": p50, "p95": p95, "prob_loss": pl, "n_paths": S.shape[0], "days": S.shape[1],
               "s0": 100.0, "sigma": 0.35, "worst": float(S[:, -1].min()), "best": float(S[:, -1].max())}
     formats = {"p5": "num1", "p50": "num1", "p95": "num1", "prob_loss": "pct0", "n_paths": "int", "days": "int",
@@ -274,8 +294,8 @@ def sharpe_demo(seed=12, n=750):
     return sharpe(a), sharpe(b), cagr(a), cagr(b), a, b
 
 
-def compute_sharpe(seed=12, returns=None):
-    sa, sb, ca, cb, a, b = sharpe_demo(seed)
+def compute_sharpe(seed=12, returns=None, **kw):
+    sa, sb, ca, cb, a, b = sharpe_demo(seed, **kw)
     dd = lambda r: float((np.cumprod(1 + r) / np.maximum.accumulate(np.cumprod(1 + r)) - 1).min())
     values = {"sharpe_a": sa, "sharpe_b": sb, "mean_a": a.mean(), "mean_b": b.mean(), "cagr_a": ca, "cagr_b": cb, "vol_a": a.std() * math.sqrt(252),
               "vol_b": b.std() * math.sqrt(252), "dd_a": dd(a), "dd_b": dd(b), "n_days": len(a)}
@@ -316,8 +336,8 @@ def sortino_demo(seed=3, n=750):
             sortino(a), sortino(b), a, b)
 
 
-def compute_sortino(seed=3, returns=None):
-    sa, sb, ta, tb, a, b = sortino_demo(seed)
+def compute_sortino(seed=3, returns=None, **kw):
+    sa, sb, ta, tb, a, b = sortino_demo(seed, **kw)
     dn = lambda r: float(np.sqrt(np.mean(np.minimum(r, 0) ** 2)))
     values = {"sharpe_a": sa, "sharpe_b": sb, "sortino_a": ta, "sortino_b": tb, "n_days": len(a),
               "worst_a": float(a.min()), "worst_b": float(b.min()), "best_a": float(a.max()), "best_b": float(b.max()),
@@ -364,8 +384,8 @@ def var_cvar_demo(seed=13, n=2500, df=3):
     return out, loss.max(), r
 
 
-def compute_var_cvar(seed=13, returns=None):
-    out, w, r = var_cvar_demo(seed)
+def compute_var_cvar(seed=13, returns=None, **kw):
+    out, w, r = var_cvar_demo(seed, **kw)
     if returns is not None:
         r = np.asarray(returns, float); loss = -r; w = float(loss.max())
         for q, z in ((95, 1.645), (99, 2.326)):
@@ -413,34 +433,69 @@ def kelly_demo(seed=4, bets=500, W=0.55, R=1.0):
     return f_star, fracs, out, win
 
 
-def compute_kelly(seed=4, returns=None):
-    f, fr, out, win = kelly_demo(seed)
+def compute_kelly(seed=4, returns=None, **kw):
+    f, fr, out, win = kelly_demo(seed, **kw)
     med = list(out.values())
-    values = {"W": 0.55, "R": 1.0, "f_star": f, "half_kelly": fr[0], "double_kelly": fr[2], "quad_kelly": fr[3],
+    W, R = kw.get("W", 0.55), kw.get("R", 1.0)
+    values = {"W": W, "R": R, "f_star": f, "half_kelly": fr[0], "double_kelly": fr[2], "quad_kelly": fr[3],
               "med_half": med[0], "med_full": med[1], "med_double": med[2], "med_quad": med[3], "bets": win.shape[1]}
     formats = {"W": "pct0", "R": "num0", "f_star": "pct0", "half_kelly": "pct0", "double_kelly": "pct0",
                "quad_kelly": "pct0", "med_half": "x1", "med_full": "x1", "med_double": "x1", "med_quad": "x2", "bets": "int"}
-    return values, formats, {"fracs": fr, "win": win, "R": 1.0}
+    formats["R"] = "num1" if R != int(R) else "num0"
+    return values, formats, {"fracs": fr, "win": win, "R": R}
 
 
 def plot2d_kelly(ax, s, upto=1.0):
-    win = s["win"][:400]; bets = win.shape[1]; k = max(2, int(bets * upto)); x = np.arange(k)
-    for f, c in zip(s["fracs"], [MUT, POS, NEU, NEG]):
+    """Bốn đường = bốn mức cược, đặt tên đúng như lời đọc (½ Kelly, Kelly, 2×, 4×); số cuối đường = đúng giá trị
+    trung vị code tính (cùng 2.000 người mô phỏng), để hình và lời không bao giờ lệch nhau."""
+    import matplotlib.ticker as mt
+
+    from core import fmt_vi
+
+    win = s["win"]; bets = win.shape[1]; k = max(2, int(bets * upto)); x = np.arange(1, k + 1)
+    names = ["½ Kelly", "Kelly", "2× Kelly", "4× Kelly"]
+    ax.axhline(1, color=MUT, lw=1.2, ls="--")
+    placed = []
+    for f, c, name, lw in zip(s["fracs"], [MUT, POS, NEU, NEG], names, [2.2, 3.6, 2.6, 3.0]):
         w = np.median(np.cumprod(np.where(win, 1 + f * s["R"], 1 - f), axis=1), axis=0)
-        ax.plot(x, w[:k], color=c, lw=2.2, label=f"f = {f*100:.0f}%".replace(".", ","))
-    ax.set_yscale("log"); ax.set_xlim(0, bets); ax.set_ylim(1e-3, 1e2); ax.set_xlabel("số lần đặt"); ax.set_ylabel("tài sản trung vị (log)")
-    ax.legend(loc="upper left", fontsize=18, frameon=False, labelcolor=TXT)
+        ax.plot(x, w[:k], color=c, lw=lw)
+        y_end = max(w[k - 1], 2.5e-3)
+        for q in placed:  # nhãn cách nhau tối thiểu ~0,55 bậc log để không chồng chữ
+            if abs(np.log10(y_end) - np.log10(q)) < 0.55:
+                y_end = q / 10 ** 0.55 if y_end <= q else q * 10 ** 0.55
+        placed.append(y_end)
+        ax.annotate(f"{name} ({fmt_vi(f, 'pct0')})\n{fmt_vi(w[k - 1], 'x2' if w[k - 1] < 0.1 else 'x1')}",
+                    (k, y_end), xytext=(8, 0), textcoords="offset points", color=c, fontsize=17, weight="bold",
+                    va="center")
+    ax.set_yscale("log"); ax.set_xlim(0, bets * 1.32); ax.set_ylim(1e-3, 1e2)
+    ax.yaxis.set_major_formatter(mt.FuncFormatter(
+        lambda v, _: (f"{v:g}".replace(".", ",") + "x") if v < 1 else fmt_vi(v, "x0")))
+    ax.set_xticks([0, bets // 2, bets])
+    ax.set_xlabel("số lần đặt cược"); ax.set_ylabel("tài sản trung vị (lần vốn)")
 
 
 def surface_kelly(s, v):
-    f = np.linspace(0.0, 0.6, 50); W = np.linspace(0.45, 0.70, 40)
+    """Tốc độ tăng trưởng log mỗi lần cược theo (mức cược f, tỷ lệ thắng W). Sàn cắt ở mức âm vừa phải để
+    thấy rõ cái đỉnh; đường trắng = đỉnh f* = 2W−1 (R = 1), chấm cam = trường hợp trong video."""
+    f = np.linspace(0.0, 0.42, 60); W = np.linspace(0.50, 0.65, 40)
     F, Wm = np.meshgrid(f, W)
-    G = Wm * np.log1p(F) + (1 - Wm) * np.log(np.clip(1 - F, 1e-6, None))
-    return {"X": F * 100, "Y": Wm * 100, "Z": G * 100, "xl": "tỷ lệ cược f %", "yl": "tỷ lệ thắng W %", "zl": "tăng trưởng log %"}
+    G = Wm * np.log1p(F) + (1 - Wm) * np.log1p(-F)
+    floor = -0.03
+    Z = np.maximum(G, floor) * 100
+    wr = np.linspace(0.505, 0.65, 30); fr = np.clip(2 * wr - 1, 0, 0.42)
+    gr = wr * np.log1p(fr) + (1 - wr) * np.log1p(-fr)
+    w0, f0 = v["W"], v["f_star"]
+    g0 = w0 * np.log1p(f0) + (1 - w0) * np.log1p(-f0)
+    return {"X": F * 100, "Y": Wm * 100, "Z": Z, "xl": "mức cược f %", "yl": "tỷ lệ thắng W %",
+            "zl": "tăng trưởng/lần %", "ridge": (fr * 100, wr * 100, gr * 100 + 0.05),
+            "point": (f0 * 100, w0 * 100, g0 * 100 + 0.1, "đỉnh Kelly"), "label_z": 4.6}
 
 
 # =============================================================== registry
 TOPICS = ["garch", "hurst", "ou", "hmm", "monte_carlo", "sharpe", "sortino", "var_cvar", "kelly"]
+from models_extra import *  # noqa: E402,F401,F403  (mô hình bổ sung, cùng giao diện)
+from models_extra import EXTRA_TOPICS  # noqa: E402
+TOPICS += EXTRA_TOPICS
 
 
 def _style(ax):
@@ -450,8 +505,16 @@ def _style(ax):
     ax.yaxis.label.set_size(20); ax.xaxis.label.set_size(20)
 
 
+def _show_args(src, args):
+    """Viết lại dòng def để code trên màn hình khớp đúng seed/tham số của lần chạy."""
+    head, _, rest = src.partition("\n")
+    for k, v in args.items():
+        head = re.sub(rf"\b{k}=[^,)]+", f"{k}={v}", head)
+    return head + "\n" + rest
+
+
 class Model:
-    def __init__(self, topic, seed=None, returns=None):
+    def __init__(self, topic, seed=None, returns=None, params=None):
         if topic not in TOPICS:
             raise ValueError(f"unknown topic {topic}; known: {TOPICS}")
         g = globals()
@@ -459,10 +522,11 @@ class Model:
         demo = g[f"{topic}_demo"]
         sig = inspect.signature(demo)
         self.seed = seed if seed is not None else sig.parameters["seed"].default
-        self.values, self.formats, self.series = g[f"compute_{topic}"](self.seed, returns)
+        self.params = {k: v for k, v in (params or {}).items() if k in sig.parameters and k != "seed"}
+        self.values, self.formats, self.series = g[f"compute_{topic}"](self.seed, returns, **self.params)
         self.values = {k: (float(v) if isinstance(v, (np.floating, float)) else int(v) if isinstance(v, (np.integer, int)) else v)
                        for k, v in self.values.items()}
-        self.code = inspect.getsource(demo).rstrip()
+        self.code = _show_args(inspect.getsource(demo).rstrip(), {"seed": self.seed, **self.params})
         self._plot2d = g[f"plot2d_{topic}"]
         self._surface = g[f"surface_{topic}"]
         self.real_data = returns is not None

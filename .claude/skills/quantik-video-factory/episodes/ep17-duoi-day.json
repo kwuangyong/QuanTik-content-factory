@@ -1,0 +1,99 @@
+{
+  "id": "ep17-duoi-day",
+  "topic": "fat_tails",
+  "seed": 6,
+  "title": "Phân phối chuẩn, log-normal và đuôi dày: vì sao lợi suất thực tế không chuẩn",
+  "caption": "Sách giáo khoa vẽ lợi suất thành hình chuông. Năm 1963 Mandelbrot chỉ ra giá thật có quá nhiều ngày cực đoan. Video so sánh phân phối chuẩn, log-normal và đuôi dày bằng code thật, và giải thích vì sao QuanTik dùng GARCH–t thay vì phân phối chuẩn.",
+  "hashtags": [
+    "quant",
+    "fattails",
+    "xacsuat",
+    "quanlyruiro",
+    "QuanTik"
+  ],
+  "facts": {
+    "mandelbrot": {
+      "value": "1963",
+      "source": "Mandelbrot (1963), Journal of Business 36(4)"
+    }
+  },
+  "scenes": [
+    {
+      "type": "hook",
+      "text": "Sách giáo khoa: ngày giật 4 sigma {once_every_years} năm mới có một lần. Mô phỏng đuôi dày: *{big_t} lần*.",
+      "kicker": "Phân phối",
+      "visual": "swan"
+    },
+    {
+      "type": "broll",
+      "say": "Người châu Âu từng tin mọi con thiên nga đều trắng, cho tới khi thấy thiên nga đen ở Úc. Cú sập thị trường cũng thế.",
+      "visual": "swan",
+      "caption": "Hiếm, nhưng *có thật*",
+      "optional": true,
+      "image": "black-swan",
+      "label": "Thiên nga đen · Úc"
+    },
+    {
+      "type": "formula",
+      "latex": "r_t \\sim \\mathcal{N}(\\mu,\\sigma^2) \\;\\Rightarrow\\; P_t = P_0\\, e^{\\sum r} \\text{ là log-normal}",
+      "caption": "Lợi suất log chuẩn → giá log-normal: không âm, lệch phải",
+      "say": "Mô hình sách giáo khoa: lợi suất log là phân phối chuẩn, nên giá là log-normal: không bao giờ âm và lệch về bên phải. Đẹp, nhưng thiếu một thứ."
+    },
+    {
+      "type": "story",
+      "chip": "Năm 1963",
+      "era": "1963",
+      "title": "Mandelbrot và giá bông",
+      "text": "Benoit Mandelbrot nghiên cứu giá bông hàng trăm năm và thấy những cú nhảy lớn xuất hiện quá thường xuyên so với hình chuông.",
+      "source": "Mandelbrot (1963), Journal of Business",
+      "say": "Năm 1963, Benoit Mandelbrot nghiên cứu giá bông và thấy những cú nhảy lớn xuất hiện thường xuyên hơn hình chuông cho phép rất nhiều.",
+      "visual": "professor",
+      "image": "mandelbrot"
+    },
+    {
+      "type": "run",
+      "outputs": [
+        {
+          "label": "số phiên",
+          "key": "n_days"
+        },
+        {
+          "label": "ngày > 4σ, chuẩn",
+          "key": "big_z"
+        },
+        {
+          "label": "ngày > 4σ, đuôi dày",
+          "key": "big_t",
+          "highlight": true
+        },
+        {
+          "label": "kurtosis dư",
+          "key": "kurt_t"
+        }
+      ],
+      "say": "Hai chuỗi {n_days} phiên, cùng độ lệch chuẩn. Chuỗi chuẩn có {big_z} ngày vượt bốn sigma. Chuỗi đuôi dày có {big_t}."
+    },
+    {
+      "type": "chart",
+      "title": "Tần suất, thang log",
+      "say": "Trục dọc thang log để nhìn rõ đuôi. Cột đỏ kéo dài xa ngoài vạch bốn sigma, nơi đường chuẩn đã gần bằng không."
+    },
+    {
+      "type": "surface",
+      "view": "orbit",
+      "caption": "Bậc tự do càng nhỏ, đuôi càng dày",
+      "say": "3D: trục sâu là bậc tự do. Càng nhỏ, hai cánh càng nâng lên. Đó là lý do QuanTik dùng GARCH với phân phối t thay vì phân phối chuẩn."
+    },
+    {
+      "type": "statement",
+      "chip": "Mang về",
+      "text": "Lợi suất thật không chuẩn. Mô hình rủi ro phải tính tới đuôi.",
+      "say": "Lợi suất thật không chuẩn. Mô hình rủi ro phải tính tới đuôi."
+    }
+  ],
+  "thumb": {
+    "tag": "Đuôi dày"
+  },
+  "style": "story-mix",
+  "series_no": 17
+}

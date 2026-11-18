@@ -1,0 +1,26 @@
+{
+ "bundle_id": "fixture-market-snapshot",
+ "created_at": "2026-11-05T15:30:00+07:00",
+ "datasets": [
+  {
+   "name": "indexsnaps",
+   "source_id": "synthetic-fixture",
+   "url": "fixture",
+   "retrieved_at": "2026-11-05T15:30:00+07:00",
+   "file": "indexsnaps.json",
+   "status": "ok",
+   "rows": 4,
+   "period": "phiên 05/11/2026"
+  },
+  {
+   "name": "instruments",
+   "source_id": "synthetic-fixture",
+   "url": "fixture",
+   "retrieved_at": "2026-11-05T15:30:00+07:00",
+   "file": "instruments.json",
+   "status": "ok",
+   "rows": 20,
+   "period": "phiên 05/11/2026"
+  }
+ ]
+}

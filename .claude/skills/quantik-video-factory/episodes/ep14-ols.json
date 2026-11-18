@@ -1,0 +1,114 @@
+{
+  "id": "ep14-ols",
+  "topic": "ols",
+  "seed": 2,
+  "title": "Một điểm dữ liệu có thể bẻ cong cả đường hồi quy",
+  "caption": "OLS (bình phương nhỏ nhất) là nền của beta, đường xu hướng và rất nhiều mô hình quant. Legendre công bố năm 1805 để tính quỹ đạo sao chổi. Điểm mạnh của nó cũng là điểm yếu: một điểm ngoại lai đủ kéo lệch cả đường.",
+  "hashtags": [
+    "quant",
+    "hoiquy",
+    "OLS",
+    "thongke",
+    "QuanTik"
+  ],
+  "facts": {
+    "leg": {
+      "value": "1805",
+      "source": "Legendre, Nouvelles méthodes pour la détermination des orbites des comètes (1805)"
+    }
+  },
+  "scenes": [
+    {
+      "type": "hook",
+      "text": "Một nhà toán học nhìn sao chổi nghĩ ra công thức này. Một điểm *bẩn* là đủ phá nó.",
+      "kicker": "Hồi quy",
+      "visual": "telescope"
+    },
+    {
+      "type": "story",
+      "chip": "Năm 1805",
+      "era": "1805",
+      "title": "Legendre và quỹ đạo sao chổi",
+      "text": "Adrien-Marie Legendre cần khớp quỹ đạo từ các lần quan sát có sai số. Ông chọn đường làm tổng bình phương sai số nhỏ nhất.",
+      "source": "Legendre (1805)",
+      "say": "Năm 1805, Legendre cần khớp quỹ đạo sao chổi từ các lần quan sát có sai số. Ông chọn đường làm tổng bình phương sai số nhỏ nhất.",
+      "visual": "telescope",
+      "image": "legendre"
+    },
+    {
+      "type": "code",
+      "lines": [
+        5,
+        8
+      ],
+      "hl": 6,
+      "note": "Nghiệm đóng: (XᵀX)⁻¹Xᵀy",
+      "say": "Hơn hai trăm năm sau, nó vẫn chỉ là một dòng code: X chuyển vị nhân X, nghịch đảo, nhân X chuyển vị y."
+    },
+    {
+      "type": "run",
+      "outputs": [
+        {
+          "label": "số điểm",
+          "key": "n"
+        },
+        {
+          "label": "độ dốc thật",
+          "key": "b_true"
+        },
+        {
+          "label": "độ dốc ước lượng",
+          "key": "b_hat",
+          "highlight": true
+        },
+        {
+          "label": "R²",
+          "key": "r2"
+        }
+      ],
+      "say": "Với {n} điểm, độ dốc thật {b_true}, OLS ước lượng {b_hat}, giải thích {r2} phương sai."
+    },
+    {
+      "type": "chart",
+      "title": "Phần dư và một điểm ngoại lai",
+      "notes": [
+        [
+          0.0,
+          "Vạch xám: phần dư"
+        ],
+        [
+          0.86,
+          "Chấm đỏ kéo độ dốc xuống {b_out}"
+        ]
+      ],
+      "say": "Vạch xám là phần dư. Giờ thêm một chấm đỏ ở xa. Vì sai số bị bình phương, chấm đó kéo cả đường xuống độ dốc {b_out}."
+    },
+    {
+      "type": "surface",
+      "view": "top",
+      "caption": "Sai số bình phương theo hệ số chặn và độ dốc",
+      "say": "3D là bề mặt sai số: một cái bát. OLS chính là đáy bát. Một điểm ngoại lai làm cả cái bát lệch đi."
+    },
+    {
+      "type": "usage",
+      "title": "Trước khi tin một đường hồi quy",
+      "steps": [
+        "Vẽ phần dư, tìm điểm ngoại lai",
+        "R² cao chưa phải nhân quả",
+        "Thử bỏ từng điểm xem độ dốc có đứng vững"
+      ],
+      "say": "Trước khi tin một đường hồi quy: vẽ phần dư. Nhớ R bình phương cao chưa phải nhân quả. Và thử bỏ từng điểm xem độ dốc có đứng vững không."
+    },
+    {
+      "type": "statement",
+      "chip": "Mang về",
+      "text": "OLS mạnh và nhanh, nhưng nghe lời điểm ngoại lai. Luôn nhìn phần dư.",
+      "say": "OLS mạnh và nhanh, nhưng nghe lời điểm ngoại lai. Luôn nhìn phần dư."
+    }
+  ],
+  "thumb": {
+    "tag": "Hồi quy OLS"
+  },
+  "style": "story-mix",
+  "series_no": 14
+}

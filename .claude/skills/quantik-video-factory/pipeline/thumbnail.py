@@ -132,13 +132,35 @@ def chart_generic(m, w, h):
     return F.fig_to_img(fig, transparent=True)
 
 
+def formula_card(m, w, h, ep=None):
+    """Chủ đề không có chart: công thức lớn (màu mực) giữa vùng chart; ưu tiên công thức trong episode."""
+    from term_topic import tex_safe
+    img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    tex = next((sc["latex"] for sc in (ep or {}).get("scenes", []) if sc.get("type") == "formula"), "")
+    if not tex and getattr(m, "has_formula", False):
+        tex = tex_safe(getattr(m, "entry", {}).get("formulaLatex", ""))
+    if tex:
+        fm = F.fit_width(F.math_img(tex, 120, "#0f3b2e"), w - 40, h - 40)
+        img.paste(fm, ((w - fm.width) // 2, (h - fm.height) // 2), fm)
+    return img
+
+
 CHARTS = {"sortino": chart_sortino}  # thêm chart riêng cho topic khác ở đây
 
 
-def build(topic, no, out):
-    m = Model(topic)
-    vd = load_model_kb(topic)
-    th = vd.get("thumb", {})
+def build(topic, no, out, style=None, episode=None):
+    ep = episode or {}
+    from models import TOPICS
+    if topic in TOPICS:
+        m = Model(topic, ep.get("seed"), None, ep.get("params"))
+        vd = load_model_kb(topic)
+    else:  # chủ đề catalog: không có mô hình chạy → chart ngưỡng nếu có, không thì thẻ công thức
+        import catalog as CAT
+        import term_topic as TT
+        m = TT.TermModel(CAT.get(topic), ep.get("seed")); vd = {}
+    th = dict(vd.get("thumb", {}))
+    th.update(vd.get("thumb_variants", {}).get(style or "", {}))  # tiêu đề riêng theo style, tránh ảnh trùng
+    th.update(ep.get("thumb", {}))  # episode JSON có khối "thumb" riêng → ảnh riêng cho đúng video đó
     f = lambda s: fill(s, m.values, m.formats)
     img = background(); d = ImageDraw.Draw(img)
 
@@ -159,7 +181,7 @@ def build(topic, no, out):
     labels = th.get("labels", [])
     cw = W - 128 - (270 if labels else 0)
     ch_h = 1610 - y
-    im = CHARTS.get(topic, chart_generic)(m, cw, ch_h)
+    im = CHARTS.get(topic, chart_generic)(m, cw, ch_h) if getattr(m, "has_chart", True) else formula_card(m, cw, ch_h, ep)
     img.paste(im, (64, y), im)
     for i, lb in enumerate(labels):
         col = C["green"] if lb.get("color") == "green" else C["orange"]
@@ -188,8 +210,14 @@ def build(topic, no, out):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--topic", required=True)
+    ap.add_argument("--topic")
+    ap.add_argument("--episode", help="episode JSON: lấy topic, seed, params và khối thumb riêng")
     ap.add_argument("--no", type=int, required=True, help="số tập trong series Học Quant cùng QuanTik")
     ap.add_argument("--out", required=True)
+    ap.add_argument("--style", help="lấy biến thể thumb_variants[<style>] nếu có")
     a = ap.parse_args()
-    print(build(a.topic, a.no, a.out))
+    ep = None
+    if a.episode:
+        import json
+        ep = json.loads(Path(a.episode).read_text(encoding="utf-8"))
+    print(build(a.topic or ep["topic"], a.no, a.out, a.style or (ep or {}).get("style"), ep))

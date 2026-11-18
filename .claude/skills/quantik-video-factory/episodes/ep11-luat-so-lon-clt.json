@@ -1,0 +1,99 @@
+{
+  "id": "ep11-luat-so-lon-clt",
+  "topic": "lln_clt",
+  "seed": 8,
+  "title": "Luật số lớn và định lý giới hạn trung tâm: vì sao vài lệnh thắng chưa chứng minh gì",
+  "caption": "Luật số lớn (Bernoulli, 1713): trung bình mẫu tiến về kỳ vọng. Định lý giới hạn trung tâm: trung bình của nhiều quan sát có dạng chuông dù dữ liệu gốc lệch. Hai định lý này giải thích vì sao trong đầu tư, vài lần thắng chưa nói lên điều gì.",
+  "hashtags": [
+    "quant",
+    "xacsuat",
+    "thongke",
+    "CLT",
+    "QuanTik"
+  ],
+  "facts": {
+    "bern": {
+      "value": "1713",
+      "source": "Jacob Bernoulli, Ars Conjectandi (1713)"
+    }
+  },
+  "allowed_literals": [
+    "10 lần",
+    "100 lần",
+    "1.000 lần"
+  ],
+  "scenes": [
+    {
+      "type": "hook",
+      "text": "Thắng 3 lệnh liền chưa chứng minh bạn giỏi. Toán học nói vì sao.",
+      "kicker": "Xác suất"
+    },
+    {
+      "type": "story",
+      "chip": "Năm 1713",
+      "era": "1713",
+      "title": "Jacob Bernoulli và luật số lớn",
+      "text": "Bernoulli chứng minh: lặp càng nhiều lần, tỷ lệ quan sát được càng gần xác suất thật. Ông mất hơn hai mươi năm để hoàn thiện chứng minh.",
+      "source": "Bernoulli, Ars Conjectandi (1713)",
+      "say": "Năm 1713, cuốn sách của Jacob Bernoulli chứng minh luật số lớn: lặp càng nhiều, trung bình quan sát càng gần giá trị thật."
+    },
+    {
+      "type": "chart",
+      "title": "Trung bình cộng dồn",
+      "notes": [
+        [
+          0.0,
+          "Kỳ vọng thật = {true_mean}"
+        ],
+        [
+          0.5,
+          "Sau 10 lần: {mean_10} · sau 100 lần: {mean_100}"
+        ],
+        [
+          0.85,
+          "Sau {n} lần: {mean_n}"
+        ]
+      ],
+      "say": "Code lấy {n} quan sát có kỳ vọng {true_mean}. Sau 10 lần, trung bình là {mean_10}. Sau 100 lần, {mean_100}. Sau {n} lần, {mean_n}."
+    },
+    {
+      "type": "myth",
+      "myth": "Thua 5 lần liền thì lần sau dễ thắng hơn, luật số lớn sẽ bù lại.",
+      "fact": "Luật số lớn không bù trừ. Nó pha loãng: những lần lệch cũ chìm dần giữa rất nhiều lần mới.",
+      "say": "Hiểu lầm phổ biến: thua năm lần liền thì lần sau dễ thắng hơn. Sai. Luật số lớn không bù trừ, nó pha loãng."
+    },
+    {
+      "type": "surface",
+      "view": "spin",
+      "caption": "Dữ liệu gốc lệch, độ lệch {skew_raw} → trung bình {k} quan sát, độ lệch còn {skew_means}",
+      "say": "Còn đây là định lý giới hạn trung tâm. Dữ liệu gốc lệch hẳn một bên. Nhưng trung bình của {k} quan sát thì gần thành quả chuông."
+    },
+    {
+      "type": "compare",
+      "title": "Sai số giảm theo căn bậc hai",
+      "left": {
+        "label": "Độ lệch chuẩn lý thuyết",
+        "value": "{sd_theory}",
+        "note": "σ / √k",
+        "color": "positive"
+      },
+      "right": {
+        "label": "Đo được từ mô phỏng",
+        "value": "{sd_means}",
+        "color": "neutral"
+      },
+      "say": "Độ phân tán của trung bình đúng bằng sigma chia căn k: lý thuyết {sd_theory}, mô phỏng {sd_means}. Muốn sai số giảm một nửa, cần gấp bốn lần dữ liệu."
+    },
+    {
+      "type": "statement",
+      "chip": "Mang về",
+      "text": "Một lần chưa nói gì. Lợi thế thật chỉ lộ ra sau rất nhiều lần.",
+      "say": "Một lần chưa nói gì. Lợi thế thật chỉ lộ ra sau rất nhiều lần."
+    }
+  ],
+  "thumb": {
+    "tag": "LLN · CLT"
+  },
+  "style": "story-mix",
+  "series_no": 11
+}

@@ -1,0 +1,101 @@
+{
+  "id": "ep22-psr-dsr",
+  "topic": "psr",
+  "seed": 1,
+  "title": "Backtest Sharpe gần 2 mà lợi thế thật bằng 0?",
+  "caption": "Thử 200 chiến lược hoàn toàn ngẫu nhiên, chọn cái có Sharpe cao nhất, và nó trông như một chiến lược xuất sắc. PSR và DSR (Bailey & López de Prado) giúp trả lời: Sharpe này có phải do may, sau khi tính cả số lần thử?",
+  "hashtags": [
+    "quant",
+    "backtest",
+    "sharpe",
+    "PSR",
+    "QuanTik"
+  ],
+  "facts": {
+    "psr": {
+      "value": "2012",
+      "source": "Bailey & López de Prado (2012), Journal of Risk 15(2)"
+    },
+    "dsr": {
+      "value": "2014",
+      "source": "Bailey & López de Prado (2014), Journal of Portfolio Management 40(5)"
+    }
+  },
+  "allowed_literals": [
+    "Sharpe 1",
+    "trên 1"
+  ],
+  "scenes": [
+    {
+      "type": "hook",
+      "text": "Backtest Sharpe {best_sr} mà lợi thế thật *bằng không*? Bạn đang bị chính mình lừa.",
+      "kicker": "Backtest",
+      "visual": "coin_crowd"
+    },
+    {
+      "type": "broll",
+      "say": "Cho thật nhiều người cùng tung đồng xu. Kiểu gì cũng có người ngửa liền mười lần, và được gọi là thiên tài.",
+      "visual": "coin_crowd",
+      "caption": "Thiên tài, hay *may*?",
+      "optional": true
+    },
+    {
+      "type": "code",
+      "lines": [
+        2,
+        5
+      ],
+      "hl": 3,
+      "note": "{trials} chiến lược · không cái nào có lợi thế",
+      "say": "Code tạo {trials} chiến lược, mỗi cái {T} phiên, lợi suất thuần ngẫu nhiên. Không cái nào có lợi thế. Rồi mình chọn cái có Sharpe cao nhất."
+    },
+    {
+      "type": "chart",
+      "title": "Sharpe năm của {trials} backtest",
+      "say": "Cột đỏ là {n_over1} chiến lược có Sharpe trên 1 hoàn toàn nhờ may. Vạch cam là cái được chọn: Sharpe {best_sr}."
+    },
+    {
+      "type": "quiz",
+      "question": "Chiến lược tốt nhất có PSR {psr_best}. Xác suất nó có lợi thế thật là bao nhiêu?",
+      "options": [
+        "{psr_best}",
+        "Khoảng một nửa",
+        "Bằng không, theo cách mình tạo dữ liệu"
+      ],
+      "answer": 2,
+      "say": "Đố bạn: PSR nói {psr_best}. Xác suất nó có lợi thế thật là bao nhiêu? Đáp án: bằng không. Vì mình tạo dữ liệu không có lợi thế nào."
+    },
+    {
+      "type": "compare",
+      "title": "Tính cả số lần thử",
+      "left": {
+        "label": "PSR (chỉ nhìn cái tốt nhất)",
+        "value": "{psr_best}",
+        "color": "negative"
+      },
+      "right": {
+        "label": "DSR (tính {trials} lần thử)",
+        "value": "{dsr_best}",
+        "color": "positive"
+      },
+      "say": "PSR chỉ nhìn một chiến lược. DSR nâng ngưỡng lên bằng Sharpe kỳ vọng của cái tốt nhất trong {trials} lần thử, và chỉ còn {dsr_best}."
+    },
+    {
+      "type": "surface",
+      "view": "top",
+      "caption": "PSR theo Sharpe quan sát và độ dài backtest",
+      "say": "3D: backtest càng ngắn, Sharpe cao càng ít ý nghĩa."
+    },
+    {
+      "type": "statement",
+      "chip": "Mang về",
+      "text": "Thử càng nhiều, cái tốt nhất càng dễ là may. Hãy hỏi: đã thử bao nhiêu lần?",
+      "say": "Thử càng nhiều, cái tốt nhất càng dễ là may. Hãy hỏi: đã thử bao nhiêu lần?"
+    }
+  ],
+  "thumb": {
+    "tag": "PSR · DSR"
+  },
+  "style": "story-mix",
+  "series_no": 22
+}

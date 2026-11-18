@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "quantik/market_report.schema.json",
+  "title": "Market report",
+  "description": "Đầu ra giai đoạn phân tích (analyze.py). Tách rõ observed / model / limitation; interpretation nằm ở editorial.",
+  "type": "object",
+  "required": [
+    "id",
+    "generated_at",
+    "data_status",
+    "bundle",
+    "observed",
+    "model",
+    "limitations"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "data_status": {
+      "enum": [
+        "fresh",
+        "intraday",
+        "stale",
+        "unavailable",
+        "sample"
+      ]
+    },
+    "as_of": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "ngày giao dịch của dữ liệu (YYYY-MM-DD)"
+    },
+    "sessions_behind": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "bundle": {
+      "type": "object",
+      "required": [
+        "datasets"
+      ],
+      "properties": {
+        "datasets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "source_id",
+              "status"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "source_id": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "retrieved_at": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "period": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "enum": [
+                  "ok",
+                  "failed",
+                  "missing",
+                  "sample"
+                ]
+              },
+              "rows": {
+                "type": "integer"
+              },
+              "sha256": {
+                "type": "string"
+              },
+              "error": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "observed": {
+      "type": "object",
+      "description": "số đọc thẳng từ dữ liệu: key → {value, unit, dataset, desc}"
+    },
+    "model": {
+      "type": "object",
+      "description": "số do mô hình tính: key → {value, method, inputs}"
+    },
+    "regime": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "sectors": {
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

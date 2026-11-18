@@ -1,0 +1,130 @@
+{
+  "id": "ep21-ou-hat-brown",
+  "topic": "ou",
+  "seed": 14,
+  "params": {
+    "theta": 0.15
+  },
+  "title": "Từ hạt bụi trong nước đến giao dịch cặp: mô hình Ornstein–Uhlenbeck",
+  "caption": "Năm 1930, hai nhà vật lý Uhlenbeck và Ornstein mô tả vận tốc của một hạt bị kéo về trạng thái cân bằng. Năm 1977 Vasicek dùng nó cho lãi suất, và ngày nay nó là nền của chiến lược hồi quy về trung bình. Code chạy thật.",
+  "hashtags": [
+    "quant",
+    "OU",
+    "meanreversion",
+    "lichsutaichinh",
+    "QuanTik"
+  ],
+  "facts": {
+    "ou": {
+      "value": "1930",
+      "source": "Uhlenbeck & Ornstein (1930), Physical Review 36"
+    },
+    "vas": {
+      "value": "1977",
+      "source": "Vasicek, O. (1977), Journal of Financial Economics 5"
+    }
+  },
+  "scenes": [
+    {
+      "type": "hook",
+      "text": "Phương trình của *hạt bụi trong nước* đang được dân quant dùng để đo cổ phiếu. Thật.",
+      "kicker": "Lịch sử quant",
+      "visual": "particle"
+    },
+    {
+      "type": "story",
+      "chip": "Năm 1930",
+      "era": "1930",
+      "title": "Uhlenbeck & Ornstein",
+      "text": "Hai nhà vật lý mô tả một hạt bị va đập ngẫu nhiên nhưng luôn bị lực ma sát kéo về trạng thái cân bằng.",
+      "source": "Uhlenbeck & Ornstein (1930), Physical Review",
+      "say": "Năm 1930, hai nhà vật lý Uhlenbeck và Ornstein mô tả một hạt bị va đập ngẫu nhiên, nhưng luôn bị ma sát kéo về cân bằng.",
+      "visual": "particle",
+      "image": "uhlenbeck"
+    },
+    {
+      "type": "story",
+      "chip": "Năm 1977",
+      "era": "1977",
+      "title": "Vasicek đưa vào tài chính",
+      "text": "Oldrich Vasicek dùng cùng phương trình cho lãi suất: lệch xa thì bị kéo về mức dài hạn. Sau này nó thành nền của giao dịch cặp.",
+      "source": "Vasicek (1977), Journal of Financial Economics",
+      "say": "Năm 1977, Vasicek dùng đúng phương trình đó cho lãi suất. Ngày nay nó là nền của các chiến lược hồi quy về trung bình.",
+      "visual": "leash"
+    },
+    {
+      "type": "formula",
+      "latex": "dX_t = \\theta(\\mu - X_t)\\,dt + \\sigma\\, dW_t",
+      "caption": "θ: lực kéo về · μ: mức cân bằng · σ: nhiễu",
+      "say": "Theta là lực kéo về, mu là mức cân bằng, sigma là nhiễu. Lệch càng xa, lực kéo càng mạnh."
+    },
+    {
+      "type": "run",
+      "outputs": [
+        {
+          "label": "θ thật",
+          "key": "theta_true"
+        },
+        {
+          "label": "θ ước lượng",
+          "key": "theta_hat"
+        },
+        {
+          "label": "nửa đời (phiên)",
+          "key": "half_life",
+          "highlight": true
+        }
+      ],
+      "say": "Code mô phỏng với theta {theta_true}, rồi ước lượng lại bằng hồi quy được {theta_hat}. Nửa đời: khoảng {half_life} phiên để lệch giảm một nửa."
+    },
+    {
+      "type": "chart",
+      "title": "Spread mô phỏng",
+      "say": "Spread xuất phát từ {start}, bị kéo dần về không, rồi dao động trong dải xanh."
+    },
+    {
+      "type": "surface",
+      "view": "low",
+      "caption": "Phân phối spread theo thời gian: đỉnh trượt về 0 rồi nở ra",
+      "say": "3D: phân phối spread theo thời gian. Đỉnh trượt dần về không, rồi nở ra thành trạng thái cân bằng."
+    },
+    {
+      "type": "statement",
+      "chip": "Mang về",
+      "text": "Quay về trung bình là xu hướng, không phải lời hứa. Bạn phải sống sót qua lúc nó lệch thêm.",
+      "say": "Quay về trung bình là xu hướng, không phải lời hứa. Bạn phải sống sót qua lúc nó lệch thêm."
+    }
+  ],
+  "thumb": {
+    "tag": "OU · Lịch sử",
+    "headline": [
+      {
+        "t": "TỪ HẠT BỤI",
+        "size": 160
+      },
+      {
+        "t": "TRONG NƯỚC",
+        "size": 150
+      },
+      {
+        "t": "ĐẾN [o]SPREAD[/o]",
+        "size": 150
+      }
+    ],
+    "pill": "Ornstein–Uhlenbeck 1930 · Vasicek 1977",
+    "labels": [
+      {
+        "label": "θ ước lượng",
+        "value": "{theta_hat}",
+        "color": "green"
+      },
+      {
+        "label": "Nửa đời",
+        "value": "{half_life}",
+        "color": "orange"
+      }
+    ]
+  },
+  "style": "story-mix",
+  "series_no": 21
+}

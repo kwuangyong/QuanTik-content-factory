@@ -7,6 +7,7 @@ Formats (ep.meme.format):
 import numpy as np
 
 import frames as F
+import illustrate as I
 import scenes as S
 from core import THEME as T
 from render import Scene
@@ -48,9 +49,13 @@ def build(ep, model, ctx):
         out += [Scene("setup", m["setup"], d_setup, 2.5, texts=[m["setup"], "KỲ VỌNG"]),
                 Scene("punch", m["punch"], d_punch, 3.0, texts=[m["punch"], "THỰC TẾ"])]
     else:
+        tag = I.pick(m["setup"]) or I.pick(m.get("punch", ""))
+
         def d_setup(img, t, p):
-            F.text_box(img, m["setup"], (S.X0, 400, S.X1, 700), "sans-black", 72, T["muted"], "left", "middle",
-                       label="setup")
+            F.text_box(img, m["setup"], (S.X0, 330 if tag else 400, S.X1, 640 if tag else 700), "sans-black", 72,
+                       T["muted"], "left", "middle", label="setup", marks=True)
+            if tag and t < 98:  # hình khớp câu setup, bị thẻ punch che khi punch vào
+                F.paste(img, I.frame(tag, S.CW, 520, p, t), (S.X0, 700))
 
         def d_punch(img, t, p):
             d_setup(img, 99, 1.0)

@@ -15,7 +15,7 @@ MUSIC = False
 DEFAULTS = {"max_seconds": 90}
 
 CUES = {
-    "hook": "Nhìn thẳng camera, nói nhanh, không chào hỏi.",
+    "hook": "Nhìn thẳng camera, nói nhanh và gắt, không chào hỏi; nhấn mạnh cụm khiêu khích.",
     "beat1": "Cắt sang B-roll: công thức / code (broll/formula.png).",
     "beat2": "Nửa khung là mặt, nửa khung là số liệu (broll/chart.png).",
     "beat3": "B-roll: chart (broll/chart.png), chỉ tay theo đường cam.",
@@ -42,7 +42,15 @@ def prompter(name, text, cue):
 
 
 def build(ep, model, ctx):
-    lines = [("hook", ep["hook"])] + [(f"beat{i + 1}", b) for i, b in enumerate(ep["beats"])] + \
+    from core import strip_marks
+    import illustrate as I
+
+    story = []
+    for i, it in enumerate(ep.get("cold_open") or []):
+        tag = it.get("visual") or I.pick(it["say"]) or "trader"
+        CUES[f"story{i + 1}"] = f"Cắt B-roll khớp lời: {tag} (ảnh thật hoặc broll/{tag}.png)."
+        story.append((f"story{i + 1}", it["say"]))
+    lines = [("hook", strip_marks(ep["hook"]))] + story + [(f"beat{i + 1}", b) for i, b in enumerate(ep["beats"])] + \
             [("takeaway", ep["takeaway"]), ("cta", ep["cta"])]
     ctx["_lines"] = lines
     return [prompter(n, t, CUES.get(n, "")) for n, t in lines]
@@ -55,6 +63,11 @@ def export(scenes, ep, model, ctx):
     F.math_img(ep["formula"], 90).save(br / "formula.png")
     F.chart_img(model, 1080, 900).save(br / "chart.png")
     F.surface_img(model, -50, 25, 1080, 1000).save(br / "surface3d.png")
+    import illustrate as I
+
+    for it in ep.get("cold_open") or []:
+        tag = it.get("visual") or I.pick(it["say"]) or "trader"
+        I.frame(tag, 1080, 1080, 0.6, 2.0).convert("RGB").save(br / f"{tag}.png")
     t, rows = 0.0, []
     for s, (name, text) in zip(scenes, ctx["_lines"]):
         rows.append(f"| {t:4.0f}–{t + s.duration:.0f}s | **{name}** | {text} | {CUES.get(name, '')} |")

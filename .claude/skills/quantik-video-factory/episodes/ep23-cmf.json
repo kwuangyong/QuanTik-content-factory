@@ -1,0 +1,98 @@
+{
+  "id": "ep23-cmf",
+  "topic": "cmf",
+  "seed": 11,
+  "title": "Giá tăng nhưng tiền có thật sự vào? Đọc dòng tiền Chaikin",
+  "caption": "Chaikin Money Flow nhìn giá đóng cửa nằm ở đâu trong biên độ ngày và có khối lượng đi kèm không. CMF cũng là một thành phần của Điểm Quant trong QuanTik. Code tính thật trên dữ liệu mô phỏng.",
+  "hashtags": [
+    "quant",
+    "CMF",
+    "dongtien",
+    "phantichkythuat",
+    "QuanTik"
+  ],
+  "allowed_literals": [
+    "20 phiên",
+    "0,08",
+    "−1"
+  ],
+  "facts": {
+    "wcmf": {
+      "value": "0,08",
+      "source": "quant.py:2304 AdaptiveScorer.WEIGHTS['cmf']"
+    }
+  },
+  "scenes": [
+    {
+      "type": "hook",
+      "text": "Giá tăng là tiền vào? *Chưa chắc đâu.* Có khi tiền đang lặng lẽ rút ra.",
+      "kicker": "Dòng tiền",
+      "visual": "water_flow"
+    },
+    {
+      "type": "broll",
+      "say": "Giá là mực nước bạn nhìn thấy. Dòng tiền là vòi bơm vào và vòi xả ra mà bạn không thấy.",
+      "visual": "water_flow",
+      "caption": "Nhìn *vòi nước*, đừng chỉ nhìn mực nước",
+      "optional": true
+    },
+    {
+      "type": "formula",
+      "latex": "MFM = \\frac{(C-L)-(H-C)}{H-L}",
+      "caption": "Đóng cửa ở đỉnh biên độ: +1 · ở giữa: 0 · ở đáy: −1",
+      "say": "Mỗi phiên, CMF hỏi một câu: giá đóng cửa nằm ở đâu trong biên độ cao thấp? Sát đỉnh là cộng một, sát đáy là trừ một."
+    },
+    {
+      "type": "code",
+      "lines": [
+        8,
+        11
+      ],
+      "hl": 10,
+      "note": "Nhân khối lượng, trung bình {w} phiên",
+      "say": "Rồi nhân với khối lượng, cộng dồn {w} phiên và chia tổng khối lượng. Phiên nào khớp nhiều, phiên đó nặng ký."
+    },
+    {
+      "type": "chart",
+      "title": "CMF và giá",
+      "notes": [
+        [
+          0.0,
+          "Cột xanh: đóng cửa mạnh · cột đỏ: đóng cửa yếu"
+        ],
+        [
+          0.6,
+          "{div_days} phiên giá tăng mà CMF âm"
+        ]
+      ],
+      "say": "Cột xanh đỏ là CMF, đường xám là giá. Có {div_days} phiên giá đã tăng so với hai mươi phiên trước, mà CMF vẫn âm. Đó là phân kỳ."
+    },
+    {
+      "type": "usage",
+      "title": "Đọc CMF cho đúng",
+      "steps": [
+        "CMF dương kéo dài: đóng cửa mạnh có khối lượng",
+        "Phân kỳ với giá: dấu hiệu cần đọc kỹ thêm",
+        "Là một thành phần trong Điểm Quant, trọng số 0,08"
+      ],
+      "say": "Đọc CMF: dương kéo dài là đóng cửa mạnh có khối lượng. Phân kỳ với giá là lúc cần đọc kỹ thêm. Trong Điểm Quant của QuanTik, CMF chiếm trọng số 0,08."
+    },
+    {
+      "type": "surface",
+      "view": "spin",
+      "caption": "CMF theo thời gian và độ dài cửa sổ",
+      "say": "3D: cửa sổ ngắn thì nhạy nhưng nhiễu, cửa sổ dài thì mượt nhưng chậm."
+    },
+    {
+      "type": "statement",
+      "chip": "Mang về",
+      "text": "CMF đo giá đóng cửa mạnh hay yếu có khối lượng đi kèm. Đọc cùng giá, đừng đọc một mình.",
+      "say": "CMF đo giá đóng cửa mạnh hay yếu có khối lượng đi kèm. Đọc cùng giá, đừng đọc một mình."
+    }
+  ],
+  "thumb": {
+    "tag": "CMF"
+  },
+  "style": "story-mix",
+  "series_no": 23
+}

@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "quantik/factcheck.schema.json",
+  "title": "Fact-check report",
+  "description": "Đầu ra của worker Fact-checker (research/<episode>/factcheck.json).",
+  "type": "object",
+  "required": [
+    "brief",
+    "checked",
+    "checker",
+    "verdicts"
+  ],
+  "properties": {
+    "brief": {
+      "type": "string"
+    },
+    "checked": {
+      "type": "string"
+    },
+    "checker": {
+      "type": "string"
+    },
+    "verdicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "claim",
+          "verdict"
+        ],
+        "properties": {
+          "claim": {
+            "type": "string"
+          },
+          "verdict": {
+            "enum": [
+              "verified",
+              "verified_with_correction",
+              "status_changed",
+              "unverified",
+              "rejected"
+            ]
+          },
+          "status": {
+            "enum": [
+              "documented",
+              "self_reported",
+              "anecdote",
+              "disputed",
+              "speculation",
+              "observed",
+              "model_output",
+              "interpretation"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

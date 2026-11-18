@@ -199,8 +199,9 @@ def episode(entry, model):
     return {
         "tag": (e.get("engine") if is_engine else en.split("·")[0].split("(")[0].strip())[:22],
         "title": (f"Bên trong QuanTik: {vi}" if is_engine else f"{en} — {vi}: đọc đúng trong báo cáo Quant")[:95],
-        "hook": (f"Bên trong QuanTik có một engine tên {e['engine']}. Nó làm gì?" if is_engine
-                 else f"Bạn thấy {en} trong báo cáo Quant. Nó đo gì, và không nói điều gì?"),
+        # hook ragebait nhưng đúng sự thật: khiêu khích người xem, không hứa lãi, không bịa số
+        "hook": (f"Bạn nghĩ QuanTik *đoán bừa*? Đây là engine {e['engine']} chạy phía sau mỗi báo cáo." if is_engine
+                 else f"Đọc {en} theo cảm giác là *tự bắn vào chân*. Nó thật ra đo gì, và giấu điều gì?"),
         "kicker": (e.get("group") or "Báo cáo Quant")[:30],
         "beats": beats,
         "outputs": outputs,

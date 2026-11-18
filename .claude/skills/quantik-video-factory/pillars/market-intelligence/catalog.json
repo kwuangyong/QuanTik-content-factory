@@ -1,0 +1,59 @@
+{
+  "pillar": "market-intelligence",
+  "topics": [
+    {
+      "id": "mi_daily_pulse",
+      "name": "Nhịp thị trường cuối phiên",
+      "group": "Định dạng",
+      "model": "market_snapshot",
+      "status": "ready",
+      "example_episode": "(sinh bởi market produce)",
+      "angle": "Độ rộng, thanh khoản, ngành, kịch bản"
+    },
+    {
+      "id": "mi_weekly_regime",
+      "name": "Regime tuần",
+      "group": "Định dạng",
+      "model": "market_snapshot",
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Cần lịch sử ≥ 200 phiên"
+    },
+    {
+      "id": "mi_sector_rotation",
+      "name": "Luân chuyển ngành",
+      "group": "Định dạng",
+      "model": "market_snapshot",
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Sức mạnh tương đối theo nhóm ngành"
+    },
+    {
+      "id": "mi_liquidity_watch",
+      "name": "Thanh khoản & dòng tiền ngoại",
+      "group": "Định dạng",
+      "model": "market_snapshot",
+      "status": "backlog",
+      "example_episode": null,
+      "angle": ""
+    },
+    {
+      "id": "mi_risk_conditions",
+      "name": "Biến động & điều kiện rủi ro",
+      "group": "Định dạng",
+      "model": "market_snapshot",
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Cần lịch sử"
+    },
+    {
+      "id": "mi_macro_event",
+      "name": "Sự kiện vĩ mô (giải thích kênh tác động)",
+      "group": "Định dạng",
+      "model": null,
+      "status": "backlog",
+      "example_episode": null,
+      "angle": "Chỉ sự kiện đã công bố, có nguồn"
+    }
+  ]
+}

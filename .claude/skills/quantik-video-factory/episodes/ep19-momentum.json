@@ -1,0 +1,94 @@
+{
+  "id": "ep19-momentum",
+  "topic": "momentum",
+  "seed": 9,
+  "title": "Mạnh hôm qua có mạnh tiếp hôm nay? Kiểm chứng hiệu ứng momentum",
+  "caption": "Jegadeesh và Titman (1993) ghi nhận nhóm cổ phiếu mạnh trong quá khứ có xu hướng tiếp tục vượt nhóm yếu. Nhưng momentum chỉ tồn tại khi có thứ gì đó bền đứng sau. Mình kiểm chứng bằng mô phỏng lặp 60 lần.",
+  "hashtags": [
+    "quant",
+    "momentum",
+    "nhanto",
+    "chungkhoan",
+    "QuanTik"
+  ],
+  "facts": {
+    "jt": {
+      "value": "1993",
+      "source": "Jegadeesh & Titman (1993), Journal of Finance 48(1)"
+    }
+  },
+  "scenes": [
+    {
+      "type": "hook",
+      "text": "Đu theo mã đang mạnh là *liều* hay khôn? Câu trả lời nằm ở đúng một điều kiện.",
+      "kicker": "Nhân tố",
+      "visual": "rocket"
+    },
+    {
+      "type": "broll",
+      "say": "Tên lửa đang bay thì bay tiếp, nếu còn nhiên liệu. Hết nhiên liệu là rơi.",
+      "visual": "rocket",
+      "caption": "Còn *nhiên liệu* mới bay tiếp",
+      "optional": true
+    },
+    {
+      "type": "story",
+      "chip": "Năm 1993",
+      "era": "1993",
+      "title": "Jegadeesh & Titman",
+      "text": "Hai nhà nghiên cứu mua nhóm mạnh nhất, bán nhóm yếu nhất theo lợi suất vài tháng trước, và thấy chênh lệch dương kéo dài nhiều tháng.",
+      "source": "Jegadeesh & Titman (1993), Journal of Finance",
+      "say": "Năm 1993, Jegadeesh và Titman xếp cổ phiếu theo lợi suất vài tháng trước, và thấy nhóm mạnh tiếp tục vượt nhóm yếu trong nhiều tháng sau.",
+      "visual": "professor"
+    },
+    {
+      "type": "code",
+      "lines": [
+        3,
+        9
+      ],
+      "hl": 4,
+      "note": "Mỗi mã có một lợi thế nhỏ, bền: mu",
+      "say": "Code tạo {n_stocks} mã. Mỗi mã có một lợi thế nhỏ, bền, gọi là mu. Xếp hạng theo {look} phiên trước, rồi xem {hold} phiên sau."
+    },
+    {
+      "type": "chart",
+      "title": "Quá khứ và giai đoạn sau",
+      "say": "Chấm xanh là nhóm mạnh nhất, chấm đỏ là nhóm yếu nhất. Nhóm mạnh lãi {top_fwd}, nhóm yếu {bot_fwd} ở giai đoạn sau."
+    },
+    {
+      "type": "compare",
+      "title": "Trung bình {reps} thế giới mô phỏng",
+      "left": {
+        "label": "Có lợi thế bền",
+        "value": "{spread_avg}",
+        "note": "chênh lệch nhóm mạnh − yếu",
+        "color": "positive"
+      },
+      "right": {
+        "label": "Xoá lợi thế đi",
+        "value": "{spread_noise}",
+        "note": "chỉ còn nhiễu",
+        "color": "negative"
+      },
+      "say": "Lặp {reps} lần cho chắc. Có lợi thế bền, chênh lệch trung bình {spread_avg}. Xoá lợi thế đi, chỉ còn {spread_noise}: gần như nhiễu."
+    },
+    {
+      "type": "surface",
+      "view": "dive",
+      "caption": "Chênh lệch theo cửa sổ nhìn lại và thời gian giữ",
+      "say": "3D: chênh lệch thay đổi theo cửa sổ nhìn lại và thời gian giữ. Không có một cấu hình thần kỳ."
+    },
+    {
+      "type": "statement",
+      "chip": "Mang về",
+      "text": "Momentum chỉ tồn tại khi có thứ gì đó bền đứng sau. Không có thì chỉ là nhiễu.",
+      "say": "Momentum chỉ tồn tại khi có thứ gì đó bền đứng sau. Không có thì chỉ là nhiễu."
+    }
+  ],
+  "thumb": {
+    "tag": "Momentum"
+  },
+  "style": "story-mix",
+  "series_no": 19
+}

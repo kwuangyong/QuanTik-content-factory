@@ -10,12 +10,15 @@ import edge_tts, edge_tts.communicate as C
 _ca = os.environ.get("TTS_CA_BUNDLE") or ("/root/.ccr/ca-bundle.crt" if os.path.exists("/root/.ccr/ca-bundle.crt") else None)
 if _ca:
     C._SSL_CTX = ssl.create_default_context(cafile=_ca)
-VOICE = os.environ.get("TTS_VOICE", "vi-VN-HoaiMyNeural")   # nam: vi-VN-NamMinhNeural
+# Giọng mặc định: nam miền Bắc, sáng và thanh (cao độ +8Hz), nhịp nhanh x1.25 — đồng bộ pipeline/voiceover.py.
+VOICE = os.environ.get("TTS_VOICE", "vi-VN-NamMinhNeural")   # nữ: vi-VN-HoaiMyNeural
+RATE = os.environ.get("TTS_RATE", "+25%")
+PITCH = os.environ.get("TTS_PITCH", "+8Hz")
 
 
-async def go(text, out, voice=VOICE, rate="+8%"):
+async def go(text, out, voice=VOICE, rate=RATE, pitch=PITCH):
     proxy = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
-    await edge_tts.Communicate(text, voice, rate=rate, proxy=proxy).save(out)
+    await edge_tts.Communicate(text, voice, rate=rate, pitch=pitch, proxy=proxy).save(out)
 
 
 if __name__ == "__main__":

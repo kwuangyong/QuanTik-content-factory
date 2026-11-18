@@ -1,0 +1,91 @@
+{
+  "id": "ep12-beta",
+  "topic": "beta",
+  "seed": 11,
+  "params": {
+    "b_a": 0.6,
+    "b_b": 1.8
+  },
+  "title": "Cùng một thị trường, vì sao có mã rung gấp đôi?",
+  "caption": "Beta đo một mã ăn theo thị trường bao nhiêu: beta gần 2 nghĩa là thị trường đi 1%, mã đi trung bình gần 2%. Nhưng beta thấp chưa chắc an toàn. Code tính thật trên dữ liệu mô phỏng.",
+  "hashtags": [
+    "quant",
+    "beta",
+    "ruirothitruong",
+    "chungkhoan",
+    "QuanTik"
+  ],
+  "allowed_literals": [
+    "1%"
+  ],
+  "scenes": [
+    {
+      "type": "hook",
+      "text": "Thị trường giảm {mkt_worst}, mã của bạn giảm {b_worst}? *Không phải xui*, đó là beta.",
+      "kicker": "So sánh",
+      "visual": "panic"
+    },
+    {
+      "type": "broll",
+      "say": "Cùng một cú rơi của thị trường. Người cầm mã A hơi chao đảo, người cầm mã B hoảng loạn.",
+      "visual": "rollercoaster",
+      "caption": "Cùng cú rơi, khác *nỗi đau*",
+      "optional": true
+    },
+    {
+      "type": "compare",
+      "title": "Cùng một ngày xấu",
+      "left": {
+        "label": "Mã A",
+        "value": "{a_worst}",
+        "note": "β = {beta_a}",
+        "color": "positive"
+      },
+      "right": {
+        "label": "Mã B",
+        "value": "{b_worst}",
+        "note": "β = {beta_b}",
+        "color": "negative"
+      },
+      "say": "Cùng một ngày thị trường giảm {mkt_worst}. Mã A giảm {a_worst}, mã B giảm tới {b_worst}. Khác nhau ở beta."
+    },
+    {
+      "type": "formula",
+      "latex": "\\beta = \\frac{\\mathrm{Cov}(r_i, r_m)}{\\mathrm{Var}(r_m)}",
+      "caption": "Thị trường đi 1%, cổ phiếu đi trung bình β%",
+      "say": "Beta là hiệp phương sai giữa cổ phiếu và thị trường, chia phương sai thị trường. Thị trường đi 1 phần trăm, cổ phiếu đi trung bình beta phần trăm."
+    },
+    {
+      "type": "code",
+      "lines": [
+        6,
+        8
+      ],
+      "hl": 7,
+      "note": "Beta A = {beta_a} · Beta B = {beta_b}",
+      "say": "Code tính đúng một dòng: hiệp phương sai chia phương sai. Ra beta A {beta_a}, beta B {beta_b}."
+    },
+    {
+      "type": "chart",
+      "title": "Mỗi chấm là một ngày",
+      "say": "Mỗi chấm là một ngày. Độ dốc đường xanh là beta của A, đường đỏ là beta của B. Đường đỏ dốc gấp ba."
+    },
+    {
+      "type": "myth",
+      "myth": "Beta thấp là an toàn.",
+      "fact": "Beta chỉ đo phần ăn theo thị trường. Mã A beta {beta_a} vẫn biến động {vol_a} một năm, ngang thị trường {vol_m}.",
+      "say": "Nhưng beta thấp chưa chắc an toàn. Mã A beta chỉ {beta_a}, mà biến động cả năm vẫn {vol_a}, ngang thị trường. Phần rung riêng không nằm trong beta."
+    },
+    {
+      "type": "statement",
+      "chip": "Mang về",
+      "text": "Beta đo bạn ăn theo thị trường bao nhiêu, không đo toàn bộ rủi ro.",
+      "say": "Beta đo bạn ăn theo thị trường bao nhiêu, không đo toàn bộ rủi ro."
+    }
+  ],
+  "thumb": {
+    "tag": "Beta"
+  },
+  "style": "story-mix",
+  "series_no": 12
+}

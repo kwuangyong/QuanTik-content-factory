@@ -1,0 +1,147 @@
+{
+  "id": "escape-velocity",
+  "look": "dark-truth",
+  "pillar": "dark-truth",
+  "topic": "dt_escape_velocity",
+  "model": "escape_velocity",
+  "lang": "en",
+  "episode_no": 1,
+  "tag": "DARK TRUTH",
+  "title": "Escape velocity: why you can't escape the 9-to-5",
+  "hook": "You got the raise. So why are you still trapped?",
+  "caption": "You got the raise. You're still trapped. Not because you earn too little, but because every raise goes into looking like you're doing fine. We simulated {n_paths} careers that saved {save} and spent every raise: after {years} years, only {esc_a_n} broke free. Escape velocity isn't a bigger salary. It's needing less applause than you earn.\n\n(Simulation: {ret} real return, {vol} volatility, {raise} raises a year, {wr} withdrawal rule, no taxes or fees. An illustration of a mechanism, not a plan.)",
+  "hashtags": [
+    "darktruth",
+    "socialpressure",
+    "lifestylecreep",
+    "moneymindset",
+    "personalfinance",
+    "9to5",
+    "financialfreedom",
+    "QuanTik"
+  ],
+  "allowed_literals": [],
+  "claims": [
+    {
+      "id": "sim_escape",
+      "text": "Trong 2.000 sự nghiệp mô phỏng tiết kiệm 10% và tiêu hết phần tăng lương, chỉ số ít đạt mức thu nhập đầu tư trả đủ chi tiêu sau 40 năm",
+      "status": "model_output",
+      "source_ids": []
+    },
+    {
+      "id": "rule_4pct",
+      "text": "Quy tắc rút 4%/năm là quy ước từ nghiên cứu dữ liệu lịch sử Mỹ, không phải bảo đảm",
+      "status": "documented",
+      "source_ids": [
+        "bengen-1994"
+      ]
+    }
+  ],
+  "cta": "Like and follow QuanTik for more dark truths about money",
+  "thumb": {
+    "series": "THE DARK TRUTH OF MONEY",
+    "headline": [
+      "YOU GOT THE RAISE.",
+      "STILL",
+      "TRAPPED."
+    ],
+    "sub": "Only {esc_a_n} of {n_paths} careers broke free",
+    "footer": "Simulated data • Not financial advice"
+  },
+  "variants": {
+    "dark-story": {
+      "scenes": [
+        {
+          "kind": "office",
+          "show": "You got the raise. So why are you still trapped?",
+          "say": "You got the raise. So why are you still trapped?",
+          "min_dur": 3.2
+        },
+        {
+          "kind": "commute",
+          "show": "Same train. Same desk.",
+          "say": "Same train. Same desk. Same hope next year is different."
+        },
+        {
+          "kind": "scroll",
+          "show": "Then you open your phone.",
+          "say": "Then you open your phone. Everyone else is winning."
+        },
+        {
+          "kind": "compare",
+          "show": "Their car. Their house. Their trip.",
+          "say": "Their car. Their house. Their trip. Yours feels small.",
+          "min_dur": 4.0
+        },
+        {
+          "kind": "spend",
+          "show": "The raise buys a life that looks fine.",
+          "say": "So every raise buys a life that looks fine. Never a way out."
+        },
+        {
+          "kind": "wheel",
+          "show": "Every upgrade is another bill.",
+          "say": "Every upgrade is another bill. The bigger it looks, the tighter it holds."
+        },
+        {
+          "kind": "crowd",
+          "show": "{esc_a_n} out of {n_paths}",
+          "say": "Of {n_paths} simulated careers that spent every raise, only {esc_a_n} broke free.",
+          "note": "Simulation: {years} years · {save} saved · {raise} raises a year · {ret} real return · {wr} rule",
+          "min_dur": 5.0,
+          "claims": [
+            "sim_escape",
+            "rule_4pct"
+          ]
+        },
+        {
+          "kind": "walkaway",
+          "show": "Escape velocity.",
+          "say": "Escape velocity isn't a bigger salary. It's when you stop paying to be seen.",
+          "min_dur": 4.5
+        },
+        {
+          "kind": "alone",
+          "show": "The salary was never the trap.",
+          "say": "The salary was never the trap. Needing them to see it was."
+        }
+      ],
+      "takeaway": "Your salary was never the trap. Needing them to see it was.",
+      "about": "Animated social story: commuters, the scroll, status posts, hamster wheel, a crowd of 2,000 where 32 escape. No charts."
+    },
+    "chart-story": {
+      "kicker": "Escape velocity",
+      "story": [
+        {
+          "at": 0.25,
+          "label": "The treadmill",
+          "say": "Two people. Same pay. Both save {save}. One upgrades their life with every raise. One doesn't."
+        },
+        {
+          "at": 0.5,
+          "label": "The quiet trap",
+          "say": "Year twenty. Red's money pays {cover_a20} of its bills. Every raise it spent moved the finish line."
+        },
+        {
+          "at": 0.775,
+          "label": "Lift-off",
+          "say": "Year {yr_b}. Green crosses the line. Its money pays every bill. Escape velocity."
+        },
+        {
+          "at": 1.0,
+          "label": "Still trapped",
+          "say": "Year {years}. Red covers just {cover_a40}. Of {n_paths} careers, only {esc_a_n} escaped."
+        }
+      ],
+      "beats": [
+        "",
+        "",
+        "",
+        "Spend more of each raise, and you never leave the ground."
+      ],
+      "takeaway": "Your salary isn't the trap. Your lifestyle rising with it is.",
+      "note": "Simulation: {years} years · {save} saved · {raise} raises · {ret} real return · {wr} rule",
+      "about": "Chart version: two careers (spend vs save the raises) racing toward the escape-velocity line, 2,000 simulated paths."
+    }
+  }
+}
