@@ -29,6 +29,27 @@
     "90%",
     "2.000",
     "ba tuần",
-    "năm phiên"
-  ]
+    "năm phiên",
+    "95%",
+    "99%",
+    "½",
+    "2×",
+    "4×"
+  ],
+  "anim": {
+    "kind": "steps",
+    "items": [
+      [
+        "độ lệch ban đầu",
+        "{start}"
+      ],
+      [
+        "nửa đời (phiên)",
+        "{half_life}"
+      ]
+    ],
+    "hl": 1,
+    "label": "Lệch {start}, sau {half_life} phiên còn một nửa"
+  },
+  "anim_say": "Chênh lệch bắt đầu ở {start}. Sau khoảng {half_life} phiên, nó chỉ còn một nửa."
 }

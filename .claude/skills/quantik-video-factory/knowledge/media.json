@@ -1,0 +1,263 @@
+{
+ "_doc": "Real photos from Wikimedia Commons per topic (free licenses only, credited on screen and in captions). wiki = image on the wiki card; hook_bg / dark_bg = Ken Burns background. Fetch/caches: python pipeline/media.py --prefetch",
+ "garch": {
+  "wiki": {
+   "q": "Robert Engle SantiagoWEAI2017"
+  },
+  "hook_bg": {
+   "q": "stock market ticker board"
+  }
+ },
+ "kelly": {
+  "wiki": {
+   "q": "Bell Labs Murray Hill"
+  },
+  "hook_bg": {
+   "q": "blackjack table casino"
+  }
+ },
+ "var_cvar": {
+  "wiki": {
+   "q": "JPMorgan Chase headquarters 270 Park Avenue"
+  },
+  "hook_bg": {
+   "q": "bank vault"
+  }
+ },
+ "sharpe": {
+  "wiki": {
+   "q": "William F. Sharpe economist"
+  },
+  "hook_bg": {
+   "q": "stock exchange board"
+  }
+ },
+ "monte_carlo": {
+  "wiki": {
+   "q": "STAN ULAM HOLDING THE FERMIAC"
+  },
+  "hook_bg": {
+   "q": "Casino de Monte-Carlo"
+  }
+ },
+ "hmm": {
+  "wiki": {
+   "q": "Andrey Markov mathematician"
+  },
+  "hook_bg": {
+   "q": "Ho Chi Minh City Stock Exchange"
+  }
+ },
+ "hurst": {
+  "wiki": {
+   "q": "Nile river Aswan"
+  },
+  "hook_bg": {
+   "q": "Nile river flood"
+  }
+ },
+ "ou": {
+  "wiki": {
+   "q": "Brownian motion pollen"
+  },
+  "hook_bg": {
+   "q": "rubber band stretched"
+  }
+ },
+ "sortino": {
+  "wiki": {
+   "q": "stock market chart screen"
+  },
+  "hook_bg": {
+   "q": "stock trader screens"
+  }
+ },
+ "martingale": {
+  "wiki": {
+   "q": "Roulette wheel in a casino"
+  },
+  "hook_bg": {
+   "q": "roulette casino table"
+  },
+  "dark_bg": {
+   "q": "Casino de Monte-Carlo"
+  }
+ },
+ "gambler_ruin": {
+  "wiki": {
+   "q": "Blaise Pascal"
+  },
+  "hook_bg": {
+   "q": "slot machines casino"
+  },
+  "dark_bg": {
+   "q": "Las Vegas Strip night"
+  }
+ },
+ "monty_hall": {
+  "wiki": {
+   "q": "game show stage doors"
+  },
+  "hook_bg": {
+   "q": "three doors"
+  },
+  "dark_bg": {
+   "q": "goat portrait"
+  }
+ },
+ "prisoners": {
+  "wiki": {
+   "q": "RAND Corporation headquarters Santa Monica"
+  },
+  "hook_bg": {
+   "q": "prison cell bars"
+  },
+  "dark_bg": {
+   "q": "handshake business"
+  }
+ },
+ "penalty": {
+  "wiki": {
+   "q": "John Forbes Nash (1928-2015) portrait"
+  },
+  "hook_bg": {
+   "q": "penalty kick goalkeeper"
+  },
+  "dark_bg": {
+   "q": "goalkeeper diving save"
+  }
+ },
+ "pot_odds": {
+  "wiki": {
+   "q": "Texas hold em poker table"
+  },
+  "hook_bg": {
+   "q": "poker chips cards"
+  },
+  "dark_bg": {
+   "q": "poker hand cards table"
+  }
+ },
+ "poker_variance": {
+  "wiki": {
+   "q": "World Series of Poker table"
+  },
+  "hook_bg": {
+   "q": "poker tournament"
+  },
+  "dark_bg": {
+   "q": "stack of poker chips"
+  }
+ },
+ "bluff": {
+  "commons_note": "von Neumann",
+  "wiki": {
+   "commons": "File:John von Neumann.jpg"
+  },
+  "hook_bg": {
+   "q": "poker player cards face"
+  },
+  "dark_bg": {
+   "q": "poker cards dark"
+  }
+ },
+ "loss_aversion": {
+  "wiki": {
+   "q": "Daniel Kahneman"
+  },
+  "hook_bg": {
+   "q": "Vietnamese dong banknotes"
+  },
+  "dark_bg": {
+   "q": "stock exchange trader worried"
+  }
+ },
+ "survivorship": {
+  "wiki": {
+   "commons": "File:Survivorship-bias.png"
+  },
+  "hook_bg": {
+   "q": "Boeing B-17 Flying Fortress formation"
+  },
+  "dark_bg": {
+   "q": "cemetery crosses"
+  }
+ },
+ "regression_mean": {
+  "wiki": {
+   "q": "Sir Francis Galton, 1890s"
+  },
+  "hook_bg": {
+   "q": "trophy cup gold"
+  },
+  "dark_bg": {
+   "q": "New York Stock Exchange trading floor"
+  }
+ },
+ "streaks": {
+  "wiki": {
+   "q": "coin toss flipping"
+  },
+  "hook_bg": {
+   "q": "coins heads tails"
+  },
+  "dark_bg": {
+   "q": "Monte Carlo casino interior"
+  }
+ },
+ "beauty": {
+  "wiki": {
+   "q": "John Maynard Keynes"
+  },
+  "hook_bg": {
+   "q": "beauty contest 1920s"
+  },
+  "dark_bg": {
+   "q": "New York Stock Exchange floor"
+  }
+ },
+ "vol_drag": {
+  "wiki": {
+   "q": "Crowd outside New York Stock Exchange 1929"
+  },
+  "hook_bg": {
+   "q": "stock market ticker board"
+  },
+  "dark_bg": {
+   "q": "Wall Street crash 1929"
+  }
+ },
+ "base_rate": {
+  "wiki": {
+   "q": "Thomas Bayes portrait"
+  },
+  "hook_bg": {
+   "q": "alarm clock ringing"
+  },
+  "dark_bg": {
+   "q": "newspaper headlines"
+  }
+ },
+ "winners_curse": {
+  "wiki": {
+   "q": "offshore oil platform Gulf of Mexico"
+  },
+  "hook_bg": {
+   "q": "auction gavel"
+  },
+  "dark_bg": {
+   "q": "auction house bidding"
+  }
+ },
+ "overtrading": {
+  "wiki": {
+   "q": "stock trader multiple screens"
+  },
+  "hook_bg": {
+   "q": "Ho Chi Minh City Stock Exchange"
+  },
+  "dark_bg": {
+   "q": "trading floor traders"
+  }
+ }
+}

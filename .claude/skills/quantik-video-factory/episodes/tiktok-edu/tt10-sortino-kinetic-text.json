@@ -27,6 +27,35 @@
     "90%",
     "2.000",
     "ba tuần",
-    "năm phiên"
-  ]
+    "năm phiên",
+    "95%",
+    "99%",
+    "½",
+    "2×",
+    "4×"
+  ],
+  "anim": {
+    "kind": "steps",
+    "items": [
+      [
+        "Sharpe A",
+        "{sharpe_a}"
+      ],
+      [
+        "Sharpe B",
+        "{sharpe_b}"
+      ],
+      [
+        "Sortino A",
+        "{sortino_a}"
+      ],
+      [
+        "Sortino B",
+        "{sortino_b}"
+      ]
+    ],
+    "hl": 2,
+    "label": "Cùng Sharpe, khác Sortino"
+  },
+  "anim_say": "Sharpe hai bên đều là {sharpe_a}. Nhưng Sortino của A là {sortino_a}, B chỉ {sortino_b}."
 }

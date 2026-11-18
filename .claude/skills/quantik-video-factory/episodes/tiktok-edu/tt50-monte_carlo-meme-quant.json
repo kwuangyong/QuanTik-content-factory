@@ -28,7 +28,20 @@
     "90%",
     "2.000",
     "ba tuần",
-    "năm phiên"
+    "năm phiên",
+    "95%",
+    "99%",
+    "½",
+    "2×",
+    "4×"
   ],
+  "anim": {
+    "kind": "crowd",
+    "mode": "highlight",
+    "hits": 0,
+    "false": 110,
+    "label": "{prob_loss} tương lai kết thúc ở mức lỗ"
+  },
+  "anim_say": "Mỗi hình người là một tương lai. Màu đỏ là những tương lai kết thúc ở mức lỗ: {prob_loss}.",
   "use_wiki": false
 }

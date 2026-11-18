@@ -31,6 +31,31 @@
     "90%",
     "2.000",
     "ba tuần",
-    "năm phiên"
-  ]
+    "năm phiên",
+    "95%",
+    "99%",
+    "½",
+    "2×",
+    "4×"
+  ],
+  "anim": {
+    "kind": "steps",
+    "items": [
+      [
+        "êm nhất",
+        "{vol_min}"
+      ],
+      [
+        "dài hạn",
+        "{long_run_vol}"
+      ],
+      [
+        "đỉnh bão",
+        "{vol_peak}"
+      ]
+    ],
+    "hl": 2,
+    "label": "Biến động năm hoá theo GARCH"
+  },
+  "anim_say": "Cùng một mô hình: lúc êm nhất biến động {vol_min}, lúc bão lên tới {vol_peak}."
 }

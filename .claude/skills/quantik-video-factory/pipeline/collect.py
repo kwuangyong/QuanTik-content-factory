@@ -22,7 +22,7 @@ def main():
     ap.add_argument("--dir", required=True); ap.add_argument("--platform", required=True); ap.add_argument("--title", default="")
     a = ap.parse_args()
     rows, body = [], []
-    for p in sorted(Path(a.dir).glob("*.json")):
+    for p in sorted(q for q in Path(a.dir).glob("*.json") if not q.name.startswith("_")):
         ep = json.loads(p.read_text(encoding="utf-8"))
         out = DEFAULT_OUT / ep["id"]
         rep = (out / "qa_report.md").read_text(encoding="utf-8") if (out / "qa_report.md").exists() else ""

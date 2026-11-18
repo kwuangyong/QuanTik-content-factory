@@ -76,6 +76,8 @@ def captions(ep, disc):
     title = ep.get("title", ep["hook"])
     cap = ep.get("caption", ep["hook"])
     yt_title = (title[:90] + " #Shorts") if len(title) <= 90 else title[:88] + "… #Shorts"
+    cred = ep.get("_credits", "")
+    disc = (cred + "\n\n" + disc) if cred else disc
     return f"""# Caption — {ep['id']}
 
 ## TikTok
@@ -134,9 +136,24 @@ def _follow_cta(ep, override):
     return ep
 
 
+def _media_defaults(ep, topic):
+    """Real photos per topic from knowledge/media.json (wiki card image, hook / dark-twist backgrounds)."""
+    path = KNOWLEDGE / "media.json"
+    m = load_json(path).get(topic) if path.exists() else None
+    if not m or ep.get("use_media") is False:
+        return ep
+    if m.get("hook_bg"):
+        ep.setdefault("hook_bg", m["hook_bg"])
+    if m.get("dark_bg"):
+        ep.setdefault("dark_bg", m["dark_bg"])
+    if m.get("wiki") and isinstance(ep.get("wiki"), dict):
+        ep["wiki"].setdefault("image", m["wiki"])
+    return ep
+
+
 def prepare(topic, style, override=None, returns=None):
     ep, mod, model = _prepare(topic, style, override, returns)
-    return _follow_cta(ep, override), mod, model
+    return _media_defaults(_follow_cta(ep, override), topic), mod, model
 
 
 def _prepare(topic, style, override=None, returns=None):
@@ -171,6 +188,16 @@ def _insert_extras(scenes, ep):
     scenes[at:at] = extra
 
 
+def _apply_backgrounds(scenes, ep):
+    """Real photos (Wikimedia Commons) behind the hook / dark-twist / takeaway scenes when the episode names them."""
+    import anims as A
+
+    for s in scenes:
+        spec = {"hook": ep.get("hook_bg"), "dark": ep.get("dark_bg"), "takeaway": ep.get("takeaway_bg")}.get(s.name)
+        if spec:
+            A.with_bg(s, spec, dim=0.7 if s.name == "dark" else 0.62)
+
+
 def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice="female", music=None,
          scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True):
     t_start = time.time()
@@ -192,8 +219,12 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
 
     result = mod.build(filled, model, ctx)
     kind = getattr(mod, "KIND", "video")
+    import media
+    media.CREDITS.clear()
     if kind == "video" and style not in ("dark-truth", "meme-quant", "talking-head-script"):
         _insert_extras(result["scenes"] if isinstance(result, dict) else result, filled)
+    if kind == "video":
+        _apply_backgrounds(result["scenes"] if isinstance(result, dict) else result, filled)
 
     # ---- pre-render QA on every word that will be heard or seen
     texts = result.get("texts", []) if isinstance(result, dict) else []
@@ -202,7 +233,9 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
     corpus += [filled.get("caption", ""), filled.get("title", "")]
     save_json(out / "narration.json", {"scenes": [{"name": s.name, "say": s.say, "texts": s.texts} for s in scenes],
                                        "extra": texts})
-    nums = check_numbers.check(corpus, model.values, model.formats, rendered, filled.get("allowed_literals", []),
+    # series labels ("Học Quant #12") carry an episode number, not a data claim
+    labels = [filled.get(k, "") for k in ("kicker", "hook_kicker", "dark_kicker") if filled.get(k)]
+    nums = check_numbers.check(corpus, model.values, model.formats, rendered, filled.get("allowed_literals", []) + labels,
                                filled.get("facts", {}))
     banned = check_banned.check(corpus)
     if (nums["fail"] or banned["fail"]) and not force:
@@ -242,7 +275,14 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
                                        expect_audio=True)
         if hasattr(mod, "export"):
             mod.export(scenes, filled, model, ctx)
-    (out / "captions.md").write_text(captions(filled, disc), encoding="utf-8")
+    if media.CREDITS:
+        filled["_credits"] = "Ảnh: " + "; ".join(f"{m['artist']} ({m['license']})" for m in media.CREDITS) + \
+            " · Wikimedia Commons"
+    cap = captions(filled, disc)
+    if media.CREDITS:
+        cap += "\n## Nguồn ảnh (Wikimedia Commons, giấy phép tự do)\n\n" + "\n".join(
+            f"- {m['title']} — {m['artist']} — {m['license']} — {m['page']}" for m in media.CREDITS) + "\n"
+    (out / "captions.md").write_text(cap, encoding="utf-8")
     status = "ĐẠT" if not (nums["fail"] or banned["fail"] or fmt["fail"]) else "KHÔNG ĐẠT"
     report.write(out, ep, nums, banned, fmt, status=status, extra={"Giọng đọc": used + (" — " + "; ".join(errors) if errors else ""),
                                                                    "Thời lượng": f"{duration:.1f}s",

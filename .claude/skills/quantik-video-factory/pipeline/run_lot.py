@@ -40,10 +40,10 @@ def main():
     env = dict(os.environ, MPLBACKEND="Agg")
     for kv in a.env:
         k, v = kv.split("=", 1); env[k] = v
-    eps = sorted(Path(a.dir).glob("*.json"))
+    eps = sorted(p for p in Path(a.dir).glob("*.json") if not p.name.startswith("_"))
     with ThreadPoolExecutor(a.jobs) as ex:
         res = list(ex.map(lambda p: run(p, a, env), eps))
-    Path(a.dir, "_lot.json").write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
+    Path(a.out, f"_lot-{Path(a.dir).name}.json").write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
     print(json.dumps({"ok": sum(r[1] in ("ok", "skip") for r in res), "fail": [r[0] for r in res if r[1] == "fail"]},
                      ensure_ascii=False))
 

@@ -29,6 +29,31 @@
     "90%",
     "2.000",
     "ba tuần",
-    "năm phiên"
-  ]
+    "năm phiên",
+    "95%",
+    "99%",
+    "½",
+    "2×",
+    "4×"
+  ],
+  "anim": {
+    "kind": "steps",
+    "items": [
+      [
+        "quay đầu",
+        "{h_meanrev}"
+      ],
+      [
+        "ngẫu nhiên",
+        "{h_walk}"
+      ],
+      [
+        "quán tính",
+        "{h_trend}"
+      ]
+    ],
+    "hl": 1,
+    "label": "Số mũ Hurst của ba chuỗi"
+  },
+  "anim_say": "Chuỗi hay quay đầu có H bằng {h_meanrev}. Ngẫu nhiên: {h_walk}. Có quán tính: {h_trend}."
 }

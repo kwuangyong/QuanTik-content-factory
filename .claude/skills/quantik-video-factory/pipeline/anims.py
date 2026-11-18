@@ -383,10 +383,91 @@ def anim(a, say, name="anim", min_dur=4.0):
     return Scene(name, say, draw, min_dur, texts=anim_texts(a))
 
 
+# ------------------------------------------------------------------ real photos (Wikimedia Commons) — Ken Burns
+from functools import lru_cache as _lru  # noqa: E402
+
+from PIL import Image as _Image  # noqa: E402
+
+
+@_lru(maxsize=32)
+def _cover(key, w, h, zoom=1.14):
+    import media
+    im, meta = media.fetch(json_loads(key))
+    if im is None:
+        return None, None
+    s = max(w * zoom / im.width, h * zoom / im.height)
+    return im.resize((int(im.width * s) + 1, int(im.height * s) + 1), _Image.LANCZOS), meta
+
+
+def json_loads(k):
+    import json
+    return json.loads(k)
+
+
+def _spec_key(spec):
+    import json
+    return json.dumps(spec, sort_keys=True)
+
+
+def kenburns(img, spec, box, p, dim=0.0, credit=True, direction=1):
+    """Paint a slowly zooming/panning photo into box. Returns the credit meta (or None if unavailable)."""
+    x0, y0, x1, y1 = [int(v) for v in box]
+    w, h = x1 - x0, y1 - y0
+    big, meta = _cover(_spec_key(spec), w, h)
+    if big is None:
+        return None
+    z = 1.0 + 0.12 * F.ease_in_out(p)
+    # crop a w×h window scaled by 1/z, panning horizontally with p
+    sw, sh = int(w * 1.14 / z), int(h * 1.14 / z)
+    sw, sh = min(sw, big.width), min(sh, big.height)
+    px = int((big.width - sw) * (0.5 + 0.4 * direction * (p - 0.5)))
+    py = int((big.height - sh) * 0.4)
+    crop = big.crop((px, py, px + sw, py + sh)).resize((w, h), _Image.BILINEAR)
+    if dim > 0:
+        crop = _Image.blend(crop, _Image.new("RGB", (w, h), T["bg"]), dim)
+    img.paste(crop, (x0, y0))
+    if credit:
+        import media
+        line = media.credit_line(meta)
+        d = ImageDraw.Draw(img, "RGBA")
+        f = F.font("sans", 18)
+        tw = d.textlength(line, font=f)
+        d.rectangle([x1 - tw - 20, y1 - 30, x1, y1], fill=(0, 0, 0, 150))
+        d.text((x1 - tw - 10, y1 - 26), line, font=f, fill=(220, 225, 220))
+    return meta
+
+
+def with_bg(scene, spec, dim=0.62):
+    """Wrap a scene: real photo full-width behind it (below the header), darkened so text stays readable."""
+    inner = scene.draw
+
+    def draw(img, t, p):
+        kenburns(img, spec, (0, 290, 1080, 1320), p, dim=dim)
+        inner(img, t, p)
+
+    scene.draw = draw
+    return scene
+
+
+def photo(spec, say, caption=None, name="broll", min_dur=3.5):
+    """Standalone B-roll: a real photo with Ken Burns in a rounded frame, optional caption below."""
+    def draw(img, t, p):
+        kenburns(img, spec, (S.X0, 330, S.X1, 1150), p, credit=True)
+        if caption:
+            F.text_box(img, caption, (S.X0, 1170, S.X1, S.BOT), "sans-bold", 40, T["neutral"], "left", "top",
+                       min_size=26, label=f"{name}-cap", hl_numbers=True)
+
+    return Scene(name, say, draw, min_dur, texts=[caption or ""])
+
+
 # ------------------------------------------------------------------ wiki card
 def wiki(w, name="wiki", min_dur=4.5):
-    """Encyclopedia-style card: title, English name, 2–4 fact lines typed in, source at the bottom."""
+    """Encyclopedia-style card: real image (if any), title, English name, fact lines typed in, source at the bottom."""
     lines = w.get("lines", [])
+    if w.get("image"):
+        import media
+        if media.fetch(w["image"])[0] is not None:
+            return _wiki_img(w, name, min_dur)
 
     def draw(img, t, p):
         a = F.ease_out(F.seg(p, 0, 0.15))
@@ -413,6 +494,39 @@ def wiki(w, name="wiki", min_dur=4.5):
         if w.get("source"):
             F.text_box(img, "Nguồn: " + w["source"], (S.X0 + 40, S.BOT - 80, S.X1 - 40, S.BOT - 20), "sans", 24,
                        (100, 106, 100), min_size=18, label=f"{name}-src")
+
+    return Scene(name, w.get("say", " ".join(lines)), draw, min_dur,
+                 texts=[w["title"], w.get("en", ""), w.get("source", "")] + lines)
+
+
+def _wiki_img(w, name, min_dur):
+    lines = w.get("lines", [])
+
+    def draw(img, t, p):
+        a = F.ease_out(F.seg(p, 0, 0.15))
+        d = ImageDraw.Draw(img)
+        F.panel(img, (S.X0, 330, S.X1, S.BOT), fill=(236, 238, 234), outline=(200, 205, 200))
+        d.rectangle([S.X0 + 2, 330, S.X1 - 2, 390], fill=(210, 214, 208))
+        F.text_box(img, "W  Bách khoa · tóm tắt", (S.X0 + 30, 340, S.X1 - 30, 384), "sans-bold", 28, (60, 64, 60),
+                   label=f"{name}-bar")
+        kenburns(img, w["image"], (S.X0 + 2, 392, S.X1 - 2, 800), p, credit=True)
+        F.text_box(img, w["title"], (S.X0 + 36, 815, S.X1 - 36, 895), "sans-black", 52, (20, 22, 20), min_size=32,
+                   label=f"{name}-title", alpha=a)
+        if w.get("en"):
+            F.text_box(img, w["en"], (S.X0 + 36, 895, S.X1 - 36, 935), "sans", 28, (90, 96, 90), min_size=18,
+                       label=f"{name}-en", alpha=a)
+        y = 950
+        for i, ln in enumerate(lines):
+            k = F.seg(p, 0.06 + 0.12 * i, 0.2 + 0.12 * i)
+            if k <= 0:
+                break
+            shown = ln[:max(1, int(len(ln) * k))]
+            used = F.text_box(img, "• " + shown, (S.X0 + 36, y, S.X1 - 36, min(y + 100, S.BOT - 50)), "sans-bold", 32,
+                              (30, 34, 30), min_size=22, label=f"{name}-l{i}")
+            y = max(y + 46, used[3] + 10)
+        if w.get("source"):
+            F.text_box(img, "Nguồn: " + w["source"], (S.X0 + 36, S.BOT - 44, S.X1 - 36, S.BOT - 10), "sans", 20,
+                       (100, 106, 100), min_size=16, label=f"{name}-src")
 
     return Scene(name, w.get("say", " ".join(lines)), draw, min_dur,
                  texts=[w["title"], w.get("en", ""), w.get("source", "")] + lines)

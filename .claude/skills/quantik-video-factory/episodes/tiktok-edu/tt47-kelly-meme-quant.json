@@ -30,12 +30,41 @@
     "90%",
     "2.000",
     "ba tuần",
-    "năm phiên"
+    "năm phiên",
+    "95%",
+    "99%",
+    "½",
+    "2×",
+    "4×"
   ],
+  "anim": {
+    "kind": "steps",
+    "items": [
+      [
+        "½ Kelly",
+        "{med_half}"
+      ],
+      [
+        "Kelly",
+        "{med_full}"
+      ],
+      [
+        "2× Kelly",
+        "{med_double}"
+      ],
+      [
+        "4× Kelly",
+        "{med_quad}"
+      ]
+    ],
+    "hl": 1,
+    "label": "Tài sản trung vị sau {bets} lần đặt"
+  },
+  "anim_say": "Đặt đúng Kelly, tài sản trung vị nhân {med_full}. Gấp đôi Kelly chỉ còn {med_double}.",
   "use_wiki": false,
   "meme": {
     "format": "nobody-quant",
-    "setup": "Bạn: thắng {W}, đặt hết luôn! Kelly:",
+    "setup": "Bạn: thắng {W}, đặt hết luôn!",
     "punch": "Kelly: “Bình tĩnh. {f_star} thôi.”",
     "truth": "Đặt {quad_kelly} mỗi lần, tài sản trung vị gần như về 0 dù có lợi thế."
   }

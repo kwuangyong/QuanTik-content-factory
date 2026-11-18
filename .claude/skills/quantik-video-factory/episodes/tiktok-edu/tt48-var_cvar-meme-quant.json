@@ -31,7 +31,36 @@
     "90%",
     "2.000",
     "ba tuần",
-    "năm phiên"
+    "năm phiên",
+    "95%",
+    "99%",
+    "½",
+    "2×",
+    "4×"
   ],
+  "anim": {
+    "kind": "steps",
+    "items": [
+      [
+        "VaR 95%",
+        "{var95}"
+      ],
+      [
+        "CVaR 95%",
+        "{cvar95}"
+      ],
+      [
+        "VaR 99%",
+        "{var99}"
+      ],
+      [
+        "tệ nhất",
+        "{worst}"
+      ]
+    ],
+    "hl": 3,
+    "label": "Mức lỗ một ngày"
+  },
+  "anim_say": "VaR là {var95}. Trung bình phía sau ranh giới là {cvar95}. Còn phiên tệ nhất: {worst}.",
   "use_wiki": false
 }

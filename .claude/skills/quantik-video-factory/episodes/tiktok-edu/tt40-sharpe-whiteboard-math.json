@@ -28,6 +28,27 @@
     "90%",
     "2.000",
     "ba tuần",
-    "năm phiên"
-  ]
+    "năm phiên",
+    "95%",
+    "99%",
+    "½",
+    "2×",
+    "4×"
+  ],
+  "anim": {
+    "kind": "steps",
+    "items": [
+      [
+        "Sharpe A",
+        "{sharpe_a}"
+      ],
+      [
+        "Sharpe B",
+        "{sharpe_b}"
+      ]
+    ],
+    "hl": 0,
+    "label": "Lãi trên mỗi đơn vị rung lắc"
+  },
+  "anim_say": "A lãi ít hơn, nhưng Sharpe là {sharpe_a}. B lãi nhiều hơn, Sharpe chỉ {sharpe_b}."
 }
