@@ -16,7 +16,7 @@ Chọn nhánh theo yêu cầu:
 | --- | --- | --- |
 | Video/carousel giải thích một mô hình, chỉ số, thuật ngữ quant | `SKILL.md` → `knowledge/`, `styles/` | `cd pipeline && python batch.py --topics <id> --styles <style>` |
 | Video **hướng dẫn dùng sản phẩm** (đăng ký, quét toàn sàn, phân tích Quant…) | `tutorial/README.md` | `bash tutorial/run.sh <workdir>` |
-| Nội dung cho **YouTube Shorts / IG Reels** (dark truth finance, poker theory, psychology facts, game theory) | `channels/yt-ig.md` | chưa có pipeline; hỏi phần "cần chốt" trước |
+| Nội dung cho **YouTube Shorts / IG Reels** (dark truth finance, poker theory, psychology facts, game theory, quant mindset) | `channels/yt-ig.md` | `cd pipeline && python batch.py --topics <id> --styles sketch-short` (cả lô: `--topics concepts`) |
 
 **YT Shorts và IG Reels chỉ đăng nhóm chủ đề ở `channels/yt-ig.md`.** Video quant và video sản phẩm QuanTik đi
 TikTok / Facebook; đừng đưa caption YT/Reels của chúng cho người dùng như thể sẽ đăng.

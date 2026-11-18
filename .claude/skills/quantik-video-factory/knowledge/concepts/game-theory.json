@@ -1,0 +1,830 @@
+[
+ {
+  "id": "56-prisoners-dilemma",
+  "no": 56,
+  "group": "game-theory",
+  "en": "Prisoner's Dilemma",
+  "angle": "Tại sao hai người cùng tối ưu lợi ích cá nhân lại có thể cùng thất bại?",
+  "title": "Hai người cùng khôn, cùng thua",
+  "hook": "Hai người cùng chọn điều tốt nhất cho mình. Kết quả: cả hai cùng thua.",
+  "beats": [
+   "Đây là thế lưỡng nan của người tù. Hai người không bàn được với nhau, mỗi người chọn hợp tác hoặc phản bội.",
+   "Số cam là điểm của bạn, số trắng là điểm của họ. Dù họ chọn gì, bạn phản bội luôn được nhiều hơn.",
+   "Nên cả hai phản bội, mỗi người {nash_r} điểm. Trong khi cùng hợp tác thì mỗi người {r00} điểm.",
+   "Vòng tròn xanh là cân bằng Nash: không ai muốn đổi một mình, dù cả hai đều có thể khá hơn."
+  ],
+  "punch": {
+   "value": "{nash_total} vs {best_total}",
+   "label": "tổng điểm khi cùng phản bội so với cùng hợp tác"
+  },
+  "takeaway": "Lý trí cá nhân không tự cộng lại thành lý trí tập thể. Cần niềm tin, hợp đồng, hoặc chơi lặp lại.",
+  "chart_title": "Bảng điểm: bạn (cam) · họ (trắng)",
+  "chart_note": "Bảng điểm minh hoạ kinh điển. Code tìm cân bằng Nash bằng cách thử phản ứng tốt nhất của từng người.",
+  "caption": "Prisoner's Dilemma: khi ai cũng tối ưu cho mình, cả nhóm có thể cùng thất bại. Bạn đã gặp tình huống này ở đâu?",
+  "visual": {
+   "kind": "matrix",
+   "rows": [
+    "Hợp tác",
+    "Phản bội"
+   ],
+   "cols": [
+    "Hợp tác",
+    "Phản bội"
+   ],
+   "payoffs": [
+    [
+     [
+      3,
+      3
+     ],
+     [
+      0,
+      5
+     ]
+    ],
+    [
+     [
+      5,
+      0
+     ],
+     [
+      1,
+      1
+     ]
+    ]
+   ],
+   "players": [
+    "Bạn",
+    "Họ"
+   ]
+  },
+  "hashtags": [
+   "prisonersdilemma",
+   "nashequilibrium"
+  ]
+ },
+ {
+  "id": "57-nash-equilibrium",
+  "no": 57,
+  "group": "game-theory",
+  "en": "Nash Equilibrium",
+  "angle": "Khi không ai muốn thay đổi nhưng cũng chẳng ai thực sự hài lòng.",
+  "title": "Không ai muốn đổi, nhưng chẳng ai hài lòng",
+  "hook": "Có những tình huống không ai muốn thay đổi, dù ai cũng biết có một kết cục tốt hơn.",
+  "beats": [
+   "Đó là cân bằng Nash: mỗi người đã chọn phương án tốt nhất, khi biết người kia đang làm gì.",
+   "Trò săn hươu: cùng săn hươu thì mỗi người {r00} điểm, nhưng nếu người kia bỏ đi, bạn trắng tay. Săn thỏ thì chắc chắn {r11} điểm.",
+   "Code tìm thấy {n_nash} cân bằng: cùng săn hươu, hoặc cùng săn thỏ. Ở cân bằng kém, không ai dám đổi một mình.",
+   "Ở cân bằng kém, mỗi người đều hợp lý. Thứ thiếu không phải trí thông minh, mà là niềm tin vào người kia."
+  ],
+  "takeaway": "Muốn thoát một cân bằng kém, cần thay đổi cùng lúc, hoặc một cam kết đủ đáng tin để người khác đi theo.",
+  "chart_title": "Trò săn hươu: bạn (cam) · họ (trắng)",
+  "caption": "Nash equilibrium: không ai muốn đổi một mình, kể cả khi có kết cục tốt hơn cho tất cả.",
+  "visual": {
+   "kind": "matrix",
+   "rows": [
+    "Săn hươu",
+    "Săn thỏ"
+   ],
+   "cols": [
+    "Săn hươu",
+    "Săn thỏ"
+   ],
+   "payoffs": [
+    [
+     [
+      4,
+      4
+     ],
+     [
+      0,
+      3
+     ]
+    ],
+    [
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      3
+     ]
+    ]
+   ]
+  },
+  "chart_note": "Bảng điểm minh hoạ. Code tìm mọi cân bằng Nash, khoanh bằng vòng xanh.",
+  "punch": {
+   "value": "{n_nash}",
+   "label": "số cân bằng Nash, một tốt và một kém"
+  },
+  "hashtags": [
+   "nashequilibrium",
+   "staghunt"
+  ]
+ },
+ {
+  "id": "58-zero-sum-game",
+  "no": 58,
+  "group": "game-theory",
+  "en": "Zero-Sum Game",
+  "angle": "Muốn thắng có nhất thiết phải có người thua?",
+  "title": "Muốn thắng có phải có người thua?",
+  "hook": "Bạn thắng thì phải có người thua? Chỉ đúng trong một loại trò chơi.",
+  "beats": [
+   "Trò chơi tổng bằng không là khi phần bạn được đúng bằng phần người kia mất. Không ai tạo thêm giá trị.",
+   "Ví dụ đoán đồng xu: trùng mặt thì bạn thắng một, khác mặt thì bạn thua một. Mỗi ô cộng lại bằng không.",
+   "Code tìm cân bằng: không có lựa chọn cố định nào an toàn. Cách tốt nhất là chọn ngẫu nhiên, mỗi bên {mix_row}.",
+   "Nhưng phần lớn đời sống không phải tổng bằng không. Thương mại, hợp tác và học hỏi đều tạo ra giá trị mới."
+  ],
+  "takeaway": "Trước khi coi ai đó là đối thủ, hỏi: đây có thật là trò chơi tổng bằng không, hay cả hai có thể cùng được?",
+  "chart_title": "Đoán đồng xu: bạn (cam) · họ (trắng)",
+  "caption": "Zero-sum game: phần bạn được đúng bằng phần người kia mất. May mắn là đời sống hiếm khi như vậy.",
+  "visual": {
+   "kind": "matrix",
+   "rows": [
+    "Sấp",
+    "Ngửa"
+   ],
+   "cols": [
+    "Sấp",
+    "Ngửa"
+   ],
+   "payoffs": [
+    [
+     [
+      1,
+      -1
+     ],
+     [
+      -1,
+      1
+     ]
+    ],
+    [
+     [
+      -1,
+      1
+     ],
+     [
+      1,
+      -1
+     ]
+    ]
+   ]
+  },
+  "chart_note": "Mỗi ô cộng lại bằng không. Code tính cân bằng hỗn hợp.",
+  "punch": {
+   "value": "{mix_row}",
+   "label": "xác suất tối ưu cho mỗi lựa chọn: ngẫu nhiên hoàn toàn"
+  },
+  "hashtags": [
+   "zerosum"
+  ]
+ },
+ {
+  "id": "59-tragedy-of-the-commons",
+  "no": 59,
+  "group": "game-theory",
+  "en": "Tragedy of the Commons",
+  "angle": "Khi lợi ích cá nhân phá hủy lợi ích tập thể.",
+  "title": "Khi ai cũng lấy thêm một chút",
+  "hook": "Mỗi người chỉ lấy thêm một chút. Vài năm sau, không còn gì cho ai cả.",
+  "beats": [
+   "Bi kịch của mảnh đất chung: tài nguyên dùng chung bị khai thác quá mức vì lợi ích lấy thêm thuộc về một người, còn thiệt hại chia cho tất cả.",
+   "Code mô phỏng một hồ cá có {users} người đánh bắt. Đường xanh có hạn ngạch. Đường đỏ ai cũng lấy thêm {greed_extra}.",
+   "Lấy thêm làm hồ cá cạn kiệt ở năm thứ {collapse_year}. Sau {years} năm, nhóm có hạn ngạch bắt được {quota_catch} đơn vị, nhóm tham chỉ được {greedy_catch}.",
+   "Mỗi người đều hợp lý. Tổng lại thì thảm hoạ. Đó là lý do cần luật chơi chung."
+  ],
+  "takeaway": "Khi một nguồn lực dùng chung, hãy đặt luật trước khi nó cạn, không phải sau.",
+  "chart_title": "Trữ lượng hồ cá theo năm",
+  "caption": "Tragedy of the commons: lợi ích cá nhân có thể phá huỷ lợi ích của tất cả.",
+  "visual": {
+   "kind": "commons",
+   "users": 10,
+   "greed": 1.6,
+   "years": 40
+  },
+  "chart_note": "Mô phỏng: cá tái tạo theo mô hình logistic. Hạn ngạch = mức khai thác bền vững chia đều. Minh hoạ.",
+  "punch": {
+   "value": "năm {collapse_year}",
+   "label": "hồ cá cạn khi ai cũng lấy thêm {greed_extra}"
+  },
+  "hashtags": [
+   "tragedyofthecommons"
+  ]
+ },
+ {
+  "id": "60-chicken-game",
+  "no": 60,
+  "group": "game-theory",
+  "en": "Chicken Game",
+  "angle": "Ai là người có lợi thế khi cả hai đều không chịu nhượng bộ?",
+  "title": "Ai né trước thì thua?",
+  "hook": "Hai chiếc xe lao vào nhau. Ai né trước là kẻ nhát. Không ai né thì cả hai cùng mất.",
+  "beats": [
+   "Trò chơi gà: mỗi người muốn người kia nhượng bộ, nhưng nếu không ai nhượng thì kết cục tệ nhất cho cả hai.",
+   "Né thì mất một điểm, người kia được một điểm. Cả hai lao thẳng thì mỗi người mất mười điểm.",
+   "Code tìm thấy {n_nash} cân bằng: một người lao, người kia né. Vấn đề là ai sẽ né.",
+   "Lợi thế thuộc về người làm cho lời đe doạ của mình đáng tin hơn, kể cả bằng cách tự trói tay."
+  ],
+  "takeaway": "Trong đàm phán căng thẳng, người thắng thường là người khiến bên kia tin rằng mình thật sự không lùi.",
+  "chart_title": "Trò chơi gà: bạn (cam) · họ (trắng)",
+  "caption": "Chicken game: không ai muốn né trước, nhưng không ai né thì cả hai cùng mất.",
+  "visual": {
+   "kind": "matrix",
+   "rows": [
+    "Né",
+    "Lao thẳng"
+   ],
+   "cols": [
+    "Né",
+    "Lao thẳng"
+   ],
+   "payoffs": [
+    [
+     [
+      0,
+      0
+     ],
+     [
+      -1,
+      1
+     ]
+    ],
+    [
+     [
+      1,
+      -1
+     ],
+     [
+      -10,
+      -10
+     ]
+    ]
+   ]
+  },
+  "chart_note": "Bảng điểm minh hoạ. Code tìm cân bằng Nash, khoanh bằng vòng xanh.",
+  "punch": {
+   "value": "{n_nash}",
+   "label": "cân bằng Nash: một người phải né"
+  },
+  "hashtags": [
+   "chickengame"
+  ]
+ },
+ {
+  "id": "61-tit-for-tat",
+  "no": 61,
+  "group": "game-theory",
+  "en": "Tit for Tat",
+  "angle": "Chiến lược đơn giản có thể đánh bại những chiến lược phức tạp.",
+  "title": "Chiến lược đơn giản nhất lại đứng top",
+  "hook": "Một chiến lược chỉ có một luật: làm lại điều đối phương vừa làm. Nó đứng top giải đấu.",
+  "beats": [
+   "Năm 1980, Axelrod tổ chức giải đấu thế lưỡng nan người tù lặp lại. Tit for Tat, ăn miếng trả miếng, là người chiến thắng.",
+   "Code tái hiện một giải nhỏ: {n_strats} chiến lược đấu vòng tròn, mỗi cặp {rounds} lượt. Mỗi cột là tổng điểm.",
+   "Tit for Tat đứng thứ {tft_rank}, với {tft_score} điểm. Luôn phản bội chỉ được {defect_score}. Hai chiến lược đứng đầu đều không bao giờ phản bội trước.",
+   "Bí quyết: tử tế trước, trả đũa ngay khi bị chơi xấu, và tha thứ ngay khi đối phương quay lại hợp tác."
+  ],
+  "takeaway": "Tử tế, rõ ràng, biết trả đũa và biết tha thứ. Đơn giản nhưng khó bị lợi dụng.",
+  "chart_title": "Tổng điểm giải đấu vòng tròn",
+  "caption": "Tit for Tat: tử tế trước, trả đũa khi bị chơi xấu, tha thứ khi đối phương sửa sai.",
+  "visual": {
+   "kind": "ipd",
+   "rounds": 200
+  },
+  "chart_note": "Mô phỏng thế lưỡng nan lặp lại, điểm 5-3-1-0. Nguồn giải gốc: Axelrod (1984), The Evolution of Cooperation.",
+  "punch": {
+   "value": "#{tft_rank}",
+   "label": "thứ hạng của Tit for Tat trong {n_strats} chiến lược"
+  },
+  "allowed_literals": [
+   "5-3-1-0"
+  ],
+  "facts": {
+   "axelrod": {
+    "value": "1980 1984",
+    "source": "Axelrod, R. (1984). The Evolution of Cooperation. Basic Books."
+   }
+  },
+  "hashtags": [
+   "titfortat"
+  ]
+ },
+ {
+  "id": "62-repeated-games",
+  "no": 62,
+  "group": "game-theory",
+  "en": "Repeated Games",
+  "angle": "Tại sao danh tiếng quan trọng hơn lợi ích ngắn hạn?",
+  "title": "Vì sao danh tiếng đáng giá hơn một lần lừa?",
+  "hook": "Lừa một lần có lời. Lừa một người bạn sẽ gặp lại hai trăm lần thì sao?",
+  "beats": [
+   "Trò chơi lặp lại: khi gặp lại nhau nhiều lần, hôm nay bạn đối xử thế nào quyết định ngày mai người kia đối xử ra sao.",
+   "Code cho kẻ luôn phản bội đấu với Tit for Tat. Chơi một lần, kẻ phản bội được {one_shot_defect} điểm, Tit for Tat được {one_shot_tft}.",
+   "Chơi {rounds} lượt, kẻ phản bội chỉ được {rep_defect_gain} điểm. Hai người cùng hợp tác thì mỗi người được {coop_pair}.",
+   "Khi tương lai đủ dài, danh tiếng biến thành tài sản, và lừa đảo biến thành chiến lược thua."
+  ],
+  "takeaway": "Hành xử như thể bạn sẽ gặp lại người đó nhiều lần. Trong một thị trường nhỏ, điều đó thường đúng.",
+  "chart_title": "Tổng điểm giải đấu vòng tròn",
+  "caption": "Repeated games: khi gặp lại nhau nhiều lần, danh tiếng đáng giá hơn mọi lợi ích ngắn hạn.",
+  "visual": {
+   "kind": "ipd",
+   "rounds": 200
+  },
+  "chart_note": "Mô phỏng thế lưỡng nan lặp lại, điểm 5-3-1-0.",
+  "punch": {
+   "value": "{rep_defect_gain} vs {coop_pair}",
+   "label": "điểm của kẻ phản bội so với cặp hợp tác sau {rounds} lượt"
+  },
+  "allowed_literals": [
+   "5-3-1-0"
+  ],
+  "hashtags": [
+   "repeatedgames",
+   "danhtieng"
+  ]
+ },
+ {
+  "id": "63-ultimatum-game",
+  "no": 63,
+  "group": "game-theory",
+  "en": "Ultimatum Game",
+  "angle": "Tại sao con người chấp nhận mất tiền chỉ để trừng phạt sự bất công?",
+  "title": "Thà mất tiền còn hơn nhận phần bất công",
+  "hook": "Ai đó chia cho bạn một phần rất nhỏ. Từ chối thì cả hai trắng tay. Bạn có nhận không?",
+  "beats": [
+   "Trò chơi tối hậu thư: một người đề nghị cách chia, người kia nhận hoặc từ chối. Từ chối thì không ai được gì.",
+   "Sơ đồ trên bảng: người chia đưa ra phần nhỏ, người nhận thấy bất công, từ chối, cả hai cùng mất.",
+   "Theo lý thuyết, nhận bất kỳ khoản nào cũng hơn không. Thực tế, đề nghị dưới khoảng 20% thường bị từ chối, theo tổng hợp của Camerer.",
+   "Con người không chỉ tối đa hoá tiền. Ta sẵn sàng trả giá để trừng phạt sự bất công."
+  ],
+  "takeaway": "Khi chia lợi ích, đừng tính mức tối thiểu người kia buộc phải nhận. Hãy tính mức họ thấy công bằng.",
+  "chart_title": "Trò chơi tối hậu thư",
+  "caption": "Ultimatum game: người ta sẵn sàng mất tiền để trừng phạt sự bất công.",
+  "visual": {
+   "kind": "diagram",
+   "nodes": [
+    {
+     "text": "Người chia đưa\nphần rất nhỏ",
+     "x": 5,
+     "y": 8.6,
+     "color": "accent"
+    },
+    {
+     "text": "Người nhận\nthấy bất công",
+     "x": 8.0,
+     "y": 5,
+     "color": "neutral"
+    },
+    {
+     "text": "Từ chối",
+     "x": 5,
+     "y": 1.4,
+     "color": "negative"
+    },
+    {
+     "text": "Cả hai\ntrắng tay",
+     "x": 2.0,
+     "y": 5,
+     "color": "negative"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3,
+     "negative"
+    ]
+   ]
+  },
+  "chart_note": "Nguồn: Camerer (2003), Behavioral Game Theory.",
+  "facts": {
+   "camerer": {
+    "value": "20% 2003",
+    "source": "Camerer, C. (2003). Behavioral Game Theory. Princeton University Press."
+   }
+  },
+  "hashtags": [
+   "ultimatumgame"
+  ]
+ },
+ {
+  "id": "64-signaling-theory",
+  "no": 64,
+  "group": "game-theory",
+  "en": "Signaling Theory",
+  "angle": "Tại sao tín hiệu đôi khi quan trọng hơn bản chất?",
+  "title": "Vì sao tín hiệu đôi khi quan trọng hơn bản chất?",
+  "hook": "Nhà tuyển dụng không nhìn thấy năng lực của bạn. Họ chỉ nhìn thấy tín hiệu.",
+  "beats": [
+   "Lý thuyết tín hiệu: khi một bên không quan sát được chất lượng thật, họ dựa vào những tín hiệu tốn kém để phân biệt.",
+   "Chuỗi trên bảng: chất lượng bị ẩn, người tốt gửi tín hiệu tốn kém, người kém khó bắt chước, nên bên kia tin vào tín hiệu.",
+   "Một tín hiệu chỉ có giá khi nó đắt với người kém. Nếu ai cũng làm được dễ dàng, nó vô nghĩa.",
+   "Bằng cấp, bảo hành dài hạn, văn phòng đẹp đều có thể là tín hiệu. Câu hỏi là nó tốn kém với ai."
+  ],
+  "takeaway": "Khi đọc tín hiệu của người khác, hỏi: thứ này có đắt với người không có chất lượng thật không?",
+  "chart_title": "Tín hiệu hoạt động thế nào",
+  "caption": "Signaling theory: tín hiệu chỉ có giá khi nó đắt với người không có chất lượng thật.",
+  "visual": {
+   "kind": "diagram",
+   "nodes": [
+    {
+     "text": "Chất lượng\nbị ẩn",
+     "x": 3.0,
+     "y": 8.8,
+     "color": "text"
+    },
+    {
+     "text": "Người tốt gửi\ntín hiệu tốn kém",
+     "x": 7.0,
+     "y": 6.2666666666666675,
+     "color": "accent"
+    },
+    {
+     "text": "Người kém\nkhó bắt chước",
+     "x": 3.0,
+     "y": 3.7333333333333343,
+     "color": "neutral"
+    },
+    {
+     "text": "Bên kia tin\nvào tín hiệu",
+     "x": 7.0,
+     "y": 1.200000000000001,
+     "color": "positive"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ]
+   ]
+  },
+  "chart_note": "Sơ đồ khái niệm, không có số liệu.",
+  "hashtags": [
+   "signaling"
+  ]
+ },
+ {
+  "id": "65-commitment-strategy",
+  "no": 65,
+  "group": "game-theory",
+  "en": "Commitment Strategy",
+  "angle": "Đôi khi chiến thắng bắt đầu bằng việc tự tước đi lựa chọn rút lui.",
+  "title": "Tự cắt đường lui để thắng",
+  "hook": "Có những lúc cách mạnh nhất để thắng là tự xoá bỏ lựa chọn rút lui của mình.",
+  "beats": [
+   "Chiến lược cam kết: hạn chế lựa chọn của chính mình để lời hứa hoặc lời đe doạ trở nên đáng tin.",
+   "Chuỗi trên bảng: tự cắt đường lui, đối phương tin bạn sẽ không lùi, họ điều chỉnh theo, và bạn đạt được điều mình muốn.",
+   "Hạng Vũ đập nồi, đánh chìm thuyền trước trận Cự Lộc. Quân lính biết không còn đường về.",
+   "Trong lý thuyết trò chơi, ít lựa chọn hơn đôi khi lại là lợi thế, vì người khác buộc phải tin bạn."
+  ],
+  "takeaway": "Muốn giữ một quyết định khó, hãy tạo ra cái giá cho việc bỏ cuộc trước khi bạn bắt đầu.",
+  "chart_title": "Sức mạnh của cam kết",
+  "caption": "Commitment strategy: tự cắt đường lui khiến lời cam kết của bạn trở nên đáng tin.",
+  "visual": {
+   "kind": "diagram",
+   "nodes": [
+    {
+     "text": "Tự cắt\nđường lui",
+     "x": 3.0,
+     "y": 8.8,
+     "color": "text"
+    },
+    {
+     "text": "Đối phương tin\nbạn không lùi",
+     "x": 7.0,
+     "y": 6.2666666666666675,
+     "color": "accent"
+    },
+    {
+     "text": "Họ điều chỉnh\ntheo",
+     "x": 3.0,
+     "y": 3.7333333333333343,
+     "color": "neutral"
+    },
+    {
+     "text": "Bạn đạt được\nmục tiêu",
+     "x": 7.0,
+     "y": 1.200000000000001,
+     "color": "positive"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ]
+   ]
+  },
+  "chart_note": "Sơ đồ khái niệm, không có số liệu.",
+  "hashtags": [
+   "commitment"
+  ]
+ },
+ {
+  "id": "66-schelling-point",
+  "no": 66,
+  "group": "game-theory",
+  "en": "Schelling Point",
+  "angle": "Tại sao những người không liên lạc vẫn có thể chọn cùng một đáp án?",
+  "title": "Gặp nhau mà không cần hẹn",
+  "hook": "Bạn phải gặp một người lạ ở Hà Nội ngày mai, không hẹn giờ, không hẹn chỗ. Bạn sẽ đi đâu?",
+  "beats": [
+   "Điểm Schelling: lựa chọn mà nhiều người tự nghĩ tới khi không thể bàn với nhau.",
+   "Chuỗi trên bảng: không liên lạc được, mỗi người tự hỏi người kia sẽ nghĩ gì, cùng chọn điểm nổi bật nhất, và gặp nhau.",
+   "Thomas Schelling hỏi sinh viên câu tương tự với New York. Rất nhiều người chọn cùng một nơi: ga Grand Central, lúc giữa trưa.",
+   "Điểm hội tụ không cần tốt nhất. Nó chỉ cần nổi bật nhất trong đầu mọi người."
+  ],
+  "takeaway": "Khi cần phối hợp mà không bàn trước được, chọn phương án hiển nhiên nhất, không phải thông minh nhất.",
+  "chart_title": "Phối hợp không cần lời",
+  "caption": "Schelling point: không cần bàn trước, người ta vẫn có thể chọn cùng một đáp án.",
+  "visual": {
+   "kind": "diagram",
+   "nodes": [
+    {
+     "text": "Không liên\nlạc được",
+     "x": 3.0,
+     "y": 8.8,
+     "color": "text"
+    },
+    {
+     "text": "Đoán người kia\nnghĩ gì",
+     "x": 7.0,
+     "y": 6.2666666666666675,
+     "color": "accent"
+    },
+    {
+     "text": "Chọn điểm\nnổi bật nhất",
+     "x": 3.0,
+     "y": 3.7333333333333343,
+     "color": "neutral"
+    },
+    {
+     "text": "Gặp\nnhau",
+     "x": 7.0,
+     "y": 1.200000000000001,
+     "color": "positive"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ]
+   ]
+  },
+  "chart_note": "Nguồn: Schelling (1960), The Strategy of Conflict.",
+  "facts": {
+   "schelling": {
+    "value": "1960",
+    "source": "Schelling, T. (1960). The Strategy of Conflict. Harvard University Press."
+   }
+  },
+  "hashtags": [
+   "schellingpoint"
+  ]
+ },
+ {
+  "id": "67-principal-agent-problem",
+  "no": 67,
+  "group": "game-theory",
+  "en": "Principal-Agent Problem",
+  "angle": "Người đại diện có thực sự hành động vì lợi ích của bạn?",
+  "title": "Người làm thay có làm vì bạn không?",
+  "hook": "Người môi giới được trả theo số giao dịch. Bạn nghĩ họ khuyên bạn giao dịch nhiều hay ít?",
+  "beats": [
+   "Vấn đề người uỷ thác và người đại diện: người làm thay có mục tiêu khác người thuê họ.",
+   "Sơ đồ trên bảng: bạn giao việc, người đại diện có thông tin hơn bạn, họ được trả theo thứ khác với kết quả của bạn, và hành động theo lợi ích của họ.",
+   "Không cần ai xấu cả. Chỉ cần cách trả công lệch khỏi mục tiêu của bạn là đủ.",
+   "Môi giới, quản lý quỹ, nhân viên, thậm chí bác sĩ, đều có thể rơi vào thế này."
+  ],
+  "takeaway": "Trước khi nghe lời khuyên, hỏi: người này được trả tiền theo cách nào?",
+  "chart_title": "Khi mục tiêu lệch nhau",
+  "caption": "Principal-agent problem: người làm thay có mục tiêu riêng. Hãy hỏi họ được trả tiền thế nào.",
+  "visual": {
+   "kind": "diagram",
+   "nodes": [
+    {
+     "text": "Bạn\ngiao việc",
+     "x": 5,
+     "y": 8.6,
+     "color": "text"
+    },
+    {
+     "text": "Người đại diện\nbiết nhiều hơn",
+     "x": 8.0,
+     "y": 5,
+     "color": "neutral"
+    },
+    {
+     "text": "Được trả theo\nthứ khác",
+     "x": 5,
+     "y": 1.4,
+     "color": "accent"
+    },
+    {
+     "text": "Làm theo\nlợi ích của họ",
+     "x": 2.0,
+     "y": 5,
+     "color": "negative"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3,
+     "negative"
+    ],
+    [
+     3,
+     0,
+     "negative"
+    ]
+   ]
+  },
+  "chart_note": "Sơ đồ khái niệm, không có số liệu.",
+  "hashtags": [
+   "principalagent"
+  ]
+ },
+ {
+  "id": "68-adverse-selection",
+  "no": 68,
+  "group": "game-theory",
+  "en": "Adverse Selection",
+  "angle": "Tại sao thông tin bất cân xứng có thể khiến thị trường sụp đổ?",
+  "title": "Khi người bán biết nhiều hơn người mua",
+  "hook": "Một chợ xe cũ có thể tự sụp đổ, chỉ vì người mua không phân biệt được xe tốt và xe tồi.",
+  "beats": [
+   "Lựa chọn bất lợi: khi người bán biết chất lượng còn người mua thì không, hàng tốt bị đẩy ra khỏi thị trường.",
+   "Code mô phỏng {cars} chiếc xe chất lượng ngẫu nhiên. Người mua chỉ dám trả giá trung bình, nên chủ xe tốt rút lui. Lặp lại.",
+   "Giá khởi đầu là {first_price}. Sau {rounds} vòng, giá còn {last_price}, và chỉ còn {left} chiếc xe trên chợ.",
+   "Akerlof gọi đây là thị trường quả chanh. Thiếu thông tin đáng tin, thị trường có thể biến mất."
+  ],
+  "takeaway": "Thông tin đáng tin như kiểm định, bảo hành, đánh giá độc lập là thứ giữ cho thị trường tồn tại.",
+  "chart_title": "Giá và số xe còn bán qua từng vòng",
+  "caption": "Adverse selection: thông tin bất cân xứng đẩy hàng tốt ra khỏi thị trường. Thị trường quả chanh của Akerlof.",
+  "visual": {
+   "kind": "lemons",
+   "cars": 1000,
+   "rounds": 8
+  },
+  "chart_note": "Mô phỏng: chất lượng ngẫu nhiên từ 0 đến 100, người mua trả giá trung bình. Ý tưởng: Akerlof (1970).",
+  "punch": {
+   "value": "{left} / {cars}",
+   "label": "số xe còn lại trên chợ sau {rounds} vòng"
+  },
+  "allowed_literals": [
+   "0",
+   "100"
+  ],
+  "facts": {
+   "akerlof": {
+    "value": "1970",
+    "source": "Akerlof, G. (1970). The Market for Lemons. Quarterly Journal of Economics 84(3)."
+   }
+  },
+  "hashtags": [
+   "adverseselection"
+  ]
+ },
+ {
+  "id": "69-mechanism-design",
+  "no": 69,
+  "group": "game-theory",
+  "en": "Mechanism Design",
+  "angle": "Muốn thay đổi hành vi, hãy thay đổi luật chơi.",
+  "title": "Đừng đổi người, hãy đổi luật chơi",
+  "hook": "Hai đứa trẻ tranh nhau một chiếc bánh. Có một luật chơi khiến cả hai đều thấy công bằng.",
+  "beats": [
+   "Thiết kế cơ chế: thay vì yêu cầu mọi người tử tế, hãy thiết kế luật chơi để hành vi ích kỷ cũng cho ra kết quả tốt.",
+   "Sơ đồ trên bảng: một người cắt, người kia chọn trước. Người cắt muốn phần mình không nhỏ, nên cắt đều nhất có thể.",
+   "Không cần trọng tài, không cần tin nhau. Luật chơi tự làm phần việc đó.",
+   "Đấu giá, thưởng theo kết quả, chính sách hoàn tiền đều là thiết kế cơ chế."
+  ],
+  "takeaway": "Khi muốn ai đó thay đổi hành vi, đừng thuyết phục họ. Hãy thay đổi thứ họ được và mất.",
+  "chart_title": "Luật chơi một người cắt, một người chọn",
+  "caption": "Mechanism design: muốn thay đổi hành vi, hãy thay đổi luật chơi.",
+  "visual": {
+   "kind": "diagram",
+   "nodes": [
+    {
+     "text": "Một người\ncắt bánh",
+     "x": 3.0,
+     "y": 8.8,
+     "color": "text"
+    },
+    {
+     "text": "Người kia\nchọn trước",
+     "x": 7.0,
+     "y": 6.2666666666666675,
+     "color": "accent"
+    },
+    {
+     "text": "Người cắt\ncắt thật đều",
+     "x": 3.0,
+     "y": 3.7333333333333343,
+     "color": "neutral"
+    },
+    {
+     "text": "Cả hai thấy\ncông bằng",
+     "x": 7.0,
+     "y": 1.200000000000001,
+     "color": "positive"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ]
+   ]
+  },
+  "chart_note": "Sơ đồ khái niệm, không có số liệu.",
+  "hashtags": [
+   "mechanismdesign"
+  ]
+ },
+ {
+  "id": "70-war-of-attrition",
+  "no": 70,
+  "group": "game-theory",
+  "en": "The War of Attrition",
+  "angle": "Ai sẽ là người bỏ cuộc trước trong một cuộc chiến kéo dài?",
+  "title": "Cuộc chiến tiêu hao: ai bỏ cuộc trước?",
+  "hook": "Hai công ty đốt tiền giành một thị trường. Người thắng thật sự được gì?",
+  "beats": [
+   "Cuộc chiến tiêu hao: hai bên cùng trả giá mỗi ngày, ai trụ lâu hơn sẽ lấy giải thưởng.",
+   "Code mô phỏng {contests} cuộc chiến giành giải thưởng {prize}, mỗi bên tốn một mỗi vòng, bỏ cuộc theo chiến lược cân bằng.",
+   "Trung bình, hai bên đốt tổng cộng {avg_paid}, gần bằng chính giá trị giải thưởng. Có {over_prize} cuộc chiến tốn nhiều hơn cả giải.",
+   "Ở cân bằng, phần thắng bị chi phí ăn hết. Người được lợi nhất thường là người đứng ngoài."
+  ],
+  "takeaway": "Trước khi lao vào một cuộc đua tiêu hao, tính tổng chi phí cả hai bên, không chỉ phần thưởng.",
+  "chart_title": "Tổng chi phí hai bên bỏ ra mỗi cuộc chiến",
+  "caption": "War of attrition: ở cân bằng, chi phí chiến đấu ăn hết giá trị chiến thắng.",
+  "visual": {
+   "kind": "attrition",
+   "prize": 100,
+   "contests": 20000
+  },
+  "chart_note": "Mô phỏng chiến lược cân bằng: mỗi vòng bỏ cuộc với xác suất bằng chi phí chia giải thưởng. Đường đứt: giá trị giải.",
+  "punch": {
+   "value": "{avg_paid}",
+   "label": "tổng chi phí trung bình cho giải thưởng {prize}"
+  },
+  "hashtags": [
+   "warofattrition"
+  ]
+ }
+]

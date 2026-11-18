@@ -1,0 +1,701 @@
+[
+ {
+  "id": "21-expected-value",
+  "no": 21,
+  "group": "poker",
+  "en": "Expected Value (EV)",
+  "angle": "Một quyết định thua tiền vẫn có thể là quyết định đúng.",
+  "title": "Thua ván này vẫn có thể là quyết định đúng",
+  "hook": "Bạn thua ván này. Nhưng đó vẫn là một quyết định đúng.",
+  "beats": [
+   "Dân poker không chấm điểm từng ván. Họ chấm điểm quyết định, bằng giá trị kỳ vọng, gọi tắt là EV.",
+   "Một cú cược thắng {a_abs0} với xác suất {a_p0}, thua {a_abs1} với xác suất {a_p1}. Đường cam là tổng lãi lỗ sau {trials} lần làm lại đúng quyết định đó.",
+   "EV mỗi lần là cộng {a_ev}. Dù vậy, {sim_losses} trên {trials} lần vẫn thua.",
+   "Ngắn hạn, kết quả là may rủi. Dài hạn, chỉ còn lại chất lượng quyết định."
+  ],
+  "takeaway": "Đừng đánh giá một quyết định bằng một kết quả. Hãy hỏi: làm lại một nghìn lần thì sao?",
+  "chart_title": "Cùng một quyết định, lặp lại {trials} lần",
+  "caption": "Thua không có nghĩa là sai. Expected Value giúp bạn tách chất lượng quyết định khỏi may rủi của một lần.",
+  "visual": {
+   "kind": "ev",
+   "trials": 60,
+   "fmt": "num1",
+   "options": [
+    {
+     "id": "a",
+     "label": "Cược +EV",
+     "outcomes": [
+      {
+       "p": 0.45,
+       "pay": 3
+      },
+      {
+       "p": 0.55,
+       "pay": -2
+      }
+     ]
+    }
+   ]
+  },
+  "chart_note": "Mô phỏng bằng code: thắng {a_abs0} với xác suất {a_p0}, thua {a_abs1} với xác suất {a_p1}.",
+  "punch": {
+   "value": "+{a_ev}",
+   "label": "EV mỗi lần đặt cược"
+  },
+  "hashtags": [
+   "expectedvalue"
+  ]
+ },
+ {
+  "id": "22-art-of-bluffing",
+  "no": 22,
+  "group": "poker",
+  "en": "The Art of Bluffing",
+  "angle": "Tại sao đôi khi nói dối lại là chiến lược tối ưu?",
+  "title": "Vì sao bluff lại là chiến lược tối ưu?",
+  "hook": "Người chơi không bao giờ bluff không phải người trung thực. Họ là người dễ bị đọc bài nhất.",
+  "beats": [
+   "Nếu bạn chỉ cược khi có bài mạnh, đối thủ sẽ bỏ bài mỗi lần bạn cược. Bài mạnh của bạn không bao giờ được trả tiền.",
+   "Giả sử cược bằng đúng tiền trong pot. Đường cam là EV của người theo cược, theo tỷ lệ bluff của bạn.",
+   "Điểm cân bằng là {gto_bluff}: cứ ba lần cược thì một lần là bluff, tức hai phần giá trị cho một phần bluff.",
+   "Ở tỷ lệ đó, đối thủ theo hay bỏ đều như nhau. Bluff không phải để lừa, mà để bài mạnh có giá."
+  ],
+  "takeaway": "Trong mọi cuộc thương lượng, nếu bạn quá dễ đoán, mọi tín hiệu của bạn đều mất giá.",
+  "chart_title": "EV của người theo cược",
+  "caption": "Bluff không phải nói dối cho vui. Đó là cách để bài mạnh của bạn được trả tiền.",
+  "visual": {
+   "kind": "bluff",
+   "pot": 100,
+   "bet": 100
+  },
+  "chart_note": "Tính bằng code: cược bằng pot. Đường đứt là tỷ lệ bluff cân bằng.",
+  "punch": {
+   "value": "{gto_bluff}",
+   "label": "tỷ lệ bluff cân bằng khi cược bằng pot"
+  },
+  "hashtags": [
+   "bluff"
+  ]
+ },
+ {
+  "id": "23-pot-odds",
+  "no": 23,
+  "group": "poker",
+  "en": "Pot Odds",
+  "angle": "Khi nào theo cược là quyết định có lợi về toán học?",
+  "title": "Khi nào theo cược là có lợi về toán học?",
+  "hook": "Bạn chỉ có khoảng một phần năm cơ hội thắng. Theo cược vẫn có thể là quyết định đúng.",
+  "beats": [
+   "Pot odds so sánh hai thứ: số tiền phải bỏ ra và số tiền có thể thắng.",
+   "Pot đang có {pot}, bạn cần bỏ {call} để theo. Bạn có {outs} lá bài giúp thắng trong {unseen} lá chưa lộ.",
+   "Cơ hội thắng của bạn là {equity}, trong khi chỉ cần {need} để hoà vốn. EV khi theo là cộng {ev}.",
+   "Câu hỏi không phải là mình có khả năng thắng không, mà là cái giá có rẻ hơn cơ hội không."
+  ],
+  "takeaway": "Một cơ hội có xác suất thấp vẫn đáng theo, nếu cái giá còn thấp hơn.",
+  "chart_title": "EV khi theo cược, theo xác suất thắng",
+  "caption": "Pot odds: so cái giá phải trả với phần thưởng. Xác suất thấp vẫn có thể là quyết định đúng.",
+  "visual": {
+   "kind": "potodds",
+   "pot": 120,
+   "call": 20,
+   "outs": 9,
+   "unseen": 46
+  },
+  "chart_note": "Tính bằng code: pot {pot}, cần theo {call}. Đường đứt: xác suất hoà vốn.",
+  "punch": {
+   "value": "{equity} > {need}",
+   "label": "cơ hội thắng so với mức cần để hoà vốn"
+  },
+  "hashtags": [
+   "potodds"
+  ]
+ },
+ {
+  "id": "24-game-theory-optimal",
+  "no": 24,
+  "group": "poker",
+  "en": "Game Theory Optimal (GTO)",
+  "angle": "Làm thế nào để đối thủ không thể khai thác chiến lược của bạn?",
+  "title": "Chơi sao để đối thủ không thể khai thác?",
+  "hook": "Có một cách chơi mà dù đối thủ biết trước chiến lược của bạn, họ vẫn không khai thác được.",
+  "beats": [
+   "Đó là chiến lược tối ưu theo lý thuyết trò chơi, gọi tắt là GTO.",
+   "Cược {bet} vào pot {pot}. Đường cam là EV của đối thủ khi theo cược, theo tỷ lệ bluff của bạn.",
+   "Bluff {over}, họ theo và lãi {call_ev_over}. Bluff {under}, họ bỏ bài. Ở mức {gto_bluff}, họ hết đường khai thác.",
+   "GTO không thắng nhiều nhất trước người chơi dở. Nó đảm bảo bạn không bị người chơi giỏi khai thác."
+  ],
+  "takeaway": "Khi chưa hiểu đối thủ, hãy cân bằng. Khi đã thấy họ lệch, hãy khai thác chỗ lệch đó.",
+  "chart_title": "EV của đối thủ theo tỷ lệ bluff",
+  "caption": "GTO là chiến lược không thể bị khai thác, kể cả khi đối thủ biết trước bạn chơi thế nào.",
+  "visual": {
+   "kind": "bluff",
+   "pot": 100,
+   "bet": 75,
+   "over": 0.5,
+   "under": 0.1
+  },
+  "chart_note": "Tính bằng code: cược {bet} vào pot {pot}. Đường đứt: tỷ lệ bluff cân bằng.",
+  "punch": {
+   "value": "{gto_bluff}",
+   "label": "tỷ lệ bluff khiến đối thủ hết đường khai thác"
+  },
+  "hashtags": [
+   "gto"
+  ]
+ },
+ {
+  "id": "25-variance-vs-skill",
+  "no": 25,
+  "group": "poker",
+  "en": "Variance vs Skill",
+  "angle": "Người giỏi vẫn có thể thua liên tục.",
+  "title": "Người giỏi vẫn có thể thua rất lâu",
+  "hook": "Một người chơi thật sự có lợi thế vẫn có thể thua sau mười nghìn ván.",
+  "beats": [
+   "Kết quả là kỹ năng cộng với phương sai. Trong ngắn hạn, phương sai lấn át kỹ năng.",
+   "Code mô phỏng {players} người cùng lợi thế {wr} big blind mỗi trăm ván, độ lệch chuẩn {sd}. Mỗi đường là một sự nghiệp.",
+   "Sau mười nghìn ván, {losing_10k} người vẫn đang lỗ. Sau {hands} ván, vẫn còn {losing_end}.",
+   "Đừng kết luận mình giỏi hay dở sau một chuỗi thắng hay thua. Mẫu quá nhỏ chỉ nói về may rủi."
+  ],
+  "takeaway": "Đánh giá kỹ năng bằng mẫu đủ lớn, và chuẩn bị tinh thần cho những đoạn thua dài dù mình làm đúng.",
+  "chart_title": "Lãi lỗ của 30 người cùng lợi thế",
+  "caption": "Người có lợi thế vẫn có thể lỗ sau mười nghìn ván. Phương sai là thứ cần tôn trọng.",
+  "visual": {
+   "kind": "variance",
+   "wr": 5,
+   "sd": 90,
+   "hands": 50000,
+   "players": 1000
+  },
+  "chart_note": "Mô phỏng: lợi thế {wr} bb/100 ván, độ lệch chuẩn {sd} bb/100 ván. Minh hoạ.",
+  "punch": {
+   "value": "{losing_10k}",
+   "label": "người có lợi thế vẫn lỗ sau mười nghìn ván"
+  },
+  "allowed_literals": [
+   "30 người",
+   "bb/100"
+  ],
+  "hashtags": [
+   "variance"
+  ]
+ },
+ {
+  "id": "26-tilt",
+  "no": 26,
+  "group": "poker",
+  "en": "Tilt",
+  "angle": "Khi cảm xúc phá hủy khả năng ra quyết định.",
+  "title": "Tilt: khi cảm xúc cầm lái",
+  "hook": "Cùng một người chơi, cùng một lợi thế. Khác biệt duy nhất là cách họ phản ứng sau hai ván thua.",
+  "beats": [
+   "Tilt là trạng thái cảm xúc lấn át lý trí: muốn gỡ ngay, cược to hơn, và chơi tệ hơn.",
+   "Hai nhóm cùng thắng {a_p} mỗi ván. Nhóm tilt sau hai ván thua liên tiếp sẽ cược gấp ba và chơi kém đi.",
+   "Giữ bình tĩnh: {a_ruin} cháy vốn. Để tilt điều khiển: {b_ruin} cháy vốn.",
+   "Lợi thế mất đi không phải vì bài xấu, mà vì quyết định tệ đi đúng lúc tâm lý yếu nhất."
+  ],
+  "takeaway": "Đặt luật dừng trước khi ngồi vào bàn. Thua liên tiếp là tín hiệu nghỉ, không phải tín hiệu tăng cược.",
+  "chart_title": "Tỷ lệ cháy vốn",
+  "caption": "Tilt biến người có lợi thế thành người cháy vốn. Thua liên tiếp là lúc cần nghỉ.",
+  "visual": {
+   "kind": "ruin",
+   "players": 1000,
+   "rounds": 1000,
+   "p": 0.52,
+   "payout": 1.0,
+   "start": 100,
+   "groups": [
+    {
+     "id": "a",
+     "label": "giữ bình tĩnh",
+     "mode": "fixed",
+     "stake": 2
+    },
+    {
+     "id": "b",
+     "label": "để tilt điều khiển",
+     "mode": "tilt",
+     "stake": 2,
+     "tilt_penalty": 0.06
+    }
+   ]
+  },
+  "chart_note": "Mô phỏng {players} người, {rounds} ván. Khi tilt: cược gấp ba và xác suất thắng giảm. Minh hoạ.",
+  "punch": {
+   "value": "{b_ruin}",
+   "label": "người cháy vốn khi để tilt điều khiển"
+  },
+  "hashtags": [
+   "tilt",
+   "kiemsoatcamxuc"
+  ]
+ },
+ {
+  "id": "27-bankroll-management",
+  "no": 27,
+  "group": "poker",
+  "en": "Bankroll Management",
+  "angle": "Tại sao người chơi giỏi vẫn có thể phá sản?",
+  "title": "Chơi giỏi vẫn có thể phá sản, vì sao?",
+  "hook": "Bạn có lợi thế thật. Bạn vẫn có thể phá sản nếu vốn quá mỏng.",
+  "beats": [
+   "Quản lý vốn là chuyện sống sót qua những đoạn xui, đủ lâu để lợi thế kịp phát huy.",
+   "Ba nhóm cùng thắng {a_p} mỗi ván, lợi thế {a_edge}. Chỉ khác vốn: {a_start}, {b_start} và {c_start} lần mức cược.",
+   "Vốn {a_start} lần: {a_ruin} phá sản. Vốn {b_start} lần: {b_ruin}. Vốn {c_start} lần: {c_ruin}.",
+   "Kỹ năng quyết định bạn thắng bao nhiêu. Quản lý vốn quyết định bạn có còn ở đó để thắng không."
+  ],
+  "takeaway": "Lợi thế cần thời gian. Hãy chắc chắn vốn của bạn mua đủ thời gian đó.",
+  "chart_title": "Tỷ lệ phá sản theo độ dày vốn",
+  "caption": "Người chơi giỏi vẫn phá sản nếu vốn quá mỏng. Quản lý vốn là mua thời gian cho lợi thế.",
+  "visual": {
+   "kind": "ruin",
+   "players": 1000,
+   "rounds": 2000,
+   "p": 0.53,
+   "payout": 1.0,
+   "groups": [
+    {
+     "id": "a",
+     "label": "vốn 10 lần",
+     "start": 10,
+     "stake": 1
+    },
+    {
+     "id": "b",
+     "label": "vốn 30 lần",
+     "start": 30,
+     "stake": 1
+    },
+    {
+     "id": "c",
+     "label": "vốn 100 lần",
+     "start": 100,
+     "stake": 1
+    }
+   ]
+  },
+  "chart_note": "Mô phỏng {players} người, {rounds} ván, xác suất thắng {a_p}. Minh hoạ.",
+  "punch": {
+   "value": "{a_ruin}",
+   "label": "người có lợi thế vẫn phá sản khi vốn chỉ bằng {a_start} lần mức cược"
+  },
+  "hashtags": [
+   "bankroll"
+  ]
+ },
+ {
+  "id": "28-nash-equilibrium-poker",
+  "no": 28,
+  "group": "poker",
+  "en": "Nash Equilibrium",
+  "angle": "Trạng thái cân bằng trong chiến lược poker.",
+  "title": "Cân bằng Nash trên bàn poker",
+  "hook": "Ở bàn poker, có một điểm mà cả hai người đều không muốn đổi cách chơi.",
+  "beats": [
+   "Cân bằng Nash là khi mỗi người đã chọn phản ứng tốt nhất trước chiến lược của người kia.",
+   "Cược nửa pot. Đường cam là EV của người theo cược khi tỷ lệ bluff thay đổi. Đường đứt là điểm cân bằng.",
+   "Người cược bluff {gto_bluff}. Người theo phải theo ít nhất {mdf} số lần để không bị bluff ăn tiền.",
+   "Lệch khỏi điểm này thì người kia có cách trừng phạt. Đứng đúng điểm này thì không ai có lý do để đổi."
+  ],
+  "takeaway": "Cân bằng không phải là thắng đậm. Đó là trạng thái không còn lỗ hổng để người khác khai thác.",
+  "chart_title": "EV người theo, cược nửa pot",
+  "caption": "Cân bằng Nash trong poker: tỷ lệ bluff và tỷ lệ theo khiến không ai muốn đổi cách chơi.",
+  "visual": {
+   "kind": "bluff",
+   "pot": 100,
+   "bet": 50
+  },
+  "chart_note": "Tính bằng code: cược {bet} vào pot {pot}.",
+  "punch": {
+   "value": "{mdf}",
+   "label": "tỷ lệ tối thiểu phải theo cược nửa pot"
+  },
+  "hashtags": [
+   "nashequilibrium"
+  ]
+ },
+ {
+  "id": "29-fold-equity",
+  "no": 29,
+  "group": "poker",
+  "en": "Fold Equity",
+  "angle": "Sức mạnh của việc khiến đối thủ bỏ cuộc.",
+  "title": "Thắng mà không cần bài mạnh",
+  "hook": "Bài của bạn chỉ có {equity} cơ hội thắng. Cược lớn vẫn có thể có lời.",
+  "beats": [
+   "Fold equity là phần giá trị đến từ khả năng đối thủ bỏ bài, trước khi bài được lật.",
+   "Cược {bet} vào pot {pot}. Đường cam là EV của cú cược theo tỷ lệ đối thủ bỏ bài.",
+   "Nếu không ai bỏ bài, EV là {ev_no_fold}. Chỉ cần họ bỏ bài {breakeven_fold} số lần là hoà vốn. Họ bỏ {fold_ex}, EV là {ev_ex}.",
+   "Đây là lý do áp lực cũng là một loại tài sản. Nhưng chỉ có tác dụng khi đối thủ thật sự có thể bỏ."
+  ],
+  "takeaway": "Trong đàm phán, giá trị không chỉ nằm ở lá bài bạn có, mà ở khả năng bên kia rút lui.",
+  "chart_title": "EV của cú cược theo tỷ lệ bỏ bài",
+  "caption": "Fold equity: giá trị đến từ việc khiến đối thủ bỏ cuộc. Áp lực cũng là một loại tài sản.",
+  "visual": {
+   "kind": "foldeq",
+   "pot": 100,
+   "bet": 100,
+   "equity": 0.3,
+   "fold_ex": 0.4
+  },
+  "chart_note": "Tính bằng code: cược {bet} vào pot {pot}, cơ hội thắng khi bị theo {equity}.",
+  "punch": {
+   "value": "{breakeven_fold}",
+   "label": "tỷ lệ bỏ bài đủ để cú cược hoà vốn"
+  },
+  "hashtags": [
+   "foldequity"
+  ]
+ },
+ {
+  "id": "30-range-vs-hand",
+  "no": 30,
+  "group": "poker",
+  "en": "Range vs Hand",
+  "angle": "Đừng đoán một lá bài, hãy tư duy về toàn bộ khả năng.",
+  "title": "Đừng đoán một lá bài",
+  "hook": "Người mới cố đoán đối thủ cầm lá gì. Người giỏi nghĩ về toàn bộ những lá họ có thể cầm.",
+  "beats": [
+   "Range là tập hợp mọi tay bài đối thủ có thể có trong tình huống này, kèm theo số cách để có mỗi tay.",
+   "Mỗi cột là số tổ hợp của một tay bài. Đôi chỉ có {aa} cách, bài khác chất có tới {ako} cách.",
+   "Range này có {total} tổ hợp, trong đó {strong} là bài mạnh, tức {strong_pct}. Phần còn lại là bluff hoặc bài vừa.",
+   "Bạn không cần biết chính xác. Bạn cần biết tỷ lệ, rồi chọn quyết định tốt nhất trước cả tập hợp đó."
+  ],
+  "takeaway": "Ngoài bàn poker cũng vậy: đừng hỏi điều gì sẽ xảy ra, hãy hỏi những gì có thể xảy ra và với tỷ lệ nào.",
+  "chart_title": "Số tổ hợp trong range đối thủ",
+  "caption": "Đừng đoán một lá bài, hãy nghĩ theo range. Tư duy xác suất cho mọi quyết định.",
+  "visual": {
+   "kind": "combos",
+   "hands": [
+    {
+     "id": "aa",
+     "label": "AA",
+     "type": "pair",
+     "strong": true
+    },
+    {
+     "id": "kk",
+     "label": "KK",
+     "type": "pair",
+     "strong": true
+    },
+    {
+     "id": "aks",
+     "label": "AKs",
+     "type": "suited",
+     "strong": true
+    },
+    {
+     "id": "ako",
+     "label": "AKo",
+     "type": "offsuit",
+     "strong": true
+    },
+    {
+     "id": "qjs",
+     "label": "QJs",
+     "type": "suited"
+    },
+    {
+     "id": "t9s",
+     "label": "T9s",
+     "type": "suited"
+    },
+    {
+     "id": "s76",
+     "label": "76s",
+     "type": "suited"
+    },
+    {
+     "id": "a5s",
+     "label": "A5s",
+     "type": "suited"
+    }
+   ]
+  },
+  "chart_note": "Code đếm tổ hợp: đôi {aa} cách, cùng chất 4 cách, khác chất {ako} cách. Xanh: bài mạnh.",
+  "punch": {
+   "value": "{strong_pct}",
+   "label": "phần bài mạnh trong range đối thủ"
+  },
+  "allowed_literals": [
+   "76s",
+   "A5s",
+   "T9s"
+  ],
+  "hashtags": [
+   "range"
+  ]
+ },
+ {
+  "id": "31-position-is-power",
+  "no": 31,
+  "group": "poker",
+  "en": "Position Is Power",
+  "angle": "Tại sao người hành động sau có lợi thế?",
+  "title": "Vì sao người đi sau có lợi thế?",
+  "hook": "Trong poker, được hành động sau cùng đáng giá hơn rất nhiều người nghĩ.",
+  "beats": [
+   "Người đi sau thấy đối thủ làm gì rồi mới quyết định. Người đi trước phải quyết định trong bóng tối.",
+   "Sơ đồ trên bảng: người đi trước hành động, để lộ thông tin, người đi sau đọc thông tin đó và chọn phản ứng tốt nhất.",
+   "Thông tin là lợi thế. Người đi sau kiểm soát được kích thước pot và có thêm lựa chọn ở mỗi vòng.",
+   "Ngoài đời cũng vậy: trong đàm phán, người nói giá sau thường có thêm thông tin để quyết định."
+  ],
+  "takeaway": "Khi có thể, hãy để người khác lộ bài trước. Thông tin đến trước, quyết định đến sau.",
+  "chart_title": "Vì sao vị trí là sức mạnh",
+  "caption": "Position is power: người hành động sau có thêm thông tin, và thông tin là lợi thế.",
+  "visual": {
+   "kind": "diagram",
+   "nodes": [
+    {
+     "text": "Người đi trước\nhành động",
+     "x": 2.5,
+     "y": 8.4,
+     "color": "muted"
+    },
+    {
+     "text": "Lộ\nthông tin",
+     "x": 7.5,
+     "y": 8.4,
+     "color": "neutral"
+    },
+    {
+     "text": "Người đi sau\nquan sát",
+     "x": 7.5,
+     "y": 4.2,
+     "color": "accent"
+    },
+    {
+     "text": "Chọn phản ứng\ntốt nhất",
+     "x": 2.5,
+     "y": 4.2,
+     "color": "positive"
+    },
+    {
+     "text": "Kiểm soát pot\nvà rủi ro",
+     "x": 5,
+     "y": 1.0,
+     "color": "positive"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3,
+     "positive"
+    ],
+    [
+     3,
+     4,
+     "positive"
+    ]
+   ]
+  },
+  "chart_note": "Sơ đồ khái niệm, không có số liệu.",
+  "hashtags": [
+   "position"
+  ]
+ },
+ {
+  "id": "32-sunk-cost-trap",
+  "no": 32,
+  "group": "poker",
+  "en": "The Sunk Cost Trap",
+  "angle": "Càng thua càng muốn gỡ: sai lầm chết người.",
+  "title": "Càng thua càng muốn gỡ",
+  "hook": "Càng thua, bạn càng muốn cược to để gỡ. Toán học nói đó là con đường nhanh nhất tới cháy vốn.",
+  "beats": [
+   "Tiền đã mất là chi phí chìm. Nó không quay lại, dù bạn quyết định gì tiếp theo.",
+   "Hai nhóm cùng chơi một trò bất lợi nhẹ, thắng {a_p}. Một nhóm cược đều tay, một nhóm tăng cược để gỡ phần đã mất.",
+   "Nhóm cố gỡ về bờ nhiều lần hơn, nhưng cháy vốn {b_ruin}, so với {a_ruin} ở nhóm cược đều.",
+   "Gỡ được nhiều lần tạo cảm giác chiến lược hiệu quả. Một lần cháy vốn xoá sạch tất cả."
+  ],
+  "takeaway": "Mỗi quyết định nên dựa trên những gì phía trước, không phải những gì đã mất.",
+  "chart_title": "Tỷ lệ cháy vốn",
+  "caption": "Càng thua càng muốn gỡ là con đường ngắn nhất tới cháy vốn. Tiền đã mất là chi phí chìm.",
+  "visual": {
+   "kind": "ruin",
+   "players": 1000,
+   "rounds": 500,
+   "p": 0.49,
+   "payout": 1.0,
+   "start": 100,
+   "groups": [
+    {
+     "id": "a",
+     "label": "cược đều tay",
+     "mode": "fixed",
+     "stake": 2
+    },
+    {
+     "id": "b",
+     "label": "cược to để gỡ",
+     "mode": "chase",
+     "stake": 2
+    }
+   ]
+  },
+  "chart_note": "Mô phỏng {players} người, {rounds} ván, xác suất thắng {a_p}. Minh hoạ.",
+  "punch": {
+   "value": "{b_ruin}",
+   "label": "người cháy vốn khi cố cược to để gỡ"
+  },
+  "hashtags": [
+   "sunkcost"
+  ]
+ },
+ {
+  "id": "33-bluff-frequency",
+  "no": 33,
+  "group": "poker",
+  "en": "Bluff Frequency",
+  "angle": "Khi nào bạn nên bluff và tần suất bao nhiêu là hợp lý?",
+  "title": "Bluff bao nhiêu là vừa?",
+  "hook": "Bluff bao nhiêu là vừa? Câu trả lời phụ thuộc vào đúng một thứ: bạn cược lớn cỡ nào.",
+  "beats": [
+   "Cược càng lớn, đối thủ càng cần nhiều lý do để theo. Bạn càng được phép bluff nhiều hơn.",
+   "Đường cam là EV của người theo khi bạn cược bằng pot. Đường đứt là tỷ lệ bluff cân bằng.",
+   "Cược nửa pot: bluff {gto_half}. Cược bằng pot: {gto_pot}. Cược gấp đôi pot: {gto_2x}.",
+   "Bluff ít hơn mức này, bạn quá dễ đoán. Bluff nhiều hơn, bạn đang tặng tiền."
+  ],
+  "takeaway": "Không có con số bluff đúng cho mọi tình huống. Có một con số đúng cho mỗi kích thước cược.",
+  "chart_title": "EV người theo, cược bằng pot",
+  "caption": "Tần suất bluff hợp lý phụ thuộc vào kích thước cược. Toán học cho ra con số cụ thể.",
+  "visual": {
+   "kind": "bluff",
+   "pot": 100,
+   "bet": 100
+  },
+  "chart_note": "Tính bằng code: tỷ lệ bluff cân bằng bằng cược chia cho pot cộng hai lần cược.",
+  "punch": {
+   "value": "{gto_pot}",
+   "label": "tỷ lệ bluff cân bằng khi cược bằng pot"
+  },
+  "hashtags": [
+   "bluff"
+  ]
+ },
+ {
+  "id": "34-information-asymmetry",
+  "no": 34,
+  "group": "poker",
+  "en": "Information Asymmetry",
+  "angle": "Lợi thế của người biết nhiều hơn đối thủ.",
+  "title": "Lợi thế của người biết nhiều hơn",
+  "hook": "Trên mọi bàn chơi, người biết nhiều hơn không cần may mắn hơn.",
+  "beats": [
+   "Thông tin bất cân xứng là khi một bên biết điều bên kia không biết.",
+   "Sơ đồ trên bảng: người biết nhiều có thông tin riêng, định giá đúng hơn, chọn ván có lợi, và tránh ván bất lợi.",
+   "Người biết ít không chỉ thiệt ở từng ván. Họ còn không biết mình đang ngồi ở ván nào.",
+   "Câu nói quen thuộc của dân poker: ngồi vào bàn mà không biết ai là con mồi, thì con mồi chính là bạn."
+  ],
+  "takeaway": "Trước khi tham gia một cuộc chơi, hỏi: ai đang biết nhiều hơn mình, và họ được lợi gì từ việc đó?",
+  "chart_title": "Thông tin bất cân xứng",
+  "caption": "Người biết nhiều hơn không cần may mắn hơn. Thông tin bất cân xứng quyết định ai là con mồi.",
+  "visual": {
+   "kind": "diagram",
+   "nodes": [
+    {
+     "text": "Có thông tin\nriêng",
+     "x": 5,
+     "y": 8.6,
+     "color": "accent"
+    },
+    {
+     "text": "Định giá\nđúng hơn",
+     "x": 8.0,
+     "y": 5,
+     "color": "neutral"
+    },
+    {
+     "text": "Chọn ván\ncó lợi",
+     "x": 5,
+     "y": 1.4,
+     "color": "positive"
+    },
+    {
+     "text": "Người biết ít\ntrả giá",
+     "x": 2.0,
+     "y": 5,
+     "color": "negative"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2,
+     "positive"
+    ],
+    [
+     2,
+     3,
+     "negative"
+    ]
+   ]
+  },
+  "chart_note": "Sơ đồ khái niệm, không có số liệu.",
+  "hashtags": [
+   "thongtin"
+  ]
+ },
+ {
+  "id": "35-martingale-fallacy",
+  "no": 35,
+  "group": "poker",
+  "en": "The Martingale Fallacy",
+  "angle": "Tại sao nhân đôi tiền cược không thể đánh bại xác suất?",
+  "title": "Gấp đôi tiền cược sau mỗi lần thua?",
+  "hook": "Thua thì gấp đôi tiền cược, kiểu gì cũng gỡ. Nghe hợp lý, cho tới khi gặp chuỗi thua đủ dài.",
+  "beats": [
+   "Chiến thuật Martingale thắng nhỏ rất thường xuyên. Đó chính là thứ khiến nó nguy hiểm.",
+   "Code cho {players} người chơi cửa đỏ của roulette, thắng {m_p} mỗi ván, vốn {m_start}, cược đầu {m_stake}.",
+   "Sau {rounds} ván, {m_ruin} người gấp đôi cược đã cháy vốn. Người cược đều tay: {f_ruin}.",
+   "Gấp đôi không đổi xác suất. Nó chỉ đổi nhiều lần lãi nhỏ lấy một lần mất gần như tất cả."
+  ],
+  "takeaway": "Không cách cược nào biến một trò bất lợi thành có lợi. Nó chỉ đổi hình dạng của khoản lỗ.",
+  "chart_title": "Tỷ lệ cháy vốn sau {rounds} ván",
+  "caption": "Martingale thắng nhỏ thường xuyên rồi mất lớn một lần. Không cách cược nào thắng được xác suất.",
+  "visual": {
+   "kind": "ruin",
+   "players": 1000,
+   "rounds": 500,
+   "p": 0.4865,
+   "payout": 1.0,
+   "start": 1000,
+   "groups": [
+    {
+     "id": "m",
+     "label": "gấp đôi khi thua",
+     "mode": "martingale",
+     "stake": 10
+    },
+    {
+     "id": "f",
+     "label": "cược đều tay",
+     "mode": "fixed",
+     "stake": 10
+    }
+   ]
+  },
+  "chart_note": "Mô phỏng {players} người, cửa đỏ roulette châu Âu, xác suất thắng {m_p}.",
+  "punch": {
+   "value": "{m_ruin}",
+   "label": "người cháy vốn khi gấp đôi cược sau mỗi lần thua"
+  },
+  "hashtags": [
+   "martingale"
+  ]
+ }
+]

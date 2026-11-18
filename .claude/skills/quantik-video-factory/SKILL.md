@@ -31,6 +31,9 @@ episodes/                episode JSON đã viết (ghi đè mặc định của 
 > **Video hướng dẫn dùng sản phẩm** ("hướng dẫn sử dụng QuanTik", "workflow từ tạo tài khoản đến phân tích",
 > "demo tính năng quét sàn") không đi qua `batch.py`. Đọc `tutorial/README.md` và làm theo đó: quay giao diện
 > production thật bằng Playwright, dữ liệu minh hoạ với mã bịa, rồi lồng tiếng và ghép bằng `tutorial/run.sh`.
+>
+> **Nội dung YouTube Shorts / IG Reels** (dark truth finance, poker theory, psychology facts, game theory, quant
+> mindset) dùng 80 concept trong `knowledge/concepts/` và style `sketch-short`. Đọc `channels/yt-ig.md`.
 
 ### 1. Chốt yêu cầu
 

@@ -54,12 +54,22 @@ def _to_wav(src, dst):
 
 
 def _edge(text, dst, voice, rate):
-    import edge_tts
+    import ssl
 
+    import edge_tts
+    import edge_tts.communicate as C
+
+    # edge-tts opens its own aiohttp websocket: it ignores HTTPS_PROXY and trusts only certifi.
+    # Behind an HTTPS-inspecting proxy (cloud sandbox) pass the proxy and trust its CA bundle.
+    ca = os.environ.get("TTS_CA_BUNDLE") or ("/root/.ccr/ca-bundle.crt" if os.path.exists("/root/.ccr/ca-bundle.crt") else None)
+    if ca:
+        C._SSL_CTX = ssl.create_default_context(cafile=ca)
+    proxy = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
     tmp = Path(dst).with_suffix(".mp3")
 
     async def go():
-        await edge_tts.Communicate(text, voice, rate=os.environ.get("QT_RATE", rate), pitch=os.environ.get("QT_PITCH", "+0Hz")).save(str(tmp))
+        await edge_tts.Communicate(text, voice, rate=os.environ.get("QT_RATE", rate), pitch=os.environ.get("QT_PITCH", "+0Hz"),
+                                   proxy=proxy).save(str(tmp))
 
     asyncio.run(asyncio.wait_for(go(), timeout=40))
     _to_wav(tmp, dst); tmp.unlink(missing_ok=True)

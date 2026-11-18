@@ -1,0 +1,385 @@
+[
+ {
+  "id": "71-monty-hall",
+  "no": 71,
+  "group": "quant-mindset",
+  "en": "Monty Hall Problem",
+  "angle": "Tại sao đổi cửa lại tăng xác suất thắng từ 1/3 lên 2/3?",
+  "title": "Đổi cửa hay giữ cửa? Toán học trả lời",
+  "hook": "Ba cánh cửa, một chiếc xe. Người dẫn mở một cửa trống. Bạn có nên đổi?",
+  "beats": [
+   "Trực giác nói còn hai cửa thì mỗi cửa năm mươi năm mươi. Trực giác sai.",
+   "Code chơi {games} ván. Đường xanh là luôn đổi cửa, đường đỏ là luôn giữ cửa.",
+   "Giữ cửa thắng {stay_win}. Đổi cửa thắng {switch_win}.",
+   "Vì lúc chọn, cửa của bạn chỉ có một phần ba cơ hội. Người dẫn biết xe ở đâu, nên hai phần ba còn lại dồn hết vào cửa kia."
+  ],
+  "punch": {
+   "value": "{switch_win}",
+   "label": "tỷ lệ thắng khi luôn đổi cửa"
+  },
+  "takeaway": "Khi người ra tín hiệu biết nhiều hơn bạn, tín hiệu đó có giá. Cập nhật xác suất theo thông tin mới.",
+  "chart_title": "Tỷ lệ thắng sau {games} ván",
+  "chart_note": "Mô phỏng bằng code, {games} ván ngẫu nhiên. Đường đứt: một phần ba và hai phần ba.",
+  "caption": "Monty Hall: đổi cửa thắng gấp đôi giữ cửa. Code chơi thử hàng nghìn ván để chứng minh.",
+  "visual": {
+   "kind": "montyhall",
+   "games": 3000
+  },
+  "allowed_literals": [
+   "1/3",
+   "2/3"
+  ],
+  "hashtags": [
+   "montyhall",
+   "xacsuat"
+  ]
+ },
+ {
+  "id": "72-birthday-paradox",
+  "no": 72,
+  "group": "quant-mindset",
+  "en": "The Birthday Paradox",
+  "angle": "Tại sao chỉ cần 23 người đã có xác suất hơn 50% trùng sinh nhật?",
+  "title": "Bao nhiêu người thì có hai người trùng sinh nhật?",
+  "hook": "Một năm có {days} ngày. Cần bao nhiêu người trong phòng để có quá nửa khả năng hai người trùng sinh nhật?",
+  "beats": [
+   "Phần lớn người đoán khoảng một trăm tám mươi. Câu trả lời nhỏ hơn rất nhiều.",
+   "Đường cam là xác suất có ít nhất hai người trùng ngày sinh, theo số người trong phòng. Đường đứt là mốc một nửa.",
+   "Chỉ cần {n50} người: xác suất là {p_n50}. Với năm mươi người, xác suất lên tới {p50}.",
+   "Bí mật: ta nghĩ về một người trùng với mình, trong khi phải đếm mọi cặp. {n50} người tạo ra {pairs_n50} cặp."
+  ],
+  "takeaway": "Khi đánh giá trùng hợp, hãy đếm tất cả các cặp có thể, không chỉ những cặp liên quan đến bạn.",
+  "chart_title": "Xác suất có hai người trùng sinh nhật",
+  "caption": "Nghịch lý ngày sinh: chỉ cần {n50} người là đã có quá nửa khả năng hai người trùng sinh nhật.",
+  "visual": {
+   "kind": "birthday"
+  },
+  "chart_note": "Tính chính xác bằng công thức, kiểm tra lại bằng 4.000 lần mô phỏng ({sim_n50}).",
+  "punch": {
+   "value": "{n50} người",
+   "label": "đủ để có quá nửa khả năng trùng sinh nhật"
+  },
+  "allowed_literals": [
+   "4.000",
+   "23",
+   "50%"
+  ],
+  "hashtags": [
+   "birthdayparadox"
+  ]
+ },
+ {
+  "id": "73-simpsons-paradox",
+  "no": 73,
+  "group": "quant-mindset",
+  "en": "Simpson's Paradox",
+  "angle": "Khi dữ liệu tổng thể cho kết quả ngược với từng nhóm dữ liệu.",
+  "title": "Thắng ở mọi nhóm mà thua ở tổng?",
+  "hook": "Phương pháp A tốt hơn ở mọi nhóm bệnh nhân. Nhưng khi cộng lại, A lại thua. Làm sao có thể?",
+  "beats": [
+   "Đây là nghịch lý Simpson, với số liệu thật từ một nghiên cứu điều trị sỏi thận năm 1986.",
+   "Cột xanh là phương pháp A, cột đỏ là phương pháp B, theo nhóm sỏi nhỏ, sỏi lớn và tổng cộng.",
+   "Sỏi nhỏ: A {g0_a}, B {g0_b}. Sỏi lớn: A {g1_a}, B {g1_b}. Nhưng tổng cộng: A {all_a}, B chỉ {all_b}.",
+   "Vì A được dùng nhiều cho ca sỏi lớn, vốn khó chữa hơn. Nhóm lẫn vào tổng đã đảo ngược kết luận."
+  ],
+  "takeaway": "Trước khi tin một con số tổng, hỏi: các nhóm bên trong có giống nhau không?",
+  "chart_title": "Tỷ lệ điều trị thành công (%)",
+  "caption": "Simpson's paradox: A tốt hơn ở mọi nhóm nhưng thua ở tổng. Số liệu thật từ nghiên cứu sỏi thận.",
+  "visual": {
+   "kind": "simpson",
+   "a_label": "A",
+   "b_label": "B",
+   "total_label": "Tổng",
+   "groups": [
+    {
+     "label": "Sỏi nhỏ",
+     "a": [
+      81,
+      87
+     ],
+     "b": [
+      234,
+      270
+     ]
+    },
+    {
+     "label": "Sỏi lớn",
+     "a": [
+      192,
+      263
+     ],
+     "b": [
+      55,
+      80
+     ]
+    }
+   ]
+  },
+  "chart_note": "Nguồn: Charig và cộng sự (1986), BMJ. Code tính tỷ lệ từ số ca gốc.",
+  "punch": {
+   "value": "{all_a} < {all_b}",
+   "label": "tổng cộng A thua B, dù A thắng ở từng nhóm"
+  },
+  "facts": {
+   "charig": {
+    "value": "1986",
+    "source": "Charig, C. R. et al. (1986). Comparison of treatment of renal calculi. BMJ 292, 879–882."
+   }
+  },
+  "hashtags": [
+   "simpsonsparadox"
+  ]
+ },
+ {
+  "id": "74-regression-to-the-mean",
+  "no": 74,
+  "group": "quant-mindset",
+  "en": "Regression to the Mean",
+  "angle": "Tại sao sau một kết quả cực kỳ tốt, kết quả tiếp theo thường bớt ấn tượng?",
+  "title": "Vì sao lần sau thường kém lần đầu?",
+  "hook": "Quỹ đầu tư đứng top năm nay, năm sau thường tụt hạng. Không cần ai làm sai cả.",
+  "beats": [
+   "Hồi quy về trung bình: kết quả nào có phần may rủi, kết quả cực đoan thường được theo sau bởi kết quả bình thường hơn.",
+   "Code cho {n} người thi hai lần, điểm gồm kỹ năng và may mắn chia đôi. Chấm cam là nhóm đứng top mười phần trăm ở lần một.",
+   "Lần một nhóm này ở thứ hạng trung bình {top_r1}. Lần hai tụt về {top_r2}. Chỉ {still_top} còn ở top.",
+   "Họ không kém đi. Phần may mắn của lần đầu không lặp lại. Phần kỹ năng thì vẫn còn."
+  ],
+  "takeaway": "Đừng chọn người, quỹ hay chiến lược chỉ vì một kết quả xuất sắc gần nhất.",
+  "chart_title": "Thứ hạng lần một và lần hai",
+  "caption": "Regression to the mean: đứng top một lần chưa chắc vì giỏi hơn. Phần may mắn không lặp lại.",
+  "visual": {
+   "kind": "regression",
+   "n": 2000,
+   "luck_share": 0.5
+  },
+  "chart_note": "Mô phỏng: điểm = kỹ năng + may mắn, mỗi phần chiếm {luck_share} phương sai. Minh hoạ.",
+  "punch": {
+   "value": "{top_r1} → {top_r2}",
+   "label": "thứ hạng trung bình của nhóm top, lần một rồi lần hai"
+  },
+  "hashtags": [
+   "regressiontothemean"
+  ]
+ },
+ {
+  "id": "75-law-of-large-numbers",
+  "no": 75,
+  "group": "quant-mindset",
+  "en": "The Law of Large Numbers",
+  "angle": "Tại sao kết quả dài hạn có xu hướng ổn định hơn?",
+  "title": "Tung đồng xu mười lần, được bao nhiêu mặt ngửa?",
+  "hook": "Tung đồng xu mười lần, bạn có thể được rất lệch. Tung năm nghìn lần thì khác.",
+  "beats": [
+   "Luật số lớn: càng lặp lại nhiều, tỷ lệ thực tế càng tiến gần xác suất thật.",
+   "Đường cam là tỷ lệ mặt ngửa sau từng lần tung, trên thang log. Đường xanh là năm mươi phần trăm.",
+   "Sau mười lần: {at10}. Sau một trăm lần: {at100}. Sau {flips} lần: {at_end}.",
+   "Lưu ý: luật số lớn nói về tỷ lệ, không phải về việc thiếu hụt sẽ được bù lại. Đồng xu không có trí nhớ."
+  ],
+  "takeaway": "Một lợi thế nhỏ chỉ lộ ra sau rất nhiều lần lặp. Đánh giá chiến lược bằng mẫu lớn, không bằng vài lần.",
+  "chart_title": "Tỷ lệ mặt ngửa theo số lần tung",
+  "caption": "Law of large numbers: lặp lại đủ nhiều, may rủi tự triệt tiêu và xác suất thật lộ diện.",
+  "visual": {
+   "kind": "lln",
+   "flips": 5000
+  },
+  "chart_note": "Mô phỏng {flips} lần tung đồng xu công bằng.",
+  "punch": {
+   "value": "{at10} → {at_end}",
+   "label": "tỷ lệ mặt ngửa sau mười lần và sau {flips} lần"
+  },
+  "hashtags": [
+   "lawoflargenumbers"
+  ]
+ },
+ {
+  "id": "76-gamblers-ruin",
+  "no": 76,
+  "group": "quant-mindset",
+  "en": "The Gambler's Ruin",
+  "angle": "Tại sao người có vốn nhỏ dễ bị loại khỏi cuộc chơi hơn?",
+  "title": "Vì sao vốn nhỏ thì dễ bị loại?",
+  "hook": "Cùng một trò chơi, cùng một kỹ năng. Người vốn nhỏ bị loại sớm hơn hẳn.",
+  "beats": [
+   "Bài toán phá sản của con bạc: khi chơi đủ lâu một trò hơi bất lợi, người có vốn ít gần như chắc chắn bị loại.",
+   "Code cho ba nhóm chơi trò thắng {a_p} mỗi ván, cược một đơn vị mỗi lần, vốn {a_start}, {b_start} và {c_start}.",
+   "Sau {rounds} ván: vốn {a_start}, {a_ruin} bị loại. Vốn {b_start}: {b_ruin}. Vốn {c_start}: {c_ruin}.",
+   "Nhà cái không cần lợi thế lớn. Chỉ cần vốn dày hơn và thời gian dài hơn người chơi."
+  ],
+  "takeaway": "Trong cuộc chơi có bất lợi nhỏ, thời gian là kẻ thù. Trong cuộc chơi có lợi thế nhỏ, thời gian là đồng minh.",
+  "chart_title": "Tỷ lệ bị loại theo vốn ban đầu",
+  "caption": "Gambler's ruin: chơi đủ lâu một trò hơi bất lợi, vốn nhỏ gần như chắc chắn bị loại.",
+  "visual": {
+   "kind": "ruin",
+   "players": 1000,
+   "rounds": 5000,
+   "p": 0.49,
+   "payout": 1.0,
+   "groups": [
+    {
+     "id": "a",
+     "label": "vốn 10",
+     "start": 10,
+     "stake": 1
+    },
+    {
+     "id": "b",
+     "label": "vốn 50",
+     "start": 50,
+     "stake": 1
+    },
+    {
+     "id": "c",
+     "label": "vốn 200",
+     "start": 200,
+     "stake": 1
+    }
+   ]
+  },
+  "chart_note": "Mô phỏng {players} người, {rounds} ván, xác suất thắng {a_p}.",
+  "punch": {
+   "value": "{a_ruin}",
+   "label": "người vốn {a_start} bị loại sau {rounds} ván"
+  },
+  "hashtags": [
+   "gamblersruin"
+  ]
+ },
+ {
+  "id": "77-base-rate-neglect",
+  "no": 77,
+  "group": "quant-mindset",
+  "en": "Base Rate Neglect",
+  "angle": "Tại sao chúng ta thường bỏ qua xác suất nền khi đánh giá một sự kiện?",
+  "title": "Xét nghiệm dương tính, bạn có bệnh không?",
+  "hook": "Xét nghiệm chính xác {sensitivity}. Bạn dương tính. Xác suất bạn thật sự có bệnh là bao nhiêu?",
+  "beats": [
+   "Phần lớn người, kể cả bác sĩ, đoán khoảng chín mươi phần trăm. Câu trả lời thấp hơn rất nhiều.",
+   "Mỗi chấm là một người trong {n} người. Chỉ {prevalence} có bệnh. Xanh là người bệnh được phát hiện, đỏ là người khoẻ nhưng báo nhầm dương tính.",
+   "Có {tp} người bệnh dương tính, nhưng tới {fp} người khoẻ cũng dương tính. Xác suất thật sự có bệnh chỉ {ppv}.",
+   "Khi bệnh hiếm, báo nhầm từ số đông người khoẻ lấn át số ít người bệnh thật."
+  ],
+  "takeaway": "Trước khi tin một tín hiệu, hỏi: chuyện này vốn dĩ hiếm hay phổ biến?",
+  "chart_title": "{n} người, ai dương tính?",
+  "caption": "Base rate neglect: xét nghiệm chính xác {sensitivity}, dương tính, nhưng xác suất có bệnh chỉ {ppv}.",
+  "visual": {
+   "kind": "baserate",
+   "n": 1000,
+   "prevalence": 0.01,
+   "sensitivity": 0.9,
+   "false_positive": 0.09
+  },
+  "chart_note": "Giả định minh hoạ: tỷ lệ bệnh {prevalence}, độ nhạy {sensitivity}, báo nhầm {false_positive}. Ví dụ theo Gigerenzer.",
+  "punch": {
+   "value": "{ppv}",
+   "label": "xác suất thật sự có bệnh khi dương tính"
+  },
+  "hashtags": [
+   "baserate",
+   "bayes"
+  ]
+ },
+ {
+  "id": "78-kelly-criterion",
+  "no": 78,
+  "group": "quant-mindset",
+  "en": "The Kelly Criterion",
+  "angle": "Làm thế nào để xác định tỷ lệ vốn tối ưu cho một cơ hội đầu tư?",
+  "title": "Nên đặt bao nhiêu phần vốn?",
+  "hook": "Bạn có lợi thế. Câu hỏi khó hơn là: mỗi lần nên đặt bao nhiêu phần vốn?",
+  "beats": [
+   "Công thức Kelly trả lời đúng câu đó: tỷ lệ vốn làm tài sản tăng nhanh nhất trong dài hạn.",
+   "Một cơ hội thắng {p}, thắng bao nhiêu thì thua bấy nhiêu. Đường cam là tốc độ tăng trưởng theo phần vốn đặt mỗi lần.",
+   "Đỉnh đường cong là {fstar}. Đặt gấp đôi, {f2}, tăng trưởng về gần không. Sau {bets} lần, trung vị tài sản: gấp {med_kelly} so với {med_2kelly}.",
+   "Đặt quá tay tệ hơn đặt quá ít. Nhiều người dùng nửa Kelly, {fhalf}, để giảm biến động."
+  ],
+  "takeaway": "Lợi thế quyết định nên chơi hay không. Kelly quyết định chơi lớn cỡ nào.",
+  "chart_title": "Tăng trưởng theo phần vốn đặt mỗi lần",
+  "caption": "Kelly criterion: tỷ lệ vốn tối ưu cho mỗi cơ hội. Đặt gấp đôi mức Kelly, tăng trưởng gần như bằng không.",
+  "visual": {
+   "kind": "kelly",
+   "p": 0.55,
+   "b": 1.0,
+   "bets": 200
+  },
+  "chart_note": "Tính bằng code: f* = p − (1 − p)/b. Mô phỏng 1.000 người, {bets} lần. Minh hoạ, không phải khuyến nghị.",
+  "punch": {
+   "value": "{fstar}",
+   "label": "phần vốn tối ưu theo Kelly"
+  },
+  "allowed_literals": [
+   "1.000"
+  ],
+  "hashtags": [
+   "kelly"
+  ]
+ },
+ {
+  "id": "79-power-law",
+  "no": 79,
+  "group": "quant-mindset",
+  "en": "Power Law",
+  "angle": "Tại sao một số ít sự kiện tạo ra phần lớn kết quả?",
+  "title": "Vì sao số ít tạo ra phần lớn kết quả?",
+  "hook": "Một số ít người, một số ít ngày, một số ít quyết định tạo ra phần lớn kết quả. Đó không phải ngẫu nhiên.",
+  "beats": [
+   "Luật lũy thừa: trong nhiều hệ thống, kết quả không phân bố đều quanh mức trung bình, mà dồn về một nhóm rất nhỏ.",
+   "Code tạo {n} giá trị theo phân phối lũy thừa. Đường cam là phần tổng kết quả khi cộng dần từ giá trị lớn nhất.",
+   "Một phần trăm đứng đầu chiếm {top1}. Hai mươi phần trăm đứng đầu chiếm khoảng {top20}.",
+   "Trong thế giới lũy thừa, trung bình đánh lừa bạn. Vài sự kiện lớn quyết định gần như tất cả."
+  ],
+  "takeaway": "Tìm số ít thứ tạo ra phần lớn kết quả trong công việc của bạn, và bảo vệ thời gian cho chúng.",
+  "chart_title": "Phần kết quả cộng dồn từ lớn nhất",
+  "caption": "Power law: số ít sự kiện tạo ra phần lớn kết quả. Đó là lý do trung bình hay đánh lừa ta.",
+  "visual": {
+   "kind": "powerlaw",
+   "alpha": 1.16,
+   "n": 10000
+  },
+  "chart_note": "Mô phỏng {n} giá trị, phân phối Pareto hệ số {alpha}.",
+  "punch": {
+   "value": "{top1}",
+   "label": "phần kết quả của một phần trăm đứng đầu"
+  },
+  "hashtags": [
+   "powerlaw",
+   "pareto"
+  ]
+ },
+ {
+  "id": "80-black-swan",
+  "no": 80,
+  "group": "quant-mindset",
+  "en": "Black Swan",
+  "angle": "Những sự kiện hiếm gặp có thể thay đổi toàn bộ cuộc chơi như thế nào?",
+  "title": "Thiên nga đen: hiếm, nhưng không hiếm như bạn nghĩ",
+  "hook": "Theo phân phối chuẩn, một ngày biến động cực lớn hiếm đến mức gần như không bao giờ xảy ra. Thực tế thì khác.",
+  "beats": [
+   "Thiên nga đen là sự kiện hiếm, tác động cực lớn, và chỉ có vẻ dễ đoán sau khi đã xảy ra.",
+   "Code tạo {days} ngày, khoảng {years} năm. Đường xanh theo phân phối chuẩn. Đường đỏ có đuôi dày, giống dữ liệu tài chính thật hơn.",
+   "Phân phối chuẩn nói một ngày lệch năm độ lệch chuẩn chỉ xảy ra khoảng một lần mỗi {normal_5s_expected_years} năm. Chuỗi đuôi dày có {fat_5s} ngày như vậy.",
+   "Mô hình dùng phân phối chuẩn sẽ đánh giá thấp đúng những ngày quan trọng nhất."
+  ],
+  "takeaway": "Đừng hỏi điều tệ nhất có khả năng xảy ra là gì. Hãy hỏi nếu nó xảy ra, mình có sống sót không.",
+  "chart_title": "Biến động ngày: chuẩn và đuôi dày",
+  "caption": "Black swan: phân phối chuẩn coi biến động cực lớn là gần như không thể. Dữ liệu đuôi dày nói ngược lại.",
+  "visual": {
+   "kind": "fattail",
+   "days": 10000,
+   "df": 3
+  },
+  "chart_note": "Mô phỏng: phân phối chuẩn và phân phối t ba bậc tự do, cùng độ lệch chuẩn. Ý tưởng: Taleb (2007).",
+  "punch": {
+   "value": "{fat_5s} ngày",
+   "label": "biến động trên năm độ lệch chuẩn trong chuỗi đuôi dày"
+  },
+  "facts": {
+   "taleb": {
+    "value": "2007",
+    "source": "Taleb, N. N. (2007). The Black Swan. Random House."
+   }
+  },
+  "hashtags": [
+   "blackswan"
+  ]
+ }
+]

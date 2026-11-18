@@ -1,0 +1,1116 @@
+[
+ {
+  "id": "36-loss-aversion",
+  "no": 36,
+  "group": "psychology",
+  "en": "Loss Aversion",
+  "angle": "Mất 100 USD đau hơn niềm vui kiếm được 100 USD.",
+  "title": "Vì sao mất tiền đau hơn được tiền?",
+  "hook": "Mất 100 USD đau hơn hẳn niềm vui khi nhặt được 100 USD. Não bạn không tính sòng phẳng.",
+  "beats": [
+   "Đây là né tránh thua lỗ, loss aversion. Cùng một số tiền, cảm giác mất mạnh hơn cảm giác được.",
+   "Tversky và Kahneman đo được hệ số này năm 1992. Cột trái là niềm vui khi được, cột phải là nỗi đau khi mất cùng số tiền.",
+   "Nỗi đau mất mát nặng khoảng {pain} lần niềm vui có được.",
+   "Vì vậy nhiều người ôm khoản lỗ quá lâu, và chốt khoản lời quá sớm. Họ đang né cảm giác, không phải né rủi ro."
+  ],
+  "punch": {
+   "value": "{pain}x",
+   "label": "nỗi đau khi mất so với niềm vui khi được"
+  },
+  "takeaway": "Trước khi quyết định, hỏi: nếu không sợ cảm giác mất, mình có chọn khác không?",
+  "chart_title": "Cùng một số tiền, hai cảm giác",
+  "chart_note": "Nguồn: Tversky & Kahneman (1992), Advances in Prospect Theory: hệ số né tránh thua lỗ ước lượng {pain}.",
+  "caption": "Mất tiền đau hơn được tiền khoảng hai lần. Loss aversion giải thích vì sao ta giữ khoản lỗ quá lâu.",
+  "visual": {
+   "kind": "bars",
+   "unit": "",
+   "source": "Tversky & Kahneman 1992",
+   "bars": [
+    {
+     "id": "joy",
+     "label": "Được",
+     "value": 1.0,
+     "fmt": "num0",
+     "color": "positive"
+    },
+    {
+     "id": "pain",
+     "label": "Mất",
+     "value": 2.25,
+     "fmt": "num2",
+     "color": "negative"
+    }
+   ]
+  },
+  "facts": {
+   "tk1992": {
+    "value": "1992",
+    "source": "Tversky, A. & Kahneman, D. (1992). Advances in Prospect Theory. Journal of Risk and Uncertainty 5, 297–323."
+   }
+  },
+  "allowed_literals": [
+   "100 USD"
+  ],
+  "hashtags": [
+   "lossaversion",
+   "kahneman"
+  ]
+ },
+ {
+  "id": "37-dunning-kruger",
+  "no": 37,
+  "group": "psychology",
+  "en": "Dunning-Kruger Effect",
+  "angle": "Người thiếu kiến thức thường đánh giá quá cao năng lực của mình.",
+  "title": "Biết càng ít, càng tự tin?",
+  "hook": "Người biết ít nhất thường lại là người tự tin nhất. Có nghiên cứu đo hẳn hoi.",
+  "beats": [
+   "Đó là hiệu ứng Dunning-Kruger: thiếu kỹ năng khiến ta thiếu luôn khả năng nhận ra mình thiếu kỹ năng.",
+   "Kruger và Dunning làm bài kiểm tra năm 1999. Cột đỏ là điểm thật của nhóm thấp nhất, cột cam là mức họ tự đánh giá, tính theo phân vị.",
+   "Điểm thật ở phân vị {actual}. Họ tự xếp mình ở phân vị {self}, tức trên mức trung bình.",
+   "Kỹ năng để làm tốt một việc cũng chính là kỹ năng để nhận ra mình làm chưa tốt."
+  ],
+  "takeaway": "Khi thấy một lĩnh vực có vẻ quá dễ, đó có thể là dấu hiệu bạn chưa thấy hết độ khó của nó.",
+  "chart_title": "Nhóm điểm thấp nhất: thật và tự đánh giá (phân vị)",
+  "caption": "Hiệu ứng Dunning-Kruger: người biết ít thường đánh giá quá cao năng lực của mình.",
+  "visual": {
+   "kind": "bars",
+   "unit": "",
+   "source": "Kruger & Dunning 1999",
+   "bars": [
+    {
+     "id": "actual",
+     "label": "Điểm thật",
+     "value": 12,
+     "color": "negative"
+    },
+    {
+     "id": "self",
+     "label": "Tự đánh giá",
+     "value": 62,
+     "color": "accent"
+    }
+   ]
+  },
+  "chart_note": "Nguồn: Kruger & Dunning (1999), Journal of Personality and Social Psychology.",
+  "punch": {
+   "value": "{actual} → {self}",
+   "label": "phân vị thật so với phân vị tự đánh giá"
+  },
+  "facts": {
+   "kd1999": {
+    "value": "1999",
+    "source": "Kruger, J. & Dunning, D. (1999). Unskilled and Unaware of It. JPSP 77(6), 1121–1134."
+   }
+  },
+  "hashtags": [
+   "dunningkruger"
+  ]
+ },
+ {
+  "id": "38-confirmation-bias",
+  "no": 38,
+  "group": "psychology",
+  "en": "Confirmation Bias",
+  "angle": "Bạn không tìm kiếm sự thật, bạn tìm kiếm thứ chứng minh mình đúng.",
+  "title": "Bạn không tìm sự thật, bạn tìm người đồng ý",
+  "hook": "Bạn không đi tìm sự thật. Bạn đi tìm thứ chứng minh mình đã đúng.",
+  "beats": [
+   "Đó là thiên kiến xác nhận: ta chú ý, nhớ và tin những gì khớp với điều mình đã nghĩ.",
+   "Vòng lặp trên bảng: có niềm tin, tìm thông tin ủng hộ, bỏ qua thông tin trái chiều, rồi càng tin chắc hơn.",
+   "Thuật toán mạng xã hội làm vòng lặp này quay nhanh hơn: bạn bấm vào gì, nó đưa thêm thứ đó.",
+   "Càng nhiều thông tin, ta không chắc chắn đúng hơn. Ta chỉ chắc chắn hơn mà thôi."
+  ],
+  "takeaway": "Trước một quyết định lớn, tự hỏi: bằng chứng nào sẽ khiến mình đổi ý? Rồi đi tìm đúng thứ đó.",
+  "chart_title": "Vòng lặp thiên kiến xác nhận",
+  "caption": "Thiên kiến xác nhận: ta tìm thứ chứng minh mình đúng, không phải sự thật.",
+  "visual": {
+   "kind": "diagram",
+   "nodes": [
+    {
+     "text": "Có một\nniềm tin",
+     "x": 5,
+     "y": 8.6,
+     "color": "text"
+    },
+    {
+     "text": "Tìm thông tin\nủng hộ",
+     "x": 8.0,
+     "y": 5,
+     "color": "accent"
+    },
+    {
+     "text": "Bỏ qua\nđiều trái chiều",
+     "x": 5,
+     "y": 1.4,
+     "color": "negative"
+    },
+    {
+     "text": "Càng tin\nchắc hơn",
+     "x": 2.0,
+     "y": 5,
+     "color": "neutral"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     0
+    ]
+   ],
+   "loop": true
+  },
+  "chart_note": "Sơ đồ khái niệm, không có số liệu.",
+  "hashtags": [
+   "confirmationbias"
+  ]
+ },
+ {
+  "id": "39-gamblers-fallacy",
+  "no": 39,
+  "group": "psychology",
+  "en": "Gambler's Fallacy",
+  "angle": "Tại sao sau 5 lần đỏ, bạn nghĩ lần tiếp theo phải đen?",
+  "title": "Ra đỏ năm lần, lần sau phải là đen?",
+  "hook": "Roulette ra đỏ năm lần liền. Bạn cảm thấy lần sau chắc chắn phải là đen. Hãy để code kiểm tra.",
+  "beats": [
+   "Ngụy biện con bạc: tin rằng kết quả ngẫu nhiên sẽ tự cân bằng trong ngắn hạn.",
+   "Code tung {n} lần một sự kiện năm mươi năm mươi, rồi tìm mọi chỗ có chuỗi {k} lần giống nhau liên tiếp.",
+   "Có {cases} chuỗi như vậy. Lần tiếp theo đổi màu {flip}, giữ nguyên màu {same}.",
+   "Vòng quay không có trí nhớ. Mỗi lần quay là một lần mới, không nợ ai một kết quả nào."
+  ],
+  "takeaway": "Khi các sự kiện độc lập, quá khứ không đòi nợ tương lai. Đừng đặt cược vào cảm giác đến lượt.",
+  "chart_title": "Sau một chuỗi giống nhau, lần tiếp theo ra sao?",
+  "caption": "Ra đỏ năm lần liền không làm lần sau dễ ra đen hơn. Code kiểm tra hàng trăm nghìn lần quay.",
+  "visual": {
+   "kind": "streak",
+   "n": 200000,
+   "k": 5
+  },
+  "chart_note": "Mô phỏng {n} lần, xác suất mỗi bên một nửa. Bỏ qua ô số không cho đơn giản.",
+  "punch": {
+   "value": "{flip}",
+   "label": "tỷ lệ đổi màu sau chuỗi {k} lần giống nhau"
+  },
+  "allowed_literals": [
+   "5 lần"
+  ],
+  "hashtags": [
+   "gamblersfallacy"
+  ]
+ },
+ {
+  "id": "40-anchoring-bias",
+  "no": 40,
+  "group": "psychology",
+  "en": "Anchoring Bias",
+  "angle": "Con số đầu tiên có thể thao túng toàn bộ quyết định sau đó.",
+  "title": "Con số đầu tiên thao túng bạn",
+  "hook": "Một vòng quay ngẫu nhiên có thể thay đổi câu trả lời của bạn cho một câu hỏi hoàn toàn khác.",
+  "beats": [
+   "Đó là hiệu ứng mỏ neo: con số đầu tiên ta nghe thấy kéo mọi ước lượng sau đó về phía nó.",
+   "Tversky và Kahneman cho người tham gia xem một con số từ vòng quay, rồi hỏi tỷ lệ nước châu Phi trong Liên Hợp Quốc.",
+   "Nhóm thấy số 10 đoán trung vị {low}. Nhóm thấy số 65 đoán {high}. Con số vô nghĩa vẫn kéo câu trả lời.",
+   "Giá niêm yết, mức lương đầu tiên, giá mua cổ phiếu đều là mỏ neo trong đầu bạn."
+  ],
+  "takeaway": "Trước khi nghe con số của người khác, tự ước lượng con số của mình và viết ra.",
+  "chart_title": "Ước lượng trung vị theo mỏ neo",
+  "caption": "Hiệu ứng mỏ neo: một con số ngẫu nhiên vẫn kéo lệch ước lượng của bạn.",
+  "visual": {
+   "kind": "bars",
+   "unit": "%",
+   "source": "Tversky & Kahneman 1974",
+   "bars": [
+    {
+     "id": "low",
+     "label": "Mỏ neo 10",
+     "value": 25,
+     "color": "positive"
+    },
+    {
+     "id": "high",
+     "label": "Mỏ neo 65",
+     "value": 45,
+     "color": "accent"
+    }
+   ]
+  },
+  "chart_note": "Nguồn: Tversky & Kahneman (1974), Judgment under Uncertainty, Science.",
+  "punch": {
+   "value": "{low} vs {high}",
+   "label": "ước lượng khi mỏ neo là 10 và 65"
+  },
+  "allowed_literals": [
+   "10",
+   "65"
+  ],
+  "facts": {
+   "tk1974": {
+    "value": "1974",
+    "source": "Tversky, A. & Kahneman, D. (1974). Judgment under Uncertainty: Heuristics and Biases. Science 185, 1124–1131."
+   }
+  },
+  "hashtags": [
+   "anchoring"
+  ]
+ },
+ {
+  "id": "41-present-bias",
+  "no": 41,
+  "group": "psychology",
+  "en": "Present Bias",
+  "angle": "Tại sao bạn hy sinh tương lai để đổi lấy sự thoải mái hôm nay?",
+  "title": "Vì sao bạn luôn để mai tính?",
+  "hook": "Bạn biết tập thể dục và tiết kiệm là tốt. Nhưng bạn của hôm nay luôn thắng bạn của tương lai.",
+  "beats": [
+   "Thiên kiến hiện tại: phần thưởng ngay bây giờ được phóng to, cái giá trong tương lai bị thu nhỏ.",
+   "Hai con đường trên bảng: chọn sướng hôm nay thì cái giá dồn về sau. Chọn khó hôm nay thì phần thưởng tích luỹ về sau.",
+   "Vấn đề không phải thiếu ý chí. Não người được tiến hoá để ưu tiên cái trước mắt.",
+   "Kế hoạch cho tương lai luôn hợp lý. Đến lúc thực hiện thì tương lai đã thành hiện tại."
+  ],
+  "takeaway": "Đừng dựa vào ý chí. Tự động hoá lựa chọn tốt, như tiết kiệm trước khi tiêu.",
+  "chart_title": "Hai lựa chọn, hai tương lai",
+  "caption": "Present bias: bạn của hôm nay luôn thắng bạn của tương lai. Tự động hoá là cách lách não mình.",
+  "visual": {
+   "kind": "diagram",
+   "nodes": [
+    {
+     "text": "Sướng\nhôm nay",
+     "x": 2.6,
+     "y": 7.8,
+     "color": "negative"
+    },
+    {
+     "text": "Cái giá\ndồn về sau",
+     "x": 2.6,
+     "y": 2.4,
+     "color": "negative"
+    },
+    {
+     "text": "Khó\nhôm nay",
+     "x": 7.4,
+     "y": 7.8,
+     "color": "positive"
+    },
+    {
+     "text": "Phần thưởng\ntích luỹ",
+     "x": 7.4,
+     "y": 2.4,
+     "color": "positive"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1,
+     "negative"
+    ],
+    [
+     2,
+     3,
+     "positive"
+    ]
+   ]
+  },
+  "chart_note": "Sơ đồ khái niệm, không có số liệu.",
+  "hashtags": [
+   "presentbias"
+  ]
+ },
+ {
+  "id": "42-overconfidence-bias",
+  "no": 42,
+  "group": "psychology",
+  "en": "Overconfidence Bias",
+  "angle": "Tự tin quá mức là một trong những rủi ro lớn nhất của nhà đầu tư.",
+  "title": "Tự tin quá mức đắt cỡ nào?",
+  "hook": "Hai người có cùng lợi thế. Người tự tin hơn mất gần hết tiền.",
+  "beats": [
+   "Tự tin quá mức không làm bạn chọn sai hướng. Nó làm bạn đặt cược quá tay vào hướng mình chọn.",
+   "Code cho hai nhóm cùng thắng {a_p} mỗi lượt. Nhóm vừa phải đặt {a_stake} vốn, nhóm quá tự tin đặt {b_stake}.",
+   "Sau {rounds} lượt: nhóm vừa phải {a_ruin} mất gần hết. Nhóm quá tự tin: {b_ruin}.",
+   "Cùng một nhận định đúng. Khác biệt duy nhất là kích thước cú cược."
+  ],
+  "takeaway": "Đúng hướng chưa đủ. Kích thước vị thế mới quyết định bạn còn ở lại cuộc chơi hay không.",
+  "chart_title": "Tỷ lệ mất gần hết vốn",
+  "caption": "Tự tin quá mức không làm bạn sai hướng, nó làm bạn cược quá tay. Kích thước vị thế quan trọng hơn bạn nghĩ.",
+  "visual": {
+   "kind": "ruin",
+   "players": 1000,
+   "rounds": 300,
+   "p": 0.53,
+   "payout": 1.0,
+   "start": 100,
+   "groups": [
+    {
+     "id": "a",
+     "label": "vừa phải",
+     "mode": "fraction",
+     "stake": 0.05,
+     "ruin": 0.1
+    },
+    {
+     "id": "b",
+     "label": "quá tự tin",
+     "mode": "fraction",
+     "stake": 0.4,
+     "ruin": 0.1
+    }
+   ]
+  },
+  "chart_note": "Mô phỏng {players} người, {rounds} lượt. 'Mất gần hết' = còn dưới 10% vốn. Minh hoạ.",
+  "punch": {
+   "value": "{b_ruin}",
+   "label": "người quá tự tin mất gần hết vốn"
+  },
+  "allowed_literals": [
+   "10%"
+  ],
+  "hashtags": [
+   "overconfidence"
+  ]
+ },
+ {
+  "id": "43-herd-mentality",
+  "no": 43,
+  "group": "psychology",
+  "en": "Herd Mentality",
+  "angle": "Tại sao con người thích sai cùng đám đông hơn đúng một mình?",
+  "title": "Sai cùng đám đông hay đúng một mình?",
+  "hook": "Câu trả lời đúng hiển nhiên ngay trước mắt. Vậy mà phần lớn người vẫn chọn theo đám đông, ít nhất một lần.",
+  "beats": [
+   "Thí nghiệm của Asch: so độ dài các đoạn thẳng, trong phòng toàn người đóng thế cố tình trả lời sai.",
+   "Cột đỏ là tỷ lệ người làm theo câu trả lời sai của đám đông ít nhất một lần. Cột xanh là người không bao giờ theo.",
+   "Khoảng {conform} người tham gia làm theo đám đông ít nhất một lần, dù đáp án đúng nằm ngay trước mắt.",
+   "Sai một mình bị phạt bằng cảm giác bị loại. Sai cùng đám đông thì có người chia sẻ."
+  ],
+  "takeaway": "Khi thấy mình đồng ý chỉ vì mọi người đều đồng ý, đó là lúc cần tự kiểm tra lại.",
+  "chart_title": "Thí nghiệm Asch",
+  "caption": "Tâm lý bầy đàn: ta thà sai cùng đám đông còn hơn đúng một mình.",
+  "visual": {
+   "kind": "bars",
+   "unit": "%",
+   "source": "Asch 1956",
+   "bars": [
+    {
+     "id": "conform",
+     "label": "Theo ít nhất 1 lần",
+     "value": 75,
+     "color": "negative"
+    },
+    {
+     "id": "never",
+     "label": "Không bao giờ theo",
+     "value": 25,
+     "color": "positive"
+    }
+   ]
+  },
+  "chart_note": "Nguồn: Asch (1956), Studies of independence and conformity, Psychological Monographs.",
+  "punch": {
+   "value": "{conform}",
+   "label": "người tham gia làm theo đám đông ít nhất một lần"
+  },
+  "facts": {
+   "asch": {
+    "value": "1956",
+    "source": "Asch, S. E. (1956). Studies of independence and conformity. Psychological Monographs 70(9)."
+   }
+  },
+  "hashtags": [
+   "herdmentality"
+  ]
+ },
+ {
+  "id": "44-recency-bias",
+  "no": 44,
+  "group": "psychology",
+  "en": "Recency Bias",
+  "angle": "Tại sao vài ngày tăng giá khiến bạn tin thị trường sẽ tiếp tục tăng?",
+  "title": "Ba phiên tăng liền, phiên sau cũng tăng?",
+  "hook": "Ba phiên tăng liền và bạn bắt đầu tin xu hướng đã hình thành. Với chuỗi ngẫu nhiên, điều đó có đúng không?",
+  "beats": [
+   "Thiên kiến gần đây: những gì vừa xảy ra được ta coi là sẽ tiếp tục xảy ra.",
+   "Code tạo một chuỗi {n} phiên lên xuống hoàn toàn ngẫu nhiên, rồi tìm mọi lần có {k} phiên giống nhau liên tiếp.",
+   "Có {cases} lần như vậy. Phiên tiếp theo giữ hướng cũ {same}, đổi hướng {flip}. Gần như tung đồng xu.",
+   "Ở chuỗi ngẫu nhiên, vài phiên gần nhất không nói gì về phiên tới. Não ta vẫn thấy một câu chuyện."
+  ],
+  "takeaway": "Trước khi kết luận từ vài điểm dữ liệu gần nhất, hỏi: nếu đây là ngẫu nhiên, mình có thấy y như vậy không?",
+  "chart_title": "Sau ba phiên giống nhau, phiên tiếp theo?",
+  "caption": "Recency bias: vài phiên tăng liền khiến ta thấy xu hướng, kể cả trong chuỗi ngẫu nhiên.",
+  "visual": {
+   "kind": "streak",
+   "n": 200000,
+   "k": 3,
+   "labels": [
+    "↑",
+    "giữ hướng",
+    "đổi hướng"
+   ]
+  },
+  "chart_note": "Mô phỏng chuỗi ngẫu nhiên {n} phiên. Minh hoạ tâm lý, không phải mô hình thị trường.",
+  "punch": {
+   "value": "{same}",
+   "label": "tỷ lệ giữ hướng cũ sau {k} phiên giống nhau"
+  },
+  "hashtags": [
+   "recencybias"
+  ]
+ },
+ {
+  "id": "45-endowment-effect",
+  "no": 45,
+  "group": "psychology",
+  "en": "Endowment Effect",
+  "angle": "Thứ thuộc về bạn luôn có vẻ đáng giá hơn.",
+  "title": "Của mình thì luôn đáng giá hơn",
+  "hook": "Cùng một chiếc cốc. Khi nó là của bạn, bạn đòi giá gấp đôi.",
+  "beats": [
+   "Hiệu ứng sở hữu: ta định giá một thứ cao hơn chỉ vì nó đã thuộc về mình.",
+   "Kahneman, Knetsch và Thaler phát cốc cho một nửa lớp học. Cột cam là giá người có cốc muốn bán, cột xám là giá người chưa có muốn mua.",
+   "Người bán đòi trung vị {sell} USD. Người mua chỉ trả {buy} USD. Gấp khoảng {ratio} lần.",
+   "Đây là lý do ta giữ đồ cũ, giữ khoản đầu tư kém, và khó bán nhà đúng giá thị trường."
+  ],
+  "takeaway": "Hỏi lại: nếu chưa sở hữu thứ này, hôm nay mình có bỏ đúng giá đó để mua không?",
+  "chart_title": "Giá trung vị của cùng một chiếc cốc",
+  "caption": "Hiệu ứng sở hữu: thứ của mình luôn có vẻ đáng giá hơn. Người bán đòi giá gấp đôi người mua.",
+  "visual": {
+   "kind": "bars",
+   "unit": " USD",
+   "source": "Kahneman, Knetsch & Thaler 1990",
+   "bars": [
+    {
+     "id": "sell",
+     "label": "Người bán đòi",
+     "value": 7.12,
+     "fmt": "num2",
+     "color": "accent"
+    },
+    {
+     "id": "buy",
+     "label": "Người mua trả",
+     "value": 2.87,
+     "fmt": "num2",
+     "color": "muted"
+    }
+   ],
+   "derived": {
+    "ratio": [
+     "sell",
+     "buy"
+    ]
+   }
+  },
+  "chart_note": "Nguồn: Kahneman, Knetsch & Thaler (1990), Journal of Political Economy.",
+  "punch": {
+   "value": "{ratio}x",
+   "label": "giá người sở hữu đòi so với giá người mua trả"
+  },
+  "facts": {
+   "kkt1990": {
+    "value": "1990",
+    "source": "Kahneman, D., Knetsch, J. & Thaler, R. (1990). Experimental Tests of the Endowment Effect and the Coase Theorem. JPE 98(6)."
+   }
+  },
+  "hashtags": [
+   "endowmenteffect"
+  ]
+ },
+ {
+  "id": "46-availability-heuristic",
+  "no": 46,
+  "group": "psychology",
+  "en": "Availability Heuristic",
+  "angle": "Một sự kiện hiếm gặp có thể khiến bạn đánh giá sai xác suất.",
+  "title": "Thứ bạn nhớ rõ không phải thứ hay xảy ra",
+  "hook": "Bạn sợ đi máy bay hơn đi xe máy. Thống kê thì nói ngược lại.",
+  "beats": [
+   "Đó là lối tắt sẵn có: điều gì dễ nhớ ra, ta nghĩ điều đó dễ xảy ra.",
+   "Chuỗi trên bảng: sự kiện hiếm nhưng gây sốc, được đưa tin nhiều, dễ nhớ lại, rồi bị đánh giá là thường xuyên.",
+   "Một tai nạn máy bay chiếm sóng nhiều ngày. Hàng nghìn vụ tai nạn đường bộ thì hiếm khi lên tin.",
+   "Trí nhớ đo độ ấn tượng, không đo tần suất. Và ta hay nhầm hai thứ đó."
+  ],
+  "takeaway": "Khi đánh giá rủi ro, tìm con số tần suất thật thay vì dựa vào ví dụ đầu tiên hiện ra trong đầu.",
+  "chart_title": "Từ tin tức tới nỗi sợ",
+  "caption": "Dễ nhớ không có nghĩa là dễ xảy ra. Availability heuristic khiến ta đánh giá sai rủi ro.",
+  "visual": {
+   "kind": "diagram",
+   "nodes": [
+    {
+     "text": "Sự kiện hiếm\nnhưng sốc",
+     "x": 5,
+     "y": 8.6,
+     "color": "text"
+    },
+    {
+     "text": "Lên tin\nliên tục",
+     "x": 8.0,
+     "y": 5,
+     "color": "accent"
+    },
+    {
+     "text": "Dễ nhớ\nlại",
+     "x": 5,
+     "y": 1.4,
+     "color": "negative"
+    },
+    {
+     "text": "Tưởng là\nthường xuyên",
+     "x": 2.0,
+     "y": 5,
+     "color": "neutral"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     0
+    ]
+   ],
+   "loop": true
+  },
+  "chart_note": "Sơ đồ khái niệm, không có số liệu.",
+  "hashtags": [
+   "availabilityheuristic"
+  ]
+ },
+ {
+  "id": "47-cognitive-dissonance",
+  "no": 47,
+  "group": "psychology",
+  "en": "Cognitive Dissonance",
+  "angle": "Tại sao bạn bảo vệ quyết định ngay cả khi biết mình sai?",
+  "title": "Vì sao ta cãi cố cho quyết định sai?",
+  "hook": "Bạn biết mình sai. Nhưng bạn vẫn tìm đủ lý do để bảo vệ quyết định đó.",
+  "beats": [
+   "Bất hoà nhận thức: cảm giác khó chịu khi hành động và niềm tin của mình mâu thuẫn nhau.",
+   "Vòng lặp trên bảng: ra quyết định, thấy bằng chứng mình sai, khó chịu, rồi đổi cách hiểu bằng chứng thay vì đổi quyết định.",
+   "Thừa nhận sai tốn một lần đau. Bảo vệ cái sai tốn nhiều lần, nhưng mỗi lần đau ít hơn.",
+   "Nên ta thường chọn cách thứ hai, và khoản lỗ cứ thế lớn dần."
+  ],
+  "takeaway": "Tách bản thân khỏi quyết định. Một quyết định sai không có nghĩa bạn là người kém.",
+  "chart_title": "Vòng lặp bảo vệ cái sai",
+  "caption": "Bất hoà nhận thức: ta đổi cách hiểu sự thật để khỏi phải thừa nhận mình sai.",
+  "visual": {
+   "kind": "diagram",
+   "nodes": [
+    {
+     "text": "Ra một\nquyết định",
+     "x": 5,
+     "y": 8.6,
+     "color": "text"
+    },
+    {
+     "text": "Thấy bằng chứng\nmình sai",
+     "x": 8.0,
+     "y": 5,
+     "color": "accent"
+    },
+    {
+     "text": "Khó chịu",
+     "x": 5,
+     "y": 1.4,
+     "color": "negative"
+    },
+    {
+     "text": "Đổi cách hiểu\nbằng chứng",
+     "x": 2.0,
+     "y": 5,
+     "color": "neutral"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     0
+    ]
+   ],
+   "loop": true
+  },
+  "chart_note": "Sơ đồ khái niệm, không có số liệu.",
+  "hashtags": [
+   "cognitivedissonance"
+  ]
+ },
+ {
+  "id": "48-ikea-effect",
+  "no": 48,
+  "group": "psychology",
+  "en": "IKEA Effect",
+  "angle": "Tại sao chúng ta đánh giá quá cao thứ mình tự tạo ra?",
+  "title": "Tự lắp thì thấy đáng giá hơn",
+  "hook": "Cùng một chiếc hộp. Tự tay lắp xong, bạn sẵn sàng trả nhiều hơn hẳn.",
+  "beats": [
+   "Hiệu ứng IKEA: công sức bỏ ra khiến ta định giá sản phẩm cao hơn giá trị thật của nó.",
+   "Norton, Mochon và Ariely so giá người tham gia sẵn sàng trả: cột cam là hộp tự lắp, cột xám là hộp lắp sẵn y hệt.",
+   "Hộp tự lắp: {built} USD. Hộp lắp sẵn: {ready} USD. Cao hơn khoảng {premium}.",
+   "Đây là lý do ta khó bỏ một dự án mình tự làm, kể cả khi số liệu nói nó không hiệu quả."
+  ],
+  "takeaway": "Khi đánh giá thứ mình làm ra, nhờ một người không tham gia nhìn vào và cho ý kiến.",
+  "chart_title": "Giá sẵn sàng trả cho cùng một hộp",
+  "caption": "Hiệu ứng IKEA: ta định giá cao thứ mình tự làm ra. Công sức không bằng giá trị.",
+  "visual": {
+   "kind": "bars",
+   "unit": " USD",
+   "source": "Norton, Mochon & Ariely 2012",
+   "bars": [
+    {
+     "id": "built",
+     "label": "Tự lắp",
+     "value": 0.78,
+     "fmt": "num2",
+     "color": "accent"
+    },
+    {
+     "id": "ready",
+     "label": "Lắp sẵn",
+     "value": 0.48,
+     "fmt": "num2",
+     "color": "muted"
+    }
+   ],
+   "derived": {
+    "premium": [
+     "built",
+     "ready",
+     "premium"
+    ]
+   }
+  },
+  "chart_note": "Nguồn: Norton, Mochon & Ariely (2012), Journal of Consumer Psychology.",
+  "punch": {
+   "value": "+{premium}",
+   "label": "giá sẵn sàng trả cao hơn khi tự lắp"
+  },
+  "facts": {
+   "nma2012": {
+    "value": "2012",
+    "source": "Norton, M. I., Mochon, D. & Ariely, D. (2012). The IKEA effect: When labor leads to love. Journal of Consumer Psychology 22(3)."
+   }
+  },
+  "hashtags": [
+   "ikeaeffect"
+  ]
+ },
+ {
+  "id": "49-hyperbolic-discounting",
+  "no": 49,
+  "group": "psychology",
+  "en": "Hyperbolic Discounting",
+  "angle": "100 USD hôm nay hấp dẫn hơn 150 USD trong tương lai.",
+  "title": "Vì sao bạn đổi ý khi phần thưởng tới gần?",
+  "hook": "Một năm nữa, bạn chọn chờ thêm để lấy nhiều hơn. Đến đúng ngày, bạn lại chọn lấy ít ngay.",
+  "beats": [
+   "Chiết khấu hyperbol: ta giảm giá trị phần thưởng rất mạnh khi nó ở gần, và rất nhẹ khi nó ở xa.",
+   "Hai lựa chọn: {small} USD sớm hơn, hoặc {large} USD muộn hơn {gap} tháng. Hai đường là giá trị cảm nhận khi ngày nhận tới gần.",
+   "Nhìn từ xa, {large} USD có giá trị cảm nhận {later_large}, hơn {later_small}. Đến sát ngày, {small} USD ngay lập tức thắng.",
+   "Hai đường cắt nhau. Đó là khoảnh khắc kế hoạch hợp lý của bạn đổi ý."
+  ],
+  "takeaway": "Ra quyết định khi phần thưởng còn ở xa, rồi khoá nó lại để bản thân ở hiện tại không đổi được.",
+  "chart_title": "Giá trị cảm nhận khi ngày nhận tới gần",
+  "caption": "Hyperbolic discounting: từ xa ta kiên nhẫn, đến gần ta đổi ý. Hãy khoá quyết định từ sớm.",
+  "visual": {
+   "kind": "discount",
+   "k": 0.1,
+   "small": 100,
+   "large": 150,
+   "gap": 6,
+   "shift": 12
+  },
+  "chart_note": "Mô hình chiết khấu hyperbol V = A/(1 + kD), k = {k} mỗi tháng. Minh hoạ.",
+  "punch": {
+   "value": "{now_small} > {now_large}",
+   "label": "giá trị cảm nhận ngay trước ngày nhận"
+  },
+  "allowed_literals": [
+   "100 USD",
+   "150 USD"
+  ],
+  "hashtags": [
+   "hyperbolicdiscounting"
+  ]
+ },
+ {
+  "id": "50-spotlight-effect",
+  "no": 50,
+  "group": "psychology",
+  "en": "The Spotlight Effect",
+  "angle": "Bạn nghĩ mọi người chú ý đến mình nhiều hơn thực tế.",
+  "title": "Không ai để ý bạn nhiều như bạn nghĩ",
+  "hook": "Bạn mặc một chiếc áo ngại ngùng vào phòng. Bạn nghĩ cả phòng nhìn mình. Thực tế thì sao?",
+  "beats": [
+   "Hiệu ứng ánh đèn sân khấu: ta luôn đứng giữa câu chuyện của mình, nên tưởng người khác cũng nhìn vào đó.",
+   "Gilovich và cộng sự cho sinh viên mặc áo in hình gây ngại vào phòng, rồi hỏi họ đoán bao nhiêu người để ý.",
+   "Người mặc đoán khoảng {guess}. Thực tế chỉ khoảng {real} người trong phòng để ý.",
+   "Người khác đang bận lo về ánh đèn chiếu vào chính họ."
+  ],
+  "takeaway": "Thứ ngăn bạn thử điều mới thường không phải ánh mắt người khác, mà là ánh mắt bạn tưởng tượng.",
+  "chart_title": "Tỷ lệ người để ý: đoán và thực tế",
+  "caption": "Spotlight effect: người khác để ý bạn ít hơn nhiều so với bạn nghĩ.",
+  "visual": {
+   "kind": "bars",
+   "unit": "%",
+   "source": "Gilovich, Medvec & Savitsky 2000",
+   "bars": [
+    {
+     "id": "guess",
+     "label": "Người mặc đoán",
+     "value": 50,
+     "color": "accent"
+    },
+    {
+     "id": "real",
+     "label": "Thực tế để ý",
+     "value": 23,
+     "color": "muted"
+    }
+   ]
+  },
+  "chart_note": "Nguồn: Gilovich, Medvec & Savitsky (2000), JPSP. Số làm tròn.",
+  "punch": {
+   "value": "{real}",
+   "label": "tỷ lệ người thực sự để ý"
+  },
+  "facts": {
+   "gms2000": {
+    "value": "2000",
+    "source": "Gilovich, T., Medvec, V. H. & Savitsky, K. (2000). The spotlight effect in social judgment. JPSP 78(2), 211–222."
+   }
+  },
+  "hashtags": [
+   "spotlighteffect"
+  ]
+ },
+ {
+  "id": "51-negativity-bias",
+  "no": 51,
+  "group": "psychology",
+  "en": "Negativity Bias",
+  "angle": "Một lời chỉ trích có thể lấn át mười lời khen.",
+  "title": "Một lời chê nặng hơn nhiều lời khen",
+  "hook": "Mười lời khen và một lời chê. Tối hôm đó bạn nghĩ về câu nào?",
+  "beats": [
+   "Thiên kiến tiêu cực: điều xấu để lại dấu ấn mạnh hơn điều tốt cùng mức độ.",
+   "Gottman quan sát các cặp đôi và thấy một tỷ lệ cân bằng. Cột xanh là số tương tác tích cực cần để bù cột đỏ, một tương tác tiêu cực.",
+   "Các mối quan hệ bền vững có khoảng {pos} tương tác tích cực cho mỗi {neg} tương tác tiêu cực.",
+   "Não ta được tiến hoá để chú ý đến mối đe doạ. Bỏ lỡ một bữa ăn thì không sao, bỏ lỡ một con hổ thì hết chuyện."
+  ],
+  "takeaway": "Khi góp ý cho ai đó, nhớ rằng lời chê của bạn nặng hơn bạn nghĩ. Khi nhận lời chê, nhớ điều ngược lại.",
+  "chart_title": "Tỷ lệ tương tác của các cặp đôi bền vững",
+  "caption": "Negativity bias: một lời chê có thể lấn át nhiều lời khen. Tỷ lệ cân bằng là bao nhiêu?",
+  "visual": {
+   "kind": "bars",
+   "unit": "",
+   "source": "Gottman 1994",
+   "bars": [
+    {
+     "id": "pos",
+     "label": "Tích cực",
+     "value": 5,
+     "color": "positive"
+    },
+    {
+     "id": "neg",
+     "label": "Tiêu cực",
+     "value": 1,
+     "color": "negative"
+    }
+   ]
+  },
+  "chart_note": "Nguồn: Gottman (1994), Why Marriages Succeed or Fail.",
+  "punch": {
+   "value": "{pos} : {neg}",
+   "label": "tích cực so với tiêu cực ở các mối quan hệ bền vững"
+  },
+  "facts": {
+   "gottman": {
+    "value": "1994",
+    "source": "Gottman, J. (1994). Why Marriages Succeed or Fail. Simon & Schuster."
+   }
+  },
+  "hashtags": [
+   "negativitybias"
+  ]
+ },
+ {
+  "id": "52-choice-overload",
+  "no": 52,
+  "group": "psychology",
+  "en": "Choice Overload",
+  "angle": "Quá nhiều lựa chọn khiến bạn không thể quyết định.",
+  "title": "Nhiều lựa chọn hơn, bán được ít hơn",
+  "hook": "Quầy có nhiều loại mứt thu hút nhiều người hơn. Nhưng bán được ít hơn hẳn.",
+  "beats": [
+   "Quá tải lựa chọn: khi có quá nhiều phương án, ta sợ chọn sai đến mức không chọn gì cả.",
+   "Iyengar và Lepper bày quầy mứt ở siêu thị, lúc 6 loại, lúc 24 loại. Mỗi cột là tỷ lệ người dừng lại rồi mua.",
+   "Quầy 6 loại: {few} người mua. Quầy 24 loại: chỉ {many}. Chênh nhau {x} lần.",
+   "Mỗi lựa chọn thêm vào làm tăng chi phí suy nghĩ, và tăng nỗi sợ chọn nhầm."
+  ],
+  "takeaway": "Khi phân vân giữa quá nhiều phương án, loại bớt còn ba rồi mới so sánh.",
+  "chart_title": "Tỷ lệ người mua theo số loại mứt",
+  "caption": "Choice overload: nhiều lựa chọn hơn khiến ta quyết định ít hơn. Thí nghiệm quầy mứt nổi tiếng.",
+  "visual": {
+   "kind": "bars",
+   "unit": "%",
+   "source": "Iyengar & Lepper 2000",
+   "bars": [
+    {
+     "id": "few",
+     "label": "6 loại",
+     "value": 30,
+     "color": "positive"
+    },
+    {
+     "id": "many",
+     "label": "24 loại",
+     "value": 3,
+     "color": "negative"
+    }
+   ],
+   "derived": {
+    "x": [
+     "few",
+     "many"
+    ]
+   }
+  },
+  "chart_note": "Nguồn: Iyengar & Lepper (2000), JPSP.",
+  "punch": {
+   "value": "{x}x",
+   "label": "chênh lệch tỷ lệ mua giữa quầy ít và nhiều lựa chọn"
+  },
+  "allowed_literals": [
+   "6 loại",
+   "24 loại"
+  ],
+  "facts": {
+   "il2000": {
+    "value": "2000",
+    "source": "Iyengar, S. S. & Lepper, M. R. (2000). When choice is demotivating. JPSP 79(6), 995–1006."
+   }
+  },
+  "hashtags": [
+   "choiceoverload"
+  ]
+ },
+ {
+  "id": "53-sunk-cost-fallacy",
+  "no": 53,
+  "group": "psychology",
+  "en": "Sunk Cost Fallacy",
+  "angle": "Tại sao chúng ta không thể từ bỏ những thứ đã đầu tư quá nhiều?",
+  "title": "Đã lỡ bỏ tiền rồi thì phải đi cho bằng được?",
+  "hook": "Bạn có hai vé du lịch trùng ngày. Bạn sẽ chọn chuyến mình thích hơn, hay chuyến đắt tiền hơn?",
+  "beats": [
+   "Ngụy biện chi phí chìm: ta tiếp tục một việc chỉ vì đã bỏ quá nhiều vào nó.",
+   "Arkes và Blumer hỏi đúng câu đó: chuyến rẻ mà bạn thích hơn, hay chuyến đắt mà bạn thích kém hơn. Tiền vé đều không hoàn lại.",
+   "Khoảng {sunk} người chọn chuyến đắt hơn, dù đã nói mình thích chuyến kia hơn.",
+   "Tiền đã chi không lấy lại được trong cả hai trường hợp. Chỉ còn câu hỏi: chuyến nào làm bạn vui hơn?"
+  ],
+  "takeaway": "Hỏi: nếu bắt đầu lại từ hôm nay, không có khoản đã bỏ ra, mình có chọn tiếp tục không?",
+  "chart_title": "Thí nghiệm hai chuyến du lịch",
+  "caption": "Sunk cost fallacy: ta tiếp tục một việc chỉ vì đã lỡ bỏ quá nhiều vào nó.",
+  "visual": {
+   "kind": "bars",
+   "unit": "%",
+   "source": "Arkes & Blumer 1985",
+   "bars": [
+    {
+     "id": "sunk",
+     "label": "Chọn chuyến đắt",
+     "value": 54,
+     "color": "negative"
+    },
+    {
+     "id": "enjoy",
+     "label": "Chọn chuyến thích",
+     "value": 46,
+     "color": "positive"
+    }
+   ]
+  },
+  "chart_note": "Nguồn: Arkes & Blumer (1985), Organizational Behavior and Human Decision Processes.",
+  "punch": {
+   "value": "{sunk}",
+   "label": "người chọn chuyến đắt hơn dù thích chuyến kia hơn"
+  },
+  "facts": {
+   "ab1985": {
+    "value": "1985",
+    "source": "Arkes, H. R. & Blumer, C. (1985). The psychology of sunk cost. OBHDP 35(1), 124–140."
+   }
+  },
+  "hashtags": [
+   "sunkcost"
+  ]
+ },
+ {
+  "id": "54-emotional-reasoning",
+  "no": 54,
+  "group": "psychology",
+  "en": "Emotional Reasoning",
+  "angle": "Cảm thấy đúng không có nghĩa là nó đúng.",
+  "title": "Cảm thấy đúng không có nghĩa là đúng",
+  "hook": "Tôi cảm thấy lo, vậy chắc có chuyện xấu sắp xảy ra. Đó là một lỗi tư duy rất phổ biến.",
+  "beats": [
+   "Suy luận cảm xúc: lấy cảm giác của mình làm bằng chứng cho sự thật.",
+   "Chuỗi trên bảng: có cảm xúc mạnh, coi cảm xúc là bằng chứng, kết luận vội, rồi hành động theo kết luận đó.",
+   "Cảm xúc là dữ liệu về bạn, không phải dữ liệu về thế giới bên ngoài.",
+   "Lo lắng không làm rủi ro lớn hơn. Hào hứng cũng không làm cơ hội tốt hơn."
+  ],
+  "takeaway": "Khi cảm xúc mạnh, viết ra: bằng chứng ủng hộ là gì, bằng chứng phản bác là gì.",
+  "chart_title": "Khi cảm xúc thành bằng chứng",
+  "caption": "Emotional reasoning: cảm xúc là dữ liệu về bạn, không phải về thế giới.",
+  "visual": {
+   "kind": "diagram",
+   "nodes": [
+    {
+     "text": "Cảm xúc\nmạnh",
+     "x": 5,
+     "y": 8.6,
+     "color": "text"
+    },
+    {
+     "text": "Coi cảm xúc\nlà bằng chứng",
+     "x": 8.0,
+     "y": 5,
+     "color": "accent"
+    },
+    {
+     "text": "Kết luận\nvội",
+     "x": 5,
+     "y": 1.4,
+     "color": "negative"
+    },
+    {
+     "text": "Hành động\ntheo đó",
+     "x": 2.0,
+     "y": 5,
+     "color": "neutral"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     0
+    ]
+   ],
+   "loop": true
+  },
+  "chart_note": "Sơ đồ khái niệm, không có số liệu.",
+  "hashtags": [
+   "emotionalreasoning"
+  ]
+ },
+ {
+  "id": "55-fundamental-attribution-error",
+  "no": 55,
+  "group": "psychology",
+  "en": "Fundamental Attribution Error",
+  "angle": "Tại sao ta đổ lỗi cho tính cách người khác nhưng đổ lỗi hoàn cảnh cho bản thân?",
+  "title": "Người khác sai vì tính cách, mình sai vì hoàn cảnh?",
+  "hook": "Người khác đến muộn vì họ vô trách nhiệm. Bạn đến muộn vì kẹt xe.",
+  "beats": [
+   "Lỗi quy kết cơ bản: giải thích hành vi người khác bằng tính cách, và bỏ qua hoàn cảnh của họ.",
+   "Hai cột trên bảng: khi người khác sai, ta nghĩ họ là người như vậy. Khi mình sai, ta biết rõ hoàn cảnh đã đẩy mình tới đó.",
+   "Ta thấy hoàn cảnh của mình rất rõ, còn của người khác thì gần như vô hình.",
+   "Lỗi này khiến ta phán xét quá nhanh, và học sai bài học từ thất bại của người khác."
+  ],
+  "takeaway": "Trước khi kết luận về một người, tự hỏi: hoàn cảnh nào có thể khiến một người bình thường làm y như vậy?",
+  "chart_title": "Hai tiêu chuẩn cho cùng một lỗi",
+  "caption": "Fundamental attribution error: người khác sai vì tính cách, mình sai vì hoàn cảnh. Công bằng chưa?",
+  "visual": {
+   "kind": "diagram",
+   "nodes": [
+    {
+     "text": "Người khác\nsai",
+     "x": 2.6,
+     "y": 7.8,
+     "color": "negative"
+    },
+    {
+     "text": "Vì tính cách\ncủa họ",
+     "x": 2.6,
+     "y": 2.4,
+     "color": "negative"
+    },
+    {
+     "text": "Mình\nsai",
+     "x": 7.4,
+     "y": 7.8,
+     "color": "positive"
+    },
+    {
+     "text": "Vì hoàn cảnh\nép buộc",
+     "x": 7.4,
+     "y": 2.4,
+     "color": "positive"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1,
+     "negative"
+    ],
+    [
+     2,
+     3,
+     "positive"
+    ]
+   ]
+  },
+  "chart_note": "Sơ đồ khái niệm, không có số liệu.",
+  "hashtags": [
+   "attributionerror"
+  ]
+ }
+]

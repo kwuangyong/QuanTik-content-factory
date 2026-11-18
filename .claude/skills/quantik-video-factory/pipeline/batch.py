@@ -29,6 +29,7 @@ sys.path.insert(0, str(HERE.parent / "qa"))
 from core import DEFAULT_OUT, KNOWLEDGE, STYLES, disclaimer, fill_tree, load_json, load_model_kb, save_json  # noqa: E402
 from models import TOPICS, Model, load_returns  # noqa: E402
 import catalog as C  # noqa: E402
+import concepts as CC  # noqa: E402
 import term_topic as TT  # noqa: E402
 import render as R  # noqa: E402
 import voiceover as V  # noqa: E402
@@ -71,7 +72,40 @@ def build_episode(topic, style, override=None):
     return ep, mod
 
 
+def captions_yt_ig(ep, disc):
+    """Concept topics go to YouTube Shorts + Instagram Reels only (channels/yt-ig.md)."""
+    tags = " ".join("#" + h.lstrip("#") for h in ep.get("hashtags", []))
+    title = ep.get("title", ep["hook"])
+    yt_title = (title[:90] + " #Shorts") if len(title) <= 90 else title[:88] + "… #Shorts"
+    extra = (ep.get("extra_note", "") + "\n\n") if ep.get("extra_note") else ""
+    return f"""# Caption — {ep['id']}
+
+## YouTube Shorts
+**Tiêu đề:** {yt_title}
+
+**Mô tả:**
+{ep.get('caption', ep['hook'])}
+
+{ep.get('cta', '')}
+
+{extra}{disc}
+
+{tags} #Shorts
+
+## Instagram Reels
+{ep.get('caption', ep['hook'])}
+
+{ep.get('cta', '')}
+
+{extra}{disc}
+
+{tags} #reels
+"""
+
+
 def captions(ep, disc):
+    if ep.get("channel") == "yt-ig":
+        return captions_yt_ig(ep, disc)
     tags = " ".join("#" + h.lstrip("#") for h in ep.get("hashtags", []))
     title = ep.get("title", ep["hook"])
     cap = ep.get("caption", ep["hook"])
@@ -140,7 +174,23 @@ def prepare(topic, style, override=None, returns=None):
 
 
 def _prepare(topic, style, override=None, returns=None):
-    """(episode, style module, model) for a hand-written topic or any catalog topic."""
+    """(episode, style module, model) for a hand-written topic, a concept topic or any catalog topic."""
+    concept = CC.get(topic)
+    if concept is not None:
+        mod = load_style(style)
+        model = CC.ConceptModel(concept, (override or {}).get("seed"))
+        g = CC.GROUPS[concept["group"]]
+        base = {k: v for k, v in concept.items() if k not in ("visual", "group", "no")}
+        base.update({"channel": "yt-ig", "tag": f"{g['tag']} #{concept['no']:02d}", "kicker": g["label"],
+                     "hashtags": concept.get("hashtags", []) + g["hashtags"],
+                     "allowed_literals": concept.get("allowed_literals", []) + [f"#{concept['no']:02d}"],
+                     "note": concept.get("note") or ("Mô phỏng bằng code · giáo dục" if concept["visual"]["kind"] not in
+                                                     ("bars", "diagram") else "Giáo dục · nguồn ghi trên màn hình"),
+                     "extra_note": g.get("extra_note", "")})
+        ep = merge(getattr(mod, "DEFAULTS", {}), base, override or {})
+        ep["topic"], ep["style"] = topic, style
+        ep.setdefault("id", f"{topic}")
+        return ep, mod, model
     if topic in TOPICS:
         ep, mod = build_episode(topic, style, override)
         return ep, mod, Model(topic, ep.get("seed"), returns)
@@ -172,7 +222,7 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
     rendered = set()
     filled = fill_tree(ep, model.values, model.formats, rendered)
     disc = disclaimer()
-    note = data_label or ("Dữ liệu thật: " + filled.get("data_source", "CSV người dùng") if model.real_data
+    note = data_label or filled.get("note") or ("Dữ liệu thật: " + filled.get("data_source", "CSV người dùng") if model.real_data
                           else "Dữ liệu mô phỏng · giáo dục, không phải khuyến nghị")
     ctx = {"tag": filled.get("tag", topic.upper()), "note": note, "disclaimer": disc, "out": out}
     save_json(out / "episode.filled.json", filled)
@@ -205,7 +255,7 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
         sec = V.estimate_seconds(s.say) if s.say else 0
         if used != "silent" and s.say:
             wav = work / f"{i:02d}-{s.name}.wav"
-            u, sec, _ = V.synth(s.say, wav, used, voice)
+            u, sec, _ = V.synth(s.say, wav, used, voice, getattr(mod, "VOICE_RATE", "+0%"))
             s.audio = str(wav) if u != "silent" else None
         s.duration = max(s.min_dur, sec + 0.45)
     if hasattr(mod, "after_timing"):
@@ -262,6 +312,10 @@ def main():
         e = load_json(p)
         jobs.append((e["topic"], e["style"], e))
     topics = [t.strip() for t in a.topics.split(",") if t.strip()]
+    if a.topics.strip() == "concepts":
+        topics = CC.ids()
+    elif a.topics.strip().startswith("concepts:"):  # concepts:psychology
+        topics = [c["id"] for c in CC.load_all().values() if c["group"] == a.topics.split(":", 1)[1]]
     if a.topics.strip() in ("all", "catalog"):
         topics = [t["id"] for t in C.load()["topics"] if t["kind"] != "field"]
     for t in topics:
