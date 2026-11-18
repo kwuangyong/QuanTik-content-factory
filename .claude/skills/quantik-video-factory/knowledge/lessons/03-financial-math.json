@@ -237,8 +237,8 @@
         "title": "Giá trị hiện tại và tương lai: tiền có giá theo thời gian",
         "beats": [
           "Code lấy lợi suất {r} một năm, đẩy một trăm triệu ra tương lai, và kéo một tỷ ở tương lai về hiện tại.",
-          "Sau mười năm thành {fv10}, ba mươi năm thành {fv30}, trong khi lãi đơn chỉ được {simple30}. Muốn có một tỷ sau hai mươi năm, hôm nay cần {pv_need}. Cứ khoảng {double} năm tiền nhân đôi.",
-          "Đường cam là lãi kép, cong vút lên về cuối. Đường xám là lãi đơn, thẳng đuột. Khoảng cách giữa chúng là sức mạnh của thời gian.",
+          "Mười năm thành {fv10}, ba mươi năm thành {fv30}, lãi đơn chỉ {simple30}. Muốn một tỷ sau hai mươi năm, hôm nay cần {pv_need}.",
+          "Đường cam là lãi kép, cong vút về cuối. Đường xám là lãi đơn, thẳng đuột.",
           "Giá trị tương lai là tiền hôm nay sau khi sinh lời. Giá trị hiện tại là tiền tương lai chiết khấu về hôm nay. Mọi định giá tài sản đều dựa trên hai phép tính này."
         ],
         "outputs": [
@@ -290,7 +290,7 @@
             "query": "Albert Einstein portrait",
             "label": "Lãi kép",
             "draw": "chart-up",
-            "say": "Có một câu nói nổi tiếng được gán cho Einstein: lãi kép là kỳ quan thứ tám của thế giới. Dù ai nói, nó đúng."
+            "say": "Người ta hay gán cho Einstein câu: lãi kép là kỳ quan thứ tám của thế giới."
           }
         ]
       }

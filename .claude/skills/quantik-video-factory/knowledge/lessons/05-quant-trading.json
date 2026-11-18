@@ -166,13 +166,13 @@
       },
       "episode": {
         "kicker": "Heston model",
-        "hook": "Tập trước mình nói Black-Scholes có một điểm yếu chết người. Đây là mô hình sinh ra để vá nó, và nó cho thấy thị trường sợ cú sập hơn bạn tưởng.",
+        "hook": "Tập trước Black-Scholes có một điểm yếu chết người. Heston sinh ra để vá nó, và nó cho thấy thị trường sợ sập hơn bạn tưởng.",
         "title": "Mô hình Heston: khi biến động cũng là một biến ngẫu nhiên",
         "beats": [
-          "Black-Scholes giả định biến động cố định. Heston cho chính biến động chạy ngẫu nhiên, kéo về mức trung bình, và tương quan âm với giá. Code mô phỏng hai mươi nghìn kịch bản.",
-          "Giá quyền mua theo Heston là {call}. Tương quan giữa giá và biến động là {rho}, độ biến động của biến động là {xi}. Kết quả: {crash} kịch bản giá rơi dưới bảy mươi.",
+          "Heston cho chính biến động chạy ngẫu nhiên, kéo về trung bình và tương quan âm với giá. Code mô phỏng hai mươi nghìn kịch bản.",
+          "Giá quyền mua là {call}. Tương quan giá và biến động {rho}. Có {crash} kịch bản giá rơi dưới bảy mươi.",
           "Black-Scholes cho một đường phẳng ở {vol_bs}. Heston cho một nụ cười lệch: giá thực hiện thấp có biến động hàm ý {skew_lo}, giá thực hiện cao chỉ {skew_hi}.",
-          "Mô hình Heston thêm một phương trình cho phương sai. Khi giá giảm, biến động tăng, nên đuôi trái dày lên, đúng như dữ liệu quyền chọn thật."
+          "Heston thêm một phương trình cho phương sai: giá giảm thì biến động tăng, đuôi trái dày lên như dữ liệu thật."
         ],
         "outputs": [
           {
@@ -226,7 +226,7 @@
             "query": "Fischer Black",
             "label": "Nhắc lại tập trước",
             "draw": "bell",
-            "say": "Nhắc lại tập trước: Black-Scholes giả định biến động không đổi suốt vòng đời quyền chọn. Steven Heston đã phá bỏ giả định đó."
+            "say": "Nhắc lại tập trước: Black-Scholes giả định biến động không đổi. Steven Heston phá bỏ giả định đó."
           }
         ]
       }
