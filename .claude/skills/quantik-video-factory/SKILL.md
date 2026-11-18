@@ -115,7 +115,7 @@ Mỗi video ra `social-output/<id>/` (thư mục gốc repo): `final.mp4`, `thum
 Người dùng muốn **văn bản trong chat để copy đăng ngay**. Với mỗi video:
 
 - Tiêu đề, đường dẫn file (`social-output/<id>/final.mp4`), thời lượng, kết luận QA, engine giọng.
-- Caption từng nền tảng lấy từ `captions.md` (TikTok · Facebook/Reels · YouTube Shorts), trong khối copy được, có hashtag và câu miễn trừ.
+- Caption từng nền tảng lấy từ `captions.md`, trong khối copy được, có hashtag và câu miễn trừ. Chỉ đưa **TikTok** và **Facebook**: YT Shorts và IG Reels chỉ đăng nhóm chủ đề ở `channels/yt-ig.md` (dark truth finance, poker theory, psychology facts, game theory).
 - Lưu ý còn lại cho người duyệt (giọng thiếu, giá gói cần đối chiếu, nhạc chưa có giấy phép…).
 
 Sau khi đăng, nhắc người dùng ghi view vào `knowledge/episodes.csv` sau 7 ngày (hoặc lấy qua công cụ vidIQ nếu có kết nối) để `hooks.md` dần có hook đã kiểm chứng.
