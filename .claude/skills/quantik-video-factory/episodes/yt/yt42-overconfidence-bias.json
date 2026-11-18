@@ -1,0 +1,120 @@
+{
+ "id": "yt42-overconfidence-bias",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt42-overconfidence-bias",
+ "model": "sim",
+ "sim": {
+  "kind": "ruin",
+  "players": 1000,
+  "rounds": 300,
+  "p": 0.53,
+  "payout": 1.0,
+  "start": 100,
+  "groups": [
+   {
+    "id": "a",
+    "label": "tự tin vừa: 5% vốn",
+    "mode": "fraction",
+    "stake": 0.05,
+    "ruin": 0.1
+   },
+   {
+    "id": "b",
+    "label": "quá tự tin: 40% vốn",
+    "mode": "fraction",
+    "stake": 0.4,
+    "ruin": 0.1
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 42,
+ "group": "psychology",
+ "concept": "Overconfidence Bias",
+ "tag": "PSYCHOLOGY #42",
+ "title": "Same edge. The confident one went broke.",
+ "hook": "Two people with the same edge. The more confident one loses almost everything.",
+ "caption": "Same edge, different confidence. Both win {a_p}: betting {a_stake} → {a_ruin} lose almost everything; betting {b_stake} → {b_ruin}.",
+ "hashtags": [
+  "overconfidence",
+  "psychology",
+  "psychologyfacts",
+  "cognitivebias",
+  "mindset",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "10%",
+  "#42"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for the psychology behind your money",
+ "thumb": {
+  "series": "PSYCHOLOGY FACTS",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "CONFIDENCE",
+   "WENT",
+   "BROKE."
+  ],
+  "sub": "Same edge: {a_ruin} vs {b_ruin}",
+  "visual": "money_burn"
+ },
+ "scenes": [
+  {
+   "say": "Two people with the same edge. The more confident one loses almost everything.",
+   "show": "The confident one goes broke.",
+   "visual": "money_burn",
+   "real": true
+  },
+  {
+   "say": "Overconfidence doesn't make you pick the wrong direction. It makes you bet too much on the right one.",
+   "show": "Too much on the right call.",
+   "kind": "duel"
+  },
+  {
+   "say": "Both win {a_p} of the time. The modest group bets {a_stake} of their money. The confident group bets {b_stake}.",
+   "show": "{a_stake} vs {b_stake}.",
+   "kind": "compare",
+   "note": "Simulation: {players} players, {rounds} rounds; 'lost almost all' = below 10% of start"
+  },
+  {
+   "say": "Modest: {a_ruin} lose almost everything.",
+   "show": "Modest:",
+   "kind": "walkaway",
+   "big": "{a_ruin}",
+   "big_label": "lost almost everything",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Confident: {b_ruin}.",
+   "show": "Confident:",
+   "visual": "panic",
+   "big": "{b_ruin}",
+   "big_label": "lost almost everything — same edge",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Being right isn't enough. Position size decides whether you're still in the game.",
+   "show": "Size decides survival.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Being right isn't enough. Position size decides whether you're still in the game.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

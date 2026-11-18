@@ -1,0 +1,83 @@
+{
+ "id": "yt14-financial-nihilism",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt14-financial-nihilism",
+ "model": "sim",
+ "sim": {
+  "kind": "diagram",
+  "nodes": [],
+  "edges": []
+ },
+ "lang": "en",
+ "episode_no": 14,
+ "group": "dark-truth",
+ "concept": "Financial Nihilism",
+ "tag": "DARK TRUTH #14",
+ "title": "Can't afford a house, so why save?",
+ "hook": "Can't afford a house anyway, so why save? That thought is the trap.",
+ "caption": "\"Can't afford a house, so why save?\" is the trap. Hopelessness pushes people to stop saving or swing for the fences, and the miss proves the story. Start with a goal you can hit in three months.",
+ "hashtags": [
+  "financialnihilism",
+  "genz",
+  "darktruth",
+  "money",
+  "moneymindset",
+  "personalfinance",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#14"
+ ],
+ "claims": [],
+ "facts": {},
+ "cta": "Follow QuanTik for more dark truths about money",
+ "thumb": {
+  "series": "THE DARK TRUTH OF MONEY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "GIVING UP,",
+   "BETTER",
+   "BRANDED."
+  ],
+  "sub": "The quiet trap of financial nihilism",
+  "art": "scroll"
+ },
+ "scenes": [
+  {
+   "say": "Can't afford a house anyway, so why save? That thought is the trap.",
+   "show": "So why save?",
+   "kind": "scroll"
+  },
+  {
+   "say": "When the goal looks impossible, people stop saving, or bet it all on one big swing.",
+   "show": "Stop saving. Or swing big.",
+   "visual": "casino",
+   "image": "slot-machines"
+  },
+  {
+   "say": "The swing usually misses. And the miss proves the story: trying is pointless.",
+   "show": "The miss proves the story.",
+   "visual": "money_burn"
+  },
+  {
+   "say": "Hopelessness makes you choose exactly the decisions that make the future worse.",
+   "show": "Hopelessness picks bad bets.",
+   "kind": "wheel"
+  },
+  {
+   "say": "The way out isn't a bigger goal. It's a smaller one you can hit in three months.",
+   "show": "A goal you hit in three months.",
+   "kind": "walkaway"
+  },
+  {
+   "say": "Nihilism feels like honesty. It's just giving up with better branding.",
+   "show": "Giving up, rebranded.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Nihilism feels like honesty. It's just giving up with better branding.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

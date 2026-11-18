@@ -1,0 +1,126 @@
+{
+ "id": "yt11-risk-of-ruin",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt11-risk-of-ruin",
+ "model": "sim",
+ "sim": {
+  "kind": "ruin",
+  "players": 1000,
+  "rounds": 300,
+  "p": 0.55,
+  "payout": 1.0,
+  "start": 100,
+  "groups": [
+   {
+    "id": "a",
+    "label": "đặt 5% vốn",
+    "mode": "fraction",
+    "stake": 0.05,
+    "ruin": 0.01
+   },
+   {
+    "id": "b",
+    "label": "đặt 50% vốn",
+    "mode": "fraction",
+    "stake": 0.5,
+    "ruin": 0.01
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 11,
+ "group": "dark-truth",
+ "concept": "Risk of Ruin",
+ "tag": "DARK TRUTH #11",
+ "title": "You can have the edge and still lose everything",
+ "hook": "You can be right every time on average, and still lose everything.",
+ "caption": "You can have a real edge and still lose everything. {players} players, win chance {a_p}, edge {a_edge}: betting {a_stake} of the stack → {a_ruin} broke; betting {b_stake} → {b_ruin} wiped out (below 1% of the start).\n\n(Simulation; illustration only.)",
+ "hashtags": [
+  "riskofruin",
+  "riskmanagement",
+  "darktruth",
+  "money",
+  "moneymindset",
+  "personalfinance",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "1%",
+  "#11"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from a seeded simulation with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for more dark truths about money",
+ "thumb": {
+  "series": "THE DARK TRUTH OF MONEY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "THE EDGE",
+   "WON'T",
+   "SAVE YOU."
+  ],
+  "sub": "Same edge: {a_ruin} vs {b_ruin} wiped out",
+  "visual": "casino"
+ },
+ "scenes": [
+  {
+   "say": "You can be right every time on average, and still lose everything.",
+   "show": "Right on average. Still broke.",
+   "visual": "casino",
+   "real": true
+  },
+  {
+   "say": "Risk of ruin isn't about losing once. It's about betting too much on once.",
+   "show": "Betting too much on once.",
+   "kind": "duel"
+  },
+  {
+   "say": "{players} players. A game they win {a_p} of the time. A real edge of {a_edge}.",
+   "show": "A real edge.",
+   "kind": "duel",
+   "note": "Simulation: {players} players, {rounds} rounds, win chance {a_p}"
+  },
+  {
+   "say": "Bet {a_stake} of your stack each time: {a_ruin} go broke.",
+   "show": "Bet {a_stake}:",
+   "kind": "walkaway",
+   "big": "{a_ruin}",
+   "big_label": "went broke",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Bet {b_stake}: {b_ruin} are wiped out.",
+   "show": "Bet {b_stake}:",
+   "visual": "money_burn",
+   "big": "{b_ruin}",
+   "big_label": "wiped out — with the same edge",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Lose half and you need double just to get back. The math of losses isn't symmetric.",
+   "show": "Losses aren't symmetric.",
+   "visual": "rollercoaster"
+  },
+  {
+   "say": "Survive first. Optimize later.",
+   "show": "Survive first. Optimize later.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Survive first. Optimize later.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

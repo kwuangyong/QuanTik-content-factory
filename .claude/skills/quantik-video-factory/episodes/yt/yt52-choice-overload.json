@@ -1,0 +1,121 @@
+{
+ "id": "yt52-choice-overload",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt52-choice-overload",
+ "model": "sim",
+ "sim": {
+  "kind": "bars",
+  "unit": "",
+  "bars": [
+   {
+    "id": "few",
+    "label": "",
+    "value": 0.3,
+    "fmt": "pct0"
+   },
+   {
+    "id": "many",
+    "label": "",
+    "value": 0.03,
+    "fmt": "pct0"
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 52,
+ "group": "psychology",
+ "concept": "Choice Overload",
+ "tag": "PSYCHOLOGY #52",
+ "title": "More choices, fewer sales",
+ "hook": "More choice sounds like freedom. It's actually how stores lose sales.",
+ "caption": "More choice, fewer sales. Iyengar & Lepper (2000): with 6 jams {few} of visitors bought; with 24, just {many}.",
+ "hashtags": [
+  "choiceoverload",
+  "psychology",
+  "psychologyfacts",
+  "cognitivebias",
+  "mindset",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "6",
+  "24",
+  "#52"
+ ],
+ "claims": [
+  {
+   "id": "jam",
+   "text": "30% bought from the 6-jam display vs 3% from the 24-jam display",
+   "status": "documented",
+   "source_ids": [
+    "iyengar-lepper-2000"
+   ]
+  }
+ ],
+ "facts": {
+  "il2000": {
+   "value": "2000",
+   "source_id": "iyengar-lepper-2000"
+  }
+ },
+ "cta": "Follow QuanTik for the psychology behind your money",
+ "thumb": {
+  "series": "PSYCHOLOGY FACTS",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "MORE",
+   "CHOICE,",
+   "FEWER SALES."
+  ],
+  "sub": "6 jams: {few} · 24 jams: {many}",
+  "image": "jam-jars"
+ },
+ "scenes": [
+  {
+   "say": "More choice sounds like freedom. It's actually how stores lose sales.",
+   "show": "More choice, fewer sales.",
+   "visual": "board",
+   "image": "jam-jars"
+  },
+  {
+   "say": "Choice overload: with too many options, we're so scared of choosing wrong we don't choose.",
+   "show": "Too scared to choose.",
+   "kind": "doors"
+  },
+  {
+   "say": "Iyengar and Lepper set up a jam stand. Sometimes 6 flavours. Sometimes 24.",
+   "show": "6 flavours vs 24.",
+   "visual": "news",
+   "image": "jam-jars",
+   "note": "Source: Iyengar & Lepper (2000), JPSP",
+   "claims": [
+    "jam"
+   ]
+  },
+  {
+   "say": "With 6: {few} of visitors bought. With 24: just {many}.",
+   "show": "6 flavours: {few}",
+   "kind": "compare",
+   "big": "{many}",
+   "big_label": "bought with 24 flavours",
+   "claims": [
+    "jam"
+   ]
+  },
+  {
+   "say": "Every extra option adds thinking cost, and the fear of picking wrong.",
+   "show": "Every option adds fear.",
+   "kind": "wheel"
+  },
+  {
+   "say": "Stuck between too many options? Cut to three, then compare.",
+   "show": "Cut to three.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Stuck between too many options? Cut to three, then compare.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

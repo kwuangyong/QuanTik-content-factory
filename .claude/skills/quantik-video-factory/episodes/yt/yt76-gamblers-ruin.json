@@ -1,0 +1,124 @@
+{
+ "id": "yt76-gamblers-ruin",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt76-gamblers-ruin",
+ "model": "sim",
+ "sim": {
+  "kind": "ruin",
+  "players": 1000,
+  "rounds": 5000,
+  "p": 0.49,
+  "payout": 1.0,
+  "groups": [
+   {
+    "id": "a",
+    "label": "vốn 10",
+    "start": 10,
+    "stake": 1
+   },
+   {
+    "id": "b",
+    "label": "vốn 50",
+    "start": 50,
+    "stake": 1
+   },
+   {
+    "id": "c",
+    "label": "vốn 200",
+    "start": 200,
+    "stake": 1
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 76,
+ "group": "quant-mindset",
+ "concept": "The Gambler's Ruin",
+ "tag": "QUANT MINDSET #76",
+ "title": "The house doesn't need a big edge",
+ "hook": "The casino doesn't need a big edge to beat you. It just needs a bigger wallet and more time.",
+ "caption": "The house doesn't need a big edge — just a bigger wallet. Win {a_p} per bet: starting with {a_start} units → {a_ruin} wiped out; {b_start} → {b_ruin}; {c_start} → {c_ruin}.",
+ "hashtags": [
+  "gamblersruin",
+  "casino",
+  "quant",
+  "probability",
+  "statistics",
+  "math",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#76"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik to think like a quant",
+ "thumb": {
+  "series": "QUANT MINDSET",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "THE HOUSE",
+   "JUST",
+   "WAITS."
+  ],
+  "sub": "{a_ruin} of small bankrolls wiped out",
+  "image": "las-vegas-strip"
+ },
+ "scenes": [
+  {
+   "say": "The casino doesn't need a big edge to beat you. It just needs a bigger wallet and more time.",
+   "show": "Bigger wallet. More time.",
+   "visual": "casino",
+   "image": "las-vegas-strip"
+  },
+  {
+   "say": "Gambler's ruin: play a slightly losing game long enough, and a small bankroll is almost guaranteed to hit zero.",
+   "show": "Small bankroll, near-certain zero.",
+   "visual": "roulette",
+   "image": "slot-machines"
+  },
+  {
+   "say": "Three groups play a game they win {a_p} of the time, one unit a bet, with {a_start}, {b_start} or {c_start} units.",
+   "show": "{a_start}, {b_start}, {c_start} units.",
+   "kind": "compare",
+   "note": "Simulation: {players} players, {rounds} bets, win {a_p}"
+  },
+  {
+   "say": "Start with {a_start}: {a_ruin} wiped out.",
+   "show": "Start with {a_start}:",
+   "visual": "money_burn",
+   "big": "{a_ruin}",
+   "big_label": "wiped out",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "{b_start}: {b_ruin}. {c_start}: {c_ruin}.",
+   "show": "{b_start}: {b_ruin}",
+   "kind": "walkaway",
+   "big": "{c_ruin}",
+   "big_label": "wiped out starting with {c_start}",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "In a slightly losing game, time is your enemy. In a slightly winning game, it's your friend.",
+   "show": "Time: enemy or friend.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "In a slightly losing game, time is your enemy. In a slightly winning game, it's your friend.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

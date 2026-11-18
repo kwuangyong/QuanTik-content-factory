@@ -55,7 +55,9 @@ def lexicon():
 def speakable(text: str) -> str:
     """Rewrite symbols/acronyms so Vietnamese TTS reads them naturally (brand/pronunciation.json)."""
     if LANG["code"] == "en":
-        return text.replace("−", "minus ").replace("%", " percent").replace(" + ", " plus ").replace(" = ", " equals ")
+        # edge-tts en voices intermittently return no audio for "word: word" — a comma reads the same pause
+        out = re.sub(r"(?<=\w):\s", ", ", text)
+        return out.replace("−", "minus ").replace("%", " percent").replace(" + ", " plus ").replace(" = ", " equals ")
     out = text
     for k, v in sorted(lexicon().items(), key=lambda kv: -len(kv[0])):
         out = re.sub(r"(?<!\w)" + re.escape(k) + r"(?!\w)", v, out)

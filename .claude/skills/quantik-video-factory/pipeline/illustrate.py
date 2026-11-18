@@ -142,7 +142,30 @@ def chip_stack(d, x, y, n, color, s=1.0):
         d.ellipse([x - 32 * s, yy - 12 * s, x + 32 * s, yy + 12 * s], fill=color, outline=WHITE, width=2)
 
 
+EN = {  # on-picture words for English episodes (core.LANG == "en")
+    "đếm Hi-Lo": "Hi-Lo count", "BIẾN ĐỘNG: ": "VOLATILITY: ", "YÊN": "CALM", "BÃO": "STORM", "ngẫu nhiên": "random",
+    "quán tính": "momentum", "mức cân bằng": "equilibrium", "nắng?": "sun?", "mưa?": "rain?", "bão?": "storm?",
+    "phóng ẩu": "reckless", "chạy đều": "steady", "VaR thấy": "what you see", "phần chìm = CVaR": "hidden part = the real risk",
+    "TÀI KHOẢN": "ACCOUNT", "mã minh hoạ · dữ liệu giả": "illustrative tickers · fake data", "…rơi": "…falling",
+    "TIN TỐT ▲": "GOOD NEWS ▲", "TIN XẤU ▼": "BAD NEWS ▼", "trạng thái ẩn → âm thanh": "hidden state → sound",
+    "hiếm… nhưng CÓ": "rare… but REAL", "BÁO ĐỘNG!": "ALARM!", "vào thì dễ…": "easy to get in…",
+    "va đập ngẫu nhiên + lực kéo về": "random kicks + a pull back", "“THIÊN TÀI”?": "“GENIUS”?", "tiền vào": "money in",
+    "tiền ra": "money out", "mực nước = giá": "water level = price",
+}
+
+
+def tr(text):
+    from core import LANG
+
+    if LANG["code"] != "en" or not isinstance(text, str):
+        return text
+    for vi in sorted(EN, key=len, reverse=True):
+        text = text.replace(vi, EN[vi])
+    return text
+
+
 def label(d, x, y, text, size=30, color=WHITE, bg=(0, 0, 0, 150), anchor="mm"):
+    text = tr(text)
     f = font("sans-black", size)
     tw = d.textlength(text, font=f)
     bx = x - tw / 2 if anchor == "mm" else x
@@ -480,7 +503,7 @@ def draw_money_burn(d, w, h, p, t):
         if nh > 4:
             d.rounded_rectangle([x, y + h * 0.16 - nh, x + w * 0.22, y + h * 0.16], radius=8, fill=(90, 160, 110),
                                 outline=(40, 90, 60), width=3)
-            d.text((x + 16, y + h * 0.16 - nh + 6), "₫", font=font("sans-black", int(h * 0.06)), fill=(40, 90, 60))
+            d.text((x + 16, y + h * 0.16 - nh + 6), "$" if __import__("core").LANG["code"] == "en" else "₫", font=font("sans-black", int(h * 0.06)), fill=(40, 90, 60))
         if 0 < b < 1:
             fx, fy = x + w * 0.11, y + h * 0.16 - nh
             for j in range(5):
@@ -712,7 +735,7 @@ def draw_news(d, w, h, p, t):
             continue
         shake = 8 * math.sin(t * 30) if i == 1 else 0
         d.rectangle([x0 + shake, h * 0.06, x0 + w * 0.42 + shake, h * 0.46], fill=(235, 230, 215))
-        d.text((x0 + 20 + shake, h * 0.09), txt, font=font("sans-black", int(h * 0.07)), fill=col)
+        d.text((x0 + 20 + shake, h * 0.09), tr(txt), font=font("sans-black", int(h * 0.07)), fill=col)
         for j in range(5):
             d.line([(x0 + 20 + shake, h * 0.22 + j * h * 0.045), (x0 + w * 0.4 + shake, h * 0.22 + j * h * 0.045)], fill=(150, 150, 140), width=4)
         n = 1 if i == 0 else 3
@@ -736,7 +759,7 @@ def draw_speech(d, w, h, p, t):
         d.line([(x, my - 15 - amp), (x, my - 15 + amp)], fill=T["accent"], width=4)
     cx0, cy0 = w * 0.7, h * 0.2
     d.rounded_rectangle([cx0, cy0, cx0 + w * 0.27, cy0 + h * 0.42], radius=12, fill=(10, 12, 18), outline=(90, 100, 120), width=4)
-    words = ["xin", "chào", "thị", "trường"]
+    words = ["hello", "market"] if __import__("core").LANG["code"] == "en" else ["xin", "chào", "thị", "trường"]
     n = int(len(words) * ease(p / 0.8) + 0.999)
     for i, wd in enumerate(words[:n]):
         d.text((cx0 + 18, cy0 + 16 + i * h * 0.09), wd, font=font("mono-bold", int(h * 0.06)), fill=GREEN)

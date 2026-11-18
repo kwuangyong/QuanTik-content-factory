@@ -1,0 +1,104 @@
+{
+ "id": "yt19-opportunity-cost-of-money",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt19-opportunity-cost-of-money",
+ "model": "sim",
+ "sim": {
+  "kind": "growth",
+  "years": 30,
+  "unit": "triệu đồng",
+  "lines": [
+   {
+    "id": "a",
+    "label": "1 triệu/tháng đầu tư, 7%",
+    "contrib": 12,
+    "rate": 0.07,
+    "color": "accent"
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 19,
+ "group": "dark-truth",
+ "concept": "Opportunity Cost of Money",
+ "tag": "DARK TRUTH #19",
+ "title": "That daily habit costs more than you think",
+ "hook": "That small monthly habit isn't small. You just haven't seen its future.",
+ "caption": "That small habit isn't small. {a_contrib} a year at {a_rate} for {years} years: you put in {a_paid}, it becomes about {a_end}. Make every spend worth the future it replaces.\n\n(Assumptions on screen; illustration only.)",
+ "hashtags": [
+  "opportunitycost",
+  "darktruth",
+  "money",
+  "moneymindset",
+  "personalfinance",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#19"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from a seeded simulation with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for more dark truths about money",
+ "thumb": {
+  "series": "THE DARK TRUTH OF MONEY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "IT'S NOT",
+   "A SMALL",
+   "HABIT."
+  ],
+  "sub": "{a_paid} becomes {a_end}",
+  "art": "spend"
+ },
+ "scenes": [
+  {
+   "say": "That small monthly habit isn't small. You just haven't seen its future.",
+   "show": "It's not small.",
+   "kind": "spend"
+  },
+  {
+   "say": "Every dollar you spend today is a dollar that never gets to grow.",
+   "show": "A dollar that never grows.",
+   "visual": "money_burn",
+   "real": true
+  },
+  {
+   "say": "Put {a_contrib} a year away at {a_rate}, for {years} years.",
+   "show": "{a_contrib} a year.",
+   "kind": "office",
+   "note": "Assumption: {a_rate}/yr return, yearly contributions"
+  },
+  {
+   "say": "You put in {a_paid}. It becomes about {a_end}.",
+   "show": "It becomes:",
+   "visual": "rocket",
+   "big": "{a_end}",
+   "big_label": "from {a_paid} put in",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "This isn't 'never spend'. It's: make every spend worth the future it replaces.",
+   "show": "Worth the future it replaces?",
+   "kind": "walkaway"
+  },
+  {
+   "say": "The price tag is today's cost. The real cost is everything it could have become.",
+   "show": "The real cost.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "The price tag is today's cost. The real cost is everything it could have become.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

@@ -1,0 +1,122 @@
+{
+ "id": "yt79-power-law",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt79-power-law",
+ "model": "sim",
+ "sim": {
+  "kind": "powerlaw",
+  "alpha": 1.16,
+  "n": 10000
+ },
+ "lang": "en",
+ "episode_no": 79,
+ "group": "quant-mindset",
+ "concept": "Power Law",
+ "tag": "QUANT MINDSET #79",
+ "title": "A few things create almost everything",
+ "hook": "A tiny handful of people, days and decisions create almost everything. That's not luck. It's a power law.",
+ "caption": "A few things create almost everything. In {n} power-law outcomes, the top 1% took {top1} and the top fifth about {top20}.",
+ "hashtags": [
+  "powerlaw",
+  "pareto",
+  "quant",
+  "probability",
+  "statistics",
+  "math",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "1%",
+  "#79"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  },
+  {
+   "id": "pareto",
+   "text": "Highly unequal distributions",
+   "status": "documented",
+   "source_ids": [
+    "pareto-1896"
+   ]
+  }
+ ],
+ "facts": {
+  "pareto_yr": {
+   "value": "1896",
+   "source_id": "pareto-1896"
+  }
+ },
+ "cta": "Follow QuanTik to think like a quant",
+ "thumb": {
+  "series": "QUANT MINDSET",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "A FEW",
+   "THINGS",
+   "= EVERYTHING."
+  ],
+  "sub": "Top 1% takes {top1}",
+  "visual": "rocket"
+ },
+ "scenes": [
+  {
+   "say": "A tiny handful of people, days and decisions create almost everything. That's not luck. It's a power law.",
+   "show": "A handful creates everything.",
+   "visual": "rocket",
+   "real": true
+  },
+  {
+   "say": "Power law: outcomes don't cluster around an average. They pile up in a tiny group at the top.",
+   "show": "They pile up at the top.",
+   "visual": "professor",
+   "image": "vilfredo-pareto",
+   "claims": [
+    "pareto"
+   ]
+  },
+  {
+   "say": "Code draws {n} outcomes from a power law.",
+   "show": "{n} outcomes.",
+   "visual": "coin_crowd",
+   "note": "Simulation: Pareto distribution, alpha {alpha}"
+  },
+  {
+   "say": "The top one percent take {top1} of the total.",
+   "show": "Top 1%:",
+   "visual": "coin_crowd",
+   "big": "{top1}",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "The top fifth take about {top20}.",
+   "show": "Top fifth:",
+   "visual": "banker",
+   "big": "{top20}",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "In a power-law world, averages lie. A few huge events decide almost everything.",
+   "show": "Averages lie.",
+   "visual": "storm"
+  },
+  {
+   "say": "Find the few things that produce most of your results, and protect your time for them.",
+   "show": "Protect the vital few.",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "Find the few things that produce most of your results, and protect your time for them.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

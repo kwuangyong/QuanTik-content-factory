@@ -1,0 +1,82 @@
+{
+ "id": "yt15-middle-class-trap",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt15-middle-class-trap",
+ "model": "sim",
+ "sim": {
+  "kind": "diagram",
+  "nodes": [],
+  "edges": []
+ },
+ "lang": "en",
+ "episode_no": 15,
+ "group": "dark-truth",
+ "concept": "The Middle-Class Trap",
+ "tag": "DARK TRUTH #15",
+ "title": "Good salary. Three months from collapse.",
+ "hook": "Good salary. Nice house. Three months without a paycheck and it all collapses.",
+ "caption": "Good salary, nice house, three months from collapse. Every raise became a fixed payment, and fixed costs don't shrink when income does. Keep fixed costs below your worst year's income.",
+ "hashtags": [
+  "middleclass",
+  "darktruth",
+  "money",
+  "moneymindset",
+  "personalfinance",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#15"
+ ],
+ "claims": [],
+ "facts": {},
+ "cta": "Follow QuanTik for more dark truths about money",
+ "thumb": {
+  "series": "THE DARK TRUTH OF MONEY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "THREE MONTHS",
+   "FROM",
+   "COLLAPSE."
+  ],
+  "sub": "The middle-class trap",
+  "art": "wheel"
+ },
+ "scenes": [
+  {
+   "say": "Good salary. Nice house. Three months without a paycheck and it all collapses.",
+   "show": "Three months from collapse.",
+   "kind": "office"
+  },
+  {
+   "say": "Every raise brought a bigger mortgage, a better car, another monthly payment.",
+   "show": "Every raise, a new payment.",
+   "kind": "spend"
+  },
+  {
+   "say": "Fixed costs are the most dangerous kind. They don't shrink when your income does.",
+   "show": "Fixed costs don't shrink.",
+   "visual": "iceberg",
+   "real": true
+  },
+  {
+   "say": "So you can't quit, can't take a risk, can't say no. You depend on the paycheck more than ever.",
+   "show": "You can't say no.",
+   "kind": "wheel"
+  },
+  {
+   "say": "The middle class isn't stuck because they earn too little. Every dollar is spoken for before it arrives.",
+   "show": "Spoken for before it arrives.",
+   "kind": "commute"
+  },
+  {
+   "say": "Keep fixed costs below your worst year's income, not your best.",
+   "show": "Below your worst year.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Keep fixed costs below your worst year's income, not your best.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

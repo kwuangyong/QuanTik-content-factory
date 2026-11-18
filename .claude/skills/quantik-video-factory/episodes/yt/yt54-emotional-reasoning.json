@@ -1,0 +1,83 @@
+{
+ "id": "yt54-emotional-reasoning",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt54-emotional-reasoning",
+ "model": "sim",
+ "sim": {
+  "kind": "diagram",
+  "nodes": [],
+  "edges": []
+ },
+ "lang": "en",
+ "episode_no": 54,
+ "group": "psychology",
+ "concept": "Emotional Reasoning",
+ "tag": "PSYCHOLOGY #54",
+ "title": "Feeling it doesn't make it true",
+ "hook": "'I feel anxious, so something bad is coming.' Your feelings are not evidence.",
+ "caption": "Feeling it doesn't make it true. Emotional reasoning treats feelings as proof. Emotions are data about you, not about the world — write down the evidence first.",
+ "hashtags": [
+  "emotionalreasoning",
+  "psychology",
+  "psychologyfacts",
+  "cognitivebias",
+  "mindset",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#54"
+ ],
+ "claims": [],
+ "facts": {},
+ "cta": "Follow QuanTik for the psychology behind your money",
+ "thumb": {
+  "series": "PSYCHOLOGY FACTS",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "FEELINGS",
+   "AREN'T",
+   "EVIDENCE."
+  ],
+  "sub": "Emotional reasoning",
+  "art": "alone"
+ },
+ "scenes": [
+  {
+   "say": "'I feel anxious, so something bad is coming.' Your feelings are not evidence.",
+   "show": "Feelings aren't evidence.",
+   "kind": "alone"
+  },
+  {
+   "say": "Emotional reasoning: treating how you feel as proof of how things are.",
+   "show": "Feeling as proof.",
+   "kind": "scale"
+  },
+  {
+   "say": "The chain: strong emotion, emotion becomes evidence, quick conclusion, action.",
+   "show": "Emotion → conclusion → action.",
+   "kind": "wheel"
+  },
+  {
+   "say": "Your emotions are data about you, not data about the world.",
+   "show": "Data about you.",
+   "visual": "storm",
+   "real": true
+  },
+  {
+   "say": "Anxiety doesn't make a risk bigger. Excitement doesn't make an opportunity better.",
+   "show": "Anxiety ≠ risk. Hype ≠ opportunity.",
+   "visual": "panic",
+   "image": "nyse-floor"
+  },
+  {
+   "say": "When feelings run hot, write down the evidence for and against before you act.",
+   "show": "Evidence first.",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "When feelings run hot, write down the evidence for and against before you act.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

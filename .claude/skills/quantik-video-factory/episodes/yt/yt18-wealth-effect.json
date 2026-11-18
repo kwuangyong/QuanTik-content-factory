@@ -1,0 +1,83 @@
+{
+ "id": "yt18-wealth-effect",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt18-wealth-effect",
+ "model": "sim",
+ "sim": {
+  "kind": "diagram",
+  "nodes": [],
+  "edges": []
+ },
+ "lang": "en",
+ "episode_no": 18,
+ "group": "dark-truth",
+ "concept": "The Wealth Effect",
+ "tag": "DARK TRUTH #18",
+ "title": "Feeling rich is how people get poor",
+ "hook": "Feeling rich is one of the fastest ways to get poor.",
+ "caption": "Feeling rich is how people get poor. Paper gains make us spend real cash and take real debt; when prices fall the gains vanish but the payments stay. Spend what you've banked, never what's on the screen.",
+ "hashtags": [
+  "wealtheffect",
+  "darktruth",
+  "money",
+  "moneymindset",
+  "personalfinance",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#18"
+ ],
+ "claims": [],
+ "facts": {},
+ "cta": "Follow QuanTik for more dark truths about money",
+ "thumb": {
+  "series": "THE DARK TRUTH OF MONEY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "FEELING RICH",
+   "MAKES YOU",
+   "POOR."
+  ],
+  "sub": "The wealth effect",
+  "visual": "rollercoaster"
+ },
+ "scenes": [
+  {
+   "say": "Feeling rich is one of the fastest ways to get poor.",
+   "show": "Feeling rich makes you poor.",
+   "kind": "scroll"
+  },
+  {
+   "say": "Your stocks are green. Your house price went up. You feel wealthy.",
+   "show": "Green stocks. Pricier house.",
+   "visual": "board",
+   "image": "nyse-floor"
+  },
+  {
+   "say": "So you spend real cash, and borrow real debt, against paper gains.",
+   "show": "Real debt. Paper gains.",
+   "kind": "spend"
+  },
+  {
+   "say": "Then prices fall. The gains vanish. The payments don't.",
+   "show": "The gains vanish. Payments stay.",
+   "visual": "rollercoaster",
+   "real": true
+  },
+  {
+   "say": "That's why so many people feel poorer exactly when the market turns.",
+   "show": "Poorer when it turns.",
+   "visual": "panic"
+  },
+  {
+   "say": "Spend what you've banked. Never what's still on the screen.",
+   "show": "Never spend the screen.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Spend what you've banked. Never what's still on the screen.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

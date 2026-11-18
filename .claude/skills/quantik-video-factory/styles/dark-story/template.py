@@ -10,6 +10,7 @@ from PIL import Image, ImageDraw
 
 import darkart as G
 import frames as F
+import illustrate as I
 from core import SAFE, L, font
 from render import Scene
 
@@ -200,11 +201,64 @@ def art_alone(a, t, p, c):
     a.line([(690, GROUND - 14), (706, GROUND + 2), (696, GROUND + 18)], P["bone"], 2.5)
 
 
+def art_doors(a, t, p, c):
+    # three doors; the host opens one (empty), the light behind the other closed door grows
+    xs = [210, 540, 870]
+    a.rect([0, GROUND + 6, AW, GROUND + 14], fill=P["crowd_dk"])
+    open_k = F.ease_out(F.seg(p, 0.3, 0.6)); hint = F.ease_in_out(F.seg(p, 0.6, 1.0))
+    for i, x in enumerate(xs):
+        x0, x1, y0 = x - 120, x + 120, 90
+        if i == 2:
+            a.glow(x, 330, 230, P["warm"], int(140 * hint))
+        a.rect([x0 - 12, y0 - 12, x1 + 12, GROUND + 6], fill=P["ink"], r=10)
+        if i == 1 and open_k > 0:   # opened: empty dark room
+            a.rect([x0, y0, x1, GROUND], fill=(10, 10, 12))
+            w = (x1 - x0) * (1 - 0.8 * open_k)
+            a.rect([x0, y0, x0 + w, GROUND], fill=(70, 60, 50), r=4)
+        else:
+            a.rect([x0, y0, x1, GROUND], fill=(92, 74, 56) if i != 2 else (110, 88, 62), r=4)
+            a.circle(x1 - 30, (y0 + GROUND) / 2, 10, P["gold"])
+        f = font("sans-black", 64)
+        a.d.text(((x - 18) * a.ss, (y0 + 40) * a.ss), str(i + 1), font=font("sans-black", 64 * a.ss),
+                 fill=P["bone"])
+    G.person(a, 540, GROUND + 10, 200, P["red"], head_down=0.2)
+
+
+def art_duel(a, t, p, c):
+    # two players face each other across a table, each hiding a choice; red light between them
+    a.glow(540, 300, 260, P["red"], int(60 + 40 * math.sin(t * 2) ** 2))
+    a.rect([200, GROUND - 150, 880, GROUND - 120], fill=P["crowd_dk"], r=8)
+    a.rect([260, GROUND - 120, 290, GROUND + 10], fill=P["crowd_dk"]); a.rect([790, GROUND - 120, 820, GROUND + 10], fill=P["crowd_dk"])
+    G.person(a, 190, GROUND + 10, 420, P["crowd"], facing=1, head_down=0.2)
+    G.person(a, 890, GROUND + 10, 420, P["red"], facing=-1, head_down=0.2)
+    for k, x in enumerate((420, 660)):  # two hidden cards / choices
+        flip = F.ease_out(F.seg(p, 0.55 + 0.15 * k, 0.75 + 0.15 * k))
+        a.rect([x - 55, GROUND - 260, x + 55, GROUND - 120], fill=P["bone"] if flip > 0.5 else (60, 30, 30), r=10,
+               outline=P["gold"], width=4)
+
+
+def art_scale(a, t, p, c):
+    # a balance: the "loss" pan sinks far lower than the equal "gain" pan rises
+    tilt = 0.32 * F.ease_out(F.seg(p, 0.15, 0.6)) + 0.02 * math.sin(t * 2)
+    cx, cy, L = 540, 170, 330
+    a.rect([cx - 14, cy, cx + 14, GROUND], fill=P["muted"]); a.rect([cx - 120, GROUND - 10, cx + 120, GROUND + 6], fill=P["muted"], r=6)
+    lx, ly = cx - L * math.cos(tilt), cy - L * math.sin(tilt) * -1
+    rx, ry = cx + L * math.cos(tilt), cy + L * math.sin(tilt) * -1
+    a.line([(lx, ly), (rx, ry)], P["bone"], 12)
+    for x, y, col, k in ((lx, ly, P["green"], "coin"), (rx, ry, P["red"], "coin")):
+        a.line([(x - 90, y + 170), (x, y), (x + 90, y + 170)], P["muted"], 4)
+        a.ellipse([x - 120, y + 160, x + 120, y + 200], fill=col)
+        G.icon(a, k, x, y + 120, 80, P["gold"])
+    a.circle(cx, cy, 22, P["gold"])
+
+
 ART = {"office": art_office, "commute": art_commute, "scroll": art_scroll, "compare": art_compare,
-       "spend": art_spend, "wheel": art_wheel, "crowd": art_crowd, "walkaway": art_walkaway, "alone": art_alone}
+       "spend": art_spend, "wheel": art_wheel, "crowd": art_crowd, "walkaway": art_walkaway, "alone": art_alone,
+       "doors": art_doors, "duel": art_duel, "scale": art_scale}
 TINT = {"office": (P["glow"], 0.45, 0.45), "scroll": (P["glow"], 0.5, 0.4), "compare": (P["gold"], 0.5, 0.4),
         "spend": (P["gold"], 0.5, 0.5), "wheel": (P["red"], 0.5, 0.55), "crowd": (P["warm"], 0.5, 0.35),
-        "walkaway": (P["warm"], 0.9, 0.5), "alone": (P["warm"], 0.5, 0.3)}
+        "walkaway": (P["warm"], 0.9, 0.5), "alone": (P["warm"], 0.5, 0.3),
+        "doors": (P["warm"], 0.6, 0.4), "duel": (P["red"], 0.5, 0.45), "scale": (P["gold"], 0.5, 0.4)}
 
 
 # ================================================================ frame assembly
@@ -219,29 +273,107 @@ def brand(img, tag):
     d.text((SAFE["right"] - tw - 18, y + 17), tag, font=f, fill=P["red"])
 
 
+_NUM = __import__("re").compile(r"([−\-+$]?)(\d[\d.,]*)(.*)")
+
+
+def _countup(token, k):
+    """'2,000' / '68%' / '$1,134' at fraction k of its value, same format (English or Vietnamese separators)."""
+    from core import LANG
+
+    m = _NUM.fullmatch(token or "")
+    if not m or k >= 1:
+        return token
+    pre, num, suf = m.groups()
+    th, dec = (",", ".") if LANG["code"] == "en" else (".", ",")
+    ip, _, fp = num.replace(th, "").partition(dec)
+    try:
+        val = float(ip + ("." + fp if fp else "")) * k
+    except ValueError:
+        return token
+    s_ = f"{val:,.{len(fp)}f}"
+    if th == ".":
+        s_ = s_.replace(",", "X").replace(".", ",").replace("X", ".")
+    return pre + s_ + suf
+
+
+def _grade(im, k=0.35):
+    """Dark-truth grade for real photos: desaturate, darken, cool shadows, so they sit inside the dark story."""
+    from PIL import ImageEnhance
+
+    rgb = im.convert("RGB")
+    rgb = ImageEnhance.Color(rgb).enhance(0.55)
+    rgb = Image.blend(rgb, Image.new("RGB", rgb.size, (10, 10, 16)), k)
+    out = rgb.convert("RGBA"); out.putalpha(im.getchannel("A"))
+    return out
+
+
+def _credit_of(path):
+    for it in I.USED:
+        if it.get("path") == path:
+            lic = it.get("license", "")
+            who = it.get("artist", "") or "Wikimedia Commons"
+            return f"Photo: {who} · {lic} · Wikimedia Commons"
+    return ""
+
+
 def story_scene(i, item, ctx, art_ctx):
-    kind = item["kind"]; show = item.get("show", "")
-    draw_art = ART[kind]
+    """One scene. Picture, by priority: 'image' (real photo of a named person/place, ledger id) → 'visual'
+    (illustrate.py tag: real Commons B-roll when 'real' is true and a free photo exists, else the hand-drawn
+    animation) → 'kind' (dark-story drawing). 'big' adds a huge counting number (from the model run)."""
+    kind = item.get("kind"); show = item.get("show", "")
+    vis, img_id = item.get("visual"), item.get("image")
+    ent = I.entity(img_id) if img_id else None
+    photo, credit = None, ""
+    if ent:
+        photo, credit = ent[0], ("Photo: " + ent[1].replace("Ảnh: ", "")) if ent[2] else ""
+    elif vis:
+        photo = I.source(vis, slot=1 if item.get("real") else 0)
+        credit = _credit_of(photo) if isinstance(photo, str) else ""
+    draw_art = ART.get(kind) if kind else None
+    big, big_label = item.get("big"), item.get("big_label", "")
+    box_w, box_h = AW - 80, AH - 40
+    crowd_ctx = dict(art_ctx)
+    if item.get("crowd"):
+        crowd_ctx.update(n=int(art_ctx["v"][item["crowd"]["n"]]), k=int(art_ctx["v"][item["crowd"]["k"]]))
 
     def draw(img, t, p):
-        img.paste(G.backdrop(W, H, TINT.get(kind)), (0, 0))
-        a = G.Art(AW, AH)
-        draw_art(a, t, p, art_ctx)
-        im = a.image()
+        img.paste(G.backdrop(W, H, TINT.get(kind or "", (P["warm"], 0.5, 0.35))), (0, 0))
         drift = int(10 * math.sin(t * 0.6))                         # slow handheld drift
-        img.paste(im, (ART_BOX[0] + drift, ART_BOX[1]), im)
+        if photo or (vis and not draw_art):
+            fr = I.frame(vis or "trader", box_w, box_h, p, t, photo=photo, seed=i)
+            if photo:
+                fr = _grade(fr, 0.3)
+            if big:
+                fr = _grade(fr, 0.82)
+            img.paste(fr, (ART_BOX[0] + 40 + drift, ART_BOX[1] + 10), fr)
+        elif draw_art:
+            a = G.Art(AW, AH)
+            draw_art(a, t, p, crowd_ctx)
+            im = a.image()
+            if big:
+                im = _grade(im, 0.82)
+            img.paste(im, (ART_BOX[0] + drift, ART_BOX[1]), im)
+        if big:
+            k = F.ease_out(F.seg(p, 0.05, 0.5))
+            F.text_box(img, _countup(big, k), (SAFE["left"], 760, SAFE["right"], 1060), "sans-black", 230, P["red"],
+                       "center", "middle", min_size=90, label=f"s{i}-big")
+            if big_label:
+                F.text_box(img, big_label, (SAFE["left"], 1070, SAFE["right"], 1200), "sans-bold", 44, P["bone"],
+                           "center", "top", min_size=28, label=f"s{i}-biglabel", alpha=F.ease_out(F.seg(p, 0.2, 0.4)))
         brand(img, ctx["tag"])
         if show:
             al = F.ease_out(F.seg(p, 0.0, 0.18))
             F.text_box(img, show, TEXT_BOX, "sans-black", 84, P["bone"], "left", "middle", min_size=44,
                        label=f"s{i}-show", hl_numbers=True, hl_color=P["red"], alpha=al, spacing=1.08)
-        if item.get("note"):
-            F.text_box(img, item["note"], (SAFE["left"], 1270, SAFE["right"], 1316), "sans", 22, P["muted"], "left",
-                       "middle", min_size=18, label=f"s{i}-note")
+        foot = " · ".join(x for x in (item.get("note", ""), credit) if x)
+        if foot:
+            F.text_box(img, foot, (SAFE["left"], 1270, SAFE["right"], 1316), "sans", 20, P["muted"], "left",
+                       "middle", min_size=15, label=f"s{i}-note")
         img.paste(G.film_grain(img, t), (0, 0))
 
-    return Scene(f"s{i:02d}-{kind}", item["say"], draw, item.get("min_dur", 3.0), texts=[show, item.get("note", "")],
-                 header=False)
+    name = kind or vis or ("img" if img_id else "scene")
+    return Scene(f"s{i:02d}-{name}", item["say"], draw, item.get("min_dur", 3.0),
+                 texts=[show, item.get("note", ""), big or "", big_label], header=False)
 
 
 def end_scene(ep, ctx):
@@ -255,7 +387,7 @@ def end_scene(ep, ctx):
 
 def build(ep, model, ctx):
     v = model.values
-    art_ctx = {"n": int(v.get("n_paths", 2000)), "k": int(v.get("esc_a_n", 30))}
+    art_ctx = {"n": int(v.get("n_paths", 2000)), "k": int(v.get("esc_a_n", 30)), "v": v}
     out = [story_scene(i, it, ctx, art_ctx) for i, it in enumerate(ep["scenes"], 1)]
     out.append(end_scene(ep, ctx))
     return out
@@ -291,10 +423,19 @@ def thumbnail(ep, model, path, no=None):
         d.text((x, y - top), ln, font=fo, fill=col)
         y += int(sz * 0.98) + 18
     # illustration: running in the wheel with the bag of upgrades
-    a = G.Art(AW, AH)
-    art_wheel(a, 0.17, 1.0, {})
-    im = a.image().resize((int(AW * 1.0), int(AH * 1.0)))
-    img.paste(im, (0, y + 10), im)
+    # th["art"]: dark-story kind · th["visual"]: illustrate tag · th["image"]: ledger photo (default: the wheel)
+    ent = I.entity(th["image"]) if th.get("image") else None
+    if ent or th.get("visual"):
+        fr = I.frame(th.get("visual") or "trader", AW - 128, min(AH, 1540 - y), 1.0, 1.0,
+                     photo=ent[0] if ent else None)
+        fr = _grade(fr, 0.25)
+        img.paste(fr, (64, y + 10), fr)
+    else:
+        a = G.Art(AW, AH)
+        ART.get(th.get("art", "wheel"), art_wheel)(a, 0.17, 1.0,
+                                                   {"n": 2000, "k": 30, "v": getattr(model, "values", {})})
+        im = a.image()
+        img.paste(im, (0, y + 10), im)
     # the one number, from the model
     sub = th.get("sub", "")
     if sub:

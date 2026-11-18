@@ -1,0 +1,122 @@
+{
+ "id": "yt35-martingale-fallacy",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt35-martingale-fallacy",
+ "model": "sim",
+ "sim": {
+  "kind": "ruin",
+  "players": 1000,
+  "rounds": 500,
+  "p": 0.4865,
+  "payout": 1.0,
+  "start": 1000,
+  "groups": [
+   {
+    "id": "m",
+    "label": "gấp đôi sau mỗi lần thua",
+    "mode": "martingale",
+    "stake": 10
+   },
+   {
+    "id": "f",
+    "label": "cược đều tay",
+    "mode": "fixed",
+    "stake": 10
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 35,
+ "group": "poker",
+ "concept": "The Martingale Fallacy",
+ "tag": "POKER THEORY #35",
+ "title": "Doubling after every loss can't beat the odds",
+ "hook": "Double your bet after every loss and you'll always win it back. Except you absolutely won't.",
+ "caption": "Doubling after every loss can't beat the odds. {players} players on red (win {m_p}), bankroll {m_start}: after {rounds} spins {m_ruin} of the doublers were broke, vs {f_ruin} of flat bettors.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
+ "hashtags": [
+  "martingale",
+  "roulette",
+  "pokertheory",
+  "poker",
+  "probability",
+  "decisionmaking",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#35"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for the math behind every decision",
+ "thumb": {
+  "series": "POKER THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "DOUBLING",
+   "WON'T",
+   "SAVE YOU."
+  ],
+  "sub": "{m_ruin} of doublers went broke",
+  "image": "roulette-wheel"
+ },
+ "scenes": [
+  {
+   "say": "Double your bet after every loss and you'll always win it back. Except you absolutely won't.",
+   "show": "Double after every loss?",
+   "visual": "roulette",
+   "image": "roulette-wheel"
+  },
+  {
+   "say": "Martingale wins small, wins often. That's exactly what makes it dangerous.",
+   "show": "Wins small. Wins often.",
+   "visual": "coin_crowd"
+  },
+  {
+   "say": "{players} players on red, win chance {m_p}, bankroll {m_start}, starting bet {m_stake}.",
+   "show": "Red. Double after a loss.",
+   "visual": "roulette",
+   "image": "monte-carlo-casino",
+   "note": "Simulation: European roulette red, {rounds} spins"
+  },
+  {
+   "say": "After {rounds} spins, {m_ruin} of the doublers are broke.",
+   "show": "Broke:",
+   "visual": "money_burn",
+   "big": "{m_ruin}",
+   "big_label": "of the doublers",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Flat bettors in the same game: {f_ruin}.",
+   "show": "Flat bettors broke: {f_ruin}",
+   "kind": "walkaway",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Doubling doesn't change the odds. It trades lots of small wins for one loss that takes almost everything.",
+   "show": "One loss takes everything.",
+   "kind": "wheel"
+  },
+  {
+   "say": "No betting system turns a losing game into a winning one. It only changes the shape of the loss.",
+   "show": "It only changes the shape.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "No betting system turns a losing game into a winning one. It only changes the shape of the loss.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

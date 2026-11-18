@@ -1,0 +1,100 @@
+{
+ "id": "yt75-law-of-large-numbers",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt75-law-of-large-numbers",
+ "model": "sim",
+ "sim": {
+  "kind": "lln",
+  "flips": 5000
+ },
+ "lang": "en",
+ "episode_no": 75,
+ "group": "quant-mindset",
+ "concept": "The Law of Large Numbers",
+ "tag": "QUANT MINDSET #75",
+ "title": "Ten flips lie. Five thousand don't.",
+ "hook": "Flip a coin ten times and it can lie to your face. Flip it five thousand times and it can't.",
+ "caption": "Ten flips lie; five thousand don't. Heads after 10 flips: {at10}. After 100: {at100}. After {flips}: {at_end}.",
+ "hashtags": [
+  "lawoflargenumbers",
+  "quant",
+  "probability",
+  "statistics",
+  "math",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#75",
+  "10",
+  "100"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik to think like a quant",
+ "thumb": {
+  "series": "QUANT MINDSET",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "TEN FLIPS",
+   "LIE TO",
+   "YOU."
+  ],
+  "sub": "10 flips {at10} · {flips} flips {at_end}",
+  "visual": "coin"
+ },
+ "scenes": [
+  {
+   "say": "Flip a coin ten times and it can lie to your face. Flip it five thousand times and it can't.",
+   "show": "Ten flips lie.",
+   "visual": "coin",
+   "real": true
+  },
+  {
+   "say": "The law of large numbers: the more you repeat, the closer the real rate gets to the true probability.",
+   "show": "Repeat, and the truth shows.",
+   "visual": "coin_crowd"
+  },
+  {
+   "say": "After ten flips: {at10} heads.",
+   "show": "Ten flips:",
+   "kind": "duel",
+   "big": "{at10}",
+   "note": "Simulation: {flips} fair coin flips",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "After a hundred: {at100}. After {flips}: {at_end}.",
+   "show": "After {flips}:",
+   "kind": "walkaway",
+   "big": "{at_end}",
+   "big_label": "heads",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Careful: it's about the rate, not about shortfalls being paid back. The coin has no memory.",
+   "show": "The coin has no memory.",
+   "kind": "alone"
+  },
+  {
+   "say": "A small edge only shows up after many repetitions. Judge strategies on big samples.",
+   "show": "Judge on big samples.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "A small edge only shows up after many repetitions. Judge strategies on big samples.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

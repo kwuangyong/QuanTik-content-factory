@@ -1,52 +1,45 @@
-# Kênh YouTube Shorts + Instagram Reels
+# Kênh YouTube Shorts + Instagram Reels (tiếng Anh)
 
-Chủ sản phẩm chốt (11/2026): **YT Shorts và IG Reels chỉ đăng nhóm nội dung dưới đây.** Video giải thích mô hình
-quant và video hướng dẫn sản phẩm QuanTik không đăng lên hai nền tảng này (chúng đi TikTok / Facebook).
+Chủ sản phẩm chốt (11/2026): **YT Shorts và IG Reels chỉ đăng nhóm nội dung dưới đây, bằng tiếng Anh.** Video giải
+thích mô hình quant và video hướng dẫn sản phẩm QuanTik (tiếng Việt) không đăng lên hai nền tảng này.
 
-## Chủ đề (80 ý tưởng, `knowledge/concepts/*.json`)
+## 80 tập (`episodes/yt/ytNN-<slug>.json`)
 
-| Nhóm | Số | File |
+| Nhóm | Số | Chip trên video | Series thumbnail |
+| --- | --- | --- | --- |
+| Dark Truth Finance | 01–20 | `DARK TRUTH #NN` | THE DARK TRUTH OF MONEY |
+| Poker Theory | 21–35 | `POKER THEORY #NN` | POKER THEORY |
+| Psychology Facts | 36–55 | `PSYCHOLOGY #NN` | PSYCHOLOGY FACTS |
+| Game Theory | 56–70 | `GAME THEORY #NN` | GAME THEORY |
+| Quant Mindset | 71–80 | `QUANT MINDSET #NN` | QUANT MINDSET |
+
+## Quy chuẩn (yêu cầu của chủ sản phẩm)
+
+| Mặt | Quy chuẩn | Ở đâu |
 | --- | --- | --- |
-| Dark Truth Finance | 01–20 | `dark-truth.json` |
-| Poker Theory | 21–35 | `poker.json` |
-| Psychology Facts | 36–55 | `psychology.json` |
-| Game Theory | 56–70 | `game-theory.json` |
-| Quant Mindset (kinh tế học hành vi & xác suất) | 71–80 | `quant-mindset.json` |
-
-Thêm nhóm mới: hỏi chủ sản phẩm trước.
+| Ngôn ngữ | Tiếng Anh toàn bộ: lời, phụ đề, chữ trên hình, caption, thẻ cuối, câu miễn trừ | `"lang": "en"` |
+| Hình | **Không chart.** Style `dark-story`: hoạt hoạ phẳng tông tối, một màu đỏ cảnh báo, film grain | `styles/dark-story/template.py` |
+| B-roll ảnh thật | Ảnh Wikimedia Commons giấy phép tự do, **ghi tác giả + giấy phép ngay trên khung**. Có ảnh thật thì dùng, không có thì vẽ tay | `"image"` (sổ ảnh `knowledge/images/ledger.json`), `"visual"` + `"real": true` (B-roll theo tag) |
+| Hoạt hoạ vẽ tay | Cảnh dark-story (`office`, `commute`, `scroll`, `compare`, `spend`, `wheel`, `crowd`, `walkaway`, `alone`, `doors`, `duel`, `scale`) + cảnh `illustrate.py` (casino, roulette, coin, iceberg, storm, money_burn…) | `"kind"`, `"visual"` |
+| Số | Đếm lên thật to (`"big"`) hoặc đám đông n người sáng k người (`"crowd"`); số từ mô phỏng chạy thật hoặc nguồn trong sổ nguồn | `"sim"` → `pipeline/concept_sims.py`; `facts` + `claims` |
+| Hook | Ragebait, nổ ngay câu đầu, **đúng sự thật**, không hứa lãi | cảnh đầu `scenes[0]` |
+| Tempo | Giọng ×1,25 (`TEMPO` trong `core.py`), giọng nam trầm `en-US-ChristopherNeural`, nhạc nền hồi hộp 120 bpm tự tổng hợp | `"voice": "male-deep"`, `"music": "suspense"` |
+| Caption | Tiếng Anh; poker thêm câu "không khuyến khích cờ bạc" | `"caption"` |
 
 ## Dựng
 
 ```bash
 cd pipeline
-python concepts.py --list                                     # 80 id
-python concepts.py 71-monty-hall                              # số dùng được làm {placeholder}
-python batch.py --topics 71-monty-hall --styles sketch-short  # một video
-python batch.py --topics concepts:poker --styles sketch-short # một nhóm
-python batch.py --topics concepts --styles sketch-short       # cả 80 (khoảng 2 giờ)
+python concept_sims.py ../episodes/yt/yt71-monty-hall.json          # số dùng được làm {placeholder}
+python batch.py --episode ../episodes/yt/yt71-monty-hall.json --voice male-deep
+python batch.py --episode ../episodes/yt/yt71-monty-hall.json --check-only --no-log   # chỉ QA trước render
 ```
 
-Mỗi concept có `visual.kind`. Đó là đoạn code chạy thật trong `pipeline/concepts.py`, gồm các loại: mô phỏng
-(ruin, montyhall, ipd, commons…), công thức đóng (birthday, kelly, potodds…), bảng số từ nghiên cứu có nguồn
-(`bars`) hoặc sơ đồ vẽ tay không có số (`diagram`). Lời thoại dùng `{key}` từ lần chạy đó, nên QA số vẫn áp dụng.
-
-## Quy chuẩn sản xuất (mặc định đã áp dụng, người dùng có thể đổi)
-
-| Mặt | Đang dùng |
-| --- | --- |
-| Ngôn ngữ | Lời đọc và phụ đề tiếng Việt. Tên khái niệm tiếng Anh hiện trên màn hình và nhắc ở lần đầu |
-| Hình ảnh | Nhận diện QuanTik (nền tối, logo, màu cam), style `sketch-short` |
-| Hoạt hoạ vẽ tay | Biểu đồ/sơ đồ nét xkcd hiện dần, gạch chân và vòng khoanh run tay |
-| B-roll | Không dùng stock. Mọi hình vẽ bằng code (chưa có nguồn B-roll có giấy phép) |
-| Hook | Câu nghịch lý/câu hỏi ở 2–3 giây đầu, tên khái niệm ở chip phía trên |
-| Tempo giọng | edge-tts vi-VN-HoaiMyNeural, nhanh hơn 8%. Video 40–55s |
-| Caption | `captions.md` chỉ có YouTube Shorts + Instagram Reels |
-| CTA | Thẻ cuối theo dõi QuanTik (`FOLLOW_CTA`) |
+Ảnh người/nơi chốn: `python images.py search "<tên>"` rồi `python images.py fetch "File:…" --id <id> --subject "<tên>"`.
+Môi trường cloud dùng chung IP nên Commons hay trả HTTP 429: tải chậm, có ảnh rồi thì dựng lại tập đó.
 
 ## Luật vẫn áp dụng
 
-- `brand/compliance.md`: dark truth finance không gọi mua/bán, không hứa lợi nhuận, không có cụm cấm. Poker
-  thêm câu "không khuyến khích cờ bạc" trong caption.
-- "Facts" tâm lý học có nguồn trong `facts` của concept. Số trong nghiên cứu (nhóm `bars`) cần người duyệt đối
-  chiếu bản gốc trước khi đăng: 37, 43, 45, 48, 50, 51, 53 (xem lưu ý trong báo cáo).
-- Nhạc, ảnh, meme, B-roll phải có giấy phép.
+- `brand/compliance.md` (cụm cấm Việt + Anh), không gọi mua/bán, không hứa lợi nhuận.
+- Số trong nghiên cứu tâm lý học cần người duyệt đối chiếu bản gốc trước khi đăng (37, 43, 45, 48, 50, 51, 53).
+- Nhạc/ảnh/B-roll phải có giấy phép; ảnh CC BY/BY-SA bắt buộc ghi công (pipeline tự ghi trên khung và trong caption).

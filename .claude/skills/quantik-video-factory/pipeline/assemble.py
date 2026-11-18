@@ -107,6 +107,8 @@ def pick_music(work: Path, seconds: float, music: str | None):
         return None
     if music == "drone":
         return synth_drone(work / "drone.wav", seconds + 1)
+    if music == "suspense":  # drone + heartbeat kick + clock tick at 96 × TEMPO bpm
+        return synth_suspense(work / "suspense.wav", seconds + 1)
     if music:
         return Path(music)
     lib = sorted((BRAND / "assets/music").glob("*.*")) if (BRAND / "assets/music").exists() else []

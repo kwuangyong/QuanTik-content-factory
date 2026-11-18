@@ -1,0 +1,83 @@
+{
+ "id": "yt31-position-is-power",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt31-position-is-power",
+ "model": "sim",
+ "sim": {
+  "kind": "diagram",
+  "nodes": [],
+  "edges": []
+ },
+ "lang": "en",
+ "episode_no": 31,
+ "group": "poker",
+ "concept": "Position Is Power",
+ "tag": "POKER THEORY #31",
+ "title": "Acting last is a superpower",
+ "hook": "At the poker table, going last is a superpower. Most players don't even notice.",
+ "caption": "Position is power: the player who acts last sees what everyone did before deciding. Information is edge — at the table and in every negotiation.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
+ "hashtags": [
+  "position",
+  "pokertheory",
+  "poker",
+  "probability",
+  "decisionmaking",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#31"
+ ],
+ "claims": [],
+ "facts": {},
+ "cta": "Follow QuanTik for the math behind every decision",
+ "thumb": {
+  "series": "POKER THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "GOING LAST",
+   "IS A",
+   "SUPERPOWER."
+  ],
+  "sub": "Position is information",
+  "image": "poker-table"
+ },
+ "scenes": [
+  {
+   "say": "At the poker table, going last is a superpower. Most players don't even notice.",
+   "show": "Going last is a superpower.",
+   "kind": "duel"
+  },
+  {
+   "say": "The player who acts first decides in the dark.",
+   "show": "First decides in the dark.",
+   "visual": "casino",
+   "image": "poker-table"
+  },
+  {
+   "say": "The player who acts last sees what everyone did, then chooses.",
+   "show": "Last sees everything.",
+   "visual": "telescope"
+  },
+  {
+   "say": "Information is edge. Position controls the pot and gives you more options every street.",
+   "show": "Information is edge.",
+   "visual": "casino",
+   "real": true
+  },
+  {
+   "say": "Same in negotiations: whoever names a price second knows more.",
+   "show": "Name your price second.",
+   "kind": "compare"
+  },
+  {
+   "say": "When you can, let the other side show their cards first.",
+   "show": "Let them show first.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "When you can, let the other side show their cards first.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

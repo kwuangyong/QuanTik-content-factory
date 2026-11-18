@@ -1,0 +1,101 @@
+{
+ "id": "yt64-signaling-theory",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt64-signaling-theory",
+ "model": "sim",
+ "sim": {
+  "kind": "diagram",
+  "nodes": [],
+  "edges": []
+ },
+ "lang": "en",
+ "episode_no": 64,
+ "group": "game-theory",
+ "concept": "Signaling Theory",
+ "tag": "GAME THEORY #64",
+ "title": "They can't see your talent. Only your signals.",
+ "hook": "Nobody can see your talent. They can only see your signals. Harsh, but true.",
+ "caption": "Nobody can see your talent, only your signals. Spence (1973): a signal works only if it's expensive for people without the real quality.",
+ "hashtags": [
+  "signaling",
+  "gametheory",
+  "strategy",
+  "nashequilibrium",
+  "economics",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#64"
+ ],
+ "claims": [
+  {
+   "id": "spence",
+   "text": "Job market signaling",
+   "status": "documented",
+   "source_ids": [
+    "spence-1973"
+   ]
+  }
+ ],
+ "facts": {
+  "spence_yr": {
+   "value": "1973",
+   "source_id": "spence-1973"
+  }
+ },
+ "cta": "Follow QuanTik for the game theory of real life",
+ "thumb": {
+  "series": "GAME THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "THEY ONLY",
+   "SEE YOUR",
+   "SIGNALS."
+  ],
+  "sub": "Signaling theory",
+  "image": "michael-spence"
+ },
+ "scenes": [
+  {
+   "say": "Nobody can see your talent. They can only see your signals. Harsh, but true.",
+   "show": "They only see signals.",
+   "kind": "compare"
+  },
+  {
+   "say": "Signaling theory: when quality is hidden, people rely on signals that are expensive to fake.",
+   "show": "Expensive to fake.",
+   "visual": "professor",
+   "image": "michael-spence",
+   "claims": [
+    "spence"
+   ]
+  },
+  {
+   "say": "The chain: quality is hidden, the good ones pay for a costly signal, the bad ones can't copy it, so it's believed.",
+   "show": "Costly signal → believed.",
+   "kind": "duel"
+  },
+  {
+   "say": "A signal only works if it's expensive for people who don't have the real thing.",
+   "show": "Cheap signals mean nothing.",
+   "visual": "money_burn",
+   "image": "luxury-car"
+  },
+  {
+   "say": "Degrees, long warranties, fancy offices can all be signals. The question is who they're expensive for.",
+   "show": "Expensive for whom?",
+   "visual": "banker",
+   "real": true
+  },
+  {
+   "say": "When reading a signal, ask: would this be hard to fake without the real quality?",
+   "show": "Hard to fake?",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "When reading a signal, ask: would this be hard to fake without the real quality?",
+ "music": "suspense",
+ "voice": "male-deep"
+}

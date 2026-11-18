@@ -1,0 +1,96 @@
+{
+ "id": "yt22-art-of-bluffing",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt22-art-of-bluffing",
+ "model": "sim",
+ "sim": {
+  "kind": "bluff",
+  "pot": 100,
+  "bet": 100
+ },
+ "lang": "en",
+ "episode_no": 22,
+ "group": "poker",
+ "concept": "The Art of Bluffing",
+ "tag": "POKER THEORY #22",
+ "title": "Never bluffing isn't honest. It's readable.",
+ "hook": "The player who never bluffs isn't honest. They're just easy to read.",
+ "caption": "Never bluffing isn't honest — it's readable. With a pot-sized bet, the balanced bluff rate is {gto_bluff}: one bluff per two value bets. That's what gets your strong hands paid.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
+ "hashtags": [
+  "bluff",
+  "pokertheory",
+  "poker",
+  "probability",
+  "decisionmaking",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#22"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for the math behind every decision",
+ "thumb": {
+  "series": "POKER THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "NEVER",
+   "BLUFFING IS",
+   "READABLE."
+  ],
+  "sub": "Balanced bluff rate: {gto_bluff}",
+  "art": "duel"
+ },
+ "scenes": [
+  {
+   "say": "The player who never bluffs isn't honest. They're just easy to read.",
+   "show": "Never bluffing = readable.",
+   "kind": "duel"
+  },
+  {
+   "say": "Only bet with strong hands, and everyone folds when you bet. Your monsters never get paid.",
+   "show": "Your monsters never get paid.",
+   "visual": "casino",
+   "image": "poker-table"
+  },
+  {
+   "say": "Bet the size of the pot. How often should that bet be a bluff?",
+   "show": "How often should you bluff?",
+   "visual": "casino",
+   "real": true
+  },
+  {
+   "say": "The balanced answer: {gto_bluff}. One bluff for every two value bets.",
+   "show": "Balanced bluff rate:",
+   "kind": "duel",
+   "big": "{gto_bluff}",
+   "big_label": "of your pot-sized bets",
+   "note": "Computed: bluff share = bet / (pot + 2 × bet)",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "At that rate, calling or folding makes no difference to your opponent. They can't win by guessing.",
+   "show": "They can't win by guessing.",
+   "visual": "professor"
+  },
+  {
+   "say": "A bluff isn't a lie for fun. It's what makes your strong hands worth something.",
+   "show": "Bluffs give your strength value.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "A bluff isn't a lie for fun. It's what makes your strong hands worth something.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

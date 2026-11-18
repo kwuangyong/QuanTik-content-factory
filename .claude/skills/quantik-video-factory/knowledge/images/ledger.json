@@ -29,6 +29,19 @@
       "retrieved": "2026-11-15"
     },
     {
+      "id": "daniel-kahneman",
+      "kind": "photo",
+      "subject": "Daniel Kahneman",
+      "depicts": "<a href=\"https://creativecommons.org/licenses/by-sa/3.0/no/\" rel=\"noreferrer nofollow\"></a>This work by <a href=\"http://nrkbeta.no\" rel=\"noreferrer nofollow\">nrkbeta.no</a> is licensed under a <a href=\"https://creativecommons.org/licenses/by-sa/3.0/no/\" rel=\"noreferrer nofollow\">Creative Commons Att",
+      "file": "files/daniel-kahneman.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Daniel_Kahneman_(3283955327)_(cropped).jpg",
+      "author": "nrkbeta",
+      "license": "CC BY-SA 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+      "credit": "Ảnh: nrkbeta · CC BY-SA 2.0 · Wikimedia Commons",
+      "retrieved": "2026-11-18"
+    },
+    {
       "id": "jim-simons",
       "kind": "photo",
       "subject": "Jim Simons",

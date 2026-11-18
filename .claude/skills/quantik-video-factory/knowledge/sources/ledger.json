@@ -387,6 +387,374 @@
       "tier": "B",
       "cite_short": "Bengen (1994), Journal of Financial Planning",
       "accessed": "2026-11-16"
+    },
+    {
+      "id": "kruger-dunning-1999",
+      "type": "journal_article",
+      "title": "Unskilled and Unaware of It",
+      "authors": [
+        "Justin Kruger",
+        "David Dunning"
+      ],
+      "year": 1999,
+      "venue": "Journal of Personality and Social Psychology 77(6), 1121–1134",
+      "tier": "A",
+      "cite_short": "Kruger & Dunning (1999), JPSP",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "tversky-kahneman-1974",
+      "type": "journal_article",
+      "title": "Judgment under Uncertainty: Heuristics and Biases",
+      "authors": [
+        "Amos Tversky",
+        "Daniel Kahneman"
+      ],
+      "year": 1974,
+      "venue": "Science 185(4157), 1124–1131",
+      "tier": "A",
+      "cite_short": "Tversky & Kahneman (1974), Science",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "asch-1956",
+      "type": "journal_article",
+      "title": "Studies of independence and conformity: A minority of one against a unanimous majority",
+      "authors": [
+        "Solomon E. Asch"
+      ],
+      "year": 1956,
+      "venue": "Psychological Monographs 70(9)",
+      "tier": "A",
+      "cite_short": "Asch (1956), Psychological Monographs",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "kahneman-knetsch-thaler-1990",
+      "type": "journal_article",
+      "title": "Experimental Tests of the Endowment Effect and the Coase Theorem",
+      "authors": [
+        "Daniel Kahneman",
+        "Jack Knetsch",
+        "Richard Thaler"
+      ],
+      "year": 1990,
+      "venue": "Journal of Political Economy 98(6), 1325–1348",
+      "tier": "A",
+      "cite_short": "Kahneman, Knetsch & Thaler (1990), JPE",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "norton-mochon-ariely-2012",
+      "type": "journal_article",
+      "title": "The IKEA effect: When labor leads to love",
+      "authors": [
+        "Michael I. Norton",
+        "Daniel Mochon",
+        "Dan Ariely"
+      ],
+      "year": 2012,
+      "venue": "Journal of Consumer Psychology 22(3), 453–460",
+      "tier": "A",
+      "cite_short": "Norton, Mochon & Ariely (2012), JCP",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "gilovich-2000",
+      "type": "journal_article",
+      "title": "The spotlight effect in social judgment",
+      "authors": [
+        "Thomas Gilovich",
+        "Victoria Medvec",
+        "Kenneth Savitsky"
+      ],
+      "year": 2000,
+      "venue": "Journal of Personality and Social Psychology 78(2), 211–222",
+      "tier": "A",
+      "cite_short": "Gilovich, Medvec & Savitsky (2000), JPSP",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "gottman-1994",
+      "type": "book",
+      "title": "Why Marriages Succeed or Fail",
+      "authors": [
+        "John Gottman"
+      ],
+      "year": 1994,
+      "venue": "Simon & Schuster",
+      "tier": "B",
+      "cite_short": "Gottman (1994)",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "iyengar-lepper-2000",
+      "type": "journal_article",
+      "title": "When choice is demotivating: Can one desire too much of a good thing?",
+      "authors": [
+        "Sheena S. Iyengar",
+        "Mark R. Lepper"
+      ],
+      "year": 2000,
+      "venue": "Journal of Personality and Social Psychology 79(6), 995–1006",
+      "tier": "A",
+      "cite_short": "Iyengar & Lepper (2000), JPSP",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "arkes-blumer-1985",
+      "type": "journal_article",
+      "title": "The psychology of sunk cost",
+      "authors": [
+        "Hal R. Arkes",
+        "Catherine Blumer"
+      ],
+      "year": 1985,
+      "venue": "Organizational Behavior and Human Decision Processes 35(1), 124–140",
+      "tier": "A",
+      "cite_short": "Arkes & Blumer (1985), OBHDP",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "axelrod-1984",
+      "type": "book",
+      "title": "The Evolution of Cooperation",
+      "authors": [
+        "Robert Axelrod"
+      ],
+      "year": 1984,
+      "venue": "Basic Books",
+      "tier": "B",
+      "cite_short": "Axelrod (1984)",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "camerer-2003",
+      "type": "book",
+      "title": "Behavioral Game Theory",
+      "authors": [
+        "Colin Camerer"
+      ],
+      "year": 2003,
+      "venue": "Princeton University Press",
+      "tier": "B",
+      "cite_short": "Camerer (2003)",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "schelling-1960",
+      "type": "book",
+      "title": "The Strategy of Conflict",
+      "authors": [
+        "Thomas Schelling"
+      ],
+      "year": 1960,
+      "venue": "Harvard University Press",
+      "tier": "B",
+      "cite_short": "Schelling (1960)",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "akerlof-1970",
+      "type": "journal_article",
+      "title": "The Market for 'Lemons': Quality Uncertainty and the Market Mechanism",
+      "authors": [
+        "George Akerlof"
+      ],
+      "year": 1970,
+      "venue": "Quarterly Journal of Economics 84(3), 488–500",
+      "tier": "A",
+      "cite_short": "Akerlof (1970), QJE",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "charig-1986",
+      "type": "journal_article",
+      "title": "Comparison of treatment of renal calculi by open surgery, percutaneous nephrolithotomy, and extracorporeal shockwave lithotripsy",
+      "authors": [
+        "C. R. Charig",
+        "D. R. Webb",
+        "S. R. Payne",
+        "J. E. Wickham"
+      ],
+      "year": 1986,
+      "venue": "BMJ 292, 879–882",
+      "tier": "A",
+      "cite_short": "Charig et al. (1986), BMJ",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "taleb-2007",
+      "type": "book",
+      "title": "The Black Swan",
+      "authors": [
+        "Nassim Nicholas Taleb"
+      ],
+      "year": 2007,
+      "venue": "Random House",
+      "tier": "B",
+      "cite_short": "Taleb (2007)",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "hardin-1968",
+      "type": "journal_article",
+      "title": "The Tragedy of the Commons",
+      "authors": [
+        "Garrett Hardin"
+      ],
+      "year": 1968,
+      "venue": "Science 162(3859), 1243–1248",
+      "tier": "A",
+      "cite_short": "Hardin (1968), Science",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "spence-1973",
+      "type": "journal_article",
+      "title": "Job Market Signaling",
+      "authors": [
+        "Michael Spence"
+      ],
+      "year": 1973,
+      "venue": "Quarterly Journal of Economics 87(3), 355–374",
+      "tier": "A",
+      "cite_short": "Spence (1973), QJE",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "jensen-meckling-1976",
+      "type": "journal_article",
+      "title": "Theory of the Firm: Managerial Behavior, Agency Costs and Ownership Structure",
+      "authors": [
+        "Michael Jensen",
+        "William Meckling"
+      ],
+      "year": 1976,
+      "venue": "Journal of Financial Economics 3(4), 305–360",
+      "tier": "A",
+      "cite_short": "Jensen & Meckling (1976), JFE",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "maynard-smith-1974",
+      "type": "journal_article",
+      "title": "The theory of games and the evolution of animal conflicts",
+      "authors": [
+        "John Maynard Smith"
+      ],
+      "year": 1974,
+      "venue": "Journal of Theoretical Biology 47(1), 209–221",
+      "tier": "A",
+      "cite_short": "Maynard Smith (1974), J. Theor. Biol.",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "selvin-1975",
+      "type": "journal_article",
+      "title": "A Problem in Probability (letter to the editor)",
+      "authors": [
+        "Steve Selvin"
+      ],
+      "year": 1975,
+      "venue": "The American Statistician 29(1), 67",
+      "tier": "A",
+      "cite_short": "Selvin (1975), The American Statistician",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "gigerenzer-2002",
+      "type": "book",
+      "title": "Calculated Risks: How to Know When Numbers Deceive You",
+      "authors": [
+        "Gerd Gigerenzer"
+      ],
+      "year": 2002,
+      "venue": "Simon & Schuster",
+      "tier": "B",
+      "cite_short": "Gigerenzer (2002)",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "mangel-samaniego-1984",
+      "type": "journal_article",
+      "title": "Abraham Wald's Work on Aircraft Survivability",
+      "authors": [
+        "Marc Mangel",
+        "Francisco J. Samaniego"
+      ],
+      "year": 1984,
+      "venue": "Journal of the American Statistical Association 79(386), 259–267",
+      "tier": "A",
+      "cite_short": "Mangel & Samaniego (1984), JASA",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "guth-1982",
+      "type": "journal_article",
+      "title": "An experimental analysis of ultimatum bargaining",
+      "authors": [
+        "Werner Güth",
+        "Rolf Schmittberger",
+        "Bernd Schwarze"
+      ],
+      "year": 1982,
+      "venue": "Journal of Economic Behavior & Organization 3(4), 367–388",
+      "tier": "A",
+      "cite_short": "Güth et al. (1982), JEBO",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "pareto-1896",
+      "type": "book",
+      "title": "Cours d'économie politique",
+      "authors": [
+        "Vilfredo Pareto"
+      ],
+      "year": 1896,
+      "venue": "Lausanne: F. Rouge",
+      "tier": "B",
+      "cite_short": "Pareto (1896)",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "galton-1886",
+      "type": "journal_article",
+      "title": "Regression Towards Mediocrity in Hereditary Stature",
+      "authors": [
+        "Francis Galton"
+      ],
+      "year": 1886,
+      "venue": "Journal of the Anthropological Institute 15, 246–263",
+      "tier": "A",
+      "cite_short": "Galton (1886)",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "vietlott-mega645",
+      "type": "official",
+      "title": "Mega 6/45 game rules (pick 6 of 45)",
+      "authors": [
+        "Vietlott"
+      ],
+      "year": 2016,
+      "venue": "vietlott.vn",
+      "tier": "A",
+      "cite_short": "Vietlott Mega 6/45 rules",
+      "accessed": "2026-11-18"
+    },
+    {
+      "id": "nash-1951",
+      "type": "journal_article",
+      "title": "Non-Cooperative Games",
+      "authors": [
+        "John Nash"
+      ],
+      "year": 1951,
+      "venue": "Annals of Mathematics 54(2), 286–295",
+      "tier": "A",
+      "cite_short": "Nash (1951), Annals of Mathematics",
+      "accessed": "2026-11-18"
     }
   ]
 }

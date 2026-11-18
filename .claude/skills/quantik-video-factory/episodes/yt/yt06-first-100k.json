@@ -1,0 +1,116 @@
+{
+ "id": "yt06-first-100k",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt06-first-100k",
+ "model": "sim",
+ "sim": {
+  "kind": "growth",
+  "years": 22,
+  "unit": "USD",
+  "target": 100000,
+  "lines": [
+   {
+    "id": "a",
+    "label": "góp 10.000/năm, lãi 7%",
+    "contrib": 10000,
+    "rate": 0.07,
+    "color": "accent"
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 6,
+ "group": "dark-truth",
+ "concept": "The First $100K",
+ "tag": "DARK TRUTH #06",
+ "title": "Why the first $100K is the hardest",
+ "hook": "The first $100K is brutal. The next ones are almost lazy.",
+ "caption": "The first $100K is brutal; the next ones are almost lazy. Saving {a_contrib} a year at {a_rate}: first $100K in {a_t1} years, then {a_t2}, then {a_t3}.\n\n(Simulation; illustration only.)",
+ "hashtags": [
+  "first100k",
+  "compounding",
+  "darktruth",
+  "money",
+  "moneymindset",
+  "personalfinance",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "$100K",
+  "#06"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from a seeded simulation with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for more dark truths about money",
+ "thumb": {
+  "series": "THE DARK TRUTH OF MONEY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "THE FIRST",
+   "$100K",
+   "IS BRUTAL."
+  ],
+  "sub": "{a_t1} years → {a_t2} → {a_t3}",
+  "visual": "rocket"
+ },
+ "scenes": [
+  {
+   "say": "The first $100K is brutal. The next ones are almost lazy.",
+   "show": "The first $100K is brutal.",
+   "kind": "office"
+  },
+  {
+   "say": "At the start, every dollar comes from your sweat. Interest is a rounding error.",
+   "show": "Every dollar is sweat.",
+   "kind": "commute"
+  },
+  {
+   "say": "Save {a_contrib} a year at {a_rate}.",
+   "show": "Save {a_contrib} a year.",
+   "kind": "spend",
+   "note": "Simulation: {a_contrib}/yr contributions, {a_rate} return"
+  },
+  {
+   "say": "The first hundred thousand takes {a_t1} years.",
+   "show": "First $100K:",
+   "visual": "drunk_walk",
+   "big": "{a_t1} years",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "The second takes {a_t2}. The third, {a_t3}.",
+   "show": "Then:",
+   "visual": "rocket",
+   "big": "{a_t2} → {a_t3}",
+   "big_label": "years for the 2nd and 3rd",
+   "claims": [
+    "sim"
+   ],
+   "real": true
+  },
+  {
+   "say": "Because now your money is working a second shift next to you.",
+   "show": "Your money works a second shift.",
+   "kind": "walkaway"
+  },
+  {
+   "say": "The slow part is where most people quit. It's also the only part that matters.",
+   "show": "Most people quit here.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "The slow part is where most people quit. It's also the only part that matters.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

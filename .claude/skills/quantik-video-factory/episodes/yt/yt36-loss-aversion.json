@@ -1,0 +1,130 @@
+{
+ "id": "yt36-loss-aversion",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt36-loss-aversion",
+ "model": "sim",
+ "sim": {
+  "kind": "bars",
+  "unit": "",
+  "bars": [
+   {
+    "id": "joy",
+    "label": "joy",
+    "value": 1.0,
+    "fmt": "num0"
+   },
+   {
+    "id": "pain",
+    "label": "pain",
+    "value": 2.25,
+    "fmt": "num2"
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 36,
+ "group": "psychology",
+ "concept": "Loss Aversion",
+ "tag": "PSYCHOLOGY #36",
+ "title": "Losing $100 hurts more than winning $100 feels good",
+ "hook": "Losing $100 hurts way more than finding $100 feels good. Your brain is not fair with you.",
+ "caption": "Losing $100 hurts more than finding $100 feels good. Tversky & Kahneman (1992) measured it: a loss weighs about {pain}x an equal gain. That's why we hold losers and sell winners too early.",
+ "hashtags": [
+  "lossaversion",
+  "kahneman",
+  "psychology",
+  "psychologyfacts",
+  "cognitivebias",
+  "mindset",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "$100",
+  "#36"
+ ],
+ "claims": [
+  {
+   "id": "tk",
+   "text": "Loss aversion coefficient about 2.25 (cumulative prospect theory)",
+   "status": "documented",
+   "source_ids": [
+    "tversky-kahneman-1992"
+   ]
+  }
+ ],
+ "facts": {
+  "tk1992": {
+   "value": "1992",
+   "source_id": "tversky-kahneman-1992"
+  }
+ },
+ "cta": "Follow QuanTik for the psychology behind your money",
+ "thumb": {
+  "series": "PSYCHOLOGY FACTS",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "LOSING",
+   "HURTS",
+   "{pain}x MORE."
+  ],
+  "sub": "Tversky & Kahneman, 1992",
+  "image": "daniel-kahneman"
+ },
+ "scenes": [
+  {
+   "say": "Losing $100 hurts way more than finding $100 feels good. Your brain is not fair with you.",
+   "show": "Your brain isn't fair.",
+   "kind": "scale"
+  },
+  {
+   "say": "It's called loss aversion. Same amount of money, very different feelings.",
+   "show": "Loss aversion.",
+   "visual": "professor",
+   "image": "daniel-kahneman",
+   "claims": [
+    "tk"
+   ]
+  },
+  {
+   "say": "Kahneman and Tversky measured it in 1992.",
+   "show": "Measured in 1992.",
+   "visual": "professor",
+   "image": "amos-tversky",
+   "note": "Source: Tversky & Kahneman (1992), Journal of Risk and Uncertainty",
+   "claims": [
+    "tk"
+   ]
+  },
+  {
+   "say": "A loss weighs about {pain} times as much as an equal gain.",
+   "show": "A loss weighs:",
+   "kind": "scale",
+   "big": "{pain}x",
+   "big_label": "an equal gain",
+   "claims": [
+    "tk"
+   ]
+  },
+  {
+   "say": "That's why people hold losing positions too long and sell winners too early.",
+   "show": "Hold losers. Sell winners.",
+   "visual": "panic",
+   "image": "nyse-floor"
+  },
+  {
+   "say": "They're not avoiding risk. They're avoiding a feeling.",
+   "show": "Avoiding a feeling.",
+   "kind": "alone"
+  },
+  {
+   "say": "Before you decide, ask: if losing didn't sting, would I choose differently?",
+   "show": "Would you choose differently?",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "Before you decide, ask: if losing didn't sting, would I choose differently?",
+ "music": "suspense",
+ "voice": "male-deep"
+}

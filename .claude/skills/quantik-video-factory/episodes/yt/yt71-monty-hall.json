@@ -1,0 +1,119 @@
+{
+ "id": "yt71-monty-hall",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt71-monty-hall",
+ "model": "sim",
+ "sim": {
+  "kind": "montyhall",
+  "games": 3000
+ },
+ "lang": "en",
+ "episode_no": 71,
+ "group": "quant-mindset",
+ "concept": "Monty Hall Problem",
+ "tag": "QUANT MINDSET #71",
+ "title": "Switch doors. Your gut is wrong.",
+ "hook": "Three doors, one car. The host opens an empty one. Your gut says it's fifty-fifty. Your gut is wrong.",
+ "caption": "Switch doors — your gut is wrong. In {games} simulated Monty Hall games, staying won {stay_win} and switching won {switch_win}.",
+ "hashtags": [
+  "montyhall",
+  "quant",
+  "probability",
+  "statistics",
+  "math",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#71"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  },
+  {
+   "id": "selvin",
+   "text": "The Monty Hall problem first posed in The American Statistician",
+   "status": "documented",
+   "source_ids": [
+    "selvin-1975"
+   ]
+  }
+ ],
+ "facts": {
+  "selvin_yr": {
+   "value": "1975",
+   "source_id": "selvin-1975"
+  }
+ },
+ "cta": "Follow QuanTik to think like a quant",
+ "thumb": {
+  "series": "QUANT MINDSET",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "SWITCH.",
+   "YOUR GUT",
+   "IS WRONG."
+  ],
+  "sub": "Stay {stay_win} · Switch {switch_win}",
+  "art": "doors"
+ },
+ "scenes": [
+  {
+   "say": "Three doors, one car. The host opens an empty one. Your gut says it's fifty-fifty. Your gut is wrong.",
+   "show": "Your gut is wrong.",
+   "kind": "doors"
+  },
+  {
+   "say": "This puzzle made mathematicians write angry letters. It's named after game show host Monty Hall.",
+   "show": "Named after Monty Hall.",
+   "image": "monty-hall",
+   "claims": [
+    "selvin"
+   ],
+   "kind": "duel"
+  },
+  {
+   "say": "Code plays {games} games.",
+   "show": "{games} games.",
+   "kind": "doors",
+   "note": "Simulation: {games} random games"
+  },
+  {
+   "say": "Always staying wins {stay_win}.",
+   "show": "Stay:",
+   "kind": "alone",
+   "big": "{stay_win}",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Always switching wins {switch_win}.",
+   "show": "Switch:",
+   "kind": "walkaway",
+   "big": "{switch_win}",
+   "big_label": "twice as often",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Your first pick had a one-in-three chance. The host knows where the car is, so the other two-thirds pile onto the last door.",
+   "show": "The host's knowledge moves the odds.",
+   "kind": "doors"
+  },
+  {
+   "say": "When someone who knows more gives you a hint, the hint has a price. Update.",
+   "show": "Update on new information.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "When someone who knows more gives you a hint, the hint has a price. Update.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

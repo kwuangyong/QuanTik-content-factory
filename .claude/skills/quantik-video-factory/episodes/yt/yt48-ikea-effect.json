@@ -1,0 +1,126 @@
+{
+ "id": "yt48-ikea-effect",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt48-ikea-effect",
+ "model": "sim",
+ "sim": {
+  "kind": "bars",
+  "unit": "",
+  "bars": [
+   {
+    "id": "built",
+    "label": "",
+    "value": 0.78,
+    "fmt": "num2"
+   },
+   {
+    "id": "ready",
+    "label": "",
+    "value": 0.48,
+    "fmt": "num2"
+   }
+  ],
+  "derived": {
+   "premium": [
+    "built",
+    "ready",
+    "premium"
+   ]
+  }
+ },
+ "lang": "en",
+ "episode_no": 48,
+ "group": "psychology",
+ "concept": "IKEA Effect",
+ "tag": "PSYCHOLOGY #48",
+ "title": "You built it, so you overpay for it",
+ "hook": "You assembled it yourself, so now you think it's worth way more. It isn't.",
+ "caption": "You built it, so you overvalue it. Norton, Mochon & Ariely (2012): people paid ${built} for a box they assembled vs ${ready} pre-built (+{premium}).",
+ "hashtags": [
+  "ikeaeffect",
+  "psychology",
+  "psychologyfacts",
+  "cognitivebias",
+  "mindset",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#48"
+ ],
+ "claims": [
+  {
+   "id": "ikea",
+   "text": "Willingness to pay about $0.78 for self-assembled vs $0.48 for pre-assembled boxes",
+   "status": "documented",
+   "source_ids": [
+    "norton-mochon-ariely-2012"
+   ]
+  }
+ ],
+ "facts": {
+  "nma2012": {
+   "value": "2012",
+   "source_id": "norton-mochon-ariely-2012"
+  }
+ },
+ "cta": "Follow QuanTik for the psychology behind your money",
+ "thumb": {
+  "series": "PSYCHOLOGY FACTS",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "YOU",
+   "BUILT IT.",
+   "SO WHAT?"
+  ],
+  "sub": "+{premium} for your own labour",
+  "image": "ikea-store"
+ },
+ "scenes": [
+  {
+   "say": "You assembled it yourself, so now you think it's worth way more. It isn't.",
+   "show": "You built it. It's not worth more.",
+   "visual": "professor",
+   "image": "ikea-store"
+  },
+  {
+   "say": "The IKEA effect: effort makes us overvalue what we made.",
+   "show": "Effort inflates value.",
+   "kind": "scale"
+  },
+  {
+   "say": "Norton, Mochon and Ariely asked people what they'd pay for the same storage box.",
+   "show": "Same box.",
+   "visual": "professor",
+   "image": "dan-ariely",
+   "note": "Source: Norton, Mochon & Ariely (2012), Journal of Consumer Psychology",
+   "claims": [
+    "ikea"
+   ]
+  },
+  {
+   "say": "Built it themselves: {built} dollars. Pre-built: {ready}.",
+   "show": "Built: ${built}. Pre-built: ${ready}.",
+   "kind": "duel",
+   "big": "+{premium}",
+   "big_label": "paid for their own labour",
+   "claims": [
+    "ikea"
+   ]
+  },
+  {
+   "say": "It's why we can't kill our own projects, even when the numbers say they're failing.",
+   "show": "We can't kill our projects.",
+   "visual": "money_burn"
+  },
+  {
+   "say": "Judge your work through someone who didn't build it.",
+   "show": "Get an outsider's eyes.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Judge your work through someone who didn't build it.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

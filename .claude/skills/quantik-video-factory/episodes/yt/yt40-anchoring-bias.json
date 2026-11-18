@@ -1,0 +1,122 @@
+{
+ "id": "yt40-anchoring-bias",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt40-anchoring-bias",
+ "model": "sim",
+ "sim": {
+  "kind": "bars",
+  "unit": "",
+  "bars": [
+   {
+    "id": "low",
+    "label": "low",
+    "value": 0.25,
+    "fmt": "pct0"
+   },
+   {
+    "id": "high",
+    "label": "high",
+    "value": 0.45,
+    "fmt": "pct0"
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 40,
+ "group": "psychology",
+ "concept": "Anchoring Bias",
+ "tag": "PSYCHOLOGY #40",
+ "title": "A random number just changed your answer",
+ "hook": "A random number from a spinning wheel can change your answer to a totally different question.",
+ "caption": "A random number can change your answer. Tversky & Kahneman (1974): after a wheel showed 10, people guessed {low}; after 65, they guessed {high}. Write your own number first.",
+ "hashtags": [
+  "anchoring",
+  "psychology",
+  "psychologyfacts",
+  "cognitivebias",
+  "mindset",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "10",
+  "65",
+  "#40"
+ ],
+ "claims": [
+  {
+   "id": "tk74",
+   "text": "Median estimates 25% vs 45% after anchors of 10 vs 65",
+   "status": "documented",
+   "source_ids": [
+    "tversky-kahneman-1974"
+   ]
+  }
+ ],
+ "facts": {
+  "tk1974": {
+   "value": "1974",
+   "source_id": "tversky-kahneman-1974"
+  }
+ },
+ "cta": "Follow QuanTik for the psychology behind your money",
+ "thumb": {
+  "series": "PSYCHOLOGY FACTS",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "A RANDOM",
+   "NUMBER",
+   "OWNS YOU."
+  ],
+  "sub": "Saw 10 → {low}. Saw 65 → {high}",
+  "image": "roulette-wheel"
+ },
+ "scenes": [
+  {
+   "say": "A random number from a spinning wheel can change your answer to a totally different question.",
+   "show": "A random number changes you.",
+   "visual": "roulette",
+   "image": "roulette-wheel"
+  },
+  {
+   "say": "Anchoring: the first number you hear drags every estimate after it.",
+   "show": "The first number drags you.",
+   "kind": "scale"
+  },
+  {
+   "say": "Tversky and Kahneman spun a wheel, then asked: what share of African nations are in the UN?",
+   "show": "Spin, then guess.",
+   "visual": "professor",
+   "image": "amos-tversky",
+   "note": "Source: Tversky & Kahneman (1974), Science",
+   "claims": [
+    "tk74"
+   ]
+  },
+  {
+   "say": "People who saw 10 guessed {low} on average. People who saw 65 guessed {high}.",
+   "show": "Saw 10: {low}",
+   "kind": "compare",
+   "big": "{high}",
+   "big_label": "after seeing 65",
+   "claims": [
+    "tk74"
+   ]
+  },
+  {
+   "say": "List prices, first salary offers, the price you bought a stock at: all anchors.",
+   "show": "Every price is an anchor.",
+   "visual": "board",
+   "image": "nyse-floor"
+  },
+  {
+   "say": "Write down your own number before you hear anyone else's.",
+   "show": "Your number first.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Write down your own number before you hear anyone else's.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

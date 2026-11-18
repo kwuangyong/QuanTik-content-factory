@@ -1,0 +1,115 @@
+{
+ "id": "yt70-war-of-attrition",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt70-war-of-attrition",
+ "model": "sim",
+ "sim": {
+  "kind": "attrition",
+  "prize": 100,
+  "contests": 20000
+ },
+ "lang": "en",
+ "episode_no": 70,
+ "group": "game-theory",
+ "concept": "The War of Attrition",
+ "tag": "GAME THEORY #70",
+ "title": "Two companies burn cash to win. Who actually wins?",
+ "hook": "Two companies burn cash for years to win a market. Who actually wins? Usually nobody.",
+ "caption": "Two companies burn cash to win a market; usually nobody wins. In {contests} simulated contests for a prize of {prize}, both sides spent {avg_paid} on average, and {over_prize} spent more than the prize.",
+ "hashtags": [
+  "warofattrition",
+  "gametheory",
+  "strategy",
+  "nashequilibrium",
+  "economics",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#70"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  },
+  {
+   "id": "ms",
+   "text": "War of attrition model",
+   "status": "documented",
+   "source_ids": [
+    "maynard-smith-1974"
+   ]
+  }
+ ],
+ "facts": {
+  "ms_yr": {
+   "value": "1974",
+   "source_id": "maynard-smith-1974"
+  }
+ },
+ "cta": "Follow QuanTik for the game theory of real life",
+ "thumb": {
+  "series": "GAME THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "BOTH",
+   "BURNED",
+   "THE PRIZE."
+  ],
+  "sub": "Average cost {avg_paid} for a prize of {prize}",
+  "visual": "money_burn"
+ },
+ "scenes": [
+  {
+   "say": "Two companies burn cash for years to win a market. Who actually wins? Usually nobody.",
+   "show": "Usually nobody wins.",
+   "visual": "money_burn",
+   "real": true
+  },
+  {
+   "say": "A war of attrition: both sides pay every day. Whoever lasts longer takes the prize.",
+   "show": "Whoever lasts longer.",
+   "kind": "duel",
+   "claims": [
+    "ms"
+   ]
+  },
+  {
+   "say": "Code runs {contests} contests over a prize worth {prize}, each side paying one per round.",
+   "show": "Prize: {prize}.",
+   "kind": "scale",
+   "note": "Simulation: equilibrium quitting rate = cost / prize"
+  },
+  {
+   "say": "On average, both sides together spend {avg_paid}. Basically the whole prize.",
+   "show": "Spent on average:",
+   "visual": "storm",
+   "big": "{avg_paid}",
+   "big_label": "for a prize worth {prize}",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "In {over_prize} of fights, they burn more than the prize is worth.",
+   "show": "Burned more than the prize:",
+   "kind": "alone",
+   "big": "{over_prize}",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Before joining a war of attrition, add up what both sides will pay, not just the prize.",
+   "show": "Count both sides' costs.",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "Before joining a war of attrition, add up what both sides will pay, not just the prize.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

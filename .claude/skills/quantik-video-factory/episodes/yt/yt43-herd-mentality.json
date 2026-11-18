@@ -1,0 +1,136 @@
+{
+ "id": "yt43-herd-mentality",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt43-herd-mentality",
+ "model": "sim",
+ "sim": {
+  "kind": "bars",
+  "unit": "",
+  "bars": [
+   {
+    "id": "conform",
+    "label": "",
+    "value": 0.75,
+    "fmt": "pct0"
+   },
+   {
+    "id": "never",
+    "label": "",
+    "value": 0.25,
+    "fmt": "pct0"
+   },
+   {
+    "id": "n_people",
+    "label": "",
+    "value": 100,
+    "fmt": "int"
+   },
+   {
+    "id": "k_people",
+    "label": "",
+    "value": 75,
+    "fmt": "int"
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 43,
+ "group": "psychology",
+ "concept": "Herd Mentality",
+ "tag": "PSYCHOLOGY #43",
+ "title": "You'd rather be wrong with the crowd",
+ "hook": "You'd rather be wrong with the crowd than right on your own. Science proved it.",
+ "caption": "You'd rather be wrong with the crowd than right alone. In Asch's (1956) experiment, about {conform} of people went along with an obviously wrong answer at least once.",
+ "hashtags": [
+  "herdmentality",
+  "conformity",
+  "psychology",
+  "psychologyfacts",
+  "cognitivebias",
+  "mindset",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#43"
+ ],
+ "claims": [
+  {
+   "id": "asch",
+   "text": "About 75% of participants conformed at least once",
+   "status": "documented",
+   "source_ids": [
+    "asch-1956"
+   ]
+  }
+ ],
+ "facts": {
+  "asch": {
+   "value": "1956",
+   "source_id": "asch-1956"
+  }
+ },
+ "cta": "Follow QuanTik for the psychology behind your money",
+ "thumb": {
+  "series": "PSYCHOLOGY FACTS",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "WRONG",
+   "WITH THE",
+   "CROWD."
+  ],
+  "sub": "{conform} followed at least once",
+  "art": "commute"
+ },
+ "scenes": [
+  {
+   "say": "You'd rather be wrong with the crowd than right on your own. Science proved it.",
+   "show": "Wrong with the crowd.",
+   "kind": "commute"
+  },
+  {
+   "say": "Solomon Asch asked people to compare the length of lines. Everyone else in the room was an actor giving the wrong answer.",
+   "show": "The room was lying.",
+   "visual": "professor",
+   "image": "solomon-asch",
+   "note": "Source: Asch (1956), Psychological Monographs",
+   "claims": [
+    "asch"
+   ]
+  },
+  {
+   "say": "The right answer was obvious.",
+   "show": "The answer was obvious.",
+   "kind": "duel"
+  },
+  {
+   "say": "About {conform} of people went along with the wrong answer at least once.",
+   "show": "Followed the crowd:",
+   "kind": "crowd",
+   "big": "{conform}",
+   "big_label": "at least once",
+   "crowd": {
+    "n": "n_people",
+    "k": "k_people"
+   },
+   "claims": [
+    "asch"
+   ]
+  },
+  {
+   "say": "Being wrong alone feels like being excluded. Being wrong together feels like company.",
+   "show": "Wrong together feels safe.",
+   "visual": "panic",
+   "image": "nyse-floor"
+  },
+  {
+   "say": "When you agree just because everyone agrees, that's your cue to check again.",
+   "show": "That's your cue.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "When you agree just because everyone agrees, that's your cue to check again.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

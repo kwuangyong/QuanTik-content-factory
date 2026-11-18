@@ -80,8 +80,9 @@ Chạy từ `pipeline/`: `python pillar.py list` · `python pillar.py topics <pi
 > "demo tính năng quét sàn") không đi qua `batch.py`. Đọc `tutorial/README.md` và làm theo đó: quay giao diện
 > production thật bằng Playwright, dữ liệu minh hoạ với mã bịa, rồi lồng tiếng và ghép bằng `tutorial/run.sh`.
 >
-> **Nội dung YouTube Shorts / IG Reels** (dark truth finance, poker theory, psychology facts, game theory, quant
-> mindset) dùng 80 concept trong `knowledge/concepts/` và style `sketch-short`. Đọc `channels/yt-ig.md`.
+> **Nội dung YouTube Shorts / IG Reels (tiếng Anh)**: dark truth finance, poker theory, psychology facts, game theory,
+> quant mindset. 80 tập trong `episodes/yt/`, style `dark-story` (không chart, ảnh thật có ghi nguồn + hoạt hoạ vẽ tay).
+> Đọc `channels/yt-ig.md`.
 
 ### 1. Chốt yêu cầu
 

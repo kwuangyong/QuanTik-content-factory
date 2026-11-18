@@ -1,0 +1,100 @@
+{
+ "id": "yt33-bluff-frequency",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt33-bluff-frequency",
+ "model": "sim",
+ "sim": {
+  "kind": "bluff",
+  "pot": 100,
+  "bet": 100
+ },
+ "lang": "en",
+ "episode_no": 33,
+ "group": "poker",
+ "concept": "Bluff Frequency",
+ "tag": "POKER THEORY #33",
+ "title": "How often you should bluff depends on one thing",
+ "hook": "How often should you bluff? Almost everyone gets this wrong, and it depends on one thing.",
+ "caption": "How often should you bluff? It depends on bet size: half pot {gto_half}, pot {gto_pot}, double pot {gto_2x}. Less is predictable, more is donating.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
+ "hashtags": [
+  "bluff",
+  "pokertheory",
+  "poker",
+  "probability",
+  "decisionmaking",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#33"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for the math behind every decision",
+ "thumb": {
+  "series": "POKER THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "YOU BLUFF",
+   "ALL",
+   "WRONG."
+  ],
+  "sub": "Half pot {gto_half} · pot {gto_pot} · 2x {gto_2x}",
+  "image": "poker-table"
+ },
+ "scenes": [
+  {
+   "say": "How often should you bluff? Almost everyone gets this wrong, and it depends on one thing.",
+   "show": "It depends on one thing.",
+   "kind": "duel"
+  },
+  {
+   "say": "Bet size. The bigger the bet, the more reasons they need to call, and the more you can bluff.",
+   "show": "Bet size.",
+   "visual": "casino",
+   "image": "poker-table"
+  },
+  {
+   "say": "Half pot: bluff {gto_half}.",
+   "show": "Half pot:",
+   "visual": "casino",
+   "big": "{gto_half}",
+   "note": "Computed: bluff share = bet / (pot + 2 × bet)",
+   "claims": [
+    "sim"
+   ],
+   "real": true
+  },
+  {
+   "say": "Pot size: {gto_pot}. Double the pot: {gto_2x}.",
+   "show": "Pot: {gto_pot}",
+   "kind": "duel",
+   "big": "{gto_2x}",
+   "big_label": "when you bet double the pot",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Bluff less and you're predictable. Bluff more and you're donating.",
+   "show": "Predictable, or donating.",
+   "kind": "scale"
+  },
+  {
+   "say": "There's no right bluff rate. There's a right one for every bet size.",
+   "show": "One for every bet size.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "There's no right bluff rate. There's a right one for every bet size.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

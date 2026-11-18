@@ -1,0 +1,120 @@
+{
+ "id": "yt74-regression-to-the-mean",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt74-regression-to-the-mean",
+ "model": "sim",
+ "sim": {
+  "kind": "regression",
+  "n": 2000,
+  "luck_share": 0.5
+ },
+ "lang": "en",
+ "episode_no": 74,
+ "group": "quant-mindset",
+ "concept": "Regression to the Mean",
+ "tag": "QUANT MINDSET #74",
+ "title": "This year's star is next year's average",
+ "hook": "This year's top fund is usually next year's disappointment. And nobody did anything wrong.",
+ "caption": "This year's star is next year's average. Of {n} people scored on half skill, half luck, the top tenth fell from the {top_r1} to the {top_r2} percentile; only {still_top} stayed on top.",
+ "hashtags": [
+  "regressiontothemean",
+  "quant",
+  "probability",
+  "statistics",
+  "math",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#74"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  },
+  {
+   "id": "galton",
+   "text": "Regression toward the mean",
+   "status": "documented",
+   "source_ids": [
+    "galton-1886"
+   ]
+  }
+ ],
+ "facts": {
+  "galton_yr": {
+   "value": "1886",
+   "source_id": "galton-1886"
+  }
+ },
+ "cta": "Follow QuanTik to think like a quant",
+ "thumb": {
+  "series": "QUANT MINDSET",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "TOP THIS",
+   "YEAR.",
+   "AVERAGE NEXT."
+  ],
+  "sub": "Only {still_top} stayed on top",
+  "image": "nyse-floor"
+ },
+ "scenes": [
+  {
+   "say": "This year's top fund is usually next year's disappointment. And nobody did anything wrong.",
+   "show": "Top this year. Average next.",
+   "visual": "board",
+   "image": "nyse-floor"
+  },
+  {
+   "say": "Regression to the mean: when results contain luck, extreme results are usually followed by normal ones.",
+   "show": "Extremes don't last.",
+   "visual": "rollercoaster",
+   "claims": [
+    "galton"
+   ]
+  },
+  {
+   "say": "Code tests {n} people twice. Score is half skill, half luck. The top tenth in round one…",
+   "show": "Top tenth in round one…",
+   "visual": "coin_crowd",
+   "note": "Simulation: score = skill + luck, luck share {luck_share}"
+  },
+  {
+   "say": "…averaged the {top_r1} percentile. In round two: {top_r2}.",
+   "show": "Round two:",
+   "kind": "alone",
+   "big": "{top_r2}",
+   "big_label": "from {top_r1}",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Only {still_top} stayed in the top tenth.",
+   "show": "Still on top:",
+   "kind": "walkaway",
+   "big": "{still_top}",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "They didn't get worse. The luck just didn't repeat. The skill stayed.",
+   "show": "The luck didn't repeat.",
+   "visual": "coin"
+  },
+  {
+   "say": "Never pick a person, a fund, or a strategy on its best year alone.",
+   "show": "Never judge on one great year.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Never pick a person, a fund, or a strategy on its best year alone.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

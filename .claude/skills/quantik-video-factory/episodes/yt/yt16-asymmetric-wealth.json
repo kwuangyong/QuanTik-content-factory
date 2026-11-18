@@ -1,0 +1,120 @@
+{
+ "id": "yt16-asymmetric-wealth",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt16-asymmetric-wealth",
+ "model": "sim",
+ "sim": {
+  "kind": "ev",
+  "trials": 40,
+  "fmt": "num1",
+  "options": [
+   {
+    "id": "a",
+    "label": "bất cân xứng",
+    "outcomes": [
+     {
+      "p": 0.1,
+      "pay": 15
+     },
+     {
+      "p": 0.9,
+      "pay": -1
+     }
+    ]
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 16,
+ "group": "dark-truth",
+ "concept": "Asymmetric Wealth",
+ "tag": "DARK TRUTH #16",
+ "title": "Lose almost every time and still come out ahead",
+ "hook": "Lose almost every single time, and still come out ahead.",
+ "caption": "Lose almost every time and still come out ahead. Lose {a_abs1} with probability {a_p1}, win {a_abs0} with probability {a_p0}: lost {sim_losses} of {trials} tries, still finished up {sim_total}.\n\n(Simulation; illustration of asymmetry, not an investment.)",
+ "hashtags": [
+  "asymmetry",
+  "expectedvalue",
+  "darktruth",
+  "money",
+  "moneymindset",
+  "personalfinance",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#16"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from a seeded simulation with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for more dark truths about money",
+ "thumb": {
+  "series": "THE DARK TRUTH OF MONEY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "LOSE OFTEN.",
+   "STILL",
+   "WIN."
+  ],
+  "sub": "Lost {sim_losses} of {trials} — still up {sim_total}",
+  "visual": "rocket"
+ },
+ "scenes": [
+  {
+   "say": "Lose almost every single time, and still come out ahead.",
+   "show": "Lose often. Still win.",
+   "visual": "rocket",
+   "real": true
+  },
+  {
+   "say": "Asymmetry: the downside is small and capped. The upside is big.",
+   "show": "Small downside. Big upside.",
+   "kind": "scale"
+  },
+  {
+   "say": "A bet that loses {a_abs1} with probability {a_p1}, and wins {a_abs0} with probability {a_p0}.",
+   "show": "Lose {a_abs1}, or win {a_abs0}.",
+   "kind": "duel",
+   "note": "Simulation: {trials} tries, seeded"
+  },
+  {
+   "say": "Over {trials} tries, it lost {sim_losses} times.",
+   "show": "Lost:",
+   "visual": "coin_crowd",
+   "big": "{sim_losses}/{trials}",
+   "big_label": "times — and still ended up",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "And still finished up {sim_total}. The expected value per try: {a_ev}.",
+   "show": "Finished up {sim_total}.",
+   "kind": "walkaway",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "The condition: every loss must be small enough that you're still playing when the win shows up.",
+   "show": "Stay in the game.",
+   "visual": "drunk_walk"
+  },
+  {
+   "say": "The rich don't avoid losing. They make losing cheap.",
+   "show": "Make losing cheap.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "The rich don't avoid losing. They make losing cheap.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

@@ -1,0 +1,113 @@
+{
+ "id": "yt24-game-theory-optimal",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt24-game-theory-optimal",
+ "model": "sim",
+ "sim": {
+  "kind": "bluff",
+  "pot": 100,
+  "bet": 75,
+  "over": 0.5,
+  "under": 0.1
+ },
+ "lang": "en",
+ "episode_no": 24,
+ "group": "poker",
+ "concept": "Game Theory Optimal (GTO)",
+ "tag": "POKER THEORY #24",
+ "title": "A strategy they can't beat even if they know it",
+ "hook": "There's a way to play that can't be beaten, even if your opponent knows exactly what you're doing.",
+ "caption": "GTO: a strategy that can't be exploited even when your opponent knows it. Betting {bet} into {pot}: bluff {over} and they profit {call_ev_over} per call; bluff {under} and they fold; at {gto_bluff} there's nothing to exploit.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
+ "hashtags": [
+  "gto",
+  "pokertheory",
+  "poker",
+  "probability",
+  "decisionmaking",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#24"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  },
+  {
+   "id": "nash",
+   "text": "Nash proved every finite game has an equilibrium",
+   "status": "documented",
+   "source_ids": [
+    "nash-1951"
+   ]
+  }
+ ],
+ "facts": {
+  "nash_yr": {
+   "value": "1951",
+   "source_id": "nash-1951"
+  }
+ },
+ "cta": "Follow QuanTik for the math behind every decision",
+ "thumb": {
+  "series": "POKER THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "THEY KNOW",
+   "YOUR PLAN.",
+   "STILL LOSE."
+  ],
+  "sub": "Unexploitable bluff rate: {gto_bluff}",
+  "image": "john-nash"
+ },
+ "scenes": [
+  {
+   "say": "There's a way to play that can't be beaten, even if your opponent knows exactly what you're doing.",
+   "show": "Unbeatable — even if they know it.",
+   "kind": "duel"
+  },
+  {
+   "say": "It's called game theory optimal: GTO.",
+   "show": "GTO.",
+   "visual": "professor",
+   "image": "john-nash",
+   "claims": [
+    "nash"
+   ]
+  },
+  {
+   "say": "You bet {bet} into {pot}. Bluff {over} of the time, and they call everything and profit {call_ev_over}.",
+   "show": "Bluff {over}: they profit.",
+   "visual": "casino",
+   "note": "Computed: caller's EV per call against your bluff share",
+   "real": true
+  },
+  {
+   "say": "Bluff {under}, and they just fold.",
+   "show": "Bluff {under}: they fold.",
+   "kind": "duel"
+  },
+  {
+   "say": "At {gto_bluff}, they have nothing left to exploit.",
+   "show": "Unexploitable at:",
+   "kind": "alone",
+   "big": "{gto_bluff}",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "GTO doesn't crush bad players hardest. It makes sure good players can't crush you.",
+   "show": "Nobody can crush you.",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "GTO doesn't crush bad players hardest. It makes sure good players can't crush you.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

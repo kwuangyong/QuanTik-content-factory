@@ -1,0 +1,87 @@
+{
+ "id": "yt41-present-bias",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt41-present-bias",
+ "model": "sim",
+ "sim": {
+  "kind": "diagram",
+  "nodes": [],
+  "edges": []
+ },
+ "lang": "en",
+ "episode_no": 41,
+ "group": "psychology",
+ "concept": "Present Bias",
+ "tag": "PSYCHOLOGY #41",
+ "title": "Today-you keeps robbing future-you",
+ "hook": "Today-you keeps robbing future-you. And future-you can't fight back.",
+ "caption": "Today-you keeps robbing future-you. Present bias makes rewards now look huge and costs later look tiny. Don't rely on willpower — automate the good choice.",
+ "hashtags": [
+  "presentbias",
+  "psychology",
+  "psychologyfacts",
+  "cognitivebias",
+  "mindset",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#41"
+ ],
+ "claims": [],
+ "facts": {},
+ "cta": "Follow QuanTik for the psychology behind your money",
+ "thumb": {
+  "series": "PSYCHOLOGY FACTS",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "TODAY-YOU",
+   "ROBS",
+   "FUTURE-YOU."
+  ],
+  "sub": "Present bias",
+  "art": "alone"
+ },
+ "scenes": [
+  {
+   "say": "Today-you keeps robbing future-you. And future-you can't fight back.",
+   "show": "Today-you robs future-you.",
+   "kind": "alone"
+  },
+  {
+   "say": "Present bias: rewards right now look huge. Costs later look tiny.",
+   "show": "Now looks huge. Later looks tiny.",
+   "kind": "scale"
+  },
+  {
+   "say": "Take the easy path today, and the bill lands later, with interest.",
+   "show": "The bill lands later.",
+   "visual": "money_burn",
+   "real": true
+  },
+  {
+   "say": "Take the hard path today, and the reward quietly stacks up.",
+   "show": "The reward stacks up.",
+   "visual": "rocket"
+  },
+  {
+   "say": "It's not weak willpower. Your brain evolved to grab what's in front of it.",
+   "show": "Your brain grabs what's in front.",
+   "kind": "scroll"
+  },
+  {
+   "say": "Plans for the future always look reasonable. Then the future turns into today.",
+   "show": "Then the future becomes today.",
+   "kind": "commute"
+  },
+  {
+   "say": "Don't rely on willpower. Automate the good choice, like saving before you spend.",
+   "show": "Automate the good choice.",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "Don't rely on willpower. Automate the good choice, like saving before you spend.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

@@ -1,0 +1,82 @@
+{
+ "id": "yt20-illusion-of-financial-freedom",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt20-illusion-of-financial-freedom",
+ "model": "sim",
+ "sim": {
+  "kind": "diagram",
+  "nodes": [],
+  "edges": []
+ },
+ "lang": "en",
+ "episode_no": 20,
+ "group": "dark-truth",
+ "concept": "The Illusion of Financial Freedom",
+ "tag": "DARK TRUTH #20",
+ "title": "You don't want freedom. You want a bigger number.",
+ "hook": "Most people don't want financial freedom. They want a bigger number.",
+ "caption": "Most people don't want freedom, they want a bigger number — and a bigger number never ends. Freedom is knowing what enough costs. If you can't name your number, you'll chase it forever.",
+ "hashtags": [
+  "financialfreedom",
+  "darktruth",
+  "money",
+  "moneymindset",
+  "personalfinance",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#20"
+ ],
+ "claims": [],
+ "facts": {},
+ "cta": "Follow QuanTik for more dark truths about money",
+ "thumb": {
+  "series": "THE DARK TRUTH OF MONEY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "YOU WANT",
+   "A BIGGER",
+   "NUMBER."
+  ],
+  "sub": "Name your number, or chase it forever",
+  "art": "walkaway"
+ },
+ "scenes": [
+  {
+   "say": "Most people don't want financial freedom. They want a bigger number.",
+   "show": "You want a bigger number.",
+   "kind": "scroll"
+  },
+  {
+   "say": "A bigger number never ends. Every time you reach it, your lifestyle moves the line.",
+   "show": "The line keeps moving.",
+   "kind": "wheel"
+  },
+  {
+   "say": "The chase: more money, more spending, a goal that runs away.",
+   "show": "More money. More spending.",
+   "kind": "spend"
+  },
+  {
+   "say": "The other road: know what enough costs, and freedom shows up years earlier.",
+   "show": "Know what enough costs.",
+   "kind": "walkaway"
+  },
+  {
+   "say": "Freedom isn't how much you have. It's how little you need to live the life you want.",
+   "show": "How little you need.",
+   "visual": "exit",
+   "real": true
+  },
+  {
+   "say": "If you can't name your number, you'll chase it forever.",
+   "show": "Name your number.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "If you can't name your number, you'll chase it forever.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

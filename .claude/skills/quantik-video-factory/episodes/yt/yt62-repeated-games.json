@@ -1,0 +1,100 @@
+{
+ "id": "yt62-repeated-games",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt62-repeated-games",
+ "model": "sim",
+ "sim": {
+  "kind": "ipd",
+  "rounds": 200
+ },
+ "lang": "en",
+ "episode_no": 62,
+ "group": "game-theory",
+ "concept": "Repeated Games",
+ "tag": "GAME THEORY #62",
+ "title": "Cheating pays once. Then it doesn't.",
+ "hook": "Cheating pays. Once. Cheat someone you'll meet two hundred times and watch what happens.",
+ "caption": "Cheating pays once. In one round the cheater gets {one_shot_defect} vs {one_shot_tft}; over {rounds} rounds the cheater ends with {rep_defect_gain} while two cooperators get {coop_pair} each.",
+ "hashtags": [
+  "repeatedgames",
+  "reputation",
+  "gametheory",
+  "strategy",
+  "nashequilibrium",
+  "economics",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "5-3-1-0",
+  "#62"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for the game theory of real life",
+ "thumb": {
+  "series": "GAME THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "CHEATING",
+   "PAYS.",
+   "ONCE."
+  ],
+  "sub": "{rep_defect_gain} vs {coop_pair} over {rounds} rounds",
+  "art": "duel"
+ },
+ "scenes": [
+  {
+   "say": "Cheating pays. Once. Cheat someone you'll meet two hundred times and watch what happens.",
+   "show": "Cheating pays. Once.",
+   "kind": "duel"
+  },
+  {
+   "say": "Repeated games: how you treat someone today decides how they treat you tomorrow.",
+   "show": "Today decides tomorrow.",
+   "kind": "duel"
+  },
+  {
+   "say": "One round: the cheater gets {one_shot_defect}. Tit for Tat gets {one_shot_tft}.",
+   "show": "One round:",
+   "visual": "coin",
+   "big": "{one_shot_defect} vs {one_shot_tft}",
+   "big_label": "the cheater wins",
+   "note": "Simulation: payoffs 5-3-1-0",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "{rounds} rounds: the cheater ends with {rep_defect_gain}. Two cooperators get {coop_pair} each.",
+   "show": "{rounds} rounds:",
+   "kind": "scale",
+   "big": "{rep_defect_gain} vs {coop_pair}",
+   "big_label": "cheater vs cooperators",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "When the future is long enough, reputation becomes an asset, and cheating becomes a losing strategy.",
+   "show": "Reputation is an asset.",
+   "kind": "walkaway"
+  },
+  {
+   "say": "Act like you'll meet them again. In a small world, you usually will.",
+   "show": "You'll meet them again.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Act like you'll meet them again. In a small world, you usually will.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

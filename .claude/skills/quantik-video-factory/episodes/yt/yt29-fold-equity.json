@@ -1,0 +1,102 @@
+{
+ "id": "yt29-fold-equity",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt29-fold-equity",
+ "model": "sim",
+ "sim": {
+  "kind": "foldeq",
+  "pot": 100,
+  "bet": 100,
+  "equity": 0.3,
+  "fold_ex": 0.4
+ },
+ "lang": "en",
+ "episode_no": 29,
+ "group": "poker",
+ "concept": "Fold Equity",
+ "tag": "POKER THEORY #29",
+ "title": "Win without the best hand",
+ "hook": "You don't need the best hand. You need them to believe you have it.",
+ "caption": "Win without the best hand. With {equity} equity, betting {bet} into {pot} loses {ev_no_fold} if they never fold — but they only need to fold {breakeven_fold} to break even, and at {fold_ex} you make {ev_ex}.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
+ "hashtags": [
+  "foldequity",
+  "pokertheory",
+  "poker",
+  "probability",
+  "decisionmaking",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#29"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for the math behind every decision",
+ "thumb": {
+  "series": "POKER THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "WIN",
+   "WITHOUT",
+   "THE HAND."
+  ],
+  "sub": "They only need to fold {breakeven_fold}",
+  "image": "poker-table"
+ },
+ "scenes": [
+  {
+   "say": "You don't need the best hand. You need them to believe you have it.",
+   "show": "Make them believe.",
+   "kind": "duel"
+  },
+  {
+   "say": "Fold equity: the value of your opponent giving up before the cards are shown.",
+   "show": "The value of them giving up.",
+   "visual": "casino",
+   "image": "poker-table"
+  },
+  {
+   "say": "Your hand wins only {equity} when called. You bet {bet} into {pot}.",
+   "show": "{equity} if called.",
+   "visual": "casino",
+   "note": "Computed: EV = fold% × pot + (1 − fold%) × (equity × (pot + 2·bet) − bet)",
+   "real": true
+  },
+  {
+   "say": "If they never fold, the bet loses {ev_no_fold}.",
+   "show": "If they never fold:",
+   "kind": "alone",
+   "big": "{ev_no_fold}",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "They only need to fold {breakeven_fold} of the time to break even. If they fold {fold_ex}, you make {ev_ex}.",
+   "show": "Break-even fold rate:",
+   "kind": "walkaway",
+   "big": "{breakeven_fold}",
+   "big_label": "fold {fold_ex} → EV +{ev_ex}",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Pressure is an asset. But only against someone who can actually fold.",
+   "show": "Pressure is an asset.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Pressure is an asset. But only against someone who can actually fold.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

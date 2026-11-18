@@ -409,6 +409,8 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
         style_music = getattr(mod, "MUSIC", True)
         if style_music is False:
             music = "none"
+        elif music is None and filled.get("music"):
+            music = filled["music"]  # episode choice, e.g. "suspense" for the YT/IG lot
         elif music is None and isinstance(style_music, str):
             music = style_music  # e.g. dark-story → "drone"
         assemble(silent, scenes, final, work, music=music)

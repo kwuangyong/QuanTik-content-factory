@@ -1,0 +1,82 @@
+{
+ "id": "yt47-cognitive-dissonance",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt47-cognitive-dissonance",
+ "model": "sim",
+ "sim": {
+  "kind": "diagram",
+  "nodes": [],
+  "edges": []
+ },
+ "lang": "en",
+ "episode_no": 47,
+ "group": "psychology",
+ "concept": "Cognitive Dissonance",
+ "tag": "PSYCHOLOGY #47",
+ "title": "You know you're wrong. You defend it anyway.",
+ "hook": "You know you were wrong. You'll still find ten reasons you were right.",
+ "caption": "You know you were wrong and you defend it anyway. Cognitive dissonance makes us reinterpret the evidence instead of the decision. A bad call doesn't make you a bad person.",
+ "hashtags": [
+  "cognitivedissonance",
+  "psychology",
+  "psychologyfacts",
+  "cognitivebias",
+  "mindset",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#47"
+ ],
+ "claims": [],
+ "facts": {},
+ "cta": "Follow QuanTik for the psychology behind your money",
+ "thumb": {
+  "series": "PSYCHOLOGY FACTS",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "WRONG.",
+   "STILL",
+   "DEFENDING."
+  ],
+  "sub": "Cognitive dissonance",
+  "art": "duel"
+ },
+ "scenes": [
+  {
+   "say": "You know you were wrong. You'll still find ten reasons you were right.",
+   "show": "Wrong. Still defending it.",
+   "kind": "duel"
+  },
+  {
+   "say": "Cognitive dissonance: the pain of your actions and beliefs not matching.",
+   "show": "Actions vs beliefs.",
+   "kind": "scale"
+  },
+  {
+   "say": "The loop: make a decision, see proof it was wrong, feel bad, reinterpret the proof.",
+   "show": "Reinterpret the proof.",
+   "kind": "wheel"
+  },
+  {
+   "say": "Admitting it hurts once. Defending it hurts a little, many times.",
+   "show": "Once vs many times.",
+   "visual": "money_burn",
+   "real": true
+  },
+  {
+   "say": "So we pick the second, and the loss quietly gets bigger.",
+   "show": "The loss gets bigger.",
+   "visual": "iceberg"
+  },
+  {
+   "say": "Separate yourself from the decision. A bad call doesn't make you a bad person.",
+   "show": "A bad call isn't you.",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "Separate yourself from the decision. A bad call doesn't make you a bad person.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

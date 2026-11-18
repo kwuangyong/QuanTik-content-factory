@@ -1,0 +1,101 @@
+{
+ "id": "yt67-principal-agent-problem",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt67-principal-agent-problem",
+ "model": "sim",
+ "sim": {
+  "kind": "diagram",
+  "nodes": [],
+  "edges": []
+ },
+ "lang": "en",
+ "episode_no": 67,
+ "group": "game-theory",
+ "concept": "Principal-Agent Problem",
+ "tag": "GAME THEORY #67",
+ "title": "Your broker gets paid when you trade. Guess what they advise.",
+ "hook": "Your broker gets paid every time you trade. Guess how often they'll tell you to trade.",
+ "caption": "Your broker gets paid when you trade — guess what they advise. The principal-agent problem: the person acting for you follows their incentives (Jensen & Meckling 1976). Ask how they get paid.",
+ "hashtags": [
+  "principalagent",
+  "incentives",
+  "gametheory",
+  "strategy",
+  "nashequilibrium",
+  "economics",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#67"
+ ],
+ "claims": [
+  {
+   "id": "jm",
+   "text": "Agency costs between principals and agents",
+   "status": "documented",
+   "source_ids": [
+    "jensen-meckling-1976"
+   ]
+  }
+ ],
+ "facts": {
+  "jm_yr": {
+   "value": "1976",
+   "source_id": "jensen-meckling-1976"
+  }
+ },
+ "cta": "Follow QuanTik for the game theory of real life",
+ "thumb": {
+  "series": "GAME THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "HOW DO",
+   "THEY GET",
+   "PAID?"
+  ],
+  "sub": "Principal-agent problem",
+  "image": "nyse-floor"
+ },
+ "scenes": [
+  {
+   "say": "Your broker gets paid every time you trade. Guess how often they'll tell you to trade.",
+   "show": "Guess what they'll advise.",
+   "visual": "banker",
+   "image": "nyse-floor"
+  },
+  {
+   "say": "The principal-agent problem: the person acting for you has different goals than you.",
+   "show": "Different goals.",
+   "kind": "duel",
+   "claims": [
+    "jm"
+   ]
+  },
+  {
+   "say": "You hand over the job. They know more than you. They're paid on something else, so they follow their incentive.",
+   "show": "They follow their incentive.",
+   "visual": "banker",
+   "real": true
+  },
+  {
+   "say": "Nobody has to be evil. A pay structure pointing the wrong way is enough.",
+   "show": "Nobody has to be evil.",
+   "kind": "scale"
+  },
+  {
+   "say": "Brokers, fund managers, employees, even doctors can end up here.",
+   "show": "Brokers. Managers. Doctors.",
+   "kind": "commute"
+  },
+  {
+   "say": "Before taking advice, ask one thing: how does this person get paid?",
+   "show": "How do they get paid?",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Before taking advice, ask one thing: how does this person get paid?",
+ "music": "suspense",
+ "voice": "male-deep"
+}

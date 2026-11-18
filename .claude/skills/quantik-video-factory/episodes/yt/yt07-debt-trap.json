@@ -1,0 +1,125 @@
+{
+ "id": "yt07-debt-trap",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt07-debt-trap",
+ "model": "sim",
+ "sim": {
+  "kind": "growth",
+  "years": 8,
+  "unit": "triệu đồng",
+  "lines": [
+   {
+    "id": "debt",
+    "label": "nợ thẻ 25%/năm",
+    "start": 50,
+    "rate": 0.25,
+    "color": "negative"
+   },
+   {
+    "id": "sav",
+    "label": "tiết kiệm 6%/năm",
+    "start": 50,
+    "rate": 0.06,
+    "color": "positive"
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 7,
+ "group": "dark-truth",
+ "concept": "The Debt Trap",
+ "tag": "DARK TRUTH #07",
+ "title": "You didn't buy a car. You bought a monthly boss.",
+ "hook": "You didn't buy a car. You bought a monthly boss.",
+ "caption": "You didn't buy a car — you bought a monthly boss. {debt_start} of card debt at {debt_rate} a year, never paid down, becomes {debt_end} in {years} years ({debt_mult}x).\n\n(Simulation; illustration only.)",
+ "hashtags": [
+  "debt",
+  "creditcard",
+  "darktruth",
+  "money",
+  "moneymindset",
+  "personalfinance",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#07"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from a seeded simulation with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for more dark truths about money",
+ "thumb": {
+  "series": "THE DARK TRUTH OF MONEY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "YOU BOUGHT",
+   "A MONTHLY",
+   "BOSS."
+  ],
+  "sub": "Unpaid card debt: {debt_mult}x in {years} years",
+  "image": "credit-cards"
+ },
+ "scenes": [
+  {
+   "say": "You didn't buy a car. You bought a monthly boss.",
+   "show": "You didn't buy a car. You bought a monthly boss.",
+   "kind": "spend"
+  },
+  {
+   "say": "Compounding is magic when you receive it. When you pay it, it's a trap.",
+   "show": "Compounding, reversed.",
+   "visual": "money_burn",
+   "image": "credit-cards"
+  },
+  {
+   "say": "{debt_start} of card debt at {debt_rate} a year, never paid down.",
+   "show": "Card debt at {debt_rate}.",
+   "kind": "wheel",
+   "note": "Simulation: {debt_rate}/yr interest, no repayments; savings at {sav_rate}"
+  },
+  {
+   "say": "After {years} years it's {debt_end}.",
+   "show": "After {years} years:",
+   "kind": "crowd",
+   "big": "{debt_mult}x",
+   "big_label": "what you owe",
+   "crowd": {
+    "n": "debt_end",
+    "k": "debt_start"
+   },
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "The same money saved at {sav_rate} would be {sav_end}.",
+   "show": "Saved instead: {sav_end}.",
+   "kind": "walkaway",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Before you borrow, ask: does this thing put money in my pocket, or take it out every month?",
+   "show": "In your pocket, or out?",
+   "visual": "banker",
+   "real": true
+  },
+  {
+   "say": "An asset pays you. A liability gives you a boss.",
+   "show": "A liability is a boss.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "An asset pays you. A liability gives you a boss.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

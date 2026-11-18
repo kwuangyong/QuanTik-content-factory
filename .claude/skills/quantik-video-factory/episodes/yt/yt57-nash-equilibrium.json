@@ -1,0 +1,140 @@
+{
+ "id": "yt57-nash-equilibrium",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt57-nash-equilibrium",
+ "model": "sim",
+ "sim": {
+  "kind": "matrix",
+  "rows": [
+   "Săn hươu",
+   "Săn thỏ"
+  ],
+  "cols": [
+   "Săn hươu",
+   "Săn thỏ"
+  ],
+  "payoffs": [
+   [
+    [
+     4,
+     4
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   [
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     3
+    ]
+   ]
+  ]
+ },
+ "lang": "en",
+ "episode_no": 57,
+ "group": "game-theory",
+ "concept": "Nash Equilibrium",
+ "tag": "GAME THEORY #57",
+ "title": "Stuck where nobody wants to move",
+ "hook": "Some situations get stuck where nobody wants to move, even though everyone knows something better exists.",
+ "caption": "Stuck where nobody wants to move. The stag hunt has {n_nash} Nash equilibria: both hunt the stag ({r00} each) or both settle for hares ({r11} each).",
+ "hashtags": [
+  "nashequilibrium",
+  "staghunt",
+  "gametheory",
+  "strategy",
+  "nashequilibrium",
+  "economics",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#57"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  },
+  {
+   "id": "nash",
+   "text": "Nash equilibrium definition",
+   "status": "documented",
+   "source_ids": [
+    "nash-1951"
+   ]
+  }
+ ],
+ "facts": {
+  "nash_yr": {
+   "value": "1951",
+   "source_id": "nash-1951"
+  }
+ },
+ "cta": "Follow QuanTik for the game theory of real life",
+ "thumb": {
+  "series": "GAME THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "STUCK.",
+   "AND IT'S",
+   "RATIONAL."
+  ],
+  "sub": "{n_nash} equilibria, one bad",
+  "image": "john-nash"
+ },
+ "scenes": [
+  {
+   "say": "Some situations get stuck where nobody wants to move, even though everyone knows something better exists.",
+   "show": "Stuck. Everyone knows better.",
+   "kind": "commute"
+  },
+  {
+   "say": "That's a Nash equilibrium: everyone's best move, given what everyone else is doing.",
+   "show": "Everyone's best response.",
+   "visual": "professor",
+   "image": "john-nash",
+   "claims": [
+    "nash"
+   ]
+  },
+  {
+   "say": "The stag hunt. Hunt the stag together: {r00} each. But if your partner wanders off, you get nothing.",
+   "show": "Hunt together: {r00} each.",
+   "kind": "duel",
+   "note": "Illustrative payoffs; code finds every equilibrium"
+  },
+  {
+   "say": "Hunt a hare alone: a safe {r11}.",
+   "show": "A safe hare: {r11}.",
+   "visual": "race"
+  },
+  {
+   "say": "There are {n_nash} equilibria: both hunt the stag, or both settle for hares.",
+   "show": "Equilibria:",
+   "kind": "scale",
+   "big": "{n_nash}",
+   "big_label": "one great, one mediocre",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "In the bad one, everyone is rational. What's missing isn't intelligence. It's trust.",
+   "show": "What's missing is trust.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "In the bad one, everyone is rational. What's missing isn't intelligence. It's trust.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

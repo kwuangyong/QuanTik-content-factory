@@ -1,0 +1,122 @@
+{
+ "id": "yt27-bankroll-management",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt27-bankroll-management",
+ "model": "sim",
+ "sim": {
+  "kind": "ruin",
+  "players": 1000,
+  "rounds": 2000,
+  "p": 0.53,
+  "payout": 1.0,
+  "groups": [
+   {
+    "id": "a",
+    "label": "vốn 10 lần cược",
+    "start": 10,
+    "stake": 1
+   },
+   {
+    "id": "b",
+    "label": "vốn 30 lần cược",
+    "start": 30,
+    "stake": 1
+   },
+   {
+    "id": "c",
+    "label": "vốn 100 lần cược",
+    "start": 100,
+    "stake": 1
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 27,
+ "group": "poker",
+ "concept": "Bankroll Management",
+ "tag": "POKER THEORY #27",
+ "title": "Good players go broke too",
+ "hook": "Being good isn't enough. Good players go broke all the time.",
+ "caption": "Good players go broke too. All with an edge (win {a_p}): {a_start} bets of bankroll → {a_ruin} broke, {b_start} → {b_ruin}, {c_start} → {c_ruin}.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
+ "hashtags": [
+  "bankroll",
+  "pokertheory",
+  "poker",
+  "probability",
+  "decisionmaking",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#27"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for the math behind every decision",
+ "thumb": {
+  "series": "POKER THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "GOOD",
+   "PLAYERS",
+   "GO BROKE."
+  ],
+  "sub": "{a_ruin} broke with a thin bankroll",
+  "visual": "casino"
+ },
+ "scenes": [
+  {
+   "say": "Being good isn't enough. Good players go broke all the time.",
+   "show": "Good players go broke.",
+   "visual": "casino",
+   "real": true
+  },
+  {
+   "say": "Bankroll management is surviving the bad runs long enough for your edge to show up.",
+   "show": "Survive the bad runs.",
+   "kind": "wheel"
+  },
+  {
+   "say": "Three groups, all with a real edge: win {a_p}. Only the bankroll differs: {a_start}, {b_start}, {c_start} bets.",
+   "show": "Same edge. Different bankrolls.",
+   "kind": "compare",
+   "note": "Simulation: {players} players, {rounds} bets, win {a_p}"
+  },
+  {
+   "say": "{a_start} bets deep: {a_ruin} go broke.",
+   "show": "{a_start} bets:",
+   "visual": "money_burn",
+   "big": "{a_ruin}",
+   "big_label": "went broke — with an edge",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "{b_start} bets: {b_ruin}. {c_start} bets: {c_ruin}.",
+   "show": "{b_start} bets: {b_ruin}",
+   "kind": "walkaway",
+   "big": "{c_ruin}",
+   "big_label": "broke with {c_start} bets",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Skill decides how much you win. Bankroll decides whether you're still there to win it.",
+   "show": "Still there to win it?",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Skill decides how much you win. Bankroll decides whether you're still there to win it.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

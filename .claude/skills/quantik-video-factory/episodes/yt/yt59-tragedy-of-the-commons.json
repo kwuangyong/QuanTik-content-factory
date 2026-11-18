@@ -1,0 +1,118 @@
+{
+ "id": "yt59-tragedy-of-the-commons",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt59-tragedy-of-the-commons",
+ "model": "sim",
+ "sim": {
+  "kind": "commons",
+  "users": 10,
+  "greed": 1.6,
+  "years": 40
+ },
+ "lang": "en",
+ "episode_no": 59,
+ "group": "game-theory",
+ "concept": "Tragedy of the Commons",
+ "tag": "GAME THEORY #59",
+ "title": "Everyone takes a little more. Then there's nothing.",
+ "hook": "Everyone takes just a little more. A few years later, nobody gets anything.",
+ "caption": "Everyone takes a little more, then there's nothing. With {users} fishers each taking {greed_extra} more, the simulated lake collapses in year {collapse_year}; over {years} years the quota group catches {quota_catch} vs {greedy_catch}.",
+ "hashtags": [
+  "tragedyofthecommons",
+  "gametheory",
+  "strategy",
+  "nashequilibrium",
+  "economics",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#59"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  },
+  {
+   "id": "hardin",
+   "text": "Hardin's tragedy of the commons",
+   "status": "documented",
+   "source_ids": [
+    "hardin-1968"
+   ]
+  }
+ ],
+ "facts": {
+  "hardin_yr": {
+   "value": "1968",
+   "source_id": "hardin-1968"
+  }
+ },
+ "cta": "Follow QuanTik for the game theory of real life",
+ "thumb": {
+  "series": "GAME THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "A LITTLE",
+   "MORE",
+   "= NOTHING."
+  ],
+  "sub": "Lake collapses in year {collapse_year}",
+  "image": "fishing-boats"
+ },
+ "scenes": [
+  {
+   "say": "Everyone takes just a little more. A few years later, nobody gets anything.",
+   "show": "Then there's nothing.",
+   "visual": "water_flow",
+   "image": "fishing-boats"
+  },
+  {
+   "say": "The tragedy of the commons: the gain from taking more goes to you. The damage is shared by everyone.",
+   "show": "Your gain. Everyone's loss.",
+   "visual": "professor",
+   "image": "garrett-hardin",
+   "claims": [
+    "hardin"
+   ]
+  },
+  {
+   "say": "Code runs a lake with {users} fishers. One version has quotas. In the other, everyone takes {greed_extra} more.",
+   "show": "{users} fishers. One lake.",
+   "visual": "water_flow",
+   "note": "Simulation: logistic regrowth; quota = sustainable yield split evenly"
+  },
+  {
+   "say": "With everyone taking more, the lake collapses in year {collapse_year}.",
+   "show": "Collapse:",
+   "visual": "storm",
+   "big": "year {collapse_year}",
+   "claims": [
+    "sim"
+   ],
+   "real": true
+  },
+  {
+   "say": "Over {years} years, the quota group catches {quota_catch}. The greedy group, only {greedy_catch}.",
+   "show": "Quota: {quota_catch}",
+   "kind": "compare",
+   "big": "{greedy_catch}",
+   "big_label": "caught by the greedy group",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Everyone was rational. Together it was a disaster. That's why shared resources need rules.",
+   "show": "Rational. Together, a disaster.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Everyone was rational. Together it was a disaster. That's why shared resources need rules.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

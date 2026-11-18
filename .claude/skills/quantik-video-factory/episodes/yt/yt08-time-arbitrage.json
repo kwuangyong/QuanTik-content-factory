@@ -1,0 +1,83 @@
+{
+ "id": "yt08-time-arbitrage",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt08-time-arbitrage",
+ "model": "sim",
+ "sim": {
+  "kind": "diagram",
+  "nodes": [],
+  "edges": []
+ },
+ "lang": "en",
+ "episode_no": 8,
+ "group": "dark-truth",
+ "concept": "Time Arbitrage",
+ "tag": "DARK TRUTH #08",
+ "title": "The poor sell time. The rich buy it back.",
+ "hook": "The poor sell time for money. The rich buy it back.",
+ "caption": "The poor sell time for money; the rich buy it back. Money buys time, time goes into leverage, leverage makes more money. Know what your hour is worth and stop selling it cheaper.",
+ "hashtags": [
+  "time",
+  "leverage",
+  "darktruth",
+  "money",
+  "moneymindset",
+  "personalfinance",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#08"
+ ],
+ "claims": [],
+ "facts": {},
+ "cta": "Follow QuanTik for more dark truths about money",
+ "thumb": {
+  "series": "THE DARK TRUTH OF MONEY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "THE RICH",
+   "BUY TIME",
+   "BACK."
+  ],
+  "sub": "Price your hour like an asset",
+  "art": "office"
+ },
+ "scenes": [
+  {
+   "say": "The poor sell time for money. The rich buy it back.",
+   "show": "The poor sell time for money. The rich buy it back.",
+   "kind": "office"
+  },
+  {
+   "say": "Everyone gets the same twenty-four hours. Not everyone owns them.",
+   "show": "Same hours. Different owners.",
+   "kind": "commute"
+  },
+  {
+   "say": "The loop: money buys back time, time goes into leverage, leverage makes more money.",
+   "show": "Money → time → leverage.",
+   "kind": "walkaway"
+  },
+  {
+   "say": "An hour learning a skill or building a system can be worth a week of errands.",
+   "show": "Some hours are worth weeks.",
+   "visual": "professor",
+   "real": true
+  },
+  {
+   "say": "The catch: you have to know what your hour is worth, and refuse to sell it cheaper.",
+   "show": "What's your hour worth?",
+   "visual": "board"
+  },
+  {
+   "say": "Time is the only asset you can't earn back. Price it like one.",
+   "show": "Price your time.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Time is the only asset you can't earn back. Price it like one.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

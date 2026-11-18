@@ -1,0 +1,95 @@
+{
+ "id": "yt44-recency-bias",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt44-recency-bias",
+ "model": "sim",
+ "sim": {
+  "kind": "streak",
+  "n": 200000,
+  "k": 3
+ },
+ "lang": "en",
+ "episode_no": 44,
+ "group": "psychology",
+ "concept": "Recency Bias",
+ "tag": "PSYCHOLOGY #44",
+ "title": "Three green days don't make a trend",
+ "hook": "Three green days and you're sure it's a trend. In a random series, it isn't.",
+ "caption": "Three green days don't make a trend. In a purely random {n}-day series, after {k} moves in a row the next day kept direction {same} of the time — a coin flip.",
+ "hashtags": [
+  "recencybias",
+  "psychology",
+  "psychologyfacts",
+  "cognitivebias",
+  "mindset",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#44"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for the psychology behind your money",
+ "thumb": {
+  "series": "PSYCHOLOGY FACTS",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "IT'S NOT",
+   "A",
+   "TREND."
+  ],
+  "sub": "After {k} in a row: {same}",
+  "image": "nyse-floor"
+ },
+ "scenes": [
+  {
+   "say": "Three green days and you're sure it's a trend. In a random series, it isn't.",
+   "show": "It's not a trend.",
+   "visual": "board",
+   "image": "nyse-floor"
+  },
+  {
+   "say": "Recency bias: whatever just happened feels like what will keep happening.",
+   "show": "What just happened feels permanent.",
+   "kind": "scroll"
+  },
+  {
+   "say": "Code builds a purely random up-down series of {n} days and finds every run of {k} in a row.",
+   "show": "A purely random series.",
+   "visual": "coin_crowd",
+   "note": "Simulation: random series, not a model of any market"
+  },
+  {
+   "say": "Next day keeps the same direction {same} of the time.",
+   "show": "Same direction next day:",
+   "visual": "coin",
+   "big": "{same}",
+   "big_label": "basically a coin flip",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "In random data, the last few days tell you nothing about tomorrow. Your brain still sees a story.",
+   "show": "Your brain sees a story.",
+   "kind": "alone"
+  },
+  {
+   "say": "Before you conclude, ask: would pure randomness look exactly like this?",
+   "show": "Would randomness look the same?",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "Before you conclude, ask: would pure randomness look exactly like this?",
+ "music": "suspense",
+ "voice": "male-deep"
+}

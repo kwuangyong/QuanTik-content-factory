@@ -1,0 +1,124 @@
+{
+ "id": "yt58-zero-sum-game",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt58-zero-sum-game",
+ "model": "sim",
+ "sim": {
+  "kind": "matrix",
+  "rows": [
+   "Sấp",
+   "Ngửa"
+  ],
+  "cols": [
+   "Sấp",
+   "Ngửa"
+  ],
+  "payoffs": [
+   [
+    [
+     1,
+     -1
+    ],
+    [
+     -1,
+     1
+    ]
+   ],
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     1,
+     -1
+    ]
+   ]
+  ]
+ },
+ "lang": "en",
+ "episode_no": 58,
+ "group": "game-theory",
+ "concept": "Zero-Sum Game",
+ "tag": "GAME THEORY #58",
+ "title": "For you to win, someone has to lose?",
+ "hook": "For you to win, someone has to lose? Only in one specific kind of game.",
+ "caption": "In a zero-sum game your gain is their loss and the best strategy is pure randomness ({mix_row} each way). But most of life isn't zero-sum.",
+ "hashtags": [
+  "zerosum",
+  "gametheory",
+  "strategy",
+  "nashequilibrium",
+  "economics",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#58"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for the game theory of real life",
+ "thumb": {
+  "series": "GAME THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "SOMEONE",
+   "HAS TO",
+   "LOSE?"
+  ],
+  "sub": "Only in zero-sum games",
+  "image": "chess-board"
+ },
+ "scenes": [
+  {
+   "say": "For you to win, someone has to lose? Only in one specific kind of game.",
+   "show": "Someone has to lose?",
+   "kind": "duel"
+  },
+  {
+   "say": "A zero-sum game: what you gain is exactly what they lose. No new value is created.",
+   "show": "Your gain = their loss.",
+   "visual": "board",
+   "image": "chess-board"
+  },
+  {
+   "say": "Matching pennies: match, you win one. Don't match, you lose one.",
+   "show": "Match or don't.",
+   "visual": "coin",
+   "note": "Illustrative payoffs; code solves the mixed equilibrium",
+   "real": true
+  },
+  {
+   "say": "No fixed choice is safe. The best strategy: pure randomness, {mix_row} each way.",
+   "show": "Best strategy:",
+   "kind": "scale",
+   "big": "{mix_row}",
+   "big_label": "each side — pure randomness",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "But most of life isn't zero-sum. Trade, cooperation, learning: they all create new value.",
+   "show": "Most of life isn't zero-sum.",
+   "kind": "walkaway"
+  },
+  {
+   "say": "Before treating someone as an opponent, ask if you could both come out ahead.",
+   "show": "Could you both win?",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Before treating someone as an opponent, ask if you could both come out ahead.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

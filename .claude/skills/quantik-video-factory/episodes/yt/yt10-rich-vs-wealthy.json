@@ -1,0 +1,112 @@
+{
+ "id": "yt10-rich-vs-wealthy",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt10-rich-vs-wealthy",
+ "model": "sim",
+ "sim": {
+  "kind": "growth",
+  "years": 20,
+  "unit": "tài sản (triệu đồng)",
+  "lines": [
+   {
+    "id": "w",
+    "label": "thu nhập vừa, giữ lại nhiều",
+    "contrib": 72,
+    "rate": 0.07,
+    "color": "positive"
+   },
+   {
+    "id": "r",
+    "label": "thu nhập cao, tiêu gần hết",
+    "contrib": 24,
+    "rate": 0.07,
+    "color": "negative"
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 10,
+ "group": "dark-truth",
+ "concept": "Rich vs Wealthy",
+ "tag": "DARK TRUTH #10",
+ "title": "Rich and wealthy are not the same people",
+ "hook": "The person who looks rich is usually not the one who is.",
+ "caption": "The person who looks rich usually isn't. Rich = income. Wealthy = what's left when income stops. Keeping {w_contrib} vs {r_contrib} a year at {w_rate}: {gap_ratio}x more wealth after {years} years.\n\n(Simulation; illustration only.)",
+ "hashtags": [
+  "richvswealthy",
+  "wealth",
+  "darktruth",
+  "money",
+  "moneymindset",
+  "personalfinance",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#10"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from a seeded simulation with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for more dark truths about money",
+ "thumb": {
+  "series": "THE DARK TRUTH OF MONEY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "LOOKING RICH",
+   "ISN'T",
+   "WEALTHY."
+  ],
+  "sub": "{gap_ratio}x more wealth, smaller paycheck",
+  "image": "luxury-car"
+ },
+ "scenes": [
+  {
+   "say": "The person who looks rich is usually not the one who is.",
+   "show": "Looking rich isn't being rich.",
+   "visual": "money_burn",
+   "image": "luxury-car"
+  },
+  {
+   "say": "Rich is income. Wealthy is what's still there when the income stops.",
+   "show": "Rich vs wealthy.",
+   "kind": "compare"
+  },
+  {
+   "say": "High earner keeps {r_contrib} a year. Average earner keeps {w_contrib}. Same return, {w_rate}.",
+   "show": "Who keeps more?",
+   "kind": "duel",
+   "note": "Simulation: {w_rate} return, {years} years"
+  },
+  {
+   "say": "After {years} years, the average earner owns {gap_ratio} times more.",
+   "show": "{years} years later:",
+   "kind": "walkaway",
+   "big": "{gap_ratio}x",
+   "big_label": "wealth of the 'average' earner",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "The car and the house are what people see. Real wealth is mostly invisible.",
+   "show": "Real wealth is invisible.",
+   "kind": "scroll"
+  },
+  {
+   "say": "Measure wealth in months you could live without working, not in things you own.",
+   "show": "Measure it in months.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Measure wealth in months you could live without working, not in things you own.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

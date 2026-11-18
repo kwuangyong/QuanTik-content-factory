@@ -1,0 +1,77 @@
+{
+ "id": "yt55-fundamental-attribution-error",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt55-fundamental-attribution-error",
+ "model": "sim",
+ "sim": {
+  "kind": "diagram",
+  "nodes": [],
+  "edges": []
+ },
+ "lang": "en",
+ "episode_no": 55,
+ "group": "psychology",
+ "concept": "Fundamental Attribution Error",
+ "tag": "PSYCHOLOGY #55",
+ "title": "They're late because they're lazy. You're late because of traffic.",
+ "hook": "They're late because they're irresponsible. You're late because of traffic. Convenient.",
+ "caption": "They're late because they're irresponsible; you're late because of traffic. The fundamental attribution error blames their character and your circumstances.",
+ "hashtags": [
+  "attributionerror",
+  "psychology",
+  "psychologyfacts",
+  "cognitivebias",
+  "mindset",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#55"
+ ],
+ "claims": [],
+ "facts": {},
+ "cta": "Follow QuanTik for the psychology behind your money",
+ "thumb": {
+  "series": "PSYCHOLOGY FACTS",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "THEY'RE LAZY.",
+   "YOU'RE",
+   "UNLUCKY?"
+  ],
+  "sub": "Fundamental attribution error",
+  "art": "commute"
+ },
+ "scenes": [
+  {
+   "say": "They're late because they're irresponsible. You're late because of traffic. Convenient.",
+   "show": "Convenient.",
+   "kind": "commute"
+  },
+  {
+   "say": "The fundamental attribution error: we blame other people's character, and our own circumstances.",
+   "show": "Their character. Your circumstances.",
+   "kind": "duel"
+  },
+  {
+   "say": "You see your own situation in full detail. Theirs is invisible.",
+   "show": "Theirs is invisible.",
+   "visual": "telescope"
+  },
+  {
+   "say": "So you judge too fast, and learn the wrong lesson from other people's failures.",
+   "show": "The wrong lesson.",
+   "visual": "news",
+   "real": true
+  },
+  {
+   "say": "Before judging someone, ask what situation would make a normal person do exactly the same.",
+   "show": "What situation would explain it?",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "Before judging someone, ask what situation would make a normal person do exactly the same.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

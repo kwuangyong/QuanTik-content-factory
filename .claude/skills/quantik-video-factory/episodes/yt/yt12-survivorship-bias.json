@@ -1,0 +1,127 @@
+{
+ "id": "yt12-survivorship-bias",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt12-survivorship-bias",
+ "model": "sim",
+ "sim": {
+  "kind": "coins",
+  "n": 1024,
+  "rounds": 10
+ },
+ "lang": "en",
+ "episode_no": 12,
+ "group": "dark-truth",
+ "concept": "Survivorship Bias",
+ "tag": "DARK TRUTH #12",
+ "title": "The guru's secret might be pure luck",
+ "hook": "That millionaire's secret? Could be a coin flip.",
+ "caption": "That millionaire's secret could be a coin flip. {n} people flip a coin; after {rounds} rounds exactly {survivors} never lost — by pure luck. Count the losers before copying the winner.\n\n(Simulation. Wald story: Mangel & Samaniego 1984, JASA.)",
+ "hashtags": [
+  "survivorshipbias",
+  "darktruth",
+  "money",
+  "moneymindset",
+  "personalfinance",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#12"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from a seeded simulation with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  },
+  {
+   "id": "wald",
+   "text": "Abraham Wald's WWII analysis of where returning aircraft were hit",
+   "status": "documented",
+   "source_ids": [
+    "mangel-samaniego-1984"
+   ]
+  }
+ ],
+ "facts": {
+  "wald1984_yr": {
+   "value": "1984",
+   "source_id": "mangel-samaniego-1984"
+  }
+ },
+ "cta": "Follow QuanTik for more dark truths about money",
+ "thumb": {
+  "series": "THE DARK TRUTH OF MONEY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "THE GURU",
+   "GOT",
+   "LUCKY."
+  ],
+  "sub": "{survivors} of {n} unbeaten by pure luck",
+  "visual": "coin"
+ },
+ "scenes": [
+  {
+   "say": "That millionaire's secret? Could be a coin flip.",
+   "show": "Could be a coin flip.",
+   "visual": "coin",
+   "real": true
+  },
+  {
+   "say": "We study the winners and forget the graveyard of people who did the exact same thing.",
+   "show": "Nobody films the graveyard.",
+   "kind": "crowd",
+   "crowd": {
+    "n": "n",
+    "k": "survivors"
+   }
+  },
+  {
+   "say": "In World War Two, Abraham Wald said: armor the planes where the returning ones weren't hit.",
+   "show": "Armor where they weren't hit.",
+   "visual": "news",
+   "image": "abraham-wald",
+   "claims": [
+    "wald"
+   ]
+  },
+  {
+   "say": "{n} people flip a coin. Heads, you stay in. After {rounds} rounds…",
+   "show": "{n} people. {rounds} flips.",
+   "kind": "crowd",
+   "note": "Simulation: {n} fair coin flippers",
+   "crowd": {
+    "n": "n",
+    "k": "after3"
+   }
+  },
+  {
+   "say": "…exactly {survivors} never lost. Pure luck.",
+   "show": "Unbeaten:",
+   "kind": "alone",
+   "big": "{survivors}",
+   "big_label": "out of {n}, by pure luck",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "That person could write a book on the secret of coin flipping. Millions would buy it.",
+   "show": "And write a book about it.",
+   "visual": "news",
+   "real": true
+  },
+  {
+   "say": "Before you copy a winner, ask how many did the same thing and lost.",
+   "show": "Count the losers first.",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "Before you copy a winner, ask how many did the same thing and lost.",
+ "seed": 4,
+ "music": "suspense",
+ "voice": "male-deep"
+}

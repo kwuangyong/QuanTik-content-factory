@@ -360,6 +360,10 @@ def make_model(name, seed=None, returns=None, ep=None):
         if not (ep or {}).get("market_report"):
             raise SystemExit("market episode needs 'market_report' (path to market_report.json)")
         return MarketModel(ep["market_report"])
+    if name == "sim":  # YT/IG lot: episode carries its own simulation spec (pipeline/concept_sims.py)
+        from concept_sims import SimModel
+
+        return SimModel((ep or {})["sim"], seed, (ep or {}).get("id", "sim"))
     if name in TOPICS:
         return Model(name, seed, returns)
     if name in BASE_TOPICS:

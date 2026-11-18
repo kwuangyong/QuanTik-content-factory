@@ -1,0 +1,124 @@
+{
+ "id": "yt26-tilt",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt26-tilt",
+ "model": "sim",
+ "sim": {
+  "kind": "ruin",
+  "players": 1000,
+  "rounds": 1000,
+  "p": 0.52,
+  "payout": 1.0,
+  "start": 100,
+  "groups": [
+   {
+    "id": "a",
+    "label": "giữ mức cược",
+    "mode": "fixed",
+    "stake": 2
+   },
+   {
+    "id": "b",
+    "label": "tilt: thua là gấp ba",
+    "mode": "tilt",
+    "stake": 2,
+    "tilt_penalty": 0.06
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 26,
+ "group": "poker",
+ "concept": "Tilt",
+ "tag": "POKER THEORY #26",
+ "title": "Two bad beats and your brain hands the wheel to your ego",
+ "hook": "Two bad beats in a row, and your brain hands the steering wheel to your ego.",
+ "caption": "Tilt turns a winning player into a broke one. Same skill (win {a_p}): calm players → {a_ruin} broke; tilted players who triple after two losses → {b_ruin} broke.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
+ "hashtags": [
+  "tilt",
+  "emotions",
+  "pokertheory",
+  "poker",
+  "probability",
+  "decisionmaking",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#26"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for the math behind every decision",
+ "thumb": {
+  "series": "POKER THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "YOUR EGO",
+   "TOOK THE",
+   "WHEEL."
+  ],
+  "sub": "Tilted: {b_ruin} went broke",
+  "visual": "panic"
+ },
+ "scenes": [
+  {
+   "say": "Two bad beats in a row, and your brain hands the steering wheel to your ego.",
+   "show": "Your ego takes the wheel.",
+   "kind": "duel"
+  },
+  {
+   "say": "Tilt: emotion takes over. You chase, you bet bigger, you play worse.",
+   "show": "Chase. Bet bigger. Play worse.",
+   "visual": "panic",
+   "real": true
+  },
+  {
+   "say": "Two groups, same skill, win {a_p} of hands. The tilted group triples its bet after two losses, and plays worse.",
+   "show": "Same skill. One tilts.",
+   "kind": "compare",
+   "note": "Simulation: {players} players, {rounds} hands"
+  },
+  {
+   "say": "Calm players: {a_ruin} go broke.",
+   "show": "Calm:",
+   "kind": "walkaway",
+   "big": "{a_ruin}",
+   "big_label": "went broke",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Tilted players: {b_ruin}.",
+   "show": "Tilted:",
+   "visual": "money_burn",
+   "big": "{b_ruin}",
+   "big_label": "went broke — same skill",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Your edge didn't disappear because of bad cards. It disappeared when your decisions got worse.",
+   "show": "Bad decisions, not bad cards.",
+   "kind": "wheel"
+  },
+  {
+   "say": "Losing streaks are a signal to stop, not to raise the stakes.",
+   "show": "Stop. Don't raise.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Losing streaks are a signal to stop, not to raise the stakes.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

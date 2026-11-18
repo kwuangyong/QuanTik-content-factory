@@ -1,0 +1,125 @@
+{
+ "id": "yt60-chicken-game",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt60-chicken-game",
+ "model": "sim",
+ "sim": {
+  "kind": "matrix",
+  "rows": [
+   "Né",
+   "Lao thẳng"
+  ],
+  "cols": [
+   "Né",
+   "Lao thẳng"
+  ],
+  "payoffs": [
+   [
+    [
+     0,
+     0
+    ],
+    [
+     -1,
+     1
+    ]
+   ],
+   [
+    [
+     1,
+     -1
+    ],
+    [
+     -10,
+     -10
+    ]
+   ]
+  ]
+ },
+ "lang": "en",
+ "episode_no": 60,
+ "group": "game-theory",
+ "concept": "Chicken Game",
+ "tag": "GAME THEORY #60",
+ "title": "Whoever swerves first loses",
+ "hook": "Two cars speeding at each other. Whoever swerves is the coward. Nobody swerves, everyone dies.",
+ "caption": "Whoever swerves first loses; if nobody swerves, both lose big. Chicken has {n_nash} equilibria — one must back down. The edge goes to the more believable threat.",
+ "hashtags": [
+  "chickengame",
+  "gametheory",
+  "strategy",
+  "nashequilibrium",
+  "economics",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#60",
+  "Nineteen sixty-two"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for the game theory of real life",
+ "thumb": {
+  "series": "GAME THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "WHOEVER",
+   "SWERVES",
+   "LOSES."
+  ],
+  "sub": "{n_nash} equilibria, one must back down",
+  "image": "cuban-missile-crisis"
+ },
+ "scenes": [
+  {
+   "say": "Two cars speeding at each other. Whoever swerves is the coward. Nobody swerves, everyone dies.",
+   "show": "Whoever swerves loses.",
+   "visual": "race",
+   "real": true
+  },
+  {
+   "say": "The game of chicken: each wants the other to back down. If nobody does, it's the worst outcome for both.",
+   "show": "Nobody backs down.",
+   "kind": "duel"
+  },
+  {
+   "say": "Swerve and you lose face. Both go straight, and both lose big.",
+   "show": "Both straight: disaster.",
+   "visual": "storm",
+   "note": "Illustrative payoffs; code finds the equilibria"
+  },
+  {
+   "say": "Code finds {n_nash} equilibria: one goes straight, one swerves. The fight is over who.",
+   "show": "Equilibria:",
+   "kind": "scale",
+   "big": "{n_nash}",
+   "big_label": "one must swerve — but who?",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Nineteen sixty-two: Kennedy and Khrushchev played it with nuclear missiles.",
+   "show": "With nuclear missiles.",
+   "visual": "news",
+   "image": "cuban-missile-crisis"
+  },
+  {
+   "say": "The edge goes to whoever makes their threat more believable, even by tying their own hands.",
+   "show": "Make the threat believable.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "The edge goes to whoever makes their threat more believable, even by tying their own hands.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

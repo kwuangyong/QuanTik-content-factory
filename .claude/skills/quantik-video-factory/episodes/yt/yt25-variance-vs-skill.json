@@ -1,0 +1,109 @@
+{
+ "id": "yt25-variance-vs-skill",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt25-variance-vs-skill",
+ "model": "sim",
+ "sim": {
+  "kind": "variance",
+  "wr": 5,
+  "sd": 90,
+  "hands": 50000,
+  "players": 1000
+ },
+ "lang": "en",
+ "episode_no": 25,
+ "group": "poker",
+ "concept": "Variance vs Skill",
+ "tag": "POKER THEORY #25",
+ "title": "Good players can lose for months",
+ "hook": "You can be a genuinely winning player and still be losing after ten thousand hands.",
+ "caption": "A winning player can still be down after ten thousand hands. {players} simulated players with a {wr} bb/100 edge: {losing_10k} down after 10k hands, {losing_end} still down after {hands}.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
+ "hashtags": [
+  "variance",
+  "pokertheory",
+  "poker",
+  "probability",
+  "decisionmaking",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "10k",
+  "bb/100",
+  "ten thousand",
+  "#25"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for the math behind every decision",
+ "thumb": {
+  "series": "POKER THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "GOOD",
+   "PLAYERS",
+   "LOSE."
+  ],
+  "sub": "{losing_10k} down after 10k hands",
+  "visual": "rollercoaster"
+ },
+ "scenes": [
+  {
+   "say": "You can be a genuinely winning player and still be losing after ten thousand hands.",
+   "show": "Winning player. Still losing.",
+   "visual": "rollercoaster",
+   "real": true
+  },
+  {
+   "say": "Results are skill plus variance. Short term, variance wins.",
+   "show": "Short term, variance wins.",
+   "visual": "storm"
+  },
+  {
+   "say": "Simulate {players} players with the same real edge: {wr} big blinds per hundred hands.",
+   "show": "{players} winning players.",
+   "visual": "coin_crowd",
+   "note": "Simulation: edge {wr} bb/100, std dev {sd} bb/100"
+  },
+  {
+   "say": "After ten thousand hands, {losing_10k} of them are down.",
+   "show": "Down after 10k hands:",
+   "kind": "alone",
+   "big": "{losing_10k}",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "After {hands} hands, {losing_end} are still losing.",
+   "show": "After {hands}:",
+   "visual": "drunk_walk",
+   "big": "{losing_end}",
+   "big_label": "still losing — with a real edge",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "A hot streak doesn't make you good. A cold one doesn't make you bad.",
+   "show": "Streaks prove nothing.",
+   "visual": "coin"
+  },
+  {
+   "say": "Judge skill on a big sample, and expect long losing runs even when you're right.",
+   "show": "Expect long losing runs.",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "Judge skill on a big sample, and expect long losing runs even when you're right.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

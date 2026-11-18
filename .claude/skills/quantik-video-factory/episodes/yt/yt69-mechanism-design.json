@@ -1,0 +1,83 @@
+{
+ "id": "yt69-mechanism-design",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt69-mechanism-design",
+ "model": "sim",
+ "sim": {
+  "kind": "diagram",
+  "nodes": [],
+  "edges": []
+ },
+ "lang": "en",
+ "episode_no": 69,
+ "group": "game-theory",
+ "concept": "Mechanism Design",
+ "tag": "GAME THEORY #69",
+ "title": "Don't change people. Change the rules.",
+ "hook": "Stop trying to change people. Change the rules, and they'll change themselves.",
+ "caption": "Don't change people, change the rules. One cuts, the other picks first — so the cake gets cut fairly with no referee. That's mechanism design.",
+ "hashtags": [
+  "mechanismdesign",
+  "incentives",
+  "gametheory",
+  "strategy",
+  "nashequilibrium",
+  "economics",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#69"
+ ],
+ "claims": [],
+ "facts": {},
+ "cta": "Follow QuanTik for the game theory of real life",
+ "thumb": {
+  "series": "GAME THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "CHANGE",
+   "THE",
+   "RULES."
+  ],
+  "sub": "Mechanism design",
+  "art": "scale"
+ },
+ "scenes": [
+  {
+   "say": "Stop trying to change people. Change the rules, and they'll change themselves.",
+   "show": "Change the rules.",
+   "kind": "duel"
+  },
+  {
+   "say": "Two kids fighting over one cake. There's a rule that makes both feel it's fair.",
+   "show": "One cake. Two kids.",
+   "visual": "coin"
+  },
+  {
+   "say": "One cuts. The other picks first. So the cutter cuts as evenly as humanly possible.",
+   "show": "One cuts. One picks.",
+   "kind": "scale"
+  },
+  {
+   "say": "No referee, no trust needed. The rule does the work.",
+   "show": "The rule does the work.",
+   "kind": "walkaway"
+  },
+  {
+   "say": "Auctions, bonuses, refund policies: all mechanism design.",
+   "show": "Auctions. Bonuses. Refunds.",
+   "visual": "banker",
+   "image": "nyse-floor"
+  },
+  {
+   "say": "To change behaviour, don't preach. Change what people win and lose.",
+   "show": "Change what they win and lose.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "To change behaviour, don't preach. Change what people win and lose.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

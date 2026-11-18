@@ -1,0 +1,123 @@
+{
+ "id": "yt80-black-swan",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt80-black-swan",
+ "model": "sim",
+ "sim": {
+  "kind": "fattail",
+  "days": 10000,
+  "df": 3
+ },
+ "lang": "en",
+ "episode_no": 80,
+ "group": "quant-mindset",
+ "concept": "Black Swan",
+ "tag": "QUANT MINDSET #80",
+ "title": "'Once in a millennium' kept happening",
+ "hook": "Your risk model says a crash this big happens once in thousands of years. Reality didn't read the model.",
+ "caption": "The bell curve says a five-sigma day happens once every {normal_5s_expected_years} years. In {years} years of simulated fat-tailed data there were {fat_5s}. Ask whether you survive the unlikely (Taleb 2007).",
+ "hashtags": [
+  "blackswan",
+  "fattails",
+  "quant",
+  "probability",
+  "statistics",
+  "math",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#80"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  },
+  {
+   "id": "taleb",
+   "text": "Black swan events",
+   "status": "documented",
+   "source_ids": [
+    "taleb-2007"
+   ]
+  }
+ ],
+ "facts": {
+  "taleb_yr": {
+   "value": "2007",
+   "source_id": "taleb-2007"
+  }
+ },
+ "cta": "Follow QuanTik to think like a quant",
+ "thumb": {
+  "series": "QUANT MINDSET",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "'ONCE IN",
+   "A MILLENNIUM'",
+   "{fat_5s} TIMES."
+  ],
+  "sub": "{fat_5s} five-sigma days in {years} years",
+  "image": "black-swan-bird"
+ },
+ "scenes": [
+  {
+   "say": "Your risk model says a crash this big happens once in thousands of years. Reality didn't read the model.",
+   "show": "Reality didn't read the model.",
+   "visual": "swan",
+   "image": "black-swan-bird"
+  },
+  {
+   "say": "A black swan: rare, massive impact, and obvious only in hindsight.",
+   "show": "Rare. Massive. Obvious later.",
+   "visual": "swan",
+   "image": "nassim-taleb",
+   "claims": [
+    "taleb"
+   ]
+  },
+  {
+   "say": "Code simulates {days} days, about {years} years. One series is normal. One has fat tails, closer to real markets.",
+   "show": "Normal vs fat tails.",
+   "visual": "storm",
+   "note": "Simulation: normal vs Student-t (3 d.f.), same volatility",
+   "real": true
+  },
+  {
+   "say": "The normal model expects a five-sigma day about once every {normal_5s_expected_years} years.",
+   "show": "Normal model:",
+   "kind": "alone",
+   "big": "1 per {normal_5s_expected_years} yrs",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "The fat-tailed series had {fat_5s} of them.",
+   "show": "Fat tails:",
+   "visual": "panic",
+   "big": "{fat_5s}",
+   "big_label": "five-sigma days in {years} years",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Models built on the bell curve underestimate exactly the days that matter most.",
+   "show": "The days that matter most.",
+   "visual": "iceberg"
+  },
+  {
+   "say": "Don't ask what's likely. Ask: if the unlikely happens, do I survive?",
+   "show": "Do you survive the unlikely?",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "Don't ask what's likely. Ask: if the unlikely happens, do I survive?",
+ "music": "suspense",
+ "voice": "male-deep"
+}

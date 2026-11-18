@@ -1,0 +1,121 @@
+{
+ "id": "yt21-expected-value",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt21-expected-value",
+ "model": "sim",
+ "sim": {
+  "kind": "ev",
+  "trials": 60,
+  "fmt": "num1",
+  "options": [
+   {
+    "id": "a",
+    "label": "+EV bet",
+    "outcomes": [
+     {
+      "p": 0.45,
+      "pay": 3
+     },
+     {
+      "p": 0.55,
+      "pay": -2
+     }
+    ]
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 21,
+ "group": "poker",
+ "concept": "Expected Value (EV)",
+ "tag": "POKER THEORY #21",
+ "title": "You lost the hand. You still made the right call.",
+ "hook": "You lost the hand. You still made the right call. Deal with it.",
+ "caption": "You lost the hand — you still made the right call. Win {a_abs0} with probability {a_p0}, lose {a_abs1} with probability {a_p1}: EV +{a_ev}. Repeated {trials} times, it still lost {sim_losses} and finished up {sim_total}.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
+ "hashtags": [
+  "expectedvalue",
+  "pokertheory",
+  "poker",
+  "probability",
+  "decisionmaking",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#21"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for the math behind every decision",
+ "thumb": {
+  "series": "POKER THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "YOU LOST.",
+   "YOU WERE",
+   "RIGHT."
+  ],
+  "sub": "EV +{a_ev}, lost {sim_losses} of {trials}",
+  "image": "poker-table"
+ },
+ "scenes": [
+  {
+   "say": "You lost the hand. You still made the right call. Deal with it.",
+   "show": "You lost. You were right.",
+   "visual": "casino",
+   "real": true
+  },
+  {
+   "say": "Pros don't grade the result. They grade the decision, with expected value: EV.",
+   "show": "Grade the decision.",
+   "visual": "casino",
+   "image": "poker-table"
+  },
+  {
+   "say": "A bet that wins {a_abs0} with probability {a_p0}, loses {a_abs1} with probability {a_p1}.",
+   "show": "Win {a_abs0} or lose {a_abs1}.",
+   "kind": "duel",
+   "note": "Simulation: {trials} repeats of the same bet"
+  },
+  {
+   "say": "EV per bet: plus {a_ev}.",
+   "show": "EV per bet:",
+   "visual": "coin",
+   "big": "+{a_ev}",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Repeat it {trials} times. It still loses {sim_losses} of them.",
+   "show": "It still loses:",
+   "visual": "coin_crowd",
+   "big": "{sim_losses}/{trials}",
+   "big_label": "and finishes up {sim_total}",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Short term, results are luck. Long term, only the quality of the decision is left.",
+   "show": "Long term, only decisions remain.",
+   "visual": "drunk_walk"
+  },
+  {
+   "say": "Stop asking 'did it work?'. Ask 'would I make it a thousand times?'",
+   "show": "Would you make it a thousand times?",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Stop asking 'did it work?'. Ask 'would I make it a thousand times?'",
+ "music": "suspense",
+ "voice": "male-deep"
+}

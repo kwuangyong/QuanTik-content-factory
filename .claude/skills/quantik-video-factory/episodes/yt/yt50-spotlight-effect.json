@@ -1,0 +1,133 @@
+{
+ "id": "yt50-spotlight-effect",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt50-spotlight-effect",
+ "model": "sim",
+ "sim": {
+  "kind": "bars",
+  "unit": "",
+  "bars": [
+   {
+    "id": "guess",
+    "label": "",
+    "value": 0.5,
+    "fmt": "pct0"
+   },
+   {
+    "id": "real",
+    "label": "",
+    "value": 0.23,
+    "fmt": "pct0"
+   },
+   {
+    "id": "n_people",
+    "label": "",
+    "value": 100,
+    "fmt": "int"
+   },
+   {
+    "id": "k_people",
+    "label": "",
+    "value": 23,
+    "fmt": "int"
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 50,
+ "group": "psychology",
+ "concept": "The Spotlight Effect",
+ "tag": "PSYCHOLOGY #50",
+ "title": "Nobody is watching you as much as you think",
+ "hook": "Nobody is watching you as much as you think. Not even close.",
+ "caption": "Nobody's watching you as much as you think. Gilovich, Medvec & Savitsky (2000): students in an embarrassing T-shirt guessed half the room noticed; about {real} actually did.",
+ "hashtags": [
+  "spotlighteffect",
+  "psychology",
+  "psychologyfacts",
+  "cognitivebias",
+  "mindset",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#50"
+ ],
+ "claims": [
+  {
+   "id": "gms",
+   "text": "Wearers estimated about half noticed; about 23% actually did",
+   "status": "documented",
+   "source_ids": [
+    "gilovich-2000"
+   ]
+  }
+ ],
+ "facts": {
+  "gms2000": {
+   "value": "2000",
+   "source_id": "gilovich-2000"
+  }
+ },
+ "cta": "Follow QuanTik for the psychology behind your money",
+ "thumb": {
+  "series": "PSYCHOLOGY FACTS",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "NOBODY",
+   "IS",
+   "WATCHING."
+  ],
+  "sub": "Only about {real} noticed",
+  "art": "alone"
+ },
+ "scenes": [
+  {
+   "say": "Nobody is watching you as much as you think. Not even close.",
+   "show": "Nobody's watching.",
+   "kind": "alone"
+  },
+  {
+   "say": "The spotlight effect: you're the centre of your story, so you assume you're the centre of everyone's.",
+   "show": "You're not their main character.",
+   "kind": "scroll"
+  },
+  {
+   "say": "Gilovich and colleagues had students walk into a room in an embarrassing T-shirt.",
+   "show": "An embarrassing T-shirt.",
+   "visual": "professor",
+   "note": "Source: Gilovich, Medvec & Savitsky (2000), JPSP · rounded",
+   "claims": [
+    "gms"
+   ]
+  },
+  {
+   "say": "They guessed about half the room noticed. In reality, about {real}.",
+   "show": "They guessed half. Reality:",
+   "kind": "crowd",
+   "big": "{real}",
+   "big_label": "actually noticed",
+   "crowd": {
+    "n": "n_people",
+    "k": "k_people"
+   },
+   "claims": [
+    "gms"
+   ]
+  },
+  {
+   "say": "Everyone else is too busy worrying about their own spotlight.",
+   "show": "Everyone has their own spotlight.",
+   "kind": "commute"
+  },
+  {
+   "say": "What stops you trying new things usually isn't other people's eyes. It's the ones you imagine.",
+   "show": "The eyes you imagine.",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "What stops you trying new things usually isn't other people's eyes. It's the ones you imagine.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

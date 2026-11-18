@@ -1,0 +1,133 @@
+{
+ "id": "yt73-simpsons-paradox",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt73-simpsons-paradox",
+ "model": "sim",
+ "sim": {
+  "kind": "simpson",
+  "a_label": "Phương pháp A",
+  "b_label": "Phương pháp B",
+  "groups": [
+   {
+    "label": "Sỏi nhỏ",
+    "a": [
+     81,
+     87
+    ],
+    "b": [
+     234,
+     270
+    ]
+   },
+   {
+    "label": "Sỏi lớn",
+    "a": [
+     192,
+     263
+    ],
+    "b": [
+     55,
+     80
+    ]
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 73,
+ "group": "quant-mindset",
+ "concept": "Simpson's Paradox",
+ "tag": "QUANT MINDSET #73",
+ "title": "Better in every group, worse overall",
+ "hook": "Treatment A beats B for small kidney stones. It beats B for large ones. Overall, A loses. How?",
+ "caption": "Better in every group, worse overall. Kidney stone data (Charig et al. 1986): A beat B for small ({g0_a} vs {g0_b}) and large stones ({g1_a} vs {g1_b}) yet lost overall ({all_a} vs {all_b}).",
+ "hashtags": [
+  "simpsonsparadox",
+  "statistics",
+  "quant",
+  "probability",
+  "statistics",
+  "math",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#73"
+ ],
+ "claims": [
+  {
+   "id": "charig",
+   "text": "Success counts by stone size for two kidney stone treatments",
+   "status": "documented",
+   "source_ids": [
+    "charig-1986"
+   ]
+  }
+ ],
+ "facts": {
+  "charig": {
+   "value": "1986",
+   "source_id": "charig-1986"
+  }
+ },
+ "cta": "Follow QuanTik to think like a quant",
+ "thumb": {
+  "series": "QUANT MINDSET",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "BETTER",
+   "EVERYWHERE.",
+   "WORSE OVERALL."
+  ],
+  "sub": "{all_a} vs {all_b} combined",
+  "visual": "professor"
+ },
+ "scenes": [
+  {
+   "say": "Treatment A beats B for small kidney stones. It beats B for large ones. Overall, A loses. How?",
+   "show": "Better in every group. Worse overall.",
+   "visual": "professor",
+   "real": true
+  },
+  {
+   "say": "It's Simpson's paradox, with real data from a 1986 kidney stone study.",
+   "show": "Real data. 1986.",
+   "visual": "news",
+   "note": "Source: Charig et al. (1986), BMJ · rates computed from the original counts",
+   "claims": [
+    "charig"
+   ]
+  },
+  {
+   "say": "Small stones: A {g0_a}, B {g0_b}. Large stones: A {g1_a}, B {g1_b}.",
+   "show": "A wins both groups.",
+   "kind": "duel",
+   "claims": [
+    "charig"
+   ]
+  },
+  {
+   "say": "Combined: A {all_a}, B {all_b}.",
+   "show": "Combined:",
+   "kind": "scale",
+   "big": "{all_a} < {all_b}",
+   "big_label": "A loses overall",
+   "claims": [
+    "charig"
+   ]
+  },
+  {
+   "say": "A was used far more on the hard large-stone cases. Mixing groups flipped the conclusion.",
+   "show": "Mixing groups flips it.",
+   "kind": "compare"
+  },
+  {
+   "say": "Before trusting a total, ask whether the groups inside it are actually alike.",
+   "show": "Are the groups alike?",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Before trusting a total, ask whether the groups inside it are actually alike.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

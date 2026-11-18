@@ -1,0 +1,117 @@
+{
+ "id": "yt32-sunk-cost-trap",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt32-sunk-cost-trap",
+ "model": "sim",
+ "sim": {
+  "kind": "ruin",
+  "players": 1000,
+  "rounds": 500,
+  "p": 0.49,
+  "payout": 1.0,
+  "start": 100,
+  "groups": [
+   {
+    "id": "a",
+    "label": "cược đều tay",
+    "mode": "fixed",
+    "stake": 2
+   },
+   {
+    "id": "b",
+    "label": "cược to để gỡ",
+    "mode": "chase",
+    "stake": 2
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 32,
+ "group": "poker",
+ "concept": "The Sunk Cost Trap",
+ "tag": "POKER THEORY #32",
+ "title": "Chasing losses is the fastest way to zero",
+ "hook": "Down money and want to win it back? That feeling is the fastest road to zero.",
+ "caption": "Chasing losses is the fastest road to zero. In a slightly losing game (win {a_p}), players who bet bigger to win it back went broke {b_ruin} of the time vs {a_ruin} for flat bettors.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
+ "hashtags": [
+  "sunkcost",
+  "pokertheory",
+  "poker",
+  "probability",
+  "decisionmaking",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#32"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for the math behind every decision",
+ "thumb": {
+  "series": "POKER THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "CHASING",
+   "LOSSES",
+   "= ZERO."
+  ],
+  "sub": "Chasers broke: {b_ruin}",
+  "visual": "money_burn"
+ },
+ "scenes": [
+  {
+   "say": "Down money and want to win it back? That feeling is the fastest road to zero.",
+   "show": "The fastest road to zero.",
+   "visual": "money_burn",
+   "real": true
+  },
+  {
+   "say": "Money already lost is a sunk cost. It's gone no matter what you do next.",
+   "show": "It's gone either way.",
+   "kind": "alone"
+  },
+  {
+   "say": "Two groups play a slightly losing game, win {a_p}. One bets flat. One bets bigger to win back losses.",
+   "show": "Flat vs chasing.",
+   "kind": "compare",
+   "note": "Simulation: {players} players, {rounds} bets"
+  },
+  {
+   "say": "The chasers do get back to even more often.",
+   "show": "Chasing 'works'…",
+   "visual": "rollercoaster"
+  },
+  {
+   "say": "But {b_ruin} of them go broke, versus {a_ruin} of flat bettors.",
+   "show": "Chasers broke:",
+   "visual": "money_burn",
+   "big": "{b_ruin}",
+   "big_label": "vs {a_ruin} betting flat",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Winning it back a few times feels like a strategy. One wipeout erases all of it.",
+   "show": "One wipeout erases it all.",
+   "kind": "wheel"
+  },
+  {
+   "say": "Decide on what's ahead of you, never on what you've already lost.",
+   "show": "Decide on what's ahead.",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "Decide on what's ahead of you, never on what you've already lost.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

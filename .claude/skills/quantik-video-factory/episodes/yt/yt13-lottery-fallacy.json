@@ -1,0 +1,117 @@
+{
+ "id": "yt13-lottery-fallacy",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt13-lottery-fallacy",
+ "model": "sim",
+ "sim": {
+  "kind": "lottery",
+  "pool": 45,
+  "pick": 6,
+  "per_year": 365
+ },
+ "lang": "en",
+ "episode_no": 13,
+ "group": "dark-truth",
+ "concept": "The Lottery Fallacy",
+ "tag": "DARK TRUTH #13",
+ "title": "Buy a ticket every day. Here's how long it takes.",
+ "hook": "Buy a lottery ticket every single day. How long until you win?",
+ "caption": "Pick {pick} of {pool}: {combos} possible tickets. One ticket a day, average wait {years} years. Hope isn't a strategy — it's a business model.\n\n(Odds computed in code for a pick-{pick}-of-{pool} game.)",
+ "hashtags": [
+  "lottery",
+  "odds",
+  "darktruth",
+  "money",
+  "moneymindset",
+  "personalfinance",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#13"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from a seeded simulation with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  },
+  {
+   "id": "rules",
+   "text": "Mega 6/45: pick 6 numbers out of 45",
+   "status": "documented",
+   "source_ids": [
+    "vietlott-mega645"
+   ]
+  }
+ ],
+ "facts": {
+  "rules_yr": {
+   "value": "6/45",
+   "source_id": "vietlott-mega645"
+  }
+ },
+ "cta": "Follow QuanTik for more dark truths about money",
+ "thumb": {
+  "series": "THE DARK TRUTH OF MONEY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "HOPE IS A",
+   "BUSINESS",
+   "MODEL."
+  ],
+  "sub": "{years} years to win, one ticket a day",
+  "image": "lottery-tickets"
+ },
+ "scenes": [
+  {
+   "say": "Buy a lottery ticket every single day. How long until you win?",
+   "show": "One ticket a day.",
+   "visual": "coin",
+   "image": "lottery-tickets"
+  },
+  {
+   "say": "Pick {pick} numbers out of {pool}. Sounds doable.",
+   "show": "Pick {pick} of {pool}.",
+   "kind": "doors",
+   "claims": [
+    "rules"
+   ]
+  },
+  {
+   "say": "There are {combos} possible tickets.",
+   "show": "Possible tickets:",
+   "visual": "coin_crowd",
+   "big": "{combos}",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "One ticket a day, and the average wait is {years} years.",
+   "show": "Average wait:",
+   "kind": "alone",
+   "big": "{years} years",
+   "big_label": "one ticket every day",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "The trap: every ticket feels close to changing your life. The odds never move.",
+   "show": "It feels close. It isn't.",
+   "visual": "roulette",
+   "image": "slot-machines"
+  },
+  {
+   "say": "Hope is not a strategy. It's a business model, and you're the revenue.",
+   "show": "You're the revenue.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Hope is not a strategy. It's a business model, and you're the revenue.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

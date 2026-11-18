@@ -1,0 +1,102 @@
+{
+ "id": "yt66-schelling-point",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt66-schelling-point",
+ "model": "sim",
+ "sim": {
+  "kind": "diagram",
+  "nodes": [],
+  "edges": []
+ },
+ "lang": "en",
+ "episode_no": 66,
+ "group": "game-theory",
+ "concept": "Schelling Point",
+ "tag": "GAME THEORY #66",
+ "title": "Meet a stranger with no time and no place",
+ "hook": "You must meet a stranger in New York tomorrow. No time, no place, no phone. Where do you go?",
+ "caption": "Meet a stranger in New York with no time and no place: many of Schelling's students picked Grand Central at noon. A Schelling point wins by being obvious, not best.",
+ "hashtags": [
+  "schellingpoint",
+  "gametheory",
+  "strategy",
+  "nashequilibrium",
+  "economics",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#66"
+ ],
+ "claims": [
+  {
+   "id": "schelling",
+   "text": "Focal points in coordination games",
+   "status": "documented",
+   "source_ids": [
+    "schelling-1960"
+   ]
+  }
+ ],
+ "facts": {
+  "schelling_yr": {
+   "value": "1960",
+   "source_id": "schelling-1960"
+  }
+ },
+ "cta": "Follow QuanTik for the game theory of real life",
+ "thumb": {
+  "series": "GAME THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "NO PHONE.",
+   "STILL",
+   "MET."
+  ],
+  "sub": "Schelling point",
+  "image": "grand-central"
+ },
+ "scenes": [
+  {
+   "say": "You must meet a stranger in New York tomorrow. No time, no place, no phone. Where do you go?",
+   "show": "No time. No place.",
+   "visual": "exit",
+   "image": "grand-central"
+  },
+  {
+   "say": "A Schelling point: the choice people land on without talking, because it stands out.",
+   "show": "The choice that stands out.",
+   "visual": "professor",
+   "image": "thomas-schelling",
+   "claims": [
+    "schelling"
+   ]
+  },
+  {
+   "say": "The chain: no contact, guess what they'll guess, pick the most obvious point, meet.",
+   "show": "Guess what they'll guess.",
+   "kind": "duel"
+  },
+  {
+   "say": "Thomas Schelling asked students exactly this. A huge share picked Grand Central, at noon.",
+   "show": "Grand Central. Noon.",
+   "visual": "exit",
+   "image": "grand-central",
+   "note": "Source: Schelling (1960), The Strategy of Conflict"
+  },
+  {
+   "say": "The meeting point doesn't need to be best. It needs to be the most obvious.",
+   "show": "Obvious beats best.",
+   "kind": "walkaway"
+  },
+  {
+   "say": "When you can't coordinate in advance, pick the obvious option, not the clever one.",
+   "show": "Obvious, not clever.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "When you can't coordinate in advance, pick the obvious option, not the clever one.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

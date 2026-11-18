@@ -1,0 +1,112 @@
+{
+ "id": "yt09-cost-of-comfort",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt09-cost-of-comfort",
+ "model": "sim",
+ "sim": {
+  "kind": "growth",
+  "years": 15,
+  "unit": "thu nhập (năm đầu = 100)",
+  "lines": [
+   {
+    "id": "grow",
+    "label": "học thêm, đổi việc",
+    "start": 100,
+    "rate": 0.08,
+    "color": "positive"
+   },
+   {
+    "id": "safe",
+    "label": "ở yên chỗ cũ",
+    "start": 100,
+    "rate": 0.03,
+    "color": "muted"
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 9,
+ "group": "dark-truth",
+ "concept": "The Opportunity Cost of Comfort",
+ "tag": "DARK TRUTH #09",
+ "title": "Your safe job might be your most expensive choice",
+ "hook": "Your safe job might be the most expensive decision you ever made.",
+ "caption": "Your safe job might be your most expensive choice. Same start: raises of {safe_rate} vs {grow_rate}. After {years} years one earns {gap_ratio}x the other.\n\n(Assumptions on screen; illustration only.)",
+ "hashtags": [
+  "career",
+  "comfortzone",
+  "darktruth",
+  "money",
+  "moneymindset",
+  "personalfinance",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#09"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from a seeded simulation with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for more dark truths about money",
+ "thumb": {
+  "series": "THE DARK TRUTH OF MONEY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "COMFORT",
+   "IS A",
+   "SUBSCRIPTION."
+  ],
+  "sub": "{gap_ratio}x income gap in {years} years",
+  "visual": "multiverse"
+ },
+ "scenes": [
+  {
+   "say": "Your safe job might be the most expensive decision you ever made.",
+   "show": "Your safe job is expensive.",
+   "kind": "office"
+  },
+  {
+   "say": "Comfort never sends a bill. Its price is the road you didn't take.",
+   "show": "The road you didn't take.",
+   "visual": "multiverse",
+   "real": true
+  },
+  {
+   "say": "Same starting pay. One stays put, raises of {safe_rate}. One keeps learning and moving, {grow_rate}.",
+   "show": "Stay vs move.",
+   "kind": "duel",
+   "note": "Assumption: income grows {safe_rate} vs {grow_rate} a year"
+  },
+  {
+   "say": "{years} years later, one earns {gap_ratio} times the other.",
+   "show": "{years} years later:",
+   "visual": "race",
+   "big": "{gap_ratio}x",
+   "big_label": "the income gap",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Staying still isn't risk-free. It's the risk of being left behind, delivered slowly.",
+   "show": "Left behind, slowly.",
+   "kind": "commute"
+  },
+  {
+   "say": "Comfort is a subscription. You just never see the invoice.",
+   "show": "Comfort is a subscription.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Comfort is a subscription. You just never see the invoice.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

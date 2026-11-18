@@ -1,0 +1,121 @@
+{
+ "id": "yt63-ultimatum-game",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt63-ultimatum-game",
+ "model": "sim",
+ "sim": {
+  "kind": "diagram",
+  "nodes": [],
+  "edges": []
+ },
+ "lang": "en",
+ "episode_no": 63,
+ "group": "game-theory",
+ "concept": "Ultimatum Game",
+ "tag": "GAME THEORY #63",
+ "title": "People burn free money to punish unfairness",
+ "hook": "Someone offers you a tiny slice of free money. Refuse, and you both get nothing. Most people refuse.",
+ "caption": "People burn free money to punish unfairness. In the ultimatum game, offers below about 20% are usually rejected even though rejecting means getting nothing (Camerer 2003).",
+ "hashtags": [
+  "ultimatumgame",
+  "gametheory",
+  "strategy",
+  "nashequilibrium",
+  "economics",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#63"
+ ],
+ "claims": [
+  {
+   "id": "guth",
+   "text": "Ultimatum bargaining experiment",
+   "status": "documented",
+   "source_ids": [
+    "guth-1982"
+   ]
+  },
+  {
+   "id": "camerer",
+   "text": "Offers below about 20% are rejected about half the time",
+   "status": "documented",
+   "source_ids": [
+    "camerer-2003"
+   ]
+  }
+ ],
+ "facts": {
+  "camerer": {
+   "value": "20%",
+   "source_id": "camerer-2003",
+   "claim": "camerer"
+  },
+  "guth_yr": {
+   "value": "1982",
+   "source_id": "guth-1982"
+  },
+  "camerer2003_yr": {
+   "value": "2003",
+   "source_id": "camerer-2003"
+  }
+ },
+ "cta": "Follow QuanTik for the game theory of real life",
+ "thumb": {
+  "series": "GAME THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "THEY'D",
+   "RATHER GET",
+   "NOTHING."
+  ],
+  "sub": "Unfair offers get rejected",
+  "art": "duel"
+ },
+ "scenes": [
+  {
+   "say": "Someone offers you a tiny slice of free money. Refuse, and you both get nothing. Most people refuse.",
+   "show": "Most people refuse.",
+   "kind": "duel"
+  },
+  {
+   "say": "The ultimatum game: one person proposes a split, the other accepts or rejects. Reject, and nobody gets anything.",
+   "show": "Accept, or both get nothing.",
+   "visual": "coin",
+   "claims": [
+    "guth"
+   ],
+   "real": true
+  },
+  {
+   "say": "Economic theory says take anything. It's more than zero.",
+   "show": "Theory: take anything.",
+   "visual": "professor"
+  },
+  {
+   "say": "In reality, offers below about 20% are usually rejected.",
+   "show": "Below about 20%:",
+   "kind": "scale",
+   "big": "REJECTED",
+   "note": "Sources: Güth et al. (1982); Camerer (2003), Behavioral Game Theory",
+   "claims": [
+    "camerer"
+   ]
+  },
+  {
+   "say": "Humans don't just maximise money. We'll pay to punish unfairness.",
+   "show": "We pay to punish unfairness.",
+   "kind": "alone"
+  },
+  {
+   "say": "When splitting a deal, don't offer the minimum they'll accept. Offer what they'll call fair.",
+   "show": "Offer what feels fair.",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "When splitting a deal, don't offer the minimum they'll accept. Offer what they'll call fair.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

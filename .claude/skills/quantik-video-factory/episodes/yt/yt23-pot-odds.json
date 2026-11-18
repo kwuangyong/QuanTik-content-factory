@@ -1,0 +1,103 @@
+{
+ "id": "yt23-pot-odds",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt23-pot-odds",
+ "model": "sim",
+ "sim": {
+  "kind": "potodds",
+  "pot": 120,
+  "call": 20,
+  "outs": 9,
+  "unseen": 46
+ },
+ "lang": "en",
+ "episode_no": 23,
+ "group": "poker",
+ "concept": "Pot Odds",
+ "tag": "POKER THEORY #23",
+ "title": "A 20% shot can be the right call",
+ "hook": "You'll lose this hand four times out of five. Calling is still correct.",
+ "caption": "You'll lose four times out of five and calling is still correct. Pot {pot}, call {call}, {outs} outs of {unseen}: equity {equity} vs {need} needed. EV +{ev}.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
+ "hashtags": [
+  "potodds",
+  "pokertheory",
+  "poker",
+  "probability",
+  "decisionmaking",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "4 of 5",
+  "#23"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for the math behind every decision",
+ "thumb": {
+  "series": "POKER THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "LOSE 4 OF 5.",
+   "STILL",
+   "CALL."
+  ],
+  "sub": "Equity {equity} vs {need} needed",
+  "image": "poker-table"
+ },
+ "scenes": [
+  {
+   "say": "You'll lose this hand four times out of five. Calling is still correct.",
+   "show": "Lose 4 of 5. Still call.",
+   "visual": "casino",
+   "image": "poker-table"
+  },
+  {
+   "say": "Pot odds compare what it costs to call with what you can win.",
+   "show": "Cost vs prize.",
+   "kind": "scale"
+  },
+  {
+   "say": "There's {pot} in the pot. Calling costs {call}. {outs} cards win it, out of {unseen} unseen.",
+   "show": "Pot {pot}. Call {call}.",
+   "visual": "casino",
+   "note": "Computed: equity = {outs}/{unseen}; break-even = call / (pot + call)",
+   "real": true
+  },
+  {
+   "say": "Your chance: {equity}. You only need {need} to break even.",
+   "show": "You need {need}.",
+   "kind": "duel",
+   "big": "{equity}",
+   "big_label": "your chance to win",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Expected value of calling: plus {ev}.",
+   "show": "EV of calling:",
+   "visual": "coin",
+   "big": "+{ev}",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "The question was never 'will I win?'. It's 'is the price lower than the chance?'",
+   "show": "Is the price lower than the chance?",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "The question was never 'will I win?'. It's 'is the price lower than the chance?'",
+ "music": "suspense",
+ "voice": "male-deep"
+}

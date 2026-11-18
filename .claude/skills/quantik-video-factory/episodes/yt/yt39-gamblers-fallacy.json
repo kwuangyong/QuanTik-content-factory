@@ -1,0 +1,97 @@
+{
+ "id": "yt39-gamblers-fallacy",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt39-gamblers-fallacy",
+ "model": "sim",
+ "sim": {
+  "kind": "streak",
+  "n": 200000,
+  "k": 5
+ },
+ "lang": "en",
+ "episode_no": 39,
+ "group": "psychology",
+ "concept": "Gambler's Fallacy",
+ "tag": "PSYCHOLOGY #39",
+ "title": "Five reds in a row. Black is 'due'?",
+ "hook": "Five reds in a row. Black is 'due'. Your gut is lying to you.",
+ "caption": "Five reds in a row doesn't make black 'due'. In {n} simulated spins there were {cases} streaks of {k}; the next spin switched colour {flip} of the time.",
+ "hashtags": [
+  "gamblersfallacy",
+  "psychology",
+  "psychologyfacts",
+  "cognitivebias",
+  "mindset",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#39",
+  "50/50"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for the psychology behind your money",
+ "thumb": {
+  "series": "PSYCHOLOGY FACTS",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "BLACK IS",
+   "NOT",
+   "'DUE'."
+  ],
+  "sub": "After {k} reds: switch {flip}",
+  "image": "roulette-wheel"
+ },
+ "scenes": [
+  {
+   "say": "Five reds in a row. Black is 'due'. Your gut is lying to you.",
+   "show": "Black is 'due'?",
+   "visual": "roulette",
+   "image": "roulette-wheel"
+  },
+  {
+   "say": "The gambler's fallacy: believing randomness evens itself out in the short run.",
+   "show": "Randomness doesn't owe you.",
+   "visual": "coin"
+  },
+  {
+   "say": "Code flips a fair fifty-fifty {n} times and finds every streak of {k} in a row.",
+   "show": "{n} spins.",
+   "visual": "coin_crowd",
+   "note": "Simulation: fair 50/50, zero pocket ignored"
+  },
+  {
+   "say": "There are {cases} streaks like that. The next spin switches colour {flip} of the time.",
+   "show": "Next spin switches:",
+   "visual": "roulette",
+   "image": "monte-carlo-casino",
+   "big": "{flip}",
+   "big_label": "a coin flip — no memory",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "The wheel has no memory. Every spin is new, and it owes nobody anything.",
+   "show": "The wheel has no memory.",
+   "kind": "alone"
+  },
+  {
+   "say": "When events are independent, the past never sends the future a bill.",
+   "show": "The past sends no bill.",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "When events are independent, the past never sends the future a bill.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

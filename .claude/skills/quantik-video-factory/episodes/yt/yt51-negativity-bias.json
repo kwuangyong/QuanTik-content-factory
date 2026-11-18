@@ -1,0 +1,118 @@
+{
+ "id": "yt51-negativity-bias",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt51-negativity-bias",
+ "model": "sim",
+ "sim": {
+  "kind": "bars",
+  "unit": "",
+  "bars": [
+   {
+    "id": "pos",
+    "label": "pos",
+    "value": 5,
+    "fmt": "int"
+   },
+   {
+    "id": "neg",
+    "label": "neg",
+    "value": 1,
+    "fmt": "int"
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 51,
+ "group": "psychology",
+ "concept": "Negativity Bias",
+ "tag": "PSYCHOLOGY #51",
+ "title": "One insult beats ten compliments",
+ "hook": "Ten compliments and one insult. Tonight, you'll replay the insult.",
+ "caption": "One insult beats ten compliments. Gottman (1994): stable couples had about {pos} positive interactions for every {neg} negative one.",
+ "hashtags": [
+  "negativitybias",
+  "psychology",
+  "psychologyfacts",
+  "cognitivebias",
+  "mindset",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#51"
+ ],
+ "claims": [
+  {
+   "id": "gottman",
+   "text": "Stable couples show about a 5:1 ratio of positive to negative interactions",
+   "status": "documented",
+   "source_ids": [
+    "gottman-1994"
+   ]
+  }
+ ],
+ "facts": {
+  "gottman": {
+   "value": "1994",
+   "source_id": "gottman-1994"
+  }
+ },
+ "cta": "Follow QuanTik for the psychology behind your money",
+ "thumb": {
+  "series": "PSYCHOLOGY FACTS",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "ONE INSULT",
+   "BEATS",
+   "TEN."
+  ],
+  "sub": "The {pos}:{neg} ratio",
+  "art": "alone"
+ },
+ "scenes": [
+  {
+   "say": "Ten compliments and one insult. Tonight, you'll replay the insult.",
+   "show": "You'll replay the insult.",
+   "kind": "alone"
+  },
+  {
+   "say": "Negativity bias: bad things leave a deeper mark than good things of the same size.",
+   "show": "Bad leaves a deeper mark.",
+   "kind": "scale"
+  },
+  {
+   "say": "John Gottman studied couples for years and found a ratio.",
+   "show": "A ratio.",
+   "visual": "professor",
+   "note": "Source: Gottman (1994), Why Marriages Succeed or Fail",
+   "claims": [
+    "gottman"
+   ],
+   "real": true
+  },
+  {
+   "say": "Stable couples had about {pos} positive moments for every {neg} negative one.",
+   "show": "For every negative:",
+   "kind": "duel",
+   "big": "{pos} : {neg}",
+   "big_label": "positive to negative",
+   "claims": [
+    "gottman"
+   ]
+  },
+  {
+   "say": "Your brain evolved to notice threats. Missing a meal is fine. Missing a tiger isn't.",
+   "show": "Missing a tiger isn't fine.",
+   "visual": "storm"
+  },
+  {
+   "say": "When you criticise, it lands heavier than you think. When you're criticised, remember that too.",
+   "show": "It lands heavier than you think.",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "When you criticise, it lands heavier than you think. When you're criticised, remember that too.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

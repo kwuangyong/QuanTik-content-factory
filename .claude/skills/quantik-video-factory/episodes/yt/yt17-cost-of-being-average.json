@@ -1,0 +1,125 @@
+{
+ "id": "yt17-cost-of-being-average",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt17-cost-of-being-average",
+ "model": "sim",
+ "sim": {
+  "kind": "powerlaw",
+  "alpha": 1.16,
+  "n": 10000
+ },
+ "lang": "en",
+ "episode_no": 17,
+ "group": "dark-truth",
+ "concept": "The Cost of Being Average",
+ "tag": "DARK TRUTH #17",
+ "title": "Average doesn't get an average share",
+ "hook": "Being average used to be safe. Now it's the most expensive place to stand.",
+ "caption": "Average doesn't get an average share. On a power law, the top fifth takes about {top20} and the bottom half shares {bottom50}. Be hard to replace at one thing.\n\n(Simulation: Pareto alpha {alpha}. Idea: Pareto 1896.)",
+ "hashtags": [
+  "powerlaw",
+  "career",
+  "darktruth",
+  "money",
+  "moneymindset",
+  "personalfinance",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#17"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from a seeded simulation with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  },
+  {
+   "id": "pareto",
+   "text": "Pareto observed highly unequal income distributions",
+   "status": "documented",
+   "source_ids": [
+    "pareto-1896"
+   ]
+  }
+ ],
+ "facts": {
+  "pareto_yr": {
+   "value": "1896",
+   "source_id": "pareto-1896"
+  }
+ },
+ "cta": "Follow QuanTik for more dark truths about money",
+ "thumb": {
+  "series": "THE DARK TRUTH OF MONEY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "AVERAGE",
+   "GETS",
+   "NOTHING."
+  ],
+  "sub": "Top fifth takes {top20}",
+  "visual": "banker"
+ },
+ "scenes": [
+  {
+   "say": "Being average used to be safe. Now it's the most expensive place to stand.",
+   "show": "Average is expensive.",
+   "kind": "commute"
+  },
+  {
+   "say": "Income, views, sales: they don't split evenly. They follow a power law.",
+   "show": "They follow a power law.",
+   "visual": "professor",
+   "image": "vilfredo-pareto",
+   "claims": [
+    "pareto"
+   ]
+  },
+  {
+   "say": "Simulate {n} people on a power law.",
+   "show": "{n} people.",
+   "kind": "crowd",
+   "note": "Simulation: Pareto distribution, alpha {alpha}",
+   "crowd": {
+    "n": "n",
+    "k": "n"
+   }
+  },
+  {
+   "say": "The top fifth takes about {top20} of everything.",
+   "show": "Top fifth takes:",
+   "visual": "banker",
+   "big": "{top20}",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "The bottom half shares {bottom50}.",
+   "show": "Bottom half shares:",
+   "kind": "alone",
+   "big": "{bottom50}",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "When rewards pile up at the top, a small edge in skill becomes a huge edge in outcome.",
+   "show": "Small edge, huge outcome.",
+   "visual": "race",
+   "real": true
+  },
+  {
+   "say": "You don't need to be the best at everything. You need to be hard to replace at one thing.",
+   "show": "Be hard to replace.",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "You don't need to be the best at everything. You need to be hard to replace at one thing.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

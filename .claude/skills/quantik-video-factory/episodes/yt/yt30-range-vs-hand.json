@@ -1,0 +1,144 @@
+{
+ "id": "yt30-range-vs-hand",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt30-range-vs-hand",
+ "model": "sim",
+ "sim": {
+  "kind": "combos",
+  "hands": [
+   {
+    "id": "aa",
+    "label": "AA",
+    "type": "pair",
+    "strong": true
+   },
+   {
+    "id": "kk",
+    "label": "KK",
+    "type": "pair",
+    "strong": true
+   },
+   {
+    "id": "aks",
+    "label": "AKs",
+    "type": "suited",
+    "strong": true
+   },
+   {
+    "id": "ako",
+    "label": "AKo",
+    "type": "offsuit",
+    "strong": true
+   },
+   {
+    "id": "qjs",
+    "label": "QJs",
+    "type": "suited"
+   },
+   {
+    "id": "t9s",
+    "label": "T9s",
+    "type": "suited"
+   },
+   {
+    "id": "s76",
+    "label": "76s",
+    "type": "suited"
+   },
+   {
+    "id": "a5s",
+    "label": "A5s",
+    "type": "suited"
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 30,
+ "group": "poker",
+ "concept": "Range vs Hand",
+ "tag": "POKER THEORY #30",
+ "title": "Stop guessing their cards",
+ "hook": "Stop guessing their exact cards. That's how amateurs lose.",
+ "caption": "Stop guessing their exact cards. Think in ranges: pairs come {aa} ways, AK offsuit {ako} ways. This range has {total} combos and {strong_pct} are strong.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
+ "hashtags": [
+  "range",
+  "pokertheory",
+  "poker",
+  "probability",
+  "decisionmaking",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#30"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for the math behind every decision",
+ "thumb": {
+  "series": "POKER THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "STOP",
+   "GUESSING",
+   "THEIR CARDS."
+  ],
+  "sub": "{strong_pct} of the range is strong",
+  "image": "poker-table"
+ },
+ "scenes": [
+  {
+   "say": "Stop guessing their exact cards. That's how amateurs lose.",
+   "show": "Stop guessing their cards.",
+   "kind": "duel"
+  },
+  {
+   "say": "Pros think in ranges: every hand the opponent could have here, and how many ways to have it.",
+   "show": "Think in ranges.",
+   "visual": "casino",
+   "image": "poker-table"
+  },
+  {
+   "say": "A pair can be dealt {aa} ways. Ace-king offsuit: {ako} ways.",
+   "show": "Pairs: {aa} ways. AK offsuit: {ako}.",
+   "visual": "casino",
+   "note": "Computed: pair 6 combos, suited 4, offsuit 12",
+   "real": true
+  },
+  {
+   "say": "This range has {total} combos. {strong} are strong.",
+   "show": "{total} combos:",
+   "kind": "crowd",
+   "big": "{strong_pct}",
+   "big_label": "are strong hands",
+   "crowd": {
+    "n": "total",
+    "k": "strong"
+   },
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "You don't need to know their hand. You need the odds, and the best move against all of it.",
+   "show": "The best move against all of it.",
+   "visual": "professor"
+  },
+  {
+   "say": "Off the table too: don't ask what will happen. Ask what could, and how often.",
+   "show": "What could happen, and how often?",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Off the table too: don't ask what will happen. Ask what could, and how often.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

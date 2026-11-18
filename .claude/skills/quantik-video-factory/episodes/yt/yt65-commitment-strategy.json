@@ -1,0 +1,101 @@
+{
+ "id": "yt65-commitment-strategy",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt65-commitment-strategy",
+ "model": "sim",
+ "sim": {
+  "kind": "diagram",
+  "nodes": [],
+  "edges": []
+ },
+ "lang": "en",
+ "episode_no": 65,
+ "group": "game-theory",
+ "concept": "Commitment Strategy",
+ "tag": "GAME THEORY #65",
+ "title": "Burn the boats to win",
+ "hook": "Sometimes the strongest move is deleting your own way out.",
+ "caption": "Sometimes the strongest move is deleting your own way out. A commitment strategy limits your options so your threat or promise is believable (Schelling 1960).",
+ "hashtags": [
+  "commitment",
+  "gametheory",
+  "strategy",
+  "nashequilibrium",
+  "economics",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#65"
+ ],
+ "claims": [
+  {
+   "id": "schelling",
+   "text": "Strategic value of commitment",
+   "status": "documented",
+   "source_ids": [
+    "schelling-1960"
+   ]
+  }
+ ],
+ "facts": {
+  "schelling_yr": {
+   "value": "1960",
+   "source_id": "schelling-1960"
+  }
+ },
+ "cta": "Follow QuanTik for the game theory of real life",
+ "thumb": {
+  "series": "GAME THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "BURN",
+   "THE",
+   "BOATS."
+  ],
+  "sub": "Commitment strategy",
+  "image": "burning-ships"
+ },
+ "scenes": [
+  {
+   "say": "Sometimes the strongest move is deleting your own way out.",
+   "show": "Delete your way out.",
+   "visual": "money_burn",
+   "image": "burning-ships"
+  },
+  {
+   "say": "A commitment strategy: limit your own options so your promise or threat becomes believable.",
+   "show": "Limit yourself to be believed.",
+   "kind": "duel"
+  },
+  {
+   "say": "Cut the escape route, the other side believes you won't back down, and they adjust.",
+   "show": "They believe you. They adjust.",
+   "kind": "walkaway"
+  },
+  {
+   "say": "Generals have burned their own ships so the army knew there was no way home.",
+   "show": "No way home.",
+   "visual": "storm",
+   "real": true
+  },
+  {
+   "say": "In game theory, fewer options can be an advantage, because others are forced to believe you.",
+   "show": "Fewer options, more power.",
+   "visual": "professor",
+   "image": "thomas-schelling",
+   "claims": [
+    "schelling"
+   ]
+  },
+  {
+   "say": "Want to keep a hard decision? Make quitting expensive before you start.",
+   "show": "Make quitting expensive.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Want to keep a hard decision? Make quitting expensive before you start.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

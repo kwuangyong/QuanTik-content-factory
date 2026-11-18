@@ -1,0 +1,125 @@
+{
+ "id": "yt45-endowment-effect",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt45-endowment-effect",
+ "model": "sim",
+ "sim": {
+  "kind": "bars",
+  "unit": "",
+  "bars": [
+   {
+    "id": "sell",
+    "label": "",
+    "value": 7.12,
+    "fmt": "num2"
+   },
+   {
+    "id": "buy",
+    "label": "",
+    "value": 2.87,
+    "fmt": "num2"
+   }
+  ],
+  "derived": {
+   "ratio": [
+    "sell",
+    "buy"
+   ]
+  }
+ },
+ "lang": "en",
+ "episode_no": 45,
+ "group": "psychology",
+ "concept": "Endowment Effect",
+ "tag": "PSYCHOLOGY #45",
+ "title": "It's yours, so it's suddenly worth double",
+ "hook": "Same mug. The second it's yours, you want double for it.",
+ "caption": "Same mug — once it's yours you want double. Kahneman, Knetsch & Thaler (1990): owners asked ${sell}, buyers offered ${buy}, a {ratio}x gap.",
+ "hashtags": [
+  "endowmenteffect",
+  "psychology",
+  "psychologyfacts",
+  "cognitivebias",
+  "mindset",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#45"
+ ],
+ "claims": [
+  {
+   "id": "kkt",
+   "text": "Median selling price $7.12 vs median buying price $2.87 for the same mug",
+   "status": "documented",
+   "source_ids": [
+    "kahneman-knetsch-thaler-1990"
+   ]
+  }
+ ],
+ "facts": {
+  "kkt1990": {
+   "value": "1990",
+   "source_id": "kahneman-knetsch-thaler-1990"
+  }
+ },
+ "cta": "Follow QuanTik for the psychology behind your money",
+ "thumb": {
+  "series": "PSYCHOLOGY FACTS",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "YOURS?",
+   "NOW IT'S",
+   "WORTH 2x."
+  ],
+  "sub": "Owners ${sell} vs buyers ${buy}",
+  "image": "coffee-mug"
+ },
+ "scenes": [
+  {
+   "say": "Same mug. The second it's yours, you want double for it.",
+   "show": "Yours = worth double.",
+   "visual": "coin",
+   "image": "coffee-mug"
+  },
+  {
+   "say": "The endowment effect: we value things more just because we own them.",
+   "show": "We overvalue what we own.",
+   "kind": "scale"
+  },
+  {
+   "say": "Kahneman, Knetsch and Thaler handed mugs to half a class.",
+   "show": "Mugs for half the class.",
+   "visual": "professor",
+   "image": "richard-thaler",
+   "note": "Source: Kahneman, Knetsch & Thaler (1990), JPE",
+   "claims": [
+    "kkt"
+   ]
+  },
+  {
+   "say": "Owners wanted {sell} dollars. Buyers offered {buy}.",
+   "show": "Owners: ${sell}. Buyers: ${buy}.",
+   "kind": "duel",
+   "big": "{ratio}x",
+   "big_label": "for the exact same mug",
+   "claims": [
+    "kkt"
+   ]
+  },
+  {
+   "say": "That's why we keep old junk, bad investments, and can't sell a house at market price.",
+   "show": "Junk, bad bets, overpriced houses.",
+   "visual": "money_burn"
+  },
+  {
+   "say": "Ask: if I didn't own this, would I buy it today at this price?",
+   "show": "Would you buy it today?",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Ask: if I didn't own this, would I buy it today at this price?",
+ "music": "suspense",
+ "voice": "male-deep"
+}

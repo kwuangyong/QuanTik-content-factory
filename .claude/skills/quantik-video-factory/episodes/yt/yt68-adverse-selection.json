@@ -1,0 +1,121 @@
+{
+ "id": "yt68-adverse-selection",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt68-adverse-selection",
+ "model": "sim",
+ "sim": {
+  "kind": "lemons",
+  "cars": 1000,
+  "rounds": 8
+ },
+ "lang": "en",
+ "episode_no": 68,
+ "group": "game-theory",
+ "concept": "Adverse Selection",
+ "tag": "GAME THEORY #68",
+ "title": "How a market kills itself",
+ "hook": "A used-car market can destroy itself, just because buyers can't tell good cars from bad.",
+ "caption": "A market can kill itself. In a simulated used-car market of {cars} cars where buyers pay only the average, the price fell from {first_price} to {last_price} and just {left} cars were left (Akerlof 1970).",
+ "hashtags": [
+  "adverseselection",
+  "gametheory",
+  "strategy",
+  "nashequilibrium",
+  "economics",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "0–100",
+  "#68"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  },
+  {
+   "id": "akerlof",
+   "text": "The market for lemons",
+   "status": "documented",
+   "source_ids": [
+    "akerlof-1970"
+   ]
+  }
+ ],
+ "facts": {
+  "akerlof_yr": {
+   "value": "1970",
+   "source_id": "akerlof-1970"
+  }
+ },
+ "cta": "Follow QuanTik for the game theory of real life",
+ "thumb": {
+  "series": "GAME THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "A MARKET",
+   "KILLED",
+   "ITSELF."
+  ],
+  "sub": "{left} of {cars} cars left",
+  "image": "used-car-lot"
+ },
+ "scenes": [
+  {
+   "say": "A used-car market can destroy itself, just because buyers can't tell good cars from bad.",
+   "show": "A market can kill itself.",
+   "visual": "board",
+   "image": "used-car-lot"
+  },
+  {
+   "say": "Adverse selection: sellers know quality, buyers don't, and good products get pushed out.",
+   "show": "Good products get pushed out.",
+   "visual": "professor",
+   "image": "george-akerlof",
+   "claims": [
+    "akerlof"
+   ]
+  },
+  {
+   "say": "Code simulates {cars} cars of random quality. Buyers only pay the average, so good-car owners leave. Repeat.",
+   "show": "Pay average. Good cars leave.",
+   "kind": "crowd",
+   "note": "Simulation: quality uniform 0–100, buyers pay the average",
+   "crowd": {
+    "n": "cars",
+    "k": "left"
+   }
+  },
+  {
+   "say": "The price starts at {first_price}. After {rounds} rounds it's {last_price}.",
+   "show": "Price: {first_price} →",
+   "visual": "rollercoaster",
+   "big": "{last_price}",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Only {left} cars are left on the lot.",
+   "show": "Cars left:",
+   "visual": "board",
+   "image": "used-car-lot",
+   "big": "{left} / {cars}",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Akerlof called it the market for lemons. Without trusted information, markets can vanish.",
+   "show": "The market for lemons.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Without trusted information, markets can vanish. Inspections, warranties and honest reviews keep them alive.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

@@ -1,0 +1,111 @@
+{
+ "id": "yt78-kelly-criterion",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt78-kelly-criterion",
+ "model": "sim",
+ "sim": {
+  "kind": "kelly",
+  "p": 0.55,
+  "b": 1.0,
+  "bets": 200
+ },
+ "lang": "en",
+ "episode_no": 78,
+ "group": "quant-mindset",
+ "concept": "The Kelly Criterion",
+ "tag": "QUANT MINDSET #78",
+ "title": "Bet too big and a winning edge loses",
+ "hook": "You have a real edge. Bet too much, and you'll still lose. Here's the formula that says how much.",
+ "caption": "Bet too big and a winning edge still loses. Win {p}, even money: Kelly says {fstar}. After {bets} bets the median Kelly bettor is at {med_kelly}x; at double Kelly ({f2}), {med_2kelly}x.\n\n(Simulation; illustration, not advice.)",
+ "hashtags": [
+  "kellycriterion",
+  "quant",
+  "probability",
+  "statistics",
+  "math",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "1,000",
+  "#78"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik to think like a quant",
+ "thumb": {
+  "series": "QUANT MINDSET",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "BET TOO",
+   "BIG,",
+   "STILL LOSE."
+  ],
+  "sub": "Kelly {med_kelly}x vs double {med_2kelly}x",
+  "visual": "casino"
+ },
+ "scenes": [
+  {
+   "say": "You have a real edge. Bet too much, and you'll still lose. Here's the formula that says how much.",
+   "show": "Bet too much, still lose.",
+   "visual": "casino",
+   "real": true
+  },
+  {
+   "say": "The Kelly criterion: the fraction of your money that grows it fastest in the long run.",
+   "show": "The fastest-growth fraction.",
+   "visual": "professor"
+  },
+  {
+   "say": "A bet you win {p} of the time, even money. Kelly says bet {fstar}.",
+   "show": "Kelly says:",
+   "kind": "scale",
+   "big": "{fstar}",
+   "big_label": "of your bankroll per bet",
+   "note": "Computed: f* = p − (1 − p)/b · simulated 1,000 players, {bets} bets",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "After {bets} bets, the typical Kelly bettor has multiplied their money {med_kelly} times.",
+   "show": "Kelly bettor:",
+   "visual": "rocket",
+   "big": "{med_kelly}x",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Bet double, {f2}, and the typical result is {med_2kelly} times. Basically nowhere.",
+   "show": "Double Kelly:",
+   "visual": "money_burn",
+   "big": "{med_2kelly}x",
+   "big_label": "all that risk, nowhere",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Betting too big is worse than betting too small. Many pros use half Kelly, {fhalf}.",
+   "show": "Pros use half: {fhalf}.",
+   "kind": "walkaway"
+  },
+  {
+   "say": "Your edge decides whether to play. Kelly decides how big.",
+   "show": "Edge: whether. Kelly: how big.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Your edge decides whether to play. Kelly decides how big.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

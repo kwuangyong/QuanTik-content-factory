@@ -1,0 +1,102 @@
+{
+ "id": "yt49-hyperbolic-discounting",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt49-hyperbolic-discounting",
+ "model": "sim",
+ "sim": {
+  "kind": "discount",
+  "k": 0.1,
+  "small": 100,
+  "large": 150,
+  "gap": 6,
+  "shift": 12
+ },
+ "lang": "en",
+ "episode_no": 49,
+ "group": "psychology",
+ "concept": "Hyperbolic Discounting",
+ "tag": "PSYCHOLOGY #49",
+ "title": "You'll wait a year. You won't wait a day.",
+ "hook": "A year from now, you'd happily wait for more. On the day itself, you grab the smaller amount.",
+ "caption": "You'll wait a year, but not a day. With hyperbolic discounting (k = {k}/month), ${large} later beats ${small} sooner from far away ({later_large} vs {later_small}) — but up close, ${small} now wins ({now_small} vs {now_large}).",
+ "hashtags": [
+  "hyperbolicdiscounting",
+  "psychology",
+  "psychologyfacts",
+  "cognitivebias",
+  "mindset",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#49"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for the psychology behind your money",
+ "thumb": {
+  "series": "PSYCHOLOGY FACTS",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "YOU'LL WAIT",
+   "A YEAR.",
+   "NOT A DAY."
+  ],
+  "sub": "Preference reversal, computed",
+  "art": "alone"
+ },
+ "scenes": [
+  {
+   "say": "A year from now, you'd happily wait for more. On the day itself, you grab the smaller amount.",
+   "show": "You flip on the day.",
+   "kind": "alone"
+  },
+  {
+   "say": "Hyperbolic discounting: we discount rewards brutally when they're close, gently when they're far.",
+   "show": "Close rewards feel huge.",
+   "kind": "scale"
+  },
+  {
+   "say": "{small} dollars sooner, or {large} dollars {gap} months later.",
+   "show": "${small} now or ${large} later?",
+   "kind": "duel",
+   "note": "Model: hyperbolic discounting V = A/(1 + kD), k = {k} per month"
+  },
+  {
+   "say": "Seen from far away, the bigger reward feels like {later_large}, beating {later_small}.",
+   "show": "From afar: wait.",
+   "visual": "telescope",
+   "big": "{later_large}",
+   "big_label": "vs {later_small} — you'd wait",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Right before the day, {small} now feels like {now_small}, against {now_large}. You grab it.",
+   "show": "Up close: grab it.",
+   "visual": "money_burn",
+   "big": "{now_small}",
+   "big_label": "vs {now_large} — you grab it",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Decide when the reward is far away, then lock it so present-you can't undo it.",
+   "show": "Decide early. Lock it.",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "Decide when the reward is far away, then lock it so present-you can't undo it.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

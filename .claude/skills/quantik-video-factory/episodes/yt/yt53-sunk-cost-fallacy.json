@@ -1,0 +1,118 @@
+{
+ "id": "yt53-sunk-cost-fallacy",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt53-sunk-cost-fallacy",
+ "model": "sim",
+ "sim": {
+  "kind": "bars",
+  "unit": "",
+  "bars": [
+   {
+    "id": "sunk",
+    "label": "",
+    "value": 0.54,
+    "fmt": "pct0"
+   },
+   {
+    "id": "enjoy",
+    "label": "",
+    "value": 0.46,
+    "fmt": "pct0"
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 53,
+ "group": "psychology",
+ "concept": "Sunk Cost Fallacy",
+ "tag": "PSYCHOLOGY #53",
+ "title": "You paid for it, so you'll suffer through it",
+ "hook": "You paid for it, so you'll suffer through it. That's not discipline. That's a bias.",
+ "caption": "You paid for it, so you'll suffer through it? Arkes & Blumer (1985): about {sunk} chose the more expensive trip despite preferring the cheaper one.",
+ "hashtags": [
+  "sunkcost",
+  "psychology",
+  "psychologyfacts",
+  "cognitivebias",
+  "mindset",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#53"
+ ],
+ "claims": [
+  {
+   "id": "ab",
+   "text": "About 54% chose the more expensive trip they expected to enjoy less",
+   "status": "documented",
+   "source_ids": [
+    "arkes-blumer-1985"
+   ]
+  }
+ ],
+ "facts": {
+  "ab1985": {
+   "value": "1985",
+   "source_id": "arkes-blumer-1985"
+  }
+ },
+ "cta": "Follow QuanTik for the psychology behind your money",
+ "thumb": {
+  "series": "PSYCHOLOGY FACTS",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "YOU PAID.",
+   "SO YOU",
+   "SUFFER."
+  ],
+  "sub": "{sunk} picked the trip they liked less",
+  "visual": "money_burn"
+ },
+ "scenes": [
+  {
+   "say": "You paid for it, so you'll suffer through it. That's not discipline. That's a bias.",
+   "show": "That's not discipline.",
+   "kind": "alone"
+  },
+  {
+   "say": "The sunk cost fallacy: continuing something only because you've already put so much into it.",
+   "show": "Only because you paid.",
+   "visual": "money_burn",
+   "real": true
+  },
+  {
+   "say": "Arkes and Blumer asked: two non-refundable trips on the same weekend. The one you prefer, or the expensive one?",
+   "show": "Two trips. Pick one.",
+   "kind": "doors",
+   "note": "Source: Arkes & Blumer (1985), OBHDP",
+   "claims": [
+    "ab"
+   ]
+  },
+  {
+   "say": "About {sunk} picked the expensive trip, even though they preferred the other one.",
+   "show": "Picked the pricier trip:",
+   "kind": "duel",
+   "big": "{sunk}",
+   "big_label": "despite preferring the other",
+   "claims": [
+    "ab"
+   ]
+  },
+  {
+   "say": "The money is gone either way. The only question left is which trip makes you happier.",
+   "show": "The money is gone either way.",
+   "kind": "scale"
+  },
+  {
+   "say": "Ask: starting from zero today, would I still choose this?",
+   "show": "Starting from zero?",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "Ask: starting from zero today, would I still choose this?",
+ "music": "suspense",
+ "voice": "male-deep"
+}

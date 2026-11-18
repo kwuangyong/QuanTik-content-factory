@@ -1,0 +1,122 @@
+{
+ "id": "yt37-dunning-kruger",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt37-dunning-kruger",
+ "model": "sim",
+ "sim": {
+  "kind": "bars",
+  "unit": "",
+  "bars": [
+   {
+    "id": "actual",
+    "label": "actual",
+    "value": 12,
+    "fmt": "num0"
+   },
+   {
+    "id": "self",
+    "label": "self",
+    "value": 62,
+    "fmt": "num0"
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 37,
+ "group": "psychology",
+ "concept": "Dunning-Kruger Effect",
+ "tag": "PSYCHOLOGY #37",
+ "title": "The least skilled are often the most confident",
+ "hook": "The least skilled person in the room is often the most confident. There's a study for that.",
+ "caption": "The least skilled are often the most confident. Kruger & Dunning (1999): the bottom group scored around the {actual}th percentile but rated themselves around the {self}nd.",
+ "hashtags": [
+  "dunningkruger",
+  "psychology",
+  "psychologyfacts",
+  "cognitivebias",
+  "mindset",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "12th",
+  "62nd",
+  "#37"
+ ],
+ "claims": [
+  {
+   "id": "kd",
+   "text": "Bottom-quartile participants scored around the 12th percentile but estimated the 62nd",
+   "status": "documented",
+   "source_ids": [
+    "kruger-dunning-1999"
+   ]
+  }
+ ],
+ "facts": {
+  "kd1999": {
+   "value": "1999",
+   "source_id": "kruger-dunning-1999"
+  }
+ },
+ "cta": "Follow QuanTik for the psychology behind your money",
+ "thumb": {
+  "series": "PSYCHOLOGY FACTS",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "LEAST",
+   "SKILLED.",
+   "MOST SURE."
+  ],
+  "sub": "Scored {actual}th, rated {self}nd",
+  "visual": "professor"
+ },
+ "scenes": [
+  {
+   "say": "The least skilled person in the room is often the most confident. There's a study for that.",
+   "show": "Least skilled. Most confident.",
+   "kind": "compare"
+  },
+  {
+   "say": "The Dunning-Kruger effect: lacking a skill also means lacking the skill to notice.",
+   "show": "You can't see what you lack.",
+   "visual": "professor",
+   "real": true
+  },
+  {
+   "say": "Kruger and Dunning tested people in 1999. The bottom group scored around the {actual}th percentile.",
+   "show": "Actual score:",
+   "kind": "alone",
+   "big": "{actual}th",
+   "big_label": "percentile",
+   "note": "Source: Kruger & Dunning (1999), JPSP",
+   "claims": [
+    "kd"
+   ]
+  },
+  {
+   "say": "They rated themselves around the {self}nd percentile. Above average.",
+   "show": "Self-rating:",
+   "kind": "scroll",
+   "big": "{self}nd",
+   "big_label": "percentile — 'above average'",
+   "claims": [
+    "kd"
+   ]
+  },
+  {
+   "say": "The skill you need to do something well is the same skill you need to see you're doing it badly.",
+   "show": "Same skill, both ways.",
+   "kind": "duel"
+  },
+  {
+   "say": "If a field looks too easy, you probably haven't seen how hard it is yet.",
+   "show": "Too easy? Look again.",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "If a field looks too easy, you probably haven't seen how hard it is yet.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

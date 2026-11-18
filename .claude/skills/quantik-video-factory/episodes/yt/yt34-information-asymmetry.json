@@ -1,0 +1,84 @@
+{
+ "id": "yt34-information-asymmetry",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt34-information-asymmetry",
+ "model": "sim",
+ "sim": {
+  "kind": "diagram",
+  "nodes": [],
+  "edges": []
+ },
+ "lang": "en",
+ "episode_no": 34,
+ "group": "poker",
+ "concept": "Information Asymmetry",
+ "tag": "POKER THEORY #34",
+ "title": "If you can't spot the sucker, it's you",
+ "hook": "If you can't spot the sucker at the table within half an hour, it's you.",
+ "caption": "If you can't spot the sucker within half an hour, it's you. Information asymmetry decides who gets picked off — at the table and in every deal pitched to you.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
+ "hashtags": [
+  "information",
+  "pokertheory",
+  "poker",
+  "probability",
+  "decisionmaking",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#34"
+ ],
+ "claims": [],
+ "facts": {},
+ "cta": "Follow QuanTik for the math behind every decision",
+ "thumb": {
+  "series": "POKER THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "THE",
+   "SUCKER",
+   "IS YOU."
+  ],
+  "sub": "Information asymmetry",
+  "visual": "casino"
+ },
+ "scenes": [
+  {
+   "say": "If you can't spot the sucker at the table within half an hour, it's you.",
+   "show": "The sucker is you.",
+   "visual": "casino",
+   "real": true
+  },
+  {
+   "say": "Information asymmetry: one side knows something the other doesn't.",
+   "show": "One side knows more.",
+   "kind": "duel"
+  },
+  {
+   "say": "The one who knows more prices things right, picks the good games, and skips the bad ones.",
+   "show": "Picks the good games.",
+   "visual": "telescope"
+  },
+  {
+   "say": "The one who knows less doesn't just lose hands. They don't know which game they're in.",
+   "show": "Wrong game, every time.",
+   "visual": "roulette",
+   "image": "slot-machines"
+  },
+  {
+   "say": "It's true in poker, in used cars, in every deal someone pitches you.",
+   "show": "Every deal pitched to you.",
+   "visual": "banker",
+   "image": "used-car-lot"
+  },
+  {
+   "say": "Before you join any game, ask who knows more than you, and what they gain from it.",
+   "show": "Who knows more than you?",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Before you join any game, ask who knows more than you, and what they gain from it.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

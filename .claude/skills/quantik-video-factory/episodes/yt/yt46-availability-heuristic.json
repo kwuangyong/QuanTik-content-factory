@@ -1,0 +1,82 @@
+{
+ "id": "yt46-availability-heuristic",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt46-availability-heuristic",
+ "model": "sim",
+ "sim": {
+  "kind": "diagram",
+  "nodes": [],
+  "edges": []
+ },
+ "lang": "en",
+ "episode_no": 46,
+ "group": "psychology",
+ "concept": "Availability Heuristic",
+ "tag": "PSYCHOLOGY #46",
+ "title": "What you remember isn't what's likely",
+ "hook": "You're scared of planes and relaxed in cars. The statistics laugh at you.",
+ "caption": "Easy to remember feels likely. The availability heuristic makes us fear rare, dramatic events and ignore the boring risks that actually get us. Look up the frequency.",
+ "hashtags": [
+  "availabilityheuristic",
+  "psychology",
+  "psychologyfacts",
+  "cognitivebias",
+  "mindset",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#46"
+ ],
+ "claims": [],
+ "facts": {},
+ "cta": "Follow QuanTik for the psychology behind your money",
+ "thumb": {
+  "series": "PSYCHOLOGY FACTS",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "SCARED OF",
+   "THE WRONG",
+   "THING."
+  ],
+  "sub": "Availability heuristic",
+  "visual": "news"
+ },
+ "scenes": [
+  {
+   "say": "You're scared of planes and relaxed in cars. The statistics laugh at you.",
+   "show": "Scared of the wrong thing.",
+   "kind": "commute"
+  },
+  {
+   "say": "The availability heuristic: if it's easy to remember, it feels likely.",
+   "show": "Easy to remember = feels likely.",
+   "visual": "news",
+   "real": true
+  },
+  {
+   "say": "Rare, shocking events get covered for days. Common dangers barely make the news.",
+   "show": "Rare events, endless coverage.",
+   "visual": "news"
+  },
+  {
+   "say": "Memory measures how vivid something is, not how often it happens.",
+   "show": "Vivid isn't frequent.",
+   "visual": "storm"
+  },
+  {
+   "say": "So we fear the dramatic and ignore the boring stuff that actually gets us.",
+   "show": "The boring stuff gets you.",
+   "kind": "alone"
+  },
+  {
+   "say": "When you judge a risk, find the real frequency, not the first example in your head.",
+   "show": "Find the real frequency.",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "When you judge a risk, find the real frequency, not the first example in your head.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

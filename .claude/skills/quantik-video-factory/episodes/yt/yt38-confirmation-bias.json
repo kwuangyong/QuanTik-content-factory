@@ -1,0 +1,82 @@
+{
+ "id": "yt38-confirmation-bias",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt38-confirmation-bias",
+ "model": "sim",
+ "sim": {
+  "kind": "diagram",
+  "nodes": [],
+  "edges": []
+ },
+ "lang": "en",
+ "episode_no": 38,
+ "group": "psychology",
+ "concept": "Confirmation Bias",
+ "tag": "PSYCHOLOGY #38",
+ "title": "You're not looking for the truth",
+ "hook": "You're not looking for the truth. You're looking for people who agree with you.",
+ "caption": "You're not looking for the truth — you're looking for agreement. Confirmation bias: believe, search for support, ignore the rest, feel more certain. Ask what evidence would change your mind, then go find it.",
+ "hashtags": [
+  "confirmationbias",
+  "psychology",
+  "psychologyfacts",
+  "cognitivebias",
+  "mindset",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#38"
+ ],
+ "claims": [],
+ "facts": {},
+ "cta": "Follow QuanTik for the psychology behind your money",
+ "thumb": {
+  "series": "PSYCHOLOGY FACTS",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "YOU WANT",
+   "AGREEMENT,",
+   "NOT TRUTH."
+  ],
+  "sub": "Confirmation bias",
+  "art": "scroll"
+ },
+ "scenes": [
+  {
+   "say": "You're not looking for the truth. You're looking for people who agree with you.",
+   "show": "You want agreement, not truth.",
+   "kind": "scroll"
+  },
+  {
+   "say": "Confirmation bias: we notice, remember and believe what fits what we already think.",
+   "show": "We see what fits.",
+   "visual": "telescope"
+  },
+  {
+   "say": "The loop: a belief, search for support, ignore the rest, feel even more certain.",
+   "show": "Believe. Search. Ignore. Repeat.",
+   "kind": "wheel"
+  },
+  {
+   "say": "Your feed spins that loop faster. Click on something, and it serves you more of it.",
+   "show": "Your feed spins it faster.",
+   "visual": "news",
+   "real": true
+  },
+  {
+   "say": "More information doesn't make you more right. It just makes you more sure.",
+   "show": "More sure, not more right.",
+   "kind": "alone"
+  },
+  {
+   "say": "Before a big decision, ask what evidence would change your mind. Then go find it.",
+   "show": "What would change your mind?",
+   "kind": "walkaway"
+  }
+ ],
+ "takeaway": "Before a big decision, ask what evidence would change your mind. Then go find it.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

@@ -1,0 +1,94 @@
+{
+ "id": "yt02-poverty-trap",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt02-poverty-trap",
+ "model": "sim",
+ "sim": {
+  "kind": "diagram",
+  "nodes": [],
+  "edges": []
+ },
+ "lang": "en",
+ "episode_no": 2,
+ "group": "dark-truth",
+ "concept": "The Poverty Trap",
+ "tag": "DARK TRUTH #02",
+ "title": "Being poor is expensive. Here's the loop.",
+ "hook": "Being poor is expensive. Literally.",
+ "caption": "Being poor is expensive. No buffer → a surprise becomes a loan → interest eats next month → even less buffer. The first win isn't investing; it's never having to borrow for a surprise.",
+ "hashtags": [
+  "povertytrap",
+  "debt",
+  "darktruth",
+  "money",
+  "moneymindset",
+  "personalfinance",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#02"
+ ],
+ "claims": [],
+ "facts": {},
+ "cta": "Follow QuanTik for more dark truths about money",
+ "thumb": {
+  "series": "THE DARK TRUTH OF MONEY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "BEING POOR",
+   "IS",
+   "EXPENSIVE."
+  ],
+  "sub": "A loop that charges interest",
+  "image": "payday-loan"
+ },
+ "scenes": [
+  {
+   "say": "Being poor is expensive. Literally.",
+   "show": "Being poor is expensive. Literally.",
+   "kind": "alone"
+  },
+  {
+   "say": "No savings means one broken phone becomes a loan.",
+   "show": "One broken phone.",
+   "visual": "money_burn"
+  },
+  {
+   "say": "The loan costs interest. The interest eats next month's pay.",
+   "show": "Interest eats next month.",
+   "visual": "banker",
+   "image": "payday-loan"
+  },
+  {
+   "say": "Next month, there's even less of a cushion.",
+   "show": "Even less cushion.",
+   "kind": "wheel"
+  },
+  {
+   "say": "So the poor pay more for the same things: fees, interest, the cheap boots that break twice.",
+   "show": "Pay more for the same.",
+   "visual": "news",
+   "image": "pawn-shop"
+  },
+  {
+   "say": "The way out needs exactly what the trap takes away: time and a buffer.",
+   "show": "Time. And a buffer.",
+   "kind": "commute"
+  },
+  {
+   "say": "That's why the first win isn't investing. It's never having to borrow for a surprise.",
+   "show": "Never borrow for a surprise.",
+   "kind": "walkaway"
+  },
+  {
+   "say": "Poverty isn't a lack of effort. It's a loop that charges interest.",
+   "show": "A loop that charges interest.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Poverty isn't a lack of effort. It's a loop that charges interest.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

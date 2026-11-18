@@ -1,0 +1,112 @@
+{
+ "id": "yt61-tit-for-tat",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt61-tit-for-tat",
+ "model": "sim",
+ "sim": {
+  "kind": "ipd",
+  "rounds": 200
+ },
+ "lang": "en",
+ "episode_no": 61,
+ "group": "game-theory",
+ "concept": "Tit for Tat",
+ "tag": "GAME THEORY #61",
+ "title": "The simplest strategy beat the geniuses",
+ "hook": "The simplest strategy in the tournament beat the experts' clever ones. One rule: copy what they just did.",
+ "caption": "One rule beat the geniuses: copy what they just did. Axelrod's tournaments were won by Tit for Tat; in our re-run of {n_strats} strategies it finished #{tft_rank} ({tft_score} pts) vs {defect_score} for Always Defect.",
+ "hashtags": [
+  "titfortat",
+  "gametheory",
+  "strategy",
+  "nashequilibrium",
+  "economics",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "5-3-1-0",
+  "#61"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from code that ran with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  },
+  {
+   "id": "axelrod",
+   "text": "Tit for Tat won Axelrod's computer tournaments",
+   "status": "documented",
+   "source_ids": [
+    "axelrod-1984"
+   ]
+  }
+ ],
+ "facts": {
+  "axelrod_yr": {
+   "value": "1984",
+   "source_id": "axelrod-1984"
+  }
+ },
+ "cta": "Follow QuanTik for the game theory of real life",
+ "thumb": {
+  "series": "GAME THEORY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "ONE RULE",
+   "BEAT THE",
+   "GENIUSES."
+  ],
+  "sub": "Tit for Tat #{tft_rank} of {n_strats}",
+  "image": "robert-axelrod"
+ },
+ "scenes": [
+  {
+   "say": "The simplest strategy in the tournament beat the experts' clever ones. One rule: copy what they just did.",
+   "show": "One rule beat the geniuses.",
+   "kind": "duel"
+  },
+  {
+   "say": "Robert Axelrod ran a tournament of repeated prisoner's dilemmas. Tit for Tat won.",
+   "show": "Tit for Tat won.",
+   "visual": "professor",
+   "image": "robert-axelrod",
+   "note": "Source: Axelrod (1984), The Evolution of Cooperation",
+   "claims": [
+    "axelrod"
+   ]
+  },
+  {
+   "say": "Code re-runs a small version: {n_strats} strategies, every pair, {rounds} rounds.",
+   "show": "{n_strats} strategies.",
+   "kind": "compare",
+   "note": "Simulation: payoffs 5-3-1-0, round robin"
+  },
+  {
+   "say": "Tit for Tat finishes number {tft_rank} with {tft_score} points. Always Defect gets {defect_score}.",
+   "show": "Tit for Tat:",
+   "kind": "scale",
+   "big": "#{tft_rank}",
+   "big_label": "{tft_score} pts vs {defect_score} for Always Defect",
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "The top two both have one thing in common: they're never the first to betray.",
+   "show": "Never betray first.",
+   "kind": "walkaway"
+  },
+  {
+   "say": "Be nice first. Hit back immediately. Forgive immediately. Simple, and hard to exploit.",
+   "show": "Nice. Retaliate. Forgive.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Be nice first. Hit back immediately. Forgive immediately. Simple, and hard to exploit.",
+ "music": "suspense",
+ "voice": "male-deep"
+}

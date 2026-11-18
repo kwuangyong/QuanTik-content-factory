@@ -1,0 +1,121 @@
+{
+ "id": "yt04-silent-tax",
+ "look": "dark-truth",
+ "pillar": "dark-truth",
+ "style": "dark-story",
+ "topic": "yt04-silent-tax",
+ "model": "sim",
+ "sim": {
+  "kind": "growth",
+  "years": 20,
+  "unit": "sức mua (triệu đồng)",
+  "lines": [
+   {
+    "id": "sav",
+    "label": "gửi, lãi thực +2%",
+    "start": 100,
+    "rate": 0.02,
+    "color": "positive"
+   },
+   {
+    "id": "cash",
+    "label": "để tiền mặt",
+    "start": 100,
+    "rate": -0.04,
+    "color": "negative"
+   }
+  ]
+ },
+ "lang": "en",
+ "episode_no": 4,
+ "group": "dark-truth",
+ "concept": "The Silent Tax",
+ "tag": "DARK TRUTH #04",
+ "title": "Inflation is a tax nobody voted for",
+ "hook": "There's a tax you pay every day. Nobody voted for it.",
+ "caption": "Inflation is a tax nobody voted for. {cash_start} left in cash, losing {cash_rate} of buying power a year, buys what about {cash_end} buys today after {years} years.\n\n(Assumptions shown on screen; an illustration, not a forecast.)",
+ "hashtags": [
+  "inflation",
+  "darktruth",
+  "money",
+  "moneymindset",
+  "personalfinance",
+  "QuanTik"
+ ],
+ "allowed_literals": [
+  "#04"
+ ],
+ "claims": [
+  {
+   "id": "sim",
+   "text": "Numbers come from a seeded simulation with the assumptions shown on screen",
+   "status": "model_output",
+   "source_ids": []
+  }
+ ],
+ "facts": {},
+ "cta": "Follow QuanTik for more dark truths about money",
+ "thumb": {
+  "series": "THE DARK TRUTH OF MONEY",
+  "footer": "Simulated / sourced data • Educational, not advice",
+  "headline": [
+   "A TAX",
+   "NOBODY",
+   "VOTED FOR."
+  ],
+  "sub": "{cash_start} → {cash_end} in {years} years",
+  "image": "dollar-bills"
+ },
+ "scenes": [
+  {
+   "say": "There's a tax you pay every day. Nobody voted for it.",
+   "show": "A tax nobody voted for.",
+   "visual": "money_burn",
+   "image": "dollar-bills"
+  },
+  {
+   "say": "It's inflation. Your balance stays the same. What it buys shrinks.",
+   "show": "Same balance. Less stuff.",
+   "kind": "spend"
+  },
+  {
+   "say": "Leave {cash_start} in cash, losing about {cash_rate} of buying power a year.",
+   "show": "Cash, doing nothing.",
+   "kind": "alone",
+   "note": "Assumption: cash loses {cash_rate}/yr of buying power; savings earn {sav_rate} above inflation"
+  },
+  {
+   "say": "After {years} years, it buys what about {cash_end} buys today.",
+   "show": "{cash_start} becomes…",
+   "kind": "crowd",
+   "big": "{cash_end}",
+   "big_label": "of buying power left after {years} years",
+   "crowd": {
+    "n": "cash_start",
+    "k": "cash_end"
+   },
+   "claims": [
+    "sim"
+   ]
+  },
+  {
+   "say": "Doing nothing felt safe. It was a decision, and it had a price.",
+   "show": "Doing nothing has a price.",
+   "visual": "iceberg",
+   "real": true
+  },
+  {
+   "say": "The real question isn't how much interest you earn. It's whether it beats inflation.",
+   "show": "Does it beat inflation?",
+   "visual": "race"
+  },
+  {
+   "say": "Your money is either working, or it's quietly melting.",
+   "show": "Working, or melting.",
+   "kind": "alone"
+  }
+ ],
+ "takeaway": "Your money is either working, or it's quietly melting.",
+ "music": "suspense",
+ "voice": "male-deep"
+}
