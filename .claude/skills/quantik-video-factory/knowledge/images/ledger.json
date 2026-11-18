@@ -2,6 +2,19 @@
   "version": 1,
   "images": [
     {
+      "id": "birthday-cake",
+      "kind": "photo",
+      "subject": "Birthday cake",
+      "depicts": "Birthday Cake - Candles",
+      "file": "files/birthday-cake.jpg",
+      "source_url": "https://www.flickr.com/photos/22272408@N07/2655639659",
+      "author": "jessica.diamond",
+      "license": "CC BY-SA 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "credit": "Ảnh: jessica.diamond · CC BY-SA 2.0 · Flickr (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
       "id": "black-scholes",
       "kind": "illustration",
       "subject": "Black & Scholes",
@@ -14,6 +27,32 @@
       "credit": "Ảnh minh hoạ tạo bằng code, không phải ảnh thật",
       "generator": "images.py person --name 'Black & Scholes' --role 'công thức định giá quyền chọn'",
       "retrieved": "2026-11-15"
+    },
+    {
+      "id": "black-swan-bird",
+      "kind": "photo",
+      "subject": "Black swan (Cygnus atratus)",
+      "depicts": "The black swan (Cygnus atratus)",
+      "file": "files/black-swan-bird.jpg",
+      "source_url": "https://www.flickr.com/photos/88123769@N02/33064803230",
+      "author": "Bernard Spragg",
+      "license": "CC0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "credit": "Ảnh: Bernard Spragg · CC0 · Flickr (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
+      "id": "chess-board",
+      "kind": "photo",
+      "subject": "Chess board",
+      "depicts": "Chess pieces board",
+      "file": "files/chess-board.jpg",
+      "source_url": "https://www.rawpixel.com/image/6026767/photo-image-public-domain-black-white",
+      "author": "unknown author",
+      "license": "CC0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "credit": "Ảnh: unknown author · CC0 · Rawpixel (via Openverse)",
+      "retrieved": "2026-11-18"
     },
     {
       "id": "claude-shannon",
@@ -29,6 +68,58 @@
       "retrieved": "2026-11-15"
     },
     {
+      "id": "coffee-mug",
+      "kind": "photo",
+      "subject": "Coffee mug",
+      "depicts": "coffee mug",
+      "file": "files/coffee-mug.jpg",
+      "source_url": "https://www.flickr.com/photos/14529257@N03/7106383471",
+      "author": "Steve A Johnson",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "credit": "Ảnh: Steve A Johnson · CC BY 2.0 · Flickr (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
+      "id": "credit-cards",
+      "kind": "photo",
+      "subject": "Credit cards",
+      "depicts": "Staples Credit Card",
+      "file": "files/credit-cards.jpg",
+      "source_url": "https://www.flickr.com/photos/39160147@N03/15412633918",
+      "author": "JeepersMedia",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "credit": "Ảnh: JeepersMedia · CC BY 2.0 · Flickr (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
+      "id": "cuban-missile-crisis",
+      "kind": "photo",
+      "subject": "Kennedy and Khrushchev, Vienna 1961",
+      "depicts": "Public Domain: Kennedy and Khrushchev in Vienna by Stanley Tretick, 1961 (NARA)",
+      "file": "files/cuban-missile-crisis.jpg",
+      "source_url": "https://www.flickr.com/photos/39735679@N00/471306255",
+      "author": "pingnews.com",
+      "license": "Public domain",
+      "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "credit": "Ảnh: pingnews.com · Public domain · Flickr (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
+      "id": "dan-ariely",
+      "kind": "photo",
+      "subject": "Dan Ariely",
+      "depicts": "Dan Ariely January 2019",
+      "file": "files/dan-ariely.jpg",
+      "source_url": "https://commons.wikimedia.org/w/index.php?curid=80345609",
+      "author": "Yael Zur, for Tel Aviv University Alumni Organization",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "credit": "Ảnh: Yael Zur, for Tel Aviv University Alumni Organization · CC BY-SA 4.0 · Wikimedia Commons (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
       "id": "daniel-kahneman",
       "kind": "photo",
       "subject": "Daniel Kahneman",
@@ -39,6 +130,84 @@
       "license": "CC BY-SA 2.0",
       "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
       "credit": "Ảnh: nrkbeta · CC BY-SA 2.0 · Wikimedia Commons",
+      "retrieved": "2026-11-18"
+    },
+    {
+      "id": "dice",
+      "kind": "photo",
+      "subject": "Dice",
+      "depicts": "Lego Dice",
+      "file": "files/dice.jpg",
+      "source_url": "https://www.flickr.com/photos/38451115@N04/4372611281",
+      "author": "pasukaru76",
+      "license": "CC0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "credit": "Ảnh: pasukaru76 · CC0 · Flickr (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
+      "id": "dollar-bills",
+      "kind": "photo",
+      "subject": "US dollar bills",
+      "depicts": "United States one-hundred-dollar bill",
+      "file": "files/dollar-bills.jpg",
+      "source_url": "https://commons.wikimedia.org/w/index.php?curid=93190216",
+      "author": "عکاس: محمدمهدی دورانی",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "credit": "Ảnh: عکاس: محمدمهدی دورانی · CC BY 4.0 · Wikimedia Commons (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
+      "id": "fishing-boats",
+      "kind": "photo",
+      "subject": "Fishing trawler",
+      "depicts": "France-000557 - Fishing Trawler 'P'tite Chine'",
+      "file": "files/fishing-boats.jpg",
+      "source_url": "https://www.flickr.com/photos/22490717@N02/14750450300",
+      "author": "archer10 (Dennis)",
+      "license": "CC BY-SA 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "credit": "Ảnh: archer10 (Dennis) · CC BY-SA 2.0 · Flickr (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
+      "id": "george-akerlof",
+      "kind": "photo",
+      "subject": "George Akerlof",
+      "depicts": "George Akerlof",
+      "file": "files/george-akerlof.jpg",
+      "source_url": "https://commons.wikimedia.org/w/index.php?curid=4985068",
+      "author": "Yan Chi Vinci Chow",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/",
+      "credit": "Ảnh: Yan Chi Vinci Chow · CC BY 3.0 · Wikimedia Commons (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
+      "id": "hamster-wheel",
+      "kind": "photo",
+      "subject": "Hamster in a wheel",
+      "depicts": "GBC Hamster wheel",
+      "file": "files/hamster-wheel.jpg",
+      "source_url": "https://www.flickr.com/photos/148399514@N08/32849701150",
+      "author": "Lasse Deleuran",
+      "license": "Public domain",
+      "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "credit": "Ảnh: Lasse Deleuran · Public domain · Flickr (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
+      "id": "ikea-store",
+      "kind": "photo",
+      "subject": "IKEA store",
+      "depicts": "IKEA store just off the Ballymun Road",
+      "file": "files/ikea-store.jpg",
+      "source_url": "https://www.flickr.com/photos/80824546@N00/7090607773",
+      "author": "infomatique",
+      "license": "CC BY-SA 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "credit": "Ảnh: infomatique · CC BY-SA 2.0 · Flickr (via Openverse)",
       "retrieved": "2026-11-18"
     },
     {
@@ -111,6 +280,19 @@
       "retrieved": "2026-11-15"
     },
     {
+      "id": "las-vegas-strip",
+      "kind": "photo",
+      "subject": "Las Vegas Strip",
+      "depicts": "las vegas strip night view",
+      "file": "files/las-vegas-strip.jpg",
+      "source_url": "https://www.flickr.com/photos/32426344@N00/9905730556",
+      "author": "_gee_",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "credit": "Ảnh: _gee_ · CC BY 2.0 · Flickr (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
       "id": "legendre",
       "kind": "photo",
       "subject": "Adrien-Marie Legendre",
@@ -122,6 +304,45 @@
       "license_url": "",
       "credit": "Ảnh: Julien-Léopold Boilly · Public domain · Wikimedia Commons",
       "retrieved": "2026-11-17"
+    },
+    {
+      "id": "lottery-tickets",
+      "kind": "photo",
+      "subject": "Lottery tickets",
+      "depicts": "lottery ticket on metro",
+      "file": "files/lottery-tickets.jpg",
+      "source_url": "https://www.flickr.com/photos/86261473@N00/3819433789",
+      "author": "kouk",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "credit": "Ảnh: kouk · CC BY 2.0 · Flickr (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
+      "id": "luxury-car",
+      "kind": "photo",
+      "subject": "Luxury sports car",
+      "depicts": "Render - Lamborghini Gallardo By Alang7",
+      "file": "files/luxury-car.jpg",
+      "source_url": "https://www.flickr.com/photos/99610616@N02/23989076516",
+      "author": "Alang7™",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "credit": "Ảnh: Alang7™ · CC BY 2.0 · Flickr (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
+      "id": "monte-carlo-casino",
+      "kind": "photo",
+      "subject": "Casino de Monte-Carlo",
+      "depicts": "Casino de Monte Carlo",
+      "file": "files/monte-carlo-casino.jpg",
+      "source_url": "https://www.flickr.com/photos/66474562@N00/3519075672",
+      "author": "Inti",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "credit": "Ảnh: Inti · CC BY 2.0 · Flickr (via Openverse)",
+      "retrieved": "2026-11-18"
     },
     {
       "id": "myron-scholes",
@@ -137,6 +358,32 @@
       "retrieved": "2026-11-17"
     },
     {
+      "id": "nassim-taleb",
+      "kind": "photo",
+      "subject": "Nassim Nicholas Taleb",
+      "depicts": "Nassim Nicholas Taleb painted portrait - 'black swan theory' _DDC0520",
+      "file": "files/nassim-taleb.jpg",
+      "source_url": "https://www.flickr.com/photos/40936370@N00/5029661090",
+      "author": "Abode of Chaos",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "credit": "Ảnh: Abode of Chaos · CC BY 2.0 · Flickr (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
+      "id": "nyse-floor",
+      "kind": "photo",
+      "subject": "NYSE trading floor",
+      "depicts": "New York Stock Exchange",
+      "file": "files/nyse-floor.jpg",
+      "source_url": "https://www.flickr.com/photos/10414027@N02/6175878927",
+      "author": "aherrero",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "credit": "Ảnh: aherrero · CC BY 2.0 · Flickr (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
       "id": "odean",
       "kind": "illustration",
       "subject": "Terrance Odean",
@@ -149,6 +396,32 @@
       "credit": "Ảnh minh hoạ tạo bằng code, không phải ảnh thật",
       "generator": "images.py person --name 'Terrance Odean' --role 'nhà kinh tế học, nghiên cứu hành vi nhà đầu tư'",
       "retrieved": "2026-11-15"
+    },
+    {
+      "id": "pawn-shop",
+      "kind": "photo",
+      "subject": "Pawn shop",
+      "depicts": "pawn shop stuff",
+      "file": "files/pawn-shop.jpg",
+      "source_url": "https://www.flickr.com/photos/47983324@N00/209607696",
+      "author": "maveric2003",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "credit": "Ảnh: maveric2003 · CC BY 2.0 · Flickr (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
+      "id": "poker-table",
+      "kind": "photo",
+      "subject": "Poker table",
+      "depicts": "Poker Chips",
+      "file": "files/poker-table.jpg",
+      "source_url": "https://www.flickr.com/photos/59937401@N07/5857835480",
+      "author": "Images_of_Money",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "credit": "Ảnh: Images_of_Money · CC BY 2.0 · Flickr (via Openverse)",
+      "retrieved": "2026-11-18"
     },
     {
       "id": "regan",
@@ -178,6 +451,45 @@
       "retrieved": "2026-11-17"
     },
     {
+      "id": "roulette-wheel",
+      "kind": "photo",
+      "subject": "Roulette wheel",
+      "depicts": "Roulette wheel",
+      "file": "files/roulette-wheel.jpg",
+      "source_url": "https://www.flickr.com/photos/93755244@N00/5276348473",
+      "author": "Håkan Dahlström",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "credit": "Ảnh: Håkan Dahlström · CC BY 2.0 · Flickr (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
+      "id": "slot-machines",
+      "kind": "photo",
+      "subject": "Slot machines",
+      "depicts": "Slot machines casino",
+      "file": "files/slot-machines.jpg",
+      "source_url": "https://www.rawpixel.com/image/5921114/photo-image-public-domain-free-game",
+      "author": "unknown author",
+      "license": "CC0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "credit": "Ảnh: unknown author · CC0 · Rawpixel (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
+      "id": "subway-crowd",
+      "kind": "photo",
+      "subject": "Rush-hour commuters",
+      "depicts": "Tokyo subway at rush hour",
+      "file": "files/subway-crowd.jpg",
+      "source_url": "https://www.flickr.com/photos/36217981@N02/13155481125",
+      "author": "transitpeople",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "credit": "Ảnh: transitpeople · CC BY 2.0 · Flickr (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
       "id": "thorp",
       "kind": "illustration",
       "subject": "Edward O. Thorp",
@@ -203,6 +515,32 @@
       "license_url": "",
       "credit": "Ảnh: Francis Godolphin Osbourne Stuart · Public domain · Wikimedia Commons",
       "retrieved": "2026-11-17"
+    },
+    {
+      "id": "used-car-lot",
+      "kind": "photo",
+      "subject": "Used car lot",
+      "depicts": "Gil Ashcom Toyota Used Car Lot, Berkeley CA",
+      "file": "files/used-car-lot.jpg",
+      "source_url": "https://www.flickr.com/photos/31411679@N08/16770362018",
+      "author": "aldenjewell",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "credit": "Ảnh: aldenjewell · CC BY 2.0 · Flickr (via Openverse)",
+      "retrieved": "2026-11-18"
+    },
+    {
+      "id": "wall-street",
+      "kind": "photo",
+      "subject": "Wall Street, New York",
+      "depicts": "Wall-Street-Sign-New-York",
+      "file": "files/wall-street.jpg",
+      "source_url": "https://commons.wikimedia.org/w/index.php?curid=134482375",
+      "author": "Acediscovery",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "credit": "Ảnh: Acediscovery · CC BY 4.0 · Wikimedia Commons (via Openverse)",
+      "retrieved": "2026-11-18"
     }
   ]
 }
