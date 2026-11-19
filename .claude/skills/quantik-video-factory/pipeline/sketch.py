@@ -117,20 +117,21 @@ def galton(d, b, t, p):
     bw = dx * 2
     for k in range(nb):
         x = cx + (k - rows / 2) * bw
-        h = landed[k] * 5.2
+        h = landed[k] * (H * 0.42 / 66)        # scaled to the box: the tallest bin ends ~42% of its height
         d.rectangle([x - bw * 0.42, base - h, x + bw * 0.42, base], fill=(255, 145, 77, 255))
-        line(d, [(x - bw / 2, base), (x - bw / 2, base - H * 0.42)], (60, 80, 70), 3, k)
+        line(d, [(x - bw / 2, base), (x - bw / 2, base - H * 0.45)], (60, 80, 70), 3, k)
+    fly = 1.0 - ease((p - 0.9) / 0.1)       # balls in flight fade out at the end instead of vanishing
     for j in range(5):  # balls in flight
-        i = shown + j
-        if i >= 240:
+        i = min(shown + j, 239)
+        if fly <= 0:
             break
         f = (t * 2.4 + j / 5) % 1.0
         r = int(f * rows)
         pos = sum(paths[i][:r]) - r / 2
         bx, by = cx + pos * bw, y0 + 70 + f * rows * dy
-        d.ellipse([bx - 11, by - 11, bx + 11, by + 11], fill=NEU)
+        d.ellipse([bx - 11, by - 11, bx + 11, by + 11], fill=(*NEU, int(255 * fly)))
     if p > 0.75:
-        pts = [(cx + (k - rows / 2) * bw, base - 5.2 * 240 * math.comb(rows, k) / 2 ** rows) for k in range(nb)]
+        pts = [(cx + (k - rows / 2) * bw, base - (H * 0.42 / 66) * 240 * math.comb(rows, k) / 2 ** rows) for k in range(nb)]
         line(d, pts, POS, 6, 9)
 
 
@@ -149,22 +150,24 @@ def wave(d, b, t, p):
 
 
 def crash(d, b, t, p):
+    """Calm climb, then the plunge (from p≈0.6, as the narration reaches the crash)."""
     x0, y0, x1, y1 = b
     W, H = x1 - x0, y1 - y0
-    n = int(10 + 150 * min(1, p / 0.8))
+    k = ease(min(1.0, p / 0.85))
+    n = max(2, int(160 * k))
     pts = []
     for i in range(n):
         u = i / 159
         y = y0 + H * (0.55 - 0.25 * u + 0.04 * math.sin(u * 40)) if u < 0.7 else y0 + H * (0.38 + (u - 0.7) * 1.8)
         pts.append((x0 + 30 + u * (W - 60), y))
-    shake = 8 * math.sin(t * 60) if 0.6 < p < 0.8 else 0
-    pts = [(x + shake, y) for x, y in pts]
-    line(d, pts, NEG if p > 0.6 else POS, 7)
-    if p > 0.62:
-        a = min(1, (p - 0.62) * 5)
+    red = max(0.0, min(1.0, (p - 0.55) / 0.25))  # colour fades green → red, no pop
+    col = tuple(int(POS[c] + (NEG[c] - POS[c]) * red) for c in range(3))
+    shake = 2.5 * math.sin(t * 30) * max(0.0, 1 - abs(p - 0.75) / 0.08) if 0.67 < p < 0.83 else 0
+    line(d, [(x + shake, y) for x, y in pts], col, 7)
+    a = ease((p - 0.75) / 0.15)
+    if a > 0:
         X, Y = pts[-1]
         line(d, [(X - 40 * a, Y - 70 * a), (X, Y), (X + 40 * a, Y - 70 * a)], NEG, 8, 2)
-
 
 def orderbook(d, b, t, p):
     x0, y0, x1, y1 = b
@@ -230,24 +233,34 @@ def vectors(d, b, t, p):
 
 
 def matrix(d, b, t, p):
+    """Row × column sweep; the highlight glides from cell to cell and result cells fill in gradually."""
     x0, y0, x1, y1 = b
     W, H = x1 - x0, y1 - y0
-    n, s = 3, min(W / 11.2, H * 0.13)
+    n, s_ = 3, min(W / 11.2, H * 0.13)
     ox, oy = x0 + W * 0.1, y0 + H * 0.3
-    step = int(t * 1.6) % (n * n)
+    pos = ease(min(1.0, p / 0.9)) * (n * n - 1e-6)   # continuous position 0..9 over the scene
+    step, frac = int(pos), pos - int(pos)
     r, c = divmod(step, n)
-    for g, gx in ((0, ox), (1, ox + s * 3.6), (2, ox + s * 7.4)):
+    def mix(a, b_, f):
+        return tuple(int(a[i] + (b_[i] - a[i]) * f) for i in range(3))
+    pr, pc = divmod(max(0, step - 1), n)
+    fin = ease(min(1.0, frac / 0.35))                 # new highlight fades in while the old one fades out
+    for g, gx in ((0, ox), (1, ox + s_ * 3.6), (2, ox + s_ * 7.4)):
         for i in range(n):
             for j in range(n):
-                hi = (g == 0 and i == r) or (g == 1 and j == c) or (g == 2 and i == r and j == c)
-                filled = g == 2 and (i * n + j) < step + (1 if hi else 0) and p > 0.05
-                rect(d, gx + j * s, oy + i * s, gx + (j + 1) * s - 8, oy + (i + 1) * s - 8,
-                     ACC if hi else MUT, 5 if hi else 3, fill=(60, 45, 30) if filled or hi else None, seed=i * 3 + j)
-    line(d, [(ox + s * 3.05, oy + s * 1.2), (ox + s * 3.35, oy + s * 1.6)], INK, 6)
-    line(d, [(ox + s * 3.35, oy + s * 1.2), (ox + s * 3.05, oy + s * 1.6)], INK, 6, 2)
-    line(d, [(ox + s * 6.85, oy + s * 1.25), (ox + s * 7.2, oy + s * 1.25)], INK, 6, 3)
-    line(d, [(ox + s * 6.85, oy + s * 1.55), (ox + s * 7.2, oy + s * 1.55)], INK, 6, 4)
-
+                cur = (g == 0 and i == r) or (g == 1 and j == c) or (g == 2 and i == r and j == c)
+                old = step > 0 and ((g == 0 and i == pr) or (g == 1 and j == pc) or (g == 2 and i == pr and j == pc))
+                w = max(fin if cur else 0.0, (1 - fin) if old else 0.0)
+                idx = i * n + j
+                fill_k = 1.0 if (g == 2 and idx < step) else (frac if (g == 2 and idx == step) else 0.0)
+                col = mix(MUT, ACC, w)
+                fill = mix((16, 30, 24), (60, 45, 30), max(fill_k, 0.7 * w))
+                rect(d, gx + j * s_, oy + i * s_, gx + (j + 1) * s_ - 8, oy + (i + 1) * s_ - 8, col, 3 + int(2 * w),
+                     fill=fill, seed=i * 3 + j)
+    line(d, [(ox + s_ * 3.05, oy + s_ * 1.2), (ox + s_ * 3.35, oy + s_ * 1.6)], INK, 6)
+    line(d, [(ox + s_ * 3.35, oy + s_ * 1.2), (ox + s_ * 3.05, oy + s_ * 1.6)], INK, 6, 2)
+    line(d, [(ox + s_ * 6.85, oy + s_ * 1.25), (ox + s_ * 7.2, oy + s_ * 1.25)], INK, 6, 3)
+    line(d, [(ox + s_ * 6.85, oy + s_ * 1.55), (ox + s_ * 7.2, oy + s_ * 1.55)], INK, 6, 4)
 
 def scale(d, b, t, p):
     x0, y0, x1, y1 = b
@@ -266,20 +279,25 @@ def scale(d, b, t, p):
 
 
 def compound(d, b, t, p):
+    """Coin stacks grow year by year, each stack rising smoothly; the growth curve follows the tops."""
     x0, y0, x1, y1 = b
     W, H = x1 - x0, y1 - y0
     n = 12
-    k = int(p * n * 1.1)
-    for i in range(min(k, n)):
-        h = 18 * 1.32 ** i
+    pos = ease(min(1.0, p / 0.9)) * n
+    tops = []
+    for i in range(n):
+        g = max(0.0, min(1.0, pos - i))
+        if g <= 0:
+            break
+        coins = (18 * 1.32 ** i / 18) * g
         x = x0 + 40 + i * (W - 80) / n
-        for j in range(int(h / 18)):
+        full = int(coins)
+        for j in range(full + (1 if coins - full > 0.05 else 0)):
             y = y1 - 40 - j * 16
             d.ellipse([x, y - 10, x + (W - 80) / n - 10, y + 10], fill=(150, 120, 40), outline=NEU, width=3)
-    pts = [(x0 + 40 + i * (W - 80) / n + 30, y1 - 40 - 16 * int(18 * 1.32 ** i / 18)) for i in range(min(k, n))]
-    if len(pts) > 1:
-        line(d, pts, ACC, 6, 3)
-
+        tops.append((x + 30, y1 - 40 - 16 * max(0, coins - 1)))
+    if len(tops) > 1:
+        line(d, tops, ACC, 6, 3)
 
 def pendulum(d, b, t, p):
     x0, y0, x1, y1 = b
@@ -322,16 +340,16 @@ def dominoes(d, b, t, p):
     x0, y0, x1, y1 = b
     W, H = x1 - x0, y1 - y0
     n = 9
-    front = p * (n + 1)
+    front = ease(min(1.0, p / 0.9)) * (n + 2)
     for i in range(n):
         x = x0 + 60 + i * (W - 120) / n
-        ang = min(1.2, max(0.0, (front - i) * 1.4))
-        h, w = H * 0.38, 26
+        ang = 1.15 * ease((front - i) / 1.6)          # each piece tips over smoothly
+        h = H * 0.38
         bx, by = x, y1 - 80
         tx, ty = bx + h * math.sin(ang), by - h * math.cos(ang)
-        line(d, [(bx, by), (tx, ty)], ACC if ang > 0 else INK, w, i)
+        col = tuple(int(INK[c] + (ACC[c] - INK[c]) * min(1, ang / 1.15)) for c in range(3))
+        line(d, [(bx, by), (tx, ty)], col, 26, i)
     line(d, [(x0 + 30, y1 - 70), (x1 - 30, y1 - 70)], MUT, 5)
-
 
 def gears(d, b, t, p):
     x0, y0, x1, y1 = b
@@ -358,9 +376,10 @@ def thermometer(d, b, t, p):
     for k in range(7):
         y = top + k * (bot - top) / 6
         line(d, [(cx + 40, y), (cx + (80 if k % 3 == 0 else 60), y)], MUT, 4, k)
-    if p > 0.6:
+    k = ease((p - 0.6) / 0.2)
+    if k > 0:
         y = top + (bot - top) * 0.2
-        line(d, [(cx + 100, y), (x1 - 40, y)], NEG, 5, 9)
+        line(d, _partial([(cx + 100, y), (x1 - 40, y)], k), NEG, 5, 9)
 
 
 def network(d, b, t, p):
@@ -385,13 +404,14 @@ def bell(d, b, t, p):
     k = int(10 + 150 * min(1, p / 0.6))
     pts = [(x0 + 30 + (W - 60) * i / 159, base - H * 0.7 * math.exp(-((i / 159 - 0.5) ** 2) / 0.018)) for i in range(k)]
     line(d, [(x0 + 30, base), (x1 - 30, base)], MUT, 4)
-    if p > 0.6:  # tails flash: where the risk lives
-        fl = 0.5 + 0.5 * math.sin(t * 7)
+    tail = ease((p - 0.6) / 0.15)
+    if tail > 0:  # tails glow in, then pulse: where the risk lives
+        fl = (0.5 + 0.5 * math.sin(t * 5)) * tail
         for side in (0, 1):
             xs = range(0, 30) if side == 0 else range(130, 160)
             poly = [(x0 + 30 + (W - 60) * i / 159, base - H * 0.7 * math.exp(-((i / 159 - 0.5) ** 2) / 0.018)) for i in xs]
             poly = poly + [(poly[-1][0], base), (poly[0][0], base)]
-            d.polygon(poly, fill=(int(120 + 100 * fl), 50, 55))
+            d.polygon(poly, fill=(int(120 + 100 * fl), 50, 55, int(255 * tail)))
     line(d, pts, ACC, 7)
 
 
@@ -400,17 +420,18 @@ def skew(d, b, t, p):
     W, H = x1 - x0, y1 - y0
     base = y1 - 60
     n = 18
-    for i in range(int(p * 1.3 * n)):
-        if i >= n:
-            break
+    for i in range(n):
         u = i / (n - 1)
-        h = H * 0.65 * (math.exp(-((u - 0.78) ** 2) / 0.006) + 0.05 * (u < 0.3))
+        grow = ease((p * 1.4 - u * 0.6) / 0.4)        # bars rise, left to right
+        if grow <= 0:
+            continue
+        h = H * 0.65 * (math.exp(-((u - 0.78) ** 2) / 0.006) + 0.05 * (u < 0.3)) * grow
         x = x0 + 40 + u * (W - 100)
         d.rectangle([x, base - h, x + (W - 100) / n - 6, base], fill=NEG if u < 0.3 else ACC)
     line(d, [(x0 + 30, base), (x1 - 30, base)], MUT, 4)
-    if p > 0.6:
-        line(d, [(x0 + W * 0.45, y0 + H * 0.35), (x0 + 70, base - 40)], NEG, 7, 3)
-
+    k = ease((p - 0.65) / 0.2)
+    if k > 0:
+        line(d, _partial([(x0 + W * 0.45, y0 + H * 0.35), (x0 + 70, base - 40)], k), NEG, 7, 3)
 
 def ripple(d, b, t, p):
     x0, y0, x1, y1 = b
@@ -450,29 +471,41 @@ def rain(d, b, t, p):
 
 
 def spring(d, b, t, p):
+    """Pulled down at first, released at p≈0.3, then a damped bounce back to rest (no periodic reset)."""
     x0, y0, x1, y1 = b
     cx, top = (x0 + x1) / 2, y0 + 50
-    ext = (y1 - y0) * (0.42 + 0.22 * math.cos(t * 3.2) * math.exp(-((t % 4.0) * 0.35)))
+    rest = (y1 - y0) * 0.42
+    if p < 0.3:
+        ext = rest * (1 + 0.45 * ease(p / 0.3))
+    else:
+        tt = (p - 0.3) * 6.0
+        ext = rest * (1 + 0.45 * math.exp(-tt * 0.9) * math.cos(tt * 4.2))
     line(d, [(cx - 150, top), (cx + 150, top)], INK, 8)
     pts = [(cx + (45 if i % 2 else -45) * (0 < i < 20), top + ext * i / 20) for i in range(21)]
     line(d, pts, ACC, 6, 2)
     rect(d, cx - 70, top + ext, cx + 70, top + ext + 90, INK, 6, fill=(60, 45, 30), seed=3)
-    line(d, [(cx + 120, top + (y1 - y0) * 0.42 + 45), (cx + 200, top + (y1 - y0) * 0.42 + 45)], POS, 5, 4)
-
+    line(d, [(cx + 120, top + rest + 45), (cx + 200, top + rest + 45)], POS, 5, 4)
+    if p < 0.3:  # hand pulling
+        hy = top + ext + 110
+        line(d, [(cx, top + ext + 90), (cx, hy)], INK, 5, 5)
+        circle(d, cx, hy + 18, 20, INK, 5, fill=(235, 205, 170), seed=6)
 
 def snowball(d, b, t, p):
+    """One roll down the slope over the scene: small → big, then it hits the tree (no loop, no teleport)."""
     x0, y0, x1, y1 = b
-    W, H = x1 - x0, y1 - y0
-    slope = [(x0 + 20, y0 + 80), (x1 - 20, y1 - 60)]
+    slope = [(x0 + 20, y0 + 80), (x1 - 120, y1 - 60)]
     line(d, slope, INK, 6)
-    u = (t * 0.25) % 1.0
+    tx, ty = x1 - 70, y1 - 60
+    line(d, [(tx, ty), (tx, ty - 200)], (120, 90, 60), 16, 3)
+    circle(d, tx, ty - 230, 60, POS, 5, fill=(40, 90, 60), seed=4)
+    u = ease(min(1.0, p / 0.85)) * 0.92
     x, y = slope[0][0] + u * (slope[1][0] - slope[0][0]), slope[0][1] + u * (slope[1][1] - slope[0][1])
     r = 18 + u * 110
-    cx, cy = x + r * 0.45, y - r * 0.9
+    hit = max(0.0, (p - 0.85) / 0.15)
+    cx, cy = x + r * 0.45 + 6 * math.sin(t * 50) * hit, y - r * 0.9
     circle(d, cx, cy, r, INK, 7, fill=(200, 210, 215))
-    a = t * 5
+    a = u * 18
     line(d, [(cx, cy), (cx + r * 0.8 * math.cos(a), cy + r * 0.8 * math.sin(a))], MUT, 4, 2)
-
 
 def turbine(d, b, t, p):
     x0, y0, x1, y1 = b
@@ -626,41 +659,49 @@ def storm(d, b, t, p):
 
 
 def volcano(d, b, t, p):
+    """Quiet mountain, a wisp of smoke… then it erupts from p≈0.55 (matches 'yên bình… rồi một ngày')."""
     x0, y0, x1, y1 = b
     W, H = x1 - x0, y1 - y0
     cx = x0 + W / 2
     mount = [(x0 + 40, y1 - 30), (cx - 70, y0 + H * 0.45), (cx + 70, y0 + H * 0.45), (x1 - 40, y1 - 30)]
     d.polygon(mount, fill=(70, 55, 45)); line(d, mount, INK, 7)
+    erupt = ease((p - 0.55) / 0.2)
     rnd = random.Random(8)
-    for i in range(26):
-        u = (t * 0.8 + rnd.random()) % 1.0
+    for i in range(30):
+        ph = rnd.random()
+        u = (t * 0.8 + ph) % 1.0
         ang = -math.pi / 2 + (rnd.random() - 0.5) * 1.6
-        v = 420 * (0.6 + rnd.random() * 0.6)
+        v = 420 * (0.6 + rnd.random() * 0.6) * erupt
+        if v < 5:
+            continue
         x = cx + math.cos(ang) * v * u
-        y = y0 + H * 0.45 + math.sin(ang) * v * u + 520 * u * u
-        r = 10 + 10 * (1 - u)
+        y = y0 + H * 0.45 + math.sin(ang) * v * u + 520 * u * u * erupt
+        if y < y0 + 10:
+            continue
+        r = (10 + 10 * (1 - u)) * erupt
         d.ellipse([x - r, y - r, x + r, y + r], fill=(255, int(120 + 100 * (1 - u)), 40))
-    for k in range(3):
-        sy = y0 + H * 0.4 - ((t * 0.3 + k / 3) % 1.0) * H * 0.4
-        circle(d, cx + 30 * math.sin(t + k), sy, 50 + 30 * k, (110, 110, 110), 5, fill=(80, 80, 80), seed=k)
-
+    for k in range(3):  # smoke puffs rise and fade out (no pop at the edge)
+        ph = (t * 0.3 + k / 3) % 1.0
+        sy = y0 + H * 0.42 - ph * H * 0.3
+        rr = (18 + 10 * k) * (1 + 1.4 * erupt) * (0.6 + 0.6 * ph)
+        al = int(200 * math.sin(math.pi * ph))
+        d.ellipse([cx + 30 * math.sin(t + k) - rr, sy - rr, cx + 30 * math.sin(t + k) + rr, sy + rr], fill=(90, 90, 90, al))
 
 def bigwave(d, b, t, p):
+    """Calm sea, then one huge wave rolls in from the left and over the houses (p≈0.4 → 0.9)."""
     x0, y0, x1, y1 = b
     W, H = x1 - x0, y1 - y0
-    crest = x0 + ((t * 0.25) % 1.0) * W * 1.3 - W * 0.15
+    crest = x0 - W * 0.2 + ease((p - 0.35) / 0.55) * W * 1.1
     pts = []
     for i in range(80):
         x = x0 + i * W / 79
-        h = H * 0.15 + H * 0.55 * math.exp(-((x - crest) / (W * 0.15)) ** 2)
+        h = H * 0.12 + H * 0.02 * math.sin(i * 0.5 + t * 3) + H * 0.55 * math.exp(-((x - crest) / (W * 0.15)) ** 2)
         pts.append((x, y1 - 40 - h))
     d.polygon(pts + [(x1, y1 - 30), (x0, y1 - 30)], fill=(40, 90, 120))
     line(d, pts, (190, 230, 240), 7)
-    houses = [x0 + W * u for u in (0.15, 0.4, 0.65, 0.88)]
-    for hx in houses:
+    for hx in [x0 + W * u for u in (0.2, 0.45, 0.7, 0.9)]:
         rect(d, hx - 30, y1 - 120, hx + 30, y1 - 40, INK, 5, seed=int(hx))
         line(d, [(hx - 38, y1 - 118), (hx, y1 - 160), (hx + 38, y1 - 118)], INK, 5, int(hx) + 1)
-
 
 def bridge(d, b, t, p):
     x0, y0, x1, y1 = b
@@ -680,32 +721,34 @@ def bridge(d, b, t, p):
 def medal(d, b, t, p):
     x0, y0, x1, y1 = b
     cx, cy = (x0 + x1) / 2, (y0 + y1) / 2 + 40
-    sq = abs(math.cos(t * 1.6))
+    spin = 1 - ease(min(1.0, p / 0.6))                 # spins in, then faces the viewer
+    sq = abs(math.cos(spin * 7))
     line(d, [(cx - 60, y0 + 30), (cx, cy - 150)], (60, 100, 180), 14)
     line(d, [(cx + 60, y0 + 30), (cx, cy - 150)], (180, 60, 60), 14, 1)
     d.ellipse([cx - 150 * sq, cy - 150, cx + 150 * sq, cy + 150], fill=(200, 160, 50), outline=NEU, width=8)
     if sq > 0.5:
         circle(d, cx, cy, 95 * sq, (150, 110, 30), 5)
     for k in range(5):
-        a = t * 2 + k * 1.25
-        star(d, cx + 230 * math.cos(a), cy + 180 * math.sin(a), 16, t + k)
-
+        a = t * 1.2 + k * 1.25
+        star(d, cx + 230 * math.cos(a), cy + 180 * math.sin(a), 16 * ease((p - 0.5) / 0.3), t + k)
 
 def roulette(d, b, t, p):
+    """Wheel spins fast, slows down and stops as the scene ends."""
     x0, y0, x1, y1 = b
     cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
     R = min(x1 - x0, y1 - y0) * 0.42
-    a0 = t * 2.5
+    q = min(1.0, p)
+    a0 = 9.0 * (q - q * q / 2) * 2          # angle = ∫ speed, speed falls linearly to 0
     for k in range(18):
         a, a2 = a0 + k * 2 * math.pi / 18, a0 + (k + 1) * 2 * math.pi / 18
-        poly = [(cx, cy), (cx + R * math.cos(a), cy + R * math.sin(a)), (cx + R * math.cos(a2), cy + R * math.sin(a2))]
-        d.polygon(poly, fill=(170, 40, 45) if k % 2 else (25, 25, 25))
+        d.polygon([(cx, cy), (cx + R * math.cos(a), cy + R * math.sin(a)), (cx + R * math.cos(a2), cy + R * math.sin(a2))],
+                  fill=(170, 40, 45) if k % 2 else (25, 25, 25))
     circle(d, cx, cy, R, NEU, 8)
     circle(d, cx, cy, R * 0.3, NEU, 6, fill=(90, 60, 30))
-    ba = -t * 4
-    bx, by = cx + R * 0.85 * math.cos(ba), cy + R * 0.85 * math.sin(ba)
+    ba = -14.0 * (q - q * q / 2) * 2
+    rr = R * (0.88 - 0.12 * ease((p - 0.7) / 0.3))
+    bx, by = cx + rr * math.cos(ba), cy + rr * math.sin(ba)
     d.ellipse([bx - 14, by - 14, bx + 14, by + 14], fill=INK)
-
 
 def ticker(d, b, t, p):
     """Exchange board: rows of blinking prices scrolling (stock exchange, trading floor, screens)."""
@@ -768,23 +811,25 @@ def building(d, b, t, p):
 def newspaper(d, b, t, p):
     x0, y0, x1, y1 = b
     W, H = x1 - x0, y1 - y0
-    spin = max(0.0, 1 - p * 1.6)
+    spin = 1 - ease(min(1.0, p / 0.45))
     sc = 1 - 0.7 * spin
     cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
     w, h = W * 0.7 * sc, H * 0.8 * sc
     a = spin * 6
     def rot(px, py):
         return (cx + px * math.cos(a) - py * math.sin(a), cy + px * math.sin(a) + py * math.cos(a))
-    corners = [rot(-w / 2, -h / 2), rot(w / 2, -h / 2), rot(w / 2, h / 2), rot(-w / 2, h / 2)]
-    d.polygon(corners, fill=(225, 220, 205))
-    if spin < 0.05:
-        d.rectangle([cx - w / 2 + 30, cy - h / 2 + 30, cx + w / 2 - 30, cy - h / 2 + 110], fill=(30, 30, 30))
-        line(d, [(cx - w / 2 + 40, cy - h / 2 + 160), (cx + w / 2 - 40, cy - h / 2 + 160)], NEG, 14, 1)
+    d.polygon([rot(-w / 2, -h / 2), rot(w / 2, -h / 2), rot(w / 2, h / 2), rot(-w / 2, h / 2)], fill=(225, 220, 205))
+    k = ease((p - 0.45) / 0.35)                        # print appears progressively once the paper lands
+    if k > 0:
+        d.rectangle([cx - w / 2 + 30, cy - h / 2 + 30, cx - w / 2 + 30 + (w - 60) * min(1, k * 2), cy - h / 2 + 110], fill=(30, 30, 30))
+        line(d, _partial([(cx - w / 2 + 40, cy - h / 2 + 160), (cx + w / 2 - 40, cy - h / 2 + 160)], k * 1.5), NEG, 14, 1)
         for r in range(7):
+            kk = max(0.0, min(1.0, k * 8 - r))
             yy = cy - h / 2 + 210 + r * 40
-            line(d, [(cx - w / 2 + 40, yy), (cx + (w / 2 - 40) * (0.4 if r % 3 == 2 else 1), yy)], (110, 110, 110), 6, r + 2)
-        line(d, [(cx + w * 0.05, cy + h * 0.05), (cx + w * 0.4, cy - h * 0.15), (cx + w * 0.42, cy + h * 0.3)], NEG, 9, 9)
-
+            x_end = cx + (w / 2 - 40) * (0.4 if r % 3 == 2 else 1)
+            line(d, _partial([(cx - w / 2 + 40, yy), (x_end, yy)], kk), (110, 110, 110), 6, r + 2)
+        k2 = ease((p - 0.8) / 0.15)
+        line(d, _partial([(cx + w * 0.05, cy + h * 0.05), (cx + w * 0.4, cy - h * 0.15), (cx + w * 0.42, cy + h * 0.3)], k2), NEG, 9, 9)
 
 def car(d, b, t, p):
     """Traffic / cars moving (traffic jam, roads, toll booth)."""
@@ -852,8 +897,20 @@ KINDS = {"dice": dice, "coin": coin, "galton": galton, "wave": wave, "crash": cr
 
 
 def draw(img, kind, box, t, p):
-    d = ImageDraw.Draw(img, "RGBA")
-    KINDS.get(kind, network)(d, box, t, p)
+    """Render on an off-screen layer at a comfortable size, then fit it into box: never spills outside the box,
+    and small cards get the same composition as full scenes."""
+    from PIL import Image
+
+    x0, y0, x1, y1 = [int(v) for v in box]
+    bw, bh = x1 - x0, y1 - y0
+    f = max(1.0, 700 / max(1, bh))
+    cw, ch = int(bw * f), int(bh * f)
+    layer = Image.new("RGBA", (cw, ch), (0, 0, 0, 0))
+    d = ImageDraw.Draw(layer, "RGBA")
+    KINDS.get(kind, network)(d, (0, 0, cw, ch), t, p)
+    if f > 1:
+        layer = layer.resize((bw, bh), Image.BILINEAR)
+    img.paste(layer, (x0, y0), layer)
 
 
 # ---------------------------------------------------------------- overlays: hand-drawn motion on every scene
@@ -907,11 +964,11 @@ def star(d, x, y, r, t, color=NEU):
 
 
 def mini(img, kind, box, t, p, alpha=200):
-    """Small hand-drawn animation in a translucent rounded card (on photos, hook, takeaway)."""
+    """Small hand-drawn animation in a translucent rounded card (hook, takeaway)."""
     x0, y0, x1, y1 = box
     d = ImageDraw.Draw(img, "RGBA")
-    d.rounded_rectangle(box, radius=22, fill=(10, 20, 16, alpha), outline=(*NEU, 160), width=3)
-    KINDS.get(kind, network)(d, (x0 + 18, y0 + 18, x1 - 18, y1 - 18), t, p)
+    d.rounded_rectangle(box, radius=22, fill=(10, 20, 16, alpha), outline=(*NEU, int(160 * alpha / 210)), width=3)
+    draw(img, kind, (x0 + 14, y0 + 14, x1 - 14, y1 - 14), t, p)
 
 
 def _seg(p, a, b):
@@ -954,3 +1011,11 @@ def decorate(scenes, kind):
 
         s.draw = wrap()
     return scenes
+
+
+# related animation to use when a cutaway would repeat the lesson's main animation
+ALT = {"pendulum": "spring", "spring": "pendulum", "wave": "ripple", "ripple": "wave", "dice": "coin", "coin": "dice",
+       "leash": "orbit", "orbit": "leash", "orderbook": "ticker", "ticker": "orderbook", "galton": "dice", "bell": "galton",
+       "network": "brownian", "brownian": "network", "scale": "tug", "tug": "scale", "matrix": "vectors",
+       "vectors": "matrix", "crash": "ticker", "cone": "storm", "compound": "coin", "thermometer": "crowd",
+       "gears": "ticker", "dominoes": "ripple", "skew": "crash"}

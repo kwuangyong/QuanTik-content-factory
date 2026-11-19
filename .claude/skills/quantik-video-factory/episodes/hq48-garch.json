@@ -24,7 +24,8 @@
       "query": "stormy ocean",
       "label": "Từ ARCH lên GARCH",
       "draw": "zigzag",
-      "say": "Tim Bollerslev mở rộng ARCH thành GARCH: biến động nhớ cả chính nó."
+      "say": "Tim Bollerslev mở rộng ARCH thành GARCH: biến động nhớ cả chính nó.",
+      "draw_anim": "scientist"
     },
     {
       "query": "volcano fumarole steam",
@@ -44,5 +45,6 @@
     "label": "Nhớ dai",
     "say": "Cú sốc hôm nay vẫn còn rung trong biến động của nhiều tuần sau."
   },
-  "tag": "GARCH"
+  "tag": "GARCH",
+  "draw_hook": "storm"
 }

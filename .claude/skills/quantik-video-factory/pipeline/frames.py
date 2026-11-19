@@ -200,15 +200,32 @@ def text_box(img, text, box, kind="sans-bold", size=64, color=None, align="left"
     return used
 
 
-def subtitle(img, text):
+def fit_text(text, box, kind="sans-bold", size=64, min_size=26, spacing=1.18):
+    """Font size text_box would choose for this text in this box, and the resulting block height."""
+    x0, y0, x1, y1 = box
+    d = ImageDraw.Draw(Image.new("RGB", (8, 8)))
+    s = size
+    while True:
+        f = font(kind, s)
+        lines = wrap(text, f, x1 - x0, d)
+        th = int(s * spacing) * len(lines)
+        widest = max((d.textlength(l, font=f) for l in lines), default=0)
+        if (th <= y1 - y0 and widest <= x1 - x0) or s <= min_size:
+            return s, th
+        s = max(min_size, int(s * 0.92))
+
+
+def subtitle(img, text, alpha=1.0, text_alpha=None, box=True):
+    """Subtitle bar. alpha fades bar+text; text_alpha/box allow cross-fading two lines on one bar."""
     if not text:
         return
     x0, x1 = SAFE["left"] + 10, SAFE["right"] - 10
-    box = (x0 + 24, 1338, x1 - 24, 1478)
-    d = ImageDraw.Draw(img, "RGBA")
-    d.rounded_rectangle([x0, 1326, x1, 1488], radius=24, fill=(0, 0, 0, 165))
-    text_box(img, text, box, "sans-bold", 42, T["text"], "center", "middle", min_size=30, label="subtitle",
-             max_lines=2, hl_numbers=True, hl_color=T["neutral"])
+    bx = (x0 + 24, 1338, x1 - 24, 1478)
+    if box:
+        d = ImageDraw.Draw(img, "RGBA")
+        d.rounded_rectangle([x0, 1326, x1, 1488], radius=24, fill=(0, 0, 0, int(165 * alpha)))
+    text_box(img, text, bx, "sans-bold", 42, T["text"], "center", "middle", min_size=30, label="subtitle",
+             max_lines=2, hl_numbers=True, hl_color=T["neutral"], alpha=alpha if text_alpha is None else text_alpha)
 
 
 def chip(img, xy, text, color=None, size=26):
@@ -376,9 +393,8 @@ def code_panel(code, width=880, chars=None, hl_line=None, title="model.py"):
                 c = T["text"]
             d.text((x, y), tok, font=f, fill=c)
             x += f.getlength(tok)
-        if remaining <= 0 and chars is not None:
-            if int(chars * 2) % 2 == 0:
-                d.rectangle([x + 2, y, x + cw * 0.6, y + size + 4], fill=T["accent"])
+        if remaining <= 0 and chars is not None:  # steady cursor while typing (a per-character blink flickers)
+            d.rectangle([x + 2, y, x + cw * 0.6, y + size + 4], fill=T["accent"])
             break
         remaining -= 1  # newline
         y += lh

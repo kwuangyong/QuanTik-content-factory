@@ -228,6 +228,11 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
         s.duration = max(s.min_dur, sec + 0.3)  # tight gaps: fast, tense pacing
     if hasattr(mod, "after_timing"):
         mod.after_timing(scenes, filled, model, ctx)
+    t_acc, tl = 0.0, []
+    for s in scenes:  # when each scene starts and what is being said (motion/sync QA reads this)
+        tl.append({"scene": s.name, "start": round(t_acc, 3), "end": round(t_acc + s.duration, 3), "say": s.say})
+        t_acc += s.duration
+    save_json(out / "timeline.json", tl)
 
     fmt = None
     if kind == "carousel":

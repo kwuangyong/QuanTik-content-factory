@@ -99,8 +99,10 @@ class LessonModel:
             ax.set_ylabel(ch["ylabel"], fontsize=18)
         ax.tick_params(labelsize=15)
         if any(len(y) > 1 and y[1] for y in ch.get("ys", [])) or ch.get("legend"):
-            ax.legend(fontsize=16, loc=ch.get("legend_loc", "best"), facecolor=hex_(T["surface"]),
-                      edgecolor=C["border"], labelcolor=C["text"])
+            lg = ax.legend(fontsize=16, loc=ch.get("legend_loc", "upper right"), facecolor=hex_(T["surface"]),
+                           edgecolor=C["border"], labelcolor=C["text"])
+            if ch["type"] == "hist":
+                lg.set_alpha(max(0.0, min(1.0, (upto - 0.35) / 0.25)))
         for s in ("top", "right"):
             ax.spines[s].set_visible(False)
 
@@ -124,16 +126,16 @@ class LessonModel:
         full, _ = np.histogram(data, bins=bins, density=True)
         ax.hist(data[:k], bins=bins, density=True, color=C["accent"], alpha=0.85, edgecolor=hex_(T["surface"]))
         ax.set_ylim(0, full.max() * 1.25)
+        ca = max(0.0, min(1.0, (upto - 0.35) / 0.25))     # overlays fade in instead of popping
+        va = max(0.0, min(1.0, (upto - 0.55) / 0.25))
         for i, e in enumerate(ch.get("curves", [])):
             x, y = self.ev(e[0]), self.ev(e[1])
-            if upto > 0.4:
-                ax.plot(x, y, color=_col(e[3] if len(e) > 3 else "pos"), lw=3, label=e[2] if len(e) > 2 else None)
+            ax.plot(x, y, color=_col(e[3] if len(e) > 3 else "pos"), lw=3, alpha=ca, label=e[2] if len(e) > 2 else None)
         for e in ch.get("vlines", []):
-            if upto > 0.6:
-                ax.axvline(self.ev(e[0]), color=_col(e[2] if len(e) > 2 else "neu"), lw=2.5, ls="--",
-                           label=e[1] if len(e) > 1 else None)
+            ax.axvline(self.ev(e[0]), color=_col(e[2] if len(e) > 2 else "neu"), lw=2.5, ls="--", alpha=va,
+                       label=e[1] if len(e) > 1 else None)
         if ch.get("curves") or ch.get("vlines"):
-            ch.setdefault("legend", upto > 0.6)
+            ch["legend"] = True
 
     def _bar(self, ax, ch, upto):
         h = np.asarray(self.ev(ch["heights"]), float)

@@ -48,7 +48,8 @@
         "query": "Moscow State University",
         "label": "Kolmogorov · Đại học Moskva",
         "draw": "dice",
-        "say": "Kolmogorov đặt nền móng tiên đề cho xác suất hiện đại, nơi biến ngẫu nhiên có định nghĩa chặt chẽ."
+        "say": "Kolmogorov đặt nền móng tiên đề cho xác suất hiện đại, nơi biến ngẫu nhiên có định nghĩa chặt chẽ.",
+        "draw_anim": "scientist"
       },
       {
         "query": "lottery balls machine",
@@ -245,7 +246,8 @@
         "label": "Ngày thị trường sập",
         "draw": "crash",
         "after": "chart",
-        "say": "Những ngày sập lịch sử lẽ ra gần như không thể xảy ra, nếu thị trường thật sự tuân theo hình chuông."
+        "say": "Những ngày sập lịch sử lẽ ra gần như không thể xảy ra, nếu thị trường thật sự tuân theo hình chuông.",
+        "draw_anim": "crash"
       }
     ],
     "takeaway_broll": {
@@ -282,7 +284,8 @@
         "label": "Rủi ro hiếm",
         "draw": "question",
         "after": "run",
-        "say": "Như bán bảo hiểm: thu phí đều đặn mỗi tháng, rồi một vụ lớn trả bằng cả năm."
+        "say": "Như bán bảo hiểm: thu phí đều đặn mỗi tháng, rồi một vụ lớn trả bằng cả năm.",
+        "draw_anim": "skew"
       }
     ],
     "takeaway_broll": {
@@ -292,7 +295,8 @@
     "sketch": {
       "kind": "skew",
       "label": "Đuôi trái dài"
-    }
+    },
+    "draw_hook": "crash"
   },
   "hq09-kurtosis": {
     "hook_broll": {
@@ -306,7 +310,8 @@
         "query": "Black Monday 1987 stock market",
         "label": "Thứ Hai Đen",
         "draw": "crash",
-        "say": "Những ngày như Thứ Hai Đen gần như không thể xảy ra nếu thị trường thật sự tuân theo phân phối chuẩn."
+        "say": "Những ngày như Thứ Hai Đen gần như không thể xảy ra nếu thị trường thật sự tuân theo phân phối chuẩn.",
+        "draw_anim": "crash"
       },
       {
         "query": "tsunami wave",
@@ -336,7 +341,8 @@
         "query": "stock certificates",
         "label": "Lý thuyết danh mục",
         "draw": "network",
-        "say": "Markowitz đưa hiệp phương sai vào trung tâm của lý thuyết danh mục hiện đại."
+        "say": "Markowitz đưa hiệp phương sai vào trung tâm của lý thuyết danh mục hiện đại.",
+        "draw_anim": "scientist"
       },
       {
         "query": "rowing team boat",
@@ -355,7 +361,8 @@
       "kind": "leash",
       "label": "Cùng nhịp",
       "say": "Hai mã càng đi cùng nhịp, hiệp phương sai càng lớn, rổ của bạn càng ít đa dạng."
-    }
+    },
+    "draw_hook": "network"
   },
   "hq11-correlation": {
     "hook_broll": {
@@ -378,7 +385,8 @@
         "label": "Kem và bãi biển",
         "draw": "two-lines",
         "after": "chart",
-        "say": "Bán kem và số người đi biển tăng cùng nhau. Kem không làm người ta đi biển, cả hai đều do trời nóng."
+        "say": "Bán kem và số người đi biển tăng cùng nhau. Kem không làm người ta đi biển, cả hai đều do trời nóng.",
+        "draw_anim": "sun"
       },
       {
         "query": "beach umbrellas",
@@ -386,7 +394,8 @@
         "draw": "question",
         "after": "run",
         "say": "Kính râm và kem chống nắng bán chạy cùng lúc, vì cùng một mùa hè.",
-        "must": "umbrella"
+        "must": "umbrella",
+        "draw_anim": "sun"
       }
     ],
     "takeaway_broll": {
@@ -396,7 +405,8 @@
     "sketch": {
       "kind": "leash",
       "label": "Đi cùng nhau"
-    }
+    },
+    "draw_hook": "leash"
   },
   "hq12-conditional-probability": {
     "hook_broll": {
@@ -559,7 +569,8 @@
         "query": "weather vane",
         "label": "Cùng hướng, ngược hướng",
         "draw": "arrows",
-        "say": "Hai vector cùng hướng thì tích vô hướng lớn, vuông góc thì bằng không, ngược hướng thì âm."
+        "say": "Hai vector cùng hướng thì tích vô hướng lớn, vuông góc thì bằng không, ngược hướng thì âm.",
+        "draw_anim": "vectors"
       },
       {
         "query": "sailing boat wind",
@@ -624,7 +635,8 @@
     "sketch": {
       "kind": "vectors",
       "label": "Hướng không xoay"
-    }
+    },
+    "draw_hook": "network"
   },
   "hq20-matrix-inverse": {
     "hook_broll": {
@@ -636,7 +648,8 @@
         "query": "computer keyboard keys",
         "label": "Hoàn tác",
         "draw": "matrix",
-        "say": "Nhân một ma trận với nghịch đảo của nó, bạn quay về ma trận đơn vị, giống như bấm hoàn tác."
+        "say": "Nhân một ma trận với nghịch đảo của nó, bạn quay về ma trận đơn vị, giống như bấm hoàn tác.",
+        "draw_anim": "matrix"
       },
       {
         "query": "construction crane counterweight",
@@ -674,14 +687,16 @@
         "query": "stock certificates",
         "label": "Lý thuyết danh mục",
         "draw": "network",
-        "say": "Ma trận này là trái tim của lý thuyết danh mục hiện đại do Harry Markowitz xây dựng."
+        "say": "Ma trận này là trái tim của lý thuyết danh mục hiện đại do Harry Markowitz xây dựng.",
+        "draw_anim": "scientist"
       },
       {
         "query": "subway map",
         "label": "Bản đồ tàu điện",
         "draw": "network",
         "after": "chart",
-        "say": "Như bản đồ tàu điện: mỗi ga nối với nhiều ga khác. Ma trận hiệp phương sai ghi lại mọi đường nối giữa các mã."
+        "say": "Như bản đồ tàu điện: mỗi ga nối với nhiều ga khác. Ma trận hiệp phương sai ghi lại mọi đường nối giữa các mã.",
+        "draw_anim": "network"
       }
     ],
     "takeaway_broll": {
@@ -704,7 +719,8 @@
         "query": "mathematician blackboard equations",
         "label": "Phân rã Cholesky",
         "draw": "matrix",
-        "say": "Phân rã Cholesky, công cụ quen thuộc để mô phỏng danh mục, chỉ chạy được trên ma trận xác định dương."
+        "say": "Phân rã Cholesky, công cụ quen thuộc để mô phỏng danh mục, chỉ chạy được trên ma trận xác định dương.",
+        "draw_anim": "scientist"
       },
       {
         "query": "bridge collapse",
@@ -734,7 +750,8 @@
         "query": "trampoline",
         "label": "Kéo giãn cả mặt phẳng",
         "draw": "arrows",
-        "say": "Hình dung kéo một tấm lưới cao su: mọi ô vuông cùng méo theo một kiểu. Đó là một ma trận đang làm việc."
+        "say": "Hình dung kéo một tấm lưới cao su: mọi ô vuông cùng méo theo một kiểu. Đó là một ma trận đang làm việc.",
+        "draw_anim": "vectors"
       },
       {
         "query": "Mercator projection world map",
@@ -760,7 +777,8 @@
     "sketch": {
       "kind": "vectors",
       "label": "Không gian bị kéo"
-    }
+    },
+    "draw_hook": "vectors"
   },
   "hq24-pca": {
     "hook_broll": {
@@ -780,14 +798,16 @@
         "label": "Cái bóng",
         "draw": "arrows",
         "after": "chart",
-        "say": "Như bóng của một vật trên tường: chọn đúng góc chiếu, chỉ một cái bóng đã đủ nhận ra hình dạng."
+        "say": "Như bóng của một vật trên tường: chọn đúng góc chiếu, chỉ một cái bóng đã đủ nhận ra hình dạng.",
+        "draw_anim": "vectors"
       },
       {
         "query": "orchestra concert",
         "label": "Dàn nhạc",
         "draw": "question",
         "after": "run",
-        "say": "Một dàn nhạc trăm người, nhưng tai bạn chỉ nghe ra vài giai điệu chính."
+        "say": "Một dàn nhạc trăm người, nhưng tai bạn chỉ nghe ra vài giai điệu chính.",
+        "draw_anim": "crowd"
       }
     ],
     "takeaway_broll": {
@@ -797,7 +817,8 @@
     "sketch": {
       "kind": "network",
       "label": "Vài câu chuyện chính"
-    }
+    },
+    "draw_hook": "ticker"
   },
   "hq34-risk-free-rate": {
     "hook_broll": {
@@ -845,7 +866,8 @@
         "query": "street market vendor",
         "label": "Hai giá, hai đầu phố",
         "draw": "scale",
-        "say": "Một món hàng bán hai giá ở hai đầu phố. Ai chạy nhanh nhất sẽ mua đầu này, bán đầu kia."
+        "say": "Một món hàng bán hai giá ở hai đầu phố. Ai chạy nhanh nhất sẽ mua đầu này, bán đầu kia.",
+        "draw_anim": "scale"
       },
       {
         "query": "fiber optic cable",
@@ -951,7 +973,8 @@
         "query": "sand dunes desert",
         "label": "Nền đất dịch chuyển",
         "draw": "chart-up",
-        "say": "Học từ một chuỗi không dừng giống như vẽ bản đồ trên những đụn cát đang trôi."
+        "say": "Học từ một chuỗi không dừng giống như vẽ bản đồ trên những đụn cát đang trôi.",
+        "draw_anim": "wave"
       },
       {
         "query": "low tide beach boats",
@@ -989,7 +1012,8 @@
         "query": "data analysis charts paper",
         "label": "Phương pháp Box-Jenkins",
         "draw": "two-lines",
-        "say": "George Box, đồng tác giả phương pháp Box-Jenkins, biến ACF thành công cụ chuẩn để đọc chuỗi thời gian."
+        "say": "George Box, đồng tác giả phương pháp Box-Jenkins, biến ACF thành công cụ chuẩn để đọc chuỗi thời gian.",
+        "draw_anim": "scientist"
       },
       {
         "query": "earthquake damage",
@@ -997,7 +1021,8 @@
         "draw": "zigzag",
         "after": "chart",
         "say": "Như động đất: một trận lớn thường kéo theo chuỗi dư chấn kéo dài nhiều ngày.",
-        "anim": "ripple"
+        "anim": "ripple",
+        "draw_anim": "wave"
       },
       {
         "query": "hurricane damage",
@@ -1026,7 +1051,8 @@
         "query": "people whispering",
         "label": "Truyền miệng",
         "draw": "network",
-        "say": "Giống trò chơi truyền tin: người thứ ba nghe được thông điệp, nhưng chỉ vì người thứ hai kể lại."
+        "say": "Giống trò chơi truyền tin: người thứ ba nghe được thông điệp, nhưng chỉ vì người thứ hai kể lại.",
+        "draw_anim": "network"
       },
       {
         "query": "domino effect",
@@ -1078,7 +1104,8 @@
         "label": "Thác nước",
         "draw": "question",
         "after": "run",
-        "say": "Tiếng thác đổ là một kiểu nhiễu: liên tục, đều đặn, không mang thông điệp nào."
+        "say": "Tiếng thác đổ là một kiểu nhiễu: liên tục, đều đặn, không mang thông điệp nào.",
+        "draw_anim": "rain"
       }
     ],
     "takeaway_broll": {
@@ -1100,7 +1127,8 @@
         "query": "Paris Bourse",
         "label": "Bachelier · Sở giao dịch Paris",
         "draw": "zigzag",
-        "say": "Louis Bachelier là người đầu tiên mô tả giá cổ phiếu như một bước đi ngẫu nhiên, trong luận án tiến sĩ của ông."
+        "say": "Louis Bachelier là người đầu tiên mô tả giá cổ phiếu như một bước đi ngẫu nhiên, trong luận án tiến sĩ của ông.",
+        "draw_anim": "scientist"
       },
       {
         "query": "pollen grains microscope",
@@ -1131,7 +1159,8 @@
         "query": "sunspot",
         "label": "Vết đen Mặt Trời",
         "draw": "chart-up",
-        "say": "Mô hình tự hồi quy được Udny Yule đề xuất khi nghiên cứu chu kỳ vết đen trên Mặt Trời."
+        "say": "Mô hình tự hồi quy được Udny Yule đề xuất khi nghiên cứu chu kỳ vết đen trên Mặt Trời.",
+        "draw_anim": "scientist"
       },
       {
         "query": "playground swing",
@@ -1177,14 +1206,16 @@
         "label": "Tiếng chuông",
         "draw": "zigzag",
         "after": "chart",
-        "say": "Như tiếng chuông: một cú gõ vang lên trong chốc lát, rồi im hẳn."
+        "say": "Như tiếng chuông: một cú gõ vang lên trong chốc lát, rồi im hẳn.",
+        "draw_anim": "ripple"
       },
       {
         "query": "drum drummer",
         "label": "Một nhịp trống",
         "draw": "question",
         "after": "run",
-        "say": "Như một nhịp trống: vang lên rồi tắt, không kéo dài sang nhịp sau."
+        "say": "Như một nhịp trống: vang lên rồi tắt, không kéo dài sang nhịp sau.",
+        "draw_anim": "wave"
       }
     ],
     "takeaway_broll": {
@@ -1206,14 +1237,16 @@
         "query": "weather forecasting office",
         "label": "Phương pháp Box-Jenkins",
         "draw": "two-lines",
-        "say": "Phương pháp Box-Jenkins đã biến ARIMA thành quy trình chuẩn của ngành dự báo suốt nhiều thập kỷ."
+        "say": "Phương pháp Box-Jenkins đã biến ARIMA thành quy trình chuẩn của ngành dự báo suốt nhiều thập kỷ.",
+        "draw_anim": "scientist"
       },
       {
         "query": "hurricane forecast cone",
         "label": "Nón dự báo bão",
         "draw": "warning",
         "after": "chart",
-        "say": "Bản tin bão luôn vẽ nón dự báo nở rộng dần: càng xa càng bất định. ARIMA cũng vậy."
+        "say": "Bản tin bão luôn vẽ nón dự báo nở rộng dần: càng xa càng bất định. ARIMA cũng vậy.",
+        "draw_anim": "cone"
       },
       {
         "query": "fog forest",
@@ -1268,7 +1301,8 @@
     "sketch": {
       "kind": "wave",
       "label": "Biến động phản ứng"
-    }
+    },
+    "draw_hook": "storm"
   },
   "hq49-egarch": {
     "hook_broll": {
@@ -1336,7 +1370,8 @@
       "kind": "bell",
       "label": "Giá trị theo thời gian",
       "say": "Mỗi ngày trôi qua, giá trị thời gian của quyền chọn mòn đi một chút."
-    }
+    },
+    "draw_hook": "crash"
   },
   "hq62-heston": {
     "hook_broll": {
@@ -1418,7 +1453,8 @@
         "query": "playing cards blackjack",
         "label": "Edward Thorp",
         "draw": "dice",
-        "say": "Edward Thorp, người từng đếm bài thắng sòng bạc, là một trong những người đi đầu arbitrage thống kê."
+        "say": "Edward Thorp, người từng đếm bài thắng sòng bạc, là một trong những người đi đầu arbitrage thống kê.",
+        "draw_anim": "scientist"
       },
       {
         "query": "blackjack table",
@@ -1528,7 +1564,8 @@
         "query": "Newton's cradle",
         "label": "Quán tính",
         "draw": "chart-up",
-        "say": "Giống định luật quán tính: vật đang chuyển động có xu hướng tiếp tục, cho đến khi có lực đủ lớn chặn lại."
+        "say": "Giống định luật quán tính: vật đang chuyển động có xu hướng tiếp tục, cho đến khi có lực đủ lớn chặn lại.",
+        "draw_anim": "pendulum"
       },
       {
         "query": "avalanche snow",
@@ -1543,7 +1580,8 @@
         "label": "Quả cầu tuyết",
         "draw": "question",
         "after": "run",
-        "say": "Quả cầu tuyết lăn càng xa càng lớn, cho đến khi đâm vào gốc cây."
+        "say": "Quả cầu tuyết lăn càng xa càng lớn, cho đến khi đâm vào gốc cây.",
+        "draw_anim": "snowball"
       }
     ],
     "takeaway_broll": {
@@ -1565,7 +1603,8 @@
         "query": "chess players",
         "label": "Hai trường phái",
         "draw": "scale",
-        "say": "Kiểm định này nổi tiếng nhờ Andrew Lo và Craig MacKinlay."
+        "say": "Kiểm định này nổi tiếng nhờ Andrew Lo và Craig MacKinlay.",
+        "draw_anim": "scientist"
       },
       {
         "query": "tug of war competition",
@@ -1591,7 +1630,8 @@
     "sketch": {
       "kind": "scale",
       "label": "Hai phe"
-    }
+    },
+    "draw_hook": "tug"
   },
   "hq69-cointegration": {
     "hook_broll": {
@@ -1628,7 +1668,8 @@
     "sketch": {
       "kind": "leash",
       "label": "Dây buộc dài hạn"
-    }
+    },
+    "draw_hook": "leash"
   },
   "hq70-z-score": {
     "hook_broll": {
@@ -1684,7 +1725,8 @@
         "label": "Chợ đấu giá",
         "draw": "orderbook",
         "after": "chart",
-        "say": "Như chợ đấu giá cá sáng sớm: giá được tạo ra từ từng người mua, người bán cụ thể."
+        "say": "Như chợ đấu giá cá sáng sớm: giá được tạo ra từ từng người mua, người bán cụ thể.",
+        "draw_anim": "crowd"
       },
       {
         "query": "auction hammer",
@@ -1816,7 +1858,8 @@
         "query": "stormy ocean",
         "label": "Từ ARCH lên GARCH",
         "draw": "zigzag",
-        "say": "Tim Bollerslev mở rộng ARCH thành GARCH: biến động nhớ cả chính nó."
+        "say": "Tim Bollerslev mở rộng ARCH thành GARCH: biến động nhớ cả chính nó.",
+        "draw_anim": "scientist"
       },
       {
         "query": "volcano fumarole steam",
@@ -1834,6 +1877,7 @@
       "kind": "wave",
       "label": "Nhớ dai",
       "say": "Cú sốc hôm nay vẫn còn rung trong biến động của nhiều tuần sau."
-    }
+    },
+    "draw_hook": "storm"
   }
 }

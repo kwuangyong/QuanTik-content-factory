@@ -86,9 +86,20 @@ def render(scenes, out_path, tag, note, fps=FPS, layout_path=None, srt_path=None
                 F.header(img, tag, note)
             s.draw(img, t, t / s.duration)
             gt = t0 + t
-            cur = next((c for c0, c1, c in chunks if c0 <= gt < c1), "")
+            ci = next((j for j, (c0, c1, c) in enumerate(chunks) if c0 <= gt < c1), None)
             if s.subtitles:
-                F.subtitle(img, cur)
+                if ci is not None:
+                    c0_, c1_, cur = chunks[ci]
+                    a_in = min(1.0, (gt - c0_) / 0.15)
+                    if a_in < 1 and ci > 0 and abs(chunks[ci - 1][1] - c0_) < 0.05:
+                        F.subtitle(img, chunks[ci - 1][2], 1.0, text_alpha=1 - a_in)   # cross-fade lines
+                        F.subtitle(img, cur, 1.0, text_alpha=a_in, box=False)
+                    else:
+                        F.subtitle(img, cur, a_in)
+                else:
+                    prev = [c for c in chunks if c[1] <= gt]
+                    if prev and gt - prev[-1][1] < 0.15:
+                        F.subtitle(img, prev[-1][2], 1 - (gt - prev[-1][1]) / 0.15)
             F.progress(img, gt / total)
             proc.stdin.write(img.tobytes())
         t0 += s.duration

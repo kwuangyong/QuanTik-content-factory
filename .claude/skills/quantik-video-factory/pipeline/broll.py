@@ -442,6 +442,8 @@ def pick_anim(spec, fallback="network"):
     """Animation kind for a B-roll spec in draw mode: people → scientist, else by keywords, else the lesson's kind."""
     if not spec:
         return fallback
+    if spec.get("draw_anim"):  # hand-picked to match the sentence being spoken
+        return spec["draw_anim"]
     if spec.get("anim"):
         return spec["anim"]
     if spec.get("must") and spec.get("must") not in ("dice", "umbrella", "security", "turbine", "juggl", "glacier",
@@ -464,7 +466,7 @@ def apply_drawn(scenes, ep, log=print):
     records = []
     hi = next((i for i, s in enumerate(scenes) if s.name == "hook"), None)
     if hi is not None:
-        k = pick_anim(ep.get("hook_broll"), base)
+        k = ep.get("draw_hook") or pick_anim(ep.get("hook_broll"), base)
         if k in ("scientist", "building", "medal"):  # hook = the idea in motion; people come later in the video
             k = base
         scenes[hi] = S.hook_art(ep["hook"], k, ep.get("kicker"))
@@ -473,17 +475,25 @@ def apply_drawn(scenes, ep, log=print):
         if not spec.get("say"):
             continue
         k = pick_anim(spec, base)
+        if k == base:  # the spoken example keeps its picture; the generic concept scene switches to a related one
+            si = next((i for i, s in enumerate(scenes) if s.name == "sketch"), None)
+            if si is not None and SK.ALT.get(base):
+                old_s = scenes[si]
+                new_s = S.sketch(SK.ALT[base], old_s.say, (ep.get("sketch") or {}).get("label"), name="sketch",
+                                 min_dur=old_s.min_dur)
+                scenes[si] = new_s
         at = next((i for i, s in enumerate(scenes) if s.name == spec.get("after", "hook")), 0) + 1
         scenes.insert(at, S.sketch(k, spec["say"], spec.get("label"), name=f"broll{n}"))
         records.append({"scene": f"broll{n}", "kind": "hoạt hoạ", "what": k})
     ti = next((i for i, s in enumerate(scenes) if s.name == "takeaway"), None)
     if ti is not None:
-        k = pick_anim(ep.get("takeaway_broll"), base)
+        k = base   # the takeaway card repeats the lesson's core idea in motion
         inner = scenes[ti].draw
 
         def draw(img, t, p, inner=inner, k=k):
             inner(img, t, p)
-            SK.mini(img, k, (S.X1 - 300, 300, S.X1, 530), t, min(1, p * 1.5), alpha=210)
+            if p > 0.02:
+                SK.mini(img, k, (S.X1 - 300, 300, S.X1, 530), t, min(1, p * 1.5), alpha=int(210 * min(1, p * 5)))
             SK.hand_underline(SK.ImageDraw.Draw(img, "RGBA"), S.X0, S.X0 + 520, 1265, F_seg(p, 0.2, 0.55), SK.ACC, 7, 9)
 
         scenes[ti].draw = draw

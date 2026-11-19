@@ -59,7 +59,7 @@ def chart(model, say, title=None, name="chart", reveal=True, notes=None, min_dur
     _MODELS[id(model)] = model
     box = box or ((X0, 340, X1, 1120) if notes else (X0, 340, X1, 1300))
     w, h = box[2] - box[0], box[3] - box[1]
-    steps = 24
+    steps = 72
 
     def draw(img, t, p):
         step = steps if not reveal else max(1, int(steps * F.ease_in_out(F.seg(p, 0, 0.75)) + 0.5))
@@ -153,14 +153,19 @@ def code_typing(model, say, name="code", min_dur=5.0, title=None, latex=None):
     code = model.code
     total = len(code)
 
+    ttl = title or getattr(model, "code_title", "") or f"{model.topic}.py"
+    full = F.code_panel(code, CW, title=ttl)
+    sc_ = min(1.0, CW / full.width, 760 / full.height)   # one scale for the whole scene: no rescaling while typing
+    full_h = int(full.height * sc_)
+
     def draw(img, t, p):
         n = int(total * F.ease_in_out(F.seg(p, 0, 0.85)))
-        im = F.fit_width(F.code_panel(code, CW, chars=n if n < total else None,
-                                      title=title or getattr(model, "code_title", "") or f"{model.topic}.py"),
-                         CW, 760)
+        im = F.code_panel(code, CW, chars=n if n < total else None, title=ttl)
+        if sc_ < 1:
+            im = im.resize((int(im.width * sc_), int(im.height * sc_)), F.Image.LANCZOS)
         F.paste(img, im, (X0, 330))
         if latex:
-            y = 330 + im.height + 40
+            y = 330 + full_h + 40
             fm = F.fit_width(F.math_img(latex, 54, F.hex_(T["accent"])), CW, BOT - y)
             F.paste(img, fm, (X0 + CW // 2, y + (BOT - y - fm.height) // 2), alpha=F.ease_out(F.seg(p, 0.2, 0.5)),
                     anchor="n")
@@ -181,12 +186,15 @@ def terminal(model, outputs, say, name="run", min_dur=4.0):
 
     def draw(img, t, p):
         k = min(len(rows), int(len(rows) * F.seg(p, 0.05, 0.7)) + 1)
-        im = F.terminal_panel(rows[:k], CW, title=getattr(model, "run_title", "") or f"python {model.topic}.py")
+        shown = rows[:k] + [("", "")] * (len(rows) - k)          # fixed panel height while rows appear
+        im = F.terminal_panel(shown, CW, title=getattr(model, "run_title", "") or f"python {model.topic}.py")
         F.paste(img, im, (X0, 340))
         a = F.ease_out(F.seg(p, 0.7, 0.85))
         if a > 0:
             y = 340 + F.terminal_panel(rows, CW).height + 50
-            F.panel(img, (X0, y, X1, BOT), fill=(30, 22, 16), outline=T["accent"])
+            dd = F.ImageDraw.Draw(img, "RGBA")   # box fades in with its text (no pop)
+            dd.rounded_rectangle((X0, y, X1, BOT), radius=28, fill=(30, 22, 16, int(255 * a)),
+                                 outline=(*T["accent"], int(255 * a)), width=2)
             F.text_box(img, hi[0], (X0 + 40, y + 30, X1 - 40, y + 90), "sans-bold", 36, T["muted"], "center",
                        label=f"{name}-hl-label", alpha=a)
             F.text_box(img, hi[1], (X0 + 40, y + 100, X1 - 40, BOT - 30), "mono-bold", 150, T["accent"], "center",
@@ -284,7 +292,8 @@ def sketch(kind, say, label=None, name="sketch", min_dur=3.5):
 
 
 def hook_art(text, kind, kicker=None, min_dur=2.6):
-    """Eye-catching hook: big hand-drawn animation on top, floating symbols, two-tone punchline text."""
+    """Eye-catching hook: big hand-drawn animation on top, floating symbols, two-tone punchline text.
+    Words appear in step with the voice (by character position over the real audio length)."""
     import math
     import re as _re
     import sketch as SK
@@ -292,14 +301,34 @@ def hook_art(text, kind, kicker=None, min_dur=2.6):
     m = _re.search(r"[?.!…]\s", text)
     head, punch = (text[: m.end()].strip(), text[m.end():].strip()) if m else (text, "")
     glyphs = ["σ", "%", "?", "↑", "↓", "Σ", "μ", "∞", "≈"]
+    words = head.split() + punch.split()
+    nh = len(head.split())
+    cum, tot = [], 0
+    for w in words:
+        tot += len(w) + 1
+        cum.append(tot)
+    starts = [(c - len(w) - 1) / tot for c, w in zip(cum, words)]  # fraction of speech where each word begins
+    hbox = (X0, 750, X1, 990 if punch else 1250)
+    HS, hh = F.fit_text(head, hbox, "sans-black", 84, 40, 1.1)
+    HB = (hbox, hh)
+    pbox = (X0, 1000, X1, 1245)
+    PS, ph_ = F.fit_text(punch, pbox, "sans-black", 72, 36, 1.1) if punch else (72, 0)
+    PB = (pbox, ph_)
+
+    def visible(p):
+        dur = sc.duration or min_dur
+        speech = max(0.0, (p * dur - 0.15) / max(0.5, dur - 0.45))   # audio starts 0.15 s in, ends 0.3 s before cut
+        return sum(1 for s_ in starts if s_ <= speech + 0.02)
 
     def draw(img, t, p):
         d = F.ImageDraw.Draw(img, "RGBA")
-        for i in range(14):  # floating math symbols behind everything
+        for i in range(14):  # floating math symbols, fading in/out at the edges (no jump when they wrap)
             gx = (i * 137 + t * (20 + i * 3)) % 1080
-            gy = 300 + ((i * 263 - t * (25 + i * 2)) % 1000)
+            ph = ((i * 263 / 1000) - t * (25 + i * 2) / 1000) % 1.0
+            gy = 300 + ph * 1000
+            al = int(255 * min(1.0, ph / 0.12, (1 - ph) / 0.12))
             d.text((gx, gy), glyphs[i % len(glyphs)], font=F.font("sans-black", 46 + (i % 3) * 18),
-                   fill=(*T["raised"], 255))
+                   fill=(*T["raised"], al))
         a = F.ease_out(F.seg(p, 0, 0.12))
         top = 300 + int(40 * (1 - a))
         box = (X0, top, X1, top + 420)
@@ -310,19 +339,33 @@ def hook_art(text, kind, kicker=None, min_dur=2.6):
         SK.draw(img, kind, (X0 + 30, top + 55, X1 - 30, top + 405), t, min(1.0, p * 1.5))
         if kicker:
             F.chip(img, (X0 + 22, top + 18), kicker, T["accent"], 28)
-        words = head.split()
-        k = max(1, int(len(words) * F.ease_out(F.seg(p, 0, 0.3)) + 0.999))
-        F.text_box(img, " ".join(words[:k]), (X0, 750, X1, 990 if punch else 1250), "sans-black", 84, T["text"],
-                   "left", "middle", min_size=40, label="hook", spacing=1.1, hl_numbers=True)
-        if punch:
-            pw = punch.split()
-            kp = int(len(pw) * F.ease_out(F.seg(p, 0.28, 0.6)) + 0.999)
-            if kp:
-                F.text_box(img, " ".join(pw[:kp]), (X0, 1000, X1, 1245), "sans-black", 72, T["accent"], "left",
-                           "middle", min_size=36, label="hook-punch", spacing=1.1, hl_numbers=True, hl_color=T["neutral"])
-            SK.hand_underline(d, X0, X0 + 560, 1262, F.seg(p, 0.6, 0.85), T["neutral"], 7, 3)
-            if p > 0.7:
-                SK.star(d, X1 - 40, 1030, 20, t)
-                SK.star(d, X1 - 90, 1230, 14, t + 2)
+        k = max(1, visible(p))
+        # each new word fades in; size and position come from the full sentence, so nothing reflows
+        dur = sc.duration or min_dur
+        def word_alpha(i):
+            st = (0.15 + starts[i] * max(0.5, dur - 0.45)) / dur
+            return max(0.0, min(1.0, (p - st) * dur / 0.15))
+        for part, lo, hi, box_, size_, col, lab in ((words[:nh], 0, nh, HB, HS, T["text"], "hook"),
+                                                    (words[nh:], nh, len(words), PB, PS, T["accent"], "hook-punch")):
+            if not part or k <= lo:
+                continue
+            upto = min(k, hi)
+            x0b, y0b, x1b, y1b = box_[0]
+            top_ = y0b + (y1b - y0b - box_[1]) // 2
+            if upto - 1 > lo:
+                F.text_box(img, " ".join(words[lo:upto - 1]), (x0b, top_, x1b, y1b), "sans-black", size_, col, "left",
+                           "top", min_size=size_, label=lab, spacing=1.1, hl_numbers=True, hl_color=T["neutral"])
+            F.text_box(img, " ".join(words[lo:upto]), (x0b, top_, x1b, y1b), "sans-black", size_, col, "left", "top",
+                       min_size=size_, label=lab, spacing=1.1, hl_numbers=True, hl_color=T["neutral"],
+                       alpha=word_alpha(upto - 1))
+        if punch:  # underline + sparkles arrive as the voice reaches the last word
+            dur = sc.duration or min_dur
+            p_last = (0.15 + starts[-1] * max(0.5, dur - 0.45)) / dur
+            u = SK.ease(F.seg(p, p_last, min(1.0, p_last + 0.12)))
+            SK.hand_underline(d, X0, X0 + 560, 1262, u, T["neutral"], 7, 3)
+            if u > 0:
+                SK.star(d, X1 - 40, 1030, 20 * u, t)
+                SK.star(d, X1 - 90, 1230, 14 * u, t + 2)
 
-    return Scene("hook", text, draw, min_dur, texts=[text, kicker or ""])
+    sc = Scene("hook", text, draw, min_dur, texts=[text, kicker or ""])
+    return sc

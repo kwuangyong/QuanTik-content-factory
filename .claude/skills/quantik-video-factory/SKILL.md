@@ -93,6 +93,15 @@ Quy tắc viết lời — mỗi quy tắc đều có lý do:
 3. **Hook ragebait, nổ căng.** Câu đầu phải chọc vào niềm tin sai phổ biến, cái tôi, hoặc nỗi sợ mất tiền của người xem; giọng thách thức ("Bạn đang tính sai hoàn toàn", "Chúc mừng, bạn vừa bị thống kê lừa", "Đó là cách người ta cháy tài khoản"). Xem mẫu ở `knowledge/hooks.md`. Ranh giới không đổi: không hứa lãi, không gọi mua/bán, không cụm cấm, không nhắm vào cá nhân/tổ chức có thật, không số gõ tay. Gây sốc bằng sự thật đo được, không bằng bịa đặt.
 4. **Loạt bài nối mạch.** Bài nâng cấp phải nhắc tập trước trong hook hoặc beat ("Tập trước Black-Scholes…" → Heston; ARCH → GARCH; MR + Momentum → MR vs Momentum).
 
+### Chế độ toàn hoạt hoạ và QA chuyển động
+
+- `QT_BROLL_STYLE=draw python batch.py …`: bỏ hết ảnh; mọi cảnh B-roll (người, sự kiện, hiện tượng, sự vật) vẽ thành
+  hoạt hoạ (`pipeline/sketch.py`, ~45 loại). Hook có cảnh hoạt hoạ lớn, chữ hiện theo nhịp giọng đọc.
+  Cảnh nào nói cụ thể về ví dụ gì thì giữ đúng hình đó (`draw_anim`, `draw_hook` trong `broll-v2.json`).
+- Mọi chuyển động phải mượt và khớp lời: `python qa/check_motion.py` (từng hoạt hoạ) và
+  `python qa/check_video_motion.py social-output/<id>` (video thành phẩm, đọc `timeline.json`). Có khung "đáng ngờ"
+  thì sửa trước khi giao. Hoạt hoạ có diễn biến (núi lửa phun, sóng ập, roulette dừng…) chạy theo tiến độ câu nói.
+
 ### 4. Dựng
 
 Chạy từ thư mục `pipeline/`:
