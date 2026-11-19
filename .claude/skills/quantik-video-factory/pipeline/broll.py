@@ -410,13 +410,103 @@ def resolve(spec):
     return spec
 
 
+_ANIM_RULES = [
+    ("roulette|sòng bạc|casino|slot machine", "roulette"), ("blackjack|poker|chips|xúc xắc|dice|xổ số|lottery|vé số|cards", "dice"),
+    ("deutsche mark|banknote|tờ tiền|tờ 10", "banknote"),
+    ("coin|đồng xu|piggy|tiết kiệm|tiền lẻ|banknote|tờ tiền|currency|ngoại tệ|gold", "coin"),
+    ("tsunami|sóng thần|surf|big wave", "bigwave"), ("volcano|núi lửa|lava|fumarole|phun trào", "volcano"),
+    ("storm|bão|lightning|sét|hurricane|thunder|cloud|mây|rain|mưa|weather|thời tiết|forecast", "storm"),
+    ("bridge|cầu tacoma|tacoma", "bridge"), ("nobel|medal|huy chương|giải", "medal"),
+    ("galton|bean machine|quincunx", "galton"), ("alarm|security|detector|smoke|báo động", "crowd"),
+    ("stock exchange|trading|ticker|bảng điện|bảng giá|screen|traders|sàn|board|phố wall|wall street|monday|1929|crash", "ticker"),
+    ("ship|tàu|boat|port|cảng|thuyền|tug", "ship"),
+    ("building|treasury|university|bank|ngân hàng|headquarters|bourse|sở giao dịch|vault", "building"),
+    ("newspaper|headline|trang nhất|tin xấu", "newspaper"), ("crowd|đám đông|people|students|beach|bãi biển|exam|đi biển", "crowd"),
+    ("traffic|kẹt xe|toll|thu phí|đèn|road|highway", "car"), ("sun|nắng|summer|ice cream|kem|mùa hè|sunglass", "sun"),
+    ("thermometer|nhiệt kế|fever|sốt|blood pressure|huyết áp|medical|xét nghiệm|doctor|bác sĩ|test tube", "thermometer"),
+    ("pendulum|con lắc|clock|đồng hồ|swing|xích đu|hourglass|watch|calendar|lịch", "pendulum"),
+    ("spring|lò xo|rubber|slingshot|yo-yo|ná", "spring"), ("domino", "dominoes"), ("galton|bean machine|quincunx", "galton"),
+    ("gpu|graphics|computer|server|data center|keyboard|robot|factory|assembly|dây chuyền|máy|supercomputer", "gears"),
+    ("spreadsheet|bảng tính|matrix|ma trận|rubik", "matrix"), ("compass|vane|sail|buồm|wind|gió|turbine|arrow", "vectors"),
+    ("scale|balance|cân|crane|cẩu|đối trọng|juggl", "scale"), ("map|bản đồ|subway|network|cables|cáp|web|mạng", "network"),
+    ("tree|cây|oak|sồi|rings|vòng gỗ", "compound"), ("fog|sương|maze", "cone"), ("seismo|earthquake|động đất|dư chấn", "wave"),
+    ("snow|tuyết|avalanche|locomotive|train", "snowball"), ("tug|kéo co|boxing|quyền anh|chess|cờ", "tug"),
+    ("star|sao đôi|binary", "orbit"), ("dog|chó|leash|tandem|bicycle|horses|runners|sprint|athletics|relay", "leash"),
+    ("ant|kiến|fish|birds|flock|pollen|phấn hoa", "brownian"), ("ripple|pond|lake|hồ|mirror|reflection|echo|vọng|canyon", "ripple"),
+    ("static|tivi|television|radio|noise|nhiễu|waterfall|thác", "wave"), ("alarm|security|detector|smoke|báo động", "crowd"),
+    ("tightrope|slackline|balancing", "scale"), ("steamroller|xe lu|insurance|bảo hiểm|car crash", "crash"),
+]
+
+
+def pick_anim(spec, fallback="network"):
+    """Animation kind for a B-roll spec in draw mode: people → scientist, else by keywords, else the lesson's kind."""
+    if not spec:
+        return fallback
+    if spec.get("anim"):
+        return spec["anim"]
+    if spec.get("must") and spec.get("must") not in ("dice", "umbrella", "security", "turbine", "juggl", "glacier",
+                                                      "snow", "boxing", "start", "spreadsheet", "compass", "swan",
+                                                      "Mark", "Tacoma", "Nobel", "Mercator", "Foucault", "1929"):
+        return "scientist"
+    hay = " ".join(str(spec.get(k, "")) for k in ("query", "label", "say")).lower()
+    for pat, kind in _ANIM_RULES:
+        if re.search(pat, hay):
+            return kind
+    return fallback
+
+
+def apply_drawn(scenes, ep, log=print):
+    """Draw mode: no photos at all. Hook gets a big animation, every cutaway is a hand-drawn animation."""
+    import scenes as S
+    import sketch as SK
+
+    base = (ep.get("sketch") or {}).get("kind") or "network"
+    records = []
+    hi = next((i for i, s in enumerate(scenes) if s.name == "hook"), None)
+    if hi is not None:
+        k = pick_anim(ep.get("hook_broll"), base)
+        if k in ("scientist", "building", "medal"):  # hook = the idea in motion; people come later in the video
+            k = base
+        scenes[hi] = S.hook_art(ep["hook"], k, ep.get("kicker"))
+        records.append({"scene": "hook", "kind": "hoạt hoạ", "what": k})
+    for n, spec in enumerate(ep.get("broll") or []):
+        if not spec.get("say"):
+            continue
+        k = pick_anim(spec, base)
+        at = next((i for i, s in enumerate(scenes) if s.name == spec.get("after", "hook")), 0) + 1
+        scenes.insert(at, S.sketch(k, spec["say"], spec.get("label"), name=f"broll{n}"))
+        records.append({"scene": f"broll{n}", "kind": "hoạt hoạ", "what": k})
+    ti = next((i for i, s in enumerate(scenes) if s.name == "takeaway"), None)
+    if ti is not None:
+        k = pick_anim(ep.get("takeaway_broll"), base)
+        inner = scenes[ti].draw
+
+        def draw(img, t, p, inner=inner, k=k):
+            inner(img, t, p)
+            SK.mini(img, k, (S.X1 - 300, 300, S.X1, 530), t, min(1, p * 1.5), alpha=210)
+            SK.hand_underline(SK.ImageDraw.Draw(img, "RGBA"), S.X0, S.X0 + 520, 1265, F_seg(p, 0.2, 0.55), SK.ACC, 7, 9)
+
+        scenes[ti].draw = draw
+        records.append({"scene": "takeaway", "kind": "hoạt hoạ", "what": k})
+    for r in records:
+        log(f"  anim   {r['scene']:<8} {r['what']}")
+    return records
+
+
+def F_seg(p, a, b):
+    return max(0.0, min(1.0, (p - a) / max(1e-6, b - a)))
+
+
 def apply(scenes, ep, mode="full", log=print):
     """Mutates the scene list: hook backdrop + cutaways. Returns a list of records for captions/QA.
     mode: 'full' (backdrop + cutaways), 'hook' (backdrop only), False (nothing)."""
+    import os
     import scenes as S
 
     if not mode:
         return []
+    if mode == "full" and (os.environ.get("QT_BROLL_STYLE") == "draw" or ep.get("broll_style") == "draw"):
+        return apply_drawn(scenes, ep, log)
     records = []
     hook_i = next((i for i, s in enumerate(scenes) if s.name == "hook"), None)
     if hook_i is not None:

@@ -414,16 +414,24 @@ def skew(d, b, t, p):
 
 def ripple(d, b, t, p):
     x0, y0, x1, y1 = b
-    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2 + 40
-    for k in range(5):
-        r = ((t * 0.7 + k / 5) % 1.0)
-        R = r * min(x1 - x0, y1 - y0) * 0.48
-        a = int(255 * (1 - r))
-        d.ellipse([cx - R, cy - R * 0.38, cx + R, cy + R * 0.38], outline=(*NEU, a), width=6)
-    drop = (t * 0.7) % 1.0
-    if drop > 0.75:
-        y = cy - (1 - (drop - 0.75) * 4) * 260
-        d.ellipse([cx - 14, y - 14, cx + 14, y + 14], fill=INK)
+    W, H = x1 - x0, y1 - y0
+    cx, cy = (x0 + x1) / 2, y0 + H * 0.62
+    d.ellipse([x0 + 10, cy - H * 0.3, x1 - 10, cy + H * 0.3], fill=(25, 55, 70))
+    for k in range(6):
+        r = ((t * 0.55 + k / 6) % 1.0)
+        R = 30 + r * W * 0.46
+        a = int(255 * (1 - r) ** 1.2)
+        d.ellipse([cx - R, cy - R * 0.32, cx + R, cy + R * 0.32], outline=(*NEU, a), width=max(2, int(8 * (1 - r))))
+    ph = (t * 0.55) % 1.0
+    if ph > 0.7:  # stone falling
+        y = cy - (1 - (ph - 0.7) / 0.3) * H * 0.55
+        circle(d, cx, y, 22, INK, 5, fill=(120, 110, 100))
+    elif ph < 0.25:  # splash
+        for j in range(7):
+            a = math.pi + j * math.pi / 6
+            u = ph / 0.25
+            line(d, [(cx + 20 * math.cos(a), cy - 10), (cx + (20 + 90 * u) * math.cos(a), cy - 10 - 120 * u * math.sin(-a) * (1 - u))],
+                 (180, 220, 235), 5, j)
 
 
 def rain(d, b, t, p):
@@ -555,12 +563,292 @@ def orbit(d, b, t, p):
     line(d, [(cx - 6, cy), (cx + 6, cy)], MUT, 4, 3)
 
 
+def scientist(d, b, t, p):
+    """Cartoon person at a chalkboard, writing (stands in for any historical figure; name comes from the label)."""
+    x0, y0, x1, y1 = b
+    W, H = x1 - x0, y1 - y0
+    bx0, by0, bx1, by1 = x0 + W * 0.38, y0 + 30, x1 - 20, y0 + H * 0.62
+    d.rectangle([bx0, by0, bx1, by1], fill=(22, 52, 40))
+    rect(d, bx0, by0, bx1, by1, (120, 90, 60), 8, seed=1)
+    k = min(1.0, p * 1.3)
+    for row in range(4):  # chalk "formula" squiggles appear line by line
+        fr = max(0.0, min(1.0, k * 4 - row))
+        if fr <= 0:
+            break
+        yy = by0 + 50 + row * (by1 - by0 - 80) / 4
+        pts = [(bx0 + 30 + u * (bx1 - bx0 - 60) * fr, yy + 10 * math.sin(u * 22 + row * 2)) for u in [i / 30 for i in range(31)]]
+        line(d, pts, INK if row % 2 else NEU, 5, row + 3)
+    cx, cy = x0 + W * 0.22, y0 + H * 0.38
+    circle(d, cx, cy, 62, INK, 7, fill=(235, 205, 170))                   # head
+    line(d, [(cx - 60, cy - 30), (cx - 30, cy - 70), (cx, cy - 62), (cx + 35, cy - 72), (cx + 62, cy - 28)], MUT, 9, 2)  # hair
+    circle(d, cx - 22, cy - 5, 14, INK, 4); circle(d, cx + 22, cy - 5, 14, INK, 4)  # glasses
+    line(d, [(cx - 8, cy - 5), (cx + 8, cy - 5)], INK, 4, 4)
+    line(d, [(cx - 18, cy + 30), (cx, cy + 36), (cx + 18, cy + 30)], INK, 4, 5)       # smile
+    body = [(cx - 85, y1 - 20), (cx - 70, cy + 80), (cx + 70, cy + 80), (cx + 85, y1 - 20)]
+    d.polygon(body, fill=(60, 80, 110)); line(d, body, INK, 6, 6)
+    tipx = bx0 + 30 + (bx1 - bx0 - 60) * ((k * 4) % 1.0) * 0.9
+    tipy = by0 + 50 + min(3, int(k * 4)) * (by1 - by0 - 80) / 4
+    line(d, [(cx + 60, cy + 110), (cx + 150, cy + 60), (tipx, tipy)], INK, 9, 7)      # writing arm
+    d.ellipse([tipx - 9, tipy - 9, tipx + 9, tipy + 9], fill=INK)
+
+
+def crowd(d, b, t, p):
+    x0, y0, x1, y1 = b
+    W, H = x1 - x0, y1 - y0
+    rnd = random.Random(4)
+    for i in range(22):
+        bx = x0 + 40 + rnd.random() * (W - 80)
+        by = y0 + H * 0.35 + rnd.random() * H * 0.55
+        jump = abs(math.sin(t * (3 + rnd.random() * 3) + i)) * 18
+        c = (ACC, POS, NEU, INK, NEG)[i % 5]
+        circle(d, bx, by - 70 - jump, 16, c, 4, fill=c, seed=i)
+        line(d, [(bx, by - 54 - jump), (bx, by - 10 - jump)], c, 6, i)
+        arm = 0.8 * math.sin(t * 5 + i)
+        line(d, [(bx - 26, by - 60 - jump + 20 * arm), (bx, by - 40 - jump), (bx + 26, by - 60 - jump - 20 * arm)], c, 5, i + 1)
+        line(d, [(bx - 14, by - jump), (bx, by - 12 - jump), (bx + 14, by - jump)], c, 5, i + 2)
+
+
+def storm(d, b, t, p):
+    x0, y0, x1, y1 = b
+    W, H = x1 - x0, y1 - y0
+    for k, (fx, fy, r) in enumerate(((0.3, 0.2, 90), (0.5, 0.15, 120), (0.72, 0.22, 95))):
+        cx = x0 + W * fx + 15 * math.sin(t + k)
+        circle(d, cx, y0 + H * fy, r, MUT, 6, fill=(70, 80, 90), seed=k)
+    if (t * 1.3) % 1.0 < 0.18:
+        lx = x0 + W * 0.5
+        pts = [(lx, y0 + H * 0.3), (lx - 40, y0 + H * 0.5), (lx + 20, y0 + H * 0.52), (lx - 30, y0 + H * 0.8)]
+        line(d, pts, NEU, 10, 3)
+    rnd = random.Random(2)
+    for i in range(45):
+        x = x0 + rnd.random() * W
+        y = y0 + H * 0.35 + ((rnd.random() + t * 1.4) % 1.0) * H * 0.6
+        line(d, [(x, y), (x - 14, y + 30)], (150, 190, 210), 4, i)
+
+
+def volcano(d, b, t, p):
+    x0, y0, x1, y1 = b
+    W, H = x1 - x0, y1 - y0
+    cx = x0 + W / 2
+    mount = [(x0 + 40, y1 - 30), (cx - 70, y0 + H * 0.45), (cx + 70, y0 + H * 0.45), (x1 - 40, y1 - 30)]
+    d.polygon(mount, fill=(70, 55, 45)); line(d, mount, INK, 7)
+    rnd = random.Random(8)
+    for i in range(26):
+        u = (t * 0.8 + rnd.random()) % 1.0
+        ang = -math.pi / 2 + (rnd.random() - 0.5) * 1.6
+        v = 420 * (0.6 + rnd.random() * 0.6)
+        x = cx + math.cos(ang) * v * u
+        y = y0 + H * 0.45 + math.sin(ang) * v * u + 520 * u * u
+        r = 10 + 10 * (1 - u)
+        d.ellipse([x - r, y - r, x + r, y + r], fill=(255, int(120 + 100 * (1 - u)), 40))
+    for k in range(3):
+        sy = y0 + H * 0.4 - ((t * 0.3 + k / 3) % 1.0) * H * 0.4
+        circle(d, cx + 30 * math.sin(t + k), sy, 50 + 30 * k, (110, 110, 110), 5, fill=(80, 80, 80), seed=k)
+
+
+def bigwave(d, b, t, p):
+    x0, y0, x1, y1 = b
+    W, H = x1 - x0, y1 - y0
+    crest = x0 + ((t * 0.25) % 1.0) * W * 1.3 - W * 0.15
+    pts = []
+    for i in range(80):
+        x = x0 + i * W / 79
+        h = H * 0.15 + H * 0.55 * math.exp(-((x - crest) / (W * 0.15)) ** 2)
+        pts.append((x, y1 - 40 - h))
+    d.polygon(pts + [(x1, y1 - 30), (x0, y1 - 30)], fill=(40, 90, 120))
+    line(d, pts, (190, 230, 240), 7)
+    houses = [x0 + W * u for u in (0.15, 0.4, 0.65, 0.88)]
+    for hx in houses:
+        rect(d, hx - 30, y1 - 120, hx + 30, y1 - 40, INK, 5, seed=int(hx))
+        line(d, [(hx - 38, y1 - 118), (hx, y1 - 160), (hx + 38, y1 - 118)], INK, 5, int(hx) + 1)
+
+
+def bridge(d, b, t, p):
+    x0, y0, x1, y1 = b
+    W, H = x1 - x0, y1 - y0
+    twist = math.sin(t * 2.4) * 40 * min(1, p * 1.5)
+    for tx in (x0 + W * 0.25, x0 + W * 0.75):
+        line(d, [(tx, y1 - 40), (tx, y0 + 80)], INK, 12, int(tx))
+    deck = [(x0 + 20 + u * (W - 40), y0 + H * 0.6 + twist * math.sin(u * math.pi * 2)) for u in [i / 40 for i in range(41)]]
+    line(d, deck, ACC, 12)
+    cable = [(x0 + 20 + u * (W - 40), y0 + 80 + (H * 0.5) * (2 * u - 1) ** 2 * 0.8 + twist * 0.3 * math.sin(u * 6)) for u in [i / 40 for i in range(41)]]
+    line(d, cable, MUT, 5, 3)
+    for i in range(6):
+        wx = x0 + ((t * 0.6 + i / 6) % 1.0) * W
+        line(d, [(wx - 70, y0 + 60 + i * 25), (wx, y0 + 55 + i * 25)], (140, 170, 180), 3, i)
+
+
+def medal(d, b, t, p):
+    x0, y0, x1, y1 = b
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2 + 40
+    sq = abs(math.cos(t * 1.6))
+    line(d, [(cx - 60, y0 + 30), (cx, cy - 150)], (60, 100, 180), 14)
+    line(d, [(cx + 60, y0 + 30), (cx, cy - 150)], (180, 60, 60), 14, 1)
+    d.ellipse([cx - 150 * sq, cy - 150, cx + 150 * sq, cy + 150], fill=(200, 160, 50), outline=NEU, width=8)
+    if sq > 0.5:
+        circle(d, cx, cy, 95 * sq, (150, 110, 30), 5)
+    for k in range(5):
+        a = t * 2 + k * 1.25
+        star(d, cx + 230 * math.cos(a), cy + 180 * math.sin(a), 16, t + k)
+
+
+def roulette(d, b, t, p):
+    x0, y0, x1, y1 = b
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+    R = min(x1 - x0, y1 - y0) * 0.42
+    a0 = t * 2.5
+    for k in range(18):
+        a, a2 = a0 + k * 2 * math.pi / 18, a0 + (k + 1) * 2 * math.pi / 18
+        poly = [(cx, cy), (cx + R * math.cos(a), cy + R * math.sin(a)), (cx + R * math.cos(a2), cy + R * math.sin(a2))]
+        d.polygon(poly, fill=(170, 40, 45) if k % 2 else (25, 25, 25))
+    circle(d, cx, cy, R, NEU, 8)
+    circle(d, cx, cy, R * 0.3, NEU, 6, fill=(90, 60, 30))
+    ba = -t * 4
+    bx, by = cx + R * 0.85 * math.cos(ba), cy + R * 0.85 * math.sin(ba)
+    d.ellipse([bx - 14, by - 14, bx + 14, by + 14], fill=INK)
+
+
+def ticker(d, b, t, p):
+    """Exchange board: rows of blinking prices scrolling (stock exchange, trading floor, screens)."""
+    x0, y0, x1, y1 = b
+    W, H = x1 - x0, y1 - y0
+    d.rectangle([x0 + 10, y0 + 10, x1 - 10, y1 - 10], fill=(10, 14, 12))
+    rnd = random.Random(1)
+    rows = 9
+    for r in range(rows):
+        y = y0 + 40 + r * (H - 80) / rows
+        off = (t * 120 * (1 + r % 3 * 0.3)) % (W * 0.5)
+        for c in range(6):
+            x = x0 + 30 + c * W * 0.25 - off
+            if x < x0 + 20 or x > x1 - 120:
+                continue
+            up = rnd.random() < 0.5 if int(t * 2 + r + c) % 3 else not (rnd.random() < 0.5)
+            col = POS if up else NEG
+            d.rectangle([x, y, x + 90, y + 26], fill=(30, 40, 35))
+            line(d, [(x + 100, y + (20 if up else 6)), (x + 112, y + (6 if up else 20)), (x + 124, y + (20 if up else 6))], col, 5, r * 7 + c)
+
+
+def ship(d, b, t, p):
+    x0, y0, x1, y1 = b
+    W, H = x1 - x0, y1 - y0
+    sx = x0 + ((t * 0.12) % 1.0) * W * 0.6 + W * 0.05
+    sea = y0 + H * 0.65
+    bob = 8 * math.sin(t * 2)
+    hull = [(sx, sea + bob), (sx + 380, sea + bob), (sx + 330, sea + 70 + bob), (sx + 40, sea + 70 + bob)]
+    d.polygon(hull, fill=(150, 60, 50)); line(d, hull + [hull[0]], INK, 6)
+    for k in range(4):
+        rect(d, sx + 50 + k * 70, sea - 50 + bob, sx + 110 + k * 70, sea + bob, INK, 4,
+             fill=((60, 110, 160), (200, 140, 50), (70, 140, 90), (170, 70, 70))[k], seed=k)
+    for i in range(8):
+        wx = sx - 30 - i * 45
+        line(d, [(wx, sea + 60 + 6 * math.sin(t * 4 + i)), (wx + 40, sea + 55)], (170, 210, 225), 4, i)
+    for i in range(7):
+        wx = x0 + ((i / 7 - t * 0.2) % 1.0) * W
+        line(d, [(wx, sea + 110), (wx + 50, sea + 100), (wx + 100, sea + 110)], (120, 170, 190), 4, i + 9)
+
+
+def building(d, b, t, p):
+    """Classical facade (bank, exchange, treasury, university)."""
+    x0, y0, x1, y1 = b
+    W, H = x1 - x0, y1 - y0
+    roof = [(x0 + 60, y0 + H * 0.3), (x0 + W / 2, y0 + 50), (x1 - 60, y0 + H * 0.3)]
+    line(d, roof + [roof[0]], NEU, 8)
+    n = 6
+    for k in range(n):
+        x = x0 + 100 + k * (W - 200) / (n - 1)
+        hgt = min(1.0, p * 2 - k * 0.12)
+        if hgt > 0:
+            line(d, [(x, y1 - 60), (x, y1 - 60 - (y1 - 60 - y0 - H * 0.32) * hgt)], INK, 16, k)
+    line(d, [(x0 + 40, y1 - 50), (x1 - 40, y1 - 50)], INK, 9, 9)
+    for k in range(3):
+        fy = y0 + 20 + 6 * math.sin(t * 3 + k)
+        line(d, [(x0 + W / 2, y0 + 50), (x0 + W / 2, fy - 40)], MUT, 4, 12)
+    line(d, [(x0 + W / 2, y0 - 10), (x0 + W / 2 + 70, y0 + 5 + 10 * math.sin(t * 4)), (x0 + W / 2, y0 + 20)], ACC, 6, 13)
+
+
+def newspaper(d, b, t, p):
+    x0, y0, x1, y1 = b
+    W, H = x1 - x0, y1 - y0
+    spin = max(0.0, 1 - p * 1.6)
+    sc = 1 - 0.7 * spin
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+    w, h = W * 0.7 * sc, H * 0.8 * sc
+    a = spin * 6
+    def rot(px, py):
+        return (cx + px * math.cos(a) - py * math.sin(a), cy + px * math.sin(a) + py * math.cos(a))
+    corners = [rot(-w / 2, -h / 2), rot(w / 2, -h / 2), rot(w / 2, h / 2), rot(-w / 2, h / 2)]
+    d.polygon(corners, fill=(225, 220, 205))
+    if spin < 0.05:
+        d.rectangle([cx - w / 2 + 30, cy - h / 2 + 30, cx + w / 2 - 30, cy - h / 2 + 110], fill=(30, 30, 30))
+        line(d, [(cx - w / 2 + 40, cy - h / 2 + 160), (cx + w / 2 - 40, cy - h / 2 + 160)], NEG, 14, 1)
+        for r in range(7):
+            yy = cy - h / 2 + 210 + r * 40
+            line(d, [(cx - w / 2 + 40, yy), (cx + (w / 2 - 40) * (0.4 if r % 3 == 2 else 1), yy)], (110, 110, 110), 6, r + 2)
+        line(d, [(cx + w * 0.05, cy + h * 0.05), (cx + w * 0.4, cy - h * 0.15), (cx + w * 0.42, cy + h * 0.3)], NEG, 9, 9)
+
+
+def car(d, b, t, p):
+    """Traffic / cars moving (traffic jam, roads, toll booth)."""
+    x0, y0, x1, y1 = b
+    W, H = x1 - x0, y1 - y0
+    for lane in range(3):
+        y = y0 + H * (0.3 + lane * 0.22)
+        line(d, [(x0 + 10, y + 60), (x1 - 10, y + 60)], MUT, 3, lane)
+        for k in range(4):
+            sp = 0.08 + lane * 0.05
+            x = x0 + ((k / 4 + t * sp) % 1.0) * (W + 200) - 150
+            c = (ACC, POS, NEU, NEG)[(k + lane) % 4]
+            d.rounded_rectangle([x, y, x + 140, y + 50], radius=14, fill=c)
+            d.ellipse([x + 15, y + 38, x + 45, y + 68], fill=INK); d.ellipse([x + 95, y + 38, x + 125, y + 68], fill=INK)
+
+
+def sun(d, b, t, p):
+    """Sun / heat / summer (sunspots, beach, ice cream, hot days)."""
+    x0, y0, x1, y1 = b
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2 - 40
+    for k in range(16):
+        a = t * 0.6 + k * math.pi / 8
+        r1, r2 = 150, 210 + 25 * math.sin(t * 4 + k)
+        line(d, [(cx + r1 * math.cos(a), cy + r1 * math.sin(a)), (cx + r2 * math.cos(a), cy + r2 * math.sin(a))], NEU, 8, k)
+    circle(d, cx, cy, 120, NEU, 8, fill=(240, 180, 60))
+    for k in range(3):
+        sx = cx - 50 + k * 45 + 10 * math.sin(t + k)
+        d.ellipse([sx - 12, cy - 20 + k * 20, sx + 12, cy + 4 + k * 20], fill=(150, 90, 30))
+    line(d, [(x0 + 30, y1 - 50), (x1 - 30, y1 - 50)], (120, 170, 190), 5)
+
+
+def banknote(d, b, t, p):
+    """Old banknote with a portrait and the bell curve printed on it (Gauss on the 10 Mark)."""
+    x0, y0, x1, y1 = b
+    W, H = x1 - x0, y1 - y0
+    tilt = 0.06 * math.sin(t * 1.5)
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+    w, h = W * 0.86, H * 0.62
+    def rot(px, py):
+        return (cx + px * math.cos(tilt) - py * math.sin(tilt), cy + px * math.sin(tilt) + py * math.cos(tilt))
+    note = [rot(-w / 2, -h / 2), rot(w / 2, -h / 2), rot(w / 2, h / 2), rot(-w / 2, h / 2)]
+    d.polygon(note, fill=(150, 160, 120)); line(d, note + [note[0]], (70, 80, 50), 7)
+    px, py = rot(-w * 0.25, 0)
+    circle(d, px, py, h * 0.3, (60, 70, 45), 6, fill=(190, 195, 160))
+    circle(d, px, py - h * 0.05, h * 0.12, (60, 70, 45), 5)
+    line(d, [rot(-w * 0.36, h * 0.25), rot(-w * 0.25, h * 0.08), rot(-w * 0.14, h * 0.25)], (60, 70, 45), 5, 2)
+    k = min(1.0, p * 1.4)
+    pts = [rot(w * 0.02 + u * w * 0.42, h * 0.28 - h * 0.5 * math.exp(-((u - 0.5) ** 2) / 0.02)) for u in [i / 40 for i in range(int(41 * k))]]
+    if len(pts) > 1:
+        line(d, pts, (90, 40, 40), 6, 3)
+    line(d, [rot(w * 0.02, h * 0.3), rot(w * 0.44, h * 0.3)], (60, 70, 45), 4, 4)
+    for j in range(3):
+        sx, sy = rot(w * 0.4 + 30 * math.sin(t * 3 + j), -h * 0.36)
+        star(d, sx, sy, 10, t + j, NEU)
+
+
 KINDS = {"dice": dice, "coin": coin, "galton": galton, "wave": wave, "crash": crash, "orderbook": orderbook,
          "leash": leash, "vectors": vectors, "matrix": matrix, "scale": scale, "compound": compound,
          "pendulum": pendulum, "cone": cone, "dominoes": dominoes, "gears": gears, "thermometer": thermometer,
          "network": network, "bell": bell, "skew": skew, "ripple": ripple, "rain": rain, "spring": spring,
          "snowball": snowball, "turbine": turbine, "juggle": juggle, "rowing": rowing, "brownian": brownian, "tug": tug,
-         "orbit": orbit}
+         "orbit": orbit, "scientist": scientist, "crowd": crowd, "storm": storm, "volcano": volcano,
+         "bigwave": bigwave, "bridge": bridge, "medal": medal, "roulette": roulette, "ticker": ticker, "ship": ship,
+         "building": building, "newspaper": newspaper, "car": car, "sun": sun, "banknote": banknote}
 
 
 def draw(img, kind, box, t, p):

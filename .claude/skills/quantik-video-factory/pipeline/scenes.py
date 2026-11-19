@@ -281,3 +281,48 @@ def sketch(kind, say, label=None, name="sketch", min_dur=3.5):
                    label=f"{name}-tag")
 
     return Scene(name, say, draw, min_dur, texts=[label or ""])
+
+
+def hook_art(text, kind, kicker=None, min_dur=2.6):
+    """Eye-catching hook: big hand-drawn animation on top, floating symbols, two-tone punchline text."""
+    import math
+    import re as _re
+    import sketch as SK
+
+    m = _re.search(r"[?.!…]\s", text)
+    head, punch = (text[: m.end()].strip(), text[m.end():].strip()) if m else (text, "")
+    glyphs = ["σ", "%", "?", "↑", "↓", "Σ", "μ", "∞", "≈"]
+
+    def draw(img, t, p):
+        d = F.ImageDraw.Draw(img, "RGBA")
+        for i in range(14):  # floating math symbols behind everything
+            gx = (i * 137 + t * (20 + i * 3)) % 1080
+            gy = 300 + ((i * 263 - t * (25 + i * 2)) % 1000)
+            d.text((gx, gy), glyphs[i % len(glyphs)], font=F.font("sans-black", 46 + (i % 3) * 18),
+                   fill=(*T["raised"], 255))
+        a = F.ease_out(F.seg(p, 0, 0.12))
+        top = 300 + int(40 * (1 - a))
+        box = (X0, top, X1, top + 420)
+        glow = 0.5 + 0.5 * math.sin(t * 4)
+        d.rounded_rectangle([box[0] - 6, box[1] - 6, box[2] + 6, box[3] + 6], radius=34,
+                            outline=(*T["accent"], int(90 + 120 * glow)), width=6)
+        F.panel(img, box, fill=(16, 30, 24))
+        SK.draw(img, kind, (X0 + 30, top + 55, X1 - 30, top + 405), t, min(1.0, p * 1.5))
+        if kicker:
+            F.chip(img, (X0 + 22, top + 18), kicker, T["accent"], 28)
+        words = head.split()
+        k = max(1, int(len(words) * F.ease_out(F.seg(p, 0, 0.3)) + 0.999))
+        F.text_box(img, " ".join(words[:k]), (X0, 750, X1, 990 if punch else 1250), "sans-black", 84, T["text"],
+                   "left", "middle", min_size=40, label="hook", spacing=1.1, hl_numbers=True)
+        if punch:
+            pw = punch.split()
+            kp = int(len(pw) * F.ease_out(F.seg(p, 0.28, 0.6)) + 0.999)
+            if kp:
+                F.text_box(img, " ".join(pw[:kp]), (X0, 1000, X1, 1245), "sans-black", 72, T["accent"], "left",
+                           "middle", min_size=36, label="hook-punch", spacing=1.1, hl_numbers=True, hl_color=T["neutral"])
+            SK.hand_underline(d, X0, X0 + 560, 1262, F.seg(p, 0.6, 0.85), T["neutral"], 7, 3)
+            if p > 0.7:
+                SK.star(d, X1 - 40, 1030, 20, t)
+                SK.star(d, X1 - 90, 1230, 14, t + 2)
+
+    return Scene("hook", text, draw, min_dur, texts=[text, kicker or ""])
