@@ -45,7 +45,7 @@ def _get(url, tries=None):
 
     tries = tries or (1 if os.environ.get("QT_BROLL_FAST") else 4)  # render: fail fast; prefetch: patient
     for i in range(tries):
-        wait = 1.2 - (time.time() - _last_call[0])
+        wait = (3.0 if "upload.wikimedia" in url else 1.0) - (time.time() - _last_call[0])
         if wait > 0:
             time.sleep(wait)
         _last_call[0] = time.time()
@@ -92,6 +92,61 @@ def _candidates(spec):
                    "license_url": md.get("LicenseUrl", {}).get("value", "")}
 
 
+OV_API = "https://api.openverse.org/v1/images/"
+OV_LIC = {"cc0": "CC0", "pdm": "Public domain", "by": "CC BY", "by-sa": "CC BY-SA"}
+
+
+def _upload_thumb(url, width=1280):
+    """Original upload.wikimedia.org URL → its 1280px thumbnail (same file, lighter)."""
+    m = re.match(r"(https://upload\.wikimedia\.org/wikipedia/commons)/(\w)/(\w\w)/([^/?]+)$", url)
+    if not m or url.lower().endswith((".svg", ".tif", ".tiff")):
+        return url
+    base, a, ab, name = m.groups()
+    return f"{base}/thumb/{a}/{ab}/{name}/{width}px-{name}"
+
+
+def _openverse(spec):
+    """Search Commons through Openverse's index (no Commons API rate limit); download from upload.wikimedia.org."""
+    q = {"q": spec["query"], "license": "cc0,pdm,by,by-sa", "source": "wikimedia", "page_size": "12",
+         "mature": "false"}
+    data = json.loads(_get(OV_API + "?" + urllib.parse.urlencode(q)))
+    for r in data.get("results", []):
+        if min(r.get("width") or 0, r.get("height") or 0) < 500:
+            continue
+        if not str(r.get("url", "")).lower().endswith((".jpg", ".jpeg", ".png")):
+            continue
+        lic = OV_LIC.get(r.get("license"), "")
+        if not lic:
+            continue
+        ver = r.get("license_version") or ""
+        lic = lic + (f" {ver}" if lic.startswith("CC BY") and ver else "")
+        yield {"title": "File:" + _clean(r.get("title")), "url": _upload_thumb(r["url"]),
+               "page": r.get("foreign_landing_url", ""), "artist": (_clean(r.get("creator")) or "không rõ tác giả")[:80],
+               "license": lic, "license_url": r.get("license_url", "")}
+
+
+def _relevant(spec, c):
+    must = spec.get("must")
+    if not must:
+        return True
+    t = c["title"].lower()
+    return all(w.lower() in t for w in (must if isinstance(must, list) else [must]))
+
+
+def _all_candidates(spec):
+    seen = set()
+    sources = ([] if spec.get("file") else [_openverse]) + [_candidates]
+    for src in sources:
+        try:
+            for c in src(spec):
+                if c["url"] in seen or not _relevant(spec, c):
+                    continue
+                seen.add(c["url"])
+                yield c
+        except Exception:  # one source down (rate limit, blocked): try the next
+            continue
+
+
 def fetch(spec):
     """Return {"path", credit...} for a free image, or {"error": why}. Cached by query/file."""
     key = spec.get("file") or spec.get("query")
@@ -101,18 +156,33 @@ def fetch(spec):
     meta = CACHE / (_slug(key) + ".json")
     if meta.exists():
         m = json.loads(meta.read_text(encoding="utf-8"))
-        if m.get("error") or (CACHE / m["file"]).exists():
+        if (m.get("error") and m.get("v") == 2) or (not m.get("error") and (CACHE / m["file"]).exists()):
             return m if m.get("error") else {**m, "path": str(CACHE / m["file"])}
+    import os
+
+    if os.environ.get("QT_BROLL_OFFLINE"):  # render from cache only (prefetch_broll.py does the downloading)
+        return {"error": "chưa có trong cache"}
     try:
-        for c in _candidates(spec):
-            raw = _get(c["url"])
+        limited = False
+        for c in _all_candidates(spec):
+            try:
+                raw = _get(c["url"])
+            except urllib.error.HTTPError as e:
+                if e.code == 429:  # rate-limited: stop, do not cache a false "no image"
+                    limited = True
+                    break
+                continue
+            except Exception:
+                continue
             ext = ".png" if c["url"].lower().endswith(".png") else ".jpg"
             name = _slug(key) + ext
             (CACHE / name).write_bytes(raw)
             c["file"], c["query"] = name, key
             meta.write_text(json.dumps(c, ensure_ascii=False, indent=2), encoding="utf-8")
             return {**c, "path": str(CACHE / name)}
-        res = {"error": "không có ảnh giấy phép tự do", "query": key}
+        if limited:
+            return {"error": "HTTPError 429: bị giới hạn tốc độ tải ảnh"}
+        res = {"error": "không có ảnh giấy phép tự do phù hợp", "query": key, "v": 2}
         meta.write_text(json.dumps(res, ensure_ascii=False), encoding="utf-8")  # cache the miss too
         return res
     except Exception as e:  # offline, blocked, rate-limited: fall back to drawing (not cached, retry next time)
@@ -200,6 +270,7 @@ def draw_doodle(img, kind, box, p, color=None, width=9, t=0.0, mono=False):
     budget = total * min(1.0, p / 0.5)
     tip = None
     d = ImageDraw.Draw(img)
+    glow = ImageDraw.Draw(img, "RGBA")
     colors = [color or T["text"], T["accent"], T["neutral"], T["positive"]]
     for k, (st, ln) in enumerate(zip(strokes, lengths)):
         if budget <= 0:
@@ -215,6 +286,8 @@ def draw_doodle(img, kind, box, p, color=None, width=9, t=0.0, mono=False):
             out.append(b); acc += seg
         budget -= ln
         xy = [(ox + u * s, oy + v * s) for u, v in out]
+        if len(xy) > 1 and not mono:  # soft glow under the stroke
+            glow.line(xy, fill=(*T["accent"], 40), width=width * 3, joint="curve")
         if len(xy) > 1 and budget > -ln:
             tip = xy[-1]
         if len(xy) > 1:
@@ -226,6 +299,14 @@ def draw_doodle(img, kind, box, p, color=None, width=9, t=0.0, mono=False):
     if tip and p < 0.5 and not mono:  # pen tip while drawing: reads as a hand sketching live
         R = width * 1.6
         d.ellipse([tip[0] - R, tip[1] - R, tip[0] + R, tip[1] + R], fill=T["accent"])
+    if not mono and p >= 0.5:  # finished: sparkles travel along the strokes
+        pts = [pt for st in strokes for pt in st]
+        for k in range(6):
+            u, v = pts[int((k / 6 + t * 0.35) % 1.0 * (len(pts) - 1))]
+            X, Y = ox + u * s, oy + v * s
+            r = 5 + 3 * math.sin(t * 6 + k)
+            glow.ellipse([X - r * 2.4, Y - r * 2.4, X + r * 2.4, Y + r * 2.4], fill=(*T["neutral"], 50))
+            d.ellipse([X - r, Y - r, X + r, Y + r], fill=T["neutral"])
 
 
 # ---------------------------------------------------------------- photo helpers
@@ -242,6 +323,34 @@ def load_cover(path, w, h):
     return _IMG[key]
 
 
+_VIG = {}
+
+
+def _vignette(w, h):
+    from PIL import Image, ImageDraw, ImageFilter
+
+    if (w, h) not in _VIG:
+        m = Image.new("L", (w, h), 0)
+        ImageDraw.Draw(m).rectangle([0, 0, w, h], fill=150)
+        ImageDraw.Draw(m).ellipse([-w * 0.15, -h * 0.1, w * 1.15, h * 1.1], fill=0)
+        _VIG[(w, h)] = m.filter(ImageFilter.GaussianBlur(min(w, h) // 6))
+    return _VIG[(w, h)]
+
+
+def _sweep(im, p):
+    from PIL import Image, ImageDraw, ImageFilter
+
+    w, h = im.size
+    out = im.copy()
+    out.paste(Image.new("RGB", (w, h), (0, 0, 0)), (0, 0), _vignette(w, h))
+    x = int(-w * 0.6 + w * 2.0 * p)
+    band = Image.new("L", (w, h), 0)
+    ImageDraw.Draw(band).polygon([(x, 0), (x + w * 0.18, 0), (x + w * 0.18 - h * 0.35, h), (x - h * 0.35, h)], fill=60)
+    band = band.filter(ImageFilter.GaussianBlur(28))
+    out.paste(Image.new("RGB", (w, h), (255, 236, 210)), (0, 0), band)
+    return out
+
+
 def ken_burns(img, path, box, p, dim=0.0, radius=28):
     """Slow zoom + pan of a photo inside box (rounded), optional darkening for text on top."""
     from PIL import Image, ImageDraw
@@ -255,6 +364,8 @@ def ken_burns(img, path, box, p, dim=0.0, radius=28):
     crop = big.crop((cx, cy, cx + cw, cy + ch)).resize((w, h), Image.BILINEAR)
     if dim:
         crop = Image.blend(crop, Image.new("RGB", (w, h), T["bg"]), dim)
+    else:  # cutaway: animated light sweep + vignette so the still photo feels alive
+        crop = _sweep(crop, p)
     mask = Image.new("L", (w, h), 0)
     ImageDraw.Draw(mask).rounded_rectangle([0, 0, w - 1, h - 1], radius=radius, fill=255)
     img.paste(crop, (x0, y0), mask)
@@ -286,6 +397,11 @@ def apply(scenes, ep, mode="full", log=print):
         hb = resolve(ep.get("hook_broll") or {"draw": guess_doodle(ep.get("kicker"), ep.get("hook"), ep.get("topic"))})
         S.with_backdrop(scenes[hook_i], hb)
         records.append(_record("hook", hb))
+    tk_i = next((i for i, s in enumerate(scenes) if s.name == "takeaway"), None)
+    if tk_i is not None and ep.get("takeaway_broll"):
+        tb = resolve(ep["takeaway_broll"])
+        S.with_backdrop(scenes[tk_i], tb, dim=0.7)
+        records.append(_record("takeaway", tb))
     if mode == "full":
         for k, spec in enumerate(ep.get("broll") or []):
             if not spec.get("say"):

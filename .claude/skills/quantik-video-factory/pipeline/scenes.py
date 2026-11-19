@@ -231,8 +231,11 @@ def broll(spec, say, name="broll", min_dur=3.0):
             B.draw_doodle(img, kind, (X0 + 90, 420, X1 - 90, 1140), p, t=t)
             F.text_box(img, "minh hoạ vẽ tay", (X0 + 30, 1170, X1 - 30, 1215), "sans", 22, T["muted"], "right",
                        label=f"{name}-drawn")
-        if label:
-            F.chip(img, (X0 + 24, 356 + int(20 * (1 - a))), label, T["accent"], 30)
+        if label:  # label slides in from the left, accent underline grows
+            sx = X0 + 24 - int(220 * (1 - a))
+            F.chip(img, (sx, 356), label, T["accent"], 30)
+            F.ImageDraw.Draw(img).rounded_rectangle([X0 + 24, 414, X0 + 24 + int(260 * F.ease_out(F.seg(p, 0.1, 0.4))), 420],
+                                                     radius=3, fill=T["neutral"])
 
     return Scene(name, say, draw, min_dur, texts=[label])
 

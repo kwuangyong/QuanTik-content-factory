@@ -37,7 +37,7 @@ def load_all():
     out = {}
     for p in sorted(LESSONS.glob("*.json")):
         data = json.loads(p.read_text(encoding="utf-8"))
-        for les in data["lessons"]:
+        for les in data.get("lessons", []):  # broll-v2.json etc. are overlays, not series
             les["series"] = data.get("series", p.stem)
             les["_file"] = p.name
             out[les["id"]] = les
@@ -219,8 +219,16 @@ class LessonModel:
         raise ValueError(kind)
 
 
+@lru_cache(maxsize=1)
+def broll_v2():
+    p = LESSONS / "broll-v2.json"
+    return json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+
+
 def episode(spec):
     ep = dict(spec.get("episode", {}))
+    ep.update(broll_v2().get(spec["id"], {}))   # 4 lớp B-roll ảnh thật (hook, người, hiện tượng, câu chốt)
+    ep.setdefault("max_seconds", 75)            # thêm cảnh B-roll → nới giới hạn (Shorts/Reels nhận > 60s)
     ep.setdefault("tag", f"#{spec.get('no', '')} " + spec.get("short", spec["id"].split("-", 1)[-1].upper())[:18])
     ep.setdefault("title", spec.get("name"))
     ep.setdefault("allowed_literals", [])

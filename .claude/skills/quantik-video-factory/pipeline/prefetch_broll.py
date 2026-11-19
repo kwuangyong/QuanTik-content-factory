@@ -13,11 +13,13 @@ from core import SKILL
 
 specs = []
 for les in L.load_all().values():
-    ep = les.get("episode", {})
+    ep = L.episode(les)
     specs += [s for s in [ep.get("hook_broll")] + ep.get("broll", []) if s and (s.get("query") or s.get("file"))]
 for p in (SKILL / "episodes").glob("*.json"):
     ep = json.loads(p.read_text(encoding="utf-8"))
     specs += [s for s in [ep.get("hook_broll")] + ep.get("broll", []) if s and (s.get("query") or s.get("file"))]
+specs = [s for s in specs] + [s for les in L.load_all().values() for s in [L.episode(les).get("takeaway_broll")]
+                              if s and s.get("query")]
 todo = list({(s.get("file") or s["query"]): s for s in specs}.values())
 rounds = int(sys.argv[sys.argv.index("--rounds") + 1]) if "--rounds" in sys.argv else 6
 for rnd in range(rounds):
@@ -31,7 +33,7 @@ for rnd in range(rounds):
             print(f"WAIT {key}: {r['error'][:60]}", flush=True); left.append(s)
         else:
             print(f"MISS {key}: {r['error']}", flush=True)
-        time.sleep(3)
+        time.sleep(0.5)
     if not left:
         break
     todo = left

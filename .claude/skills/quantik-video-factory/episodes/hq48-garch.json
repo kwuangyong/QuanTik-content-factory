@@ -17,14 +17,28 @@
     "chungkhoan"
   ],
   "hook_broll": {
+    "query": "storm sea waves lighthouse",
     "draw": "zigzag"
   },
   "broll": [
     {
       "query": "Tim Bollerslev",
+      "must": "Bollerslev",
       "label": "Tim Bollerslev",
       "draw": "zigzag",
       "say": "Tim Bollerslev mở rộng ARCH thành GARCH: biến động nhớ cả chính nó."
+    },
+    {
+      "query": "volcano smoke after eruption",
+      "label": "Âm ỉ sau phun trào",
+      "draw": "zigzag",
+      "after": "chart",
+      "say": "Biến động như núi lửa sau phun trào: còn âm ỉ rất lâu mới nguội hẳn."
     }
-  ]
+  ],
+  "takeaway_broll": {
+    "query": "calm sea sunset",
+    "draw": "zigzag"
+  },
+  "max_seconds": 75
 }

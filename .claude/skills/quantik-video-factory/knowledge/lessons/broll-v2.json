@@ -1,0 +1,411 @@
+{
+  "_doc": "B-roll v2 cho series Học Quant: mỗi video 4 lớp ảnh thật (nền hook, cảnh cắt con người/lịch sử, cảnh cắt hiện tượng đời thực sau chart, nền câu chốt). Ghi đè hook_broll/broll/takeaway_broll trong lesson. 'must' = từ bắt buộc có trong tên file (chống nhầm người). 'draw' = hoạt hoạ dự phòng khi không có ảnh.",
+  "hq01-probability": {
+    "hook_broll": {"query": "dice on casino table", "draw": "dice"},
+    "broll": [
+      {"query": "Blaise Pascal portrait", "must": "Pascal", "label": "Blaise Pascal", "draw": "dice", "say": "Lý thuyết xác suất ra đời từ một ván cờ bạc, khi Pascal và Fermat tranh luận cách chia tiền cược."},
+      {"query": "roulette wheel casino", "label": "Sòng bạc", "draw": "coin", "after": "chart", "say": "Sòng bạc sống nhờ hiểu xác suất hơn khách: mỗi ván chỉ nhỉnh một chút, nhưng lặp lại hàng triệu lần."}
+    ],
+    "takeaway_broll": {"query": "slot machines casino", "draw": "dice"}
+  },
+  "hq02-random-variable": {
+    "hook_broll": {"query": "storm clouds weather", "draw": "question"},
+    "broll": [
+      {"query": "Andrey Kolmogorov", "must": "Kolmogorov", "label": "Andrey Kolmogorov", "draw": "dice", "say": "Kolmogorov đặt nền móng tiên đề cho xác suất hiện đại, nơi biến ngẫu nhiên có định nghĩa chặt chẽ."},
+      {"query": "lottery balls machine", "label": "Lồng cầu xổ số", "draw": "dice", "after": "chart", "say": "Như lồng cầu xổ số: chưa quay thì chưa biết số nào, nhưng biết chắc mọi khả năng có thể ra."}
+    ],
+    "takeaway_broll": {"query": "stock exchange screens", "draw": "chart-up"}
+  },
+  "hq03-expected-value": {
+    "hook_broll": {"query": "poker chips", "draw": "coin"},
+    "broll": [
+      {"query": "Christiaan Huygens portrait", "must": "Huygens", "label": "Christiaan Huygens", "draw": "coin", "say": "Huygens là người đầu tiên viết về giá trị kỳ vọng, khi tính xem một ván cược đáng giá bao nhiêu."},
+      {"query": "lottery tickets", "label": "Vé số", "draw": "coin", "after": "chart", "say": "Vé số là ví dụ kinh điển của kỳ vọng âm: người mua thắng thì hiếm, người bán thì thắng chắc."}
+    ],
+    "takeaway_broll": {"query": "casino chips stack", "draw": "coin"}
+  },
+  "hq04-variance": {
+    "hook_broll": {"query": "roller coaster", "draw": "zigzag"},
+    "broll": [
+      {"query": "Ronald Fisher statistician", "must": "Fisher", "label": "Ronald Fisher", "draw": "zigzag", "say": "Chữ phương sai, variance, được nhà thống kê Ronald Fisher đặt tên."},
+      {"query": "stormy sea waves", "label": "Biển động", "draw": "zigzag", "after": "chart", "say": "Ngày lặng và ngày bão có thể cùng mực nước trung bình. Phương sai mới cho biết con thuyền chao đảo cỡ nào."}
+    ],
+    "takeaway_broll": {"query": "calm lake reflection", "draw": "zigzag"}
+  },
+  "hq05-standard-deviation": {
+    "hook_broll": {"query": "speedometer car dashboard", "draw": "bell"},
+    "broll": [
+      {"query": "Karl Pearson", "must": "Pearson", "label": "Karl Pearson", "draw": "bell", "say": "Thuật ngữ độ lệch chuẩn do Karl Pearson đưa ra cuối thế kỷ mười chín."},
+      {"query": "clinical thermometer", "label": "Nhiệt kế", "draw": "bell", "after": "chart", "say": "Như nhiệt kế đo cơn sốt: độ lệch chuẩn đo cơn sốt của giá bằng một con số."}
+    ],
+    "takeaway_broll": {"query": "stock market display board", "draw": "chart-up"}
+  },
+  "hq06-probability-distribution": {
+    "hook_broll": {"query": "coin toss", "draw": "coin"},
+    "broll": [
+      {"query": "Galton board", "label": "Bảng Galton", "draw": "bell", "say": "Bảng Galton cho thấy phân phối bằng mắt: từng viên bi rơi ngẫu nhiên, nhưng cả đống bi lại xếp thành hình rất đều."},
+      {"query": "crowd of people street", "label": "Đám đông", "draw": "bell", "after": "chart", "say": "Chiều cao một đám đông, cân nặng, điểm thi: tự nhiên đầy những phân phối có hình dạng rất ổn định."}
+    ],
+    "takeaway_broll": {"query": "Galton box quincunx", "draw": "bell"}
+  },
+  "hq07-normal-distribution": {
+    "hook_broll": {"query": "Carl Friedrich Gauss portrait", "must": "Gauss", "label": "Gauss", "draw": "bell"},
+    "broll": [
+      {"query": "10 Deutsche Mark banknote Gauss", "must": "Mark", "label": "Gauss trên tờ 10 Mark", "draw": "bell", "say": "Đường cong này mang tên Gauss, từng được in lên cả tờ tiền giấy của Đức."},
+      {"query": "stock market crash newspaper", "label": "Ngày thị trường sập", "draw": "crash", "after": "chart", "say": "Những ngày sập lịch sử lẽ ra gần như không thể xảy ra, nếu thị trường thật sự tuân theo hình chuông."}
+    ],
+    "takeaway_broll": {"query": "bell curve normal distribution", "draw": "bell"}
+  },
+  "hq08-skewness": {
+    "hook_broll": {"query": "tightrope walker", "draw": "skew"},
+    "broll": [
+      {"query": "volcano village", "label": "Sống cạnh núi lửa", "draw": "crash", "say": "Như sống cạnh núi lửa: chín mươi chín ngày yên bình, rồi một ngày mất tất cả."},
+      {"query": "steamroller road", "label": "Nhặt tiền lẻ trước xe lu", "draw": "crash", "after": "chart", "say": "Dân trong nghề gọi kiểu chiến lược này là nhặt tiền lẻ trước đầu xe lu."}
+    ],
+    "takeaway_broll": {"query": "volcano eruption", "draw": "crash"}
+  },
+  "hq09-kurtosis": {
+    "hook_broll": {"query": "black swan bird", "must": "swan", "label": "Thiên nga đen", "draw": "warning"},
+    "broll": [
+      {"query": "Black Monday 1987 stock market", "label": "Thứ Hai Đen", "draw": "crash", "say": "Những ngày như Thứ Hai Đen gần như không thể xảy ra nếu thị trường thật sự tuân theo phân phối chuẩn."},
+      {"query": "tsunami wave", "label": "Sóng thần", "draw": "crash", "after": "chart", "say": "Như sóng thần: hiếm, nhưng khi đến thì vượt xa mọi bức tường được xây cho sóng thường."}
+    ],
+    "takeaway_broll": {"query": "lightning storm", "draw": "warning"}
+  },
+  "hq10-covariance": {
+    "hook_broll": {"query": "flock of birds flying", "draw": "two-lines"},
+    "broll": [
+      {"query": "Harry Markowitz", "must": "Markowitz", "label": "Harry Markowitz", "draw": "network", "say": "Markowitz đưa hiệp phương sai vào trung tâm của lý thuyết danh mục hiện đại."},
+      {"query": "rowing team boat", "label": "Đội chèo thuyền", "draw": "two-lines", "after": "chart", "say": "Như một đội chèo: khi mọi người cùng nhịp, con thuyền lao đi, và cũng lật cùng lúc."}
+    ],
+    "takeaway_broll": {"query": "basket of eggs", "draw": "network"}
+  },
+  "hq11-correlation": {
+    "hook_broll": {"query": "ice cream summer", "draw": "two-lines"},
+    "broll": [
+      {"query": "Francis Galton portrait", "must": "Galton", "label": "Francis Galton", "draw": "two-lines", "say": "Francis Galton là người đầu tiên đưa ra khái niệm tương quan khi đo chiều cao cha mẹ và con cái."},
+      {"query": "crowded beach summer", "label": "Kem và bãi biển", "draw": "two-lines", "after": "chart", "say": "Bán kem và số người đi biển tăng cùng nhau. Kem không làm người ta đi biển, cả hai đều do trời nóng."}
+    ],
+    "takeaway_broll": {"query": "two runners race", "draw": "two-lines"}
+  },
+  "hq12-conditional-probability": {
+    "hook_broll": {"query": "dark storm clouds", "draw": "question"},
+    "broll": [
+      {"query": "umbrella rain street", "label": "Khi trời kéo mây", "draw": "warning", "say": "Như thời tiết: xác suất mưa hôm nay khác hẳn xác suất mưa khi trời đã kéo mây đen."},
+      {"query": "traffic jam city", "label": "Giờ tan tầm", "draw": "question", "after": "chart", "say": "Xác suất kẹt xe lúc nửa đêm và giờ tan tầm là hai con số khác hẳn. Điều kiện thay đổi tất cả."}
+    ],
+    "takeaway_broll": {"query": "rain clouds sky", "draw": "question"}
+  },
+  "hq13-bayes-theorem": {
+    "hook_broll": {"query": "Thomas Bayes", "must": "Bayes", "label": "Thomas Bayes", "draw": "question"},
+    "broll": [
+      {"query": "Bayes theorem neon", "must": "Bayes", "label": "Định lý Bayes", "draw": "scale", "say": "Định lý mang tên mục sư Thomas Bayes, được công bố sau khi ông qua đời."},
+      {"query": "medical laboratory test tubes", "label": "Xét nghiệm y khoa", "draw": "question", "after": "chart", "say": "Xét nghiệm dương tính chưa chắc là mắc bệnh, nếu căn bệnh đó rất hiếm. Đây là bài học kinh điển của Bayes."}
+    ],
+    "takeaway_broll": {"query": "smoke detector", "draw": "warning"}
+  },
+  "hq16-vector-matrix": {
+    "hook_broll": {"query": "spreadsheet computer screen", "draw": "matrix"},
+    "broll": [
+      {"query": "Arthur Cayley", "must": "Cayley", "label": "Arthur Cayley", "draw": "matrix", "say": "Arthur Cayley là người đầu tiên định nghĩa ma trận như một đối tượng toán học có thể cộng và nhân."},
+      {"query": "stock exchange trading screens", "label": "Bảng điện", "draw": "matrix", "after": "chart", "say": "Mỗi bảng điện là một ma trận khổng lồ: hàng là mã cổ phiếu, cột là thời gian."}
+    ],
+    "takeaway_broll": {"query": "data center servers", "draw": "network"}
+  },
+  "hq17-matrix-multiplication": {
+    "hook_broll": {"query": "Rubik's cube", "draw": "matrix"},
+    "broll": [
+      {"query": "kitchen ingredients cooking", "label": "Công thức × nguyên liệu", "draw": "arrows", "say": "Mỗi dòng là một công thức pha chế, mỗi cột là một rổ nguyên liệu. Nhân hai thứ là ra món."},
+      {"query": "graphics card GPU", "label": "Card đồ hoạ", "draw": "matrix", "after": "chart", "say": "Card đồ hoạ sinh ra để nhân ma trận cực nhanh, và đó cũng là thứ chạy trí tuệ nhân tạo hôm nay."}
+    ],
+    "takeaway_broll": {"query": "supercomputer", "draw": "network"}
+  },
+  "hq18-dot-product": {
+    "hook_broll": {"query": "compass navigation", "draw": "arrows"},
+    "broll": [
+      {"query": "weather vane", "label": "Cùng hướng, ngược hướng", "draw": "arrows", "say": "Hai vector cùng hướng thì tích vô hướng lớn, vuông góc thì bằng không, ngược hướng thì âm."},
+      {"query": "sailing boat wind", "label": "Cánh buồm đón gió", "draw": "arrows", "after": "chart", "say": "Như cánh buồm: chỉ phần gió cùng hướng mới đẩy thuyền đi. Đó chính là tích vô hướng."}
+    ],
+    "takeaway_broll": {"query": "arrows sign", "draw": "arrows"}
+  },
+  "hq19-eigen": {
+    "hook_broll": {"query": "school of fish", "draw": "arrows"},
+    "broll": [
+      {"query": "David Hilbert", "must": "Hilbert", "label": "David Hilbert", "draw": "arrows", "say": "Chữ eigen trong tiếng Đức nghĩa là 'riêng', được David Hilbert đưa vào toán học."},
+      {"query": "Tacoma Narrows Bridge collapse", "must": "Tacoma", "label": "Cầu Tacoma", "draw": "zigzag", "after": "chart", "say": "Cầu Tacoma sụp vì gió lắc đúng tần số riêng của nó. Trị riêng chỉ ra hướng mà hệ thống nhạy cảm nhất."}
+    ],
+    "takeaway_broll": {"query": "flock of starlings murmuration", "draw": "arrows"}
+  },
+  "hq20-matrix-inverse": {
+    "hook_broll": {"query": "balance scale", "draw": "scale"},
+    "broll": [
+      {"query": "computer keyboard keys", "label": "Hoàn tác", "draw": "matrix", "say": "Nhân một ma trận với nghịch đảo của nó, bạn quay về ma trận đơn vị, giống như bấm hoàn tác."},
+      {"query": "construction crane counterweight", "label": "Đối trọng", "draw": "scale", "after": "chart", "say": "Như cần cẩu đặt đối trọng: phân bổ đúng thì cả hệ đứng vững với ít rủi ro nhất."}
+    ],
+    "takeaway_broll": {"query": "balance scale weights", "draw": "scale"}
+  },
+  "hq21-covariance-matrix": {
+    "hook_broll": {"query": "spider web dew", "draw": "network"},
+    "broll": [
+      {"query": "Harry Markowitz", "must": "Markowitz", "label": "Harry Markowitz", "draw": "network", "say": "Ma trận này là trái tim của lý thuyết danh mục hiện đại do Harry Markowitz xây dựng."},
+      {"query": "subway map", "label": "Bản đồ tàu điện", "draw": "network", "after": "chart", "say": "Như bản đồ tàu điện: mỗi ga nối với nhiều ga khác. Ma trận hiệp phương sai ghi lại mọi đường nối giữa các mã."}
+    ],
+    "takeaway_broll": {"query": "network cables", "draw": "network"}
+  },
+  "hq22-positive-definite": {
+    "hook_broll": {"query": "warning sign danger", "draw": "warning"},
+    "broll": [
+      {"query": "André-Louis Cholesky", "must": "Cholesky", "label": "André-Louis Cholesky", "draw": "matrix", "say": "Phân rã Cholesky, công cụ quen thuộc để mô phỏng danh mục, chỉ chạy được trên ma trận xác định dương."},
+      {"query": "bridge collapse", "label": "Kiểm tra kết cấu", "draw": "warning", "after": "chart", "say": "Kỹ sư kiểm tra kết cấu trước khi xây. Kiểm tra ma trận cũng vậy, trước khi đặt tiền lên nó."}
+    ],
+    "takeaway_broll": {"query": "glass bowl", "draw": "matrix"}
+  },
+  "hq23-linear-transformation": {
+    "hook_broll": {"query": "funhouse mirror", "draw": "arrows"},
+    "broll": [
+      {"query": "trampoline", "label": "Kéo giãn cả mặt phẳng", "draw": "arrows", "say": "Hình dung kéo một tấm lưới cao su: mọi ô vuông cùng méo theo một kiểu. Đó là một ma trận đang làm việc."},
+      {"query": "world map projection", "label": "Phép chiếu bản đồ", "draw": "arrows", "after": "chart", "say": "Bản đồ thế giới trên giấy là một phép biến đổi: mọi quốc gia bị kéo giãn theo cùng một quy tắc."}
+    ],
+    "takeaway_broll": {"query": "kaleidoscope", "draw": "arrows"}
+  },
+  "hq24-pca": {
+    "hook_broll": {"query": "crowded city street", "draw": "network"},
+    "broll": [
+      {"query": "Karl Pearson", "must": "Pearson", "label": "Karl Pearson", "draw": "arrows", "say": "PCA được Karl Pearson đề xuất từ đầu thế kỷ hai mươi, trước cả khi có máy tính."},
+      {"query": "shadow on wall", "label": "Cái bóng", "draw": "arrows", "after": "chart", "say": "Như bóng của một vật trên tường: chọn đúng góc chiếu, chỉ một cái bóng đã đủ nhận ra hình dạng."}
+    ],
+    "takeaway_broll": {"query": "telescope", "draw": "network"}
+  },
+  "hq34-risk-free-rate": {
+    "hook_broll": {"query": "bank vault door", "draw": "clock"},
+    "broll": [
+      {"query": "United States Treasury building", "label": "Trái phiếu chính phủ", "draw": "scale", "say": "Trên thế giới, lợi suất trái phiếu chính phủ Mỹ thường được dùng làm lãi suất phi rủi ro chuẩn."},
+      {"query": "piggy bank coins", "label": "Tiết kiệm", "draw": "coin", "after": "chart", "say": "Tiền gửi tiết kiệm là thứ gần nhất với phi rủi ro mà một người bình thường có."}
+    ],
+    "takeaway_broll": {"query": "gold bars", "draw": "scale"}
+  },
+  "hq35-arbitrage": {
+    "hook_broll": {"query": "currency exchange board", "draw": "scale"},
+    "broll": [
+      {"query": "street market vendor", "label": "Hai giá, hai đầu phố", "draw": "scale", "say": "Một món hàng bán hai giá ở hai đầu phố. Ai chạy nhanh nhất sẽ mua đầu này, bán đầu kia."},
+      {"query": "fiber optic cable", "label": "Cáp quang", "draw": "network", "after": "chart", "say": "Các quỹ từng chi hàng trăm triệu đô kéo cáp quang thẳng hơn, chỉ để nhanh hơn đối thủ vài phần nghìn giây."}
+    ],
+    "takeaway_broll": {"query": "banknotes currencies", "draw": "scale"}
+  },
+  "hq36-present-future-value": {
+    "hook_broll": {"query": "hourglass", "draw": "clock"},
+    "broll": [
+      {"query": "Albert Einstein", "must": "Einstein", "label": "Lãi kép", "draw": "chart-up", "say": "Người ta hay gán cho Einstein câu: lãi kép là kỳ quan thứ tám của thế giới."},
+      {"query": "oak tree", "label": "Cây sồi", "draw": "chart-up", "after": "chart", "say": "Như cây sồi từ một hạt giống: những năm đầu gần như không thấy gì, rồi lớn vọt."}
+    ],
+    "takeaway_broll": {"query": "pocket watch", "draw": "clock"}
+  },
+  "hq38-time-series": {
+    "hook_broll": {"query": "stock ticker", "draw": "clock"},
+    "broll": [
+      {"query": "stock ticker board", "label": "Từng phiên một", "draw": "chart-up", "say": "Mỗi bảng giá bạn nhìn mỗi ngày là một điểm trong một chuỗi thời gian dài không có hồi kết."},
+      {"query": "tree rings", "label": "Vòng gỗ", "draw": "clock", "after": "chart", "say": "Vòng gỗ trong thân cây là một chuỗi thời gian tự nhiên: mỗi vòng ghi lại một năm, theo đúng thứ tự."}
+    ],
+    "takeaway_broll": {"query": "hourglass sand", "draw": "clock"}
+  },
+  "hq39-stationarity": {
+    "hook_broll": {"query": "river flowing", "draw": "warning"},
+    "broll": [
+      {"query": "sand dunes desert", "label": "Nền đất dịch chuyển", "draw": "chart-up", "say": "Học từ một chuỗi không dừng giống như vẽ bản đồ trên những đụn cát đang trôi."},
+      {"query": "ocean tide", "label": "Thuỷ triều", "draw": "zigzag", "after": "chart", "say": "Thuỷ triều lên xuống quanh một mực nước trung bình: đó là chuỗi dừng. Mực nước biển dâng qua hàng thế kỷ thì không."}
+    ],
+    "takeaway_broll": {"query": "mountain river", "draw": "zigzag"}
+  },
+  "hq40-acf": {
+    "hook_broll": {"query": "thunderstorm lightning", "draw": "zigzag"},
+    "broll": [
+      {"query": "George E. P. Box statistician", "must": "Box", "label": "George Box", "draw": "two-lines", "say": "George Box, đồng tác giả phương pháp Box-Jenkins, biến ACF thành công cụ chuẩn để đọc chuỗi thời gian."},
+      {"query": "seismograph", "label": "Dư chấn", "draw": "zigzag", "after": "chart", "say": "Như động đất: một trận lớn thường kéo theo chuỗi dư chấn kéo dài nhiều ngày."}
+    ],
+    "takeaway_broll": {"query": "storm clouds", "draw": "zigzag"}
+  },
+  "hq41-pacf": {
+    "hook_broll": {"query": "dominoes", "draw": "network"},
+    "broll": [
+      {"query": "people whispering", "label": "Truyền miệng", "draw": "network", "say": "Giống trò chơi truyền tin: người thứ ba nghe được thông điệp, nhưng chỉ vì người thứ hai kể lại."},
+      {"query": "domino effect", "label": "Hiệu ứng domino", "draw": "network", "after": "chart", "say": "Như hiệu ứng domino: quân cuối đổ, nhưng chỉ quân ngay trước nó chạm trực tiếp."}
+    ],
+    "takeaway_broll": {"query": "dominoes falling", "draw": "network"}
+  },
+  "hq42-white-noise": {
+    "hook_broll": {"query": "television static noise", "draw": "zigzag"},
+    "broll": [
+      {"query": "old television", "label": "Mất sóng", "draw": "zigzag", "say": "Như màn hình tivi mất sóng: lấm tấm khắp nơi nhưng không chứa một hình ảnh nào."},
+      {"query": "rain on window", "label": "Mưa rơi", "draw": "zigzag", "after": "chart", "say": "Như tiếng mưa: đều đặn, liên tục, nhưng không giọt nào báo trước giọt tiếp theo."}
+    ],
+    "takeaway_broll": {"query": "old radio", "draw": "zigzag"}
+  },
+  "hq43-random-walk": {
+    "hook_broll": {"query": "footprints in sand", "draw": "coin"},
+    "broll": [
+      {"query": "Louis Bachelier", "must": "Bachelier", "label": "Louis Bachelier", "draw": "zigzag", "say": "Louis Bachelier là người đầu tiên mô tả giá cổ phiếu như một bước đi ngẫu nhiên, trong luận án tiến sĩ của ông."},
+      {"query": "pollen grains microscope", "label": "Chuyển động Brown", "draw": "zigzag", "after": "chart", "say": "Robert Brown thấy hạt phấn hoa nhảy múa không ngừng trong nước. Đó là bước đi ngẫu nhiên của tự nhiên."}
+    ],
+    "takeaway_broll": {"query": "hedge maze", "draw": "question"}
+  },
+  "hq44-ar-model": {
+    "hook_broll": {"query": "mountain echo valley", "draw": "arrows"},
+    "broll": [
+      {"query": "George Udny Yule", "must": "Yule", "label": "Udny Yule", "draw": "chart-up", "say": "Mô hình tự hồi quy được Udny Yule đề xuất khi nghiên cứu chu kỳ vết đen trên Mặt Trời."},
+      {"query": "playground swing", "label": "Xích đu", "draw": "clock", "after": "chart", "say": "Như chiếc xích đu: vị trí lúc này phụ thuộc vị trí ngay trước đó, rồi chậm dần về giữa."}
+    ],
+    "takeaway_broll": {"query": "sunspots sun", "draw": "chart-up"}
+  },
+  "hq45-ma-model": {
+    "hook_broll": {"query": "trading screen chart", "draw": "question"},
+    "broll": [
+      {"query": "water ripples", "label": "Gợn sóng", "draw": "zigzag", "say": "Như ném hòn đá xuống hồ: mặt nước rung lên một nhịp rồi lặng hẳn."},
+      {"query": "church bell", "label": "Tiếng chuông", "draw": "zigzag", "after": "chart", "say": "Như tiếng chuông: một cú gõ vang lên trong chốc lát, rồi im hẳn."}
+    ],
+    "takeaway_broll": {"query": "still pond", "draw": "zigzag"}
+  },
+  "hq46-arima": {
+    "hook_broll": {"query": "weather forecast map", "draw": "chart-up"},
+    "broll": [
+      {"query": "Gwilym Jenkins", "must": "Jenkins", "label": "Box và Jenkins", "draw": "two-lines", "say": "Phương pháp Box-Jenkins đã biến ARIMA thành quy trình chuẩn của ngành dự báo suốt nhiều thập kỷ."},
+      {"query": "hurricane forecast cone", "label": "Nón dự báo bão", "draw": "warning", "after": "chart", "say": "Bản tin bão luôn vẽ nón dự báo nở rộng dần: càng xa càng bất định. ARIMA cũng vậy."}
+    ],
+    "takeaway_broll": {"query": "foggy road", "draw": "question"}
+  },
+  "hq47-arch": {
+    "hook_broll": {"query": "Robert F. Engle", "must": "Engle", "label": "Robert Engle", "draw": "zigzag"},
+    "broll": [
+      {"query": "Nobel Prize medal", "must": "Nobel", "label": "Giải Nobel kinh tế", "draw": "zigzag", "say": "Robert Engle nhận giải Nobel kinh tế nhờ ARCH, công cụ đo biến động thay đổi theo thời gian."},
+      {"query": "hurricane satellite image", "label": "Mùa bão", "draw": "zigzag", "after": "chart", "say": "Bão thường đi thành mùa: một cơn đến, những cơn sau dễ đến theo."}
+    ],
+    "takeaway_broll": {"query": "storm sea", "draw": "zigzag"}
+  },
+  "hq49-egarch": {
+    "hook_broll": {"query": "stock market panic", "draw": "crash"},
+    "broll": [
+      {"query": "New York Stock Exchange traders", "label": "Phố Wall hoảng loạn", "draw": "skew", "say": "EGARCH ra đời để bắt hiệu ứng mà dân Phố Wall biết từ lâu: tin xấu đánh mạnh hơn tin tốt."},
+      {"query": "fire alarm", "label": "Tin xấu lan nhanh", "draw": "warning", "after": "chart", "say": "Như đám đông nghe chuông báo cháy: tin xấu lan nhanh hơn nhiều so với tin vui cùng cỡ."}
+    ],
+    "takeaway_broll": {"query": "crowd running", "draw": "crash"}
+  },
+  "hq61-black-scholes": {
+    "hook_broll": {"query": "Myron Scholes", "must": "Scholes", "label": "Myron Scholes", "draw": "bell"},
+    "broll": [
+      {"query": "Fischer Black", "must": "Black", "label": "Fischer Black", "draw": "bell", "say": "Công thức mang tên Fischer Black và Myron Scholes, được Robert Merton hoàn thiện. Scholes và Merton nhận giải Nobel."},
+      {"query": "Chicago Board Options Exchange", "label": "Sàn quyền chọn Chicago", "draw": "network", "after": "chart", "say": "Cùng thời điểm công thức ra đời, sàn quyền chọn Chicago mở cửa, và giao dịch quyền chọn bùng nổ."}
+    ],
+    "takeaway_broll": {"query": "Robert C. Merton", "must": "Merton", "draw": "bell"}
+  },
+  "hq62-heston": {
+    "hook_broll": {"query": "rough sea waves", "draw": "zigzag"},
+    "broll": [
+      {"query": "Fischer Black", "must": "Black", "label": "Nhắc lại tập trước", "draw": "bell", "say": "Nhắc lại tập trước: Black-Scholes giả định biến động không đổi. Steven Heston phá bỏ giả định đó."},
+      {"query": "roller coaster", "label": "Biến động cũng biến động", "draw": "zigzag", "after": "chart", "say": "Biến động lên xuống như tàu lượn, và lao dốc đúng lúc giá rơi."}
+    ],
+    "takeaway_broll": {"query": "stormy sky", "draw": "zigzag"}
+  },
+  "hq63-algorithmic-trading": {
+    "hook_broll": {"query": "server room data center", "label": "Máy chạy lệnh", "draw": "network"},
+    "broll": [
+      {"query": "New York Stock Exchange trading floor", "label": "Sàn giao dịch", "draw": "network", "say": "Ngày nay phần lớn lệnh trên các sàn lớn được đặt bởi máy chứ không phải tay người."},
+      {"query": "industrial robot arm", "label": "Robot", "draw": "network", "after": "chart", "say": "Như robot trên dây chuyền: làm đúng điều được lập trình, rất nhanh, rất đều, kể cả khi điều đó sai."}
+    ],
+    "takeaway_broll": {"query": "server rack", "draw": "network"}
+  },
+  "hq64-statistical-arbitrage": {
+    "hook_broll": {"query": "ant colony", "draw": "network"},
+    "broll": [
+      {"query": "Edward O. Thorp", "must": "Thorp", "label": "Edward Thorp", "draw": "dice", "say": "Edward Thorp, người từng đếm bài thắng sòng bạc, là một trong những người đi đầu arbitrage thống kê."},
+      {"query": "blackjack table", "label": "Đếm bài", "draw": "dice", "after": "chart", "say": "Đếm bài chỉ cho một lợi thế rất nhỏ mỗi ván. Lặp lại thật nhiều lần, lợi thế nhỏ thành lớn."}
+    ],
+    "takeaway_broll": {"query": "ants working", "draw": "network"}
+  },
+  "hq65-pairs-trading": {
+    "hook_broll": {"query": "tandem bicycle", "draw": "two-lines"},
+    "broll": [
+      {"query": "man walking dog leash", "label": "Người dắt chó", "draw": "two-lines", "say": "Hình dung người dắt chó đi dạo: cả hai đi lung tung, nhưng sợi dây không cho chúng xa nhau quá."},
+      {"query": "tandem bicycle riders", "label": "Xe đạp đôi", "draw": "two-lines", "after": "chart", "say": "Như xe đạp đôi: hai người đạp cùng nhịp, lệch nhau một chút rồi lại khớp."}
+    ],
+    "takeaway_broll": {"query": "two horses running", "draw": "two-lines"}
+  },
+  "hq66-mean-reversion": {
+    "hook_broll": {"query": "rubber band", "draw": "two-lines"},
+    "broll": [
+      {"query": "Foucault pendulum", "label": "Con lắc", "draw": "clock", "say": "Như con lắc: kéo càng xa khỏi điểm giữa, lực đẩy về càng mạnh."},
+      {"query": "metal spring coil", "label": "Lò xo", "draw": "zigzag", "after": "chart", "say": "Như lò xo: kéo càng mạnh, lực bật về càng lớn, cho tới khi nó đứt."}
+    ],
+    "takeaway_broll": {"query": "pendulum clock", "draw": "clock"}
+  },
+  "hq67-momentum": {
+    "hook_broll": {"query": "surfer big wave", "draw": "chart-up"},
+    "broll": [
+      {"query": "Newton's cradle", "label": "Quán tính", "draw": "chart-up", "say": "Giống định luật quán tính: vật đang chuyển động có xu hướng tiếp tục, cho đến khi có lực đủ lớn chặn lại."},
+      {"query": "avalanche snow", "label": "Tuyết lở", "draw": "chart-up", "after": "chart", "say": "Như tuyết lở: bắt đầu từ một khối nhỏ, càng lăn càng lớn, cho đến khi gặp vật cản."}
+    ],
+    "takeaway_broll": {"query": "high speed train", "draw": "chart-up"}
+  },
+  "hq68-mr-vs-momentum": {
+    "hook_broll": {"query": "tug of war", "draw": "scale"},
+    "broll": [
+      {"query": "chess players", "label": "Hai trường phái", "draw": "scale", "say": "Kiểm định này nổi tiếng nhờ Andrew Lo và Craig MacKinlay."},
+      {"query": "tug of war competition", "label": "Kéo co", "draw": "scale", "after": "chart", "say": "Thị trường là cuộc kéo co giữa hai phe, và phe thắng đổi theo từng khung thời gian."}
+    ],
+    "takeaway_broll": {"query": "chess board pieces", "draw": "scale"}
+  },
+  "hq69-cointegration": {
+    "hook_broll": {"query": "two boats tied", "draw": "two-lines"},
+    "broll": [
+      {"query": "Clive Granger", "must": "Granger", "label": "Clive Granger", "draw": "two-lines", "say": "Khái niệm đồng liên kết mang về giải Nobel kinh tế cho Clive Granger, chia cùng Robert Engle."},
+      {"query": "binary star", "label": "Sao đôi", "draw": "two-lines", "after": "chart", "say": "Như sao đôi: mỗi ngôi sao đi một đường, nhưng lực hấp dẫn giữ chúng không rời xa nhau."}
+    ],
+    "takeaway_broll": {"query": "rope knot", "draw": "two-lines"}
+  },
+  "hq70-z-score": {
+    "hook_broll": {"query": "stock market display board", "label": "Bảng điện", "draw": "chart-up"},
+    "broll": [
+      {"query": "students exam hall", "label": "Cùng một thước đo", "draw": "bell", "say": "Như so điểm hai kỳ thi khác độ khó: tám điểm đề dễ có thể còn kém năm điểm đề siêu khó."},
+      {"query": "clinical thermometer fever", "label": "Bất thường so với chính nó", "draw": "bell", "after": "chart", "say": "Nhiệt độ làm người lên cơn sốt lại là bình thường với một con chim. Bất thường phải so với chính nó."}
+    ],
+    "takeaway_broll": {"query": "measuring tape ruler", "draw": "bell"}
+  },
+  "hq71-market-microstructure": {
+    "hook_broll": {"query": "stock exchange trading floor", "draw": "orderbook"},
+    "broll": [
+      {"query": "Ho Chi Minh City Stock Exchange", "label": "Sàn giao dịch", "draw": "orderbook", "say": "Mỗi lệnh bạn bấm trên app đều đi vào một sổ lệnh như thế này, khớp theo thứ tự giá rồi thời gian."},
+      {"query": "fish market auction", "label": "Chợ đấu giá", "draw": "orderbook", "after": "chart", "say": "Như chợ đấu giá cá sáng sớm: giá được tạo ra từ từng người mua, người bán cụ thể."}
+    ],
+    "takeaway_broll": {"query": "market stall vegetables", "draw": "orderbook"}
+  },
+  "hq72-bid-ask-spread": {
+    "hook_broll": {"query": "currency exchange office", "draw": "orderbook"},
+    "broll": [
+      {"query": "airport currency exchange", "label": "Mua đắt, bán rẻ", "draw": "scale", "say": "Như đổi ngoại tệ ở sân bay: bạn mua vào giá cao, bán lại giá thấp, khoảng chênh là của quầy đổi tiền."},
+      {"query": "toll booth highway", "label": "Trạm thu phí", "draw": "coin", "after": "chart", "say": "Như trạm thu phí: mỗi lần qua lại đều mất một khoản, đi càng nhiều mất càng nhiều."}
+    ],
+    "takeaway_broll": {"query": "coins pile", "draw": "coin"}
+  },
+  "hq73-slippage": {
+    "hook_broll": {"query": "wet floor sign", "draw": "crash"},
+    "broll": [
+      {"query": "stopwatch", "label": "Độ trễ", "draw": "clock", "say": "Chỉ vài giây từ lúc bấm nút tới lúc khớp lệnh, giá đã kịp chạy đi một đoạn."},
+      {"query": "traffic light red", "label": "Chậm một nhịp", "draw": "clock", "after": "chart", "say": "Như đèn chuyển đỏ khi bạn còn cách vạch vài mét: chậm một nhịp là mất cơ hội."}
+    ],
+    "takeaway_broll": {"query": "racing car pit stop", "draw": "clock"}
+  },
+  "hq74-market-impact": {
+    "hook_broll": {"query": "whale breaching", "label": "Cá mập", "draw": "crash"},
+    "broll": [
+      {"query": "boat wake water", "label": "Vệt sóng", "draw": "orderbook", "say": "Như con thuyền lớn rẽ nước: càng to càng để lại vệt sóng dài."},
+      {"query": "container ship port", "label": "Tàu lớn cập cảng", "draw": "orderbook", "after": "chart", "say": "Tàu càng lớn càng phải giảm tốc từ rất xa trước khi cập cảng. Quỹ lớn cũng chia nhỏ lệnh như vậy."}
+    ],
+    "takeaway_broll": {"query": "ocean waves", "draw": "crash"}
+  },
+  "hq48-garch": {
+    "hook_broll": {"query": "storm sea waves lighthouse", "draw": "zigzag"},
+    "broll": [
+      {"query": "Tim Bollerslev", "must": "Bollerslev", "label": "Tim Bollerslev", "draw": "zigzag", "say": "Tim Bollerslev mở rộng ARCH thành GARCH: biến động nhớ cả chính nó."},
+      {"query": "volcano smoke after eruption", "label": "Âm ỉ sau phun trào", "draw": "zigzag", "after": "chart", "say": "Biến động như núi lửa sau phun trào: còn âm ỉ rất lâu mới nguội hẳn."}
+    ],
+    "takeaway_broll": {"query": "calm sea sunset", "draw": "zigzag"}
+  }
+}
