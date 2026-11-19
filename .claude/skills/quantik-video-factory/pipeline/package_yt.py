@@ -94,25 +94,28 @@ open(f"{OUT}/INDEX.md", "w", encoding="utf-8").write("| # | file | duration | QA
 print("missing", missing, "packaged", len(rows))
 print("\n".join(r for r in rows if "CHECK" in r))
 
-# zips under ~370 MB (chat upload limit is 400 MB): split a group folder into numbered parts when needed
+# zips under ~370 MB (chat attachment limit 400 MB); an episode's mp4 + thumbnail + caption always stay together
 LIMIT = 370 * 1024 * 1024
 groups = ["."] if PLAIN else sorted(x for x in os.listdir(OUT) if os.path.isdir(os.path.join(OUT, x)))
 for g in groups:
     gp = os.path.join(OUT, g)
-    files = sorted(f for f in os.listdir(gp) if os.path.isfile(os.path.join(gp, f)) and not f.endswith(".md"))
-    part, size, k = [], 0, 1
-    def flush(part, k):
-        tagname = "videos" if g == "." else g
-        with zipfile.ZipFile(f"{SO}/_zip/{NAME}-{tagname}-part{k}.zip", "w", zipfile.ZIP_STORED) as z:
-            for f in part:
-                z.write(os.path.join(gp, f), f if g == "." else f"{g}/{f}")
-    for f in files:
-        sz = os.path.getsize(os.path.join(gp, f))
-        if part and size + sz > LIMIT:
-            flush(part, k); part, size, k = [], 0, k + 1
-        part.append(f); size += sz
-    if part:
-        flush(part, k)
-with zipfile.ZipFile(f"{SO}/_zip/{NAME}-captions.zip", "w") as z:
+    eps = sorted(f[:-4] for f in os.listdir(gp) if f.endswith(".mp4"))
+    parts, cur, size = [], [], 0
+    for e in eps:
+        fs = [f for f in (f"{e}.mp4", f"{e}-thumbnail.jpg", f"{e}-caption.txt") if os.path.exists(os.path.join(gp, f))]
+        sz = sum(os.path.getsize(os.path.join(gp, f)) for f in fs)
+        if cur and size + sz > LIMIT:
+            parts.append(cur); cur, size = [], 0
+        cur.append((e, fs)); size += sz
+    if cur:
+        parts.append(cur)
+    tagname = "" if g == "." else f"{g}-"
+    for k, ps in enumerate(parts, 1):
+        zname = f"{SO}/_zip/{NAME}-{tagname}{k}of{len(parts)}-{ps[0][0]}--to--{ps[-1][0]}.zip"
+        with zipfile.ZipFile(zname, "w", zipfile.ZIP_STORED) as z:
+            for e, fs in ps:
+                for f in fs:
+                    z.write(os.path.join(gp, f), f"{e}/{f}" if g == "." else f"{g}/{e}/{f}")
+with zipfile.ZipFile(f"{SO}/_zip/{NAME}-0-ALL-CAPTIONS-and-INDEX.zip", "w") as z:
     z.write(f"{OUT}/ALL-CAPTIONS.md", "ALL-CAPTIONS.md"); z.write(f"{OUT}/INDEX.md", "INDEX.md")
 print("zips in", f"{SO}/_zip/")
