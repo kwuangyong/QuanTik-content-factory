@@ -125,6 +125,29 @@ def _openverse(spec):
                "license": lic, "license_url": r.get("license_url", "")}
 
 
+def _openverse_any(spec):
+    """CC images from Openverse's other providers (Flickr, museums…), served by Openverse's own image proxy."""
+    q = {"q": spec["query"], "license": "cc0,pdm,by,by-sa", "page_size": "12", "mature": "false",
+         "excluded_source": "wikimedia"}
+    data = json.loads(_get(OV_API + "?" + urllib.parse.urlencode(q)))
+    for r in data.get("results", []):
+        if min(r.get("width") or 0, r.get("height") or 0) and min(r.get("width") or 0, r.get("height") or 0) < 500:
+            continue
+        lic = OV_LIC.get(r.get("license"), "")
+        if not lic:
+            continue
+        ver = r.get("license_version") or ""
+        lic = lic + (f" {ver}" if lic.startswith("CC BY") and ver else "")
+        words = [w for w in re.findall(r"[a-z]{4,}", spec["query"].lower())]
+        hay = (_clean(r.get("title")) + " " + " ".join(t.get("name", "") for t in r.get("tags") or [])).lower()
+        if words and sum(w in hay for w in words) < max(1, round(len(words) * 0.6)):
+            continue
+        src = (r.get("source") or r.get("provider") or "openverse").replace("_", " ").title()
+        yield {"title": _clean(r.get("title")) or r["id"], "url": f"{OV_API}{r['id']}/thumb/?full_size=true",
+               "page": r.get("foreign_landing_url", ""), "artist": (_clean(r.get("creator")) or "không rõ tác giả")[:80],
+               "license": lic, "license_url": r.get("license_url", ""), "source": f"{src} qua Openverse"}
+
+
 def _relevant(spec, c):
     must = spec.get("must")
     if not must:
@@ -135,7 +158,7 @@ def _relevant(spec, c):
 
 def _all_candidates(spec):
     seen = set()
-    sources = ([] if spec.get("file") else [_openverse]) + [_candidates]
+    sources = ([] if spec.get("file") else [_openverse]) + [_candidates] + ([] if spec.get("file") else [_openverse_any])
     for src in sources:
         try:
             for c in src(spec):
@@ -165,16 +188,19 @@ def fetch(spec):
     try:
         limited = False
         for c in _all_candidates(spec):
+            if limited and "upload.wikimedia" in c["url"]:
+                continue
             try:
                 raw = _get(c["url"])
             except urllib.error.HTTPError as e:
-                if e.code == 429:  # rate-limited: stop, do not cache a false "no image"
+                if e.code == 429:  # rate-limited: remember (never cache a false "no image"), try other hosts
                     limited = True
-                    break
                 continue
             except Exception:
                 continue
             ext = ".png" if c["url"].lower().endswith(".png") else ".jpg"
+            if raw[:4] == b"\x89PNG":
+                ext = ".png"
             name = _slug(key) + ext
             (CACHE / name).write_bytes(raw)
             c["file"], c["query"] = name, key
@@ -190,7 +216,7 @@ def fetch(spec):
 
 
 def credit_line(c):
-    return f"Ảnh: {c['artist'][:42]} · {c['license']} · Wikimedia Commons"
+    return f"Ảnh: {c['artist'][:42]} · {c['license']} · {c.get('source', 'Wikimedia Commons')}"
 
 
 # ---------------------------------------------------------------- hand-drawn doodles (unit square, y down)
