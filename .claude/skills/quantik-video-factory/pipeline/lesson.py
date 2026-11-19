@@ -140,10 +140,12 @@ class LessonModel:
     def _bar(self, ax, ch, upto):
         h = np.asarray(self.ev(ch["heights"]), float)
         labels = self.ev(ch["labels"]) if ch.get("labels") is not None else [str(i) for i in range(len(h))]
-        k = max(1, int(round(len(h) * upto + 0.49)))
         cols = [(_col("pos") if v >= 0 else _col("neg")) if ch.get("signed") else _col(ch.get("color", "accent"))
                 for v in h]
-        ax.bar(range(k), h[:k], color=cols[:k], width=0.7)
+        pos = upto * len(h) * 1.15                        # bars grow one after another, each rising smoothly
+        grow = np.clip(pos - np.arange(len(h)) * 1.0, 0, 1)
+        grow = grow * grow * (3 - 2 * grow)
+        ax.bar(range(len(h)), h * grow, color=cols, width=0.7)
         ax.set_xlim(-0.6, len(h) - 0.4)
         lo, hi = min(0, h.min()), max(0, h.max())
         ax.set_ylim(lo - 0.1 * (hi - lo), hi + 0.15 * (hi - lo))
@@ -165,17 +167,23 @@ class LessonModel:
 
     def _heatmap(self, ax, ch, upto):
         M = np.asarray(self.ev(ch["M"]), float)
-        k = max(1, int(round(M.shape[0] * upto + 0.49)))
-        show = np.full_like(M, np.nan); show[:k] = M[:k]
         vmax = ch.get("vmax") or np.abs(M).max()
-        ax.imshow(show, cmap=ch.get("cmap", "RdYlGn"), vmin=-vmax if ch.get("signed", True) else 0, vmax=vmax)
+        pos = upto * M.shape[0] * 1.15                    # rows fade in one after another
+        ra = np.clip(pos - np.arange(M.shape[0]), 0, 1)
+        import matplotlib.pyplot as _plt
+        rgba = _plt.get_cmap(ch.get("cmap", "RdYlGn"))((M + vmax) / (2 * vmax) if ch.get("signed", True) else M / vmax)
+        rgba[..., 3] = ra[:, None]
+        ax.imshow(rgba)
+        k = M.shape[0]
         labels = self.ev(ch["labels"]) if ch.get("labels") else [str(i) for i in range(M.shape[0])]
         ax.set_xticks(range(M.shape[1])); ax.set_yticks(range(M.shape[0]))
         ax.set_xticklabels(labels, fontsize=16); ax.set_yticklabels(labels, fontsize=16)
         for i in range(k):
+            if ra[i] <= 0:
+                continue
             for j in range(M.shape[1]):
                 ax.text(j, i, f"{M[i, j]:.2f}".replace(".", ","), ha="center", va="center", fontsize=17,
-                        color="#101010", weight="bold")
+                        color="#101010", weight="bold", alpha=float(ra[i]))
         ax.grid(False)
 
     def _vectors(self, ax, ch, upto):
