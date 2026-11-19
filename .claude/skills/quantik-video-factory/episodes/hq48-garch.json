@@ -2,7 +2,6 @@
   "id": "hq48-garch-code-reel",
   "topic": "garch",
   "style": "code-reel",
-  "tag": "GARCH",
   "kicker": "GARCH(1,1)",
   "hook": "Tập trước ARCH chỉ nhớ một phiên. Thị trường thì ôm hận cả tháng. GARCH sinh ra để nhớ dai như vậy.",
   "title": "Mô hình GARCH: thị trường nhớ dai hơn bạn tưởng",
@@ -39,5 +38,11 @@
     "query": "calm sea sunset",
     "draw": "zigzag"
   },
-  "max_seconds": 75
+  "max_seconds": 75,
+  "sketch": {
+    "kind": "wave",
+    "label": "Nhớ dai",
+    "say": "Cú sốc hôm nay vẫn còn rung trong biến động của nhiều tuần sau."
+  },
+  "tag": "GARCH"
 }

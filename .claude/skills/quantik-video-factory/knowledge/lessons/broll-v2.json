@@ -19,11 +19,22 @@
         "draw": "coin",
         "after": "chart",
         "say": "Sòng bạc sống nhờ hiểu xác suất hơn khách: mỗi ván chỉ nhỉnh một chút, nhưng lặp lại hàng triệu lần."
+      },
+      {
+        "query": "casino dealer cards",
+        "label": "Nhà cái",
+        "draw": "question",
+        "after": "run",
+        "say": "Nhà cái không cần may mắn. Họ chỉ cần trò chơi lặp lại đủ nhiều lần."
       }
     ],
     "takeaway_broll": {
       "query": "slot machines casino",
       "draw": "dice"
+    },
+    "sketch": {
+      "kind": "dice",
+      "label": "Tung thật nhiều lần"
     }
   },
   "hq02-random-variable": {
@@ -44,11 +55,22 @@
         "draw": "dice",
         "after": "chart",
         "say": "Như lồng cầu xổ số: chưa quay thì chưa biết số nào, nhưng biết chắc mọi khả năng có thể ra."
+      },
+      {
+        "query": "weather forecast satellite",
+        "label": "Dự báo thời tiết",
+        "draw": "question",
+        "after": "run",
+        "say": "Dự báo thời tiết không nói mai mưa hay nắng, mà nói khả năng mưa là bao nhiêu."
       }
     ],
     "takeaway_broll": {
       "query": "stock exchange electronic board",
       "draw": "chart-up"
+    },
+    "sketch": {
+      "kind": "galton",
+      "label": "Mỗi viên bi một kết quả"
     }
   },
   "hq03-expected-value": {
@@ -70,11 +92,22 @@
         "draw": "coin",
         "after": "chart",
         "say": "Vé số là ví dụ kinh điển của kỳ vọng âm: người mua thắng thì hiếm, người bán thì thắng chắc."
+      },
+      {
+        "query": "casino building night",
+        "label": "Sòng bạc",
+        "draw": "question",
+        "after": "run",
+        "say": "Mọi sòng bạc đều được xây bằng kỳ vọng dương của nhà cái."
       }
     ],
     "takeaway_broll": {
       "query": "casino chips stack",
       "draw": "coin"
+    },
+    "sketch": {
+      "kind": "coin",
+      "label": "Thắng nhiều, vẫn lỗ"
     }
   },
   "hq04-variance": {
@@ -96,11 +129,22 @@
         "draw": "zigzag",
         "after": "chart",
         "say": "Ngày lặng và ngày bão có thể cùng mực nước trung bình. Phương sai mới cho biết con thuyền chao đảo cỡ nào."
+      },
+      {
+        "query": "airplane turbulence clouds",
+        "label": "Nhiễu động",
+        "draw": "question",
+        "after": "run",
+        "say": "Hai chuyến bay cùng tới nơi đúng giờ, nhưng một chuyến xóc suốt hành trình."
       }
     ],
     "takeaway_broll": {
       "query": "calm lake reflection",
       "draw": "zigzag"
+    },
+    "sketch": {
+      "kind": "wave",
+      "label": "Êm và giật"
     }
   },
   "hq05-standard-deviation": {
@@ -122,11 +166,22 @@
         "draw": "bell",
         "after": "chart",
         "say": "Như nhiệt kế đo cơn sốt: độ lệch chuẩn đo cơn sốt của giá bằng một con số."
+      },
+      {
+        "query": "stock exchange trading screens",
+        "label": "Thước đo biến động",
+        "draw": "question",
+        "after": "run",
+        "say": "Dân giao dịch nhìn độ lệch chuẩn mỗi ngày để biết thị trường đang nóng hay nguội."
       }
     ],
     "takeaway_broll": {
       "query": "stock market display board",
       "draw": "chart-up"
+    },
+    "sketch": {
+      "kind": "thermometer",
+      "label": "Đo cơn sốt"
     }
   },
   "hq06-probability-distribution": {
@@ -147,11 +202,23 @@
         "draw": "bell",
         "after": "chart",
         "say": "Chiều cao một đám đông, cân nặng, điểm thi: tự nhiên đầy những phân phối có hình dạng rất ổn định."
+      },
+      {
+        "query": "pile of dice",
+        "label": "Hàng nghìn ván",
+        "draw": "question",
+        "after": "run",
+        "say": "Một ván thì khó đoán. Hàng nghìn ván thì hiện ra cả một hình dạng.",
+        "must": "dice"
       }
     ],
     "takeaway_broll": {
       "query": "Galton board",
       "draw": "bell"
+    },
+    "sketch": {
+      "kind": "galton",
+      "label": "Phân phối hiện ra"
     }
   },
   "hq07-normal-distribution": {
@@ -179,6 +246,11 @@
     "takeaway_broll": {
       "query": "Galton board",
       "draw": "bell"
+    },
+    "sketch": {
+      "kind": "bell",
+      "label": "Hai cái đuôi",
+      "say": "Nhìn kỹ hai cái đuôi của hình chuông: đó là nơi những cú sốc lớn thật sự nằm."
     }
   },
   "hq08-skewness": {
@@ -199,11 +271,22 @@
         "draw": "crash",
         "after": "chart",
         "say": "Dân trong nghề gọi kiểu chiến lược này là nhặt tiền lẻ trước đầu xe lu."
+      },
+      {
+        "query": "insurance car crash",
+        "label": "Rủi ro hiếm",
+        "draw": "question",
+        "after": "run",
+        "say": "Như bán bảo hiểm: thu phí đều đặn mỗi tháng, rồi một vụ lớn trả bằng cả năm."
       }
     ],
     "takeaway_broll": {
       "query": "volcano eruption",
       "draw": "crash"
+    },
+    "sketch": {
+      "kind": "skew",
+      "label": "Đuôi trái dài"
     }
   },
   "hq09-kurtosis": {
@@ -231,6 +314,11 @@
     "takeaway_broll": {
       "query": "lightning storm",
       "draw": "warning"
+    },
+    "sketch": {
+      "kind": "bell",
+      "label": "Đuôi dày",
+      "say": "Đuôi càng dày, những ngày cực đoan càng xuất hiện thường xuyên hơn bạn tưởng."
     }
   },
   "hq10-covariance": {
@@ -256,6 +344,11 @@
     "takeaway_broll": {
       "query": "basket of eggs",
       "draw": "network"
+    },
+    "sketch": {
+      "kind": "leash",
+      "label": "Cùng nhịp",
+      "say": "Hai mã càng đi cùng nhịp, hiệp phương sai càng lớn, rổ của bạn càng ít đa dạng."
     }
   },
   "hq11-correlation": {
@@ -280,11 +373,23 @@
         "draw": "two-lines",
         "after": "chart",
         "say": "Bán kem và số người đi biển tăng cùng nhau. Kem không làm người ta đi biển, cả hai đều do trời nóng."
+      },
+      {
+        "query": "beach umbrellas",
+        "label": "Cùng tăng, không cùng nguyên nhân",
+        "draw": "question",
+        "after": "run",
+        "say": "Kính râm và kem chống nắng bán chạy cùng lúc, vì cùng một mùa hè.",
+        "must": "umbrella"
       }
     ],
     "takeaway_broll": {
       "query": "sprinters running track",
       "draw": "two-lines"
+    },
+    "sketch": {
+      "kind": "leash",
+      "label": "Đi cùng nhau"
     }
   },
   "hq12-conditional-probability": {
@@ -305,11 +410,22 @@
         "draw": "question",
         "after": "chart",
         "say": "Xác suất kẹt xe lúc nửa đêm và giờ tan tầm là hai con số khác hẳn. Điều kiện thay đổi tất cả."
+      },
+      {
+        "query": "doctor stethoscope",
+        "label": "Bác sĩ chẩn đoán",
+        "draw": "question",
+        "after": "run",
+        "say": "Bác sĩ luôn hỏi triệu chứng trước khi đoán bệnh: mỗi thông tin là một điều kiện mới."
       }
     ],
     "takeaway_broll": {
       "query": "rain clouds sky",
       "draw": "question"
+    },
+    "sketch": {
+      "kind": "network",
+      "label": "Khi mà…"
     }
   },
   "hq13-bayes-theorem": {
@@ -333,11 +449,22 @@
         "draw": "question",
         "after": "chart",
         "say": "Xét nghiệm dương tính chưa chắc là mắc bệnh, nếu căn bệnh đó rất hiếm. Đây là bài học kinh điển của Bayes."
+      },
+      {
+        "query": "metal detector security",
+        "label": "Báo động giả",
+        "draw": "question",
+        "after": "run",
+        "say": "Máy soi sân bay kêu không có nghĩa bạn mang đồ cấm. Phần lớn lần kêu là báo động giả."
       }
     ],
     "takeaway_broll": {
       "query": "smoke alarm ceiling",
       "draw": "warning"
+    },
+    "sketch": {
+      "kind": "scale",
+      "label": "Cập nhật niềm tin"
     }
   },
   "hq16-vector-matrix": {
@@ -359,11 +486,23 @@
         "draw": "matrix",
         "after": "chart",
         "say": "Mỗi bảng điện là một ma trận khổng lồ: hàng là mã cổ phiếu, cột là thời gian."
+      },
+      {
+        "query": "spreadsheet",
+        "label": "Bảng tính",
+        "draw": "question",
+        "after": "run",
+        "say": "Mỗi bảng tính bạn mở ở công ty thực chất là một ma trận.",
+        "must": "spreadsheet"
       }
     ],
     "takeaway_broll": {
       "query": "data center servers",
       "draw": "network"
+    },
+    "sketch": {
+      "kind": "matrix",
+      "label": "Hàng và cột"
     }
   },
   "hq17-matrix-multiplication": {
@@ -384,11 +523,22 @@
         "draw": "matrix",
         "after": "chart",
         "say": "Card đồ hoạ sinh ra để nhân ma trận cực nhanh, và đó cũng là thứ chạy trí tuệ nhân tạo hôm nay."
+      },
+      {
+        "query": "factory assembly line",
+        "label": "Dây chuyền",
+        "draw": "question",
+        "after": "run",
+        "say": "Như dây chuyền nhà máy: mỗi công đoạn biến đầu vào thành đầu ra, nối tiếp nhau theo thứ tự."
       }
     ],
     "takeaway_broll": {
       "query": "supercomputer",
       "draw": "network"
+    },
+    "sketch": {
+      "kind": "matrix",
+      "label": "Dòng nhân cột"
     }
   },
   "hq18-dot-product": {
@@ -410,11 +560,22 @@
         "draw": "arrows",
         "after": "chart",
         "say": "Như cánh buồm: chỉ phần gió cùng hướng mới đẩy thuyền đi. Đó chính là tích vô hướng."
+      },
+      {
+        "query": "tug boat towing ship",
+        "label": "Kéo đúng hướng",
+        "draw": "question",
+        "after": "run",
+        "say": "Tàu kéo chỉ hiệu quả khi kéo đúng hướng con tàu cần đi."
       }
     ],
     "takeaway_broll": {
       "query": "arrows sign",
       "draw": "arrows"
+    },
+    "sketch": {
+      "kind": "vectors",
+      "label": "Hình chiếu"
     }
   },
   "hq19-eigen": {
@@ -437,11 +598,23 @@
         "draw": "zigzag",
         "after": "chart",
         "say": "Cầu Tacoma sụp vì gió lắc đúng tần số riêng của nó. Trị riêng chỉ ra hướng mà hệ thống nhạy cảm nhất."
+      },
+      {
+        "query": "wind farm turbines",
+        "label": "Hướng chính",
+        "draw": "question",
+        "after": "run",
+        "say": "Như cánh đồng gió: mọi tuabin đều quay về hướng gió chính.",
+        "must": "turbine"
       }
     ],
     "takeaway_broll": {
       "query": "flock of starlings murmuration",
       "draw": "arrows"
+    },
+    "sketch": {
+      "kind": "vectors",
+      "label": "Hướng không xoay"
     }
   },
   "hq20-matrix-inverse": {
@@ -462,11 +635,23 @@
         "draw": "scale",
         "after": "chart",
         "say": "Như cần cẩu đặt đối trọng: phân bổ đúng thì cả hệ đứng vững với ít rủi ro nhất."
+      },
+      {
+        "query": "juggling balls",
+        "label": "Giữ thăng bằng",
+        "draw": "question",
+        "after": "run",
+        "say": "Như người tung hứng: chia đều sự chú ý chưa chắc là cách giữ bóng không rơi.",
+        "must": "juggl"
       }
     ],
     "takeaway_broll": {
       "query": "balance scale weights",
       "draw": "scale"
+    },
+    "sketch": {
+      "kind": "scale",
+      "label": "Cân lại rủi ro"
     }
   },
   "hq21-covariance-matrix": {
@@ -492,6 +677,11 @@
     "takeaway_broll": {
       "query": "network cables",
       "draw": "network"
+    },
+    "sketch": {
+      "kind": "network",
+      "label": "Mọi cặp nối nhau",
+      "say": "Mỗi đường nối là một cặp mã. Rủi ro thật của danh mục nằm ở những đường nối này."
     }
   },
   "hq22-positive-definite": {
@@ -517,6 +707,11 @@
     "takeaway_broll": {
       "query": "glass bowl",
       "draw": "matrix"
+    },
+    "sketch": {
+      "kind": "scale",
+      "label": "Có đáy rõ ràng",
+      "say": "Một ma trận hợp lệ cho mặt rủi ro hình cái bát: luôn có một điểm thấp nhất."
     }
   },
   "hq23-linear-transformation": {
@@ -538,11 +733,22 @@
         "after": "chart",
         "say": "Bản đồ thế giới trên giấy là một phép biến đổi: mọi quốc gia bị kéo giãn theo cùng một quy tắc.",
         "must": "Mercator"
+      },
+      {
+        "query": "reflection in water city",
+        "label": "Phản chiếu méo",
+        "draw": "question",
+        "after": "run",
+        "say": "Như mặt nước phản chiếu thành phố: mọi thứ méo đi, nhưng méo theo cùng một quy tắc."
       }
     ],
     "takeaway_broll": {
       "query": "kaleidoscope",
       "draw": "arrows"
+    },
+    "sketch": {
+      "kind": "vectors",
+      "label": "Không gian bị kéo"
     }
   },
   "hq24-pca": {
@@ -564,11 +770,22 @@
         "draw": "arrows",
         "after": "chart",
         "say": "Như bóng của một vật trên tường: chọn đúng góc chiếu, chỉ một cái bóng đã đủ nhận ra hình dạng."
+      },
+      {
+        "query": "orchestra concert",
+        "label": "Dàn nhạc",
+        "draw": "question",
+        "after": "run",
+        "say": "Một dàn nhạc trăm người, nhưng tai bạn chỉ nghe ra vài giai điệu chính."
       }
     ],
     "takeaway_broll": {
       "query": "telescope",
       "draw": "network"
+    },
+    "sketch": {
+      "kind": "network",
+      "label": "Vài câu chuyện chính"
     }
   },
   "hq34-risk-free-rate": {
@@ -589,11 +806,22 @@
         "draw": "coin",
         "after": "chart",
         "say": "Tiền gửi tiết kiệm là thứ gần nhất với phi rủi ro mà một người bình thường có."
+      },
+      {
+        "query": "bank building facade",
+        "label": "Ngân hàng",
+        "draw": "question",
+        "after": "run",
+        "say": "Lãi suất ngân hàng là thước đo mà mọi khoản đầu tư rủi ro phải vượt qua."
       }
     ],
     "takeaway_broll": {
       "query": "gold bars",
       "draw": "scale"
+    },
+    "sketch": {
+      "kind": "compound",
+      "label": "Lãi đều không rủi ro"
     }
   },
   "hq35-arbitrage": {
@@ -614,11 +842,22 @@
         "draw": "network",
         "after": "chart",
         "say": "Các quỹ từng chi hàng trăm triệu đô kéo cáp quang thẳng hơn, chỉ để nhanh hơn đối thủ vài phần nghìn giây."
+      },
+      {
+        "query": "server room data center",
+        "label": "Tốc độ",
+        "draw": "question",
+        "after": "run",
+        "say": "Trong arbitrage, người thắng không phải người thông minh nhất mà là người nhanh nhất."
       }
     ],
     "takeaway_broll": {
       "query": "banknotes currencies",
       "draw": "scale"
+    },
+    "sketch": {
+      "kind": "scale",
+      "label": "Lệch giá"
     }
   },
   "hq36-present-future-value": {
@@ -648,6 +887,11 @@
     "takeaway_broll": {
       "query": "pocket watch",
       "draw": "clock"
+    },
+    "sketch": {
+      "kind": "compound",
+      "label": "Lãi chồng lãi",
+      "say": "Mỗi chồng xu là một năm. Lãi năm sau được tính trên cả lãi năm trước."
     }
   },
   "hq38-time-series": {
@@ -668,11 +912,22 @@
         "draw": "clock",
         "after": "chart",
         "say": "Vòng gỗ trong thân cây là một chuỗi thời gian tự nhiên: mỗi vòng ghi lại một năm, theo đúng thứ tự."
+      },
+      {
+        "query": "calendar pages",
+        "label": "Lịch",
+        "draw": "question",
+        "after": "run",
+        "say": "Mỗi tờ lịch xé đi là một điểm dữ liệu không bao giờ quay lại."
       }
     ],
     "takeaway_broll": {
       "query": "hourglass sand",
       "draw": "clock"
+    },
+    "sketch": {
+      "kind": "wave",
+      "label": "Theo thứ tự"
     }
   },
   "hq39-stationarity": {
@@ -693,11 +948,23 @@
         "draw": "zigzag",
         "after": "chart",
         "say": "Thuỷ triều lên xuống quanh một mực nước trung bình: đó là chuỗi dừng. Mực nước biển dâng qua hàng thế kỷ thì không."
+      },
+      {
+        "query": "glacier ice",
+        "label": "Băng tan",
+        "draw": "question",
+        "after": "run",
+        "say": "Như sông băng tan qua từng năm: mức trung bình hôm nay không còn là mức của mười năm trước.",
+        "must": "glacier"
       }
     ],
     "takeaway_broll": {
       "query": "mountain river",
       "draw": "zigzag"
+    },
+    "sketch": {
+      "kind": "cone",
+      "label": "Trung bình trôi đi"
     }
   },
   "hq40-acf": {
@@ -718,11 +985,22 @@
         "draw": "zigzag",
         "after": "chart",
         "say": "Như động đất: một trận lớn thường kéo theo chuỗi dư chấn kéo dài nhiều ngày."
+      },
+      {
+        "query": "hurricane damage",
+        "label": "Sau cơn bão",
+        "draw": "question",
+        "after": "run",
+        "say": "Một cơn bão lớn thường kéo theo những ngày mưa gió kéo dài."
       }
     ],
     "takeaway_broll": {
       "query": "storm clouds",
       "draw": "zigzag"
+    },
+    "sketch": {
+      "kind": "wave",
+      "label": "Bão kéo theo bão"
     }
   },
   "hq41-pacf": {
@@ -743,11 +1021,22 @@
         "draw": "network",
         "after": "chart",
         "say": "Như hiệu ứng domino: quân cuối đổ, nhưng chỉ quân ngay trước nó chạm trực tiếp."
+      },
+      {
+        "query": "relay race baton",
+        "label": "Chạy tiếp sức",
+        "draw": "question",
+        "after": "run",
+        "say": "Như chạy tiếp sức: người cuối nhận gậy từ người ngay trước, không phải từ người đầu."
       }
     ],
     "takeaway_broll": {
       "query": "dominoes falling",
       "draw": "network"
+    },
+    "sketch": {
+      "kind": "dominoes",
+      "label": "Chỉ quân trước chạm"
     }
   },
   "hq42-white-noise": {
@@ -768,11 +1057,22 @@
         "draw": "zigzag",
         "after": "chart",
         "say": "Như tiếng mưa: đều đặn, liên tục, nhưng không giọt nào báo trước giọt tiếp theo."
+      },
+      {
+        "query": "waterfall",
+        "label": "Thác nước",
+        "draw": "question",
+        "after": "run",
+        "say": "Tiếng thác đổ là một kiểu nhiễu: liên tục, đều đặn, không mang thông điệp nào."
       }
     ],
     "takeaway_broll": {
       "query": "old radio",
       "draw": "zigzag"
+    },
+    "sketch": {
+      "kind": "wave",
+      "label": "Không có hình"
     }
   },
   "hq43-random-walk": {
@@ -798,6 +1098,11 @@
     "takeaway_broll": {
       "query": "hedge maze",
       "draw": "question"
+    },
+    "sketch": {
+      "kind": "coin",
+      "label": "Từng bước tung xu",
+      "say": "Mỗi bước là một lần tung đồng xu. Cộng dồn lại, bạn có một đường giá trông rất thật."
     }
   },
   "hq44-ar-model": {
@@ -818,11 +1123,22 @@
         "draw": "clock",
         "after": "chart",
         "say": "Như chiếc xích đu: vị trí lúc này phụ thuộc vị trí ngay trước đó, rồi chậm dần về giữa."
+      },
+      {
+        "query": "canyon cliffs",
+        "label": "Tiếng vọng",
+        "draw": "question",
+        "after": "run",
+        "say": "Như tiếng vọng trong núi: âm thanh lặp lại, nhỏ dần qua từng lần."
       }
     ],
     "takeaway_broll": {
       "query": "sunspots sun",
       "draw": "chart-up"
+    },
+    "sketch": {
+      "kind": "pendulum",
+      "label": "Nhớ hôm qua"
     }
   },
   "hq45-ma-model": {
@@ -843,11 +1159,22 @@
         "draw": "zigzag",
         "after": "chart",
         "say": "Như tiếng chuông: một cú gõ vang lên trong chốc lát, rồi im hẳn."
+      },
+      {
+        "query": "drum drummer",
+        "label": "Một nhịp trống",
+        "draw": "question",
+        "after": "run",
+        "say": "Như một nhịp trống: vang lên rồi tắt, không kéo dài sang nhịp sau."
       }
     ],
     "takeaway_broll": {
       "query": "still pond",
       "draw": "zigzag"
+    },
+    "sketch": {
+      "kind": "dominoes",
+      "label": "Một nhịp rồi tắt"
     }
   },
   "hq46-arima": {
@@ -868,11 +1195,22 @@
         "draw": "warning",
         "after": "chart",
         "say": "Bản tin bão luôn vẽ nón dự báo nở rộng dần: càng xa càng bất định. ARIMA cũng vậy."
+      },
+      {
+        "query": "fog forest",
+        "label": "Sương mù",
+        "draw": "question",
+        "after": "run",
+        "say": "Như lái xe trong sương: nhìn rõ vài mét trước mặt, càng xa càng mờ."
       }
     ],
     "takeaway_broll": {
       "query": "foggy road",
       "draw": "question"
+    },
+    "sketch": {
+      "kind": "cone",
+      "label": "Càng xa càng mờ"
     }
   },
   "hq47-arch": {
@@ -895,11 +1233,22 @@
         "draw": "zigzag",
         "after": "chart",
         "say": "Bão thường đi thành mùa: một cơn đến, những cơn sau dễ đến theo."
+      },
+      {
+        "query": "lightning city night",
+        "label": "Sét",
+        "draw": "question",
+        "after": "run",
+        "say": "Sét đánh một lần thì những tia sau thường đến dồn dập."
       }
     ],
     "takeaway_broll": {
       "query": "storm sea",
       "draw": "zigzag"
+    },
+    "sketch": {
+      "kind": "wave",
+      "label": "Biến động phản ứng"
     }
   },
   "hq49-egarch": {
@@ -920,11 +1269,22 @@
         "draw": "warning",
         "after": "chart",
         "say": "Như đám đông nghe chuông báo cháy: tin xấu lan nhanh hơn nhiều so với tin vui cùng cỡ."
+      },
+      {
+        "query": "newspaper headlines",
+        "label": "Tin xấu lên trang nhất",
+        "draw": "question",
+        "after": "run",
+        "say": "Tin xấu luôn chiếm trang nhất, và thị trường phản ứng với nó mạnh hơn hẳn."
       }
     ],
     "takeaway_broll": {
       "query": "crowd running",
       "draw": "crash"
+    },
+    "sketch": {
+      "kind": "crash",
+      "label": "Tin xấu nặng hơn"
     }
   },
   "hq61-black-scholes": {
@@ -952,6 +1312,11 @@
     "takeaway_broll": {
       "query": "Chicago Board Options Exchange",
       "draw": "bell"
+    },
+    "sketch": {
+      "kind": "bell",
+      "label": "Giá trị theo thời gian",
+      "say": "Mỗi ngày trôi qua, giá trị thời gian của quyền chọn mòn đi một chút."
     }
   },
   "hq62-heston": {
@@ -978,6 +1343,11 @@
     "takeaway_broll": {
       "query": "stormy sky",
       "draw": "zigzag"
+    },
+    "sketch": {
+      "kind": "wave",
+      "label": "Biến động biết nhảy",
+      "say": "Trong Heston, chính biến động cũng nhảy múa, và nhảy mạnh nhất khi giá rơi."
     }
   },
   "hq63-algorithmic-trading": {
@@ -999,11 +1369,22 @@
         "draw": "network",
         "after": "chart",
         "say": "Như robot trên dây chuyền: làm đúng điều được lập trình, rất nhanh, rất đều, kể cả khi điều đó sai."
+      },
+      {
+        "query": "server room data center",
+        "label": "Hạ tầng",
+        "draw": "question",
+        "after": "run",
+        "say": "Đằng sau mỗi bot là cả một hạ tầng máy chủ, và mỗi lần vào ra đều có phí."
       }
     ],
     "takeaway_broll": {
       "query": "server rack",
       "draw": "network"
+    },
+    "sketch": {
+      "kind": "gears",
+      "label": "Máy chạy quy tắc"
     }
   },
   "hq64-statistical-arbitrage": {
@@ -1024,11 +1405,22 @@
         "draw": "dice",
         "after": "chart",
         "say": "Đếm bài chỉ cho một lợi thế rất nhỏ mỗi ván. Lặp lại thật nhiều lần, lợi thế nhỏ thành lớn."
+      },
+      {
+        "query": "casino slot machines rows",
+        "label": "Luật số lớn",
+        "draw": "question",
+        "after": "run",
+        "say": "Sòng bạc không cần thắng mọi ván, chỉ cần đủ nhiều ván."
       }
     ],
     "takeaway_broll": {
       "query": "ants working",
       "draw": "network"
+    },
+    "sketch": {
+      "kind": "network",
+      "label": "Nhiều cược nhỏ"
     }
   },
   "hq65-pairs-trading": {
@@ -1049,11 +1441,22 @@
         "draw": "two-lines",
         "after": "chart",
         "say": "Như xe đạp đôi: hai người đạp cùng nhịp, lệch nhau một chút rồi lại khớp."
+      },
+      {
+        "query": "two dogs leash",
+        "label": "Hai chú chó",
+        "draw": "question",
+        "after": "run",
+        "say": "Hai chú chó chạy lung tung, nhưng chung một sợi dây thì không thể đi quá xa nhau."
       }
     ],
     "takeaway_broll": {
       "query": "two horses running",
       "draw": "two-lines"
+    },
+    "sketch": {
+      "kind": "leash",
+      "label": "Sợi dây vô hình"
     }
   },
   "hq66-mean-reversion": {
@@ -1075,11 +1478,22 @@
         "draw": "zigzag",
         "after": "chart",
         "say": "Như lò xo: kéo càng mạnh, lực bật về càng lớn, cho tới khi nó đứt."
+      },
+      {
+        "query": "yo-yo toy",
+        "label": "Yo-yo",
+        "draw": "question",
+        "after": "run",
+        "say": "Như chiếc yo-yo: ném đi xa bao nhiêu cũng bị sợi dây kéo về tay."
       }
     ],
     "takeaway_broll": {
       "query": "pendulum clock",
       "draw": "clock"
+    },
+    "sketch": {
+      "kind": "pendulum",
+      "label": "Kéo về giữa"
     }
   },
   "hq67-momentum": {
@@ -1100,11 +1514,22 @@
         "draw": "chart-up",
         "after": "chart",
         "say": "Như tuyết lở: bắt đầu từ một khối nhỏ, càng lăn càng lớn, cho đến khi gặp vật cản."
+      },
+      {
+        "query": "steam locomotive",
+        "label": "Quả cầu tuyết",
+        "draw": "question",
+        "after": "run",
+        "say": "Quả cầu tuyết lăn càng xa càng lớn, cho đến khi đâm vào gốc cây."
       }
     ],
     "takeaway_broll": {
       "query": "high speed train",
       "draw": "chart-up"
+    },
+    "sketch": {
+      "kind": "crash",
+      "label": "Đà và cú gãy"
     }
   },
   "hq68-mr-vs-momentum": {
@@ -1125,11 +1550,23 @@
         "draw": "scale",
         "after": "chart",
         "say": "Thị trường là cuộc kéo co giữa hai phe, và phe thắng đổi theo từng khung thời gian."
+      },
+      {
+        "query": "boxing gloves",
+        "label": "Hai phe",
+        "draw": "question",
+        "after": "run",
+        "say": "Như một trận quyền anh: mỗi hiệp một bên chiếm ưu thế.",
+        "must": "boxing"
       }
     ],
     "takeaway_broll": {
       "query": "chess board pieces",
       "draw": "scale"
+    },
+    "sketch": {
+      "kind": "scale",
+      "label": "Hai phe"
     }
   },
   "hq69-cointegration": {
@@ -1150,11 +1587,22 @@
         "draw": "two-lines",
         "after": "chart",
         "say": "Như sao đôi: mỗi ngôi sao đi một đường, nhưng lực hấp dẫn giữ chúng không rời xa nhau."
+      },
+      {
+        "query": "mother child walking hand",
+        "label": "Đi cùng nhau",
+        "draw": "question",
+        "after": "run",
+        "say": "Hai người đi cùng có thể lệch bước, nhưng không bao giờ lạc nhau."
       }
     ],
     "takeaway_broll": {
       "query": "rope knot",
       "draw": "two-lines"
+    },
+    "sketch": {
+      "kind": "leash",
+      "label": "Dây buộc dài hạn"
     }
   },
   "hq70-z-score": {
@@ -1176,11 +1624,22 @@
         "draw": "bell",
         "after": "chart",
         "say": "Nhiệt độ làm người lên cơn sốt lại là bình thường với một con chim. Bất thường phải so với chính nó."
+      },
+      {
+        "query": "blood pressure monitor",
+        "label": "Chỉ số sức khoẻ",
+        "draw": "question",
+        "after": "run",
+        "say": "Bác sĩ so huyết áp của bạn với mức bình thường của chính bạn, không phải của người khác."
       }
     ],
     "takeaway_broll": {
       "query": "measuring tape ruler",
       "draw": "bell"
+    },
+    "sketch": {
+      "kind": "thermometer",
+      "label": "So với chính nó"
     }
   },
   "hq71-market-microstructure": {
@@ -1201,11 +1660,22 @@
         "draw": "orderbook",
         "after": "chart",
         "say": "Như chợ đấu giá cá sáng sớm: giá được tạo ra từ từng người mua, người bán cụ thể."
+      },
+      {
+        "query": "auction hammer",
+        "label": "Đấu giá",
+        "draw": "question",
+        "after": "run",
+        "say": "Giá không tự có. Nó được tạo ra từ từng lệnh mua bán cụ thể."
       }
     ],
     "takeaway_broll": {
       "query": "market stall vegetables",
       "draw": "orderbook"
+    },
+    "sketch": {
+      "kind": "orderbook",
+      "label": "Lệnh ăn sổ lệnh"
     }
   },
   "hq72-bid-ask-spread": {
@@ -1226,11 +1696,22 @@
         "draw": "coin",
         "after": "chart",
         "say": "Như trạm thu phí: mỗi lần qua lại đều mất một khoản, đi càng nhiều mất càng nhiều."
+      },
+      {
+        "query": "coins hand payment",
+        "label": "Mỗi lần mua bán",
+        "draw": "question",
+        "after": "run",
+        "say": "Mỗi lần mua rồi bán, một phần nhỏ đồng xu ở lại cho người tạo thanh khoản."
       }
     ],
     "takeaway_broll": {
       "query": "coins pile",
       "draw": "coin"
+    },
+    "sketch": {
+      "kind": "orderbook",
+      "label": "Khoảng chênh"
     }
   },
   "hq73-slippage": {
@@ -1251,11 +1732,22 @@
         "draw": "clock",
         "after": "chart",
         "say": "Như đèn chuyển đỏ khi bạn còn cách vạch vài mét: chậm một nhịp là mất cơ hội."
+      },
+      {
+        "query": "athletics track lanes",
+        "label": "Xuất phát",
+        "draw": "question",
+        "after": "run",
+        "say": "Chậm một nhịp ở vạch xuất phát là mất cả cuộc đua."
       }
     ],
     "takeaway_broll": {
       "query": "racing car pit stop",
       "draw": "clock"
+    },
+    "sketch": {
+      "kind": "orderbook",
+      "label": "Giá chạy mất"
     }
   },
   "hq74-market-impact": {
@@ -1282,6 +1774,11 @@
     "takeaway_broll": {
       "query": "ocean waves",
       "draw": "crash"
+    },
+    "sketch": {
+      "kind": "orderbook",
+      "label": "Dấu chân của lệnh lớn",
+      "say": "Lệnh càng lớn càng ăn sâu vào sổ lệnh, và chính nó đẩy giá đi ngược lại bạn."
     }
   },
   "hq48-garch": {
@@ -1307,6 +1804,11 @@
     "takeaway_broll": {
       "query": "calm sea sunset",
       "draw": "zigzag"
+    },
+    "sketch": {
+      "kind": "wave",
+      "label": "Nhớ dai",
+      "say": "Cú sốc hôm nay vẫn còn rung trong biến động của nhiều tuần sau."
     }
   }
 }

@@ -213,6 +213,16 @@ class LessonModel:
             fn = eval(sp["fn"], self.ns)
             X, Y = np.meshgrid(np.linspace(*sp["x"], 60), np.linspace(*sp["y"], 60))
             return {"X": X, "Y": Y, "Z": fn(X, Y), "xl": sp["xl"], "yl": sp["yl"], "zl": sp["zl"]}
+        if kind == "hist2d":  # joint distribution of two simulated quantities, as a 3D histogram surface
+            x, y = np.asarray(self.ev(sp["x"]), float), np.asarray(self.ev(sp["y"]), float)
+            lo = np.percentile(x, 1), np.percentile(y, 1)
+            hi = np.percentile(x, 99), np.percentile(y, 99)
+            Z, xe, ye = np.histogram2d(x, y, bins=sp.get("bins", 40), range=[[lo[0], hi[0]], [lo[1], hi[1]]], density=True)
+            X, Y = np.meshgrid((xe[:-1] + xe[1:]) / 2, (ye[:-1] + ye[1:]) / 2, indexing="ij")
+            k = np.array([1, 4, 6, 4, 1], float); k /= k.sum()  # light smoothing, numpy only
+            Z = np.apply_along_axis(lambda r: np.convolve(r, k, "same"), 0, Z)
+            Z = np.apply_along_axis(lambda r: np.convolve(r, k, "same"), 1, Z)
+            return {"X": X, "Y": Y, "Z": Z, "xl": sp["xl"], "yl": sp["yl"], "zl": sp["zl"]}
         if kind == "line3d":
             return {"line": [np.asarray(self.ev(sp[a]), float) for a in ("x", "y", "z")], "xl": sp["xl"],
                     "yl": sp["yl"], "zl": sp["zl"]}

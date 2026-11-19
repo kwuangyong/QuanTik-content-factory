@@ -488,21 +488,6 @@
         "xlabel": "số phiên tăng trong 10 phiên",
         "ylabel": "xác suất"
       },
-      "surface": {
-        "type": "grid",
-        "fn": "lambda X, Y: np.exp(-(X-5)**2/(2*Y)) / np.sqrt(2*np.pi*Y)",
-        "x": [
-          0,
-          10
-        ],
-        "y": [
-          1,
-          6
-        ],
-        "xl": "số phiên tăng",
-        "yl": "độ phân tán",
-        "zl": "xác suất"
-      },
       "episode": {
         "kicker": "Probability distribution",
         "hook": "Tám trên mười phiên tăng và bạn tưởng mình có biệt tài? Toán nói đó có thể chỉ là may mắn.",

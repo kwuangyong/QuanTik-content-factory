@@ -263,3 +263,21 @@ def with_backdrop(scene, spec, dim=0.62):
 
     scene.draw = draw
     return scene
+
+
+def sketch(kind, say, label=None, name="sketch", min_dur=3.5):
+    """Hand-drawn concept animation on a dark board (pipeline/sketch.py)."""
+    import sketch as SK
+
+    box = (X0, 330, X1, 1230)
+
+    def draw(img, t, p):
+        a = F.ease_out(F.seg(p, 0, 0.15))
+        F.panel(img, box, fill=(16, 30, 24))
+        SK.draw(img, kind, (X0 + 50, 450, X1 - 50, 1180), t, p)
+        if label:
+            F.chip(img, (X0 + 24 - int(220 * (1 - a)), 356), label, T["neutral"], 30)
+        F.text_box(img, "hoạt hoạ minh hoạ", (X0 + 30, 1185, X1 - 30, 1222), "sans", 20, T["muted"], "right",
+                   label=f"{name}-tag")
+
+    return Scene(name, say, draw, min_dur, texts=[label or ""])

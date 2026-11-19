@@ -156,13 +156,13 @@
         "ylabel": "biến động hàm ý"
       },
       "surface": {
-        "type": "line3d",
-        "x": "np.linspace(0, 1, 400)",
-        "y": "np.sqrt(np.maximum(v[:400], 0))",
-        "z": "S[:400] / S0",
-        "xl": "kịch bản",
+        "type": "hist2d",
+        "x": "S / S0",
+        "y": "np.sqrt(np.maximum(v, 0))",
+        "bins": 40,
+        "xl": "giá cuối / giá đầu",
         "yl": "biến động cuối",
-        "zl": "giá / giá đầu"
+        "zl": "tần suất"
       },
       "episode": {
         "kicker": "Heston model",
