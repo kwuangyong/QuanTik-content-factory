@@ -1,5 +1,5 @@
 """Package rendered YT/IG episodes for hand-off: per-group folders (mp4 + thumbnail + caption.txt), ALL-CAPTIONS.md,
-INDEX.md, then zips under 500 MB each (upload limit of chat attachments).
+INDEX.md, then zips under ~370 MB each (chat attachment limit 400 MB).
 
   python package_yt.py 43-55 59-70 73-76 79 --name yt-ig-lot-30     # episode numbers or ranges
   add --plain: flat folder, file names without episode number or category (for posting as standalone videos)
@@ -94,8 +94,8 @@ open(f"{OUT}/INDEX.md", "w", encoding="utf-8").write("| # | file | duration | QA
 print("missing", missing, "packaged", len(rows))
 print("\n".join(r for r in rows if "CHECK" in r))
 
-# zips under ~480 MB: split a group folder into numbered parts when needed
-LIMIT = 480 * 1024 * 1024
+# zips under ~370 MB (chat upload limit is 400 MB): split a group folder into numbered parts when needed
+LIMIT = 370 * 1024 * 1024
 groups = ["."] if PLAIN else sorted(x for x in os.listdir(OUT) if os.path.isdir(os.path.join(OUT, x)))
 for g in groups:
     gp = os.path.join(OUT, g)
