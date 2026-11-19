@@ -25,7 +25,8 @@
         "label": "Nhà cái",
         "draw": "question",
         "after": "run",
-        "say": "Nhà cái không cần may mắn. Họ chỉ cần trò chơi lặp lại đủ nhiều lần."
+        "say": "Nhà cái không cần may mắn. Họ chỉ cần trò chơi lặp lại đủ nhiều lần.",
+        "anim": "dice"
       }
     ],
     "takeaway_broll": {
@@ -54,7 +55,8 @@
         "label": "Lồng cầu xổ số",
         "draw": "dice",
         "after": "chart",
-        "say": "Như lồng cầu xổ số: chưa quay thì chưa biết số nào, nhưng biết chắc mọi khả năng có thể ra."
+        "say": "Như lồng cầu xổ số: chưa quay thì chưa biết số nào, nhưng biết chắc mọi khả năng có thể ra.",
+        "anim": "dice"
       },
       {
         "query": "weather forecast satellite",
@@ -128,7 +130,8 @@
         "label": "Biển động",
         "draw": "zigzag",
         "after": "chart",
-        "say": "Ngày lặng và ngày bão có thể cùng mực nước trung bình. Phương sai mới cho biết con thuyền chao đảo cỡ nào."
+        "say": "Ngày lặng và ngày bão có thể cùng mực nước trung bình. Phương sai mới cho biết con thuyền chao đảo cỡ nào.",
+        "anim": "wave"
       },
       {
         "query": "airplane turbulence clouds",
@@ -165,7 +168,8 @@
         "label": "Nhiệt kế",
         "draw": "bell",
         "after": "chart",
-        "say": "Như nhiệt kế đo cơn sốt: độ lệch chuẩn đo cơn sốt của giá bằng một con số."
+        "say": "Như nhiệt kế đo cơn sốt: độ lệch chuẩn đo cơn sốt của giá bằng một con số.",
+        "anim": "thermometer"
       },
       {
         "query": "stock exchange trading screens",
@@ -209,7 +213,8 @@
         "draw": "question",
         "after": "run",
         "say": "Một ván thì khó đoán. Hàng nghìn ván thì hiện ra cả một hình dạng.",
-        "must": "dice"
+        "must": "dice",
+        "anim": "dice"
       }
     ],
     "takeaway_broll": {
@@ -338,7 +343,8 @@
         "label": "Đội chèo thuyền",
         "draw": "two-lines",
         "after": "chart",
-        "say": "Như một đội chèo: khi mọi người cùng nhịp, con thuyền lao đi, và cũng lật cùng lúc."
+        "say": "Như một đội chèo: khi mọi người cùng nhịp, con thuyền lao đi, và cũng lật cùng lúc.",
+        "anim": "rowing"
       }
     ],
     "takeaway_broll": {
@@ -529,7 +535,8 @@
         "label": "Dây chuyền",
         "draw": "question",
         "after": "run",
-        "say": "Như dây chuyền nhà máy: mỗi công đoạn biến đầu vào thành đầu ra, nối tiếp nhau theo thứ tự."
+        "say": "Như dây chuyền nhà máy: mỗi công đoạn biến đầu vào thành đầu ra, nối tiếp nhau theo thứ tự.",
+        "anim": "gears"
       }
     ],
     "takeaway_broll": {
@@ -559,7 +566,8 @@
         "label": "Cánh buồm đón gió",
         "draw": "arrows",
         "after": "chart",
-        "say": "Như cánh buồm: chỉ phần gió cùng hướng mới đẩy thuyền đi. Đó chính là tích vô hướng."
+        "say": "Như cánh buồm: chỉ phần gió cùng hướng mới đẩy thuyền đi. Đó chính là tích vô hướng.",
+        "anim": "vectors"
       },
       {
         "query": "tug boat towing ship",
@@ -605,7 +613,8 @@
         "draw": "question",
         "after": "run",
         "say": "Như cánh đồng gió: mọi tuabin đều quay về hướng gió chính.",
-        "must": "turbine"
+        "must": "turbine",
+        "anim": "turbine"
       }
     ],
     "takeaway_broll": {
@@ -642,7 +651,8 @@
         "draw": "question",
         "after": "run",
         "say": "Như người tung hứng: chia đều sự chú ý chưa chắc là cách giữ bóng không rơi.",
-        "must": "juggl"
+        "must": "juggl",
+        "anim": "juggle"
       }
     ],
     "takeaway_broll": {
@@ -739,7 +749,8 @@
         "label": "Phản chiếu méo",
         "draw": "question",
         "after": "run",
-        "say": "Như mặt nước phản chiếu thành phố: mọi thứ méo đi, nhưng méo theo cùng một quy tắc."
+        "say": "Như mặt nước phản chiếu thành phố: mọi thứ méo đi, nhưng méo theo cùng một quy tắc.",
+        "anim": "ripple"
       }
     ],
     "takeaway_broll": {
@@ -947,7 +958,8 @@
         "label": "Thuỷ triều",
         "draw": "zigzag",
         "after": "chart",
-        "say": "Thuỷ triều lên xuống quanh một mực nước trung bình: đó là chuỗi dừng. Mực nước biển dâng qua hàng thế kỷ thì không."
+        "say": "Thuỷ triều lên xuống quanh một mực nước trung bình: đó là chuỗi dừng. Mực nước biển dâng qua hàng thế kỷ thì không.",
+        "anim": "wave"
       },
       {
         "query": "glacier ice",
@@ -984,7 +996,8 @@
         "label": "Dư chấn",
         "draw": "zigzag",
         "after": "chart",
-        "say": "Như động đất: một trận lớn thường kéo theo chuỗi dư chấn kéo dài nhiều ngày."
+        "say": "Như động đất: một trận lớn thường kéo theo chuỗi dư chấn kéo dài nhiều ngày.",
+        "anim": "ripple"
       },
       {
         "query": "hurricane damage",
@@ -1020,7 +1033,8 @@
         "label": "Hiệu ứng domino",
         "draw": "network",
         "after": "chart",
-        "say": "Như hiệu ứng domino: quân cuối đổ, nhưng chỉ quân ngay trước nó chạm trực tiếp."
+        "say": "Như hiệu ứng domino: quân cuối đổ, nhưng chỉ quân ngay trước nó chạm trực tiếp.",
+        "anim": "dominoes"
       },
       {
         "query": "relay race baton",
@@ -1056,7 +1070,8 @@
         "label": "Mưa rơi",
         "draw": "zigzag",
         "after": "chart",
-        "say": "Như tiếng mưa: đều đặn, liên tục, nhưng không giọt nào báo trước giọt tiếp theo."
+        "say": "Như tiếng mưa: đều đặn, liên tục, nhưng không giọt nào báo trước giọt tiếp theo.",
+        "anim": "rain"
       },
       {
         "query": "waterfall",
@@ -1092,7 +1107,8 @@
         "label": "Chuyển động Brown",
         "draw": "zigzag",
         "after": "chart",
-        "say": "Robert Brown thấy hạt phấn hoa nhảy múa không ngừng trong nước. Đó là bước đi ngẫu nhiên của tự nhiên."
+        "say": "Robert Brown thấy hạt phấn hoa nhảy múa không ngừng trong nước. Đó là bước đi ngẫu nhiên của tự nhiên.",
+        "anim": "brownian"
       }
     ],
     "takeaway_broll": {
@@ -1122,14 +1138,16 @@
         "label": "Xích đu",
         "draw": "clock",
         "after": "chart",
-        "say": "Như chiếc xích đu: vị trí lúc này phụ thuộc vị trí ngay trước đó, rồi chậm dần về giữa."
+        "say": "Như chiếc xích đu: vị trí lúc này phụ thuộc vị trí ngay trước đó, rồi chậm dần về giữa.",
+        "anim": "pendulum"
       },
       {
         "query": "canyon cliffs",
         "label": "Tiếng vọng",
         "draw": "question",
         "after": "run",
-        "say": "Như tiếng vọng trong núi: âm thanh lặp lại, nhỏ dần qua từng lần."
+        "say": "Như tiếng vọng trong núi: âm thanh lặp lại, nhỏ dần qua từng lần.",
+        "anim": "ripple"
       }
     ],
     "takeaway_broll": {
@@ -1151,7 +1169,8 @@
         "query": "water ripples",
         "label": "Gợn sóng",
         "draw": "zigzag",
-        "say": "Như ném hòn đá xuống hồ: mặt nước rung lên một nhịp rồi lặng hẳn."
+        "say": "Như ném hòn đá xuống hồ: mặt nước rung lên một nhịp rồi lặng hẳn.",
+        "anim": "ripple"
       },
       {
         "query": "church bell",
@@ -1337,7 +1356,8 @@
         "label": "Biến động cũng biến động",
         "draw": "zigzag",
         "after": "chart",
-        "say": "Biến động lên xuống như tàu lượn, và lao dốc đúng lúc giá rơi."
+        "say": "Biến động lên xuống như tàu lượn, và lao dốc đúng lúc giá rơi.",
+        "anim": "wave"
       }
     ],
     "takeaway_broll": {
@@ -1368,7 +1388,8 @@
         "label": "Robot",
         "draw": "network",
         "after": "chart",
-        "say": "Như robot trên dây chuyền: làm đúng điều được lập trình, rất nhanh, rất đều, kể cả khi điều đó sai."
+        "say": "Như robot trên dây chuyền: làm đúng điều được lập trình, rất nhanh, rất đều, kể cả khi điều đó sai.",
+        "anim": "gears"
       },
       {
         "query": "server room data center",
@@ -1477,7 +1498,8 @@
         "label": "Lò xo",
         "draw": "zigzag",
         "after": "chart",
-        "say": "Như lò xo: kéo càng mạnh, lực bật về càng lớn, cho tới khi nó đứt."
+        "say": "Như lò xo: kéo càng mạnh, lực bật về càng lớn, cho tới khi nó đứt.",
+        "anim": "spring"
       },
       {
         "query": "yo-yo toy",
@@ -1513,7 +1535,8 @@
         "label": "Tuyết lở",
         "draw": "chart-up",
         "after": "chart",
-        "say": "Như tuyết lở: bắt đầu từ một khối nhỏ, càng lăn càng lớn, cho đến khi gặp vật cản."
+        "say": "Như tuyết lở: bắt đầu từ một khối nhỏ, càng lăn càng lớn, cho đến khi gặp vật cản.",
+        "anim": "snowball"
       },
       {
         "query": "steam locomotive",
@@ -1549,7 +1572,8 @@
         "label": "Kéo co",
         "draw": "scale",
         "after": "chart",
-        "say": "Thị trường là cuộc kéo co giữa hai phe, và phe thắng đổi theo từng khung thời gian."
+        "say": "Thị trường là cuộc kéo co giữa hai phe, và phe thắng đổi theo từng khung thời gian.",
+        "anim": "tug"
       },
       {
         "query": "boxing gloves",
@@ -1586,7 +1610,8 @@
         "label": "Sao đôi",
         "draw": "two-lines",
         "after": "chart",
-        "say": "Như sao đôi: mỗi ngôi sao đi một đường, nhưng lực hấp dẫn giữ chúng không rời xa nhau."
+        "say": "Như sao đôi: mỗi ngôi sao đi một đường, nhưng lực hấp dẫn giữ chúng không rời xa nhau.",
+        "anim": "orbit"
       },
       {
         "query": "mother child walking hand",

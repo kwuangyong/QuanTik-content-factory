@@ -432,9 +432,13 @@ def apply(scenes, ep, mode="full", log=print):
         for k, spec in enumerate(ep.get("broll") or []):
             if not spec.get("say"):
                 continue
-            sp = resolve(spec)
             after = spec.get("after", "hook")
             at = next((i for i, s in enumerate(scenes) if s.name == after), 0) + 1
+            if spec.get("anim"):  # an activity that is happening → hand-drawn animation, not a still photo
+                scenes.insert(at, S.sketch(spec["anim"], spec["say"], spec.get("label"), name=f"broll{k}"))
+                records.append({"scene": f"broll{k}", "kind": "hoạt hoạ", "what": spec["anim"]})
+                continue
+            sp = resolve(spec)
             scenes.insert(at, S.broll(sp, spec["say"], name=f"broll{k}"))
             records.append(_record(f"broll{k}", sp))
     for r in records:
