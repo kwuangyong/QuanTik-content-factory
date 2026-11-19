@@ -2,7 +2,7 @@
   "id": "hq48-garch-code-reel",
   "topic": "garch",
   "style": "code-reel",
-  "tag": "#48 GARCH",
+  "tag": "GARCH",
   "kicker": "GARCH(1,1)",
   "hook": "Tập trước ARCH chỉ nhớ một phiên. Thị trường thì ôm hận cả tháng. GARCH sinh ra để nhớ dai như vậy.",
   "title": "Mô hình GARCH: thị trường nhớ dai hơn bạn tưởng",
