@@ -12,7 +12,7 @@
  "episode_no": 72,
  "group": "quant-mindset",
  "concept": "The Birthday Paradox",
- "tag": "QUANT MINDSET #72",
+ "tag": "",
  "title": "Only a handful of people for a shared birthday",
  "hook": "How many people do you need in a room for a better-than-even chance two share a birthday? It's way fewer than you think.",
  "caption": "Only {n50} people give a {p_n50} chance that two share a birthday; with fifty it's {p50}. The secret: {n50} people make {pairs_n50} pairs.",
@@ -39,7 +39,7 @@
  "facts": {},
  "cta": "Follow QuanTik to think like a quant",
  "thumb": {
-  "series": "QUANT MINDSET",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "ONLY",
@@ -47,65 +47,136 @@
    "PEOPLE."
   ],
   "sub": "{p_n50} chance of a shared birthday",
+  "no_number": true,
   "image": "birthday-cake"
  },
  "scenes": [
   {
    "say": "How many people do you need in a room for a better-than-even chance two share a birthday? It's way fewer than you think.",
    "show": "Way fewer than you think.",
-   "visual": "coin_crowd",
-   "image": "birthday-cake"
+   "image": "birthday-cake",
+   "stick": {
+    "set": "home",
+    "items": [
+     {
+      "t": "prop",
+      "k": "cake",
+      "x": 540,
+      "y": 520,
+      "s": 220
+     }
+    ]
+   }
   },
   {
    "say": "Most people guess around half of {days}. Not even close.",
    "show": "Half of {days}? No.",
-   "kind": "crowd",
-   "crowd": {
-    "n": "days",
-    "k": "n50"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "crowd",
+      "n": 11,
+      "hi": [],
+      "x0": 90,
+      "gap": 90,
+      "h": 150
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 120,
+      "text": "HOW MANY?",
+      "col": "pink"
+     }
+    ]
    }
   },
   {
    "say": "Just {n50} people: {p_n50} chance.",
    "show": "Just {n50} people:",
-   "kind": "alone",
    "big": "{p_n50}",
    "big_label": "chance of a shared birthday",
    "note": "Computed exactly; checked with 4,000 simulations ({sim_n50})",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "crowd",
+      "n": 11,
+      "hi": [
+       2,
+       8
+      ],
+      "x0": 90,
+      "gap": 90,
+      "h": 150,
+      "hicol": "pink",
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "cake",
+      "x": 540,
+      "y": 200,
+      "s": 120
+     }
+    ]
+   }
   },
   {
    "say": "With fifty people, it's {p50}.",
    "show": "Fifty people:",
-   "kind": "commute",
    "big": "{p50}",
    "claims": [
     "sim"
-   ]
+   ],
+   "kind": "commute"
   },
   {
    "say": "The trick: you think about someone matching you. But you have to count every pair. {n50} people make {pairs_n50} pairs.",
    "show": "Count every pair:",
-   "kind": "crowd",
    "big": "{pairs_n50}",
    "big_label": "pairs among {n50} people",
+   "claims": [
+    "sim"
+   ],
    "crowd": {
     "n": "pairs_n50",
     "k": "n50"
    },
-   "claims": [
-    "sim"
-   ]
+   "kind": "crowd"
   },
   {
    "say": "When judging a coincidence, count all the ways it could happen, not just the ones about you.",
    "show": "Count all the ways.",
-   "kind": "walkaway"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "think",
+      "col": "bone",
+      "h": 300
+     },
+     {
+      "t": "prop",
+      "k": "magnifier",
+      "x": 780,
+      "y": 260,
+      "s": 120
+     }
+    ]
+   }
   }
  ],
  "takeaway": "When judging a coincidence, count all the ways it could happen, not just the ones about you.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "pink",
+ "tint_x": 0.5
 }

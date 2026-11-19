@@ -32,7 +32,7 @@
  "episode_no": 26,
  "group": "poker",
  "concept": "Tilt",
- "tag": "POKER THEORY #26",
+ "tag": "",
  "title": "Two bad beats and your brain hands the wheel to your ego",
  "hook": "Two bad beats in a row, and your brain hands the steering wheel to your ego.",
  "caption": "Tilt turns a winning player into a broke one. Same skill (win {a_p}): calm players → {a_ruin} broke; tilted players who triple after two losses → {b_ruin} broke.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
@@ -59,7 +59,7 @@
  "facts": {},
  "cta": "Follow QuanTik for the math behind every decision",
  "thumb": {
-  "series": "POKER THEORY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "YOUR EGO",
@@ -67,58 +67,236 @@
    "WHEEL."
   ],
   "sub": "Tilted: {b_ruin} went broke",
-  "visual": "panic"
+  "no_number": true,
+  "stick": {
+   "set": "casino",
+   "items": [
+    {
+     "t": "man",
+     "x": 540,
+     "pose": "stand",
+     "col": "red",
+     "h": 300,
+     "face": "angry"
+    },
+    {
+     "t": "prop",
+     "k": "flame",
+     "x": 540,
+     "y": 160,
+     "s": 90
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "Two bad beats in a row, and your brain hands the steering wheel to your ego.",
    "show": "Your ego takes the wheel.",
-   "kind": "duel"
+   "stick": {
+    "set": "casino",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "stand",
+      "col": "red",
+      "h": 300,
+      "face": "angry",
+      "tremble": 1.5
+     },
+     {
+      "t": "prop",
+      "k": "flame",
+      "x": 540,
+      "y": 160,
+      "s": 90
+     }
+    ]
+   }
   },
   {
    "say": "Tilt: emotion takes over. You chase, you bet bigger, you play worse.",
    "show": "Chase. Bet bigger. Play worse.",
-   "visual": "panic",
-   "real": true
+   "stick": {
+    "set": "casino",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "bet",
+      "col": "red",
+      "h": 290,
+      "face": "angry"
+     },
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 600,
+      "y": 470,
+      "s": 160,
+      "motion": "fly",
+      "to": [
+       800,
+       470
+      ],
+      "n": 3
+     }
+    ]
+   }
   },
   {
    "say": "Two groups, same skill, win {a_p} of hands. The tilted group triples its bet after two losses, and plays worse.",
    "show": "Same skill. One tilts.",
-   "kind": "compare",
-   "note": "Simulation: {players} players, {rounds} hands"
+   "note": "Simulation: {players} players, {rounds} hands",
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "stand",
+      "col": "bone",
+      "h": 270,
+      "tag": "CALM"
+     },
+     {
+      "t": "man",
+      "x": 760,
+      "pose": "stand",
+      "col": "red",
+      "h": 270,
+      "face": "angry",
+      "tremble": 1.0,
+      "tag": "TILTED"
+     }
+    ]
+   }
   },
   {
    "say": "Calm players: {a_ruin} go broke.",
    "show": "Calm:",
-   "kind": "walkaway",
    "big": "{a_ruin}",
    "big_label": "went broke",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "casino",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "stand",
+      "col": "bone",
+      "h": 290,
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 320,
+      "y": 480,
+      "s": 110
+     }
+    ]
+   }
   },
   {
    "say": "Tilted players: {b_ruin}.",
    "show": "Tilted:",
-   "visual": "money_burn",
    "big": "{b_ruin}",
    "big_label": "went broke — same skill",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "cry",
+      "col": "red",
+      "h": 290,
+      "face": "cry"
+     },
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 540,
+      "y": 200,
+      "s": 70,
+      "motion": "float",
+      "n": 5,
+      "dx": 60
+     }
+    ]
+   }
   },
   {
    "say": "Your edge didn't disappear because of bad cards. It disappeared when your decisions got worse.",
    "show": "Bad decisions, not bad cards.",
-   "kind": "wheel"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "brain",
+      "x": 540,
+      "y": 320,
+      "s": 220,
+      "motion": "shake"
+     },
+     {
+      "t": "prop",
+      "k": "flame",
+      "x": 540,
+      "y": 500,
+      "s": 120
+     }
+    ]
+   }
   },
   {
    "say": "Losing streaks are a signal to stop, not to raise the stakes.",
    "show": "Stop. Don't raise.",
-   "kind": "alone"
+   "stick": {
+    "set": "street",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "walk",
+      "col": "bone",
+      "h": 270,
+      "move": [
+       800,
+       0.1,
+       0.9
+      ]
+     },
+     {
+      "t": "prop",
+      "k": "door",
+      "x": 940,
+      "y": 470,
+      "s": 260
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 80,
+      "text": "WALK AWAY",
+      "col": "bone"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Losing streaks are a signal to stop, not to raise the stakes.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "red",
+ "tint_x": 0.5
 }

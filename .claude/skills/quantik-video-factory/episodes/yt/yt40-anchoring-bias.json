@@ -27,7 +27,7 @@
  "episode_no": 40,
  "group": "psychology",
  "concept": "Anchoring Bias",
- "tag": "PSYCHOLOGY #40",
+ "tag": "",
  "title": "A random number just changed your answer",
  "hook": "A random number from a spinning wheel can change your answer to a totally different question.",
  "caption": "A random number can change your answer. Tversky & Kahneman (1974): after a wheel showed 10, people guessed {low}; after 65, they guessed {high}. Write your own number first.",
@@ -62,7 +62,7 @@
  },
  "cta": "Follow QuanTik for the psychology behind your money",
  "thumb": {
-  "series": "PSYCHOLOGY FACTS",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "A RANDOM",
@@ -70,53 +70,112 @@
    "OWNS YOU."
   ],
   "sub": "Saw 10 → {low}. Saw 65 → {high}",
+  "no_number": true,
   "image": "roulette-wheel"
  },
  "scenes": [
   {
    "say": "A random number from a spinning wheel can change your answer to a totally different question.",
    "show": "A random number changes you.",
-   "visual": "roulette",
-   "image": "roulette-wheel"
+   "image": "roulette-wheel",
+   "clip": "roulette2"
   },
   {
    "say": "Anchoring: the first number you hear drags every estimate after it.",
    "show": "The first number drags you.",
-   "kind": "scale"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "ship",
+      "x": 540,
+      "y": 300,
+      "s": 260
+     },
+     {
+      "t": "prop",
+      "k": "flag",
+      "x": 300,
+      "y": 500,
+      "s": 140
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 80,
+      "text": "THE FIRST NUMBER",
+      "col": "blue"
+     }
+    ]
+   }
   },
   {
    "say": "Tversky and Kahneman spun a wheel, then asked: what share of African nations are in the UN?",
    "show": "Spin, then guess.",
-   "visual": "professor",
-   "image": "amos-tversky",
    "note": "Source: Tversky & Kahneman (1974), Science",
    "claims": [
     "tk74"
-   ]
+   ],
+   "stick": {
+    "set": "lab",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "think",
+      "col": "bone",
+      "h": 290
+     },
+     {
+      "t": "prop",
+      "k": "die",
+      "x": 800,
+      "y": 300,
+      "s": 120,
+      "motion": "shake"
+     }
+    ]
+   }
   },
   {
    "say": "People who saw 10 guessed {low} on average. People who saw 65 guessed {high}.",
    "show": "Saw 10: {low}",
-   "kind": "compare",
    "big": "{high}",
    "big_label": "after seeing 65",
    "claims": [
     "tk74"
-   ]
+   ],
+   "kind": "compare"
   },
   {
    "say": "List prices, first salary offers, the price you bought a stock at: all anchors.",
    "show": "Every price is an anchor.",
-   "visual": "board",
-   "image": "nyse-floor"
+   "image": "nyse-floor",
+   "clip": "market_screen"
   },
   {
    "say": "Write down your own number before you hear anyone else's.",
    "show": "Your number first.",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "hold",
+      "col": "blue",
+      "h": 300,
+      "hold": "news",
+      "face": "happy"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Write down your own number before you hear anyone else's.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "blue",
+ "tint_x": 0.5
 }

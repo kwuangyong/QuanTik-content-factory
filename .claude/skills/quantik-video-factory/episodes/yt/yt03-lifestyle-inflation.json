@@ -31,7 +31,7 @@
  "episode_no": 3,
  "group": "dark-truth",
  "concept": "Lifestyle Inflation",
- "tag": "DARK TRUTH #03",
+ "tag": "",
  "title": "You earn more every year. Why aren't you richer?",
  "hook": "You earn more than five years ago. So why aren't you richer?",
  "caption": "You earn more than five years ago but you're not richer. Two people save {a_contrib} a year; one saves every raise too, one spends it. After {years} years: {a_end} vs {b_end} — a {gap_ratio}x gap from the same paycheck.\n\n(Simulation: {a_rate} return, raises 7% a year. Illustration only.)",
@@ -59,7 +59,7 @@
  "facts": {},
  "cta": "Follow QuanTik for more dark truths about money",
  "thumb": {
-  "series": "THE DARK TRUTH OF MONEY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "YOUR BILLS",
@@ -67,58 +67,253 @@
    "PROMOTION."
   ],
   "sub": "Same paycheck. {gap_ratio}x gap.",
-  "art": "spend"
+  "no_number": true,
+  "image": "luxury-car"
  },
  "scenes": [
   {
    "say": "You earn more than five years ago. So why aren't you richer?",
    "show": "Why aren't you richer?",
-   "kind": "office"
+   "stick": {
+    "set": "home",
+    "items": [
+     {
+      "t": "man",
+      "x": 400,
+      "pose": "shrug",
+      "col": "bone",
+      "h": 300,
+      "face": "sad"
+     },
+     {
+      "t": "prop",
+      "k": "cash",
+      "x": 760,
+      "y": 260,
+      "s": 110,
+      "motion": "fly",
+      "to": [
+       760,
+       650
+      ],
+      "n": 4
+     },
+     {
+      "t": "label",
+      "x": 760,
+      "y": 100,
+      "text": "SALARY UP",
+      "col": "green",
+      "at": 0.2
+     }
+    ]
+   }
   },
   {
    "say": "Because every raise quietly upgraded your life instead of your future.",
    "show": "Every raise got spent.",
-   "kind": "spend"
+   "stick": {
+    "set": "home",
+    "items": [
+     {
+      "t": "prop",
+      "k": "car",
+      "x": 300,
+      "y": 520,
+      "s": 200,
+      "at": 0.1
+     },
+     {
+      "t": "prop",
+      "k": "bag",
+      "x": 540,
+      "y": 520,
+      "s": 130,
+      "at": 0.3
+     },
+     {
+      "t": "prop",
+      "k": "ring",
+      "x": 760,
+      "y": 500,
+      "s": 110,
+      "at": 0.5
+     },
+     {
+      "t": "man",
+      "x": 920,
+      "pose": "cheer",
+      "col": "gold",
+      "h": 260,
+      "face": "happy",
+      "at": 0.2
+     }
+    ]
+   }
   },
   {
    "say": "Two people start by saving {a_contrib} a year. One saves every raise too. One spends it.",
    "show": "Same start. Two habits.",
-   "kind": "compare",
-   "note": "Simulation: {a_rate} return · raises 7% a year"
+   "note": "Simulation: {a_rate} return · raises 7% a year",
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "stand",
+      "col": "green",
+      "h": 280,
+      "tag": "SAVES"
+     },
+     {
+      "t": "man",
+      "x": 760,
+      "pose": "stand",
+      "col": "red",
+      "h": 280,
+      "tag": "SPENDS"
+     },
+     {
+      "t": "prop",
+      "k": "cash",
+      "x": 320,
+      "y": 300,
+      "s": 90,
+      "motion": "pile",
+      "n": 5,
+      "dy": -30
+     },
+     {
+      "t": "prop",
+      "k": "bag",
+      "x": 760,
+      "y": 330,
+      "s": 90,
+      "motion": "pile",
+      "n": 4,
+      "dy": -40
+     }
+    ]
+   }
   },
   {
    "say": "After {years} years: {a_end} versus {b_end}.",
    "show": "{a_end} vs {b_end}",
-   "kind": "compare",
    "big": "{gap_ratio}x",
    "big_label": "the gap — from the same paycheck",
    "claims": [
     "sim"
-   ]
+   ],
+   "kind": "compare"
   },
   {
    "say": "Nobody got a better job. One just stopped buying a better-looking life.",
    "show": "Nobody got a better job.",
-   "visual": "money_burn",
-   "image": "luxury-car"
+   "image": "luxury-car",
+   "visual": "money_burn"
   },
   {
    "say": "Lifestyle inflation doesn't feel like spending. It feels like finally deserving it.",
    "show": "It feels like deserving it.",
-   "kind": "scroll"
+   "stick": {
+    "set": "home",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "hold",
+      "col": "gold",
+      "h": 300,
+      "hold": "crown",
+      "face": "happy"
+     },
+     {
+      "t": "bubble",
+      "x": 820,
+      "y": 140,
+      "text": "I deserve it"
+     }
+    ]
+   }
   },
   {
    "say": "Next raise, keep at least half of it before your lifestyle notices.",
    "show": "Keep half of every raise.",
-   "kind": "walkaway"
+   "stick": {
+    "set": "bank",
+    "items": [
+     {
+      "t": "man",
+      "x": 400,
+      "pose": "carry",
+      "col": "green",
+      "h": 280,
+      "hold": "cash"
+     },
+     {
+      "t": "arrow",
+      "from": [
+       480,
+       400
+      ],
+      "to": [
+       760,
+       400
+      ],
+      "col": "green",
+      "at": 0.3
+     },
+     {
+      "t": "prop",
+      "k": "piggy",
+      "x": 820,
+      "y": 520,
+      "s": 160
+     }
+    ]
+   }
   },
   {
    "say": "You didn't get richer. Your bills just got a promotion.",
    "show": "Your bills got a promotion.",
-   "kind": "alone"
+   "stick": {
+    "set": "office",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "stand",
+      "col": "bone",
+      "h": 300,
+      "face": "shock"
+     },
+     {
+      "t": "prop",
+      "k": "bill",
+      "x": 300,
+      "y": 200,
+      "s": 110,
+      "motion": "pile",
+      "n": 6,
+      "dx": 90,
+      "until": 0.8
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 80,
+      "text": "PROMOTED",
+      "col": "gold",
+      "at": 0.5
+     }
+    ]
+   }
   }
  ],
  "takeaway": "You didn't get richer. Your bills just got a promotion.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "gold",
+ "tint_x": 0.7
 }

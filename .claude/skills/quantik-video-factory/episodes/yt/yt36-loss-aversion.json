@@ -27,7 +27,7 @@
  "episode_no": 36,
  "group": "psychology",
  "concept": "Loss Aversion",
- "tag": "PSYCHOLOGY #36",
+ "tag": "",
  "title": "Losing $100 hurts more than winning $100 feels good",
  "hook": "Losing $100 hurts way more than finding $100 feels good. Your brain is not fair with you.",
  "caption": "Losing $100 hurts more than finding $100 feels good. Tversky & Kahneman (1992) measured it: a loss weighs about {pain}x an equal gain. That's why we hold losers and sell winners too early.",
@@ -62,7 +62,7 @@
  },
  "cta": "Follow QuanTik for the psychology behind your money",
  "thumb": {
-  "series": "PSYCHOLOGY FACTS",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "LOSING",
@@ -70,6 +70,7 @@
    "{pain}x MORE."
   ],
   "sub": "Tversky & Kahneman, 1992",
+  "no_number": true,
   "image": "daniel-kahneman"
  },
  "scenes": [
@@ -81,50 +82,106 @@
   {
    "say": "It's called loss aversion. Same amount of money, very different feelings.",
    "show": "Loss aversion.",
-   "visual": "professor",
-   "image": "daniel-kahneman",
    "claims": [
     "tk"
-   ]
+   ],
+   "image": "daniel-kahneman",
+   "visual": "professor"
   },
   {
    "say": "Kahneman and Tversky measured it in 1992.",
    "show": "Measured in 1992.",
-   "visual": "professor",
-   "image": "amos-tversky",
    "note": "Source: Tversky & Kahneman (1992), Journal of Risk and Uncertainty",
    "claims": [
     "tk"
-   ]
+   ],
+   "stick": {
+    "set": "lab",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "point",
+      "col": "bone",
+      "h": 290
+     },
+     {
+      "t": "prop",
+      "k": "scale",
+      "x": 820,
+      "y": 300,
+      "s": 200
+     }
+    ]
+   }
   },
   {
    "say": "A loss weighs about {pain} times as much as an equal gain.",
    "show": "A loss weighs:",
-   "kind": "scale",
    "big": "{pain}x",
    "big_label": "an equal gain",
    "claims": [
     "tk"
-   ]
+   ],
+   "kind": "scale"
   },
   {
    "say": "That's why people hold losing positions too long and sell winners too early.",
    "show": "Hold losers. Sell winners.",
-   "visual": "panic",
-   "image": "nyse-floor"
+   "image": "nyse-floor",
+   "clip": "market_screen"
   },
   {
    "say": "They're not avoiding risk. They're avoiding a feeling.",
    "show": "Avoiding a feeling.",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "cry",
+      "col": "bone",
+      "h": 290,
+      "face": "cry"
+     },
+     {
+      "t": "prop",
+      "k": "coin",
+      "x": 760,
+      "y": 600,
+      "s": 70
+     }
+    ]
+   }
   },
   {
    "say": "Before you decide, ask: if losing didn't sting, would I choose differently?",
    "show": "Would you choose differently?",
-   "kind": "walkaway"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "think",
+      "col": "bone",
+      "h": 300
+     },
+     {
+      "t": "bubble",
+      "x": 540,
+      "y": 110,
+      "text": "no sting?",
+      "kind": "think"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Before you decide, ask: if losing didn't sting, would I choose differently?",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "red",
+ "tint_x": 0.5
 }

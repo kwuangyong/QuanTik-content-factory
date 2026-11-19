@@ -14,7 +14,7 @@
  "episode_no": 28,
  "group": "poker",
  "concept": "Nash Equilibrium",
- "tag": "POKER THEORY #28",
+ "tag": "",
  "title": "The point where neither player wants to change",
  "hook": "At the poker table there's a point where neither player wants to change a thing.",
  "caption": "Nash equilibrium at the poker table: betting half the pot, the bettor bluffs {gto_bluff} and the caller must defend at least {mdf}. Step off it and you get punished.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
@@ -53,7 +53,7 @@
  },
  "cta": "Follow QuanTik for the math behind every decision",
  "thumb": {
-  "series": "POKER THEORY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "NOBODY",
@@ -61,51 +61,177 @@
    "CHANGE."
   ],
   "sub": "Defend at least {mdf}",
-  "image": "john-nash"
+  "no_number": true,
+  "stick": {
+   "set": "casino",
+   "items": [
+    {
+     "t": "man",
+     "x": 320,
+     "pose": "stand",
+     "col": "bone",
+     "h": 290
+    },
+    {
+     "t": "man",
+     "x": 760,
+     "pose": "stand",
+     "col": "pink",
+     "h": 290,
+     "facing": -1
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "At the poker table there's a point where neither player wants to change a thing.",
    "show": "Nobody wants to change.",
-   "kind": "duel"
+   "stick": {
+    "set": "casino",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "stand",
+      "col": "bone",
+      "h": 290
+     },
+     {
+      "t": "man",
+      "x": 760,
+      "pose": "stand",
+      "col": "pink",
+      "h": 290,
+      "facing": -1
+     },
+     {
+      "t": "prop",
+      "k": "scale",
+      "x": 540,
+      "y": 260,
+      "s": 200
+     }
+    ]
+   }
   },
   {
    "say": "John Nash proved it exists in every game like this: an equilibrium.",
    "show": "An equilibrium.",
-   "visual": "professor",
-   "image": "john-nash",
    "claims": [
     "nash"
-   ]
+   ],
+   "stick": {
+    "set": "lab",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "think",
+      "col": "bone",
+      "h": 290
+     },
+     {
+      "t": "prop",
+      "k": "bulb",
+      "x": 540,
+      "y": 110,
+      "s": 110,
+      "at": 0.3
+     }
+    ]
+   }
   },
   {
    "say": "You bet half the pot. The bettor should bluff {gto_bluff} of the time.",
    "show": "Bluff {gto_bluff}.",
-   "visual": "casino",
    "note": "Computed: bet {bet} into pot {pot}",
-   "real": true
+   "clip": "cards_deal"
   },
   {
    "say": "And the caller must call at least {mdf} of the time, or get bluffed off the pot.",
    "show": "Call at least:",
-   "kind": "duel",
    "big": "{mdf}",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "casino",
+    "items": [
+     {
+      "t": "man",
+      "x": 760,
+      "pose": "bet",
+      "col": "pink",
+      "h": 290,
+      "facing": -1
+     },
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 540,
+      "y": 470,
+      "s": 120
+     }
+    ]
+   }
   },
   {
    "say": "Step off that point, and the other player has a way to punish you.",
    "show": "Step off it, get punished.",
-   "visual": "storm"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "fall",
+      "col": "bone",
+      "h": 260,
+      "fall": [
+       0.3,
+       0.6
+      ]
+     },
+     {
+      "t": "man",
+      "x": 760,
+      "pose": "point",
+      "col": "pink",
+      "h": 290,
+      "facing": -1,
+      "face": "angry"
+     }
+    ]
+   }
   },
   {
    "say": "Equilibrium isn't winning big. It's having no holes left to exploit.",
    "show": "No holes to exploit.",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "shield",
+      "x": 540,
+      "y": 380,
+      "s": 280
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 80,
+      "text": "NO HOLES",
+      "col": "pink"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Equilibrium isn't winning big. It's having no holes left to exploit.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "pink",
+ "tint_x": 0.5
 }

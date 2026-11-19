@@ -14,7 +14,7 @@
  "episode_no": 38,
  "group": "psychology",
  "concept": "Confirmation Bias",
- "tag": "PSYCHOLOGY #38",
+ "tag": "",
  "title": "You're not looking for the truth",
  "hook": "You're not looking for the truth. You're looking for people who agree with you.",
  "caption": "You're not looking for the truth — you're looking for agreement. Confirmation bias: believe, search for support, ignore the rest, feel more certain. Ask what evidence would change your mind, then go find it.",
@@ -33,7 +33,7 @@
  "facts": {},
  "cta": "Follow QuanTik for the psychology behind your money",
  "thumb": {
-  "series": "PSYCHOLOGY FACTS",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "YOU WANT",
@@ -41,42 +41,194 @@
    "NOT TRUTH."
   ],
   "sub": "Confirmation bias",
-  "art": "scroll"
+  "no_number": true,
+  "stick": {
+   "set": "city",
+   "items": [
+    {
+     "t": "man",
+     "x": 540,
+     "pose": "phone",
+     "col": "bone",
+     "h": 300,
+     "face": "happy"
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "You're not looking for the truth. You're looking for people who agree with you.",
    "show": "You want agreement, not truth.",
-   "kind": "scroll"
+   "stick": {
+    "set": "city",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "phone",
+      "col": "bone",
+      "h": 300,
+      "face": "happy"
+     },
+     {
+      "t": "bubble",
+      "x": 820,
+      "y": 130,
+      "text": "I knew it!"
+     }
+    ]
+   }
   },
   {
    "say": "Confirmation bias: we notice, remember and believe what fits what we already think.",
    "show": "We see what fits.",
-   "visual": "telescope"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "stand",
+      "col": "bone",
+      "h": 280
+     },
+     {
+      "t": "prop",
+      "k": "magnifier",
+      "x": 520,
+      "y": 300,
+      "s": 140
+     },
+     {
+      "t": "prop",
+      "k": "news",
+      "x": 800,
+      "y": 300,
+      "s": 140
+     }
+    ]
+   }
   },
   {
    "say": "The loop: a belief, search for support, ignore the rest, feel even more certain.",
    "show": "Believe. Search. Ignore. Repeat.",
-   "kind": "wheel"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "walk",
+      "col": "purple",
+      "h": 260
+     },
+     {
+      "t": "arrow",
+      "from": [
+       200,
+       200
+      ],
+      "to": [
+       880,
+       200
+      ],
+      "col": "purple"
+     },
+     {
+      "t": "arrow",
+      "from": [
+       880,
+       260
+      ],
+      "to": [
+       200,
+       360
+      ],
+      "col": "purple",
+      "at": 0.4
+     }
+    ]
+   }
   },
   {
    "say": "Your feed spins that loop faster. Click on something, and it serves you more of it.",
    "show": "Your feed spins it faster.",
-   "visual": "news",
-   "real": true
+   "stick": {
+    "set": "city",
+    "items": [
+     {
+      "t": "man",
+      "x": 400,
+      "pose": "phone",
+      "col": "bone",
+      "h": 300,
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "news",
+      "x": 760,
+      "y": 200,
+      "s": 80,
+      "motion": "rain",
+      "n": 8,
+      "spread": 400
+     }
+    ]
+   }
   },
   {
    "say": "More information doesn't make you more right. It just makes you more sure.",
    "show": "More sure, not more right.",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "brain",
+      "x": 540,
+      "y": 320,
+      "s": 220,
+      "motion": "pulse"
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 80,
+      "text": "MORE SURE ≠ MORE RIGHT",
+      "col": "purple"
+     }
+    ]
+   }
   },
   {
    "say": "Before a big decision, ask what evidence would change your mind. Then go find it.",
    "show": "What would change your mind?",
-   "kind": "walkaway"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "think",
+      "col": "bone",
+      "h": 300
+     },
+     {
+      "t": "prop",
+      "k": "magnifier",
+      "x": 780,
+      "y": 260,
+      "s": 120
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Before a big decision, ask what evidence would change your mind. Then go find it.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "purple",
+ "tint_x": 0.5
 }

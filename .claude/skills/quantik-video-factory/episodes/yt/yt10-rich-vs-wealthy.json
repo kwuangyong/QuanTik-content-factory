@@ -30,7 +30,7 @@
  "episode_no": 10,
  "group": "dark-truth",
  "concept": "Rich vs Wealthy",
- "tag": "DARK TRUTH #10",
+ "tag": "",
  "title": "Rich and wealthy are not the same people",
  "hook": "The person who looks rich is usually not the one who is.",
  "caption": "The person who looks rich usually isn't. Rich = income. Wealthy = what's left when income stops. Keeping {w_contrib} vs {r_contrib} a year at {w_rate}: {gap_ratio}x more wealth after {years} years.\n\n(Simulation; illustration only.)",
@@ -57,7 +57,7 @@
  "facts": {},
  "cta": "Follow QuanTik for more dark truths about money",
  "thumb": {
-  "series": "THE DARK TRUTH OF MONEY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "LOOKING RICH",
@@ -65,48 +65,209 @@
    "WEALTHY."
   ],
   "sub": "{gap_ratio}x more wealth, smaller paycheck",
+  "no_number": true,
   "image": "luxury-car"
  },
  "scenes": [
   {
    "say": "The person who looks rich is usually not the one who is.",
    "show": "Looking rich isn't being rich.",
-   "visual": "money_burn",
-   "image": "luxury-car"
+   "image": "luxury-car",
+   "visual": "money_burn"
   },
   {
    "say": "Rich is income. Wealthy is what's still there when the income stops.",
    "show": "Rich vs wealthy.",
-   "kind": "compare"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "cheer",
+      "col": "gold",
+      "h": 280,
+      "tag": "RICH"
+     },
+     {
+      "t": "prop",
+      "k": "car",
+      "x": 300,
+      "y": 330,
+      "s": 120,
+      "at": 0.2
+     },
+     {
+      "t": "man",
+      "x": 760,
+      "pose": "stand",
+      "col": "green",
+      "h": 260,
+      "tag": "WEALTHY"
+     },
+     {
+      "t": "prop",
+      "k": "piggy",
+      "x": 760,
+      "y": 330,
+      "s": 120,
+      "at": 0.3
+     }
+    ]
+   }
   },
   {
    "say": "High earner keeps {r_contrib} a year. Average earner keeps {w_contrib}. Same return, {w_rate}.",
    "show": "Who keeps more?",
-   "kind": "duel",
-   "note": "Simulation: {w_rate} return, {years} years"
+   "note": "Simulation: {w_rate} return, {years} years",
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "stand",
+      "col": "red",
+      "h": 280
+     },
+     {
+      "t": "prop",
+      "k": "bag",
+      "x": 300,
+      "y": 330,
+      "s": 90,
+      "motion": "pile",
+      "n": 4,
+      "dy": -40
+     },
+     {
+      "t": "man",
+      "x": 760,
+      "pose": "stand",
+      "col": "green",
+      "h": 260
+     },
+     {
+      "t": "prop",
+      "k": "cash",
+      "x": 760,
+      "y": 360,
+      "s": 90,
+      "motion": "pile",
+      "n": 6,
+      "dy": -35
+     }
+    ]
+   }
   },
   {
    "say": "After {years} years, the average earner owns {gap_ratio} times more.",
    "show": "{years} years later:",
-   "kind": "walkaway",
    "big": "{gap_ratio}x",
    "big_label": "wealth of the 'average' earner",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "bank",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "cheer",
+      "col": "green",
+      "h": 300,
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "cash",
+      "x": 300,
+      "y": 400,
+      "s": 100,
+      "motion": "pile",
+      "n": 6,
+      "dy": -40
+     },
+     {
+      "t": "prop",
+      "k": "cash",
+      "x": 780,
+      "y": 400,
+      "s": 100,
+      "motion": "pile",
+      "n": 6,
+      "dy": -40
+     }
+    ]
+   }
   },
   {
    "say": "The car and the house are what people see. Real wealth is mostly invisible.",
    "show": "Real wealth is invisible.",
-   "kind": "scroll"
+   "stick": {
+    "set": "street",
+    "items": [
+     {
+      "t": "prop",
+      "k": "house",
+      "x": 300,
+      "y": 500,
+      "s": 260
+     },
+     {
+      "t": "prop",
+      "k": "car",
+      "x": 700,
+      "y": 560,
+      "s": 220
+     },
+     {
+      "t": "prop",
+      "k": "eye",
+      "x": 540,
+      "y": 160,
+      "s": 160,
+      "motion": "pulse"
+     }
+    ]
+   }
   },
   {
    "say": "Measure wealth in months you could live without working, not in things you own.",
    "show": "Measure it in months.",
-   "kind": "alone"
+   "stick": {
+    "set": "home",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "sit",
+      "col": "green",
+      "h": 280,
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "calendar",
+      "x": 760,
+      "y": 300,
+      "s": 180
+     },
+     {
+      "t": "label",
+      "x": 760,
+      "y": 120,
+      "text": "MONTHS OF FREEDOM",
+      "col": "green"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Measure wealth in months you could live without working, not in things you own.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "gold",
+ "tint_x": 0.6
 }

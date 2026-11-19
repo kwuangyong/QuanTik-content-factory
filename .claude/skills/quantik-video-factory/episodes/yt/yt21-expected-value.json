@@ -30,7 +30,7 @@
  "episode_no": 21,
  "group": "poker",
  "concept": "Expected Value (EV)",
- "tag": "POKER THEORY #21",
+ "tag": "",
  "title": "You lost the hand. You still made the right call.",
  "hook": "You lost the hand. You still made the right call. Deal with it.",
  "caption": "You lost the hand — you still made the right call. Win {a_abs0} with probability {a_p0}, lose {a_abs1} with probability {a_p1}: EV +{a_ev}. Repeated {trials} times, it still lost {sim_losses} and finished up {sim_total}.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
@@ -56,7 +56,7 @@
  "facts": {},
  "cta": "Follow QuanTik for the math behind every decision",
  "thumb": {
-  "series": "POKER THEORY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "YOU LOST.",
@@ -64,58 +64,163 @@
    "RIGHT."
   ],
   "sub": "EV +{a_ev}, lost {sim_losses} of {trials}",
+  "no_number": true,
   "image": "poker-table"
  },
  "scenes": [
   {
    "say": "You lost the hand. You still made the right call. Deal with it.",
    "show": "You lost. You were right.",
-   "visual": "casino",
-   "real": true
+   "stick": {
+    "set": "casino",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "slump",
+      "col": "bone",
+      "h": 290,
+      "face": "sad"
+     },
+     {
+      "t": "prop",
+      "k": "card",
+      "x": 620,
+      "y": 470,
+      "s": 110,
+      "n": 2,
+      "dx": 90
+     },
+     {
+      "t": "bubble",
+      "x": 320,
+      "y": 120,
+      "text": "still right"
+     }
+    ]
+   }
   },
   {
    "say": "Pros don't grade the result. They grade the decision, with expected value: EV.",
    "show": "Grade the decision.",
-   "visual": "casino",
-   "image": "poker-table"
+   "image": "poker-table",
+   "clip": "cards_deal"
   },
   {
    "say": "A bet that wins {a_abs0} with probability {a_p0}, loses {a_abs1} with probability {a_p1}.",
    "show": "Win {a_abs0} or lose {a_abs1}.",
-   "kind": "duel",
-   "note": "Simulation: {trials} repeats of the same bet"
+   "note": "Simulation: {trials} repeats of the same bet",
+   "kind": "duel"
   },
   {
    "say": "EV per bet: plus {a_ev}.",
    "show": "EV per bet:",
-   "visual": "coin",
    "big": "+{a_ev}",
    "claims": [
     "sim"
-   ]
+   ],
+   "clip": "poker_chips"
   },
   {
    "say": "Repeat it {trials} times. It still loses {sim_losses} of them.",
    "show": "It still loses:",
-   "visual": "coin_crowd",
    "big": "{sim_losses}/{trials}",
    "big_label": "and finishes up {sim_total}",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "crowd",
+      "n": 10,
+      "hi": [
+       1,
+       4,
+       6,
+       7,
+       9
+      ],
+      "x0": 100,
+      "gap": 95,
+      "h": 160,
+      "hicol": "green",
+      "face": "happy"
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 110,
+      "text": "SAME DECISION, AGAIN AND AGAIN",
+      "col": "green",
+      "size": 34
+     }
+    ]
+   }
   },
   {
    "say": "Short term, results are luck. Long term, only the quality of the decision is left.",
    "show": "Long term, only decisions remain.",
-   "visual": "drunk_walk"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 260,
+      "pose": "walk",
+      "col": "bone",
+      "h": 260,
+      "move": [
+       820,
+       0.0,
+       0.9
+      ]
+     },
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 200,
+      "y": 560,
+      "s": 80,
+      "motion": "pile",
+      "n": 6,
+      "dx": 110,
+      "until": 0.9
+     }
+    ]
+   }
   },
   {
    "say": "Stop asking 'did it work?'. Ask 'would I make it a thousand times?'",
    "show": "Would you make it a thousand times?",
-   "kind": "alone"
+   "stick": {
+    "set": "casino",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "think",
+      "col": "bone",
+      "h": 300
+     },
+     {
+      "t": "prop",
+      "k": "card",
+      "x": 300,
+      "y": 200,
+      "s": 70,
+      "motion": "rain",
+      "n": 12,
+      "spread": 800
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Stop asking 'did it work?'. Ask 'would I make it a thousand times?'",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "green",
+ "tint_x": 0.5
 }

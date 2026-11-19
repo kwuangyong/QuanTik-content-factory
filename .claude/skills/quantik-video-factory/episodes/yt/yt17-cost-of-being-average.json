@@ -14,7 +14,7 @@
  "episode_no": 17,
  "group": "dark-truth",
  "concept": "The Cost of Being Average",
- "tag": "DARK TRUTH #17",
+ "tag": "",
  "title": "Average doesn't get an average share",
  "hook": "Being average used to be safe. Now it's the most expensive place to stand.",
  "caption": "Average doesn't get an average share. On a power law, the top fifth takes about {top20} and the bottom half shares {bottom50}. Be hard to replace at one thing.\n\n(Simulation: Pareto alpha {alpha}. Idea: Pareto 1896.)",
@@ -54,7 +54,7 @@
  },
  "cta": "Follow QuanTik for more dark truths about money",
  "thumb": {
-  "series": "THE DARK TRUTH OF MONEY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "AVERAGE",
@@ -62,64 +62,212 @@
    "NOTHING."
   ],
   "sub": "Top fifth takes {top20}",
-  "visual": "banker"
+  "no_number": true,
+  "stick": {
+   "set": "stage",
+   "items": [
+    {
+     "t": "prop",
+     "k": "spotlight",
+     "x": 540,
+     "y": 0,
+     "s": 400
+    },
+    {
+     "t": "man",
+     "x": 540,
+     "pose": "hold",
+     "col": "gold",
+     "h": 300,
+     "hold": "trophy",
+     "face": "happy"
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "Being average used to be safe. Now it's the most expensive place to stand.",
    "show": "Average is expensive.",
-   "kind": "commute"
+   "stick": {
+    "set": "crowdwall",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "stand",
+      "col": "muted",
+      "h": 260,
+      "face": "sad"
+     }
+    ]
+   }
   },
   {
    "say": "Income, views, sales: they don't split evenly. They follow a power law.",
    "show": "They follow a power law.",
-   "visual": "professor",
-   "image": "vilfredo-pareto",
    "claims": [
     "pareto"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "crowd",
+      "n": 10,
+      "hi": [
+       0
+      ],
+      "x0": 100,
+      "gap": 95,
+      "h": 160,
+      "hicol": "gold"
+     },
+     {
+      "t": "prop",
+      "k": "crown",
+      "x": 100,
+      "y": 420,
+      "s": 90,
+      "at": 0.3
+     }
+    ]
+   }
   },
   {
    "say": "Simulate {n} people on a power law.",
    "show": "{n} people.",
-   "kind": "crowd",
    "note": "Simulation: Pareto distribution, alpha {alpha}",
-   "crowd": {
-    "n": "n",
-    "k": "n"
-   }
+   "visual": "coin_crowd"
   },
   {
    "say": "The top fifth takes about {top20} of everything.",
    "show": "Top fifth takes:",
-   "visual": "banker",
    "big": "{top20}",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "stage",
+    "items": [
+     {
+      "t": "prop",
+      "k": "spotlight",
+      "x": 300,
+      "y": 0,
+      "s": 300
+     },
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "hold",
+      "col": "gold",
+      "h": 290,
+      "hold": "trophy",
+      "face": "happy"
+     },
+     {
+      "t": "crowd",
+      "n": 5,
+      "hi": [],
+      "x0": 560,
+      "gap": 100,
+      "h": 140
+     }
+    ]
+   }
   },
   {
    "say": "The bottom half shares {bottom50}.",
    "show": "Bottom half shares:",
-   "kind": "alone",
    "big": "{bottom50}",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "crowd",
+      "n": 10,
+      "hi": [],
+      "x0": 100,
+      "gap": 95,
+      "h": 160,
+      "pose": "slump"
+     },
+     {
+      "t": "prop",
+      "k": "coin",
+      "x": 540,
+      "y": 300,
+      "s": 50
+     }
+    ]
+   }
   },
   {
    "say": "When rewards pile up at the top, a small edge in skill becomes a huge edge in outcome.",
    "show": "Small edge, huge outcome.",
-   "visual": "race",
-   "real": true
+   "stick": {
+    "set": "street",
+    "items": [
+     {
+      "t": "man",
+      "x": 200,
+      "pose": "run",
+      "col": "orange",
+      "h": 260,
+      "move": [
+       900,
+       0.0,
+       0.7
+      ]
+     },
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "run",
+      "col": "muted",
+      "h": 260,
+      "move": [
+       700,
+       0.0,
+       0.9
+      ]
+     }
+    ]
+   }
   },
   {
    "say": "You don't need to be the best at everything. You need to be hard to replace at one thing.",
    "show": "Be hard to replace.",
-   "kind": "walkaway"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "hold",
+      "col": "orange",
+      "h": 300,
+      "hold": "bulb",
+      "face": "happy"
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 80,
+      "text": "HARD TO REPLACE",
+      "col": "orange"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "You don't need to be the best at everything. You need to be hard to replace at one thing.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "orange",
+ "tint_x": 0.5
 }

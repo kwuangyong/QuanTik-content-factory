@@ -42,7 +42,7 @@
  "episode_no": 58,
  "group": "game-theory",
  "concept": "Zero-Sum Game",
- "tag": "GAME THEORY #58",
+ "tag": "",
  "title": "For you to win, someone has to lose?",
  "hook": "For you to win, someone has to lose? Only in one specific kind of game.",
  "caption": "In a zero-sum game your gain is their loss and the best strategy is pure randomness ({mix_row} each way). But most of life isn't zero-sum.",
@@ -68,7 +68,7 @@
  "facts": {},
  "cta": "Follow QuanTik for the game theory of real life",
  "thumb": {
-  "series": "GAME THEORY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "SOMEONE",
@@ -76,49 +76,101 @@
    "LOSE?"
   ],
   "sub": "Only in zero-sum games",
+  "no_number": true,
   "image": "chess-board"
  },
  "scenes": [
   {
    "say": "For you to win, someone has to lose? Only in one specific kind of game.",
    "show": "Someone has to lose?",
-   "kind": "duel"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "cheer",
+      "col": "gold",
+      "h": 280,
+      "face": "happy"
+     },
+     {
+      "t": "man",
+      "x": 760,
+      "pose": "cry",
+      "col": "bone",
+      "h": 270,
+      "facing": -1,
+      "face": "cry"
+     }
+    ]
+   }
   },
   {
    "say": "A zero-sum game: what you gain is exactly what they lose. No new value is created.",
    "show": "Your gain = their loss.",
-   "visual": "board",
-   "image": "chess-board"
+   "image": "chess-board",
+   "visual": "board"
   },
   {
    "say": "Matching pennies: match, you win one. Don't match, you lose one.",
    "show": "Match or don't.",
-   "visual": "coin",
    "note": "Illustrative payoffs; code solves the mixed equilibrium",
-   "real": true
+   "clip": "coin_flip2"
   },
   {
    "say": "No fixed choice is safe. The best strategy: pure randomness, {mix_row} each way.",
    "show": "Best strategy:",
-   "kind": "scale",
    "big": "{mix_row}",
    "big_label": "each side — pure randomness",
    "claims": [
     "sim"
-   ]
+   ],
+   "kind": "scale"
   },
   {
    "say": "But most of life isn't zero-sum. Trade, cooperation, learning: they all create new value.",
    "show": "Most of life isn't zero-sum.",
-   "kind": "walkaway"
+   "clip": "deal"
   },
   {
    "say": "Before treating someone as an opponent, ask if you could both come out ahead.",
    "show": "Could you both win?",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "wave",
+      "col": "bone",
+      "h": 280,
+      "face": "happy"
+     },
+     {
+      "t": "man",
+      "x": 760,
+      "pose": "wave",
+      "col": "gold",
+      "h": 280,
+      "facing": -1,
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "heart",
+      "x": 540,
+      "y": 200,
+      "s": 100,
+      "at": 0.3
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Before treating someone as an opponent, ask if you could both come out ahead.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "gold",
+ "tint_x": 0.5
 }

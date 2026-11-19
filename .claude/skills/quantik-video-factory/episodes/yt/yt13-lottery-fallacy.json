@@ -15,7 +15,7 @@
  "episode_no": 13,
  "group": "dark-truth",
  "concept": "The Lottery Fallacy",
- "tag": "DARK TRUTH #13",
+ "tag": "",
  "title": "Buy a ticket every day. Here's how long it takes.",
  "hook": "Buy a lottery ticket every single day. How long until you win?",
  "caption": "Pick {pick} of {pool}: {combos} possible tickets. One ticket a day, average wait {years} years. Hope isn't a strategy — it's a business model.\n\n(Odds computed in code for a pick-{pick}-of-{pool} game.)",
@@ -55,7 +55,7 @@
  },
  "cta": "Follow QuanTik for more dark truths about money",
  "thumb": {
-  "series": "THE DARK TRUTH OF MONEY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "HOPE IS A",
@@ -63,55 +63,161 @@
    "MODEL."
   ],
   "sub": "{years} years to win, one ticket a day",
+  "no_number": true,
   "image": "lottery-tickets"
  },
  "scenes": [
   {
    "say": "Buy a lottery ticket every single day. How long until you win?",
    "show": "One ticket a day.",
-   "visual": "coin",
-   "image": "lottery-tickets"
+   "image": "lottery-tickets",
+   "clip": "slots"
   },
   {
    "say": "Pick {pick} numbers out of {pool}. Sounds doable.",
    "show": "Pick {pick} of {pool}.",
-   "kind": "doors",
    "claims": [
     "rules"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "ticket",
+      "x": 540,
+      "y": 320,
+      "s": 300,
+      "motion": "pulse"
+     },
+     {
+      "t": "man",
+      "x": 860,
+      "pose": "think",
+      "col": "bone",
+      "h": 260
+     }
+    ]
+   }
   },
   {
    "say": "There are {combos} possible tickets.",
    "show": "Possible tickets:",
-   "visual": "coin_crowd",
    "big": "{combos}",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "ticket",
+      "x": 540,
+      "y": 300,
+      "s": 50,
+      "motion": "rain",
+      "n": 40,
+      "spread": 1000
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 560,
+      "text": "EVERY POSSIBLE TICKET",
+      "col": "gold",
+      "at": 0.3
+     }
+    ]
+   }
   },
   {
    "say": "One ticket a day, and the average wait is {years} years.",
    "show": "Average wait:",
-   "kind": "alone",
    "big": "{years} years",
    "big_label": "one ticket every day",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "kneel",
+      "col": "bone",
+      "h": 280,
+      "face": "sad",
+      "grow": 0
+     },
+     {
+      "t": "prop",
+      "k": "calendar",
+      "x": 700,
+      "y": 300,
+      "s": 160,
+      "motion": "shake"
+     },
+     {
+      "t": "prop",
+      "k": "hourglass",
+      "x": 900,
+      "y": 480,
+      "s": 140
+     }
+    ]
+   }
   },
   {
    "say": "The trap: every ticket feels close to changing your life. The odds never move.",
    "show": "It feels close. It isn't.",
-   "visual": "roulette",
-   "image": "slot-machines"
+   "image": "slot-machines",
+   "clip": "slots"
   },
   {
    "say": "Hope is not a strategy. It's a business model, and you're the revenue.",
    "show": "You're the revenue.",
-   "kind": "alone"
+   "stick": {
+    "set": "stage",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "hold",
+      "col": "bone",
+      "h": 270,
+      "hold": "ticket",
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "cash",
+      "x": 760,
+      "y": 400,
+      "s": 100,
+      "motion": "fly",
+      "to": [
+       860,
+       120
+      ],
+      "n": 4
+     },
+     {
+      "t": "label",
+      "x": 760,
+      "y": 80,
+      "text": "THE HOUSE",
+      "col": "red",
+      "at": 0.4
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Hope is not a strategy. It's a business model, and you're the revenue.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "gold",
+ "tint_x": 0.4
 }

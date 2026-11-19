@@ -13,7 +13,7 @@
  "episode_no": 71,
  "group": "quant-mindset",
  "concept": "Monty Hall Problem",
- "tag": "QUANT MINDSET #71",
+ "tag": "",
  "title": "Switch doors. Your gut is wrong.",
  "hook": "Three doors, one car. The host opens an empty one. Your gut says it's fifty-fifty. Your gut is wrong.",
  "caption": "Switch doors — your gut is wrong. In {games} simulated Monty Hall games, staying won {stay_win} and switching won {switch_win}.",
@@ -52,7 +52,7 @@
  },
  "cta": "Follow QuanTik to think like a quant",
  "thumb": {
-  "series": "QUANT MINDSET",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "SWITCH.",
@@ -60,7 +60,21 @@
    "IS WRONG."
   ],
   "sub": "Stay {stay_win} · Switch {switch_win}",
-  "art": "doors"
+  "no_number": true,
+  "stick": {
+   "set": "void",
+   "items": [
+    {
+     "t": "prop",
+     "k": "door",
+     "x": 220,
+     "y": 470,
+     "s": 220,
+     "n": 3,
+     "dx": 320
+    }
+   ]
+  }
  },
  "scenes": [
   {
@@ -71,36 +85,143 @@
   {
    "say": "This puzzle made mathematicians write angry letters. It's named after game show host Monty Hall.",
    "show": "Named after Monty Hall.",
-   "image": "monty-hall",
    "claims": [
     "selvin"
    ],
-   "kind": "duel"
+   "stick": {
+    "set": "stage",
+    "items": [
+     {
+      "t": "prop",
+      "k": "spotlight",
+      "x": 540,
+      "y": 0,
+      "s": 400
+     },
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "point",
+      "col": "warm",
+      "h": 300,
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "megaphone",
+      "x": 720,
+      "y": 300,
+      "s": 120
+     }
+    ]
+   }
   },
   {
    "say": "Code plays {games} games.",
    "show": "{games} games.",
-   "kind": "doors",
-   "note": "Simulation: {games} random games"
+   "note": "Simulation: {games} random games",
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "door",
+      "x": 220,
+      "y": 470,
+      "s": 220,
+      "n": 3,
+      "dx": 320
+     },
+     {
+      "t": "crowd",
+      "n": 10,
+      "hi": [],
+      "x0": 100,
+      "gap": 95,
+      "h": 110,
+      "y": 648
+     }
+    ]
+   }
   },
   {
    "say": "Always staying wins {stay_win}.",
    "show": "Stay:",
-   "kind": "alone",
    "big": "{stay_win}",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "door",
+      "x": 300,
+      "y": 470,
+      "s": 260
+     },
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "slump",
+      "col": "bone",
+      "h": 200,
+      "face": "sad"
+     },
+     {
+      "t": "label",
+      "x": 300,
+      "y": 160,
+      "text": "STAY",
+      "col": "red"
+     }
+    ]
+   }
   },
   {
    "say": "Always switching wins {switch_win}.",
    "show": "Switch:",
-   "kind": "walkaway",
    "big": "{switch_win}",
    "big_label": "twice as often",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "door",
+      "x": 760,
+      "y": 470,
+      "s": 260
+     },
+     {
+      "t": "prop",
+      "k": "car",
+      "x": 760,
+      "y": 560,
+      "s": 160,
+      "at": 0.3
+     },
+     {
+      "t": "man",
+      "x": 560,
+      "pose": "cheer",
+      "col": "green",
+      "h": 240,
+      "face": "happy"
+     },
+     {
+      "t": "label",
+      "x": 760,
+      "y": 160,
+      "text": "SWITCH",
+      "col": "green"
+     }
+    ]
+   }
   },
   {
    "say": "Your first pick had a one-in-three chance. The host knows where the car is, so the other two-thirds pile onto the last door.",
@@ -110,10 +231,31 @@
   {
    "say": "When someone who knows more gives you a hint, the hint has a price. Update.",
    "show": "Update on new information.",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "think",
+      "col": "bone",
+      "h": 300
+     },
+     {
+      "t": "prop",
+      "k": "bulb",
+      "x": 540,
+      "y": 120,
+      "s": 100,
+      "at": 0.3
+     }
+    ]
+   }
   }
  ],
  "takeaway": "When someone who knows more gives you a hint, the hint has a price. Update.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "warm",
+ "tint_x": 0.5
 }

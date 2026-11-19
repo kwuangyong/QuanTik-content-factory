@@ -14,7 +14,7 @@
  "episode_no": 12,
  "group": "dark-truth",
  "concept": "Survivorship Bias",
- "tag": "DARK TRUTH #12",
+ "tag": "",
  "title": "The guru's secret might be pure luck",
  "hook": "That millionaire's secret? Could be a coin flip.",
  "caption": "That millionaire's secret could be a coin flip. {n} people flip a coin; after {rounds} rounds exactly {survivors} never lost — by pure luck. Count the losers before copying the winner.\n\n(Simulation. Wald story: Mangel & Samaniego 1984, JASA.)",
@@ -53,7 +53,7 @@
  },
  "cta": "Follow QuanTik for more dark truths about money",
  "thumb": {
-  "series": "THE DARK TRUTH OF MONEY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "THE GURU",
@@ -61,67 +61,200 @@
    "LUCKY."
   ],
   "sub": "{survivors} of {n} unbeaten by pure luck",
-  "visual": "coin"
+  "no_number": true,
+  "stick": {
+   "set": "stage",
+   "items": [
+    {
+     "t": "prop",
+     "k": "spotlight",
+     "x": 540,
+     "y": 0,
+     "s": 400
+    },
+    {
+     "t": "man",
+     "x": 540,
+     "pose": "cheer",
+     "col": "gold",
+     "h": 300,
+     "face": "happy"
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "That millionaire's secret? Could be a coin flip.",
    "show": "Could be a coin flip.",
-   "visual": "coin",
-   "real": true
+   "clip": "coin_flip"
   },
   {
    "say": "We study the winners and forget the graveyard of people who did the exact same thing.",
    "show": "Nobody films the graveyard.",
-   "kind": "crowd",
-   "crowd": {
-    "n": "n",
-    "k": "survivors"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "crowd",
+      "n": 12,
+      "hi": [
+       7
+      ],
+      "x0": 90,
+      "gap": 82,
+      "h": 170,
+      "hicol": "gold"
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 120,
+      "text": "WE ONLY SEE ONE",
+      "col": "gold",
+      "at": 0.3
+     }
+    ]
    }
   },
   {
    "say": "In World War Two, Abraham Wald said: armor the planes where the returning ones weren't hit.",
    "show": "Armor where they weren't hit.",
-   "visual": "news",
-   "image": "abraham-wald",
    "claims": [
     "wald"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "plane",
+      "x": 540,
+      "y": 330,
+      "s": 380
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 560,
+      "text": "ARMOR WHERE THERE ARE NO HOLES",
+      "col": "red",
+      "size": 34,
+      "at": 0.4
+     }
+    ]
+   }
   },
   {
    "say": "{n} people flip a coin. Heads, you stay in. After {rounds} rounds…",
    "show": "{n} people. {rounds} flips.",
-   "kind": "crowd",
    "note": "Simulation: {n} fair coin flippers",
    "crowd": {
     "n": "n",
     "k": "after3"
-   }
+   },
+   "kind": "crowd"
   },
   {
    "say": "…exactly {survivors} never lost. Pure luck.",
    "show": "Unbeaten:",
-   "kind": "alone",
    "big": "{survivors}",
    "big_label": "out of {n}, by pure luck",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "stage",
+    "items": [
+     {
+      "t": "prop",
+      "k": "spotlight",
+      "x": 540,
+      "y": 0,
+      "s": 400
+     },
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "cheer",
+      "col": "gold",
+      "h": 300,
+      "face": "happy"
+     }
+    ]
+   }
   },
   {
    "say": "That person could write a book on the secret of coin flipping. Millions would buy it.",
    "show": "And write a book about it.",
-   "visual": "news",
-   "real": true
+   "stick": {
+    "set": "stage",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "hold",
+      "col": "gold",
+      "h": 300,
+      "hold": "news",
+      "face": "happy"
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 80,
+      "text": "MY SECRET",
+      "col": "gold"
+     },
+     {
+      "t": "crowd",
+      "n": 6,
+      "hi": [],
+      "x0": 170,
+      "gap": 150,
+      "h": 140,
+      "y": 648
+     }
+    ]
+   }
   },
   {
    "say": "Before you copy a winner, ask how many did the same thing and lost.",
    "show": "Count the losers first.",
-   "kind": "walkaway"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "think",
+      "col": "bone",
+      "h": 290
+     },
+     {
+      "t": "prop",
+      "k": "magnifier",
+      "x": 460,
+      "y": 300,
+      "s": 120
+     },
+     {
+      "t": "crowd",
+      "n": 8,
+      "hi": [],
+      "x0": 600,
+      "gap": 60,
+      "h": 120,
+      "pose": "fall"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Before you copy a winner, ask how many did the same thing and lost.",
  "seed": 4,
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "gold",
+ "tint_x": 0.5
 }

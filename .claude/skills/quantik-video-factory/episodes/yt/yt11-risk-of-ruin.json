@@ -33,7 +33,7 @@
  "episode_no": 11,
  "group": "dark-truth",
  "concept": "Risk of Ruin",
- "tag": "DARK TRUTH #11",
+ "tag": "",
  "title": "You can have the edge and still lose everything",
  "hook": "You can be right every time on average, and still lose everything.",
  "caption": "You can have a real edge and still lose everything. {players} players, win chance {a_p}, edge {a_edge}: betting {a_stake} of the stack → {a_ruin} broke; betting {b_stake} → {b_ruin} wiped out (below 1% of the start).\n\n(Simulation; illustration only.)",
@@ -61,7 +61,7 @@
  "facts": {},
  "cta": "Follow QuanTik for more dark truths about money",
  "thumb": {
-  "series": "THE DARK TRUTH OF MONEY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "THE EDGE",
@@ -69,58 +69,195 @@
    "SAVE YOU."
   ],
   "sub": "Same edge: {a_ruin} vs {b_ruin} wiped out",
-  "visual": "casino"
+  "no_number": true,
+  "stick": {
+   "set": "void",
+   "items": [
+    {
+     "t": "prop",
+     "k": "cliff",
+     "x": 300,
+     "y": 470,
+     "s": 300
+    },
+    {
+     "t": "man",
+     "x": 330,
+     "pose": "fall",
+     "col": "red",
+     "h": 260,
+     "fall": [
+      0,
+      0.1
+     ],
+     "y": 470,
+     "face": "shock"
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "You can be right every time on average, and still lose everything.",
    "show": "Right on average. Still broke.",
-   "visual": "casino",
-   "real": true
+   "clip": "casino_table"
   },
   {
    "say": "Risk of ruin isn't about losing once. It's about betting too much on once.",
    "show": "Betting too much on once.",
-   "kind": "duel"
+   "stick": {
+    "set": "casino",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "bet",
+      "col": "bone",
+      "h": 290
+     },
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 600,
+      "y": 470,
+      "s": 160,
+      "motion": "fly",
+      "to": [
+       760,
+       470
+      ]
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 80,
+      "text": "ALL OF IT?",
+      "col": "red",
+      "at": 0.3
+     }
+    ]
+   }
   },
   {
    "say": "{players} players. A game they win {a_p} of the time. A real edge of {a_edge}.",
    "show": "A real edge.",
-   "kind": "duel",
-   "note": "Simulation: {players} players, {rounds} rounds, win chance {a_p}"
+   "note": "Simulation: {players} players, {rounds} rounds, win chance {a_p}",
+   "kind": "duel"
   },
   {
    "say": "Bet {a_stake} of your stack each time: {a_ruin} go broke.",
    "show": "Bet {a_stake}:",
-   "kind": "walkaway",
    "big": "{a_ruin}",
    "big_label": "went broke",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "casino",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "stand",
+      "col": "green",
+      "h": 290,
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 300,
+      "y": 480,
+      "s": 110
+     },
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 780,
+      "y": 480,
+      "s": 110
+     }
+    ]
+   }
   },
   {
    "say": "Bet {b_stake}: {b_ruin} are wiped out.",
    "show": "Bet {b_stake}:",
-   "visual": "money_burn",
    "big": "{b_ruin}",
    "big_label": "wiped out — with the same edge",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "cliff",
+      "x": 300,
+      "y": 470,
+      "s": 300
+     },
+     {
+      "t": "man",
+      "x": 330,
+      "pose": "fall",
+      "col": "red",
+      "h": 260,
+      "fall": [
+       0.3,
+       0.7
+      ],
+      "y": 470,
+      "face": "shock"
+     },
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 700,
+      "y": 300,
+      "s": 80,
+      "motion": "rain",
+      "n": 8,
+      "spread": 500
+     }
+    ]
+   }
   },
   {
    "say": "Lose half and you need double just to get back. The math of losses isn't symmetric.",
    "show": "Losses aren't symmetric.",
-   "visual": "rollercoaster"
+   "clip": "rollercoaster"
   },
   {
    "say": "Survive first. Optimize later.",
    "show": "Survive first. Optimize later.",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "shield",
+      "x": 540,
+      "y": 380,
+      "s": 280,
+      "motion": "pulse"
+     },
+     {
+      "t": "man",
+      "x": 820,
+      "pose": "stand",
+      "col": "bone",
+      "h": 260,
+      "face": "happy"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Survive first. Optimize later.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "red",
+ "tint_x": 0.5
 }

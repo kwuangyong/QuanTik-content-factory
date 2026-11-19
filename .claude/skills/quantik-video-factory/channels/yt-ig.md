@@ -20,6 +20,9 @@ thích mô hình quant và video hướng dẫn sản phẩm QuanTik (tiếng Vi
 | Ngôn ngữ | Tiếng Anh toàn bộ: lời, phụ đề, chữ trên hình, caption, thẻ cuối, câu miễn trừ | `"lang": "en"` |
 | Hình | **Không chart.** Style `dark-story`: hoạt hoạ phẳng tông tối, một màu đỏ cảnh báo, film grain | `styles/dark-story/template.py` |
 | B-roll ảnh thật | Ảnh Wikimedia Commons giấy phép tự do, **ghi tác giả + giấy phép ngay trên khung**. Có ảnh thật thì dùng, không có thì vẽ tay | `"image"` (sổ ảnh `knowledge/images/ledger.json`), `"visual"` + `"real": true` (B-roll theo tag) |
+| Không đánh số, không nhãn thể loại | Video và thumbnail không có chip "DARK TRUTH #NN" hay badge series; file giao đặt theo tên chủ đề (`package_yt.py --plain`) | `"tag": ""`, `thumb.series: ""` |
+| Stickman khớp lời | Mỗi cảnh một sân khấu riêng (`"stick"`): bối cảnh, nhân vật stickman (tư thế, nét mặt, di chuyển), đạo cụ, bong bóng thoại; mỗi tập có màu nhấn riêng (`"accent"`) để không tập nào giống tập nào | `pipeline/stickman.py` |
+| B-roll Pexels | Clip video trong `brand/assets/broll/manifest.json` (`"clip": "<key>"`), ghi công trên khung và trong caption. Thêm clip mới cần `api.pexels.com` (đang bị chặn trong môi trường cloud) | `pipeline/clips.py` |
 | Hoạt hoạ vẽ tay | Cảnh dark-story (`office`, `commute`, `scroll`, `compare`, `spend`, `wheel`, `crowd`, `walkaway`, `alone`, `doors`, `duel`, `scale`) + cảnh `illustrate.py` (casino, roulette, coin, iceberg, storm, money_burn…) | `"kind"`, `"visual"` |
 | Số | Đếm lên thật to (`"big"`) hoặc đám đông n người sáng k người (`"crowd"`); số từ mô phỏng chạy thật hoặc nguồn trong sổ nguồn | `"sim"` → `pipeline/concept_sims.py`; `facts` + `claims` |
 | Hook | Ragebait, nổ ngay câu đầu, **đúng sự thật**, không hứa lãi | cảnh đầu `scenes[0]` |

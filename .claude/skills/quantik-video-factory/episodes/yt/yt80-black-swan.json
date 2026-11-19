@@ -14,7 +14,7 @@
  "episode_no": 80,
  "group": "quant-mindset",
  "concept": "Black Swan",
- "tag": "QUANT MINDSET #80",
+ "tag": "",
  "title": "'Once in a millennium' kept happening",
  "hook": "Your risk model says a crash this big happens once in thousands of years. Reality didn't read the model.",
  "caption": "The bell curve says a five-sigma day happens once every {normal_5s_expected_years} years. In {years} years of simulated fat-tailed data there were {fat_5s}. Ask whether you survive the unlikely (Taleb 2007).",
@@ -54,7 +54,7 @@
  },
  "cta": "Follow QuanTik to think like a quant",
  "thumb": {
-  "series": "QUANT MINDSET",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "'ONCE IN",
@@ -62,62 +62,140 @@
    "{fat_5s} TIMES."
   ],
   "sub": "{fat_5s} five-sigma days in {years} years",
+  "no_number": true,
   "image": "black-swan-bird"
  },
  "scenes": [
   {
    "say": "Your risk model says a crash this big happens once in thousands of years. Reality didn't read the model.",
    "show": "Reality didn't read the model.",
-   "visual": "swan",
-   "image": "black-swan-bird"
+   "image": "black-swan-bird",
+   "visual": "swan"
   },
   {
    "say": "A black swan: rare, massive impact, and obvious only in hindsight.",
    "show": "Rare. Massive. Obvious later.",
-   "visual": "swan",
-   "image": "nassim-taleb",
    "claims": [
     "taleb"
-   ]
+   ],
+   "image": "nassim-taleb",
+   "visual": "swan"
   },
   {
    "say": "Code simulates {days} days, about {years} years. One series is normal. One has fat tails, closer to real markets.",
    "show": "Normal vs fat tails.",
-   "visual": "storm",
    "note": "Simulation: normal vs Student-t (3 d.f.), same volatility",
-   "real": true
+   "clip": "storm_waves"
   },
   {
    "say": "The normal model expects a five-sigma day about once every {normal_5s_expected_years} years.",
    "show": "Normal model:",
-   "kind": "alone",
    "big": "1 per {normal_5s_expected_years} yrs",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "calendar",
+      "x": 540,
+      "y": 330,
+      "s": 220
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 100,
+      "text": "ONCE IN AGES?",
+      "col": "muted"
+     }
+    ]
+   }
   },
   {
    "say": "The fat-tailed series had {fat_5s} of them.",
    "show": "Fat tails:",
-   "visual": "panic",
    "big": "{fat_5s}",
    "big_label": "five-sigma days in {years} years",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "market",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "cry",
+      "col": "bone",
+      "h": 290,
+      "face": "cry"
+     },
+     {
+      "t": "prop",
+      "k": "arrowdown",
+      "x": 860,
+      "y": 300,
+      "s": 160
+     }
+    ]
+   }
   },
   {
    "say": "Models built on the bell curve underestimate exactly the days that matter most.",
    "show": "The days that matter most.",
-   "visual": "iceberg"
+   "stick": {
+    "set": "sea",
+    "items": [
+     {
+      "t": "prop",
+      "k": "ship",
+      "x": 540,
+      "y": 470,
+      "s": 300,
+      "motion": "shake"
+     },
+     {
+      "t": "prop",
+      "k": "boulder",
+      "x": 860,
+      "y": 560,
+      "s": 120
+     }
+    ]
+   }
   },
   {
    "say": "Don't ask what's likely. Ask: if the unlikely happens, do I survive?",
    "show": "Do you survive the unlikely?",
-   "kind": "walkaway"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "shield",
+      "x": 540,
+      "y": 380,
+      "s": 280,
+      "motion": "pulse"
+     },
+     {
+      "t": "man",
+      "x": 820,
+      "pose": "stand",
+      "col": "purple",
+      "h": 260,
+      "face": "happy"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Don't ask what's likely. Ask: if the unlikely happens, do I survive?",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "purple",
+ "tint_x": 0.5
 }

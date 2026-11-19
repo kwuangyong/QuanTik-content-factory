@@ -11,6 +11,7 @@ from PIL import Image, ImageDraw
 import darkart as G
 import frames as F
 import illustrate as I
+import stickman as SM
 from core import SAFE, L, font
 from render import Scene
 
@@ -268,6 +269,8 @@ def brand(img, tag):
     lg = F.logo(56)
     img.paste(lg, (x, y), lg)
     d.text((x + 72, y + 10), "QuanTik", font=font("sans-bold", 30), fill=P["bone"])
+    if not tag:
+        return
     f = font("sans-bold", 22); tw = d.textlength(tag, font=f)
     d.rounded_rectangle([SAFE["right"] - tw - 36, y + 10, SAFE["right"], y + 50], radius=20, outline=P["red"], width=2)
     d.text((SAFE["right"] - tw - 18, y + 17), tag, font=f, fill=P["red"])
@@ -324,11 +327,29 @@ def story_scene(i, item, ctx, art_ctx):
     vis, img_id = item.get("visual"), item.get("image")
     ent = I.entity(img_id) if img_id else None
     photo, credit = None, ""
-    if ent:
+    stick = item.get("stick")
+    if item.get("clip"):
+        import clips as CL
+
+        if CL.ensure(item["clip"]):
+            photo = ("clip", item["clip"])
+            c = CL.manifest()["clips"][item["clip"]]
+            credit = f"Video: {c['credit']} · Pexels"
+            it = {"kind": "clip", "url": c["page"], "artist": c["credit"], "license": "Pexels License"}
+            if it not in I.USED:
+                I.USED.append(it)
+    if photo:
+        pass
+    elif ent:
         photo, credit = ent[0], ("Photo: " + ent[1].replace("Ảnh: ", "")) if ent[2] else ""
     elif vis:
         photo = I.source(vis, slot=1 if item.get("real") else 0)
-        credit = _credit_of(photo) if isinstance(photo, str) else ""
+        if isinstance(photo, str):
+            credit = _credit_of(photo)
+        elif isinstance(photo, tuple):
+            import clips as CL
+
+            credit = f"Video: {CL.manifest()['clips'][photo[1]]['credit']} · Pexels"
     draw_art = ART.get(kind) if kind else None
     big, big_label = item.get("big"), item.get("big_label", "")
     box_w, box_h = AW - 80, AH - 40
@@ -337,9 +358,15 @@ def story_scene(i, item, ctx, art_ctx):
         crowd_ctx.update(n=int(art_ctx["v"][item["crowd"]["n"]]), k=int(art_ctx["v"][item["crowd"]["k"]]))
 
     def draw(img, t, p):
-        img.paste(G.backdrop(W, H, TINT.get(kind or "", (P["warm"], 0.5, 0.35))), (0, 0))
+        tint = TINT.get(kind or "") or (SM.col(ctx.get("accent"), "warm"), ctx.get("tint_x", 0.5), 0.35)
+        img.paste(G.backdrop(W, H, tint), (0, 0))
         drift = int(10 * math.sin(t * 0.6))                         # slow handheld drift
-        if photo or (vis and not draw_art):
+        if stick and not photo:
+            im = SM.render(stick, AW, AH, t, p)
+            if big:
+                im = _grade(im, 0.82)
+            img.paste(im, (ART_BOX[0] + drift, ART_BOX[1]), im)
+        elif photo or (vis and not draw_art):
             fr = I.frame(vis or "trader", box_w, box_h, p, t, photo=photo, seed=i)
             if photo:
                 fr = _grade(fr, 0.3)
@@ -371,7 +398,7 @@ def story_scene(i, item, ctx, art_ctx):
                        "middle", min_size=15, label=f"s{i}-note")
         img.paste(G.film_grain(img, t), (0, 0))
 
-    name = kind or vis or ("img" if img_id else "scene")
+    name = ("clip" if item.get("clip") else None) or ("stick" if stick else None) or kind or vis or ("img" if img_id else "scene")
     return Scene(f"s{i:02d}-{name}", item["say"], draw, item.get("min_dur", 3.0),
                  texts=[show, item.get("note", ""), big or "", big_label], header=False)
 
@@ -388,6 +415,7 @@ def end_scene(ep, ctx):
 def build(ep, model, ctx):
     v = model.values
     art_ctx = {"n": int(v.get("n_paths", 2000)), "k": int(v.get("esc_a_n", 30)), "v": v}
+    ctx["accent"], ctx["tint_x"] = ep.get("accent"), ep.get("tint_x", 0.5)
     out = [story_scene(i, it, ctx, art_ctx) for i, it in enumerate(ep["scenes"], 1)]
     out.append(end_scene(ep, ctx))
     return out
@@ -404,10 +432,11 @@ def thumbnail(ep, model, path, no=None):
     d = ImageDraw.Draw(img)
     # series badge
     lg = F.logo(120); img.paste(lg, (64, 64), lg)
-    series = th.get("series", "THE DARK TRUTH OF MONEY") + (f"  #{no}" if no else "")
-    f = font("sans-black", 34); tw = d.textlength(series, font=f)
-    d.rounded_rectangle([W - 64 - tw - 56, 88, W - 64, 160], radius=36, outline=P["red"], width=4)
-    d.text((W - 64 - tw - 28, 104), series, font=f, fill=P["red"])
+    series = th.get("series", "THE DARK TRUTH OF MONEY") + (f"  #{no}" if no and not th.get("no_number") else "")
+    if series.strip():
+        f = font("sans-black", 34); tw = d.textlength(series, font=f)
+        d.rounded_rectangle([W - 64 - tw - 56, 88, W - 64, 160], radius=36, outline=P["red"], width=4)
+        d.text((W - 64 - tw - 28, 104), series, font=f, fill=P["red"])
     # headline: three heavy lines, last one red
     lines = th.get("headline", ["YOU GOT THE RAISE.", "STILL", "TRAPPED."])
     sizes = [104, 300, 230]
@@ -425,7 +454,10 @@ def thumbnail(ep, model, path, no=None):
     # illustration: running in the wheel with the bag of upgrades
     # th["art"]: dark-story kind · th["visual"]: illustrate tag · th["image"]: ledger photo (default: the wheel)
     ent = I.entity(th["image"]) if th.get("image") else None
-    if ent or th.get("visual"):
+    if th.get("stick"):
+        im = SM.render(th["stick"], AW, AH, 0.4, 1.0)
+        img.paste(im, (0, y + 10), im)
+    elif ent or th.get("visual"):
         fr = I.frame(th.get("visual") or "trader", AW - 128, min(AH, 1540 - y), 1.0, 1.0,
                      photo=ent[0] if ent else None)
         fr = _grade(fr, 0.25)

@@ -14,7 +14,7 @@
  "episode_no": 34,
  "group": "poker",
  "concept": "Information Asymmetry",
- "tag": "POKER THEORY #34",
+ "tag": "",
  "title": "If you can't spot the sucker, it's you",
  "hook": "If you can't spot the sucker at the table within half an hour, it's you.",
  "caption": "If you can't spot the sucker within half an hour, it's you. Information asymmetry decides who gets picked off — at the table and in every deal pitched to you.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
@@ -33,7 +33,7 @@
  "facts": {},
  "cta": "Follow QuanTik for the math behind every decision",
  "thumb": {
-  "series": "POKER THEORY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "THE",
@@ -41,44 +41,149 @@
    "IS YOU."
   ],
   "sub": "Information asymmetry",
-  "visual": "casino"
+  "no_number": true,
+  "stick": {
+   "set": "casino",
+   "items": [
+    {
+     "t": "crowd",
+     "n": 5,
+     "hi": [
+      2
+     ],
+     "x0": 180,
+     "gap": 180,
+     "h": 220,
+     "hicol": "red",
+     "face": "happy"
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "If you can't spot the sucker at the table within half an hour, it's you.",
    "show": "The sucker is you.",
-   "visual": "casino",
-   "real": true
+   "stick": {
+    "set": "casino",
+    "items": [
+     {
+      "t": "crowd",
+      "n": 5,
+      "hi": [
+       2
+      ],
+      "x0": 180,
+      "gap": 180,
+      "h": 220,
+      "hicol": "red",
+      "face": "happy"
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 100,
+      "text": "WHO'S THE SUCKER?",
+      "col": "red"
+     }
+    ]
+   }
   },
   {
    "say": "Information asymmetry: one side knows something the other doesn't.",
    "show": "One side knows more.",
-   "kind": "duel"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "think",
+      "col": "bone",
+      "h": 280
+     },
+     {
+      "t": "prop",
+      "k": "eye",
+      "x": 760,
+      "y": 280,
+      "s": 160
+     },
+     {
+      "t": "man",
+      "x": 760,
+      "pose": "stand",
+      "col": "gold",
+      "h": 280,
+      "facing": -1
+     }
+    ]
+   }
   },
   {
    "say": "The one who knows more prices things right, picks the good games, and skips the bad ones.",
    "show": "Picks the good games.",
-   "visual": "telescope"
+   "stick": {
+    "set": "lab",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "point",
+      "col": "gold",
+      "h": 290,
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "magnifier",
+      "x": 780,
+      "y": 260,
+      "s": 120
+     }
+    ]
+   }
   },
   {
    "say": "The one who knows less doesn't just lose hands. They don't know which game they're in.",
    "show": "Wrong game, every time.",
-   "visual": "roulette",
-   "image": "slot-machines"
+   "image": "slot-machines",
+   "clip": "slots"
   },
   {
    "say": "It's true in poker, in used cars, in every deal someone pitches you.",
    "show": "Every deal pitched to you.",
-   "visual": "banker",
-   "image": "used-car-lot"
+   "image": "used-car-lot",
+   "clip": "deal"
   },
   {
    "say": "Before you join any game, ask who knows more than you, and what they gain from it.",
    "show": "Who knows more than you?",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "think",
+      "col": "bone",
+      "h": 300
+     },
+     {
+      "t": "prop",
+      "k": "eye",
+      "x": 540,
+      "y": 120,
+      "s": 120,
+      "motion": "pulse"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Before you join any game, ask who knows more than you, and what they gain from it.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "gold",
+ "tint_x": 0.5
 }

@@ -14,7 +14,7 @@
  "episode_no": 15,
  "group": "dark-truth",
  "concept": "The Middle-Class Trap",
- "tag": "DARK TRUTH #15",
+ "tag": "",
  "title": "Good salary. Three months from collapse.",
  "hook": "Good salary. Nice house. Three months without a paycheck and it all collapses.",
  "caption": "Good salary, nice house, three months from collapse. Every raise became a fixed payment, and fixed costs don't shrink when income does. Keep fixed costs below your worst year's income.",
@@ -33,7 +33,7 @@
  "facts": {},
  "cta": "Follow QuanTik for more dark truths about money",
  "thumb": {
-  "series": "THE DARK TRUTH OF MONEY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "THREE MONTHS",
@@ -41,42 +41,237 @@
    "COLLAPSE."
   ],
   "sub": "The middle-class trap",
-  "art": "wheel"
+  "no_number": true,
+  "stick": {
+   "set": "home",
+   "items": [
+    {
+     "t": "prop",
+     "k": "house",
+     "x": 320,
+     "y": 450,
+     "s": 280
+    },
+    {
+     "t": "man",
+     "x": 700,
+     "pose": "stand",
+     "col": "bone",
+     "h": 290,
+     "face": "shock"
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "Good salary. Nice house. Three months without a paycheck and it all collapses.",
    "show": "Three months from collapse.",
-   "kind": "office"
+   "stick": {
+    "set": "home",
+    "items": [
+     {
+      "t": "prop",
+      "k": "house",
+      "x": 320,
+      "y": 450,
+      "s": 280
+     },
+     {
+      "t": "man",
+      "x": 700,
+      "pose": "stand",
+      "col": "bone",
+      "h": 290,
+      "face": "shock"
+     },
+     {
+      "t": "prop",
+      "k": "calendar",
+      "x": 880,
+      "y": 200,
+      "s": 120,
+      "motion": "shake"
+     }
+    ]
+   }
   },
   {
    "say": "Every raise brought a bigger mortgage, a better car, another monthly payment.",
    "show": "Every raise, a new payment.",
-   "kind": "spend"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "house",
+      "x": 260,
+      "y": 500,
+      "s": 180,
+      "at": 0.0
+     },
+     {
+      "t": "prop",
+      "k": "car",
+      "x": 540,
+      "y": 560,
+      "s": 180,
+      "at": 0.25
+     },
+     {
+      "t": "prop",
+      "k": "bill",
+      "x": 800,
+      "y": 480,
+      "s": 140,
+      "at": 0.5
+     },
+     {
+      "t": "arrow",
+      "from": [
+       340,
+       300
+      ],
+      "to": [
+       740,
+       300
+      ],
+      "col": "red",
+      "at": 0.2
+     }
+    ]
+   }
   },
   {
    "say": "Fixed costs are the most dangerous kind. They don't shrink when your income does.",
    "show": "Fixed costs don't shrink.",
-   "visual": "iceberg",
-   "real": true
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "bill",
+      "x": 540,
+      "y": 300,
+      "s": 120,
+      "motion": "pile",
+      "n": 5,
+      "dx": 0,
+      "dy": 60
+     },
+     {
+      "t": "man",
+      "x": 860,
+      "pose": "stand",
+      "col": "bone",
+      "h": 260,
+      "face": "sad"
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 70,
+      "text": "FIXED",
+      "col": "red"
+     }
+    ]
+   }
   },
   {
    "say": "So you can't quit, can't take a risk, can't say no. You depend on the paycheck more than ever.",
    "show": "You can't say no.",
-   "kind": "wheel"
+   "stick": {
+    "set": "office",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "sit",
+      "col": "bone",
+      "h": 300,
+      "face": "sad"
+     },
+     {
+      "t": "prop",
+      "k": "lock",
+      "x": 540,
+      "y": 120,
+      "s": 110
+     }
+    ]
+   }
   },
   {
    "say": "The middle class isn't stuck because they earn too little. Every dollar is spoken for before it arrives.",
    "show": "Spoken for before it arrives.",
-   "kind": "commute"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "cash",
+      "x": 220,
+      "y": 330,
+      "s": 110,
+      "motion": "fly",
+      "to": [
+       600,
+       330
+      ]
+     },
+     {
+      "t": "prop",
+      "k": "bill",
+      "x": 700,
+      "y": 330,
+      "s": 120,
+      "n": 3,
+      "dx": 110
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 80,
+      "text": "SPOKEN FOR",
+      "col": "blue"
+     }
+    ]
+   }
   },
   {
    "say": "Keep fixed costs below your worst year's income, not your best.",
    "show": "Below your worst year.",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "scale",
+      "x": 540,
+      "y": 380,
+      "s": 380
+     },
+     {
+      "t": "label",
+      "x": 330,
+      "y": 200,
+      "text": "COSTS",
+      "col": "red"
+     },
+     {
+      "t": "label",
+      "x": 760,
+      "y": 200,
+      "text": "WORST YEAR",
+      "col": "green"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Keep fixed costs below your worst year's income, not your best.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "blue",
+ "tint_x": 0.4
 }

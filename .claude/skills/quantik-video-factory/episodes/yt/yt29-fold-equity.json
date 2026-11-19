@@ -16,7 +16,7 @@
  "episode_no": 29,
  "group": "poker",
  "concept": "Fold Equity",
- "tag": "POKER THEORY #29",
+ "tag": "",
  "title": "Win without the best hand",
  "hook": "You don't need the best hand. You need them to believe you have it.",
  "caption": "Win without the best hand. With {equity} equity, betting {bet} into {pot} loses {ev_no_fold} if they never fold — but they only need to fold {breakeven_fold} to break even, and at {fold_ex} you make {ev_ex}.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
@@ -42,7 +42,7 @@
  "facts": {},
  "cta": "Follow QuanTik for the math behind every decision",
  "thumb": {
-  "series": "POKER THEORY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "WIN",
@@ -50,53 +50,183 @@
    "THE HAND."
   ],
   "sub": "They only need to fold {breakeven_fold}",
-  "image": "poker-table"
+  "no_number": true,
+  "stick": {
+   "set": "casino",
+   "items": [
+    {
+     "t": "man",
+     "x": 320,
+     "pose": "bet",
+     "col": "red",
+     "h": 300,
+     "face": "angry"
+    },
+    {
+     "t": "man",
+     "x": 760,
+     "pose": "shrug",
+     "col": "bone",
+     "h": 280,
+     "facing": -1,
+     "face": "shock"
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "You don't need the best hand. You need them to believe you have it.",
    "show": "Make them believe.",
-   "kind": "duel"
+   "stick": {
+    "set": "casino",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "bet",
+      "col": "red",
+      "h": 300,
+      "face": "angry"
+     },
+     {
+      "t": "man",
+      "x": 760,
+      "pose": "shrug",
+      "col": "bone",
+      "h": 280,
+      "facing": -1,
+      "face": "shock"
+     }
+    ]
+   }
   },
   {
    "say": "Fold equity: the value of your opponent giving up before the cards are shown.",
    "show": "The value of them giving up.",
-   "visual": "casino",
-   "image": "poker-table"
+   "stick": {
+    "set": "casino",
+    "items": [
+     {
+      "t": "man",
+      "x": 760,
+      "pose": "walk",
+      "col": "bone",
+      "h": 280,
+      "move": [
+       1000,
+       0.3,
+       0.9
+      ],
+      "facing": 1
+     },
+     {
+      "t": "prop",
+      "k": "card",
+      "x": 600,
+      "y": 500,
+      "s": 80,
+      "n": 2,
+      "dx": 60
+     }
+    ]
+   }
   },
   {
    "say": "Your hand wins only {equity} when called. You bet {bet} into {pot}.",
    "show": "{equity} if called.",
-   "visual": "casino",
    "note": "Computed: EV = fold% × pot + (1 − fold%) × (equity × (pot + 2·bet) − bet)",
-   "real": true
+   "clip": "poker_chips"
   },
   {
    "say": "If they never fold, the bet loses {ev_no_fold}.",
    "show": "If they never fold:",
-   "kind": "alone",
    "big": "{ev_no_fold}",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 540,
+      "y": 480,
+      "s": 160,
+      "motion": "drain",
+      "n": 1
+     },
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "slump",
+      "col": "red",
+      "h": 270
+     }
+    ]
+   }
   },
   {
    "say": "They only need to fold {breakeven_fold} of the time to break even. If they fold {fold_ex}, you make {ev_ex}.",
    "show": "Break-even fold rate:",
-   "kind": "walkaway",
    "big": "{breakeven_fold}",
    "big_label": "fold {fold_ex} → EV +{ev_ex}",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "crowd",
+      "n": 10,
+      "hi": [
+       0,
+       2,
+       5,
+       8
+      ],
+      "x0": 100,
+      "gap": 95,
+      "h": 160,
+      "hicol": "green",
+      "pose": "shrug"
+     }
+    ]
+   }
   },
   {
    "say": "Pressure is an asset. But only against someone who can actually fold.",
    "show": "Pressure is an asset.",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "push",
+      "col": "red",
+      "h": 270
+     },
+     {
+      "t": "man",
+      "x": 700,
+      "pose": "fall",
+      "col": "bone",
+      "h": 260,
+      "fall": [
+       0.3,
+       0.6
+      ]
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Pressure is an asset. But only against someone who can actually fold.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "red",
+ "tint_x": 0.4
 }

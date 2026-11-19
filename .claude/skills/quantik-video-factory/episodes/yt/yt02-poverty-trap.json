@@ -14,7 +14,7 @@
  "episode_no": 2,
  "group": "dark-truth",
  "concept": "The Poverty Trap",
- "tag": "DARK TRUTH #02",
+ "tag": "",
  "title": "Being poor is expensive. Here's the loop.",
  "hook": "Being poor is expensive. Literally.",
  "caption": "Being poor is expensive. No buffer → a surprise becomes a loan → interest eats next month → even less buffer. The first win isn't investing; it's never having to borrow for a surprise.",
@@ -34,7 +34,7 @@
  "facts": {},
  "cta": "Follow QuanTik for more dark truths about money",
  "thumb": {
-  "series": "THE DARK TRUTH OF MONEY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "BEING POOR",
@@ -42,53 +42,270 @@
    "EXPENSIVE."
   ],
   "sub": "A loop that charges interest",
+  "no_number": true,
   "image": "payday-loan"
  },
  "scenes": [
   {
    "say": "Being poor is expensive. Literally.",
    "show": "Being poor is expensive. Literally.",
-   "kind": "alone"
+   "stick": {
+    "set": "street",
+    "items": [
+     {
+      "t": "man",
+      "x": 420,
+      "pose": "slump",
+      "col": "bone",
+      "h": 300,
+      "face": "sad"
+     },
+     {
+      "t": "prop",
+      "k": "ticket",
+      "x": 700,
+      "y": 420,
+      "s": 120,
+      "motion": "pulse"
+     },
+     {
+      "t": "label",
+      "x": 700,
+      "y": 330,
+      "text": "$$$",
+      "col": "red"
+     }
+    ]
+   }
   },
   {
    "say": "No savings means one broken phone becomes a loan.",
    "show": "One broken phone.",
-   "visual": "money_burn"
+   "stick": {
+    "set": "home",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "stand",
+      "col": "bone",
+      "h": 290,
+      "face": "shock"
+     },
+     {
+      "t": "prop",
+      "k": "phone",
+      "x": 520,
+      "y": 600,
+      "s": 90,
+      "motion": "shake"
+     },
+     {
+      "t": "arrow",
+      "from": [
+       560,
+       520
+      ],
+      "to": [
+       820,
+       380
+      ],
+      "col": "red",
+      "at": 0.4
+     },
+     {
+      "t": "prop",
+      "k": "bill",
+      "x": 880,
+      "y": 330,
+      "s": 120,
+      "at": 0.5
+     }
+    ]
+   }
   },
   {
    "say": "The loan costs interest. The interest eats next month's pay.",
    "show": "Interest eats next month.",
-   "visual": "banker",
-   "image": "payday-loan"
+   "image": "payday-loan",
+   "stick": {
+    "set": "bank",
+    "items": [
+     {
+      "t": "man",
+      "x": 330,
+      "pose": "stand",
+      "col": "bone",
+      "h": 280,
+      "face": "sad"
+     },
+     {
+      "t": "prop",
+      "k": "cash",
+      "x": 700,
+      "y": 420,
+      "s": 110,
+      "motion": "fly",
+      "to": [
+       330,
+       380
+      ]
+     }
+    ]
+   }
   },
   {
    "say": "Next month, there's even less of a cushion.",
    "show": "Even less cushion.",
-   "kind": "wheel"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "piggy",
+      "x": 540,
+      "y": 440,
+      "s": 260,
+      "motion": "shrink",
+      "until": 0.9
+     },
+     {
+      "t": "man",
+      "x": 820,
+      "pose": "cry",
+      "col": "bone",
+      "h": 260,
+      "face": "cry"
+     }
+    ]
+   }
   },
   {
    "say": "So the poor pay more for the same things: fees, interest, the cheap boots that break twice.",
    "show": "Pay more for the same.",
-   "visual": "news",
-   "image": "pawn-shop"
+   "image": "pawn-shop",
+   "visual": "money_burn"
   },
   {
    "say": "The way out needs exactly what the trap takes away: time and a buffer.",
    "show": "Time. And a buffer.",
-   "kind": "commute"
+   "stick": {
+    "set": "street",
+    "items": [
+     {
+      "t": "man",
+      "x": 260,
+      "pose": "push",
+      "col": "bone",
+      "h": 270,
+      "face": "angry"
+     },
+     {
+      "t": "prop",
+      "k": "boulder",
+      "x": 520,
+      "y": 520,
+      "s": 240
+     },
+     {
+      "t": "prop",
+      "k": "hourglass",
+      "x": 860,
+      "y": 300,
+      "s": 130
+     }
+    ]
+   }
   },
   {
    "say": "That's why the first win isn't investing. It's never having to borrow for a surprise.",
    "show": "Never borrow for a surprise.",
-   "kind": "walkaway"
+   "stick": {
+    "set": "home",
+    "items": [
+     {
+      "t": "prop",
+      "k": "piggy",
+      "x": 320,
+      "y": 470,
+      "s": 180,
+      "motion": "pulse"
+     },
+     {
+      "t": "prop",
+      "k": "shield",
+      "x": 320,
+      "y": 250,
+      "s": 130,
+      "at": 0.3
+     },
+     {
+      "t": "man",
+      "x": 700,
+      "pose": "cheer",
+      "col": "orange",
+      "h": 280,
+      "face": "happy",
+      "at": 0.4
+     }
+    ]
+   }
   },
   {
    "say": "Poverty isn't a lack of effort. It's a loop that charges interest.",
    "show": "A loop that charges interest.",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "walk",
+      "col": "bone",
+      "h": 260,
+      "phase": 0.3
+     },
+     {
+      "t": "arrow",
+      "from": [
+       200,
+       200
+      ],
+      "to": [
+       880,
+       200
+      ],
+      "col": "orange",
+      "at": 0.1
+     },
+     {
+      "t": "arrow",
+      "from": [
+       880,
+       260
+      ],
+      "to": [
+       200,
+       360
+      ],
+      "col": "orange",
+      "at": 0.4
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 80,
+      "text": "INTEREST",
+      "col": "red",
+      "at": 0.2
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Poverty isn't a lack of effort. It's a loop that charges interest.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "orange",
+ "tint_x": 0.3
 }

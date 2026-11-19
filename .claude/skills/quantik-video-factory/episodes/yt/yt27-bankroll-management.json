@@ -36,7 +36,7 @@
  "episode_no": 27,
  "group": "poker",
  "concept": "Bankroll Management",
- "tag": "POKER THEORY #27",
+ "tag": "",
  "title": "Good players go broke too",
  "hook": "Being good isn't enough. Good players go broke all the time.",
  "caption": "Good players go broke too. All with an edge (win {a_p}): {a_start} bets of bankroll → {a_ruin} broke, {b_start} → {b_ruin}, {c_start} → {c_ruin}.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
@@ -62,7 +62,7 @@
  "facts": {},
  "cta": "Follow QuanTik for the math behind every decision",
  "thumb": {
-  "series": "POKER THEORY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "GOOD",
@@ -70,53 +70,204 @@
    "GO BROKE."
   ],
   "sub": "{a_ruin} broke with a thin bankroll",
-  "visual": "casino"
+  "no_number": true,
+  "stick": {
+   "set": "void",
+   "items": [
+    {
+     "t": "prop",
+     "k": "chips",
+     "x": 240,
+     "y": 560,
+     "s": 70,
+     "n": 2,
+     "dy": -30
+    },
+    {
+     "t": "prop",
+     "k": "chips",
+     "x": 540,
+     "y": 560,
+     "s": 70,
+     "n": 4,
+     "dy": -30
+    },
+    {
+     "t": "prop",
+     "k": "chips",
+     "x": 840,
+     "y": 560,
+     "s": 70,
+     "n": 8,
+     "dy": -30
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "Being good isn't enough. Good players go broke all the time.",
    "show": "Good players go broke.",
-   "visual": "casino",
-   "real": true
+   "clip": "casino_table"
   },
   {
    "say": "Bankroll management is surviving the bad runs long enough for your edge to show up.",
    "show": "Survive the bad runs.",
-   "kind": "wheel"
+   "stick": {
+    "set": "sea",
+    "items": [
+     {
+      "t": "prop",
+      "k": "boat",
+      "x": 540,
+      "y": 470,
+      "s": 260,
+      "motion": "shake"
+     },
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 540,
+      "y": 380,
+      "s": 80
+     }
+    ]
+   }
   },
   {
    "say": "Three groups, all with a real edge: win {a_p}. Only the bankroll differs: {a_start}, {b_start}, {c_start} bets.",
    "show": "Same edge. Different bankrolls.",
-   "kind": "compare",
-   "note": "Simulation: {players} players, {rounds} bets, win {a_p}"
+   "note": "Simulation: {players} players, {rounds} bets, win {a_p}",
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 240,
+      "y": 560,
+      "s": 70,
+      "motion": "pile",
+      "n": 2,
+      "dy": -30
+     },
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 540,
+      "y": 560,
+      "s": 70,
+      "motion": "pile",
+      "n": 4,
+      "dy": -30
+     },
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 840,
+      "y": 560,
+      "s": 70,
+      "motion": "pile",
+      "n": 8,
+      "dy": -30
+     }
+    ]
+   }
   },
   {
    "say": "{a_start} bets deep: {a_ruin} go broke.",
    "show": "{a_start} bets:",
-   "visual": "money_burn",
    "big": "{a_ruin}",
    "big_label": "went broke — with an edge",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "cliff",
+      "x": 300,
+      "y": 470,
+      "s": 300
+     },
+     {
+      "t": "man",
+      "x": 330,
+      "pose": "fall",
+      "col": "orange",
+      "h": 240,
+      "fall": [
+       0.3,
+       0.7
+      ],
+      "y": 470,
+      "face": "shock"
+     }
+    ]
+   }
   },
   {
    "say": "{b_start} bets: {b_ruin}. {c_start} bets: {c_ruin}.",
    "show": "{b_start} bets: {b_ruin}",
-   "kind": "walkaway",
    "big": "{c_ruin}",
    "big_label": "broke with {c_start} bets",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 840,
+      "pose": "cheer",
+      "col": "green",
+      "h": 260,
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 840,
+      "y": 380,
+      "s": 80,
+      "motion": "pile",
+      "n": 5,
+      "dy": -30
+     },
+     {
+      "t": "man",
+      "x": 240,
+      "pose": "slump",
+      "col": "muted",
+      "h": 240
+     }
+    ]
+   }
   },
   {
    "say": "Skill decides how much you win. Bankroll decides whether you're still there to win it.",
    "show": "Still there to win it?",
-   "kind": "alone"
+   "stick": {
+    "set": "casino",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "hold",
+      "col": "bone",
+      "h": 300,
+      "hold": "shield"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Skill decides how much you win. Bankroll decides whether you're still there to win it.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "orange",
+ "tint_x": 0.6
 }

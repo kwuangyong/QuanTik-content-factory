@@ -31,7 +31,7 @@
  "episode_no": 32,
  "group": "poker",
  "concept": "The Sunk Cost Trap",
- "tag": "POKER THEORY #32",
+ "tag": "",
  "title": "Chasing losses is the fastest way to zero",
  "hook": "Down money and want to win it back? That feeling is the fastest road to zero.",
  "caption": "Chasing losses is the fastest road to zero. In a slightly losing game (win {a_p}), players who bet bigger to win it back went broke {b_ruin} of the time vs {a_ruin} for flat bettors.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
@@ -57,7 +57,7 @@
  "facts": {},
  "cta": "Follow QuanTik for the math behind every decision",
  "thumb": {
-  "series": "POKER THEORY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "CHASING",
@@ -65,53 +65,220 @@
    "= ZERO."
   ],
   "sub": "Chasers broke: {b_ruin}",
-  "visual": "money_burn"
+  "no_number": true,
+  "stick": {
+   "set": "casino",
+   "items": [
+    {
+     "t": "man",
+     "x": 320,
+     "pose": "bet",
+     "col": "bone",
+     "h": 290,
+     "face": "angry"
+    },
+    {
+     "t": "prop",
+     "k": "chips",
+     "x": 700,
+     "y": 470,
+     "s": 140
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "Down money and want to win it back? That feeling is the fastest road to zero.",
    "show": "The fastest road to zero.",
-   "visual": "money_burn",
-   "real": true
+   "stick": {
+    "set": "casino",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "bet",
+      "col": "bone",
+      "h": 290,
+      "face": "angry"
+     },
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 620,
+      "y": 470,
+      "s": 140,
+      "motion": "fly",
+      "to": [
+       800,
+       470
+      ],
+      "n": 3
+     },
+     {
+      "t": "bubble",
+      "x": 320,
+      "y": 110,
+      "text": "win it back"
+     }
+    ]
+   }
   },
   {
    "say": "Money already lost is a sunk cost. It's gone no matter what you do next.",
    "show": "It's gone either way.",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "cash",
+      "x": 540,
+      "y": 350,
+      "s": 160,
+      "motion": "float",
+      "n": 3,
+      "dx": 100
+     },
+     {
+      "t": "man",
+      "x": 860,
+      "pose": "cry",
+      "col": "bone",
+      "h": 240,
+      "face": "cry"
+     }
+    ]
+   }
   },
   {
    "say": "Two groups play a slightly losing game, win {a_p}. One bets flat. One bets bigger to win back losses.",
    "show": "Flat vs chasing.",
-   "kind": "compare",
-   "note": "Simulation: {players} players, {rounds} bets"
+   "note": "Simulation: {players} players, {rounds} bets",
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "stand",
+      "col": "green",
+      "h": 270,
+      "tag": "FLAT"
+     },
+     {
+      "t": "man",
+      "x": 760,
+      "pose": "bet",
+      "col": "orange",
+      "h": 270,
+      "tag": "CHASING"
+     }
+    ]
+   }
   },
   {
    "say": "The chasers do get back to even more often.",
    "show": "Chasing 'works'…",
-   "visual": "rollercoaster"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "cheer",
+      "col": "orange",
+      "h": 280,
+      "face": "happy"
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 80,
+      "text": "BACK TO EVEN!",
+      "col": "orange"
+     }
+    ]
+   }
   },
   {
    "say": "But {b_ruin} of them go broke, versus {a_ruin} of flat bettors.",
    "show": "Chasers broke:",
-   "visual": "money_burn",
    "big": "{b_ruin}",
    "big_label": "vs {a_ruin} betting flat",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "cliff",
+      "x": 300,
+      "y": 470,
+      "s": 300
+     },
+     {
+      "t": "man",
+      "x": 330,
+      "pose": "fall",
+      "col": "orange",
+      "h": 240,
+      "fall": [
+       0.25,
+       0.6
+      ],
+      "y": 470,
+      "face": "shock"
+     }
+    ]
+   }
   },
   {
    "say": "Winning it back a few times feels like a strategy. One wipeout erases all of it.",
    "show": "One wipeout erases it all.",
-   "kind": "wheel"
+   "clip": "rollercoaster"
   },
   {
    "say": "Decide on what's ahead of you, never on what you've already lost.",
    "show": "Decide on what's ahead.",
-   "kind": "walkaway"
+   "stick": {
+    "set": "street",
+    "items": [
+     {
+      "t": "man",
+      "x": 250,
+      "pose": "walk",
+      "col": "bone",
+      "h": 270,
+      "move": [
+       800,
+       0.1,
+       0.8
+      ]
+     },
+     {
+      "t": "prop",
+      "k": "door",
+      "x": 940,
+      "y": 470,
+      "s": 260
+     },
+     {
+      "t": "glow",
+      "x": 940,
+      "y": 400,
+      "r": 200,
+      "col": "warm"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Decide on what's ahead of you, never on what you've already lost.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "orange",
+ "tint_x": 0.5
 }

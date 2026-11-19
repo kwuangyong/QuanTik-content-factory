@@ -14,7 +14,7 @@
  "episode_no": 14,
  "group": "dark-truth",
  "concept": "Financial Nihilism",
- "tag": "DARK TRUTH #14",
+ "tag": "",
  "title": "Can't afford a house, so why save?",
  "hook": "Can't afford a house anyway, so why save? That thought is the trap.",
  "caption": "\"Can't afford a house, so why save?\" is the trap. Hopelessness pushes people to stop saving or swing for the fences, and the miss proves the story. Start with a goal you can hit in three months.",
@@ -34,7 +34,7 @@
  "facts": {},
  "cta": "Follow QuanTik for more dark truths about money",
  "thumb": {
-  "series": "THE DARK TRUTH OF MONEY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "GIVING UP,",
@@ -42,42 +42,208 @@
    "BRANDED."
   ],
   "sub": "The quiet trap of financial nihilism",
-  "art": "scroll"
+  "no_number": true,
+  "stick": {
+   "set": "city",
+   "items": [
+    {
+     "t": "man",
+     "x": 400,
+     "pose": "phone",
+     "col": "bone",
+     "h": 290,
+     "face": "sad"
+    },
+    {
+     "t": "prop",
+     "k": "house",
+     "x": 820,
+     "y": 330,
+     "s": 200
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "Can't afford a house anyway, so why save? That thought is the trap.",
    "show": "So why save?",
-   "kind": "scroll"
+   "stick": {
+    "set": "city",
+    "items": [
+     {
+      "t": "man",
+      "x": 400,
+      "pose": "phone",
+      "col": "bone",
+      "h": 290,
+      "face": "sad"
+     },
+     {
+      "t": "prop",
+      "k": "house",
+      "x": 820,
+      "y": 330,
+      "s": 200,
+      "at": 0.2
+     },
+     {
+      "t": "label",
+      "x": 820,
+      "y": 160,
+      "text": "OUT OF REACH",
+      "col": "red",
+      "at": 0.3
+     }
+    ]
+   }
   },
   {
    "say": "When the goal looks impossible, people stop saving, or bet it all on one big swing.",
    "show": "Stop saving. Or swing big.",
-   "visual": "casino",
-   "image": "slot-machines"
+   "image": "slot-machines",
+   "clip": "slots"
   },
   {
    "say": "The swing usually misses. And the miss proves the story: trying is pointless.",
    "show": "The miss proves the story.",
-   "visual": "money_burn"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "die",
+      "x": 400,
+      "y": 400,
+      "s": 140,
+      "motion": "shake"
+     },
+     {
+      "t": "man",
+      "x": 700,
+      "pose": "cry",
+      "col": "bone",
+      "h": 270,
+      "face": "cry",
+      "at": 0.4
+     }
+    ]
+   }
   },
   {
    "say": "Hopelessness makes you choose exactly the decisions that make the future worse.",
    "show": "Hopelessness picks bad bets.",
-   "kind": "wheel"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "walk",
+      "col": "bone",
+      "h": 260
+     },
+     {
+      "t": "arrow",
+      "from": [
+       200,
+       200
+      ],
+      "to": [
+       880,
+       200
+      ],
+      "col": "purple"
+     },
+     {
+      "t": "arrow",
+      "from": [
+       880,
+       260
+      ],
+      "to": [
+       200,
+       360
+      ],
+      "col": "purple",
+      "at": 0.4
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 80,
+      "text": "HOPELESS → BAD BETS",
+      "col": "purple"
+     }
+    ]
+   }
   },
   {
    "say": "The way out isn't a bigger goal. It's a smaller one you can hit in three months.",
    "show": "A goal you hit in three months.",
-   "kind": "walkaway"
+   "stick": {
+    "set": "street",
+    "items": [
+     {
+      "t": "prop",
+      "k": "flag",
+      "x": 420,
+      "y": 450,
+      "s": 180,
+      "at": 0.2
+     },
+     {
+      "t": "man",
+      "x": 240,
+      "pose": "walk",
+      "col": "green",
+      "h": 260,
+      "move": [
+       380,
+       0.2,
+       0.8
+      ],
+      "face": "happy"
+     },
+     {
+      "t": "label",
+      "x": 420,
+      "y": 300,
+      "text": "3 MONTHS",
+      "col": "green",
+      "at": 0.3
+     }
+    ]
+   }
   },
   {
    "say": "Nihilism feels like honesty. It's just giving up with better branding.",
    "show": "Giving up, rebranded.",
-   "kind": "alone"
+   "stick": {
+    "set": "stage",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "shrug",
+      "col": "bone",
+      "h": 300,
+      "face": "neutral"
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 80,
+      "text": "\"IT'S POINTLESS\"",
+      "col": "purple"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Nihilism feels like honesty. It's just giving up with better branding.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "purple",
+ "tint_x": 0.7
 }

@@ -30,7 +30,7 @@
  "episode_no": 4,
  "group": "dark-truth",
  "concept": "The Silent Tax",
- "tag": "DARK TRUTH #04",
+ "tag": "",
  "title": "Inflation is a tax nobody voted for",
  "hook": "There's a tax you pay every day. Nobody voted for it.",
  "caption": "Inflation is a tax nobody voted for. {cash_start} left in cash, losing {cash_rate} of buying power a year, buys what about {cash_end} buys today after {years} years.\n\n(Assumptions shown on screen; an illustration, not a forecast.)",
@@ -56,7 +56,7 @@
  "facts": {},
  "cta": "Follow QuanTik for more dark truths about money",
  "thumb": {
-  "series": "THE DARK TRUTH OF MONEY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "A TAX",
@@ -64,58 +64,204 @@
    "VOTED FOR."
   ],
   "sub": "{cash_start} → {cash_end} in {years} years",
+  "no_number": true,
   "image": "dollar-bills"
  },
  "scenes": [
   {
    "say": "There's a tax you pay every day. Nobody voted for it.",
    "show": "A tax nobody voted for.",
-   "visual": "money_burn",
-   "image": "dollar-bills"
+   "image": "dollar-bills",
+   "visual": "money_burn"
   },
   {
    "say": "It's inflation. Your balance stays the same. What it buys shrinks.",
    "show": "Same balance. Less stuff.",
-   "kind": "spend"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "cash",
+      "x": 300,
+      "y": 450,
+      "s": 220
+     },
+     {
+      "t": "prop",
+      "k": "bag",
+      "x": 760,
+      "y": 420,
+      "s": 240,
+      "motion": "shrink",
+      "until": 0.9
+     },
+     {
+      "t": "label",
+      "x": 300,
+      "y": 260,
+      "text": "SAME",
+      "col": "bone"
+     },
+     {
+      "t": "label",
+      "x": 760,
+      "y": 200,
+      "text": "LESS",
+      "col": "red",
+      "at": 0.4
+     }
+    ]
+   }
   },
   {
    "say": "Leave {cash_start} in cash, losing about {cash_rate} of buying power a year.",
    "show": "Cash, doing nothing.",
-   "kind": "alone",
-   "note": "Assumption: cash loses {cash_rate}/yr of buying power; savings earn {sav_rate} above inflation"
+   "note": "Assumption: cash loses {cash_rate}/yr of buying power; savings earn {sav_rate} above inflation",
+   "stick": {
+    "set": "bank",
+    "items": [
+     {
+      "t": "prop",
+      "k": "piggy",
+      "x": 540,
+      "y": 480,
+      "s": 200
+     },
+     {
+      "t": "prop",
+      "k": "flame",
+      "x": 540,
+      "y": 600,
+      "s": 90,
+      "at": 0.3
+     },
+     {
+      "t": "man",
+      "x": 820,
+      "pose": "think",
+      "col": "bone",
+      "h": 280
+     }
+    ]
+   }
   },
   {
    "say": "After {years} years, it buys what about {cash_end} buys today.",
    "show": "{cash_start} becomes…",
-   "kind": "crowd",
    "big": "{cash_end}",
    "big_label": "of buying power left after {years} years",
+   "claims": [
+    "sim"
+   ],
    "crowd": {
     "n": "cash_start",
     "k": "cash_end"
    },
-   "claims": [
-    "sim"
-   ]
+   "kind": "crowd"
   },
   {
    "say": "Doing nothing felt safe. It was a decision, and it had a price.",
    "show": "Doing nothing has a price.",
-   "visual": "iceberg",
-   "real": true
+   "stick": {
+    "set": "home",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "sit",
+      "col": "bone",
+      "h": 280
+     },
+     {
+      "t": "prop",
+      "k": "cash",
+      "x": 640,
+      "y": 470,
+      "s": 120,
+      "motion": "burn",
+      "at": 0.3
+     },
+     {
+      "t": "bubble",
+      "x": 320,
+      "y": 180,
+      "text": "it's safe…",
+      "kind": "think"
+     }
+    ]
+   }
   },
   {
    "say": "The real question isn't how much interest you earn. It's whether it beats inflation.",
    "show": "Does it beat inflation?",
-   "visual": "race"
+   "stick": {
+    "set": "street",
+    "items": [
+     {
+      "t": "man",
+      "x": 250,
+      "pose": "run",
+      "col": "teal",
+      "h": 260,
+      "move": [
+       700,
+       0.1,
+       0.9
+      ]
+     },
+     {
+      "t": "man",
+      "x": 150,
+      "pose": "run",
+      "col": "red",
+      "h": 260,
+      "move": [
+       820,
+       0.0,
+       0.9
+      ],
+      "tag": "INFLATION"
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 90,
+      "text": "WHO'S FASTER?",
+      "col": "bone"
+     }
+    ]
+   }
   },
   {
    "say": "Your money is either working, or it's quietly melting.",
    "show": "Working, or melting.",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "cash",
+      "x": 540,
+      "y": 460,
+      "s": 260,
+      "motion": "shrink",
+      "until": 0.95
+     },
+     {
+      "t": "prop",
+      "k": "flame",
+      "x": 540,
+      "y": 600,
+      "s": 120
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Your money is either working, or it's quietly melting.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "teal",
+ "tint_x": 0.4
 }

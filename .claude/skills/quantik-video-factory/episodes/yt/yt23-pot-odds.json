@@ -16,7 +16,7 @@
  "episode_no": 23,
  "group": "poker",
  "concept": "Pot Odds",
- "tag": "POKER THEORY #23",
+ "tag": "",
  "title": "A 20% shot can be the right call",
  "hook": "You'll lose this hand four times out of five. Calling is still correct.",
  "caption": "You'll lose four times out of five and calling is still correct. Pot {pot}, call {call}, {outs} outs of {unseen}: equity {equity} vs {need} needed. EV +{ev}.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
@@ -43,7 +43,7 @@
  "facts": {},
  "cta": "Follow QuanTik for the math behind every decision",
  "thumb": {
-  "series": "POKER THEORY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "LOSE 4 OF 5.",
@@ -51,53 +51,132 @@
    "CALL."
   ],
   "sub": "Equity {equity} vs {need} needed",
+  "no_number": true,
   "image": "poker-table"
  },
  "scenes": [
   {
    "say": "You'll lose this hand four times out of five. Calling is still correct.",
    "show": "Lose 4 of 5. Still call.",
-   "visual": "casino",
-   "image": "poker-table"
+   "image": "poker-table",
+   "clip": "poker_chips"
   },
   {
    "say": "Pot odds compare what it costs to call with what you can win.",
    "show": "Cost vs prize.",
-   "kind": "scale"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "scale",
+      "x": 540,
+      "y": 380,
+      "s": 400
+     },
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 360,
+      "y": 320,
+      "s": 70
+     },
+     {
+      "t": "prop",
+      "k": "pot",
+      "x": 720,
+      "y": 300,
+      "s": 130,
+      "at": 0.3
+     }
+    ]
+   }
   },
   {
    "say": "There's {pot} in the pot. Calling costs {call}. {outs} cards win it, out of {unseen} unseen.",
    "show": "Pot {pot}. Call {call}.",
-   "visual": "casino",
    "note": "Computed: equity = {outs}/{unseen}; break-even = call / (pot + call)",
-   "real": true
+   "clip": "cards_deal"
   },
   {
    "say": "Your chance: {equity}. You only need {need} to break even.",
    "show": "You need {need}.",
-   "kind": "duel",
    "big": "{equity}",
    "big_label": "your chance to win",
    "claims": [
     "sim"
-   ]
+   ],
+   "kind": "duel"
   },
   {
    "say": "Expected value of calling: plus {ev}.",
    "show": "EV of calling:",
-   "visual": "coin",
    "big": "+{ev}",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "casino",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "cheer",
+      "col": "gold",
+      "h": 290,
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 320,
+      "y": 480,
+      "s": 120
+     },
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 760,
+      "y": 480,
+      "s": 120
+     }
+    ]
+   }
   },
   {
    "say": "The question was never 'will I win?'. It's 'is the price lower than the chance?'",
    "show": "Is the price lower than the chance?",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "think",
+      "col": "bone",
+      "h": 300
+     },
+     {
+      "t": "label",
+      "x": 330,
+      "y": 120,
+      "text": "PRICE",
+      "col": "red"
+     },
+     {
+      "t": "label",
+      "x": 760,
+      "y": 120,
+      "text": "CHANCE",
+      "col": "green"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "The question was never 'will I win?'. It's 'is the price lower than the chance?'",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "gold",
+ "tint_x": 0.4
 }

@@ -14,7 +14,7 @@
  "episode_no": 8,
  "group": "dark-truth",
  "concept": "Time Arbitrage",
- "tag": "DARK TRUTH #08",
+ "tag": "",
  "title": "The poor sell time. The rich buy it back.",
  "hook": "The poor sell time for money. The rich buy it back.",
  "caption": "The poor sell time for money; the rich buy it back. Money buys time, time goes into leverage, leverage makes more money. Know what your hour is worth and stop selling it cheaper.",
@@ -34,7 +34,7 @@
  "facts": {},
  "cta": "Follow QuanTik for more dark truths about money",
  "thumb": {
-  "series": "THE DARK TRUTH OF MONEY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "THE RICH",
@@ -42,42 +42,247 @@
    "BACK."
   ],
   "sub": "Price your hour like an asset",
-  "art": "office"
+  "no_number": true,
+  "stick": {
+   "set": "void",
+   "items": [
+    {
+     "t": "prop",
+     "k": "hourglass",
+     "x": 540,
+     "y": 380,
+     "s": 340
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "The poor sell time for money. The rich buy it back.",
    "show": "The poor sell time for money. The rich buy it back.",
-   "kind": "office"
+   "stick": {
+    "set": "office",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "sit",
+      "col": "bone",
+      "h": 280,
+      "face": "sad"
+     },
+     {
+      "t": "prop",
+      "k": "clock",
+      "x": 300,
+      "y": 160,
+      "s": 110
+     },
+     {
+      "t": "prop",
+      "k": "cash",
+      "x": 760,
+      "y": 350,
+      "s": 120,
+      "motion": "fly",
+      "to": [
+       300,
+       300
+      ]
+     },
+     {
+      "t": "man",
+      "x": 800,
+      "pose": "stand",
+      "col": "purple",
+      "h": 300,
+      "face": "happy"
+     }
+    ]
+   }
   },
   {
    "say": "Everyone gets the same twenty-four hours. Not everyone owns them.",
    "show": "Same hours. Different owners.",
-   "kind": "commute"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "clock",
+      "x": 300,
+      "y": 330,
+      "s": 220
+     },
+     {
+      "t": "prop",
+      "k": "clock",
+      "x": 760,
+      "y": 330,
+      "s": 220
+     },
+     {
+      "t": "prop",
+      "k": "lock",
+      "x": 760,
+      "y": 520,
+      "s": 110,
+      "at": 0.4
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 80,
+      "text": "SAME 24 HOURS",
+      "col": "bone"
+     }
+    ]
+   }
   },
   {
    "say": "The loop: money buys back time, time goes into leverage, leverage makes more money.",
    "show": "Money → time → leverage.",
-   "kind": "walkaway"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "cash",
+      "x": 220,
+      "y": 330,
+      "s": 110
+     },
+     {
+      "t": "arrow",
+      "from": [
+       300,
+       330
+      ],
+      "to": [
+       450,
+       330
+      ],
+      "col": "purple",
+      "at": 0.2
+     },
+     {
+      "t": "prop",
+      "k": "clock",
+      "x": 540,
+      "y": 330,
+      "s": 120,
+      "at": 0.25
+     },
+     {
+      "t": "arrow",
+      "from": [
+       620,
+       330
+      ],
+      "to": [
+       770,
+       330
+      ],
+      "col": "purple",
+      "at": 0.45
+     },
+     {
+      "t": "prop",
+      "k": "bulb",
+      "x": 860,
+      "y": 330,
+      "s": 120,
+      "at": 0.5
+     }
+    ]
+   }
   },
   {
    "say": "An hour learning a skill or building a system can be worth a week of errands.",
    "show": "Some hours are worth weeks.",
-   "visual": "professor",
-   "real": true
+   "stick": {
+    "set": "lab",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "think",
+      "col": "purple",
+      "h": 290
+     },
+     {
+      "t": "prop",
+      "k": "bulb",
+      "x": 320,
+      "y": 120,
+      "s": 100,
+      "at": 0.3
+     },
+     {
+      "t": "prop",
+      "k": "box",
+      "x": 760,
+      "y": 560,
+      "s": 120,
+      "n": 3,
+      "dx": -60,
+      "dy": -40
+     }
+    ]
+   }
   },
   {
    "say": "The catch: you have to know what your hour is worth, and refuse to sell it cheaper.",
    "show": "What's your hour worth?",
-   "visual": "board"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "hold",
+      "col": "bone",
+      "h": 300,
+      "hold": "clock"
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 80,
+      "text": "WHAT IS MY HOUR WORTH?",
+      "col": "purple"
+     }
+    ]
+   }
   },
   {
    "say": "Time is the only asset you can't earn back. Price it like one.",
    "show": "Price your time.",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "hourglass",
+      "x": 540,
+      "y": 400,
+      "s": 300,
+      "motion": "pulse"
+     },
+     {
+      "t": "man",
+      "x": 860,
+      "pose": "slump",
+      "col": "bone",
+      "h": 240
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Time is the only asset you can't earn back. Price it like one.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "purple",
+ "tint_x": 0.6
 }

@@ -14,7 +14,7 @@
  "episode_no": 20,
  "group": "dark-truth",
  "concept": "The Illusion of Financial Freedom",
- "tag": "DARK TRUTH #20",
+ "tag": "",
  "title": "You don't want freedom. You want a bigger number.",
  "hook": "Most people don't want financial freedom. They want a bigger number.",
  "caption": "Most people don't want freedom, they want a bigger number — and a bigger number never ends. Freedom is knowing what enough costs. If you can't name your number, you'll chase it forever.",
@@ -33,7 +33,7 @@
  "facts": {},
  "cta": "Follow QuanTik for more dark truths about money",
  "thumb": {
-  "series": "THE DARK TRUTH OF MONEY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "YOU WANT",
@@ -41,42 +41,222 @@
    "NUMBER."
   ],
   "sub": "Name your number, or chase it forever",
-  "art": "walkaway"
+  "no_number": true,
+  "stick": {
+   "set": "street",
+   "items": [
+    {
+     "t": "man",
+     "x": 260,
+     "pose": "run",
+     "col": "bone",
+     "h": 260
+    },
+    {
+     "t": "prop",
+     "k": "flag",
+     "x": 760,
+     "y": 450,
+     "s": 170
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "Most people don't want financial freedom. They want a bigger number.",
    "show": "You want a bigger number.",
-   "kind": "scroll"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "point",
+      "col": "bone",
+      "h": 290
+     },
+     {
+      "t": "label",
+      "x": 720,
+      "y": 300,
+      "text": "MORE",
+      "col": "gold",
+      "size": 90,
+      "at": 0.2
+     }
+    ]
+   }
   },
   {
    "say": "A bigger number never ends. Every time you reach it, your lifestyle moves the line.",
    "show": "The line keeps moving.",
-   "kind": "wheel"
+   "stick": {
+    "set": "street",
+    "items": [
+     {
+      "t": "man",
+      "x": 200,
+      "pose": "run",
+      "col": "bone",
+      "h": 260,
+      "move": [
+       700,
+       0.0,
+       0.9
+      ]
+     },
+     {
+      "t": "prop",
+      "k": "flag",
+      "x": 400,
+      "y": 450,
+      "s": 170,
+      "motion": "fly",
+      "to": [
+       980,
+       450
+      ]
+     }
+    ]
+   }
   },
   {
    "say": "The chase: more money, more spending, a goal that runs away.",
    "show": "More money. More spending.",
-   "kind": "spend"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "walk",
+      "col": "bone",
+      "h": 260
+     },
+     {
+      "t": "prop",
+      "k": "cash",
+      "x": 300,
+      "y": 300,
+      "s": 90
+     },
+     {
+      "t": "prop",
+      "k": "bag",
+      "x": 760,
+      "y": 300,
+      "s": 90
+     },
+     {
+      "t": "arrow",
+      "from": [
+       380,
+       300
+      ],
+      "to": [
+       680,
+       300
+      ],
+      "col": "red"
+     }
+    ]
+   }
   },
   {
    "say": "The other road: know what enough costs, and freedom shows up years earlier.",
    "show": "Know what enough costs.",
-   "kind": "walkaway"
+   "stick": {
+    "set": "street",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "walk",
+      "col": "green",
+      "h": 270,
+      "move": [
+       800,
+       0.1,
+       0.8
+      ],
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "door",
+      "x": 920,
+      "y": 470,
+      "s": 260
+     },
+     {
+      "t": "glow",
+      "x": 920,
+      "y": 400,
+      "r": 220,
+      "col": "warm"
+     }
+    ]
+   }
   },
   {
    "say": "Freedom isn't how much you have. It's how little you need to live the life you want.",
    "show": "How little you need.",
-   "visual": "exit",
-   "real": true
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "cheer",
+      "col": "blue",
+      "h": 300,
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "house",
+      "x": 300,
+      "y": 560,
+      "s": 120
+     },
+     {
+      "t": "prop",
+      "k": "mug",
+      "x": 780,
+      "y": 600,
+      "s": 70
+     }
+    ]
+   }
   },
   {
    "say": "If you can't name your number, you'll chase it forever.",
    "show": "Name your number.",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "think",
+      "col": "bone",
+      "h": 300
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 80,
+      "text": "WHAT IS ENOUGH?",
+      "col": "blue"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "If you can't name your number, you'll chase it forever.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "blue",
+ "tint_x": 0.5
 }

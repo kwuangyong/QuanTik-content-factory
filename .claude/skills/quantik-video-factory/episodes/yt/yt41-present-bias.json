@@ -14,7 +14,7 @@
  "episode_no": 41,
  "group": "psychology",
  "concept": "Present Bias",
- "tag": "PSYCHOLOGY #41",
+ "tag": "",
  "title": "Today-you keeps robbing future-you",
  "hook": "Today-you keeps robbing future-you. And future-you can't fight back.",
  "caption": "Today-you keeps robbing future-you. Present bias makes rewards now look huge and costs later look tiny. Don't rely on willpower — automate the good choice.",
@@ -33,7 +33,7 @@
  "facts": {},
  "cta": "Follow QuanTik for the psychology behind your money",
  "thumb": {
-  "series": "PSYCHOLOGY FACTS",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "TODAY-YOU",
@@ -41,47 +41,242 @@
    "FUTURE-YOU."
   ],
   "sub": "Present bias",
-  "art": "alone"
+  "no_number": true,
+  "stick": {
+   "set": "void",
+   "items": [
+    {
+     "t": "man",
+     "x": 320,
+     "pose": "point",
+     "col": "bone",
+     "h": 290,
+     "face": "happy"
+    },
+    {
+     "t": "man",
+     "x": 760,
+     "pose": "cry",
+     "col": "muted",
+     "h": 260,
+     "facing": -1,
+     "face": "cry"
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "Today-you keeps robbing future-you. And future-you can't fight back.",
    "show": "Today-you robs future-you.",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "point",
+      "col": "bone",
+      "h": 290,
+      "face": "happy"
+     },
+     {
+      "t": "man",
+      "x": 760,
+      "pose": "cry",
+      "col": "muted",
+      "h": 260,
+      "facing": -1,
+      "face": "cry"
+     },
+     {
+      "t": "label",
+      "x": 760,
+      "y": 120,
+      "text": "FUTURE YOU",
+      "col": "muted"
+     }
+    ]
+   }
   },
   {
    "say": "Present bias: rewards right now look huge. Costs later look tiny.",
    "show": "Now looks huge. Later looks tiny.",
-   "kind": "scale"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "mug",
+      "x": 300,
+      "y": 420,
+      "s": 220
+     },
+     {
+      "t": "prop",
+      "k": "piggy",
+      "x": 760,
+      "y": 500,
+      "s": 90
+     },
+     {
+      "t": "label",
+      "x": 300,
+      "y": 200,
+      "text": "NOW",
+      "col": "warm"
+     },
+     {
+      "t": "label",
+      "x": 760,
+      "y": 300,
+      "text": "LATER",
+      "col": "muted"
+     }
+    ]
+   }
   },
   {
    "say": "Take the easy path today, and the bill lands later, with interest.",
    "show": "The bill lands later.",
-   "visual": "money_burn",
-   "real": true
+   "stick": {
+    "set": "home",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "sit",
+      "col": "bone",
+      "h": 280,
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "bill",
+      "x": 760,
+      "y": 300,
+      "s": 120,
+      "motion": "fall",
+      "at": 0.4
+     }
+    ]
+   }
   },
   {
    "say": "Take the hard path today, and the reward quietly stacks up.",
    "show": "The reward stacks up.",
-   "visual": "rocket"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "push",
+      "col": "bone",
+      "h": 270
+     },
+     {
+      "t": "prop",
+      "k": "boulder",
+      "x": 560,
+      "y": 520,
+      "s": 200
+     },
+     {
+      "t": "prop",
+      "k": "pot",
+      "x": 900,
+      "y": 520,
+      "s": 140,
+      "at": 0.4
+     }
+    ]
+   }
   },
   {
    "say": "It's not weak willpower. Your brain evolved to grab what's in front of it.",
    "show": "Your brain grabs what's in front.",
-   "kind": "scroll"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "brain",
+      "x": 540,
+      "y": 320,
+      "s": 200,
+      "motion": "pulse"
+     },
+     {
+      "t": "prop",
+      "k": "mug",
+      "x": 760,
+      "y": 300,
+      "s": 90,
+      "at": 0.3
+     }
+    ]
+   }
   },
   {
    "say": "Plans for the future always look reasonable. Then the future turns into today.",
    "show": "Then the future becomes today.",
-   "kind": "commute"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "walk",
+      "col": "bone",
+      "h": 270,
+      "move": [
+       700,
+       0.1,
+       0.9
+      ]
+     },
+     {
+      "t": "prop",
+      "k": "calendar",
+      "x": 860,
+      "y": 300,
+      "s": 140
+     }
+    ]
+   }
   },
   {
    "say": "Don't rely on willpower. Automate the good choice, like saving before you spend.",
    "show": "Automate the good choice.",
-   "kind": "walkaway"
+   "stick": {
+    "set": "bank",
+    "items": [
+     {
+      "t": "prop",
+      "k": "piggy",
+      "x": 540,
+      "y": 500,
+      "s": 200
+     },
+     {
+      "t": "prop",
+      "k": "cash",
+      "x": 540,
+      "y": 200,
+      "s": 90,
+      "motion": "fall",
+      "n": 3,
+      "dx": 40,
+      "at": 0.2
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Don't rely on willpower. Automate the good choice, like saving before you spend.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "warm",
+ "tint_x": 0.4
 }

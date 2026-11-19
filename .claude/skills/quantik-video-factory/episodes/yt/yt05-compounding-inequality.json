@@ -30,7 +30,7 @@
  "episode_no": 5,
  "group": "dark-truth",
  "concept": "Compounding Inequality",
- "tag": "DARK TRUTH #05",
+ "tag": "",
  "title": "Inequality compounds too",
  "hook": "The rich aren't just richer. Their money runs faster.",
  "caption": "The rich aren't just richer — their money runs faster. {a_start} at {a_rate} vs {b_start} at {b_rate}: a tenfold gap becomes {gap_ratio}x after {years} years.\n\n(Simulation; illustration only.)",
@@ -57,7 +57,7 @@
  "facts": {},
  "cta": "Follow QuanTik for more dark truths about money",
  "thumb": {
-  "series": "THE DARK TRUTH OF MONEY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "INEQUALITY",
@@ -65,53 +65,227 @@
    "TOO."
   ],
   "sub": "10x becomes {gap_ratio}x",
-  "art": "compare"
+  "no_number": true,
+  "stick": {
+   "set": "street",
+   "items": [
+    {
+     "t": "man",
+     "x": 260,
+     "pose": "run",
+     "col": "gold",
+     "h": 300,
+     "hold": "cash"
+    },
+    {
+     "t": "man",
+     "x": 760,
+     "pose": "walk",
+     "col": "muted",
+     "h": 240
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "The rich aren't just richer. Their money runs faster.",
    "show": "The rich aren't just richer. Their money runs faster.",
-   "kind": "compare"
+   "stick": {
+    "set": "street",
+    "items": [
+     {
+      "t": "man",
+      "x": 200,
+      "pose": "run",
+      "col": "gold",
+      "h": 300,
+      "move": [
+       900,
+       0.0,
+       0.8
+      ],
+      "hold": "cash"
+     },
+     {
+      "t": "man",
+      "x": 200,
+      "pose": "walk",
+      "col": "muted",
+      "h": 240,
+      "move": [
+       420,
+       0.0,
+       0.9
+      ]
+     }
+    ]
+   }
   },
   {
    "say": "Big money gets lower fees, better deals, and can wait out a crash.",
    "show": "Lower fees. Better deals.",
-   "visual": "banker",
-   "image": "nyse-floor"
+   "image": "nyse-floor",
+   "clip": "trader"
   },
   {
    "say": "Start with {a_start} at {a_rate}, versus {b_start} at {b_rate}. A tenfold gap.",
    "show": "A tenfold gap.",
-   "kind": "duel",
-   "note": "Simulation: {a_rate} vs {b_rate} a year, {years} years"
+   "note": "Simulation: {a_rate} vs {b_rate} a year, {years} years",
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "cash",
+      "x": 300,
+      "y": 470,
+      "s": 100,
+      "motion": "pile",
+      "n": 10,
+      "dy": -35,
+      "until": 0.6
+     },
+     {
+      "t": "prop",
+      "k": "coin",
+      "x": 760,
+      "y": 590,
+      "s": 80
+     },
+     {
+      "t": "label",
+      "x": 300,
+      "y": 80,
+      "text": "BIG PILE",
+      "col": "gold"
+     },
+     {
+      "t": "label",
+      "x": 760,
+      "y": 470,
+      "text": "SMALL",
+      "col": "muted"
+     }
+    ]
+   }
   },
   {
    "say": "After {years} years, it isn't tenfold anymore.",
    "show": "After {years} years:",
-   "visual": "rocket",
    "big": "{gap_ratio}x",
    "big_label": "the gap that started at ten",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "cash",
+      "x": 300,
+      "y": 600,
+      "s": 70,
+      "motion": "pile",
+      "n": 14,
+      "dy": -40,
+      "until": 0.9
+     },
+     {
+      "t": "prop",
+      "k": "coin",
+      "x": 760,
+      "y": 600,
+      "s": 70,
+      "motion": "pile",
+      "n": 4,
+      "dy": -30
+     },
+     {
+      "t": "arrow",
+      "from": [
+       380,
+       120
+      ],
+      "to": [
+       700,
+       120
+      ],
+      "col": "red",
+      "at": 0.5
+     }
+    ]
+   }
   },
   {
    "say": "Compounding isn't neutral. It amplifies every head start, including the rate itself.",
    "show": "Compounding amplifies.",
-   "visual": "storm"
+   "clip": "storm_waves"
   },
   {
    "say": "You can't choose your starting pile. You can fight for your rate: low fees, patience, time.",
    "show": "Fight for your rate.",
-   "kind": "walkaway"
+   "stick": {
+    "set": "bank",
+    "items": [
+     {
+      "t": "man",
+      "x": 380,
+      "pose": "push",
+      "col": "bone",
+      "h": 270
+     },
+     {
+      "t": "prop",
+      "k": "boulder",
+      "x": 640,
+      "y": 520,
+      "s": 220
+     },
+     {
+      "t": "prop",
+      "k": "hourglass",
+      "x": 880,
+      "y": 300,
+      "s": 120,
+      "at": 0.4
+     }
+    ]
+   }
   },
   {
    "say": "Interest is a loyalty program for people who already have money.",
    "show": "A loyalty program.",
-   "kind": "alone"
+   "stick": {
+    "set": "bank",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "hold",
+      "col": "gold",
+      "h": 300,
+      "hold": "crown",
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "coin",
+      "x": 300,
+      "y": 300,
+      "s": 70,
+      "motion": "rain",
+      "n": 12,
+      "spread": 600
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Interest is a loyalty program for people who already have money.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "gold",
+ "tint_x": 0.6
 }

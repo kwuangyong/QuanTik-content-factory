@@ -30,7 +30,7 @@
  "episode_no": 16,
  "group": "dark-truth",
  "concept": "Asymmetric Wealth",
- "tag": "DARK TRUTH #16",
+ "tag": "",
  "title": "Lose almost every time and still come out ahead",
  "hook": "Lose almost every single time, and still come out ahead.",
  "caption": "Lose almost every time and still come out ahead. Lose {a_abs1} with probability {a_p1}, win {a_abs0} with probability {a_p0}: lost {sim_losses} of {trials} tries, still finished up {sim_total}.\n\n(Simulation; illustration of asymmetry, not an investment.)",
@@ -57,7 +57,7 @@
  "facts": {},
  "cta": "Follow QuanTik for more dark truths about money",
  "thumb": {
-  "series": "THE DARK TRUTH OF MONEY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "LOSE OFTEN.",
@@ -65,56 +65,215 @@
    "WIN."
   ],
   "sub": "Lost {sim_losses} of {trials} — still up {sim_total}",
-  "visual": "rocket"
+  "no_number": true,
+  "stick": {
+   "set": "void",
+   "items": [
+    {
+     "t": "man",
+     "x": 300,
+     "pose": "cheer",
+     "col": "green",
+     "h": 300,
+     "face": "happy"
+    },
+    {
+     "t": "prop",
+     "k": "pot",
+     "x": 760,
+     "y": 420,
+     "s": 220
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "Lose almost every single time, and still come out ahead.",
    "show": "Lose often. Still win.",
-   "visual": "rocket",
-   "real": true
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "cheer",
+      "col": "green",
+      "h": 300,
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "coin",
+      "x": 700,
+      "y": 300,
+      "s": 50,
+      "motion": "rain",
+      "n": 10,
+      "spread": 500
+     }
+    ]
+   }
   },
   {
    "say": "Asymmetry: the downside is small and capped. The upside is big.",
    "show": "Small downside. Big upside.",
-   "kind": "scale"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "scale",
+      "x": 540,
+      "y": 380,
+      "s": 400
+     },
+     {
+      "t": "prop",
+      "k": "coin",
+      "x": 360,
+      "y": 300,
+      "s": 60
+     },
+     {
+      "t": "prop",
+      "k": "pot",
+      "x": 720,
+      "y": 280,
+      "s": 150,
+      "at": 0.3
+     }
+    ]
+   }
   },
   {
    "say": "A bet that loses {a_abs1} with probability {a_p1}, and wins {a_abs0} with probability {a_p0}.",
    "show": "Lose {a_abs1}, or win {a_abs0}.",
-   "kind": "duel",
-   "note": "Simulation: {trials} tries, seeded"
+   "note": "Simulation: {trials} tries, seeded",
+   "kind": "duel"
   },
   {
    "say": "Over {trials} tries, it lost {sim_losses} times.",
    "show": "Lost:",
-   "visual": "coin_crowd",
    "big": "{sim_losses}/{trials}",
    "big_label": "times — and still ended up",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "crowd",
+      "n": 10,
+      "hi": [
+       8
+      ],
+      "x0": 100,
+      "gap": 95,
+      "h": 160,
+      "hicol": "green",
+      "pose": "slump"
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 120,
+      "text": "LOSE, LOSE, LOSE… WIN",
+      "col": "green",
+      "at": 0.4
+     }
+    ]
+   }
   },
   {
    "say": "And still finished up {sim_total}. The expected value per try: {a_ev}.",
    "show": "Finished up {sim_total}.",
-   "kind": "walkaway",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "bank",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "hold",
+      "col": "green",
+      "h": 300,
+      "hold": "pot",
+      "face": "happy"
+     }
+    ]
+   }
   },
   {
    "say": "The condition: every loss must be small enough that you're still playing when the win shows up.",
    "show": "Stay in the game.",
-   "visual": "drunk_walk"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "walk",
+      "col": "bone",
+      "h": 270
+     },
+     {
+      "t": "prop",
+      "k": "coin",
+      "x": 620,
+      "y": 560,
+      "s": 60,
+      "n": 5,
+      "dx": 70
+     },
+     {
+      "t": "prop",
+      "k": "pot",
+      "x": 960,
+      "y": 520,
+      "s": 130,
+      "at": 0.5
+     }
+    ]
+   }
   },
   {
    "say": "The rich don't avoid losing. They make losing cheap.",
    "show": "Make losing cheap.",
-   "kind": "alone"
+   "stick": {
+    "set": "lab",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "point",
+      "col": "bone",
+      "h": 300
+     },
+     {
+      "t": "prop",
+      "k": "shield",
+      "x": 820,
+      "y": 300,
+      "s": 150
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 70,
+      "text": "CAP THE DOWNSIDE",
+      "col": "green"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "The rich don't avoid losing. They make losing cheap.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "green",
+ "tint_x": 0.6
 }

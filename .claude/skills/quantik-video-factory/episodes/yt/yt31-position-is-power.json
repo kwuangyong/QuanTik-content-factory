@@ -14,7 +14,7 @@
  "episode_no": 31,
  "group": "poker",
  "concept": "Position Is Power",
- "tag": "POKER THEORY #31",
+ "tag": "",
  "title": "Acting last is a superpower",
  "hook": "At the poker table, going last is a superpower. Most players don't even notice.",
  "caption": "Position is power: the player who acts last sees what everyone did before deciding. Information is edge — at the table and in every negotiation.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
@@ -33,7 +33,7 @@
  "facts": {},
  "cta": "Follow QuanTik for the math behind every decision",
  "thumb": {
-  "series": "POKER THEORY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "GOING LAST",
@@ -41,43 +41,146 @@
    "SUPERPOWER."
   ],
   "sub": "Position is information",
+  "no_number": true,
   "image": "poker-table"
  },
  "scenes": [
   {
    "say": "At the poker table, going last is a superpower. Most players don't even notice.",
    "show": "Going last is a superpower.",
-   "kind": "duel"
+   "stick": {
+    "set": "casino",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "stand",
+      "col": "bone",
+      "h": 280
+     },
+     {
+      "t": "man",
+      "x": 780,
+      "pose": "stand",
+      "col": "blue",
+      "h": 300,
+      "facing": -1,
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "crown",
+      "x": 780,
+      "y": 260,
+      "s": 90,
+      "at": 0.3
+     }
+    ]
+   }
   },
   {
    "say": "The player who acts first decides in the dark.",
    "show": "First decides in the dark.",
-   "visual": "casino",
-   "image": "poker-table"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "stand",
+      "col": "bone",
+      "h": 290,
+      "face": "shock"
+     },
+     {
+      "t": "glow",
+      "x": 540,
+      "y": 300,
+      "r": 120,
+      "col": "muted",
+      "alpha": 40
+     }
+    ]
+   }
   },
   {
    "say": "The player who acts last sees what everyone did, then chooses.",
    "show": "Last sees everything.",
-   "visual": "telescope"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 780,
+      "pose": "think",
+      "col": "blue",
+      "h": 290,
+      "facing": -1
+     },
+     {
+      "t": "prop",
+      "k": "eye",
+      "x": 600,
+      "y": 250,
+      "s": 120
+     },
+     {
+      "t": "man",
+      "x": 250,
+      "pose": "bet",
+      "col": "bone",
+      "h": 260
+     }
+    ]
+   }
   },
   {
    "say": "Information is edge. Position controls the pot and gives you more options every street.",
    "show": "Information is edge.",
-   "visual": "casino",
-   "real": true
+   "image": "poker-table",
+   "clip": "cards_deal"
   },
   {
    "say": "Same in negotiations: whoever names a price second knows more.",
    "show": "Name your price second.",
-   "kind": "compare"
+   "clip": "deal"
   },
   {
    "say": "When you can, let the other side show their cards first.",
    "show": "Let them show first.",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "wave",
+      "col": "bone",
+      "h": 280
+     },
+     {
+      "t": "prop",
+      "k": "card",
+      "x": 300,
+      "y": 200,
+      "s": 90,
+      "at": 0.3
+     },
+     {
+      "t": "man",
+      "x": 780,
+      "pose": "think",
+      "col": "blue",
+      "h": 290,
+      "facing": -1
+     }
+    ]
+   }
   }
  ],
  "takeaway": "When you can, let the other side show their cards first.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "blue",
+ "tint_x": 0.6
 }

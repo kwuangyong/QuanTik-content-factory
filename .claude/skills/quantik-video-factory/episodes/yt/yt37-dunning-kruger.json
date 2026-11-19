@@ -27,7 +27,7 @@
  "episode_no": 37,
  "group": "psychology",
  "concept": "Dunning-Kruger Effect",
- "tag": "PSYCHOLOGY #37",
+ "tag": "",
  "title": "The least skilled are often the most confident",
  "hook": "The least skilled person in the room is often the most confident. There's a study for that.",
  "caption": "The least skilled are often the most confident. Kruger & Dunning (1999): the bottom group scored around the {actual}th percentile but rated themselves around the {self}nd.",
@@ -62,7 +62,7 @@
  },
  "cta": "Follow QuanTik for the psychology behind your money",
  "thumb": {
-  "series": "PSYCHOLOGY FACTS",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "LEAST",
@@ -70,53 +70,228 @@
    "MOST SURE."
   ],
   "sub": "Scored {actual}th, rated {self}nd",
-  "visual": "professor"
+  "no_number": true,
+  "stick": {
+   "set": "stage",
+   "items": [
+    {
+     "t": "prop",
+     "k": "spotlight",
+     "x": 540,
+     "y": 0,
+     "s": 400
+    },
+    {
+     "t": "man",
+     "x": 540,
+     "pose": "cheer",
+     "col": "gold",
+     "h": 300,
+     "face": "happy"
+    },
+    {
+     "t": "prop",
+     "k": "crown",
+     "x": 540,
+     "y": 230,
+     "s": 90
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "The least skilled person in the room is often the most confident. There's a study for that.",
    "show": "Least skilled. Most confident.",
-   "kind": "compare"
+   "stick": {
+    "set": "stage",
+    "items": [
+     {
+      "t": "prop",
+      "k": "spotlight",
+      "x": 540,
+      "y": 0,
+      "s": 400
+     },
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "cheer",
+      "col": "gold",
+      "h": 300,
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "crown",
+      "x": 540,
+      "y": 230,
+      "s": 90
+     }
+    ]
+   }
   },
   {
    "say": "The Dunning-Kruger effect: lacking a skill also means lacking the skill to notice.",
    "show": "You can't see what you lack.",
-   "visual": "professor",
-   "real": true
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "stand",
+      "col": "bone",
+      "h": 290,
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "eye",
+      "x": 540,
+      "y": 120,
+      "s": 110
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 560,
+      "text": "",
+      "col": "bone"
+     }
+    ]
+   }
   },
   {
    "say": "Kruger and Dunning tested people in 1999. The bottom group scored around the {actual}th percentile.",
    "show": "Actual score:",
-   "kind": "alone",
    "big": "{actual}th",
    "big_label": "percentile",
    "note": "Source: Kruger & Dunning (1999), JPSP",
    "claims": [
     "kd"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "ladder",
+      "x": 540,
+      "y": 380,
+      "s": 520
+     },
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "climb",
+      "col": "bone",
+      "h": 200,
+      "y": 600
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 70,
+      "text": "WHERE THEY ARE",
+      "col": "red"
+     }
+    ]
+   }
   },
   {
    "say": "They rated themselves around the {self}nd percentile. Above average.",
    "show": "Self-rating:",
-   "kind": "scroll",
    "big": "{self}nd",
    "big_label": "percentile — 'above average'",
    "claims": [
     "kd"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "ladder",
+      "x": 540,
+      "y": 380,
+      "s": 520
+     },
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "cheer",
+      "col": "gold",
+      "h": 200,
+      "y": 200
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 70,
+      "text": "WHERE THEY THINK",
+      "col": "gold"
+     }
+    ]
+   }
   },
   {
    "say": "The skill you need to do something well is the same skill you need to see you're doing it badly.",
    "show": "Same skill, both ways.",
-   "kind": "duel"
+   "stick": {
+    "set": "lab",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "think",
+      "col": "bone",
+      "h": 290
+     },
+     {
+      "t": "prop",
+      "k": "magnifier",
+      "x": 600,
+      "y": 300,
+      "s": 140
+     }
+    ]
+   }
   },
   {
    "say": "If a field looks too easy, you probably haven't seen how hard it is yet.",
    "show": "Too easy? Look again.",
-   "kind": "walkaway"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "boulder",
+      "x": 540,
+      "y": 560,
+      "s": 200
+     },
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "point",
+      "col": "bone",
+      "h": 270
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 120,
+      "text": "HARDER THAN IT LOOKS",
+      "col": "gold"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "If a field looks too easy, you probably haven't seen how hard it is yet.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "gold",
+ "tint_x": 0.5
 }

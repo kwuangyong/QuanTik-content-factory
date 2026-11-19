@@ -30,7 +30,7 @@
  "episode_no": 7,
  "group": "dark-truth",
  "concept": "The Debt Trap",
- "tag": "DARK TRUTH #07",
+ "tag": "",
  "title": "You didn't buy a car. You bought a monthly boss.",
  "hook": "You didn't buy a car. You bought a monthly boss.",
  "caption": "You didn't buy a car — you bought a monthly boss. {debt_start} of card debt at {debt_rate} a year, never paid down, becomes {debt_end} in {years} years ({debt_mult}x).\n\n(Simulation; illustration only.)",
@@ -57,7 +57,7 @@
  "facts": {},
  "cta": "Follow QuanTik for more dark truths about money",
  "thumb": {
-  "series": "THE DARK TRUTH OF MONEY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "YOU BOUGHT",
@@ -65,61 +65,219 @@
    "BOSS."
   ],
   "sub": "Unpaid card debt: {debt_mult}x in {years} years",
+  "no_number": true,
   "image": "credit-cards"
  },
  "scenes": [
   {
    "say": "You didn't buy a car. You bought a monthly boss.",
    "show": "You didn't buy a car. You bought a monthly boss.",
-   "kind": "spend"
+   "stick": {
+    "set": "street",
+    "items": [
+     {
+      "t": "prop",
+      "k": "car",
+      "x": 330,
+      "y": 560,
+      "s": 260
+     },
+     {
+      "t": "man",
+      "x": 760,
+      "pose": "slump",
+      "col": "bone",
+      "h": 300,
+      "face": "sad"
+     },
+     {
+      "t": "prop",
+      "k": "bill",
+      "x": 760,
+      "y": 200,
+      "s": 110,
+      "motion": "pulse"
+     },
+     {
+      "t": "label",
+      "x": 330,
+      "y": 380,
+      "text": "NEW CAR",
+      "col": "gold"
+     }
+    ]
+   }
   },
   {
    "say": "Compounding is magic when you receive it. When you pay it, it's a trap.",
    "show": "Compounding, reversed.",
-   "visual": "money_burn",
-   "image": "credit-cards"
+   "image": "credit-cards",
+   "visual": "money_burn"
   },
   {
    "say": "{debt_start} of card debt at {debt_rate} a year, never paid down.",
    "show": "Card debt at {debt_rate}.",
-   "kind": "wheel",
-   "note": "Simulation: {debt_rate}/yr interest, no repayments; savings at {sav_rate}"
+   "note": "Simulation: {debt_rate}/yr interest, no repayments; savings at {sav_rate}",
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "bill",
+      "x": 540,
+      "y": 480,
+      "s": 160,
+      "motion": "pulse"
+     },
+     {
+      "t": "prop",
+      "k": "arrowup",
+      "x": 820,
+      "y": 400,
+      "s": 160,
+      "at": 0.3
+     },
+     {
+      "t": "man",
+      "x": 260,
+      "pose": "shrug",
+      "col": "bone",
+      "h": 270,
+      "face": "shock"
+     }
+    ]
+   }
   },
   {
    "say": "After {years} years it's {debt_end}.",
    "show": "After {years} years:",
-   "kind": "crowd",
    "big": "{debt_mult}x",
    "big_label": "what you owe",
+   "claims": [
+    "sim"
+   ],
    "crowd": {
     "n": "debt_end",
     "k": "debt_start"
    },
-   "claims": [
-    "sim"
-   ]
+   "kind": "crowd"
   },
   {
    "say": "The same money saved at {sav_rate} would be {sav_end}.",
    "show": "Saved instead: {sav_end}.",
-   "kind": "walkaway",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "bank",
+    "items": [
+     {
+      "t": "prop",
+      "k": "piggy",
+      "x": 400,
+      "y": 500,
+      "s": 180
+     },
+     {
+      "t": "prop",
+      "k": "arrowup",
+      "x": 640,
+      "y": 430,
+      "s": 120,
+      "at": 0.3
+     },
+     {
+      "t": "man",
+      "x": 820,
+      "pose": "stand",
+      "col": "green",
+      "h": 260,
+      "face": "happy"
+     }
+    ]
+   }
   },
   {
    "say": "Before you borrow, ask: does this thing put money in my pocket, or take it out every month?",
    "show": "In your pocket, or out?",
-   "visual": "banker",
-   "real": true
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "think",
+      "col": "bone",
+      "h": 320
+     },
+     {
+      "t": "prop",
+      "k": "arrowup",
+      "x": 280,
+      "y": 300,
+      "s": 130
+     },
+     {
+      "t": "prop",
+      "k": "arrowdown",
+      "x": 800,
+      "y": 300,
+      "s": 130
+     },
+     {
+      "t": "label",
+      "x": 280,
+      "y": 140,
+      "text": "IN",
+      "col": "green"
+     },
+     {
+      "t": "label",
+      "x": 800,
+      "y": 140,
+      "text": "OUT",
+      "col": "red"
+     }
+    ]
+   }
   },
   {
    "say": "An asset pays you. A liability gives you a boss.",
    "show": "A liability is a boss.",
-   "kind": "alone"
+   "stick": {
+    "set": "office",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "slump",
+      "col": "bone",
+      "h": 280,
+      "face": "sad"
+     },
+     {
+      "t": "man",
+      "x": 720,
+      "pose": "point",
+      "col": "red",
+      "h": 340,
+      "facing": -1,
+      "face": "angry"
+     },
+     {
+      "t": "label",
+      "x": 720,
+      "y": 80,
+      "text": "THE PAYMENT",
+      "col": "red"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "An asset pays you. A liability gives you a boss.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "red",
+ "tint_x": 0.3
 }

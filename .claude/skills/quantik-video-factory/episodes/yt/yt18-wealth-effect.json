@@ -14,7 +14,7 @@
  "episode_no": 18,
  "group": "dark-truth",
  "concept": "The Wealth Effect",
- "tag": "DARK TRUTH #18",
+ "tag": "",
  "title": "Feeling rich is how people get poor",
  "hook": "Feeling rich is one of the fastest ways to get poor.",
  "caption": "Feeling rich is how people get poor. Paper gains make us spend real cash and take real debt; when prices fall the gains vanish but the payments stay. Spend what you've banked, never what's on the screen.",
@@ -33,7 +33,7 @@
  "facts": {},
  "cta": "Follow QuanTik for more dark truths about money",
  "thumb": {
-  "series": "THE DARK TRUTH OF MONEY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "FEELING RICH",
@@ -41,43 +41,135 @@
    "POOR."
   ],
   "sub": "The wealth effect",
-  "visual": "rollercoaster"
+  "no_number": true,
+  "stick": {
+   "set": "market",
+   "items": [
+    {
+     "t": "man",
+     "x": 540,
+     "pose": "cheer",
+     "col": "bone",
+     "h": 290,
+     "face": "happy"
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "Feeling rich is one of the fastest ways to get poor.",
    "show": "Feeling rich makes you poor.",
-   "kind": "scroll"
+   "stick": {
+    "set": "market",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "cheer",
+      "col": "bone",
+      "h": 290,
+      "face": "happy"
+     }
+    ]
+   }
   },
   {
    "say": "Your stocks are green. Your house price went up. You feel wealthy.",
    "show": "Green stocks. Pricier house.",
-   "visual": "board",
-   "image": "nyse-floor"
+   "image": "nyse-floor",
+   "clip": "market_screen"
   },
   {
    "say": "So you spend real cash, and borrow real debt, against paper gains.",
    "show": "Real debt. Paper gains.",
-   "kind": "spend"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "carry",
+      "col": "bone",
+      "h": 280,
+      "hold": "bag",
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "car",
+      "x": 700,
+      "y": 560,
+      "s": 200
+     },
+     {
+      "t": "prop",
+      "k": "bill",
+      "x": 880,
+      "y": 300,
+      "s": 110,
+      "at": 0.4
+     }
+    ]
+   }
   },
   {
    "say": "Then prices fall. The gains vanish. The payments don't.",
    "show": "The gains vanish. Payments stay.",
-   "visual": "rollercoaster",
-   "real": true
+   "clip": "rollercoaster"
   },
   {
    "say": "That's why so many people feel poorer exactly when the market turns.",
    "show": "Poorer when it turns.",
-   "visual": "panic"
+   "stick": {
+    "set": "market",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "cry",
+      "col": "bone",
+      "h": 290,
+      "face": "cry"
+     },
+     {
+      "t": "prop",
+      "k": "arrowdown",
+      "x": 860,
+      "y": 300,
+      "s": 160
+     }
+    ]
+   }
   },
   {
    "say": "Spend what you've banked. Never what's still on the screen.",
    "show": "Never spend the screen.",
-   "kind": "alone"
+   "stick": {
+    "set": "bank",
+    "items": [
+     {
+      "t": "prop",
+      "k": "piggy",
+      "x": 340,
+      "y": 500,
+      "s": 180
+     },
+     {
+      "t": "man",
+      "x": 720,
+      "pose": "point",
+      "col": "green",
+      "h": 290,
+      "facing": -1
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Spend what you've banked. Never what's still on the screen.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "green",
+ "tint_x": 0.5
 }

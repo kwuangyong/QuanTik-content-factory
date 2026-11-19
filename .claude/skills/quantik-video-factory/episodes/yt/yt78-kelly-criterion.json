@@ -15,7 +15,7 @@
  "episode_no": 78,
  "group": "quant-mindset",
  "concept": "The Kelly Criterion",
- "tag": "QUANT MINDSET #78",
+ "tag": "",
  "title": "Bet too big and a winning edge loses",
  "hook": "You have a real edge. Bet too much, and you'll still lose. Here's the formula that says how much.",
  "caption": "Bet too big and a winning edge still loses. Win {p}, even money: Kelly says {fstar}. After {bets} bets the median Kelly bettor is at {med_kelly}x; at double Kelly ({f2}), {med_2kelly}x.\n\n(Simulation; illustration, not advice.)",
@@ -42,7 +42,7 @@
  "facts": {},
  "cta": "Follow QuanTik to think like a quant",
  "thumb": {
-  "series": "QUANT MINDSET",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "BET TOO",
@@ -50,62 +50,214 @@
    "STILL LOSE."
   ],
   "sub": "Kelly {med_kelly}x vs double {med_2kelly}x",
-  "visual": "casino"
+  "no_number": true,
+  "stick": {
+   "set": "void",
+   "items": [
+    {
+     "t": "prop",
+     "k": "cliff",
+     "x": 300,
+     "y": 470,
+     "s": 300
+    },
+    {
+     "t": "man",
+     "x": 330,
+     "pose": "fall",
+     "col": "red",
+     "h": 240,
+     "fall": [
+      0,
+      0.1
+     ],
+     "y": 470,
+     "face": "shock"
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "You have a real edge. Bet too much, and you'll still lose. Here's the formula that says how much.",
    "show": "Bet too much, still lose.",
-   "visual": "casino",
-   "real": true
+   "clip": "casino_table"
   },
   {
    "say": "The Kelly criterion: the fraction of your money that grows it fastest in the long run.",
    "show": "The fastest-growth fraction.",
-   "visual": "professor"
+   "stick": {
+    "set": "lab",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "point",
+      "col": "bone",
+      "h": 290
+     },
+     {
+      "t": "prop",
+      "k": "pot",
+      "x": 820,
+      "y": 480,
+      "s": 160
+     }
+    ]
+   }
   },
   {
    "say": "A bet you win {p} of the time, even money. Kelly says bet {fstar}.",
    "show": "Kelly says:",
-   "kind": "scale",
    "big": "{fstar}",
    "big_label": "of your bankroll per bet",
    "note": "Computed: f* = p − (1 − p)/b · simulated 1,000 players, {bets} bets",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 540,
+      "y": 520,
+      "s": 160
+     },
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "bet",
+      "col": "gold",
+      "h": 270
+     }
+    ]
+   }
   },
   {
    "say": "After {bets} bets, the typical Kelly bettor has multiplied their money {med_kelly} times.",
    "show": "Kelly bettor:",
-   "visual": "rocket",
    "big": "{med_kelly}x",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "bank",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "cheer",
+      "col": "gold",
+      "h": 300,
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "cash",
+      "x": 300,
+      "y": 300,
+      "s": 80,
+      "motion": "rain",
+      "n": 10,
+      "spread": 600
+     }
+    ]
+   }
   },
   {
    "say": "Bet double, {f2}, and the typical result is {med_2kelly} times. Basically nowhere.",
    "show": "Double Kelly:",
-   "visual": "money_burn",
    "big": "{med_2kelly}x",
    "big_label": "all that risk, nowhere",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "cliff",
+      "x": 300,
+      "y": 470,
+      "s": 300
+     },
+     {
+      "t": "man",
+      "x": 330,
+      "pose": "fall",
+      "col": "red",
+      "h": 240,
+      "fall": [
+       0.3,
+       0.7
+      ],
+      "y": 470,
+      "face": "shock"
+     }
+    ]
+   }
   },
   {
    "say": "Betting too big is worse than betting too small. Many pros use half Kelly, {fhalf}.",
    "show": "Pros use half: {fhalf}.",
-   "kind": "walkaway"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 300,
+      "y": 520,
+      "s": 110
+     },
+     {
+      "t": "prop",
+      "k": "chips",
+      "x": 760,
+      "y": 520,
+      "s": 160
+     },
+     {
+      "t": "label",
+      "x": 300,
+      "y": 360,
+      "text": "HALF",
+      "col": "green"
+     },
+     {
+      "t": "label",
+      "x": 760,
+      "y": 330,
+      "text": "FULL",
+      "col": "gold"
+     }
+    ]
+   }
   },
   {
    "say": "Your edge decides whether to play. Kelly decides how big.",
    "show": "Edge: whether. Kelly: how big.",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "hold",
+      "col": "gold",
+      "h": 300,
+      "hold": "scale"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Your edge decides whether to play. Kelly decides how big.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "gold",
+ "tint_x": 0.5
 }

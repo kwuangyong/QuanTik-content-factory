@@ -24,7 +24,7 @@
  "episode_no": 6,
  "group": "dark-truth",
  "concept": "The First $100K",
- "tag": "DARK TRUTH #06",
+ "tag": "",
  "title": "Why the first $100K is the hardest",
  "hook": "The first $100K is brutal. The next ones are almost lazy.",
  "caption": "The first $100K is brutal; the next ones are almost lazy. Saving {a_contrib} a year at {a_rate}: first $100K in {a_t1} years, then {a_t2}, then {a_t3}.\n\n(Simulation; illustration only.)",
@@ -52,7 +52,7 @@
  "facts": {},
  "cta": "Follow QuanTik for more dark truths about money",
  "thumb": {
-  "series": "THE DARK TRUTH OF MONEY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "THE FIRST",
@@ -60,57 +60,275 @@
    "IS BRUTAL."
   ],
   "sub": "{a_t1} years → {a_t2} → {a_t3}",
-  "visual": "rocket"
+  "no_number": true,
+  "stick": {
+   "set": "street",
+   "items": [
+    {
+     "t": "man",
+     "x": 300,
+     "pose": "push",
+     "col": "bone",
+     "h": 300,
+     "face": "angry"
+    },
+    {
+     "t": "prop",
+     "k": "boulder",
+     "x": 560,
+     "y": 500,
+     "s": 260
+    },
+    {
+     "t": "prop",
+     "k": "flag",
+     "x": 900,
+     "y": 450,
+     "s": 200
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "The first $100K is brutal. The next ones are almost lazy.",
    "show": "The first $100K is brutal.",
-   "kind": "office"
+   "stick": {
+    "set": "street",
+    "items": [
+     {
+      "t": "man",
+      "x": 260,
+      "pose": "push",
+      "col": "bone",
+      "h": 280,
+      "face": "angry"
+     },
+     {
+      "t": "prop",
+      "k": "boulder",
+      "x": 520,
+      "y": 500,
+      "s": 260
+     },
+     {
+      "t": "prop",
+      "k": "flag",
+      "x": 900,
+      "y": 450,
+      "s": 200
+     },
+     {
+      "t": "label",
+      "x": 900,
+      "y": 300,
+      "text": "$100K",
+      "col": "green"
+     }
+    ]
+   }
   },
   {
    "say": "At the start, every dollar comes from your sweat. Interest is a rounding error.",
    "show": "Every dollar is sweat.",
-   "kind": "commute"
+   "stick": {
+    "set": "office",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "sit",
+      "col": "bone",
+      "h": 300,
+      "face": "sad"
+     },
+     {
+      "t": "prop",
+      "k": "coin",
+      "x": 540,
+      "y": 300,
+      "s": 60,
+      "motion": "pile",
+      "n": 4,
+      "dy": -20
+     }
+    ]
+   }
   },
   {
    "say": "Save {a_contrib} a year at {a_rate}.",
    "show": "Save {a_contrib} a year.",
-   "kind": "spend",
-   "note": "Simulation: {a_contrib}/yr contributions, {a_rate} return"
+   "note": "Simulation: {a_contrib}/yr contributions, {a_rate} return",
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "carry",
+      "col": "green",
+      "h": 280,
+      "hold": "cash"
+     },
+     {
+      "t": "prop",
+      "k": "piggy",
+      "x": 720,
+      "y": 520,
+      "s": 170,
+      "motion": "pulse"
+     }
+    ]
+   }
   },
   {
    "say": "The first hundred thousand takes {a_t1} years.",
    "show": "First $100K:",
-   "visual": "drunk_walk",
    "big": "{a_t1} years",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "ladder",
+      "x": 540,
+      "y": 380,
+      "s": 520
+     },
+     {
+      "t": "man",
+      "x": 470,
+      "pose": "climb",
+      "col": "bone",
+      "h": 240,
+      "y": 520
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 70,
+      "text": "STEP 1",
+      "col": "green"
+     }
+    ]
+   }
   },
   {
    "say": "The second takes {a_t2}. The third, {a_t3}.",
    "show": "Then:",
-   "visual": "rocket",
    "big": "{a_t2} → {a_t3}",
    "big_label": "years for the 2nd and 3rd",
    "claims": [
     "sim"
    ],
-   "real": true
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "ladder",
+      "x": 540,
+      "y": 380,
+      "s": 520
+     },
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "climb",
+      "col": "green",
+      "h": 220,
+      "y": 300,
+      "jump": true
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 70,
+      "text": "FASTER",
+      "col": "green",
+      "at": 0.3
+     }
+    ]
+   }
   },
   {
    "say": "Because now your money is working a second shift next to you.",
    "show": "Your money works a second shift.",
-   "kind": "walkaway"
+   "stick": {
+    "set": "office",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "sit",
+      "col": "bone",
+      "h": 280,
+      "face": "happy"
+     },
+     {
+      "t": "man",
+      "x": 700,
+      "pose": "push",
+      "col": "green",
+      "h": 240,
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "boulder",
+      "x": 900,
+      "y": 540,
+      "s": 160
+     },
+     {
+      "t": "label",
+      "x": 700,
+      "y": 200,
+      "text": "YOUR MONEY",
+      "col": "green",
+      "at": 0.3
+     }
+    ]
+   }
   },
   {
    "say": "The slow part is where most people quit. It's also the only part that matters.",
    "show": "Most people quit here.",
-   "kind": "alone"
+   "stick": {
+    "set": "street",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "slump",
+      "col": "bone",
+      "h": 300,
+      "face": "sad"
+     },
+     {
+      "t": "prop",
+      "k": "flag",
+      "x": 900,
+      "y": 450,
+      "s": 200
+     },
+     {
+      "t": "bubble",
+      "x": 540,
+      "y": 140,
+      "text": "Quit now?",
+      "kind": "think"
+     }
+    ]
+   }
   }
  ],
  "takeaway": "The slow part is where most people quit. It's also the only part that matters.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "green",
+ "tint_x": 0.5
 }

@@ -16,7 +16,7 @@
  "episode_no": 77,
  "group": "quant-mindset",
  "concept": "Base Rate Neglect",
- "tag": "QUANT MINDSET #77",
+ "tag": "",
  "title": "You tested positive. You're probably fine.",
  "hook": "The test is {sensitivity} accurate. You tested positive. You're probably fine. Here's the math doctors get wrong.",
  "caption": "Tested positive on a {sensitivity}-sensitive test? With prevalence {prevalence} and {false_positive} false positives, {tp} of {positives} positives are real — a {ppv} chance you're sick.\n\n(Illustrative numbers after Gigerenzer, Calculated Risks.)",
@@ -56,7 +56,7 @@
  },
  "cta": "Follow QuanTik to think like a quant",
  "thumb": {
-  "series": "QUANT MINDSET",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "POSITIVE?",
@@ -64,66 +64,184 @@
    "FINE."
   ],
   "sub": "Only {ppv} chance you're sick",
-  "visual": "professor"
+  "no_number": true,
+  "stick": {
+   "set": "lab",
+   "items": [
+    {
+     "t": "man",
+     "x": 320,
+     "pose": "stand",
+     "col": "bone",
+     "h": 290,
+     "face": "shock"
+    },
+    {
+     "t": "prop",
+     "k": "bill",
+     "x": 700,
+     "y": 330,
+     "s": 160
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "The test is {sensitivity} accurate. You tested positive. You're probably fine. Here's the math doctors get wrong.",
    "show": "You're probably fine.",
-   "visual": "professor",
-   "real": true
+   "stick": {
+    "set": "lab",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "stand",
+      "col": "bone",
+      "h": 290,
+      "face": "shock"
+     },
+     {
+      "t": "prop",
+      "k": "bill",
+      "x": 700,
+      "y": 330,
+      "s": 160
+     },
+     {
+      "t": "label",
+      "x": 700,
+      "y": 140,
+      "text": "POSITIVE",
+      "col": "red"
+     }
+    ]
+   }
   },
   {
    "say": "Most people, even many doctors, guess about ninety percent. It's far lower.",
    "show": "Not ninety percent.",
-   "kind": "alone",
    "claims": [
     "gig"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "shrug",
+      "col": "bone",
+      "h": 290
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 100,
+      "text": "90%?",
+      "col": "red",
+      "size": 80
+     }
+    ]
+   }
   },
   {
    "say": "Take {n} people. Only {prevalence} actually have the disease.",
    "show": "{n} people. {sick} sick.",
-   "kind": "crowd",
    "note": "Illustrative assumptions: prevalence {prevalence}, sensitivity {sensitivity}, false positives {false_positive} (after Gigerenzer)",
    "crowd": {
     "n": "n",
     "k": "sick"
-   }
+   },
+   "kind": "crowd"
   },
   {
    "say": "{tp} sick people test positive. But {fp} healthy people test positive too.",
    "show": "{tp} true. {fp} false.",
-   "kind": "crowd",
+   "claims": [
+    "sim"
+   ],
    "crowd": {
     "n": "n",
     "k": "positives"
    },
-   "claims": [
-    "sim"
-   ]
+   "kind": "crowd"
   },
   {
    "say": "So a positive result means only a {ppv} chance you're sick.",
    "show": "Chance you're sick:",
-   "visual": "professor",
    "big": "{ppv}",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "lab",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "point",
+      "col": "teal",
+      "h": 290,
+      "face": "happy"
+     }
+    ]
+   }
   },
   {
    "say": "When a condition is rare, false alarms from the healthy majority drown out the few real cases.",
    "show": "False alarms drown the signal.",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "crowd",
+      "n": 11,
+      "hi": [
+       5
+      ],
+      "x0": 90,
+      "gap": 90,
+      "h": 150,
+      "hicol": "green"
+     },
+     {
+      "t": "prop",
+      "k": "megaphone",
+      "x": 900,
+      "y": 200,
+      "s": 100
+     }
+    ]
+   }
   },
   {
    "say": "Before trusting a signal, ask: is this thing rare or common to begin with?",
    "show": "Rare or common?",
-   "kind": "walkaway"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "think",
+      "col": "bone",
+      "h": 300
+     },
+     {
+      "t": "prop",
+      "k": "magnifier",
+      "x": 780,
+      "y": 260,
+      "s": 120
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Before trusting a signal, ask: is this thing rare or common to begin with?",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "teal",
+ "tint_x": 0.5
 }

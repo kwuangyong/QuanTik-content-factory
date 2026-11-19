@@ -42,7 +42,7 @@
  "episode_no": 56,
  "group": "game-theory",
  "concept": "Prisoner's Dilemma",
- "tag": "GAME THEORY #56",
+ "tag": "",
  "title": "Both play smart. Both lose.",
  "hook": "Two smart people each make the best move for themselves. Both lose. That's not a bug, it's math.",
  "caption": "Both play smart, both lose. In the prisoner's dilemma betrayal always pays more individually, so both betray: {nash_r} each instead of {r00}.",
@@ -81,7 +81,7 @@
  },
  "cta": "Follow QuanTik for the game theory of real life",
  "thumb": {
-  "series": "GAME THEORY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "BOTH SMART.",
@@ -89,13 +89,64 @@
    "LOSE."
   ],
   "sub": "{nash_total} vs {best_total} points",
-  "art": "duel"
+  "no_number": true,
+  "stick": {
+   "set": "void",
+   "items": [
+    {
+     "t": "man",
+     "x": 320,
+     "pose": "point",
+     "col": "bone",
+     "h": 280,
+     "face": "angry"
+    },
+    {
+     "t": "man",
+     "x": 760,
+     "pose": "point",
+     "col": "red",
+     "h": 280,
+     "facing": -1,
+     "face": "angry"
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "Two smart people each make the best move for themselves. Both lose. That's not a bug, it's math.",
    "show": "Both smart. Both lose.",
-   "kind": "duel"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "slump",
+      "col": "bone",
+      "h": 280,
+      "face": "sad"
+     },
+     {
+      "t": "man",
+      "x": 760,
+      "pose": "slump",
+      "col": "red",
+      "h": 280,
+      "facing": -1,
+      "face": "sad"
+     },
+     {
+      "t": "prop",
+      "k": "cage",
+      "x": 540,
+      "y": 360,
+      "s": 520,
+      "col": "muted"
+     }
+    ]
+   }
   },
   {
    "say": "The prisoner's dilemma. Two players can't talk. Each chooses: cooperate, or betray.",
@@ -105,35 +156,75 @@
   {
    "say": "Whatever the other does, betraying pays you more. So both betray.",
    "show": "Betrayal always pays more.",
-   "kind": "duel"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "point",
+      "col": "bone",
+      "h": 280,
+      "face": "angry"
+     },
+     {
+      "t": "man",
+      "x": 760,
+      "pose": "point",
+      "col": "red",
+      "h": 280,
+      "facing": -1,
+      "face": "angry"
+     }
+    ]
+   }
   },
   {
    "say": "Both cooperate: {r00} points each. Both betray: {nash_r} each.",
    "show": "Cooperate: {r00} each.",
-   "kind": "scale",
    "big": "{nash_total} vs {best_total}",
    "big_label": "total when both betray vs both cooperate",
    "note": "Classic illustrative payoffs; code finds the Nash equilibrium",
    "claims": [
     "sim"
-   ]
+   ],
+   "kind": "scale"
   },
   {
    "say": "That's a Nash equilibrium: nobody wants to switch alone, even though both could do better.",
    "show": "Nobody switches alone.",
-   "visual": "professor",
-   "image": "john-nash",
    "claims": [
     "nash"
-   ]
+   ],
+   "stick": {
+    "set": "lab",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "think",
+      "col": "bone",
+      "h": 290
+     },
+     {
+      "t": "prop",
+      "k": "lock",
+      "x": 540,
+      "y": 120,
+      "s": 90
+     }
+    ]
+   }
   },
   {
    "say": "Individual logic doesn't add up to group logic. You need trust, contracts, or a repeated game.",
    "show": "Trust. Contracts. Repetition.",
-   "kind": "walkaway"
+   "clip": "handshake"
   }
  ],
  "takeaway": "Individual logic doesn't add up to group logic. You need trust, contracts, or a repeated game.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "red",
+ "tint_x": 0.5
 }

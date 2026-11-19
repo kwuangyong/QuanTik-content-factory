@@ -33,7 +33,7 @@
  "episode_no": 42,
  "group": "psychology",
  "concept": "Overconfidence Bias",
- "tag": "PSYCHOLOGY #42",
+ "tag": "",
  "title": "Same edge. The confident one went broke.",
  "hook": "Two people with the same edge. The more confident one loses almost everything.",
  "caption": "Same edge, different confidence. Both win {a_p}: betting {a_stake} → {a_ruin} lose almost everything; betting {b_stake} → {b_ruin}.",
@@ -60,7 +60,7 @@
  "facts": {},
  "cta": "Follow QuanTik for the psychology behind your money",
  "thumb": {
-  "series": "PSYCHOLOGY FACTS",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "CONFIDENCE",
@@ -68,53 +68,179 @@
    "BROKE."
   ],
   "sub": "Same edge: {a_ruin} vs {b_ruin}",
-  "visual": "money_burn"
+  "no_number": true,
+  "stick": {
+   "set": "void",
+   "items": [
+    {
+     "t": "prop",
+     "k": "cliff",
+     "x": 300,
+     "y": 470,
+     "s": 300
+    },
+    {
+     "t": "man",
+     "x": 330,
+     "pose": "fall",
+     "col": "orange",
+     "h": 240,
+     "fall": [
+      0,
+      0.1
+     ],
+     "y": 470,
+     "face": "shock"
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "Two people with the same edge. The more confident one loses almost everything.",
    "show": "The confident one goes broke.",
-   "visual": "money_burn",
-   "real": true
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "stand",
+      "col": "bone",
+      "h": 280,
+      "face": "neutral"
+     },
+     {
+      "t": "man",
+      "x": 760,
+      "pose": "cheer",
+      "col": "orange",
+      "h": 290,
+      "face": "happy"
+     }
+    ]
+   }
   },
   {
    "say": "Overconfidence doesn't make you pick the wrong direction. It makes you bet too much on the right one.",
    "show": "Too much on the right call.",
-   "kind": "duel"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "point",
+      "col": "orange",
+      "h": 290
+     },
+     {
+      "t": "prop",
+      "k": "pot",
+      "x": 760,
+      "y": 480,
+      "s": 200,
+      "at": 0.3
+     }
+    ]
+   }
   },
   {
    "say": "Both win {a_p} of the time. The modest group bets {a_stake} of their money. The confident group bets {b_stake}.",
    "show": "{a_stake} vs {b_stake}.",
-   "kind": "compare",
-   "note": "Simulation: {players} players, {rounds} rounds; 'lost almost all' = below 10% of start"
+   "note": "Simulation: {players} players, {rounds} rounds; 'lost almost all' = below 10% of start",
+   "kind": "duel"
   },
   {
    "say": "Modest: {a_ruin} lose almost everything.",
    "show": "Modest:",
-   "kind": "walkaway",
    "big": "{a_ruin}",
    "big_label": "lost almost everything",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "stand",
+      "col": "bone",
+      "h": 280,
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "shield",
+      "x": 820,
+      "y": 300,
+      "s": 120
+     }
+    ]
+   }
   },
   {
    "say": "Confident: {b_ruin}.",
    "show": "Confident:",
-   "visual": "panic",
    "big": "{b_ruin}",
    "big_label": "lost almost everything — same edge",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "cliff",
+      "x": 300,
+      "y": 470,
+      "s": 300
+     },
+     {
+      "t": "man",
+      "x": 330,
+      "pose": "fall",
+      "col": "orange",
+      "h": 240,
+      "fall": [
+       0.3,
+       0.7
+      ],
+      "y": 470,
+      "face": "shock"
+     }
+    ]
+   }
   },
   {
    "say": "Being right isn't enough. Position size decides whether you're still in the game.",
    "show": "Size decides survival.",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "scale",
+      "x": 540,
+      "y": 380,
+      "s": 380
+     },
+     {
+      "t": "man",
+      "x": 860,
+      "pose": "think",
+      "col": "bone",
+      "h": 240
+     }
+    ]
+   }
   }
  ],
  "takeaway": "Being right isn't enough. Position size decides whether you're still in the game.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "orange",
+ "tint_x": 0.6
 }

@@ -16,7 +16,7 @@
  "episode_no": 24,
  "group": "poker",
  "concept": "Game Theory Optimal (GTO)",
- "tag": "POKER THEORY #24",
+ "tag": "",
  "title": "A strategy they can't beat even if they know it",
  "hook": "There's a way to play that can't be beaten, even if your opponent knows exactly what you're doing.",
  "caption": "GTO: a strategy that can't be exploited even when your opponent knows it. Betting {bet} into {pot}: bluff {over} and they profit {call_ev_over} per call; bluff {under} and they fold; at {gto_bluff} there's nothing to exploit.\n\nEducational content about decision theory and probability. We do not encourage gambling.",
@@ -55,7 +55,7 @@
  },
  "cta": "Follow QuanTik for the math behind every decision",
  "thumb": {
-  "series": "POKER THEORY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "THEY KNOW",
@@ -63,51 +63,180 @@
    "STILL LOSE."
   ],
   "sub": "Unexploitable bluff rate: {gto_bluff}",
-  "image": "john-nash"
+  "no_number": true,
+  "stick": {
+   "set": "void",
+   "items": [
+    {
+     "t": "prop",
+     "k": "shield",
+     "x": 540,
+     "y": 380,
+     "s": 300
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "There's a way to play that can't be beaten, even if your opponent knows exactly what you're doing.",
    "show": "Unbeatable — even if they know it.",
-   "kind": "duel"
+   "stick": {
+    "set": "casino",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "stand",
+      "col": "blue",
+      "h": 290,
+      "face": "neutral"
+     },
+     {
+      "t": "man",
+      "x": 760,
+      "pose": "think",
+      "col": "bone",
+      "h": 290,
+      "facing": -1
+     },
+     {
+      "t": "prop",
+      "k": "magnifier",
+      "x": 640,
+      "y": 260,
+      "s": 120
+     }
+    ]
+   }
   },
   {
    "say": "It's called game theory optimal: GTO.",
    "show": "GTO.",
-   "visual": "professor",
-   "image": "john-nash",
    "claims": [
     "nash"
-   ]
+   ],
+   "stick": {
+    "set": "lab",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "point",
+      "col": "bone",
+      "h": 290
+     },
+     {
+      "t": "label",
+      "x": 540,
+      "y": 120,
+      "text": "GTO",
+      "col": "blue",
+      "size": 90,
+      "at": 0.2
+     }
+    ]
+   }
   },
   {
    "say": "You bet {bet} into {pot}. Bluff {over} of the time, and they call everything and profit {call_ev_over}.",
    "show": "Bluff {over}: they profit.",
-   "visual": "casino",
    "note": "Computed: caller's EV per call against your bluff share",
-   "real": true
+   "clip": "cards_shuffle"
   },
   {
    "say": "Bluff {under}, and they just fold.",
    "show": "Bluff {under}: they fold.",
-   "kind": "duel"
+   "stick": {
+    "set": "casino",
+    "items": [
+     {
+      "t": "man",
+      "x": 760,
+      "pose": "shrug",
+      "col": "bone",
+      "h": 290,
+      "facing": -1
+     },
+     {
+      "t": "prop",
+      "k": "card",
+      "x": 760,
+      "y": 200,
+      "s": 80,
+      "motion": "fly",
+      "to": [
+       960,
+       600
+      ]
+     }
+    ]
+   }
   },
   {
    "say": "At {gto_bluff}, they have nothing left to exploit.",
    "show": "Unexploitable at:",
-   "kind": "alone",
    "big": "{gto_bluff}",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "shield",
+      "x": 540,
+      "y": 380,
+      "s": 300,
+      "motion": "pulse"
+     },
+     {
+      "t": "man",
+      "x": 250,
+      "pose": "point",
+      "col": "red",
+      "h": 240
+     },
+     {
+      "t": "man",
+      "x": 830,
+      "pose": "point",
+      "col": "red",
+      "h": 240,
+      "facing": -1
+     }
+    ]
+   }
   },
   {
    "say": "GTO doesn't crush bad players hardest. It makes sure good players can't crush you.",
    "show": "Nobody can crush you.",
-   "kind": "walkaway"
+   "stick": {
+    "set": "casino",
+    "items": [
+     {
+      "t": "man",
+      "x": 540,
+      "pose": "stand",
+      "col": "blue",
+      "h": 300,
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "shield",
+      "x": 540,
+      "y": 160,
+      "s": 100
+     }
+    ]
+   }
   }
  ],
  "takeaway": "GTO doesn't crush bad players hardest. It makes sure good players can't crush you.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "blue",
+ "tint_x": 0.5
 }

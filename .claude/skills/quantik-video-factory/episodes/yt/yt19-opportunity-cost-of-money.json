@@ -23,7 +23,7 @@
  "episode_no": 19,
  "group": "dark-truth",
  "concept": "Opportunity Cost of Money",
- "tag": "DARK TRUTH #19",
+ "tag": "",
  "title": "That daily habit costs more than you think",
  "hook": "That small monthly habit isn't small. You just haven't seen its future.",
  "caption": "That small habit isn't small. {a_contrib} a year at {a_rate} for {years} years: you put in {a_paid}, it becomes about {a_end}. Make every spend worth the future it replaces.\n\n(Assumptions on screen; illustration only.)",
@@ -49,7 +49,7 @@
  "facts": {},
  "cta": "Follow QuanTik for more dark truths about money",
  "thumb": {
-  "series": "THE DARK TRUTH OF MONEY",
+  "series": "",
   "footer": "Simulated / sourced data • Educational, not advice",
   "headline": [
    "IT'S NOT",
@@ -57,48 +57,218 @@
    "HABIT."
   ],
   "sub": "{a_paid} becomes {a_end}",
-  "art": "spend"
+  "no_number": true,
+  "stick": {
+   "set": "home",
+   "items": [
+    {
+     "t": "man",
+     "x": 320,
+     "pose": "stand",
+     "col": "bone",
+     "h": 280,
+     "hold": "mug",
+     "face": "happy"
+    }
+   ]
+  }
  },
  "scenes": [
   {
    "say": "That small monthly habit isn't small. You just haven't seen its future.",
    "show": "It's not small.",
-   "kind": "spend"
+   "stick": {
+    "set": "home",
+    "items": [
+     {
+      "t": "man",
+      "x": 320,
+      "pose": "stand",
+      "col": "bone",
+      "h": 280,
+      "hold": "mug",
+      "face": "happy"
+     },
+     {
+      "t": "prop",
+      "k": "mug",
+      "x": 700,
+      "y": 300,
+      "s": 60,
+      "motion": "rain",
+      "n": 8,
+      "spread": 500
+     }
+    ]
+   }
   },
   {
    "say": "Every dollar you spend today is a dollar that never gets to grow.",
    "show": "A dollar that never grows.",
-   "visual": "money_burn",
-   "real": true
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "coin",
+      "x": 300,
+      "y": 450,
+      "s": 140,
+      "motion": "burn"
+     },
+     {
+      "t": "prop",
+      "k": "pot",
+      "x": 760,
+      "y": 450,
+      "s": 200,
+      "motion": "pulse"
+     },
+     {
+      "t": "label",
+      "x": 760,
+      "y": 250,
+      "text": "WHAT IT COULD BE",
+      "col": "warm"
+     }
+    ]
+   }
   },
   {
    "say": "Put {a_contrib} a year away at {a_rate}, for {years} years.",
    "show": "{a_contrib} a year.",
-   "kind": "office",
-   "note": "Assumption: {a_rate}/yr return, yearly contributions"
+   "note": "Assumption: {a_rate}/yr return, yearly contributions",
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "man",
+      "x": 300,
+      "pose": "carry",
+      "col": "bone",
+      "h": 270,
+      "hold": "cash"
+     },
+     {
+      "t": "prop",
+      "k": "piggy",
+      "x": 700,
+      "y": 520,
+      "s": 170
+     },
+     {
+      "t": "prop",
+      "k": "calendar",
+      "x": 900,
+      "y": 250,
+      "s": 120
+     }
+    ]
+   }
   },
   {
    "say": "You put in {a_paid}. It becomes about {a_end}.",
    "show": "It becomes:",
-   "visual": "rocket",
    "big": "{a_end}",
    "big_label": "from {a_paid} put in",
    "claims": [
     "sim"
-   ]
+   ],
+   "stick": {
+    "set": "bank",
+    "items": [
+     {
+      "t": "prop",
+      "k": "cash",
+      "x": 540,
+      "y": 600,
+      "s": 80,
+      "motion": "pile",
+      "n": 12,
+      "dy": -40,
+      "until": 0.9
+     },
+     {
+      "t": "man",
+      "x": 860,
+      "pose": "cheer",
+      "col": "warm",
+      "h": 260,
+      "face": "happy"
+     }
+    ]
+   }
   },
   {
    "say": "This isn't 'never spend'. It's: make every spend worth the future it replaces.",
    "show": "Worth the future it replaces?",
-   "kind": "walkaway"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "scale",
+      "x": 540,
+      "y": 380,
+      "s": 380
+     },
+     {
+      "t": "prop",
+      "k": "mug",
+      "x": 360,
+      "y": 320,
+      "s": 80
+     },
+     {
+      "t": "prop",
+      "k": "pot",
+      "x": 720,
+      "y": 300,
+      "s": 110
+     }
+    ]
+   }
   },
   {
    "say": "The price tag is today's cost. The real cost is everything it could have become.",
    "show": "The real cost.",
-   "kind": "alone"
+   "stick": {
+    "set": "void",
+    "items": [
+     {
+      "t": "prop",
+      "k": "ticket",
+      "x": 360,
+      "y": 400,
+      "s": 160
+     },
+     {
+      "t": "arrow",
+      "from": [
+       460,
+       400
+      ],
+      "to": [
+       660,
+       400
+      ],
+      "col": "warm"
+     },
+     {
+      "t": "prop",
+      "k": "pot",
+      "x": 800,
+      "y": 400,
+      "s": 220,
+      "at": 0.3
+     }
+    ]
+   }
   }
  ],
  "takeaway": "The price tag is today's cost. The real cost is everything it could have become.",
  "music": "suspense",
- "voice": "male-deep"
+ "voice": "male-deep",
+ "accent": "warm",
+ "tint_x": 0.4
 }

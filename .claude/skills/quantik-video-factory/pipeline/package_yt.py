@@ -2,6 +2,7 @@
 INDEX.md, then zips under 500 MB each (upload limit of chat attachments).
 
   python package_yt.py 43-55 59-70 73-76 79 --name yt-ig-lot-30     # episode numbers or ranges
+  add --plain: flat folder, file names without episode number or category (for posting as standalone videos)
 """
 import json, os, shutil, glob, zipfile, re, sys
 from pathlib import Path
@@ -19,6 +20,7 @@ def _nums(args):
 
 ARGS = [a for a in sys.argv[1:] if not a.startswith("--")]
 NAME = sys.argv[sys.argv.index("--name") + 1] if "--name" in sys.argv else "yt-ig-lot"
+PLAIN = "--plain" in sys.argv
 if "--name" in sys.argv:
     ARGS.remove(NAME)
 SO = str(DEFAULT_OUT)
@@ -37,14 +39,15 @@ for n in chosen:
     if not d or not os.path.exists(f"{d[0]}/final.mp4"):
         missing.append(n); continue
     d = d[0]; slug = os.path.basename(d)
+    name = re.sub(r"^yt\d+-", "", slug) if PLAIN else slug
     ep = json.load(open(f"{d}/episode.filled.json"))
     qa = open(f"{d}/qa_report.md", encoding="utf-8").read()
     ok = "**Kết luận: ĐẠT**" in qa
     dur = re.search(r"Thời lượng: ([\d.]+)s", qa)
-    sub = f"{OUT}/{GROUPS[ep['group']]}"
+    sub = OUT if PLAIN else f"{OUT}/{GROUPS[ep['group']]}"
     os.makedirs(sub, exist_ok=True)
-    shutil.copy(f"{d}/final.mp4", f"{sub}/{slug}.mp4")
-    shutil.copy(f"{d}/thumbnail.jpg", f"{sub}/{slug}-thumbnail.jpg")
+    shutil.copy(f"{d}/final.mp4", f"{sub}/{name}.mp4")
+    shutil.copy(f"{d}/thumbnail.jpg", f"{sub}/{name}-thumbnail.jpg")
     tags = " ".join("#" + h.lstrip("#") for h in ep.get("hashtags", []))
     title = ep["title"]
     yt_title = (title[:90] + " #Shorts") if len(title) <= 90 else title[:88] + "… #Shorts"
@@ -57,9 +60,18 @@ for n in chosen:
     credits = [imgs[i]["credit"].replace("Ảnh: ", "Photo: ") for i in sorted(used) if i in imgs and imgs[i]["kind"] == "photo"]
     tail = ""
     if srcs: tail += "\n\nSources: " + "; ".join(srcs)
+    import clips as CL
+    for sc in ep["scenes"]:
+        k = sc.get("clip")
+        if k and k in CL.manifest()["clips"]:
+            c = CL.manifest()["clips"][k]
+            line = f"Video: {c['credit']} (Pexels) {c['page']}"
+            if line not in credits:
+                credits.append(line)
     if credits: tail += "\n" + "\n".join(credits)
     body = f"{ep['hook']}\n\n{ep['caption']}\n\n{ep['cta']}{tail}\n\n{disc}"
-    txt = f"""# {slug}  ({ep['tag']})
+    head = f"# {name}" if PLAIN else f"# {slug}  ({ep['tag']})"
+    txt = head + f"""
 
 ## YouTube Shorts
 Title: {yt_title}
@@ -74,9 +86,9 @@ Description:
 
 {tags} #reels
 """
-    open(f"{sub}/{slug}-caption.txt", "w", encoding="utf-8").write(txt)
+    open(f"{sub}/{name}-caption.txt", "w", encoding="utf-8").write(txt)
     allcap.append(txt)
-    rows.append(f"| {ep['tag']} | {slug} | {dur.group(1) if dur else '?'}s | {'PASS' if ok else 'CHECK'} | {len(credits)} |")
+    rows.append(f"| {ep['concept'] if PLAIN else ep['tag']} | {name} | {dur.group(1) if dur else '?'}s | {'PASS' if ok else 'CHECK'} | {len(credits)} |")
 open(f"{OUT}/ALL-CAPTIONS.md", "w", encoding="utf-8").write("\n\n---\n\n".join(allcap))
 open(f"{OUT}/INDEX.md", "w", encoding="utf-8").write("| # | file | duration | QA | real photos |\n|---|---|---|---|---|\n" + "\n".join(rows) + "\n")
 print("missing", missing, "packaged", len(rows))
@@ -84,15 +96,16 @@ print("\n".join(r for r in rows if "CHECK" in r))
 
 # zips under ~480 MB: split a group folder into numbered parts when needed
 LIMIT = 480 * 1024 * 1024
-for g in sorted(os.listdir(OUT)):
+groups = ["."] if PLAIN else sorted(x for x in os.listdir(OUT) if os.path.isdir(os.path.join(OUT, x)))
+for g in groups:
     gp = os.path.join(OUT, g)
-    if not os.path.isdir(gp):
-        continue
-    files = sorted(os.listdir(gp)); part, size, k = [], 0, 1
+    files = sorted(f for f in os.listdir(gp) if os.path.isfile(os.path.join(gp, f)) and not f.endswith(".md"))
+    part, size, k = [], 0, 1
     def flush(part, k):
-        with zipfile.ZipFile(f"{SO}/_zip/{NAME}-{g}-part{k}.zip", "w", zipfile.ZIP_STORED) as z:
+        tagname = "videos" if g == "." else g
+        with zipfile.ZipFile(f"{SO}/_zip/{NAME}-{tagname}-part{k}.zip", "w", zipfile.ZIP_STORED) as z:
             for f in part:
-                z.write(os.path.join(gp, f), f"{g}/{f}")
+                z.write(os.path.join(gp, f), f if g == "." else f"{g}/{f}")
     for f in files:
         sz = os.path.getsize(os.path.join(gp, f))
         if part and size + sz > LIMIT:
