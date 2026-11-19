@@ -33,9 +33,8 @@
     },
     "broll": [
       {
-        "query": "Andrey Kolmogorov",
-        "must": "Kolmogorov",
-        "label": "Andrey Kolmogorov",
+        "query": "Moscow State University",
+        "label": "Kolmogorov · Đại học Moskva",
         "draw": "dice",
         "say": "Kolmogorov đặt nền móng tiên đề cho xác suất hiện đại, nơi biến ngẫu nhiên có định nghĩa chặt chẽ."
       },
@@ -184,7 +183,7 @@
   },
   "hq08-skewness": {
     "hook_broll": {
-      "query": "slackline highline mountain",
+      "query": "balancing rocks",
       "draw": "skew"
     },
     "broll": [
@@ -714,7 +713,7 @@
         "say": "George Box, đồng tác giả phương pháp Box-Jenkins, biến ACF thành công cụ chuẩn để đọc chuỗi thời gian."
       },
       {
-        "query": "seismogram earthquake recording",
+        "query": "earthquake damage",
         "label": "Dư chấn",
         "draw": "zigzag",
         "after": "chart",
@@ -728,7 +727,7 @@
   },
   "hq41-pacf": {
     "hook_broll": {
-      "query": "dominoes",
+      "query": "domino effect",
       "draw": "network"
     },
     "broll": [
@@ -783,9 +782,8 @@
     },
     "broll": [
       {
-        "query": "Louis Bachelier",
-        "must": "Bachelier",
-        "label": "Louis Bachelier",
+        "query": "Paris Bourse",
+        "label": "Bachelier · Sở giao dịch Paris",
         "draw": "zigzag",
         "say": "Louis Bachelier là người đầu tiên mô tả giá cổ phiếu như một bước đi ngẫu nhiên, trong luận án tiến sĩ của ông."
       },
@@ -931,9 +929,8 @@
   },
   "hq61-black-scholes": {
     "hook_broll": {
-      "query": "Myron Scholes",
-      "must": "Scholes",
-      "label": "Myron Scholes",
+      "query": "formula blackboard",
+      "label": "Black-Scholes",
       "draw": "bell"
     },
     "broll": [
@@ -953,8 +950,7 @@
       }
     ],
     "takeaway_broll": {
-      "query": "Robert C. Merton",
-      "must": "Merton",
+      "query": "Chicago Board Options Exchange",
       "draw": "bell"
     }
   },
@@ -1017,8 +1013,7 @@
     },
     "broll": [
       {
-        "query": "Edward O. Thorp",
-        "must": "Thorp",
+        "query": "playing cards blackjack",
         "label": "Edward Thorp",
         "draw": "dice",
         "say": "Edward Thorp, người từng đếm bài thắng sòng bạc, là một trong những người đi đầu arbitrage thống kê."
@@ -1144,9 +1139,8 @@
     },
     "broll": [
       {
-        "query": "Clive Granger",
-        "must": "Granger",
-        "label": "Clive Granger",
+        "query": "Nobel Prize medal",
+        "label": "Clive Granger · Nobel",
         "draw": "two-lines",
         "say": "Khái niệm đồng liên kết mang về giải Nobel kinh tế cho Clive Granger, chia cùng Robert Engle."
       },
