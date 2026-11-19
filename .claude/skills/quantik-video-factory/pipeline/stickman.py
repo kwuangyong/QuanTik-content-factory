@@ -36,7 +36,7 @@ COLS = {"bone": P["bone"], "red": P["red"], "gold": P["gold"], "green": P["green
 def col(c, default="bone"):
     if isinstance(c, (list, tuple)):
         return tuple(c)
-    return COLS.get(c or default, COLS[default])
+    return COLS.get(c or default, COLS.get(default) or COLS["bone"])
 
 
 def ease(x):
