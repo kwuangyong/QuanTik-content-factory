@@ -151,7 +151,7 @@
       }
     ],
     "takeaway_broll": {
-      "query": "Galton box quincunx",
+      "query": "Galton board",
       "draw": "bell"
     }
   },
@@ -164,19 +164,17 @@
     },
     "broll": [
       {
-        "query": "10 Deutsche Mark banknote Gauss",
-        "must": "Mark",
+        "query": "Deutsche Mark banknotes",
         "label": "Gauss trên tờ 10 Mark",
         "draw": "bell",
         "say": "Đường cong này mang tên Gauss, từng được in lên cả tờ tiền giấy của Đức."
       },
       {
-        "query": "Wall Street crash 1929 crowd",
+        "query": "New York Stock Exchange traders",
         "label": "Ngày thị trường sập",
         "draw": "crash",
         "after": "chart",
-        "say": "Những ngày sập lịch sử lẽ ra gần như không thể xảy ra, nếu thị trường thật sự tuân theo hình chuông.",
-        "must": "1929"
+        "say": "Những ngày sập lịch sử lẽ ra gần như không thể xảy ra, nếu thị trường thật sự tuân theo hình chuông."
       }
     ],
     "takeaway_broll": {
@@ -243,9 +241,8 @@
     },
     "broll": [
       {
-        "query": "Harry Markowitz",
-        "must": "Markowitz",
-        "label": "Harry Markowitz",
+        "query": "stock certificates",
+        "label": "Lý thuyết danh mục",
         "draw": "network",
         "say": "Markowitz đưa hiệp phương sai vào trung tâm của lý thuyết danh mục hiện đại."
       },
@@ -397,7 +394,8 @@
   },
   "hq18-dot-product": {
     "hook_broll": {
-      "query": "magnetic compass needle",
+      "query": "magnetic compass",
+      "must": "compass",
       "draw": "arrows"
     },
     "broll": [
@@ -479,9 +477,8 @@
     },
     "broll": [
       {
-        "query": "Harry Markowitz",
-        "must": "Markowitz",
-        "label": "Harry Markowitz",
+        "query": "stock certificates",
+        "label": "Lý thuyết danh mục",
         "draw": "network",
         "say": "Ma trận này là trái tim của lý thuyết danh mục hiện đại do Harry Markowitz xây dựng."
       },
@@ -505,9 +502,8 @@
     },
     "broll": [
       {
-        "query": "André-Louis Cholesky",
-        "must": "Cholesky",
-        "label": "André-Louis Cholesky",
+        "query": "mathematician blackboard equations",
+        "label": "Phân rã Cholesky",
         "draw": "matrix",
         "say": "Phân rã Cholesky, công cụ quen thuộc để mô phỏng danh mục, chỉ chạy được trên ma trận xác định dương."
       },
@@ -603,7 +599,7 @@
   },
   "hq35-arbitrage": {
     "hook_broll": {
-      "query": "foreign exchange rates display",
+      "query": "currency exchange rates",
       "draw": "scale"
     },
     "broll": [
@@ -662,7 +658,7 @@
     },
     "broll": [
       {
-        "query": "stock ticker tape machine",
+        "query": "stock market display board",
         "label": "Từng phiên một",
         "draw": "chart-up",
         "say": "Mỗi bảng giá bạn nhìn mỗi ngày là một điểm trong một chuỗi thời gian dài không có hồi kết."
@@ -712,9 +708,8 @@
     },
     "broll": [
       {
-        "query": "George E. P. Box statistician",
-        "must": "Box",
-        "label": "George Box",
+        "query": "data analysis charts paper",
+        "label": "Phương pháp Box-Jenkins",
         "draw": "two-lines",
         "say": "George Box, đồng tác giả phương pháp Box-Jenkins, biến ACF thành công cụ chuẩn để đọc chuỗi thời gian."
       },
@@ -758,7 +753,7 @@
   },
   "hq42-white-noise": {
     "hook_broll": {
-      "query": "television static noise",
+      "query": "TV static",
       "draw": "zigzag"
     },
     "broll": [
@@ -814,9 +809,8 @@
     },
     "broll": [
       {
-        "query": "George Udny Yule",
-        "must": "Yule",
-        "label": "Udny Yule",
+        "query": "sunspot",
+        "label": "Vết đen Mặt Trời",
         "draw": "chart-up",
         "say": "Mô hình tự hồi quy được Udny Yule đề xuất khi nghiên cứu chu kỳ vết đen trên Mặt Trời."
       },
@@ -865,9 +859,8 @@
     },
     "broll": [
       {
-        "query": "Gwilym Jenkins",
-        "must": "Jenkins",
-        "label": "Box và Jenkins",
+        "query": "weather forecasting office",
+        "label": "Phương pháp Box-Jenkins",
         "draw": "two-lines",
         "say": "Phương pháp Box-Jenkins đã biến ARIMA thành quy trình chuẩn của ngành dự báo suốt nhiều thập kỷ."
       },
@@ -886,9 +879,8 @@
   },
   "hq47-arch": {
     "hook_broll": {
-      "query": "Robert F. Engle",
-      "must": "Engle",
-      "label": "Robert Engle",
+      "query": "stock market display board",
+      "label": "Biến động",
       "draw": "zigzag"
     },
     "broll": [
@@ -914,7 +906,7 @@
   },
   "hq49-egarch": {
     "hook_broll": {
-      "query": "stock traders worried screens",
+      "query": "stock traders",
       "draw": "crash"
     },
     "broll": [
@@ -1051,7 +1043,7 @@
     },
     "broll": [
       {
-        "query": "man walking dog leash",
+        "query": "dog walking",
         "label": "Người dắt chó",
         "draw": "two-lines",
         "say": "Hình dung người dắt chó đi dạo: cả hai đi lung tung, nhưng sợi dây không cho chúng xa nhau quá."
@@ -1071,7 +1063,7 @@
   },
   "hq66-mean-reversion": {
     "hook_broll": {
-      "query": "stretched rubber band",
+      "query": "slingshot",
       "draw": "two-lines"
     },
     "broll": [
@@ -1204,7 +1196,7 @@
     },
     "broll": [
       {
-        "query": "stock exchange trading hall Asia",
+        "query": "stock exchange trading hall",
         "label": "Sàn giao dịch",
         "draw": "orderbook",
         "say": "Mỗi lệnh bạn bấm trên app đều đi vào một sổ lệnh như thế này, khớp theo thứ tự giá rồi thời gian."
@@ -1224,7 +1216,7 @@
   },
   "hq72-bid-ask-spread": {
     "hook_broll": {
-      "query": "money exchange booth",
+      "query": "bureau de change",
       "draw": "orderbook"
     },
     "broll": [
@@ -1305,9 +1297,8 @@
     },
     "broll": [
       {
-        "query": "Tim Bollerslev",
-        "must": "Bollerslev",
-        "label": "Tim Bollerslev",
+        "query": "stormy ocean",
+        "label": "Từ ARCH lên GARCH",
         "draw": "zigzag",
         "say": "Tim Bollerslev mở rộng ARCH thành GARCH: biến động nhớ cả chính nó."
       },

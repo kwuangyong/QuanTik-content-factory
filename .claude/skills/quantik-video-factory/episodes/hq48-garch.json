@@ -22,9 +22,8 @@
   },
   "broll": [
     {
-      "query": "Tim Bollerslev",
-      "must": "Bollerslev",
-      "label": "Tim Bollerslev",
+      "query": "stormy ocean",
+      "label": "Từ ARCH lên GARCH",
       "draw": "zigzag",
       "say": "Tim Bollerslev mở rộng ARCH thành GARCH: biến động nhớ cả chính nó."
     },
