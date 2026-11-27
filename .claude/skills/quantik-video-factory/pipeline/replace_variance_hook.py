@@ -8,12 +8,11 @@ import sys
 import tempfile
 from math import ceil
 from pathlib import Path
-from statistics import pvariance
 
 import render as R
 import voiceover as V
-from variance_bus import scenes
-from core import DEFAULT_OUT, FPS, SKILL, disclaimer, fill_tree, fmt_vi, load_json, save_json
+from variance_squares import scenes
+from core import DEFAULT_OUT, FPS, SKILL, disclaimer, fill_tree, load_json, save_json
 
 sys.path.insert(0, str(SKILL / "qa"))
 import check_banned
@@ -32,7 +31,6 @@ def record_hook(intro, path):
     from edge_tts.exceptions import EdgeTTSException
 
     lines = [V.speakable(scene.say) for scene in intro]
-    lines[2] = lines[2].lower()  # Continue the preceding line after its ellipsis.
     words_by_scene = [re.findall(r"\w+", line.casefold()) for line in lines]
 
     async def record():
@@ -113,16 +111,13 @@ def voice_tracks(intro, work, engine):
 
 def replace(source, out, engine):
     ep = load_json(SKILL / "episodes/04-variance-quiz.json")
-    a, b = ep["returns_a"], ep["returns_b"]
-    small, large = max(map(abs, a)), max(map(abs, b))
+    small, large = ep["deviations"]
     values = {"small": small, "large": large, "small_squared": small ** 2, "large_squared": large ** 2,
-              "weight_ratio": (large / small) ** 2, "var_a": pvariance(a), "var_b": pvariance(b)}
-    formats = dict.fromkeys(("small", "large", "small_squared", "large_squared", "weight_ratio"), "int")
+              "amplitude_ratio": large / small, "weight_ratio": (large / small) ** 2}
+    formats = dict.fromkeys(values, "int")
     rendered = set()
     ep = fill_tree(ep, values, formats, rendered)
-    labels = [[("+" if n > 0 else "") + fmt_vi(n / 100, "pct0") for n in row] for row in (a, b)]
-    rendered.update(fmt_vi(n / 100, "pct0") for row in (a, b) for n in row)
-    intro = scenes(ep, labels, large)
+    intro = scenes(ep)
     texts = [text for scene in intro for text in [scene.say, *scene.texts]] + [ep["title"], ep["caption"]]
     nums = check_numbers.check(texts, values, formats, rendered)
     banned = check_banned.check(texts)
@@ -136,7 +131,7 @@ def replace(source, out, engine):
     (out / "captions.md").write_text(
         f'# TikTok\n\n{caption}\n\n# Reels\n\n{caption}\n\n# YouTube Shorts\n\n{ep["title"]}\n\n{caption}\n',
         encoding="utf-8")
-    save_json(out / "values.json", {"values": values, "formats": formats, "returns_pct": [a, b]})
+    save_json(out / "values.json", {"values": values, "formats": formats, "deviations_pp": [small, large]})
     with tempfile.TemporaryDirectory(dir=out) as tmp:
         work = Path(tmp)
         audio, used = voice_tracks(intro, work, engine)
@@ -159,7 +154,7 @@ def replace(source, out, engine):
         fmt = check_format.check_video(draft, layout)
         verdict = "KHÔNG ĐẠT" if fmt["fail"] else "ĐẠT"
         report.write(out, ep, nums, banned, fmt, verdict, {
-            "Giọng đọc quiz": used, "Nguồn hình quiz": "Hoạt họa xe buýt QuanTik vẽ bằng code",
+            "Giọng đọc quiz": used, "Nguồn hình quiz": "Hoạt họa ô vuông QuanTik vẽ bằng code",
             "Phạm vi kiểm tra số và bố cục": "Phần quiz mới. Phần thân và thẻ cuối từ video nguồn.",
         })
         if fmt["fail"]:
