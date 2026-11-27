@@ -1,0 +1,16 @@
+{
+  "id": "04-variance",
+  "topic": "variance",
+  "style": "quiz-hook",
+  "title": "Mã nhúc nhích mỗi phiên hay mã im nửa số phiên rung lắc hơn?",
+  "hook": "Nhúc nhích mỗi phiên hay im một nửa? Mã nào rung lắc hơn?",
+  "question": "Mã nào rung lắc hơn?",
+  "answer": "B rung lắc hơn",
+  "explain": "Cú lệch gấp đôi được tính nặng gấp {weight_ratio} lần.\n{large} × {large} = {large_squared}, còn {small} × {small} = {small_squared}.",
+  "reveal_voice": "Mã B rung hơn. Phương sai tính nặng những cú giật mạnh.",
+  "returns_a": [2, -2, 2, -2],
+  "returns_b": [0, 0, 4, -4],
+  "cut_frame": 229,
+  "caption": "Một mã nhúc nhích phiên nào cũng vậy. Một mã đứng yên nửa số phiên. Bạn tưởng mã nào rung lắc hơn? Nhìn cách phương sai xử lý những cú giật mạnh.",
+  "hashtags": ["QuanTik", "HocQuant", "PhuongSai", "ChungKhoan"]
+}

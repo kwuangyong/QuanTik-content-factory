@@ -81,7 +81,7 @@ Quy tắc viết lời — mỗi quy tắc đều có lý do:
 - Hook gây tò mò bằng nghịch lý hoặc quan sát có thật, không bằng lời hứa lãi. Tham khảo `knowledge/hooks.md`; ưu tiên hook đã kiểm chứng.
 - Kết bằng giới hạn của mô hình hoặc một câu mang về được. Không bao giờ chuyển thành lời khuyên mua/bán.
 - Thẻ cuối luôn là CTA theo dõi kênh (like, follow QuanTik để học quant mỗi ngày), pipeline tự gắn; trường `cta` trong kiến thức chỉ còn là câu dẫn link trong caption.
-- Hook phải tự hiểu được với người mới: đặt câu hỏi "X là gì? Vì sao nó quan trọng với bạn?" theo cách bất ngờ, không mở bằng số khô.
+- Hook cho TikTok giáo dục quant tiếng Việt mặc định là quiz ngắn. Đặt một tình huống cụ thể, hiện đủ dữ kiện và hai lựa chọn hợp lý từ khung đầu. Dùng từ quen thuộc. Cho một nhịp để đoán, lật đáp án bằng phép tính hoặc chart tự vẽ, rồi mới gọi tên khái niệm. Xem tập Variance trong [kho hook](knowledge/hooks.md).
 - CTA quảng bá: chỉ nói tính năng đúng như `identity.md`. Nhắc giá gói thì đối chiếu https://quantik.io.vn/plans trước, vì ưu đãi có thể đã đổi.
 
 ### 4. Dựng

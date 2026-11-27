@@ -42,3 +42,14 @@ Lấy từ `video_defaults.hook` của từng mô hình; số trong hook là pla
 | sharpe | Chiến lược B lãi {cagr_b} một năm, A chỉ {cagr_a}. Vậy mà A tốt hơn. | Nghịch lý có số |
 | var_cvar | VaR nói bạn lỗ tối đa {var95} một ngày? Phiên tệ nhất ở đây lỗ {worst}. | Hiểu lầm phổ biến |
 | kelly | Thắng {W} mỗi lần, có lợi thế rõ ràng. Vẫn có cách khiến bạn mất gần hết. | Rủi ro ngầm |
+| variance | Nhúc nhích mỗi phiên hay im một nửa? Mã nào rung lắc hơn? | Quiz A/B |
+
+## Quiz TikTok tiếng Việt
+
+Tập Variance mở bằng hai dãy thay đổi giá theo phiên. A nhúc nhích đều, B đứng yên nửa số phiên nhưng có hai cú giật mạnh. Hai dãy có cùng mức thay đổi trung bình. Hoạt họa lật đáp án B và giải thích vì sao một cú lệch lớn có trọng số cao khi bình phương. Phần thân tiếp tục dùng mô phỏng của video nguồn.
+
+`episodes/04-variance-quiz.json` lưu lời thoại và dữ kiện. Từ thư mục skill, chạy lệnh sau với file video gốc để thay đoạn mở và xuất bản MP4 mới vào `social-output/04-variance/`.
+
+```bash
+python pipeline/replace_variance_hook.py /path/to/04-variance.mp4
+```
