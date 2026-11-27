@@ -187,12 +187,12 @@ def scenes(ep, labels, scale):
     headings = (ep["bus_a"], ep["bus_b"])
     question, answer, explain = (ep[key] for key in ("question", "answer", "explain"))
     stages = [
-        ("bus-a", ep["say_a"], (0, 0), (FINISH, 0), 0, 1.6),
-        ("bus-b-smooth", ep["say_b_smooth"], (FINISH, 0), (FINISH, MIDPOINT), 1, 1.4),
-        ("bus-b-bumps", ep["say_b_bumps"], (FINISH, MIDPOINT), (FINISH, FINISH), 1, 1.2),
+        ("bus-a", ep["say_a"], (0, 0), (FINISH, 0), 0, 1.5),
+        ("bus-b-smooth", ep["say_b_smooth"], (FINISH, 0), (FINISH, MIDPOINT), 1, 0),
+        ("bus-b-bumps", ep["say_b_bumps"], (FINISH, MIDPOINT), (FINISH, FINISH), 1, 0.95),
         ("guess", ep["hook"], (FINISH, FINISH), (FINISH, FINISH), None, 1.65),
         ("answer", ep["say_answer"], (FINISH, FINISH), (FINISH, FINISH), 1, 0.85),
-        ("math", ep["reveal_voice"], (FINISH, FINISH), (FINISH, FINISH), 1, 2.55),
+        ("math", ep["reveal_voice"], (FINISH, FINISH), (FINISH, FINISH), 1, 2.2),
     ]
 
     def make_scene(stage):

@@ -42,11 +42,11 @@ Lấy từ `video_defaults.hook` của từng mô hình; số trong hook là pla
 | sharpe | Chiến lược B lãi {cagr_b} một năm, A chỉ {cagr_a}. Vậy mà A tốt hơn. | Nghịch lý có số |
 | var_cvar | VaR nói bạn lỗ tối đa {var95} một ngày? Phiên tệ nhất ở đây lỗ {worst}. | Hiểu lầm phổ biến |
 | kelly | Thắng {W} mỗi lần, có lợi thế rõ ràng. Vẫn có cách khiến bạn mất gần hết. | Rủi ro ngầm |
-| variance | Xe A xóc nhẹ suốt đường. Xe B chạy êm rồi gặp cú xóc mạnh. Xe nào xóc hơn? | Quiz A/B |
+| variance | Xe xanh xóc suốt. Xe cam đang êm thì… rầm! Xe nào xóc hơn? | Quiz A/B |
 
 ## Quiz TikTok tiếng Việt
 
-Tập Variance mở bằng hai chuyến xe buýt tự vẽ. Xe A xóc nhẹ suốt đường. Xe B chạy êm nửa đường, rồi gặp gờ và ổ gà. Chia lời đọc theo từng cảnh để xe chạy, hành khách chao người và ly nước văng đúng nhịp. Khi lật đáp án B, hiện hai dãy biến động giá và phép tính cho thấy cú lệch lớn được tính nặng hơn. Phần thân tiếp tục dùng mô phỏng của video nguồn.
+Tập Variance mở bằng hai chuyến xe buýt tự vẽ. Xe A xóc nhẹ suốt đường. Xe B chạy êm nửa đường, rồi gặp gờ và ổ gà. Giọng nam trầm kể liền mạch. Căn các cảnh theo mốc từ trong lời đọc để xe xóc và nước văng ngay tiếng “rầm”. Khi lật đáp án B, hiện hai dãy biến động giá và phép tính cho thấy cú lệch lớn được tính nặng hơn. Phần thân tiếp tục dùng mô phỏng của video nguồn.
 
 `episodes/04-variance-quiz.json` lưu lời thoại và dữ kiện. Từ thư mục skill, chạy lệnh sau với file video gốc để thay đoạn mở và xuất bản MP4 mới vào `social-output/04-variance/`.
 

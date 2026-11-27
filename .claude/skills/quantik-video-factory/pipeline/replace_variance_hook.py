@@ -1,9 +1,12 @@
 """Replace the opening of the original 04-variance.mp4 with the TikTok quiz."""
 import argparse
-from math import ceil
+import asyncio
+import os
+import re
 import subprocess
 import sys
 import tempfile
+from math import ceil
 from pathlib import Path
 from statistics import pvariance
 
@@ -21,6 +24,91 @@ import report
 
 def ffmpeg(*args):
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", *map(str, args)], check=True)
+
+
+def record_hook(intro, path):
+    """Record the script in one take and find each scene's spoken cue."""
+    import edge_tts
+    from edge_tts.exceptions import EdgeTTSException
+
+    lines = [V.speakable(scene.say) for scene in intro]
+    lines[2] = lines[2].lower()  # Continue the preceding line after its ellipsis.
+    words_by_scene = [re.findall(r"\w+", line.casefold()) for line in lines]
+
+    async def record():
+        parameters = {
+            "rate": os.environ.get("QT_RATE", "+3%"),
+            "pitch": os.environ.get("QT_PITCH", "-12Hz"),
+        }
+        try:
+            speech = edge_tts.Communicate(" ".join(lines), V.VOICES["male"],
+                                          boundary="WordBoundary", **parameters)
+        except TypeError:  # Older edge-tts releases emit word boundaries by default.
+            speech = edge_tts.Communicate(" ".join(lines), V.VOICES["male"], **parameters)
+        tokens = []
+        with path.open("wb") as audio:
+            async for packet in speech.stream():
+                if packet["type"] == "audio":
+                    audio.write(packet["data"])
+                elif packet["type"] == "WordBoundary":
+                    tokens.append(packet)
+        return tokens
+
+    try:
+        tokens = asyncio.run(asyncio.wait_for(record(), timeout=40))
+    except EdgeTTSException as exc:
+        raise RuntimeError(f"Edge voice recording failed: {exc}") from exc
+    spoken = [token["text"].casefold() for token in tokens]
+    if spoken != [word for words in words_by_scene for word in words]:
+        raise RuntimeError("Voice word boundaries did not match the quiz script")
+    cues, at = [], 0
+    for words in words_by_scene:
+        start = max(0, tokens[at]["offset"] / 10_000_000 - 0.06)
+        at += len(words)
+        last = tokens[at - 1]
+        end = (last["offset"] + last["duration"]) / 10_000_000 + 0.16
+        if at < len(tokens):
+            end = min(end, tokens[at]["offset"] / 10_000_000 - 0.06)
+        cues.append((start, end - start))
+    return cues
+
+
+def voice_tracks(intro, work, engine):
+    if engine in ("auto", "edge"):
+        recording = work / "voice.mp3"
+        try:
+            cues = record_hook(intro, recording)
+        except (OSError, RuntimeError, ImportError, asyncio.TimeoutError) as exc:
+            if engine == "edge":
+                raise
+            print(f"Edge TTS unavailable: {exc}")
+        else:
+            audio = []
+            for scene, (offset, duration) in zip(intro, cues):
+                track = work / f"{scene.name}-track.wav"
+                scene.duration = ceil(max(scene.min_dur, duration) * FPS) / FPS
+                ffmpeg("-ss", offset, "-i", recording,
+                       "-af", f"atrim=duration={duration},apad", "-t", scene.duration,
+                       "-ar", 48000, "-ac", 2, track)
+                audio.append(track)
+            return audio, "Edge TTS · Nam Minh (nam trầm)"
+    fallback = "espeak" if engine == "auto" else engine
+    used, _ = V.probe_engine(fallback, voice="male")
+    audio = []
+    for scene in intro:
+        wav = work / f"{scene.name}.wav"
+        actual, duration, errors = V.synth(scene.say, wav, used, voice="male")
+        if actual != used:
+            raise RuntimeError(f"Voice synthesis failed for {scene.name}: {errors}")
+        scene.duration = ceil(max(scene.min_dur, duration + 0.12) * FPS) / FPS
+        track = work / f"{scene.name}-track.wav"
+        if actual == "silent":
+            ffmpeg("-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-t", scene.duration, track)
+        else:
+            ffmpeg("-i", wav, "-af", "adelay=50:all=1,apad", "-t", scene.duration,
+                   "-ar", 48000, "-ac", 2, track)
+        audio.append(track)
+    return audio, used
 
 
 def replace(source, out, engine):
@@ -51,30 +139,7 @@ def replace(source, out, engine):
     save_json(out / "values.json", {"values": values, "formats": formats, "returns_pct": [a, b]})
     with tempfile.TemporaryDirectory(dir=out) as tmp:
         work = Path(tmp)
-        used, _ = V.probe_engine(engine)
-        audio = []
-        for scene in intro:
-            wav = work / f"{scene.name}.wav"
-            actual, duration, synth_errors = V.synth(scene.say, wav, used, rate="+19%")
-            if actual != used:
-                raise RuntimeError(f"Voice synthesis failed for {scene.name}: {synth_errors}")
-            if actual != "silent":
-                trimmed = work / f"{scene.name}-trimmed.wav"
-                trim = "silenceremove=start_periods=1:start_threshold=-48dB"
-                ffmpeg("-i", wav, "-af", f"{trim}:start_silence=0.06,areverse,"
-                       f"{trim}:start_silence=0.12,areverse", trimmed)
-                wav = trimmed
-                duration = V.duration_of(wav)
-                if duration <= 0:
-                    raise RuntimeError(f"No voice after trimming {scene.name}")
-            scene.duration = ceil(max(scene.min_dur, duration + 0.12) * FPS) / FPS
-            track = work / f"{scene.name}-track.wav"
-            if actual == "silent":
-                ffmpeg("-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-t", scene.duration, track)
-            else:
-                ffmpeg("-i", wav, "-af", "adelay=50:all=1,apad", "-t", scene.duration,
-                       "-ar", 48000, "-ac", 2, track)
-            audio.append(track)
+        audio, used = voice_tracks(intro, work, engine)
         silent = work / "intro.mp4"
         layout = out / "layout.json"
         R.render(intro, silent, "QUIZ", "Học Quant cùng QuanTik", layout_path=layout,
