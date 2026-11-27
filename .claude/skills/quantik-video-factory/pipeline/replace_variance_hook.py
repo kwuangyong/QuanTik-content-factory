@@ -1,59 +1,22 @@
 """Replace the opening of the original 04-variance.mp4 with the TikTok quiz."""
 import argparse
+from math import ceil
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
 from statistics import pvariance
 
-import frames as F
 import render as R
 import voiceover as V
-from core import DEFAULT_OUT, FPS, SKILL, THEME as T, disclaimer, fill_tree, fmt_vi, load_json, save_json
+from variance_bus import scenes
+from core import DEFAULT_OUT, FPS, SKILL, disclaimer, fill_tree, fmt_vi, load_json, save_json
 
 sys.path.insert(0, str(SKILL / "qa"))
 import check_banned
 import check_format
 import check_numbers
 import report
-
-
-def scenes(episode, labels, scale):
-    question, answer, explain = (episode[key] for key in ("question", "answer", "explain"))
-    rows = (episode["returns_a"], episode["returns_b"])
-    headings = ("A   Nhúc nhích mỗi phiên", "B   Đứng yên nửa số phiên")
-
-    def draw(img, t, reveal):
-        F.text_box(img, answer if reveal else question, (64, 334, 936, 543),
-                   "sans-black", 86, T["accent"] if reveal else T["text"], label="title")
-        pen = F.ImageDraw.Draw(img)
-        for index, (heading, row, row_labels) in enumerate(zip(headings, rows, labels)):
-            top = 560 + index * 310
-            color = T["positive"] if index == 0 else T["negative"]
-            border = color if reveal and index == 1 else T["border"]
-            F.panel(img, (64, top, 936, top + 282), outline=border)
-            F.text_box(img, heading, (98, top + 21, 900, top + 87), size=43, label=heading)
-            baseline = top + 166
-            pen.line((105, baseline, 895, baseline), fill=T["border"], width=3)
-            for i, (change, label) in enumerate(zip(row, row_labels)):
-                x = 182 + i * 207
-                progress = F.ease_out((t - i * 0.10) / 0.6) if reveal else 1
-                y = baseline - round(62 * change / scale * progress)
-                pen.line((x, baseline, x, y), fill=color, width=10)
-                pen.ellipse((x - 10, y - 10, x + 10, y + 10), fill=color)
-                F.text_box(img, label, (x - 89, top + 233, x + 89, top + 279),
-                           "mono-bold", 32, T["text"], "center", label=f"return-{index}-{i}")
-        F.text_box(img, explain if reveal else "Cùng mức thay đổi trung bình · Mô phỏng",
-                   (72, 1190, 928, 1322), "sans-bold", 40, T["text"] if reveal else T["muted"],
-                   "center", "middle", label="explanation")
-
-    chart_texts = [*headings, *labels[0], *labels[1]]
-    return [
-        R.Scene("quiz", episode["hook"], lambda img, t, _: draw(img, t, False),
-                4.7, [question, *chart_texts]),
-        R.Scene("answer", episode["reveal_voice"], lambda img, t, _: draw(img, t, True),
-                3.5, [answer, explain, *chart_texts]),
-    ]
 
 
 def ffmpeg(*args):
@@ -88,19 +51,28 @@ def replace(source, out, engine):
     save_json(out / "values.json", {"values": values, "formats": formats, "returns_pct": [a, b]})
     with tempfile.TemporaryDirectory(dir=out) as tmp:
         work = Path(tmp)
-        used, errors = V.probe_engine(engine)
+        used, _ = V.probe_engine(engine)
         audio = []
         for scene in intro:
             wav = work / f"{scene.name}.wav"
-            actual, duration, synth_errors = V.synth(scene.say, wav, used, rate="+13%")
+            actual, duration, synth_errors = V.synth(scene.say, wav, used, rate="+19%")
             if actual != used:
                 raise RuntimeError(f"Voice synthesis failed for {scene.name}: {synth_errors}")
-            scene.duration = round(max(scene.min_dur, duration + 0.27) * FPS) / FPS
+            if actual != "silent":
+                trimmed = work / f"{scene.name}-trimmed.wav"
+                trim = "silenceremove=start_periods=1:start_threshold=-48dB"
+                ffmpeg("-i", wav, "-af", f"{trim}:start_silence=0.06,areverse,"
+                       f"{trim}:start_silence=0.12,areverse", trimmed)
+                wav = trimmed
+                duration = V.duration_of(wav)
+                if duration <= 0:
+                    raise RuntimeError(f"No voice after trimming {scene.name}")
+            scene.duration = ceil(max(scene.min_dur, duration + 0.12) * FPS) / FPS
             track = work / f"{scene.name}-track.wav"
             if actual == "silent":
                 ffmpeg("-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-t", scene.duration, track)
             else:
-                ffmpeg("-i", wav, "-af", "adelay=100:all=1,apad", "-t", scene.duration,
+                ffmpeg("-i", wav, "-af", "adelay=50:all=1,apad", "-t", scene.duration,
                        "-ar", 48000, "-ac", 2, track)
             audio.append(track)
         silent = work / "intro.mp4"
@@ -109,17 +81,20 @@ def replace(source, out, engine):
                  srt_path=out / "quiz.srt")
         draft = work / "final.mp4"
         offset = ep["cut_frame"] / FPS
-        ffmpeg("-i", silent, "-i", audio[0], "-i", audio[1], "-ss", offset, "-i", source,
+        tracks = [arg for track in audio for arg in ("-i", track)]
+        voice_inputs = "".join(f"[{i}:a]" for i in range(1, len(audio) + 1))
+        body = len(audio) + 1
+        ffmpeg("-i", silent, *tracks, "-ss", offset, "-i", source,
                "-filter_complex",
-               "[1:a][2:a]concat=n=2:v=0:a=1[qa];"
-               "[0:v]setsar=1[v0];[3:v]setsar=1[v1];"
-               "[v0][qa][v1][3:a]concat=n=2:v=1:a=1[v][a]",
+               f"{voice_inputs}concat=n={len(audio)}:v=0:a=1[qa];"
+               f"[0:v]setsar=1[v0];[{body}:v]setsar=1[v1];"
+               f"[v0][qa][v1][{body}:a]concat=n=2:v=1:a=1[v][a]",
                "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "fast", "-crf", 19,
                "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", draft)
         fmt = check_format.check_video(draft, layout)
         verdict = "KHÔNG ĐẠT" if fmt["fail"] else "ĐẠT"
         report.write(out, ep, nums, banned, fmt, verdict, {
-            "Giọng đọc quiz": used, "Nguồn hình quiz": "Hoạt họa QuanTik từ số liệu mô phỏng",
+            "Giọng đọc quiz": used, "Nguồn hình quiz": "Hoạt họa xe buýt QuanTik vẽ bằng code",
             "Phạm vi kiểm tra số và bố cục": "Phần quiz mới. Phần thân và thẻ cuối từ video nguồn.",
         })
         if fmt["fail"]:
