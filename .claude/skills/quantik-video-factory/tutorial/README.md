@@ -13,6 +13,8 @@ bash run.sh /đường/dẫn/thư-mục-làm-việc            # tự clone Quan
 bash run.sh ~/work ~/code/QuanTik---Design         # dùng clone sẵn có
 ```
 
+Dùng `TTS_VOICE=male bash run.sh ...` để chọn Phạm Tuyên, giọng nam miền Bắc. Cài `vieneu==3.8.5` bằng pip và tải mô hình ở lần chạy đầu. Đổi giọng sẽ tự tạo lại các MP3 trong `vo/`.
+
 Ra `out/final.mp4`, `out/subtitles.srt`. Sao chép vào `social-output/<id>/` cùng `captions.md`, `script.md`,
 `thumbnail.jpg` (lấy khung giây 2.5: `ffmpeg -ss 2.5 -i final.mp4 -frames:v 1 thumbnail.jpg`).
 

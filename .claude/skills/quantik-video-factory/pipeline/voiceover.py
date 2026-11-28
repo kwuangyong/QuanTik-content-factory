@@ -1,6 +1,7 @@
 """Vietnamese voice-over. Tries engines in order and reports which one was used.
 
-  edge    — Microsoft Edge neural voices (vi-VN-HoaiMyNeural / vi-VN-NamMinhNeural). Best quality, needs Internet.
+  vieneu  — VieNeu-TTS v3 Turbo, Phạm Tuyên (Northern Vietnamese male).
+  edge    — Microsoft Edge neural voices. Needs Internet.
   gtts    — Google Translate TTS. Needs Internet.
   espeak  — espeak-ng offline, robotic; last resort before silence.
   silent  — no voice; scene length estimated from text so subtitles carry the message.
@@ -19,9 +20,11 @@ import sys
 from pathlib import Path
 
 from core import BRAND
+from vieneu_voice import LABEL as VIENEU_LABEL, speak as _vieneu
 
-VOICES = {"female": "vi-VN-HoaiMyNeural", "male": "vi-VN-NamMinhNeural"}
-ENGINES = ["edge", "gtts", "espeak", "silent"]
+VOICES = {"female": "vi-VN-HoaiMyNeural"}
+AUTO_ENGINES = ["edge", "gtts", "espeak", "silent"]
+ENGINES = ["vieneu", *AUTO_ENGINES]
 
 
 def lexicon():
@@ -82,9 +85,15 @@ def _espeak(text, dst, *_):
 
 def synth(text, dst, engine="auto", voice="female", rate="+0%"):
     """Write dst (wav). Returns (engine_used, seconds). engine_used == 'silent' means no file was written."""
-    order = ENGINES if engine == "auto" else [engine]
-    errors = []
     say = speakable(text)
+    if engine == "vieneu" or (engine == "auto" and voice == "male"):
+        _vieneu(say, dst)
+        return "vieneu", duration_of(dst), []
+    if engine == "edge" and voice == "male":
+        raise ValueError("Giọng male dùng VieNeu-TTS. Chọn engine auto hoặc vieneu.")
+
+    order = AUTO_ENGINES if engine == "auto" else [engine]
+    errors = []
     for e in order:
         if e == "silent":
             return "silent", estimate_seconds(text), errors

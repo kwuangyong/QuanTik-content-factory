@@ -229,7 +229,8 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
             mod.export(scenes, filled, model, ctx)
     (out / "captions.md").write_text(captions(filled, disc), encoding="utf-8")
     status = "ĐẠT" if not (nums["fail"] or banned["fail"] or fmt["fail"]) else "KHÔNG ĐẠT"
-    report.write(out, ep, nums, banned, fmt, status=status, extra={"Giọng đọc": used + (" — " + "; ".join(errors) if errors else ""),
+    voice_label = V.VIENEU_LABEL if used == "vieneu" else used
+    report.write(out, ep, nums, banned, fmt, status=status, extra={"Giọng đọc": voice_label + (" — " + "; ".join(errors) if errors else ""),
                                                                    "Thời lượng": f"{duration:.1f}s",
                                                                    "Thời gian dựng": f"{time.time() - t_start:.0f}s"})
     print(report.summary(nums, banned, fmt))
@@ -246,7 +247,7 @@ def main():
     ap.add_argument("--episode", action="append", default=[], help="episode JSON (needs topic + style)")
     ap.add_argument("--out", default=str(DEFAULT_OUT))
     ap.add_argument("--voice-engine", default="auto", choices=["auto"] + V.ENGINES)
-    ap.add_argument("--voice", default="female", help="female | male | any edge-tts voice id")
+    ap.add_argument("--voice", default="female", help="female | male (Phạm Tuyên, VieNeu-TTS) | any edge-tts voice id")
     ap.add_argument("--music", default=None, help="path to a licensed track, or 'none'")
     ap.add_argument("--scale", type=float, default=1.0, help="0.5 = fast 540x960 preview")
     ap.add_argument("--fps", type=int, default=30)

@@ -1,8 +1,5 @@
 """Replace the opening of the original 04-variance.mp4 with the TikTok quiz."""
 import argparse
-import asyncio
-import os
-import re
 import subprocess
 import sys
 import tempfile
@@ -25,73 +22,8 @@ def ffmpeg(*args):
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", *map(str, args)], check=True)
 
 
-def record_hook(intro, path):
-    """Record the script in one take and find each scene's spoken cue."""
-    import edge_tts
-    from edge_tts.exceptions import EdgeTTSException
-
-    lines = [V.speakable(scene.say) for scene in intro]
-    words_by_scene = [re.findall(r"\w+", line.casefold()) for line in lines]
-
-    async def record():
-        parameters = {
-            "rate": os.environ.get("QT_RATE", "+3%"),
-            "pitch": os.environ.get("QT_PITCH", "-12Hz"),
-        }
-        try:
-            speech = edge_tts.Communicate(" ".join(lines), V.VOICES["male"],
-                                          boundary="WordBoundary", **parameters)
-        except TypeError:  # Older edge-tts releases emit word boundaries by default.
-            speech = edge_tts.Communicate(" ".join(lines), V.VOICES["male"], **parameters)
-        tokens = []
-        with path.open("wb") as audio:
-            async for packet in speech.stream():
-                if packet["type"] == "audio":
-                    audio.write(packet["data"])
-                elif packet["type"] == "WordBoundary":
-                    tokens.append(packet)
-        return tokens
-
-    try:
-        tokens = asyncio.run(asyncio.wait_for(record(), timeout=40))
-    except EdgeTTSException as exc:
-        raise RuntimeError(f"Edge voice recording failed: {exc}") from exc
-    spoken = [token["text"].casefold() for token in tokens]
-    if spoken != [word for words in words_by_scene for word in words]:
-        raise RuntimeError("Voice word boundaries did not match the quiz script")
-    cues, at = [], 0
-    for words in words_by_scene:
-        start = max(0, tokens[at]["offset"] / 10_000_000 - 0.06)
-        at += len(words)
-        last = tokens[at - 1]
-        end = (last["offset"] + last["duration"]) / 10_000_000 + 0.16
-        if at < len(tokens):
-            end = min(end, tokens[at]["offset"] / 10_000_000 - 0.06)
-        cues.append((start, end - start))
-    return cues
-
-
 def voice_tracks(intro, work, engine):
-    if engine in ("auto", "edge"):
-        recording = work / "voice.mp3"
-        try:
-            cues = record_hook(intro, recording)
-        except (OSError, RuntimeError, ImportError, asyncio.TimeoutError) as exc:
-            if engine == "edge":
-                raise
-            print(f"Edge TTS unavailable: {exc}")
-        else:
-            audio = []
-            for scene, (offset, duration) in zip(intro, cues):
-                track = work / f"{scene.name}-track.wav"
-                scene.duration = ceil(max(scene.min_dur, duration) * FPS) / FPS
-                ffmpeg("-ss", offset, "-i", recording,
-                       "-af", f"atrim=duration={duration},apad", "-t", scene.duration,
-                       "-ar", 48000, "-ac", 2, track)
-                audio.append(track)
-            return audio, "Edge TTS · Nam Minh (nam trầm)"
-    fallback = "espeak" if engine == "auto" else engine
-    used, _ = V.probe_engine(fallback, voice="male")
+    used, _ = V.probe_engine(engine, voice="male")
     audio = []
     for scene in intro:
         wav = work / f"{scene.name}.wav"
@@ -106,7 +38,7 @@ def voice_tracks(intro, work, engine):
             ffmpeg("-i", wav, "-af", "adelay=50:all=1,apad", "-t", scene.duration,
                    "-ar", 48000, "-ac", 2, track)
         audio.append(track)
-    return audio, used
+    return audio, V.VIENEU_LABEL if used == "vieneu" else used
 
 
 def replace(source, out, engine):
@@ -169,6 +101,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source", type=Path)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT / "04-variance")
-    parser.add_argument("--voice-engine", choices=["auto", *V.ENGINES], default="auto")
+    parser.add_argument("--voice-engine", choices=["auto", "vieneu", "gtts", "espeak", "silent"], default="auto")
     args = parser.parse_args()
     replace(args.source, args.out, args.voice_engine)
