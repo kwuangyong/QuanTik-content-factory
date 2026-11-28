@@ -72,3 +72,26 @@ Nội dung giáo dục về phương pháp định lượng, không phải khuy�
 ## Khi số liệu là sự kiện lịch sử
 
 Số không do code tính (ví dụ LTCM lỗ bao nhiêu) phải nằm trong `facts` của episode, mỗi số kèm `source`. Ưu tiên nguồn gốc: báo cáo chính thức, sách đã xuất bản, báo tài chính lớn. Nếu không chắc, bỏ số đó.
+
+## Checklist TikTok trước khi đăng
+
+Tổng hợp từ Community Guidelines (mục Regulated commercial activities, Misleading content), Branded Content Policy và quy định nội dung AI của TikTok. TikTok cập nhật nguyên tắc định kỳ (bản gần nhất 24/09/2026): mỗi quý mở lại https://www.tiktok.com/community-guidelines để đối chiếu.
+
+Pipeline tự kiểm (`qa/check_platform.py`, chặn trước khi render):
+
+- [ ] Không mời sang Zalo/Telegram/Discord, không số điện thoại, không link rút gọn: TikTok coi đây là dấu hiệu lừa đảo đầu tư.
+- [ ] Không “nhận tín hiệu”, “room VIP”, “inbox để nhận”.
+- [ ] Không đổi tương tác lấy quà (“follow để nhận…”): bị tính là engagement bait.
+- [ ] 3–6 hashtag liên quan, không nhồi hashtag trend không liên quan.
+- [ ] Cụm cấm và câu miễn trừ ở trên (`qa/check_banned.py`).
+
+Người đăng tự làm trên app (pipeline không làm thay được):
+
+- [ ] Bật nhãn **“Nội dung do AI tạo”** (giọng TTS, hình dựng bằng code). Nếu TikTok tự gắn nhãn thì không gỡ được và video dễ bị giảm phân phối.
+- [ ] **Không** bật “Nội dung thương hiệu / Quảng cáo” cho video nói về đầu tư: Branded Content Policy cấm quảng bá dịch vụ tài chính, đầu tư. Nội dung giáo dục của chính kênh thì được phép.
+- [ ] Nhạc: pad tự tạo của pipeline hoặc Commercial Music Library (tài khoản doanh nghiệp không dùng nhạc thịnh hành có bản quyền).
+- [ ] Không đăng lại y nguyên video cũ hoặc nhiều bản gần giống nhau trong thời gian ngắn (bị coi là spam / nội dung không nguyên bản).
+- [ ] Mã cổ phiếu trong video sản phẩm là mã bịa (QTA, QTV…); không logo sàn, công ty khác.
+- [ ] Chạy TikTok Ads cho QuanTik: “investment services” là ngành hạn chế, phải xin duyệt qua đại diện TikTok trước.
+
+Bị đánh vi phạm: mở thông báo → **Kháng nghị (Appeal)**, nêu rõ đây là nội dung giáo dục, không gọi mua bán, có câu miễn trừ. Ghi lý do vi phạm vào cột `notes` của `knowledge/episodes.csv` và thêm cụm gây lỗi vào danh sách cụm cấm.

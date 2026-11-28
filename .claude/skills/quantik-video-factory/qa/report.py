@@ -27,7 +27,7 @@ def write(out: Path, ep, nums, banned, fmt, status, extra=None):
     det = "; ".join(f"`{b['number']}` trong “{b['in']}”" for b in nums["unsourced"]) or f"{nums['checked']} số đều có nguồn"
     lines.append(f"| Số khớp code | {_mark(nums)} | {det} |")
     det = "; ".join(f"“{h['phrase']}” trong “{h['in']}”" for h in banned["hits"]) or f"không dính {banned['checked_phrases']} cụm cấm"
-    lines.append(f"| Cụm cấm | {_mark(banned)} | {det} |")
+    lines.append(f"| Cụm cấm + luật TikTok | {_mark(banned)} | {det} |")
     if fmt is not None:
         det = "; ".join(fmt["issues"]) or ", ".join(f"{k} {v}" for k, v in fmt["facts"].items())
         lines.append(f"| Định dạng / khung chữ | {_mark(fmt)} | {det} |")
@@ -36,5 +36,8 @@ def write(out: Path, ep, nums, banned, fmt, status, extra=None):
               "- [ ] Nhãn “Dữ liệu mô phỏng” hoặc nguồn dữ liệu thật hiển thị rõ",
               "- [ ] Không có câu nào đọc như lời khuyên mua/bán mã cụ thể",
               "- [ ] Caption có câu miễn trừ; giá gói (nếu nhắc) khớp trang /plans hiện tại",
-              "- [ ] Nhạc nền có giấy phép (hoặc là pad tự tạo của pipeline)", ""]
+              "- [ ] Nhạc nền có giấy phép (hoặc là pad tự tạo của pipeline)",
+              "- [ ] TikTok: bật nhãn “Nội dung do AI tạo”",
+              "- [ ] TikTok: KHÔNG bật “Nội dung thương hiệu” cho video về đầu tư",
+              "- [ ] Quiz mở đầu: đáp án đúng, dễ hiểu trong 3 giây, câu nối dẫn đúng vào chủ đề", ""]
     (Path(out) / "qa_report.md").write_text("\n".join(lines), encoding="utf-8")

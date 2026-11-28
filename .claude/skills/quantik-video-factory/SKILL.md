@@ -82,6 +82,8 @@ Quy tắc viết lời — mỗi quy tắc đều có lý do:
 - Kết bằng giới hạn của mô hình hoặc một câu mang về được. Không bao giờ chuyển thành lời khuyên mua/bán.
 - Thẻ cuối luôn là CTA theo dõi kênh (like, follow QuanTik để học quant mỗi ngày), pipeline tự gắn; trường `cta` trong kiến thức chỉ còn là câu dẫn link trong caption.
 - Hook cho TikTok giáo dục quant tiếng Việt mặc định là quiz ngắn. Đặt một tình huống cụ thể, hiện đủ dữ kiện và hai lựa chọn hợp lý từ khung đầu. Dùng từ quen thuộc. Cho một nhịp để đoán, lật đáp án bằng phép tính hoặc chart tự vẽ, rồi mới gọi tên khái niệm. Xem tập Variance trong [kho hook](knowledge/hooks.md).
+- **Mọi video mở đầu bằng quiz toán/xác suất** (`pipeline/quiz.py`), trước hook và nội dung chính: câu hỏi + 2 lựa chọn A/B, 3 giây đoán, lật đáp án kèm một câu trực giác, rồi câu nối sang chủ đề. Đáp án do code tính, QA số tự chấp nhận. Mặc định `auto` chọn câu đố hợp chủ đề; chọn tay bằng `"quiz": "<id>"` trong episode hoặc `--quiz <id>`, tắt bằng `off`; câu nối riêng ở `"quiz_bridge"`. Xem danh sách: `python pipeline/quiz.py`. Thêm câu đố mới: viết một hàm trong `BANK`, tính số bằng code, câu hỏi đọc hiểu trong 3 giây, đáp án đúng phải ngược trực giác.
+- Trước khi đăng TikTok: làm theo “Checklist TikTok” trong `brand/compliance.md` (nhãn AI, không bật Nội dung thương hiệu, nhạc có giấy phép). `qa/check_platform.py` chặn mời Zalo/Telegram, số điện thoại, “room VIP”, nhồi hashtag.
 - CTA quảng bá: chỉ nói tính năng đúng như `identity.md`. Nhắc giá gói thì đối chiếu https://quantik.io.vn/plans trước, vì ưu đãi có thể đã đổi.
 
 ### 4. Dựng

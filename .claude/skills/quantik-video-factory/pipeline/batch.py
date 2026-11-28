@@ -33,7 +33,8 @@ import term_topic as TT  # noqa: E402
 import render as R  # noqa: E402
 import voiceover as V  # noqa: E402
 from assemble import assemble  # noqa: E402
-import check_banned, check_format, check_numbers, report  # noqa: E402
+import check_banned, check_format, check_numbers, check_platform, report  # noqa: E402
+import quiz as QZ  # noqa: E402
 
 STYLE_NAMES = sorted(p.name for p in STYLES.iterdir() if (p / "template.py").exists())
 
@@ -159,7 +160,7 @@ def _prepare(topic, style, override=None, returns=None):
 
 
 def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice="female", music=None,
-         scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True):
+         scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True, quiz=None):
     t_start = time.time()
     ep, mod, model = prepare(topic, style, override, returns)
     out = Path(out_root) / ep["id"]
@@ -183,13 +184,23 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
     # ---- pre-render QA on every word that will be heard or seen
     texts = result.get("texts", []) if isinstance(result, dict) else []
     scenes = result["scenes"] if isinstance(result, dict) else result
+    if quiz is not None:
+        filled["quiz"] = quiz
+    scenes, quiz_nums, quiz_id = QZ.apply(scenes, filled, kind)
+    if isinstance(result, dict):
+        result["scenes"] = scenes
+    if quiz_id:
+        print(f"  quiz hook: {quiz_id}")
     corpus = [s.say for s in scenes] + [x for s in scenes for x in s.texts] + texts
     corpus += [filled.get("caption", ""), filled.get("title", "")]
     save_json(out / "narration.json", {"scenes": [{"name": s.name, "say": s.say, "texts": s.texts} for s in scenes],
                                        "extra": texts})
-    nums = check_numbers.check(corpus, model.values, model.formats, rendered, filled.get("allowed_literals", []),
+    nums = check_numbers.check(corpus, model.values, model.formats, rendered, list(filled.get("allowed_literals", [])) + quiz_nums,
                                filled.get("facts", {}))
     banned = check_banned.check(corpus)
+    plat = check_platform.check(corpus, filled)
+    banned = {**banned, "fail": banned["fail"] or plat["fail"],
+              "hits": banned["hits"] + [{"phrase": h, "in": "TikTok"} for h in plat["issues"]]}
     if (nums["fail"] or banned["fail"]) and not force:
         report.write(out, ep, nums, banned, None, status="CHẶN TRƯỚC KHI RENDER")
         print(report.summary(nums, banned, None))
@@ -223,7 +234,7 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
         final = out / "final.mp4"
         assemble(silent, scenes, final, work, music=("none" if getattr(mod, "MUSIC", True) is False else music))
         R.still(scenes[0], scenes[0].duration * 0.9, ctx["tag"], note, out / "thumbnail.jpg")
-        fmt = check_format.check_video(final, out / "layout.json", platform_max=filled.get("max_seconds", 60),
+        fmt = check_format.check_video(final, out / "layout.json", platform_max=filled.get("max_seconds", 60) + sum(s.duration for s in scenes if s.name.startswith("quiz_")),
                                        expect_audio=True)
         if hasattr(mod, "export"):
             mod.export(scenes, filled, model, ctx)
@@ -231,6 +242,8 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
     status = "ĐẠT" if not (nums["fail"] or banned["fail"] or fmt["fail"]) else "KHÔNG ĐẠT"
     report.write(out, ep, nums, banned, fmt, status=status, extra={"Giọng đọc": used + (" — " + "; ".join(errors) if errors else ""),
                                                                    "Thời lượng": f"{duration:.1f}s",
+                                                                   "Quiz hook": quiz_id or "không",
+                                                                   "TikTok": "; ".join(plat["warnings"]) or "không có cảnh báo",
                                                                    "Thời gian dựng": f"{time.time() - t_start:.0f}s"})
     print(report.summary(nums, banned, fmt))
     if log:
@@ -253,6 +266,7 @@ def main():
     ap.add_argument("--prices", help="CSV with a close column → real data instead of simulation")
     ap.add_argument("--data-source", help="label shown on screen for real data, e.g. 'FPT, HOSE, 2023–2025'")
     ap.add_argument("--force", action="store_true", help="render even if pre-render QA fails (never publish that)")
+    ap.add_argument("--quiz", default=None, help="quiz hook mở đầu: auto | off | <id> (xem python quiz.py)")
     ap.add_argument("--no-log", action="store_true", help="do not append to knowledge/episodes.csv")
     a = ap.parse_args()
 
@@ -276,7 +290,7 @@ def main():
         try:
             results.append(make(topic, style, override, a.out, a.voice_engine, a.voice, a.music, a.scale, a.fps,
                                 returns, ("Dữ liệu thật: " + a.data_source) if a.data_source else None, a.force,
-                                not a.no_log))
+                                not a.no_log, a.quiz))
         except SystemExit as ex:  # unsupported topic × style: report and keep going with the batch
             print(f"  ✗ {ex}")
             results.append({"id": f"{topic}-{style}", "ok": False, "error": str(ex)})
