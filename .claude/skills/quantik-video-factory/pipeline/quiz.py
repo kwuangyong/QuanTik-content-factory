@@ -139,15 +139,15 @@ def scenes(q, bridge=None):
     def ask(img, t, p):
         a = F.ease_out(F.seg(p, 0, 0.2))
         F.chip(img, (X0, 340), "ĐỐ VUI 3 GIÂY", T["accent"], 30)
-        F.text_box(img, q["q"], (X0, 420, X1, 800), "sans-black", 74, T["text"], "left", "middle",
+        F.text_box(img, q["q"], (X0, 480, X1, 820), "sans-black", 74, T["text"], "left", "middle",
                    min_size=44, label="quiz-q", hl_numbers=True, alpha=a)
-        _choice_box(img, 840, "A", q["a"], "idle", F.ease_out(F.seg(p, 0.15, 0.35)))
-        _choice_box(img, 1020, "B", q["b"], "idle", F.ease_out(F.seg(p, 0.25, 0.45)))
+        _choice_box(img, 850, "A", q["a"], "idle", F.ease_out(F.seg(p, 0.15, 0.35)))
+        _choice_box(img, 1025, "B", q["b"], "idle", F.ease_out(F.seg(p, 0.25, 0.45)))
         w = int((X1 - X0) * (1 - F.seg(p, 0.4, 1.0)))  # đếm ngược
         F.ImageDraw.Draw(img).rounded_rectangle([X0, 1215, X0 + max(w, 12), 1229], radius=7, fill=T["accent"])
 
     def reveal(img, t, p):
-        F.text_box(img, q["q"], (X0, 380, X1, 640), "sans-bold", 50, T["muted"], "left", "middle", min_size=34,
+        F.text_box(img, q["q"], (X0, 480, X1, 660), "sans-bold", 50, T["muted"], "left", "middle", min_size=34,
                    label="quiz-q2")
         on = F.seg(p, 0, 0.15) >= 1
         _choice_box(img, 680, "A", q["a"], ("right" if q["correct"] == "a" else "wrong") if on else "idle", 1)

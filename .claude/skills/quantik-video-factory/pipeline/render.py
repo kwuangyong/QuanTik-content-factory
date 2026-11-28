@@ -24,6 +24,7 @@ class Scene:
     subtitles: bool = True
     duration: float = 0.0
     audio: str | None = None
+    backdrop: Callable = None          # backdrop(img, t, p): full-frame picture drawn under header + content
 
 
 def chunk_text(text, max_chars=66):
@@ -82,6 +83,8 @@ def render(scenes, out_path, tag, note, fps=FPS, layout_path=None, srt_path=None
         for i in range(n):
             t = i / fps
             img = F.base()
+            if s.backdrop:
+                s.backdrop(img, t, t / s.duration)
             if s.header:
                 F.header(img, tag, note)
             s.draw(img, t, t / s.duration)
@@ -106,6 +109,8 @@ def still(scene, t, tag, note, path, size=None):
     """Render one frame of a scene to PNG (thumbnails, carousel slides)."""
     F.LAYOUT.scene = scene.name
     img = F.base()
+    if scene.backdrop:
+        scene.backdrop(img, t, min(1.0, t / max(scene.duration, 1e-6)))
     if scene.header:
         F.header(img, tag, note)
     scene.draw(img, t, min(1.0, t / max(scene.duration, 1e-6)))

@@ -35,7 +35,7 @@ Chọn nhánh theo yêu cầu:
 
 - Python 3.10+, `pip install -r .claude/skills/quantik-video-factory/requirements.txt edge-tts`, ffmpeg.
 - Video hướng dẫn cần thêm Node 20.9+ và Chromium cho Playwright.
-- Mạng: `speech.platform.bing.com` (giọng đọc edge-tts), `quantik.io.vn`, `github.com` (clone `QuanTik---Design`).
+- Mạng: `speech.platform.bing.com` (giọng đọc edge-tts), `api.openverse.org` / `commons.wikimedia.org` / `upload.wikimedia.org` / `api.pexels.com` / `images.pexels.com` / `api.unsplash.com` / `images.unsplash.com` (ảnh minh hoạ), `quantik.io.vn`, `github.com` (clone `QuanTik---Design`).
   Không có mạng tới TTS thì pipeline lùi về gTTS → espeak → không giọng; phải báo người dùng.
 - Repo nguồn liên quan (chỉ đọc): `kwuangyong/QuanTik---Design` (web production, Next.js),
   `kwuangyong/QuanTik-website` (engine quant `backend/quant_engine/quant.py`; frontend React cũ, không dùng để quay).

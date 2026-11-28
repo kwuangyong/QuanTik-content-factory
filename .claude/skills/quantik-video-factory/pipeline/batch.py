@@ -35,6 +35,7 @@ import voiceover as V  # noqa: E402
 from assemble import assemble  # noqa: E402
 import check_banned, check_format, check_numbers, check_platform, report  # noqa: E402
 import quiz as QZ  # noqa: E402
+import visuals as VIS  # noqa: E402
 
 STYLE_NAMES = sorted(p.name for p in STYLES.iterdir() if (p / "template.py").exists())
 
@@ -160,7 +161,7 @@ def _prepare(topic, style, override=None, returns=None):
 
 
 def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice="female", music=None,
-         scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True, quiz=None):
+         scale=1.0, fps=30, returns=None, data_label=None, force=False, log=True, quiz=None, visuals=None):
     t_start = time.time()
     ep, mod, model = prepare(topic, style, override, returns)
     out = Path(out_root) / ep["id"]
@@ -191,6 +192,11 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
         result["scenes"] = scenes
     if quiz_id:
         print(f"  quiz hook: {quiz_id}")
+    if visuals is not None:
+        filled["visuals"] = visuals
+    credits = VIS.illustrate(scenes, filled, kind)
+    ctx["credits"] = credits
+    print(f"  hình ảnh: {len(credits)} ảnh thật" + ("" if credits else " (không tải được ảnh: chỉ hoạt hình)"))
     corpus = [s.say for s in scenes] + [x for s in scenes for x in s.texts] + texts
     corpus += [filled.get("caption", ""), filled.get("title", "")]
     save_json(out / "narration.json", {"scenes": [{"name": s.name, "say": s.say, "texts": s.texts} for s in scenes],
@@ -238,11 +244,16 @@ def make(topic, style, override=None, out_root=DEFAULT_OUT, engine="auto", voice
                                        expect_audio=True)
         if hasattr(mod, "export"):
             mod.export(scenes, filled, model, ctx)
-    (out / "captions.md").write_text(captions(filled, disc), encoding="utf-8")
+    cap_md = captions(filled, disc)
+    if credits:
+        cap_md += "\n## Nguồn ảnh (ghi công theo giấy phép, dán vào caption hoặc bình luận ghim)\n" + "\n".join(
+            "- " + c for c in VIS.credit_lines(credits)) + "\n"
+    (out / "captions.md").write_text(cap_md, encoding="utf-8")
     status = "ĐẠT" if not (nums["fail"] or banned["fail"] or fmt["fail"]) else "KHÔNG ĐẠT"
     report.write(out, ep, nums, banned, fmt, status=status, extra={"Giọng đọc": used + (" — " + "; ".join(errors) if errors else ""),
                                                                    "Thời lượng": f"{duration:.1f}s",
                                                                    "Quiz hook": quiz_id or "không",
+                                                                   "Ảnh": "; ".join(VIS.credit_lines(credits)) or "không có ảnh thật",
                                                                    "TikTok": "; ".join(plat["warnings"]) or "không có cảnh báo",
                                                                    "Thời gian dựng": f"{time.time() - t_start:.0f}s"})
     print(report.summary(nums, banned, fmt))
@@ -267,6 +278,7 @@ def main():
     ap.add_argument("--data-source", help="label shown on screen for real data, e.g. 'FPT, HOSE, 2023–2025'")
     ap.add_argument("--force", action="store_true", help="render even if pre-render QA fails (never publish that)")
     ap.add_argument("--quiz", default=None, help="quiz hook mở đầu: auto | off | <id> (xem python quiz.py)")
+    ap.add_argument("--visuals", default=None, help="'off' = tắt ảnh/hoạt hình minh hoạ")
     ap.add_argument("--no-log", action="store_true", help="do not append to knowledge/episodes.csv")
     a = ap.parse_args()
 
@@ -290,7 +302,7 @@ def main():
         try:
             results.append(make(topic, style, override, a.out, a.voice_engine, a.voice, a.music, a.scale, a.fps,
                                 returns, ("Dữ liệu thật: " + a.data_source) if a.data_source else None, a.force,
-                                not a.no_log, a.quiz))
+                                not a.no_log, a.quiz, a.visuals))
         except SystemExit as ex:  # unsupported topic × style: report and keep going with the batch
             print(f"  ✗ {ex}")
             results.append({"id": f"{topic}-{style}", "ok": False, "error": str(ex)})
