@@ -14,6 +14,7 @@ Chọn nhánh theo yêu cầu:
 
 | Người dùng muốn | Đọc | Lệnh chính |
 | --- | --- | --- |
+| Làm tiếp Quant Edu hoặc làm một tập trong lộ trình 100 tập | [`QUANT_EDU.md`](QUANT_EDU.md) | Tra tập theo yêu cầu hoặc tiếp tục theo mục Tiến độ |
 | Video/carousel giải thích một mô hình, chỉ số, thuật ngữ quant | `SKILL.md` → `knowledge/`, `styles/` | `cd pipeline && python batch.py --topics <id> --styles <style>` |
 | Video **hướng dẫn dùng sản phẩm** (đăng ký, quét toàn sàn, phân tích Quant…) | `tutorial/README.md` | `bash tutorial/run.sh <workdir>` |
 
